@@ -40,7 +40,6 @@ if not openai.api_key:
 def chunk_text(text, max_words=250):
     """
     Splits the input text into chunks of a maximum number of words.
-    For example, with max_words=250, a 9212-word text will be split into roughly 37 chunks.
 
     Args:
         text (str): The input Markdown text.
@@ -75,7 +74,14 @@ def translate_chunk(chunk, chunk_number, source_lang, target_lang):
     """
     Calls the GPT-4o API to translate a text chunk from the specified source language
     to the modern version of the specified target language.
-    The prompt instructs GPT-4o to preserve meaning, context, formatting and to translate the entire text without omissions.
+
+    IMPORTANT: The prompt below contains all necessary instructions:
+      - Translate a Markdown text while preserving the original intent, context, and formatting.
+      - Simplify the language for a modern audience without "dumbing down" the content.
+      - Translate the entire text without omitting any part.
+      - Ensure the output is roughly the same size as the original.
+      - If any significant ambiguities are detected, note them with numbered footnotes.
+      - At the end of the translation, include a 'Footnotes:' section (only if needed).
 
     Args:
         chunk (str): The text chunk to translate.
@@ -86,14 +92,13 @@ def translate_chunk(chunk, chunk_number, source_lang, target_lang):
     Returns:
         str: The raw translated text (including any footnotes) returned by GPT-4o.
     """
-    # Build dynamic prompt instructions.
     prompt_instructions = f"""
-You will be provided with a piece of text in Markdown format in {source_lang}. Please translate this text into Modern {target_lang}.
-Ensure that the translation preserves the original intent, context, and formatting exactly as much as possible, while using simple, clear, and modern language.
+You will be provided with a piece of text in Markdown format in {source_lang}. Please translate this text into modern {target_lang}, preserving the original intent, context, and formatting exactly as much as possible. But simplifying the language enough for a modern audience to understand.
+
 IMPORTANT: Translate the entire text without omitting any part. The translated output should be roughly the same size (in terms of words and characters) as the original, preserving paragraphs and punctuation.
 
-If you encounter any significant ambiguities in the text that might affect interpretation, please note them by adding footnotes.
-Indicate footnotes in the translation with numbered markers like [^1], [^2], etc.
+If you encounter any significant ambiguities in the text that might affect interpretation, please note them by adding footnotes. Indicate footnotes in the translation with numbered markers like [^1], [^2], etc.
+
 At the end of the translation, include a 'Footnotes:' section where you list all footnotes with their corresponding numbers.
 If there are no ambiguities, output only the translated text without a 'Footnotes:' section.
 
@@ -103,12 +108,11 @@ Text (Page {chunk_number}):
     messages = [
         {
             "role": "system",
-            "content": f"You are a helpful assistant that translates texts from {source_lang} to Modern {target_lang} while preserving meaning, context, and formatting."
+            "content": f"You are a helpful assistant that translates texts from {source_lang} to modern {target_lang} while preserving meaning, context, and formatting."
         },
         {"role": "user", "content": prompt_instructions}
     ]
     
-    # Use the modern OpenAI chat completions API with max_completion_tokens parameter.
     response = openai.chat.completions.create(
         model="gpt-4o",
         messages=messages,
@@ -119,7 +123,7 @@ Text (Page {chunk_number}):
 
 def parse_translation(translated_text):
     """
-    Parses the translated text from GPT-4o into the main translation and a dictionary of footnotes.
+    Parses the translated text into the main translation and a dictionary of footnotes.
 
     Args:
         translated_text (str): The full text returned by GPT-4o, potentially including a Footnotes section.
@@ -160,7 +164,6 @@ def main():
     input_file = sys.argv[1]
     logging.info(f"Reading input file: {input_file}")
     
-    # Read the input Markdown text from file.
     try:
         with open(input_file, "r", encoding="utf-8") as f:
             input_text = f.read()
@@ -170,27 +173,23 @@ def main():
     
     # Ask the user for source and target languages.
     source_language = input("Enter the source language (e.g., English, Spanish, German): ").strip()
-    target_language = input("Enter the target language (e.g., Spanish, French): ").strip()
+    target_language = input("Enter the target language (e.g., Spanish, French, Mexican Spanish): ").strip()
 
-    # Log the language settings.
-    logging.info(f"Translating from {source_language} to Modern {target_language}.")
+    logging.info(f"Translating from {source_language} to modern {target_language}.")
 
-    # Log the size of the input text.
     input_chars = len(input_text)
     input_words = len(input_text.split())
     logging.info(f"Input size: {input_chars} characters, {input_words} words.")
     
-    # Split the input text into pages of ~250 words each.
     chunks = chunk_text(input_text, max_words=250)
     total_chunks = len(chunks)
     logging.info(f"Input text split into {total_chunks} page(s).")
     
     translated_chunks = []
     global_footnotes = []
-    footnote_counter = 1  # Global counter for footnote numbering.
+    footnote_counter = 1  # Global counter for footnotes.
     global_footnote_map = {}  # Maps local footnote numbers to global numbers.
     
-    # Process each page individually with a progress bar.
     for idx, chunk in enumerate(tqdm(chunks, desc="Translating pages", unit="page"), start=1):
         logging.info(f"Processing page {idx} of {total_chunks}...")
         try:
@@ -201,7 +200,7 @@ def main():
         
         translation_text, local_footnotes = parse_translation(raw_translation)
         
-        # Remap local footnotes to a global numbering system.
+        # Remap local footnotes to global numbering.
         for local_marker, note_text in local_footnotes.items():
             if local_marker not in global_footnote_map:
                 global_marker = str(footnote_counter)
@@ -209,7 +208,6 @@ def main():
                 global_footnotes.append(f"[^{global_marker}]: {note_text}")
                 footnote_counter += 1
         
-        # Replace local footnote markers in the translation with global markers.
         adjusted_translation = re.sub(
             r"\[\^(\d+)\]",
             lambda match: replace_marker(match, global_footnote_map),
@@ -217,19 +215,16 @@ def main():
         )
         translated_chunks.append(adjusted_translation)
     
-    # Assemble the final translated Markdown output.
     final_output = "\n\n".join(translated_chunks)
     if global_footnotes:
         final_output += "\n\nFootnotes:\n" + "\n".join(global_footnotes)
     else:
         final_output += "\n\nNo significant ambiguities identified."
     
-    # Log the size of the final output.
     output_chars = len(final_output)
     output_words = len(final_output.split())
     logging.info(f"Output size: {output_chars} characters, {output_words} words.")
     
-    # Generate the output file name based on the input file title, languages, and the current date.
     base_filename = os.path.splitext(os.path.basename(input_file))[0]
     current_date = datetime.now().strftime("%d_%m_%Y")
     output_file = f"{base_filename}_{source_language}_To_Modern_{target_language}_{current_date}.md"
