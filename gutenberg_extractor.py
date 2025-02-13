@@ -81,7 +81,7 @@ def html_to_markdown(html):
 
 def main():
     # URL for the HTML version of Don Quijote from Project Gutenberg.
-    url = "https://www.gutenberg.org/cache/epub/7205/pg7205-images.html"
+    url = "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html"
     print(f"Downloading content from {url} ...")
     response = requests.get(url)
     if response.status_code != 200:
@@ -98,7 +98,7 @@ def main():
     print("Converting HTML to Markdown ...")
     markdown_text = html_to_markdown(html)
 
-    output_filename = "Also_sprach_Zarathustra.md"
+    output_filename = "Pride_and_Prejudice.md"
     with open(output_filename, "w", encoding="utf-8") as f:
         f.write(markdown_text)
 
