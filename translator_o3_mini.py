@@ -99,7 +99,7 @@ Text (Chunk {chunk_number}):
 
     # The new openai>=1.0 call - note the difference in accessing the response data
     response = openai.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=messages,
         temperature=0.7,
         max_tokens=2000
