@@ -1,15 +1,15 @@
 """
 This script translates a large Markdown text from a specified source language to a simplified version
 of a specified target language using GPT-4o. The goal is to simplify the vocabulary to roughly 2,000–3,000 words,
-so that the translation is accessible to someone with a limited vocabulary, while preserving the original intent,
+making the text accessible to those with a limited vocabulary, while preserving the original intent,
 context, formatting, and approximate text length.
 
 It handles texts that are too large for GPT-4o's context window by splitting them into smaller "pages" (chunks)
-of approximately 250 words each (using sentence-boundary splitting and optional overlap), and processing each chunk individually.
-Any significant ambiguities are noted with numbered footnotes, which are globally renumbered and appended at the end
-of the final output.
+of approximately 250 words each (using sentence-boundary splitting and an overlapping mechanism), and processing
+each chunk individually. Any significant ambiguities are noted with numbered footnotes, which are globally
+renumbered and appended at the end of the final output.
 
-Additionally, the script logs the sizes of the input and output texts (in characters and words) to verify translation completeness.
+A post-processing step removes duplicated overlapping sentences using fuzzy matching to catch near-duplicates.
 
 Usage:
     python translator_o3_mini_simple.py input_file.md
@@ -19,7 +19,7 @@ Requirements:
     - The openai Python package (install via: pip install openai)
     - The tqdm package for progress logging (install via: pip install tqdm)
     - An environment variable OPENAI_API_KEY set to your OpenAI API key.
-
+    
 Notes:
     This script uses the modern OpenAI chat completions API for GPT-4o models.
     Ensure you are using openai>=1.0.0.
@@ -28,6 +28,7 @@ Notes:
 import os
 import sys
 import re
+import difflib
 import openai
 import logging
 from tqdm import tqdm
@@ -41,10 +42,10 @@ openai.api_key = os.environ.get("OPENAI_API_KEY")
 if not openai.api_key:
     raise ValueError("Please set the OPENAI_API_KEY environment variable.")
 
-def chunk_text(text, max_words=250, overlap_sentences=0):
+def chunk_text(text, max_words=250, overlap_sentences=1):
     """
     Splits the input text into chunks that are approximately max_words long,
-    ensuring that sentences are not cut off mid-way. Optionally, includes overlap
+    ensuring that sentences are not cut off mid-way. Optionally, includes an overlap
     of the last N sentences between chunks to preserve context.
 
     Args:
@@ -67,33 +68,26 @@ def chunk_text(text, max_words=250, overlap_sentences=0):
         # If a single sentence is longer than max_words, force a break on words.
         if sentence_word_count > max_words:
             if current_chunk_sentences:
-                chunk = " ".join(current_chunk_sentences)
-                chunks.append(chunk)
+                chunks.append(" ".join(current_chunk_sentences))
                 current_chunk_sentences = []
                 current_word_count = 0
             words = sentence.split()
             for i in range(0, len(words), max_words):
-                chunk = " ".join(words[i:i+max_words])
-                chunks.append(chunk)
+                chunks.append(" ".join(words[i:i+max_words]))
             continue
 
         if current_word_count + sentence_word_count <= max_words:
             current_chunk_sentences.append(sentence)
             current_word_count += sentence_word_count
         else:
-            chunk = " ".join(current_chunk_sentences)
-            chunks.append(chunk)
+            chunks.append(" ".join(current_chunk_sentences))
             # Include overlap from the end of the previous chunk if needed.
-            if overlap_sentences > 0:
-                overlap = current_chunk_sentences[-overlap_sentences:]
-            else:
-                overlap = []
+            overlap = current_chunk_sentences[-overlap_sentences:] if overlap_sentences > 0 else []
             current_chunk_sentences = overlap + [sentence]
             current_word_count = sum(len(s.split()) for s in current_chunk_sentences)
 
     if current_chunk_sentences:
-        chunk = " ".join(current_chunk_sentences)
-        chunks.append(chunk)
+        chunks.append(" ".join(current_chunk_sentences))
 
     return chunks
 
@@ -115,7 +109,7 @@ def replace_marker(match, footnote_map):
 def translate_chunk(chunk, chunk_number, source_lang, target_lang):
     """
     Calls the GPT-4o API to translate a text chunk from the specified source language
-    to a simplified version of the specified target language using only a vocabulary of roughly 2,000–3,000 words.
+    to a simplified version of the specified target language using a vocabulary of roughly 2,000–3,000 words.
 
     IMPORTANT: The prompt below contains all necessary instructions:
       - Translate a Markdown text while preserving the original intent, context, and formatting.
@@ -138,7 +132,7 @@ def translate_chunk(chunk, chunk_number, source_lang, target_lang):
 You will be provided with a piece of text in Markdown format in {source_lang}. Please translate this text into modern {target_lang},
 but simplify the language so that it can be understood by someone with a vocabulary of only 2,000–3,000 words. Do this without dumbing down
 the content; preserve the original intent, context, and formatting, and keep the translated text roughly the same size (in terms of words and characters)
-as the original. 
+as the original.
 
 IMPORTANT: Translate the entire text without omitting any part. If you encounter significant ambiguities, annotate them with numbered footnotes 
 using markers like [^1], [^2], etc. At the end of the translation, include a 'Footnotes:' section listing all footnotes with their corresponding numbers.
@@ -155,11 +149,11 @@ Text (Page {chunk_number}):
         {"role": "user", "content": prompt_instructions}
     ]
     
-    response = openai.chat.completions.create(
+    response = openai.ChatCompletion.create(
         model="gpt-4o-mini",
         messages=messages,
         temperature=0.7,
-        max_completion_tokens=2000
+        max_tokens=2000
     )
     return response.choices[0].message.content
 
@@ -185,15 +179,63 @@ def parse_translation(translated_text):
         footnotes = {}
     return translation_part, footnotes
 
+def stitch_chunks(chunks, overlap_sentences=1, similarity_threshold=0.85):
+    """
+    Stitches together a list of translated text chunks while removing duplicated overlapping sentences.
+    For each chunk after the first, it removes any starting sentences that are nearly identical
+    (after normalization) to the ending sentences of the previous chunk.
+
+    Args:
+        chunks (List[str]): The list of translated text chunks.
+        overlap_sentences (int): The number of overlapping sentences expected at the beginning of each chunk (except the first).
+        similarity_threshold (float): Similarity ratio (0 to 1) above which sentences are considered duplicates.
+
+    Returns:
+        str: The final stitched text without duplicate overlaps.
+    """
+    import difflib
+    import re
+
+    def normalize_sentence(sentence):
+        # Lowercase and collapse whitespace to improve fuzzy matching.
+        return re.sub(r'\s+', ' ', sentence.lower().strip())
+
+    stitched = []
+    prev_overlap = []  # List of sentences from the end of the previous chunk.
+
+    for idx, chunk in enumerate(chunks):
+        # Split current chunk into sentences.
+        sentences = re.split(r'(?<=[.!?])\s+', chunk.strip())
+        
+        if idx > 0 and prev_overlap:
+            # Remove duplicate overlapping sentences from the start of the current chunk.
+            # While the first sentence in the current chunk matches any sentence in the previous overlap, remove it.
+            while sentences and any(
+                difflib.SequenceMatcher(
+                    None, normalize_sentence(sentences[0]), normalize_sentence(prev_sentence)
+                ).ratio() >= similarity_threshold for prev_sentence in prev_overlap
+            ):
+                sentences.pop(0)
+
+        stitched.extend(sentences)
+        
+        # Update prev_overlap from the current chunk's remaining sentences.
+        if sentences:
+            prev_overlap = sentences[-overlap_sentences:] if len(sentences) >= overlap_sentences else sentences
+
+    return "\n\n".join(stitched)
+
+
 def main():
     """
     Main function to:
       1. Read a large Markdown text from an input file (provided as a command-line argument).
       2. Ask the user for the source language and the desired target language.
-      3. Split the text into manageable pages (chunks) of about 250 words (using sentence boundaries).
+      3. Split the text into manageable pages (chunks) of about 250 words (using sentence boundaries and overlapping).
       4. Translate each page using GPT-4o via separate API calls to simplify the language.
-      5. Assemble and output the final translated Markdown text with a consolidated Footnotes section.
-      6. Log the sizes of the input and output texts (in characters and words) to verify translation completeness.
+      5. Stitch the translated chunks together while removing duplicate overlapping sentences using fuzzy matching.
+      6. Assemble and output the final translated Markdown text with a consolidated Footnotes section.
+      7. Log the sizes of the input and output texts (in characters and words) to verify translation completeness.
 
     Usage:
         python translator_o3_mini_simple.py input_file.md
@@ -222,7 +264,9 @@ def main():
     input_words = len(input_text.split())
     logging.info(f"Input size: {input_chars} characters, {input_words} words.")
     
-    chunks = chunk_text(input_text, max_words=250, overlap_sentences=1)
+    # Use an overlap of one sentence between chunks.
+    overlap = 1
+    chunks = chunk_text(input_text, max_words=250, overlap_sentences=overlap)
     total_chunks = len(chunks)
     logging.info(f"Input text split into {total_chunks} page(s).")
     
@@ -256,14 +300,17 @@ def main():
         )
         translated_chunks.append(adjusted_translation)
     
-    final_output = "\n\n".join(translated_chunks)
-    if global_footnotes:
-        final_output += "\n\nFootnotes:\n" + "\n".join(global_footnotes)
-    else:
-        final_output += "\n\nNo significant ambiguities identified."
+    # Stitch the translated chunks together, removing duplicate overlaps using fuzzy matching.
+    final_translation = stitch_chunks(translated_chunks, overlap_sentences=overlap, similarity_threshold=0.85)
     
-    output_chars = len(final_output)
-    output_words = len(final_output.split())
+    # Append footnotes (if any).
+    if global_footnotes:
+        final_translation += "\n\nFootnotes:\n" + "\n".join(global_footnotes)
+    else:
+        final_translation += "\n\nNo significant ambiguities identified."
+    
+    output_chars = len(final_translation)
+    output_words = len(final_translation.split())
     logging.info(f"Output size: {output_chars} characters, {output_words} words.")
     
     base_filename = os.path.splitext(os.path.basename(input_file))[0]
@@ -272,7 +319,7 @@ def main():
     
     try:
         with open(output_file, "w", encoding="utf-8") as out_f:
-            out_f.write(final_output)
+            out_f.write(final_translation)
         logging.info(f"Translation complete. The simplified translated file is: {output_file}")
     except Exception as e:
         logging.error(f"Error writing output file: {e}")
