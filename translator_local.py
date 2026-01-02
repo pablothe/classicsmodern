@@ -34,6 +34,10 @@ MODELS = {
     'llama3.2:latest': {
         'name': 'llama3.2:latest',
         'description': 'Latest Llama 3.2 model (same as 3b but different identifier)'
+    },
+    'mistral:7b': {
+        'name': 'mistral:7b',
+        'description': 'Mistral 7B - Best open source language model, excellent for complex translations'
     }
 }
 
@@ -331,7 +335,7 @@ Examples:
     )
     
     parser.add_argument('input_file', nargs='?', help='Input markdown file to translate')
-    parser.add_argument('--model', '-m', choices=MODELS.keys(), default='llama3.2:3b',
+    parser.add_argument('--model', '-m', choices=list(MODELS.keys()), default='llama3.2:3b',
                        help='Local LLM model to use (default: llama3.2:3b)')
     parser.add_argument('--source-lang', '-s', help='Source language (interactive if not provided)')
     parser.add_argument('--target-lang', '-t', help='Target language (interactive if not provided)')
