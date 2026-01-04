@@ -13,3 +13,6 @@ TTS==0.27.3
 # Note: Also requires FFmpeg for audio post-processing
 # macOS: brew install ffmpeg
 # Linux: sudo apt install ffmpeg
+
+# Web Player
+flask

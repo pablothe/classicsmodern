@@ -1,0 +1,19 @@
+{
+  "book_path": "books/crime_punishment/\u041f\u0440\u0435\u0441\u0442\u0443\u043f\u043b\u0435\u043d\u0438\u0435_\u0438_\u043d\u0430\u043a\u0430\u0437\u0430\u043d\u0438\u0435_cleaned.md",
+  "source_lang": "Russian",
+  "target_lang": "Modern English",
+  "voice_ref": "voice_ref_clean.wav",
+  "chunking_complete": true,
+  "translation_complete": false,
+  "deduplication_complete": false,
+  "audio_complete": false,
+  "chunks_dir": "books/crime_punishment/chunks",
+  "translated_dir": null,
+  "deduped_dir": null,
+  "audio_dir": null,
+  "total_chunks": 11,
+  "translated_chunks": 0,
+  "audio_files_generated": 0,
+  "started_at": "2026-01-04T11:13:47.022633",
+  "completed_at": null
+}

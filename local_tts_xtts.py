@@ -101,10 +101,10 @@ class XTTSAudioGenerator:
 
         return text.strip()
 
-    def chunk_text(self, text: str, max_chars: int = 1500) -> List[str]:
+    def chunk_text(self, text: str, max_chars: int = 200) -> List[str]:
         """
         Split text into chunks for better TTS quality.
-        XTTS-v2 works best with paragraph-sized chunks (500-1500 chars).
+        XTTS-v2 has a 400 token limit (~250 chars max, use 200 to be safe).
 
         Args:
             text: Text to chunk
@@ -254,7 +254,7 @@ class XTTSAudioGenerator:
         self,
         input_file: str,
         output_dir: str = None,
-        chunk_size: int = 1500,
+        chunk_size: int = 200,
         speed: float = 1.15,
         normalize: bool = True,
         to_mp3: bool = True
@@ -265,7 +265,7 @@ class XTTSAudioGenerator:
         Args:
             input_file: Path to text/markdown file
             output_dir: Output directory (auto-generated if None)
-            chunk_size: Characters per chunk (500-1500 recommended)
+            chunk_size: Characters per chunk (200 max due to XTTS 400 token limit)
             speed: Speed multiplier (1.15 recommended, reduces "robotic" feel)
             normalize: Apply loudness normalization
             to_mp3: Convert to MP3 (smaller files)
@@ -493,7 +493,7 @@ def main():
 
         result = generator.generate_audiobook(
             input_file,
-            chunk_size=1500,      # Optimal for XTTS-v2
+            chunk_size=200,       # XTTS-v2 limit (400 tokens ~= 250 chars)
             speed=1.15,           # 15% faster (reduces robotic feel)
             normalize=True,       # Audiobook-standard loudness
             to_mp3=True          # Smaller files
