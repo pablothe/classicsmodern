@@ -2,6 +2,12 @@
 
 A fully localized application for downloading, translating, compressing, and generating audiobooks from classic literature - all running on local AI models with no external API dependencies.
 
+## Documentation
+
+- **[WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md)** - Complete step-by-step workflow from book to audiobook
+- **[KNOWN_ISSUES.md](KNOWN_ISSUES.md)** - Known issues and workarounds
+- **[TEST_RESULTS_DEDUPLICATION.md](TEST_RESULTS_DEDUPLICATION.md)** - Anti-duplication system validation results
+
 ## Overview
 
 This application allows users to:
@@ -48,7 +54,7 @@ This application allows users to:
 
 #### Task 1.1: Environment Setup
 - [ ] Install and configure Ollama
-- [ ] Pull `zongwei/gemma3-translator:1b` model
+- [ ] Pull `zongwei/gemma3-translator:4b` model
 - [ ] Test model with sample translation calls
 - [ ] Document hardware requirements (RAM, GPU, disk space)
 - [ ] Create requirements.txt for Python dependencies
@@ -375,7 +381,7 @@ modernclassics/
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull translation model
-ollama pull zongwei/gemma3-translator:1b
+ollama pull zongwei/gemma3-translator:4b
 
 # Install Python dependencies
 pip install -r requirements.txt
@@ -725,17 +731,26 @@ async def mobile_download(token: str):
 
 ## Roadmap
 
-### MVP (Desktop Server Only)
+### MVP (Desktop Server Only) - ✅ PARTIALLY COMPLETE
 **Goal**: Prove the concept with desktop web interface
 
 - [ ] Web interface for book selection and configuration
-- [ ] Full translation using Ollama (zongwei/gemma3-translator:1b)
+- [x] **Full translation using Ollama** (zongwei/gemma3-translator:4b) ✅
+- [x] **Context-aware translation to prevent duplicates** ✅
+- [x] **Automatic deduplication failsafe** ✅
 - [ ] Basic compression (fixed ratio: 50%)
-- [ ] Audio generation using OpenAI Whisper (temporary)
+- [x] **Audio generation using OpenAI TTS** ✅
+- [x] **Audio combining and compression** ✅
 - [ ] Single-file audio download via browser
 - [ ] Basic API endpoints for future mobile app
 
-**Deliverable**: Desktop user can translate and compress books, download audiobooks to computer
+**Current Status**:
+- ✅ Translation pipeline fully functional with anti-duplication
+- ✅ Audio generation complete (OpenAI TTS)
+- 🔄 Compression/summarization in progress
+- 🔄 Web interface not started
+
+**Deliverable**: Desktop CLI user can translate and generate audiobooks (web interface pending)
 
 ---
 

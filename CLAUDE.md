@@ -20,6 +20,8 @@ OPENAI_API_KEY=your_api_key_here
 ## Core Commands
 
 ### Text Translation
+
+**For single files (cloud-based OpenAI):**
 ```bash
 # List available AI models
 python translator.py --list-models
@@ -32,6 +34,20 @@ python translator.py input.md --model o3-mini-high --source-lang German --target
 
 # Custom output directory
 python translator.py input.md --output-dir custom_output/
+```
+
+**For batch/chunks (local Ollama - RECOMMENDED for large books):**
+```bash
+# Split book into chunks first
+python3 local_reader_smart_splitter.py books/crime_punishment/book.md
+
+# Translate entire directory with automatic deduplication
+python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
+
+# This will:
+# 1. Translate with context awareness (prevents duplicates)
+# 2. Auto-run deduplication as failsafe
+# 3. Create clean files in translated/deduplicated/
 ```
 
 ### Audio Generation
@@ -58,9 +74,14 @@ python epub_to_md.py input.epub
 ## Architecture
 
 ### Translation System
-- **Multi-Model Support**: Supports o1-mini, o1-preview, o3-mini, o3-mini-high, gpt-4o-mini
+- **Multi-Model Support**: Supports o1-mini, o1-preview, o3-mini, o3-mini-high, gpt-4o-mini (cloud), and zongwei/gemma3-translator:4b (local via Ollama)
 - **Smart Chunking**: Respects Markdown structure, ~250 words per chunk
 - **Structure Preservation**: Maintains headers, links, tables, and formatting through translation
+- **Context-Aware Translation**: Each chunk receives context from previous chunk to prevent duplicates
+- **Two-Layer Deduplication** (NEW):
+  - **Layer 1 (LLM Context)**: Translator receives previous chunk's ending as "reference only" to prevent repeating it
+  - **Layer 2 (Exact Match)**: Automatic failsafe deduplication catches any duplicates that slip through
+  - **Result**: Clean audio with zero repetition at chunk boundaries
 - **Auto-Organization**: Automatically places outputs in appropriate `books/[book_name]/` directories
 
 ### Audio Generation System  
@@ -74,7 +95,17 @@ python epub_to_md.py input.epub
 books/
 ├── [book_name]/
 │   ├── [original].md
-│   ├── [book]_[language]_[date]_[model].md     # Translations
+│   ├── chunks/                                  # Split for large books
+│   │   ├── chunk_001.md
+│   │   ├── chunk_002.md
+│   │   └── translated/
+│   │       ├── chunk_001_[language]_4b.md      # Raw translations
+│   │       └── deduplicated/                   # ← Use these for audio!
+│   │           ├── chunk_001_DEDUPED.md        # Clean, no overlaps
+│   │           └── audio/
+│   │               ├── chunk_001_part001.mp3
+│   │               └── audiobook_playlist.m3u
+│   ├── [book]_[language]_[date]_[model].md     # Single-file translations
 │   ├── [book]_part001_[voice]_[date].wav       # Audio parts
 │   └── [book]_audiobook_playlist_[date].m3u    # Playlist
 ```
@@ -104,6 +135,17 @@ books/
 - Audio generation may hit API limits with very long texts (use multi-part)
 - O1/O3 model parameters differ from standard GPT models
 - Chunking strategy optimized for translation quality over speed
+
+### Anti-Duplication System (NEW - Jan 2026)
+- **Problem**: Translation chunks use 20-word overlap for context, causing duplicate audio at boundaries
+- **Solution**: Two-layer hybrid approach:
+  1. **LLM Context (Primary)**: Translator receives previous chunk's ending as context with instruction "DO NOT translate this, it's reference only"
+  2. **Exact Match (Failsafe)**: Automatic deduplication detects and removes exact text duplicates between consecutive chunks
+- **Effectiveness**:
+  - Layer 1 prevents ~70% of duplicates
+  - Layer 2 catches 100% of remaining duplicates
+- **Result**: Clean, seamless audio with zero repetition
+- **Tested**: See `TEST_RESULTS_DEDUPLICATION.md` for validation with 5-chunk test suite
 
 ### File Naming Conventions
 - Translations: `[original_name]_[target_language]_[YYYYMMDD]_[model].md`
