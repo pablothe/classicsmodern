@@ -51,15 +51,28 @@ python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian 
 ```
 
 ### Audio Generation
+
+**Local TTS with XTTS-v2 (Recommended - $0 cost):**
 ```bash
-# List available voices
-python audio_translator.py --list-voices
+# Setup (once)
+pip install TTS==0.27.3 && brew install ffmpeg
 
-# Generate multi-part audiobook (recommended)
+# Generate audiobook
+python local_tts_xtts.py translated.md voice_ref.wav en
+
+# With voice cloning (prepare reference voice first)
+python local_tts_xtts.py --prepare-voice sample.m4a voice_ref.wav
+
+# Multi-language: es, fr, de, it, pt, pl, tr, ru, nl, cs, ar, zh-cn, ja, ko, hu
+python local_tts_xtts.py libro.md voz.wav es
+
+# See LOCAL_TTS_GUIDE.md for details
+```
+
+**Cloud TTS with OpenAI (Legacy - ~$15/book):**
+```bash
 python audio_translator.py books/alice_adventures/alices_adventures.md --voice fable
-
-# Single file audio (experimental, may hit API limits)
-python audio_translator.py input.md --voice alloy --single-file --format mp3
+# or: python local_reader_audio.py translated.md fable mp3
 ```
 
 ### Book Processing Utilities
@@ -84,9 +97,22 @@ python epub_to_md.py input.epub
   - **Result**: Clean audio with zero repetition at chunk boundaries
 - **Auto-Organization**: Automatically places outputs in appropriate `books/[book_name]/` directories
 
-### Audio Generation System  
+### Audio Generation System
+
+**Local TTS (XTTS-v2) - Primary:**
+- **Cost**: Free (fully local processing)
+- **Voice Cloning**: Clone any voice with 10-30 second sample
+- **Languages**: 16 languages (en, es, fr, de, it, pt, pl, tr, ru, nl, cs, ar, zh-cn, ja, ko, hu)
+- **Quality**: High-quality, natural prosody with voice matching
+- **Post-Processing**: Automatic speed adjustment (1.15x), loudness normalization (-16 LUFS), MP3 conversion
+- **Chunking**: Optimized for 500-1500 chars per chunk
+- **Speed**: 2-4x slower than realtime (CPU), ~1x realtime (GPU)
+- **See**: [LOCAL_TTS_GUIDE.md](LOCAL_TTS_GUIDE.md) for complete documentation
+
+**Cloud TTS (OpenAI) - Legacy:**
+- **Cost**: ~$15 per book
 - **Text Cleaning**: Removes Markdown formatting for natural speech
-- **Voice Options**: 6 voices (alloy, echo, fable, onyx, nova, shimmer)
+- **Voice Options**: 6 preset voices (alloy, echo, fable, onyx, nova, shimmer)
 - **Smart Chunking**: Breaks at natural boundaries (~4000 chars), creates playlists
 - **Format Support**: wav, mp3, flac with automatic playlist generation
 
@@ -102,11 +128,16 @@ books/
 │   │       ├── chunk_001_[language]_4b.md      # Raw translations
 │   │       └── deduplicated/                   # ← Use these for audio!
 │   │           ├── chunk_001_DEDUPED.md        # Clean, no overlaps
-│   │           └── audio/
-│   │               ├── chunk_001_part001.mp3
-│   │               └── audiobook_playlist.m3u
+│   │           ├── audio/                      # OpenAI TTS (legacy)
+│   │           │   ├── chunk_001_part001.mp3
+│   │           │   └── audiobook_playlist.m3u
+│   │           └── audio_xtts/                 # Local TTS (recommended)
+│   │               ├── raw/                    # Unprocessed WAV
+│   │               │   └── chunk_001_chunk001_raw.wav
+│   │               ├── chunk_001_chunk001.mp3  # Processed (speed + normalized)
+│   │               └── chunk_001_audiobook.m3u # Playlist
 │   ├── [book]_[language]_[date]_[model].md     # Single-file translations
-│   ├── [book]_part001_[voice]_[date].wav       # Audio parts
+│   ├── [book]_part001_[voice]_[date].wav       # Audio parts (OpenAI)
 │   └── [book]_audiobook_playlist_[date].m3u    # Playlist
 ```
 
@@ -124,9 +155,21 @@ books/
 - Automatic post-processing cleanup and verification
 
 ### Audio Processing
+
+**Local TTS (XTTS-v2):**
+- Voice cloning from 10-30 second reference sample
+- Automatic post-processing pipeline:
+  - Speed adjustment (1.15x default, reduces "draggy" TTS feel)
+  - Loudness normalization (-16 LUFS, audiobook standard)
+  - MP3 conversion (128kbps, reduces file size by ~90%)
+- Optimal chunk size: 500-1500 characters
+- Multi-language support (16 languages)
+- Model caching (~1.8GB, downloaded once)
+
+**Cloud TTS (OpenAI - Legacy):**
 - Project Gutenberg header/footer removal
 - Sentence-boundary splitting for natural pauses
-- Playlist creation for sequential playbook playback
+- Playlist creation for sequential playback
 - Automatic book directory detection and organization
 
 ## Development Notes
