@@ -36,15 +36,25 @@ class XTTSAudioGenerator:
     # Supported languages (XTTS-v2 is multilingual)
     LANGUAGES = ["en", "es", "fr", "de", "it", "pt", "pl", "tr", "ru", "nl", "cs", "ar", "zh-cn", "ja", "ko", "hu"]
 
-    def __init__(self, reference_voice: str = None, language: str = "en"):
+    def __init__(self, reference_voice=None, language: str = "en"):
         """
         Initialize XTTS-v2 audio generator.
 
         Args:
-            reference_voice: Path to reference voice WAV file (10-30s, clean, mono, 24kHz recommended)
+            reference_voice: Path(s) to reference voice WAV file(s) (10-30s each, clean, mono, 24kHz recommended)
+                            Can be a string (single file) or list of strings (multiple files)
             language: Target language code (default: "en")
         """
-        self.reference_voice = reference_voice
+        # Normalize to list format
+        if reference_voice is None:
+            self.reference_voice = None
+        elif isinstance(reference_voice, str):
+            self.reference_voice = [reference_voice]
+        elif isinstance(reference_voice, list):
+            self.reference_voice = reference_voice
+        else:
+            raise TypeError(f"reference_voice must be str, list, or None, got {type(reference_voice)}")
+
         self.language = language
 
         if language not in self.LANGUAGES:
@@ -54,12 +64,32 @@ class XTTSAudioGenerator:
         self.tts = TTS(model_name=self.MODEL_NAME, progress_bar=False, gpu=False)
         print("✓ Model loaded successfully")
 
-        # Verify reference voice if provided
-        if reference_voice:
-            ref_path = Path(reference_voice)
-            if not ref_path.exists():
-                raise FileNotFoundError(f"Reference voice not found: {reference_voice}")
-            print(f"✓ Using reference voice: {ref_path.name}")
+        # Verify reference voice(s) if provided
+        if self.reference_voice:
+            for ref_voice in self.reference_voice:
+                ref_path = Path(ref_voice)
+                if not ref_path.exists():
+                    raise FileNotFoundError(f"Reference voice not found: {ref_voice}")
+
+            if len(self.reference_voice) == 1:
+                print(f"✓ Using reference voice: {Path(self.reference_voice[0]).name}")
+            else:
+                print(f"✓ Using {len(self.reference_voice)} reference voices:")
+                for i, ref in enumerate(self.reference_voice, 1):
+                    print(f"  {i}. {Path(ref).name}")
+
+    def _format_eta(self, seconds: float) -> str:
+        """Format seconds to human-readable ETA"""
+        if seconds < 60:
+            return f"{int(seconds)}s"
+        elif seconds < 3600:
+            minutes = int(seconds / 60)
+            secs = int(seconds % 60)
+            return f"{minutes}m {secs}s"
+        else:
+            hours = int(seconds / 3600)
+            minutes = int((seconds % 3600) / 60)
+            return f"{hours}h {minutes}m"
 
     def clean_text_for_speech(self, text: str) -> str:
         """
@@ -101,55 +131,104 @@ class XTTSAudioGenerator:
 
         return text.strip()
 
-    def chunk_text(self, text: str, max_chars: int = 200) -> List[str]:
+    def chunk_text(self, text: str, max_chars: int = 250) -> List[str]:
         """
         Split text into chunks for better TTS quality.
-        XTTS-v2 has a 400 token limit (~250 chars max, use 200 to be safe).
+        XTTS-v2 has a 400 token limit (~250 chars max).
+
+        PRIORITY: Always split at sentence boundaries for natural audio flow.
+        Better to have shorter chunks than to split sentences mid-way.
 
         Args:
             text: Text to chunk
-            max_chars: Maximum characters per chunk
+            max_chars: Maximum characters per chunk (250 max for XTTS-v2)
 
         Returns:
-            List of text chunks
+            List of text chunks, guaranteed to be <= max_chars
         """
         if len(text) <= max_chars:
             return [text]
 
         chunks = []
-        current_chunk = ""
-        paragraphs = text.split('\n\n')
 
-        for paragraph in paragraphs:
-            # If adding this paragraph exceeds limit
-            if len(current_chunk) + len(paragraph) + 2 > max_chars:
+        # Split into sentences (respecting .!? followed by space or end)
+        # This regex keeps the punctuation with the sentence
+        sentences = re.split(r'(?<=[.!?])\s+', text)
+
+        current_chunk = ""
+
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if not sentence:
+                continue
+
+            # If single sentence is too long, we MUST split it
+            if len(sentence) > max_chars:
+                # First, save any accumulated chunk
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                     current_chunk = ""
 
-                # If paragraph itself is too long, split by sentences
-                if len(paragraph) > max_chars:
-                    sentences = re.split(r'(?<=[.!?])\s+', paragraph)
-                    for sentence in sentences:
-                        if len(current_chunk) + len(sentence) + 1 > max_chars:
-                            if current_chunk:
-                                chunks.append(current_chunk.strip())
-                                current_chunk = sentence
-                            else:
-                                # Force split very long sentences
-                                chunks.append(sentence[:max_chars])
-                                current_chunk = sentence[max_chars:]
-                        else:
-                            current_chunk += " " + sentence if current_chunk else sentence
-                else:
-                    current_chunk = paragraph
-            else:
-                current_chunk += "\n\n" + paragraph if current_chunk else paragraph
+                # Try to split at clause boundaries (comma, semicolon, colon, dash)
+                clauses = re.split(r'([,;:—\-]\s+)', sentence)
 
+                temp_chunk = ""
+                for i, clause in enumerate(clauses):
+                    if not clause.strip():
+                        continue
+
+                    # If adding this clause would exceed limit
+                    if len(temp_chunk) + len(clause) > max_chars:
+                        if temp_chunk:
+                            chunks.append(temp_chunk.strip())
+                        temp_chunk = clause
+                    else:
+                        temp_chunk += clause
+
+                # Save remaining as current chunk
+                if temp_chunk:
+                    current_chunk = temp_chunk.strip()
+
+            # Normal case: sentence fits within limit
+            elif len(current_chunk) + len(sentence) + 1 > max_chars:
+                # Save current chunk and start new one
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                current_chunk = sentence
+            else:
+                # Add sentence to current chunk
+                if current_chunk:
+                    current_chunk += " " + sentence
+                else:
+                    current_chunk = sentence
+
+        # Don't forget the last chunk
         if current_chunk:
             chunks.append(current_chunk.strip())
 
-        return chunks
+        # Final safety validation - ensure NO chunk exceeds max_chars
+        # If any do, split them at natural pause points
+        validated_chunks = []
+        for chunk in chunks:
+            if len(chunk) > max_chars:
+                print(f"⚠️  Warning: Chunk still too long ({len(chunk)} chars), splitting at clause boundaries...")
+
+                # Emergency split at clauses/commas
+                parts = re.split(r'([,;:\-—]\s+)', chunk)
+                temp = ""
+                for part in parts:
+                    if len(temp) + len(part) > max_chars:
+                        if temp:
+                            validated_chunks.append(temp.strip())
+                        temp = part
+                    else:
+                        temp += part
+                if temp:
+                    validated_chunks.append(temp.strip())
+            else:
+                validated_chunks.append(chunk)
+
+        return validated_chunks
 
     def generate_audio_chunk(self, text: str, output_path: Path) -> Path:
         """
@@ -162,6 +241,11 @@ class XTTSAudioGenerator:
         Returns:
             Path to generated audio file
         """
+        # Safety check - XTTS has 250 char limit
+        if len(text) > 250:
+            print(f"⚠️  WARNING: Text too long ({len(text)} chars), truncating to 250...", end=" ", flush=True)
+            text = text[:250]
+
         print(f"  Generating audio ({len(text)} chars)...", end=" ", flush=True)
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -254,8 +338,8 @@ class XTTSAudioGenerator:
         self,
         input_file: str,
         output_dir: str = None,
-        chunk_size: int = 200,
-        speed: float = 1.15,
+        chunk_size: int = 250,
+        speed: float = 1.20,
         normalize: bool = True,
         to_mp3: bool = True
     ) -> dict:
@@ -265,8 +349,8 @@ class XTTSAudioGenerator:
         Args:
             input_file: Path to text/markdown file
             output_dir: Output directory (auto-generated if None)
-            chunk_size: Characters per chunk (200 max due to XTTS 400 token limit)
-            speed: Speed multiplier (1.15 recommended, reduces "robotic" feel)
+            chunk_size: Characters per chunk (250 max due to XTTS 400 token limit)
+            speed: Speed multiplier (1.20 recommended, reduces "robotic" feel)
             normalize: Apply loudness normalization
             to_mp3: Convert to MP3 (smaller files)
 
@@ -313,7 +397,15 @@ class XTTSAudioGenerator:
         print(f"Input: {input_file}")
         print(f"Output directory: {output_dir}")
         print(f"Language: {self.language}")
-        print(f"Reference voice: {Path(self.reference_voice).name if self.reference_voice else 'None'}")
+        if self.reference_voice:
+            if len(self.reference_voice) == 1:
+                print(f"Reference voice: {Path(self.reference_voice[0]).name}")
+            else:
+                print(f"Reference voices ({len(self.reference_voice)}):")
+                for i, ref in enumerate(self.reference_voice, 1):
+                    print(f"  {i}. {Path(ref).name}")
+        else:
+            print(f"Reference voice: None")
         print(f"Chunks: {len(chunks)}")
         print(f"Post-processing: speed={speed}x, normalize={normalize}, mp3={to_mp3}")
         print("="*70)
@@ -324,7 +416,31 @@ class XTTSAudioGenerator:
         raw_dir = output_dir / "raw" if (speed != 1.0 or normalize or to_mp3) else output_dir
         raw_dir.mkdir(exist_ok=True)
 
+        import time as time_module
+        generation_start = time_module.time()
+
         for i, chunk_text in enumerate(chunks, 1):
+            # Show progress bar every 10 chunks or on first/last
+            if i == 1 or i == len(chunks) or i % 10 == 0:
+                elapsed = time_module.time() - generation_start
+                percentage = (i / len(chunks)) * 100
+
+                # Calculate ETA
+                if i > 1:
+                    rate = i / elapsed
+                    remaining = len(chunks) - i
+                    eta_seconds = remaining / rate if rate > 0 else 0
+                    eta_str = self._format_eta(eta_seconds)
+                else:
+                    eta_str = "calculating..."
+
+                # Progress bar
+                bar_width = 40
+                filled = int(bar_width * i / len(chunks))
+                bar = "█" * filled + "░" * (bar_width - filled)
+
+                print(f"\n  Progress: [{bar}] {i}/{len(chunks)} ({percentage:.1f}%) | ETA: {eta_str}")
+
             # Generate raw audio
             raw_filename = f"{base_name}_chunk{i:03d}_raw.wav"
             raw_path = raw_dir / raw_filename
@@ -439,28 +555,35 @@ def main():
         print("Local TTS Audio Generation using XTTS-v2")
         print("="*70)
         print("\nUsage:")
-        print("  python local_tts_xtts.py <input_file> [reference_voice] [language] [options]")
+        print("  python local_tts_xtts.py <input_file> [reference_voice...] [--lang LANGUAGE]")
         print("\nExamples:")
         print("  # Basic usage (default voice)")
         print("  python local_tts_xtts.py translated.md")
         print()
-        print("  # With voice cloning")
-        print("  python local_tts_xtts.py translated.md voice_ref.wav en")
+        print("  # With single voice cloning")
+        print("  python local_tts_xtts.py translated.md voice_ref.wav --lang en")
+        print()
+        print("  # With MULTIPLE reference voices (recommended for better quality)")
+        print("  python local_tts_xtts.py translated.md voice1.wav voice2.wav --lang en")
+        print("  python local_tts_xtts.py book.md clean_audio.m4a voice_ref_clean.wav --lang en")
         print()
         print("  # Prepare reference voice first")
         print("  python local_tts_xtts.py --prepare-voice input.m4a voice_ref.wav")
         print()
-        print("  # Spanish audiobook with custom voice")
-        print("  python local_tts_xtts.py libro_traducido.md voz_referencia.wav es")
+        print("  # Spanish audiobook with multiple voices")
+        print("  python local_tts_xtts.py libro.md voz1.wav voz2.wav --lang es")
         print("\nSupported languages:")
         print(f"  {', '.join(XTTSAudioGenerator.LANGUAGES)}")
         print("\nReference Voice Tips:")
-        print("  • 10-30 seconds of clear speech")
+        print("  • 10-30 seconds of clear speech PER FILE")
+        print("  • Use MULTIPLE clips (2-3) for better quality and less robotic sound")
+        print("  • Vary content across clips (different sentences, pitches)")
+        print("  • Keep same speaker, mic, and environment across all clips")
         print("  • No music, no reverb, consistent mic distance")
         print("  • Mono audio at 22-24kHz recommended")
         print("  • Clean, dry voice works best")
         print("\nPost-Processing (automatic via FFmpeg):")
-        print("  • Speed: 1.15x (reduces 'robotic' feel)")
+        print("  • Speed: 1.20x (reduces 'robotic' feel)")
         print("  • Normalization: -16 LUFS (audiobook standard)")
         print("  • Format: MP3 @ 128kbps")
         print("\nRequirements:")
@@ -482,8 +605,33 @@ def main():
 
     # Parse arguments
     input_file = sys.argv[1]
-    reference_voice = sys.argv[2] if len(sys.argv) > 2 else None
-    language = sys.argv[3] if len(sys.argv) > 3 else "en"
+
+    # Collect reference voices and language
+    reference_voices = []
+    language = "en"
+
+    i = 2
+    while i < len(sys.argv):
+        arg = sys.argv[i]
+
+        if arg == "--lang":
+            if i + 1 < len(sys.argv):
+                language = sys.argv[i + 1]
+                i += 2
+            else:
+                print("❌ ERROR: --lang requires a language code")
+                sys.exit(1)
+        else:
+            # Treat as reference voice file
+            if Path(arg).exists():
+                reference_voices.append(arg)
+                i += 1
+            else:
+                print(f"⚠️  Warning: Skipping non-existent file: {arg}")
+                i += 1
+
+    # Use None if no voices provided, otherwise use the list
+    reference_voice = reference_voices if reference_voices else None
 
     try:
         generator = XTTSAudioGenerator(
@@ -493,8 +641,8 @@ def main():
 
         result = generator.generate_audiobook(
             input_file,
-            chunk_size=200,       # XTTS-v2 limit (400 tokens ~= 250 chars)
-            speed=1.15,           # 15% faster (reduces robotic feel)
+            chunk_size=250,       # XTTS-v2 limit (400 tokens ~= 250 chars)
+            speed=1.20,           # 20% faster (reduces robotic feel)
             normalize=True,       # Audiobook-standard loudness
             to_mp3=True          # Smaller files
         )

@@ -127,6 +127,25 @@ voice*.wav
 voice*.m4a
 xtts*.wav
 
-# Local Reader: Keep only essential documentation
-# Core architecture and workflow docs are tracked
-# Test results and generated guides are not tracked
+# Documentation: Only keep core docs (README, GUIDE, CLAUDE, CHANGELOG)
+# All other documentation files are consolidated
+*_FIX*.md
+*_SUMMARY.md
+*_GUIDE.md
+*_README.md
+*_WORKFLOW.md
+*_TRACKING.md
+*_ISSUES.md
+*_INDEX.md
+*_STATUS.md
+test_*.md
+chapter*.md
+REDUCE_*.md
+GIT_*.md
+HOW_TO_*.md
+
+# Additional ignores for TTS setup
+venv_tts/
+audio_xtts/
+test_chunking.py
+clean_audio.m4a

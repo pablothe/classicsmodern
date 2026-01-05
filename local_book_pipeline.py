@@ -18,6 +18,7 @@ import sys
 import json
 import time
 import argparse
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, List
@@ -140,6 +141,64 @@ class BookProcessingPipeline:
         """Save current state"""
         self.state.save(self.state_file)
 
+    def _show_overall_progress(self, start_time: float):
+        """Show continuous overall pipeline progress across all stages"""
+        # Calculate stage weights (based on typical time distribution)
+        stage_weights = {
+            'chunking': 0.01,      # ~1% of total time
+            'translation': 0.30,   # ~30% of total time
+            'deduplication': 0.01, # ~1% of total time
+            'audio': 0.68          # ~68% of total time
+        }
+
+        # Calculate overall progress
+        overall_progress = 0.0
+
+        if self.state.chunking_complete:
+            overall_progress += stage_weights['chunking']
+
+        if self.state.translation_complete:
+            overall_progress += stage_weights['translation']
+        elif self.state.translated_chunks > 0:
+            translation_pct = self.state.translated_chunks / self.state.total_chunks
+            overall_progress += stage_weights['translation'] * translation_pct
+
+        if self.state.deduplication_complete:
+            overall_progress += stage_weights['deduplication']
+
+        if self.state.audio_complete:
+            overall_progress += stage_weights['audio']
+        elif self.state.audio_files_generated > 0:
+            # Estimate total audio files needed (rough estimate)
+            # Each chunk typically produces ~35-40 audio files per 10k words
+            estimated_total_audio = self.state.total_chunks * 35
+            audio_pct = min(1.0, self.state.audio_files_generated / estimated_total_audio)
+            overall_progress += stage_weights['audio'] * audio_pct
+
+        # Clamp to 0-100%
+        overall_pct = min(100.0, overall_progress * 100)
+
+        # Calculate elapsed and ETA
+        elapsed = time.time() - start_time
+        if overall_progress > 0.01:
+            total_estimated = elapsed / overall_progress
+            remaining = total_estimated - elapsed
+            eta_str = self._format_time(remaining)
+        else:
+            eta_str = "calculating..."
+
+        # Draw overall progress bar
+        bar_width = 50
+        filled = int(bar_width * overall_progress)
+        bar = "█" * filled + "░" * (bar_width - filled)
+
+        print(f"\n{'='*70}")
+        print(f"OVERALL PIPELINE PROGRESS")
+        print(f"{'='*70}")
+        print(f"[{bar}] {overall_pct:.1f}%")
+        print(f"Elapsed: {self._format_time(elapsed)} | ETA: {eta_str}")
+        print(f"{'='*70}\n")
+
     def _show_progress_bar(self, current: int, total: int, stage: str, elapsed: float = 0):
         """Show a progress bar"""
         percentage = (current / total) * 100 if total > 0 else 0
@@ -199,6 +258,7 @@ class BookProcessingPipeline:
             if not self.state.chunking_complete:
                 self._stage_chunking()
                 self._save_state()
+                self._show_overall_progress(start_time)
             else:
                 print("✓ Chunking already complete, skipping...\n")
 
@@ -206,6 +266,7 @@ class BookProcessingPipeline:
             if not self.state.translation_complete:
                 self._stage_translation()
                 self._save_state()
+                self._show_overall_progress(start_time)
             else:
                 print("✓ Translation already complete, skipping...\n")
 
@@ -213,13 +274,15 @@ class BookProcessingPipeline:
             if not self.state.deduplication_complete:
                 self._stage_deduplication()
                 self._save_state()
+                self._show_overall_progress(start_time)
             else:
                 print("✓ Deduplication already complete, skipping...\n")
 
             # STAGE 4: Audio Generation
             if not self.state.audio_complete:
-                self._stage_audio()
+                self._stage_audio(start_time)
                 self._save_state()
+                self._show_overall_progress(start_time)
             else:
                 print("✓ Audio generation already complete, skipping...\n")
 
@@ -385,7 +448,55 @@ class BookProcessingPipeline:
         self.state.deduplication_complete = True
         print(f"\n✅ Deduplication complete")
 
-    def _stage_audio(self):
+    def _stitch_chapter_audio(self, mp3_files: List[Path], output_file: Path) -> bool:
+        """
+        Stitch multiple MP3 files into a single file using ffmpeg.
+
+        Args:
+            mp3_files: List of MP3 files to concatenate
+            output_file: Output file path
+
+        Returns:
+            bool: True if successful
+        """
+        import tempfile
+
+        if not mp3_files:
+            return False
+
+        # Create temporary file list for ffmpeg concat
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
+            for mp3 in mp3_files:
+                f.write(f"file '{mp3.absolute()}'\n")
+            concat_file = f.name
+
+        try:
+            # Use ffmpeg concat demuxer for lossless concatenation
+            cmd = [
+                'ffmpeg',
+                '-f', 'concat',
+                '-safe', '0',
+                '-i', concat_file,
+                '-c', 'copy',
+                '-y',  # Overwrite output file
+                str(output_file),
+                '-loglevel', 'error'  # Only show errors
+            ]
+
+            result = subprocess.run(cmd, capture_output=True, text=True)
+
+            if result.returncode != 0:
+                print(f"  ❌ ffmpeg error: {result.stderr}")
+                return False
+
+            return True
+
+        finally:
+            # Clean up temp file
+            if Path(concat_file).exists():
+                Path(concat_file).unlink()
+
+    def _stage_audio(self, pipeline_start_time: float):
         """Stage 4: Generate audio files"""
         print("\n" + "="*70)
         print("STAGE 4: AUDIO GENERATION")
@@ -453,8 +564,8 @@ class BookProcessingPipeline:
                 result = generator.generate_audiobook(
                     str(chunk_file),
                     output_dir=str(audio_dir),
-                    chunk_size=200,  # Conservative limit for XTTS
-                    speed=1.15,
+                    chunk_size=250,  # XTTS-v2 limit (400 tokens ~= 250 chars)
+                    speed=1.20,      # 20% faster (reduces robotic feel)
                     normalize=True,
                     to_mp3=True
                 )
@@ -467,8 +578,11 @@ class BookProcessingPipeline:
 
                 print(f"\n✓ Chunk {i} complete in {self._format_time(chunk_time)}")
 
-                # Show overall progress
-                self._show_progress_bar(i, len(chunk_files), "Audio Progress", elapsed)
+                # Show stage progress
+                self._show_progress_bar(i, len(chunk_files), "Audio Stage", elapsed)
+
+                # Show overall pipeline progress
+                self._show_overall_progress(pipeline_start_time)
 
                 # Save progress after each chunk
                 self._save_state()
@@ -489,10 +603,67 @@ class BookProcessingPipeline:
 
         print(f"✓ Master playlist: {master_playlist.name}")
 
-        self.state.audio_dir = str(audio_dir)
+        # STAGE 4B: Stitch chunks into chapter files
+        print("\n" + "="*70)
+        print("STITCHING CHAPTERS")
+        print("="*70)
+        print("Combining MP3 chunks into single chapter files...")
+        print("(Fast operation - no re-encoding)")
+        print("="*70)
+
+        stitched_dir = audio_dir / "stitched"
+        stitched_dir.mkdir(exist_ok=True)
+
+        # Group MP3 files by chapter
+        import re
+        chapters = {}
+        for mp3_file in all_audio_files:
+            mp3_path = Path(mp3_file)
+            # Extract chapter number from filename like "chunk_001_..._chunk001.mp3"
+            match = re.match(r'(chunk_\d+)_.*?_chunk\d+\.mp3', mp3_path.name)
+            if match:
+                chapter_prefix = match.group(1)
+                if chapter_prefix not in chapters:
+                    chapters[chapter_prefix] = []
+                chapters[chapter_prefix].append(mp3_path)
+
+        # Sort files within each chapter
+        for chapter_prefix in chapters:
+            chapters[chapter_prefix].sort()
+
+        print(f"\nFound {len(chapters)} chapter(s) to stitch\n")
+
+        stitched_files = []
+        for chapter_prefix, mp3_files in sorted(chapters.items()):
+            chapter_num = re.search(r'\d+', chapter_prefix).group()
+            output_file = stitched_dir / f"chapter_{chapter_num}.mp3"
+
+            print(f"  Chapter {chapter_num}: Stitching {len(mp3_files)} chunks... ", end="", flush=True)
+
+            if self._stitch_chapter_audio(mp3_files, output_file):
+                size_mb = output_file.stat().st_size / (1024 * 1024)
+                print(f"✓ ({size_mb:.1f} MB)")
+                stitched_files.append(output_file)
+            else:
+                print("❌ Failed")
+
+        # Create stitched playlist (for multi-chapter books)
+        if len(stitched_files) > 1:
+            stitched_playlist = stitched_dir / f"{self.book_path.stem}_chapters.m3u"
+            with open(stitched_playlist, 'w', encoding='utf-8') as f:
+                f.write("#EXTM3U\n")
+                for chapter_file in sorted(stitched_files):
+                    f.write(f"#EXTINF:-1,{chapter_file.stem}\n")
+                    f.write(f"{chapter_file.name}\n")
+            print(f"\n✓ Chapter playlist: {stitched_playlist.name}")
+
+        print(f"\n✅ Stitched {len(stitched_files)} chapter file(s)")
+        print(f"   Location: {stitched_dir}/")
+
+        self.state.audio_dir = str(stitched_dir)  # Point to stitched directory
         self.state.audio_complete = True
 
-        print(f"\n✅ Audio generation complete: {len(all_audio_files)} files")
+        print(f"\n✅ Audio generation complete: {len(all_audio_files)} chunks → {len(stitched_files)} chapter(s)")
 
 
 def main():
@@ -585,7 +756,19 @@ command again and it will continue from where it left off.
         results = pipeline.run()
 
         print("\n🎧 Your audiobook is ready!")
-        print(f"\nTo play: cd {results['audio_dir']} && afplay *.m3u")
+
+        # Find the stitched files
+        audio_dir = Path(results['audio_dir'])
+        chapter_files = sorted(audio_dir.glob("chapter_*.mp3"))
+
+        print(f"\nAudio files: {len(chapter_files)} chapter(s)")
+        print(f"Location: {results['audio_dir']}/")
+        print(f"\nTo play:")
+        if len(chapter_files) == 1:
+            print(f"  afplay '{chapter_files[0]}'")
+        else:
+            print(f"  cd {results['audio_dir']}")
+            print(f"  afplay chapter_001.mp3  # or play all in order")
 
         sys.exit(0)
 

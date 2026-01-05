@@ -1,10 +1,15 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Technical reference for AI assistants working with this repository.
 
 ## Project Overview
 
-**modernclassics** is a Python-based system for translating classic literature into modern languages and generating audiobooks using AI. The project processes century-old books through various AI models while preserving Markdown structure and meaning.
+**Modern Classics** translates classic literature and generates audiobooks using local and cloud AI.
+
+**Documentation:**
+- [README.md](README.md) - Project overview and quick start
+- [GUIDE.md](GUIDE.md) - Complete user guide (read this for workflow details)
+- [CHANGELOG.md](CHANGELOG.md) - Test results and version history
 
 ## Environment Setup
 
@@ -52,37 +57,19 @@ python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian 
 
 ### Audio Generation
 
-**Local TTS with XTTS-v2 (Recommended - $0 cost):**
+**Local TTS (free, voice cloning):**
 ```bash
-# Setup (once)
-pip install TTS==0.27.3 && brew install ffmpeg
-
-# Generate audiobook
 python local_tts_xtts.py translated.md voice_ref.wav en
-
-# With voice cloning (prepare reference voice first)
-python local_tts_xtts.py --prepare-voice sample.m4a voice_ref.wav
-
-# Multi-language: es, fr, de, it, pt, pl, tr, ru, nl, cs, ar, zh-cn, ja, ko, hu
-python local_tts_xtts.py libro.md voz.wav es
-
-# See LOCAL_TTS_GUIDE.md for details
 ```
 
-**Cloud TTS with OpenAI (Legacy - ~$15/book):**
+**Cloud TTS (paid, faster):**
 ```bash
-python audio_translator.py books/alice_adventures/alices_adventures.md --voice fable
-# or: python local_reader_audio.py translated.md fable mp3
+python local_reader_audio.py translated/deduplicated/ --voice fable
+python local_reader_audio_combiner.py playlist.m3u
+python local_reader_audio_compress.py combined.mp3 96k
 ```
 
-### Book Processing Utilities
-```bash
-# Extract from Project Gutenberg
-python gutenberg_extractor.py
-
-# Convert EPUB to Markdown
-python epub_to_md.py input.epub
-```
+**See [GUIDE.md](GUIDE.md) for complete audio generation workflow.**
 
 ## Architecture
 
@@ -99,22 +86,14 @@ python epub_to_md.py input.epub
 
 ### Audio Generation System
 
-**Local TTS (XTTS-v2) - Primary:**
-- **Cost**: Free (fully local processing)
-- **Voice Cloning**: Clone any voice with 10-30 second sample
-- **Languages**: 16 languages (en, es, fr, de, it, pt, pl, tr, ru, nl, cs, ar, zh-cn, ja, ko, hu)
-- **Quality**: High-quality, natural prosody with voice matching
-- **Post-Processing**: Automatic speed adjustment (1.15x), loudness normalization (-16 LUFS), MP3 conversion
-- **Chunking**: Optimized for 500-1500 chars per chunk
-- **Speed**: 2-4x slower than realtime (CPU), ~1x realtime (GPU)
-- **See**: [LOCAL_TTS_GUIDE.md](LOCAL_TTS_GUIDE.md) for complete documentation
+**Local TTS (XTTS-v2):**
+- Free, voice cloning (10-30 sec sample)
+- 16 languages, automatic post-processing (speed, normalize, MP3)
+- 2-4x slower than realtime (CPU)
 
-**Cloud TTS (OpenAI) - Legacy:**
-- **Cost**: ~$15 per book
-- **Text Cleaning**: Removes Markdown formatting for natural speech
-- **Voice Options**: 6 preset voices (alloy, echo, fable, onyx, nova, shimmer)
-- **Smart Chunking**: Breaks at natural boundaries (~4000 chars), creates playlists
-- **Format Support**: wav, mp3, flac with automatic playlist generation
+**Cloud TTS (OpenAI):**
+- ~$15/book, 6 voices, faster generation
+- Smart chunking, playlist generation
 
 ### File Organization Pattern
 ```
@@ -141,59 +120,24 @@ books/
 │   └── [book]_audiobook_playlist_[date].m3u    # Playlist
 ```
 
-## Key Implementation Details
+## Technical Details
 
 ### Model-Specific Handling
-- **O1 models**: Don't support system messages, use combined prompts
+- **O1 models**: No system messages, use combined prompts
 - **O3 models**: Support temperature and system messages
-- **GPT models**: Standard chat completion format
-
-### Translation Quality Features
-- Markdown structure analysis and preservation
-- Table of contents link ID maintenance  
-- Code block and table structure retention
-- Automatic post-processing cleanup and verification
-
-### Audio Processing
-
-**Local TTS (XTTS-v2):**
-- Voice cloning from 10-30 second reference sample
-- Automatic post-processing pipeline:
-  - Speed adjustment (1.15x default, reduces "draggy" TTS feel)
-  - Loudness normalization (-16 LUFS, audiobook standard)
-  - MP3 conversion (128kbps, reduces file size by ~90%)
-- Optimal chunk size: 500-1500 characters
-- Multi-language support (16 languages)
-- Model caching (~1.8GB, downloaded once)
-
-**Cloud TTS (OpenAI - Legacy):**
-- Project Gutenberg header/footer removal
-- Sentence-boundary splitting for natural pauses
-- Playlist creation for sequential playback
-- Automatic book directory detection and organization
-
-## Development Notes
-
-### Current Architecture Limitations
-- Audio generation may hit API limits with very long texts (use multi-part)
-- O1/O3 model parameters differ from standard GPT models
-- Chunking strategy optimized for translation quality over speed
-
-### Anti-Duplication System (NEW - Jan 2026)
-- **Problem**: Translation chunks use 20-word overlap for context, causing duplicate audio at boundaries
-- **Solution**: Two-layer hybrid approach:
-  1. **LLM Context (Primary)**: Translator receives previous chunk's ending as context with instruction "DO NOT translate this, it's reference only"
-  2. **Exact Match (Failsafe)**: Automatic deduplication detects and removes exact text duplicates between consecutive chunks
-- **Effectiveness**:
-  - Layer 1 prevents ~70% of duplicates
-  - Layer 2 catches 100% of remaining duplicates
-- **Result**: Clean, seamless audio with zero repetition
-- **Tested**: See `TEST_RESULTS_DEDUPLICATION.md` for validation with 5-chunk test suite
+- **GPT models**: Standard chat completion
+- **Local (Ollama)**: gemma3-translator:4b, ~16-20 words/sec
 
 ### File Naming Conventions
-- Translations: `[original_name]_[target_language]_[YYYYMMDD]_[model].md`
+- Translations: `[book]_[language]_[YYYYMMDD]_[model].md`
 - Audio: `[book]_part[XXX]_[voice]_[timestamp].[format]`
-- Original files preserved with `_original.md` suffix when copied to book directories
+- Deduplicated: `chunk_XXX_DEDUPED.md`
 
-### Legacy Scripts
-Multiple translator variants exist (`translator_o1_mini.py`, `translator_o3_mini_high.py`, etc.) but `translator.py` consolidates all functionality. Legacy scripts maintained for backward compatibility.
+### Anti-Duplication System
+**Problem:** 20-word overlap causes duplicate audio
+
+**Solution:**
+1. Layer 1 (LLM): Context from previous chunk marked "reference only"
+2. Layer 2 (Exact Match): Automatic cleanup of any duplicates
+
+**Result:** Zero repetition at boundaries (validated in [CHANGELOG.md](CHANGELOG.md))

@@ -182,6 +182,50 @@ class OllamaTranslator:
         # Return last N sentences
         return ''.join(combined[-count:]).strip()
 
+    def _validate_translation(self, translated: str, original_chunk: str) -> bool:
+        """
+        Validate that the translation looks legitimate (not model commentary).
+
+        Args:
+            translated: The translated text to validate
+            original_chunk: The original chunk for comparison
+
+        Returns:
+            True if translation appears valid, False if it looks like garbage
+        """
+        # Check for common LLM meta-commentary patterns
+        garbage_patterns = [
+            r"^I will (read|translate)",
+            r"^I'll (read|translate)",
+            r"^Let me (read|translate)",
+            r"^Here is the translation",
+            r"^Translation:",
+            r"^The text says",
+            r"^This (text|passage) (is|means)"
+        ]
+
+        for pattern in garbage_patterns:
+            if re.search(pattern, translated, re.IGNORECASE | re.MULTILINE):
+                return False
+
+        # Check if the translation is suspiciously short (less than 20% of original)
+        if len(translated) < len(original_chunk) * 0.2 and len(original_chunk) > 50:
+            return False
+
+        # Check for excessive repetition (same line repeated 5+ times)
+        lines = translated.split('\n')
+        if len(lines) > 5:
+            line_counts = {}
+            for line in lines:
+                stripped = line.strip()
+                if stripped:
+                    line_counts[stripped] = line_counts.get(stripped, 0) + 1
+            # If any line appears more than 5 times, it's likely garbage
+            if any(count > 5 for count in line_counts.values()):
+                return False
+
+        return True
+
     def _translate_chunk(
         self,
         chunk: TranslationChunk,
@@ -218,10 +262,10 @@ CONTEXT (already translated, for reference only):
 TRANSLATE THE FOLLOWING NEW TEXT FROM {source_lang.upper()} TO {target_lang.upper()}:
 {chunk.content}
 
-Important: Only translate the new text above. Do not repeat the context."""
+Important: Only translate the new text above. Do not repeat the context. Do not include any commentary or explanations - only provide the direct translation."""
         else:
             # First chunk, no context
-            prompt = f"Translate from {source_lang} to {target_lang}: {chunk.content}"
+            prompt = f"Translate from {source_lang} to {target_lang}. Only provide the direct translation, no commentary or explanations:\n\n{chunk.content}"
 
         # Call Ollama API
         payload = {
@@ -233,19 +277,41 @@ Important: Only translate the new text above. Do not repeat the context."""
             }
         }
 
-        try:
-            response = requests.post(self.api_url, json=payload)
-            response.raise_for_status()
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(self.api_url, json=payload)
+                response.raise_for_status()
 
-            result = response.json()
-            translated = result.get('response', '').strip()
+                result = response.json()
+                translated = result.get('response', '').strip()
 
-            return translated
+                # Validate the translation
+                if not self._validate_translation(translated, chunk.content):
+                    print(f"⚠️  Warning: Chunk {chunk.index} translation failed validation (attempt {attempt + 1}/{max_retries})")
+                    if attempt < max_retries - 1:
+                        print(f"   Retrying with adjusted prompt...")
+                        time.sleep(1)  # Brief pause before retry
+                        continue
+                    else:
+                        print(f"❌ ERROR: Chunk {chunk.index} produced invalid translation after {max_retries} attempts")
+                        print(f"   Returning original text to prevent corruption")
+                        return chunk.content
 
-        except Exception as e:
-            print(f"Error translating chunk {chunk.index}: {e}")
-            # Return original text if translation fails
-            return chunk.content
+                return translated
+
+            except Exception as e:
+                print(f"⚠️  Error translating chunk {chunk.index} (attempt {attempt + 1}/{max_retries}): {e}")
+                if attempt < max_retries - 1:
+                    time.sleep(2)  # Longer pause on API errors
+                    continue
+                else:
+                    print(f"❌ Translation failed after {max_retries} attempts")
+                    # Return original text if translation fails
+                    return chunk.content
+
+        # Should never reach here, but just in case
+        return chunk.content
 
     def translate_document_with_context(
         self,

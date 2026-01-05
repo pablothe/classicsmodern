@@ -85,33 +85,50 @@ class AudiobookLibrary:
         """Scan XTTS audio directory for chapters"""
         chapters = []
 
-        # Group MP3 files by chunk prefix
-        mp3_files = sorted(audio_dir.glob("*.mp3"))
-        chunk_groups = {}
+        # First, check for stitched chapters (single files)
+        stitched_dir = audio_dir / "stitched"
+        if stitched_dir.exists():
+            for mp3 in sorted(stitched_dir.glob("chapter_*.mp3")):
+                # Extract chapter number from filename like "chapter_001.mp3"
+                match = re.match(r'chapter_(\d+)\.mp3', mp3.name)
+                if match:
+                    chapter_num = match.group(1)
+                    chapters.append({
+                        "name": f"Chapter {int(chapter_num)}",
+                        "tracks": [str(mp3.relative_to(book_path))],
+                        "playlist": None,
+                        "type": "xtts-stitched"
+                    })
 
-        for mp3 in mp3_files:
-            # Extract chunk name from filename like "chunk_001_modern_english_4b_DEDUPED_chunk001.mp3"
-            match = re.match(r'(chunk_\d+)_.*?_(chunk\d+)\.mp3', mp3.name)
-            if match:
-                chunk_prefix = match.group(1)
-                if chunk_prefix not in chunk_groups:
-                    chunk_groups[chunk_prefix] = []
-                chunk_groups[chunk_prefix].append(mp3)
+        # If no stitched chapters found, fall back to individual chunks
+        if not chapters:
+            # Group MP3 files by chunk prefix
+            mp3_files = sorted(audio_dir.glob("*.mp3"))
+            chunk_groups = {}
 
-        # Create chapter entry for each chunk group
-        for chunk_name, mp3_list in chunk_groups.items():
-            # Find associated playlist
-            playlist = None
-            for m3u in audio_dir.glob(f"{chunk_name}*.m3u"):
-                playlist = m3u.relative_to(book_path)
-                break
+            for mp3 in mp3_files:
+                # Extract chunk name from filename like "chunk_001_modern_english_4b_DEDUPED_chunk001.mp3"
+                match = re.match(r'(chunk_\d+)_.*?_(chunk\d+)\.mp3', mp3.name)
+                if match:
+                    chunk_prefix = match.group(1)
+                    if chunk_prefix not in chunk_groups:
+                        chunk_groups[chunk_prefix] = []
+                    chunk_groups[chunk_prefix].append(mp3)
 
-            chapters.append({
-                "name": self._format_chapter_name(chunk_name),
-                "tracks": [str(mp3.relative_to(book_path)) for mp3 in sorted(mp3_list)],
-                "playlist": str(playlist) if playlist else None,
-                "type": "xtts"
-            })
+            # Create chapter entry for each chunk group
+            for chunk_name, mp3_list in chunk_groups.items():
+                # Find associated playlist
+                playlist = None
+                for m3u in audio_dir.glob(f"{chunk_name}*.m3u"):
+                    playlist = m3u.relative_to(book_path)
+                    break
+
+                chapters.append({
+                    "name": self._format_chapter_name(chunk_name),
+                    "tracks": [str(mp3.relative_to(book_path)) for mp3 in sorted(mp3_list)],
+                    "playlist": str(playlist) if playlist else None,
+                    "type": "xtts"
+                })
 
         return chapters
 
@@ -288,7 +305,7 @@ if __name__ == '__main__':
     for book_name, book_data in lib.items():
         print(f"  - {book_data['title']} ({len(book_data['chapters'])} chapters)")
 
-    print("\n🎵 Player available at: http://localhost:5000")
+    print("\n🎵 Player available at: http://localhost:5001")
     print("Press Ctrl+C to stop\n")
 
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
