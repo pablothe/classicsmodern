@@ -24,6 +24,33 @@ OPENAI_API_KEY=your_api_key_here
 
 ## Core Commands
 
+### Book Preprocessing (Run First!)
+
+```bash
+# Validate book structure before translation/audio
+python3 book_preprocessor.py books/mybook/original.md
+
+# Check translation completeness after translation
+python3 book_preprocessor.py books/mybook/translated.md
+```
+
+**What it does:**
+- Detects table of contents (TOC)
+- Finds all chapter markers in content (Roman numerals, Markdown headers)
+- Validates chapters are sequential (no missing chapters)
+- Identifies gaps (e.g., has I, V, VI but missing II, III, IV)
+- Compares TOC vs actual content
+- Generates JSON metadata for downstream tools
+
+**Output files:**
+- `*_preprocessing_report.txt` - Human-readable validation report
+- `*_chapter_data.json` - Machine-readable chapter metadata
+
+**Use cases:**
+1. **Before translation**: Ensure source book is complete
+2. **After translation**: Validate all chapters were translated
+3. **Before audio generation**: Confirm chapter count for proper audio splitting
+
 ### Text Translation
 
 **For single files (cloud-based OpenAI):**
@@ -55,6 +82,39 @@ python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian 
 # 3. Create clean files in translated/deduplicated/
 ```
 
+### Text Summarization (NEW!)
+
+**Standalone summarization (for already-translated files):**
+```bash
+# 50% summary (auto uses 2000-word chunks)
+python3 book_summarizer.py books/mybook/translated.md 50
+
+# 10% summary / 90% compression (auto uses 5000-word chunks)
+python3 book_summarizer.py books/mybook/translated.md 10
+
+# Custom chunk size (override auto-calculation)
+python3 book_summarizer.py books/mybook/translated.md 30 1500
+```
+
+**What it does:**
+- Uses same Ollama LLM as translation (gemma3-translator:4b)
+- Auto-scales chunk size based on compression ratio (more compression = larger chunks for better context)
+- Preserves Markdown structure (headers, lists, etc.)
+- Context-aware (each chunk knows what came before)
+- Output: `*_summarized_[percentage]pct.md`
+
+**Auto-scaling chunk sizes:**
+- 10% target (90% compression) → 5000 words/chunk (~10 pages)
+- 20% target (80% compression) → 4000 words/chunk (~8 pages)
+- 30% target (70% compression) → 3000 words/chunk (~6 pages)
+- 50% target (50% compression) → 2000 words/chunk (~4 pages)
+- 70%+ target (light compression) → 1000 words/chunk (~2 pages)
+
+**Then generate audio:**
+```bash
+python3 local_tts_xtts.py books/mybook/translated_summarized_50pct.md voice_ref.wav en
+```
+
 ### Audio Generation
 
 **Local TTS (free, voice cloning):**
@@ -78,11 +138,24 @@ python local_reader_audio_compress.py combined.mp3 96k
 - **Smart Chunking**: Respects Markdown structure, ~250 words per chunk
 - **Structure Preservation**: Maintains headers, links, tables, and formatting through translation
 - **Context-Aware Translation**: Each chunk receives context from previous chunk to prevent duplicates
-- **Two-Layer Deduplication** (NEW):
+- **Two-Layer Deduplication**:
   - **Layer 1 (LLM Context)**: Translator receives previous chunk's ending as "reference only" to prevent repeating it
   - **Layer 2 (Exact Match)**: Automatic failsafe deduplication catches any duplicates that slip through
   - **Result**: Clean audio with zero repetition at chunk boundaries
 - **Auto-Organization**: Automatically places outputs in appropriate `books/[book_name]/` directories
+
+### Summarization System (NEW!)
+- **LLM-Powered**: Uses same Ollama model as translation (gemma3-translator:4b)
+- **Adaptive Chunking**: Auto-scales chunk size based on compression ratio
+  - More aggressive compression → larger chunks (more context needed)
+  - Light compression → smaller chunks (less context needed)
+- **Context-Aware**: Each chunk receives context from previous summary to maintain narrative flow
+- **Structure Preservation**: Maintains Markdown headers, lists, formatting
+- **Compression Range**: 10%-90% (target percentage of original length)
+- **Use Cases**:
+  - Create condensed audiobooks from long classics
+  - Generate executive summaries
+  - Reduce listening time while preserving key themes
 
 ### Audio Generation System
 
@@ -90,6 +163,8 @@ python local_reader_audio_compress.py combined.mp3 96k
 - Free, voice cloning (10-30 sec sample)
 - 16 languages, automatic post-processing (speed, normalize, MP3)
 - 2-4x slower than realtime (CPU)
+- **Chapter Detection**: Automatically detects chapters BEFORE text cleaning, preserves markers, then combines chunks into chapter-based audio files
+- **Smart Combining**: Uses FFmpeg to stitch 250-char audio chunks into full chapter files
 
 **Cloud TTS (OpenAI):**
 - ~$15/book, 6 voices, faster generation

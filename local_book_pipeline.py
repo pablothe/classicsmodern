@@ -29,6 +29,7 @@ from local_reader_smart_splitter import analyze_and_split
 from local_reader_batch_translator import BatchTranslator
 from local_reader_deduplicate import deduplicate_chunks
 from local_tts_xtts import XTTSAudioGenerator
+from book_summarizer import BookSummarizer
 
 
 @dataclass
@@ -38,16 +39,19 @@ class PipelineState:
     source_lang: str
     target_lang: str
     voice_ref: str
+    summarize_percentage: Optional[int] = None
 
     # Stage completion flags
     chunking_complete: bool = False
     translation_complete: bool = False
+    summarization_complete: bool = False
     deduplication_complete: bool = False
     audio_complete: bool = False
 
     # Paths to intermediate outputs
     chunks_dir: Optional[str] = None
     translated_dir: Optional[str] = None
+    summarized_dir: Optional[str] = None
     deduped_dir: Optional[str] = None
     audio_dir: Optional[str] = None
 
@@ -83,7 +87,8 @@ class BookProcessingPipeline:
         target_lang: str,
         voice_ref: str = "voice_ref_clean.wav",
         auto_chunk_threshold: int = 50000,  # 50KB
-        words_per_chunk: int = 10000
+        words_per_chunk: int = 10000,
+        summarize_percentage: Optional[int] = None
     ):
         """
         Initialize pipeline.
@@ -95,6 +100,7 @@ class BookProcessingPipeline:
             voice_ref: Path to reference voice WAV file
             auto_chunk_threshold: Auto-chunk if file larger than this (chars)
             words_per_chunk: Target words per chunk
+            summarize_percentage: Target summary length as % of original (e.g., 10 = 90% compression)
         """
         self.book_path = Path(book_path)
         self.source_lang = source_lang
@@ -102,6 +108,7 @@ class BookProcessingPipeline:
         self.voice_ref = voice_ref
         self.auto_chunk_threshold = auto_chunk_threshold
         self.words_per_chunk = words_per_chunk
+        self.summarize_percentage = summarize_percentage
 
         if not self.book_path.exists():
             raise FileNotFoundError(f"Book not found: {book_path}")
@@ -121,6 +128,7 @@ class BookProcessingPipeline:
                 source_lang=source_lang,
                 target_lang=target_lang,
                 voice_ref=voice_ref,
+                summarize_percentage=summarize_percentage,
                 started_at=datetime.now().isoformat()
             )
             self.state.save(self.state_file)
@@ -132,6 +140,8 @@ class BookProcessingPipeline:
         print("="*70)
         print(f"✓ Chunking:       {'DONE' if self.state.chunking_complete else 'PENDING'}")
         print(f"✓ Translation:    {'DONE' if self.state.translation_complete else 'PENDING'} ({self.state.translated_chunks}/{self.state.total_chunks} chunks)")
+        if self.state.summarize_percentage:
+            print(f"✓ Summarization:  {'DONE' if self.state.summarization_complete else 'PENDING'} ({self.state.summarize_percentage}% target)")
         print(f"✓ Deduplication:  {'DONE' if self.state.deduplication_complete else 'PENDING'}")
         print(f"✓ Audio:          {'DONE' if self.state.audio_complete else 'PENDING'} ({self.state.audio_files_generated} files)")
         print("="*70)
@@ -144,12 +154,22 @@ class BookProcessingPipeline:
     def _show_overall_progress(self, start_time: float):
         """Show continuous overall pipeline progress across all stages"""
         # Calculate stage weights (based on typical time distribution)
-        stage_weights = {
-            'chunking': 0.01,      # ~1% of total time
-            'translation': 0.30,   # ~30% of total time
-            'deduplication': 0.01, # ~1% of total time
-            'audio': 0.68          # ~68% of total time
-        }
+        if self.state.summarize_percentage:
+            stage_weights = {
+                'chunking': 0.01,        # ~1% of total time
+                'translation': 0.25,     # ~25% of total time
+                'summarization': 0.10,   # ~10% of total time
+                'deduplication': 0.01,   # ~1% of total time
+                'audio': 0.63            # ~63% of total time
+            }
+        else:
+            stage_weights = {
+                'chunking': 0.01,      # ~1% of total time
+                'translation': 0.30,   # ~30% of total time
+                'summarization': 0.0,  # Not used
+                'deduplication': 0.01, # ~1% of total time
+                'audio': 0.68          # ~68% of total time
+            }
 
         # Calculate overall progress
         overall_progress = 0.0
@@ -162,6 +182,10 @@ class BookProcessingPipeline:
         elif self.state.translated_chunks > 0:
             translation_pct = self.state.translated_chunks / self.state.total_chunks
             overall_progress += stage_weights['translation'] * translation_pct
+
+        if self.state.summarize_percentage:
+            if self.state.summarization_complete:
+                overall_progress += stage_weights['summarization']
 
         if self.state.deduplication_complete:
             overall_progress += stage_weights['deduplication']
@@ -269,6 +293,14 @@ class BookProcessingPipeline:
                 self._show_overall_progress(start_time)
             else:
                 print("✓ Translation already complete, skipping...\n")
+
+            # STAGE 2.5: Summarization (optional)
+            if self.state.summarize_percentage and not self.state.summarization_complete:
+                self._stage_summarization()
+                self._save_state()
+                self._show_overall_progress(start_time)
+            elif self.state.summarize_percentage:
+                print("✓ Summarization already complete, skipping...\n")
 
             # STAGE 3: Deduplication
             if not self.state.deduplication_complete:
@@ -405,6 +437,64 @@ class BookProcessingPipeline:
 
         print(f"\n✅ Translation complete: {results['successful']}/{self.state.total_chunks} chunks")
 
+    def _stage_summarization(self):
+        """Stage 2.5: Summarize translated chunks (optional)"""
+        print("\n" + "="*70)
+        print("STAGE 2.5: SUMMARIZATION")
+        print("="*70)
+        print(f"Summarizing to {self.state.summarize_percentage}% of original length...")
+        print("="*70)
+        print()
+
+        translated_dir = Path(self.state.translated_dir)
+        summarized_dir = translated_dir / "summarized"
+        summarized_dir.mkdir(exist_ok=True)
+
+        # Find translated chunks
+        chunk_files = sorted(translated_dir.glob("chunk_*.md"))
+        chunk_files = [f for f in chunk_files if '_DEDUPED' not in f.name and f.parent == translated_dir]
+
+        if not chunk_files:
+            raise ValueError(f"No translated chunks found in {translated_dir}")
+
+        print(f"Processing {len(chunk_files)} chunks...\n")
+
+        # Create summarizer
+        summarizer = BookSummarizer(target_percentage=self.state.summarize_percentage)
+
+        # Summarize each chunk
+        for i, chunk_file in enumerate(chunk_files, 1):
+            print(f"\n[{i}/{len(chunk_files)}] Summarizing: {chunk_file.name}")
+            print("-" * 70)
+
+            # Read chunk
+            with open(chunk_file, 'r', encoding='utf-8') as f:
+                text = f.read()
+
+            original_words = len(text.split())
+            print(f"Original: {original_words:,} words")
+
+            # Summarize
+            result = summarizer.summarize_document(text, self.state.summarize_percentage)
+
+            # Generate output filename
+            output_filename = f"{chunk_file.stem}_summarized_{self.state.summarize_percentage}pct.md"
+            output_path = summarized_dir / output_filename
+
+            # Save
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(result.translated_text)
+
+            summarized_words = len(result.translated_text.split())
+            print(f"✓ Summarized: {summarized_words:,} words ({summarized_words/original_words*100:.1f}% of original)")
+
+        # Update state to point to summarized directory for deduplication
+        self.state.summarized_dir = str(summarized_dir)
+        self.state.translated_dir = str(summarized_dir)  # Override for next stage
+        self.state.summarization_complete = True
+
+        print(f"\n✅ Summarization complete: {len(chunk_files)} chunks")
+
     def _stage_deduplication(self):
         """Stage 3: Remove duplicates"""
         print("\n" + "="*70)
@@ -433,9 +523,9 @@ class BookProcessingPipeline:
             translated_dir = Path(self.state.translated_dir)
             deduped_dir = translated_dir / "deduplicated"
 
-            # Find translated chunks
+            # Find translated/summarized chunks (handle both regular and summarized filenames)
             chunk_files = sorted(translated_dir.glob("chunk_*.md"))
-            chunk_files = [f for f in chunk_files if '_DEDUPED' not in f.name]
+            chunk_files = [f for f in chunk_files if '_DEDUPED' not in f.name and f.parent == translated_dir]
 
             if not chunk_files:
                 raise ValueError(f"No translated chunks found in {translated_dir}")
@@ -740,7 +830,19 @@ command again and it will continue from where it left off.
         help='Disable auto-chunking (always chunk regardless of size)'
     )
 
+    parser.add_argument(
+        '--summarize',
+        type=int,
+        metavar='PERCENT',
+        help='Summarize to target percentage of original length (e.g., 10 = 90%% compression)'
+    )
+
     args = parser.parse_args()
+
+    # Validate summarization percentage
+    if args.summarize is not None and (args.summarize < 10 or args.summarize > 90):
+        print(f"❌ ERROR: --summarize must be between 10-90 (got {args.summarize})")
+        sys.exit(1)
 
     # Create and run pipeline
     try:
@@ -750,7 +852,8 @@ command again and it will continue from where it left off.
             target_lang=args.target,
             voice_ref=args.voice,
             auto_chunk_threshold=0 if args.no_auto_chunk else 50000,
-            words_per_chunk=args.words_per_chunk
+            words_per_chunk=args.words_per_chunk,
+            summarize_percentage=args.summarize
         )
 
         results = pipeline.run()

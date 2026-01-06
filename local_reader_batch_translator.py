@@ -93,7 +93,7 @@ class BatchTranslator:
 
         # Find all matching files
         files = sorted(list(input_path.glob(file_pattern)))
-        files = [f for f in files if f.is_file() and f.name != "chunks_manifest.txt"]
+        files = [f for f in files if f.is_file() and f.name != "chunks_manifest.txt" and not f.name.endswith('.meta.json')]
 
         if not files:
             raise ValueError(f"No files matching '{file_pattern}' found in {input_dir}")
