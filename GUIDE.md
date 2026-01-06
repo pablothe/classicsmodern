@@ -17,24 +17,87 @@ End-to-end guide for translating classic literature and generating audiobooks.
 
 ## Quick Start
 
-### Full Workflow (5 Steps)
+### Full Workflow (6 Steps)
 
 ```bash
+# 0. Preprocess and validate book structure (RECOMMENDED FIRST STEP)
+python3 book_preprocessor.py books/crime_punishment/book.md
+
 # 1. Split book into chunks
 python3 local_reader_smart_splitter.py books/crime_punishment/book.md
 
 # 2. Translate with automatic deduplication
 python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
 
-# 3. Generate audio from deduplicated files
+# 3. Validate translation completeness
+python3 book_preprocessor.py books/crime_punishment/translated/chunk_001_english.md
+
+# 4. Generate audio from deduplicated files (auto-detects chapters)
 python local_tts_xtts.py translated/deduplicated/chunk_001_DEDUPED.md voice.wav en
 
-# 4. Combine audio parts (if using cloud TTS)
-python3 local_reader_audio_combiner.py audiobook_playlist.m3u
+# 5. (Optional) Combine existing chunks into chapters retroactively
+python3 combine_chapters.py translated.md audio_xtts/
 
-# 5. Compress for smaller file size
-python3 local_reader_audio_compress.py combined.mp3 96k
+# 6. (Optional) Compress for smaller file size
+python3 local_reader_audio_compress.py chapter_01.mp3 96k
 ```
+
+---
+
+## Book Preprocessing (IMPORTANT!)
+
+### Why Preprocess?
+
+Before translating or generating audio, you should **always** preprocess your book to:
+1. **Detect chapter structure** - Find all chapters and validate they're sequential
+2. **Identify missing content** - Catch incomplete translations early
+3. **Validate TOC** - Ensure table of contents matches actual chapters
+4. **Plan audio production** - Know exactly how many chapter files to expect
+
+### Usage
+
+```bash
+python3 book_preprocessor.py books/mybook/original.md
+```
+
+**Output:**
+- Console report showing TOC, chapters, and validation results
+- `original_preprocessing_report.txt` - Human-readable analysis
+- `original_chapter_data.json` - Machine-readable chapter metadata
+
+### Example Output
+
+```
+======================================================================
+BOOK PREPROCESSING REPORT
+======================================================================
+File: crime_punishment.md
+Size: 650,000 characters, 100,000 words
+
+TABLE OF CONTENTS: 18 entries found
+   1. Chapter 1: Part I (line 15)
+   2. Chapter 2: Part I (line 16)
+   ...
+
+CHAPTERS IN CONTENT: 18 found
+   1. I. (line 120, type: roman_standalone)
+   2. II. (line 5234, type: roman_standalone)
+   ...
+
+VALIDATION:
+  ✅ All 18 chapters present and sequential
+
+TOC vs CONTENT:
+  ✅ TOC and content match (18 chapters)
+======================================================================
+```
+
+### When to Preprocess
+
+✅ **ALWAYS run before translation** - Ensures source is complete
+✅ **Run after translation** - Validates all chapters were translated
+✅ **Run before audio** - Confirms chapter structure for proper splitting
+❌ **Don't run on chunked files** - Run on complete book files only
 
 ---
 
@@ -196,6 +259,8 @@ python local_tts_xtts.py buch.md stimme.wav de  # German
 
 **Supported languages:** `en`, `es`, `fr`, `de`, `it`, `pt`, `pl`, `tr`, `ru`, `nl`, `cs`, `ar`, `zh-cn`, `ja`, `ko`, `hu`
 
+**Output format:** The script automatically detects chapters (marked with Roman numerals like "I.", "II.", "III.") and combines audio into chapter-based files. Each audiobook will have one audio file per chapter, making it easy to navigate like a playlist where each "song" is a chapter.
+
 ---
 
 #### Voice Cloning
@@ -224,19 +289,33 @@ python local_tts_xtts.py book.md voice_ref.wav en
 
 ---
 
-#### Batch Processing
+#### Chapter-Based Output
 
-```bash
-cd books/mybook/chunks/translated/deduplicated/
+**How it works:**
 
-# Process all chunks
-for chunk in chunk_*_DEDUPED.md; do
-    python ../../../../local_tts_xtts.py "$chunk" ../../../../voice.wav en
-done
+The script automatically detects and preserves chapters during audio generation:
 
-# Combine into single audiobook
-cd audio_xtts/
-python ../../../../local_reader_audio_combiner.py *.m3u complete.mp3
+1. **Before processing**: Scans source text for chapter markers (Roman numerals like "I.", "II.", "III." or Markdown headers like "# Chapter 1")
+2. **During text cleaning**: Preserves chapter markers while removing other Markdown formatting
+3. **During chunking**: Tracks which text chunks belong to which chapter
+4. **During audio generation**: Generates 250-character chunks for optimal TTS quality
+5. **After generation**: Automatically combines chunks into chapter files using FFmpeg
+6. **Final output**: Creates both individual chapter MP3 files AND a master playlist
+
+**Result:** Each audiobook is like a music album where each "song" is a chapter, allowing easy navigation in any audio player.
+
+**Supported chapter formats:**
+- Roman numerals: `I.`, `II.`, `III.`, `IV.`, `V.`, etc.
+- Markdown headers: `# Chapter 1`, `## Part 2`, `# CHAPTER III`
+
+**Example output:**
+```
+audio_xtts/
+├── book_chapter_01.mp3  (Chapter 1 - 15 chunks combined)
+├── book_chapter_02.mp3  (Chapter 2 - 12 chunks combined)
+├── book_chapter_03.mp3  (Chapter 3 - 18 chunks combined)
+├── book_audiobook_20260105.m3u  (Master playlist)
+└── raw/  (Original 250-char chunks for re-processing)
 ```
 
 ---

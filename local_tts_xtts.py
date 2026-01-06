@@ -91,18 +91,39 @@ class XTTSAudioGenerator:
             minutes = int((seconds % 3600) / 60)
             return f"{hours}h {minutes}m"
 
-    def clean_text_for_speech(self, text: str) -> str:
+    def clean_text_for_speech(self, text: str, preserve_chapter_markers: bool = False) -> str:
         """
         Clean markdown text for natural speech synthesis.
 
         Args:
             text: Raw text with possible Markdown
+            preserve_chapter_markers: If True, keep Roman numeral chapter markers
 
         Returns:
             Cleaned text suitable for TTS
         """
-        # Remove markdown headers but keep text
-        text = re.sub(r'^(#{1,6})\s+(.+)$', r'\2', text, flags=re.MULTILINE)
+        # Preserve standalone Roman numeral chapter markers FIRST (before other cleaning)
+        if preserve_chapter_markers:
+            # Replace standalone Roman numerals on their own line with markers
+            text = re.sub(
+                r'^(X{0,3})(IX|IV|V?I{0,3})\.$',
+                lambda m: f"CHAPTER_MARKER_{m.group(0)}",
+                text,
+                flags=re.MULTILINE
+            )
+
+        # Remove markdown headers but keep text (unless it's a chapter marker)
+        if preserve_chapter_markers:
+            # Keep Roman numerals in headers as chapter markers
+            def replace_header(match):
+                header_text = match.group(2)
+                # Check if it's a Roman numeral chapter marker
+                if re.match(r'^(X{0,3})(IX|IV|V?I{0,3})\.$', header_text.strip()):
+                    return f"CHAPTER_MARKER_{header_text.strip()}"
+                return header_text
+            text = re.sub(r'^(#{1,6})\s+(.+)$', replace_header, text, flags=re.MULTILINE)
+        else:
+            text = re.sub(r'^(#{1,6})\s+(.+)$', r'\2', text, flags=re.MULTILINE)
 
         # Remove markdown links but keep text
         text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
@@ -334,6 +355,96 @@ class XTTSAudioGenerator:
         print(f"✓ Processed: {output_file.name}")
         return output_file
 
+    def detect_chapters(self, text: str, is_cleaned: bool = False) -> list:
+        """
+        Detect chapter boundaries in text.
+        Looks for Roman numerals (I., II., III.), CHAPTER_MARKER_ tags, or Markdown headers.
+
+        Args:
+            text: Text to search for chapters
+            is_cleaned: Whether text has been cleaned (looks for CHAPTER_MARKER_ tags)
+
+        Returns:
+            List of tuples: (chapter_number, start_position, title)
+        """
+        chapters = []
+        lines = text.split('\n')
+
+        for i, line in enumerate(lines):
+            line_stripped = line.strip()
+
+            # Check for preserved chapter markers (in cleaned text)
+            if is_cleaned and line_stripped.startswith('CHAPTER_MARKER_'):
+                marker = line_stripped.replace('CHAPTER_MARKER_', '')
+                char_pos = len('\n'.join(lines[:i]))
+                chapter_num = len(chapters) + 1
+                chapters.append((chapter_num, char_pos, marker))
+                continue
+
+            # Roman numeral pattern (I., II., III., etc.)
+            roman_match = re.match(r'^(X{0,3})(IX|IV|V?I{0,3})\.$', line_stripped)
+            if roman_match:
+                char_pos = len('\n'.join(lines[:i]))
+                chapter_num = len(chapters) + 1
+                chapters.append((chapter_num, char_pos, line_stripped))
+                continue
+
+            # Markdown header patterns
+            header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)
+            if header_match:
+                char_pos = len('\n'.join(lines[:i]))
+                chapter_num = len(chapters) + 1
+                chapters.append((chapter_num, char_pos, line_stripped))
+
+        return chapters
+
+    def combine_audio_files(self, audio_files: list, output_file: Path) -> Path:
+        """
+        Combine multiple audio files into one using FFmpeg.
+
+        Args:
+            audio_files: List of audio file paths to combine
+            output_file: Output file path
+
+        Returns:
+            Path to combined audio file
+        """
+        if not audio_files:
+            return None
+
+        # Check if ffmpeg is available
+        try:
+            subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            print("⚠️  Warning: ffmpeg not found, cannot combine files")
+            return None
+
+        # Create concat file for ffmpeg
+        concat_file = output_file.parent / f"concat_{output_file.stem}.txt"
+        with open(concat_file, 'w', encoding='utf-8') as f:
+            for audio_file in audio_files:
+                # Use absolute paths for ffmpeg concat
+                abs_path = Path(audio_file).resolve()
+                f.write(f"file '{abs_path}'\n")
+
+        # Combine files
+        cmd = [
+            'ffmpeg', '-y',
+            '-f', 'concat',
+            '-safe', '0',
+            '-i', str(concat_file),
+            '-c', 'copy',
+            str(output_file)
+        ]
+
+        try:
+            subprocess.run(cmd, capture_output=True, check=True)
+            concat_file.unlink()  # Clean up concat file
+            return output_file
+        except subprocess.CalledProcessError as e:
+            print(f"⚠️  Warning: Failed to combine files: {e}")
+            return None
+
     def generate_audiobook(
         self,
         input_file: str,
@@ -362,13 +473,27 @@ class XTTSAudioGenerator:
         if not input_path.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
 
-        # Read and clean text
+        # Read text
         print(f"Reading: {input_file}")
         with open(input_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
 
+        # Detect chapters BEFORE cleaning
+        print("Detecting chapters...")
+        chapters_raw = self.detect_chapters(raw_text, is_cleaned=False)
+
+        # Clean text for speech, preserving chapter markers if chapters found
+        preserve_markers = len(chapters_raw) > 0
+        if preserve_markers:
+            print(f"✓ Found {len(chapters_raw)} chapters - preserving markers during cleaning")
+        else:
+            print("ℹ  No chapters detected (will create single file)")
+
         print("Cleaning text for speech...")
-        clean_text = self.clean_text_for_speech(raw_text)
+        clean_text = self.clean_text_for_speech(raw_text, preserve_chapter_markers=preserve_markers)
+
+        # Re-detect chapters in cleaned text
+        chapters = self.detect_chapters(clean_text, is_cleaned=True) if preserve_markers else []
 
         word_count = len(clean_text.split())
         char_count = len(clean_text)
@@ -378,7 +503,42 @@ class XTTSAudioGenerator:
         # Chunk text
         print(f"Chunking text (max {chunk_size} chars per chunk)...")
         chunks = self.chunk_text(clean_text, chunk_size)
-        print(f"Created {len(chunks)} audio chunks\n")
+
+        # Remove CHAPTER_MARKER_ tags from chunks (so they don't get spoken)
+        if preserve_markers:
+            chunks = [chunk.replace('CHAPTER_MARKER_', '').replace('CHAPTER_MARKER_I.', '').replace('CHAPTER_MARKER_II.', '').replace('CHAPTER_MARKER_III.', '').replace('CHAPTER_MARKER_IV.', '').replace('CHAPTER_MARKER_V.', '').replace('CHAPTER_MARKER_VI.', '').replace('CHAPTER_MARKER_VII.', '').replace('CHAPTER_MARKER_VIII.', '').replace('CHAPTER_MARKER_IX.', '').replace('CHAPTER_MARKER_X.', '').replace('CHAPTER_MARKER_XI.', '').replace('CHAPTER_MARKER_XII.', '').replace('CHAPTER_MARKER_XIII.', '').replace('CHAPTER_MARKER_XIV.', '').replace('CHAPTER_MARKER_XV.', '').replace('CHAPTER_MARKER_XVI.', '').replace('CHAPTER_MARKER_XVII.', '').replace('CHAPTER_MARKER_XVIII.', '').replace('CHAPTER_MARKER_XIX.', '').replace('CHAPTER_MARKER_XX.', '') for chunk in chunks]
+            # Clean up - use regex to remove any remaining markers
+            chunks = [re.sub(r'CHAPTER_MARKER_[^\s]*', '', chunk).strip() for chunk in chunks]
+
+        print(f"Created {len(chunks)} audio chunks")
+
+        # Map chunks to chapters (if chapters detected)
+        chunk_to_chapter = []
+        if chapters:
+            # Chapters now have accurate positions in cleaned text
+            # Assign each chunk to a chapter based on text position
+
+            current_char_pos = 0
+            current_chapter = 1
+            chapter_idx = 0
+
+            for i, chunk in enumerate(chunks):
+                # Check if we've crossed into a new chapter
+                while chapter_idx < len(chapters) - 1:
+                    next_chapter_pos = chapters[chapter_idx + 1][1]
+                    if current_char_pos >= next_chapter_pos:
+                        current_chapter += 1
+                        chapter_idx += 1
+                    else:
+                        break
+
+                chunk_to_chapter.append(current_chapter)
+                current_char_pos += len(chunk)
+
+            print(f"✓ Mapped {len(chunks)} chunks to {max(chunk_to_chapter)} chapters\n")
+        else:
+            chunk_to_chapter = [1] * len(chunks)
+            print()
 
         # Create output directory
         if output_dir is None:
@@ -470,21 +630,79 @@ class XTTSAudioGenerator:
                 print(f"✗ ERROR: {e}")
                 raise
 
-        # Generate playlist
+        # Generate playlist for individual chunks
         ext = "mp3" if to_mp3 else "wav"
-        playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
-        with open(playlist_path, 'w', encoding='utf-8') as f:
+        chunks_playlist_path = output_dir / f"{base_name}_chunks_{timestamp}.m3u"
+        with open(chunks_playlist_path, 'w', encoding='utf-8') as f:
             f.write("#EXTM3U\n")
             for audio_file in audio_files:
                 f.write(f"#EXTINF:-1,{audio_file.stem}\n")
                 f.write(f"{audio_file.name}\n")
 
-        print(f"\n✓ Playlist created: {playlist_path.name}")
+        print(f"\n✓ Chunks playlist created: {chunks_playlist_path.name}")
+
+        # Combine chunks into chapter files
+        chapter_files = []
+        if chapters and len(chapters) > 1:
+            print(f"\n📚 Combining {len(chunks)} chunks into {len(chapters)} chapters...")
+
+            for chapter_num in range(1, max(chunk_to_chapter) + 1):
+                # Find all audio files for this chapter
+                chapter_audio_files = [
+                    audio_files[i] for i in range(len(audio_files))
+                    if chunk_to_chapter[i] == chapter_num
+                ]
+
+                if chapter_audio_files:
+                    chapter_filename = f"{base_name}_chapter_{chapter_num:02d}.{ext}"
+                    chapter_path = output_dir / chapter_filename
+
+                    print(f"  Chapter {chapter_num:2d}: Combining {len(chapter_audio_files)} chunks...", end=" ", flush=True)
+
+                    result = self.combine_audio_files(chapter_audio_files, chapter_path)
+                    if result:
+                        chapter_files.append(result)
+                        print(f"✓ {chapter_path.name}")
+                    else:
+                        print("✗ Failed")
+
+            # Generate master audiobook playlist
+            if chapter_files:
+                playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
+                with open(playlist_path, 'w', encoding='utf-8') as f:
+                    f.write("#EXTM3U\n")
+                    for i, chapter_file in enumerate(chapter_files, 1):
+                        f.write(f"#EXTINF:-1,Chapter {i}\n")
+                        f.write(f"{chapter_file.name}\n")
+
+                print(f"\n✓ Master audiobook playlist created: {playlist_path.name}")
+                print(f"  ({len(chapter_files)} chapters)")
+        else:
+            # No chapters detected - create single combined file
+            print(f"\n📚 Combining all {len(audio_files)} chunks into single file...")
+            combined_path = output_dir / f"{base_name}_complete.{ext}"
+
+            result = self.combine_audio_files(audio_files, combined_path)
+            if result:
+                chapter_files.append(result)
+                print(f"✓ Complete audiobook: {combined_path.name}")
+
+                # Create simple playlist
+                playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
+                with open(playlist_path, 'w', encoding='utf-8') as f:
+                    f.write("#EXTM3U\n")
+                    f.write(f"#EXTINF:-1,Complete Audiobook\n")
+                    f.write(f"{combined_path.name}\n")
+                print(f"✓ Audiobook playlist created: {playlist_path.name}")
+            else:
+                playlist_path = chunks_playlist_path
 
         print("\n" + "="*70)
         print("AUDIO GENERATION COMPLETE")
         print("="*70)
-        print(f"Total files: {len(audio_files)}")
+        print(f"Total chunks: {len(audio_files)}")
+        if chapters and len(chapters) > 1:
+            print(f"Chapters: {len(chapter_files)}")
         print(f"Format: {ext.upper()}")
         print(f"Playlist: {playlist_path}")
         print(f"Output directory: {output_dir}")
@@ -492,8 +710,10 @@ class XTTSAudioGenerator:
 
         return {
             'audio_files': [str(f) for f in audio_files],
+            'chapter_files': [str(f) for f in chapter_files] if chapter_files else [],
             'playlist': str(playlist_path),
             'chunks': len(chunks),
+            'chapters': len(chapters) if chapters else 0,
             'word_count': word_count,
             'output_directory': str(output_dir),
             'format': ext

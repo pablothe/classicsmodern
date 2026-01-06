@@ -40,6 +40,12 @@ echo "OPENAI_API_KEY=your_key_here" > .env
 
 ### Translate a Book
 
+**Step 0: Preprocess (validate structure)**
+```bash
+python3 book_preprocessor.py books/crime_punishment/book.md
+# Validates all chapters are present before translation
+```
+
 **Option 1: Cloud-based (single file)**
 ```bash
 python translator.py books/alice_adventures/alice.md
@@ -52,13 +58,18 @@ python3 local_reader_smart_splitter.py books/crime_punishment/book.md
 
 # Translate with automatic deduplication
 python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
+
+# Validate translation completeness
+python3 book_preprocessor.py books/crime_punishment/translated/chunk_001_english.md
 ```
 
 ### Generate Audiobook
 
-**Option 1: Local TTS (free, voice cloning)**
+**Option 1: Local TTS (free, voice cloning, chapter-based)**
 ```bash
 python local_tts_xtts.py translated.md voice_sample.wav en
+# Automatically creates chapter files (e.g., chapter_01.mp3, chapter_02.mp3)
+# Plus master playlist for the complete audiobook
 ```
 
 **Option 2: Cloud TTS (paid, faster)**
