@@ -245,6 +245,15 @@ async function showVariants(bookId) {
         ui.variantTitle.textContent = book.title;
         ui.variantAuthor.textContent = book.author || '';
 
+        // Update cover image in variant view
+        const variantCoverContainer = document.getElementById('variant-cover-container');
+        if (book.has_cover && book.cover_image) {
+            const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
+            variantCoverContainer.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" class="variant-cover-image" />`;
+        } else {
+            variantCoverContainer.innerHTML = '<div class="variant-cover-placeholder">📚</div>';
+        }
+
         // Render variants
         renderVariants();
 
