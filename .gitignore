@@ -109,6 +109,7 @@ books/*/*_original.md
 *.m4a
 *.m3u
 *.flac
+*.png
 
 # Local Reader: Test directories and files
 books/*/mini_test/

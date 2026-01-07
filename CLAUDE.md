@@ -115,6 +115,48 @@ python3 book_summarizer.py books/mybook/translated.md 30 1500
 python3 local_tts_xtts.py books/mybook/translated_summarized_50pct.md voice_ref.wav en
 ```
 
+### Cover Art Generation (NEW!)
+
+**Modular design: Two separate scripts for flexibility**
+
+**1. generate.py** - Core image generator (does ONE thing: text → image)
+```bash
+# Generate cover from any prompt
+python3 generate.py "whimsical Alice in Wonderland scene, fantasy illustration" --output alice.png
+
+# Custom size and quality
+python3 generate.py "dark Victorian mystery" --output cover.png --width 512 --height 768 --steps 50
+```
+
+**2. book_prompts.py** - Book-specific prompt generator (optional helper)
+```bash
+# Get prompt for known book
+python3 book_prompts.py "Alice in Wonderland"
+# Output: "Book cover art, whimsical dreamlike scene, surreal fantasy forest..."
+
+# Use in pipeline
+python3 generate.py "$(python3 book_prompts.py 'Moby Dick')" --output moby.png
+```
+
+**Integrated workflow (automatic with audiobook generation):**
+```bash
+# Add --generate-cover flag to local_tts_xtts.py
+python3 local_tts_xtts.py translated.md voice.wav en --generate-cover
+```
+
+**What it does:**
+- **generate.py**: Pure function (prompt → PNG), no hardcoded book logic
+- **book_prompts.py**: Optional catalog of 16+ book styles
+- Modular: Swap out prompt generator, use custom prompts, or add your own
+- Uses Stable Diffusion v1.5 (local, free)
+- Runs on Apple Silicon GPU (MPS), CUDA, or CPU
+- Generates 512x512 PNG images (customizable)
+
+**Requirements:**
+```bash
+pip install diffusers torch transformers accelerate
+```
+
 ### Audio Generation
 
 **Local TTS (free, voice cloning):**
@@ -156,6 +198,19 @@ python local_reader_audio_compress.py combined.mp3 96k
   - Create condensed audiobooks from long classics
   - Generate executive summaries
   - Reduce listening time while preserving key themes
+
+### Cover Art Generation System (NEW!)
+- **Model**: Stable Diffusion v1.5 (runwayml/stable-diffusion-v1-5)
+- **Hardware Acceleration**: Apple Silicon GPU (MPS) or fallback to CPU
+- **Output**: 512x512 PNG images
+- **Customization**:
+  - Custom prompts for specific artistic styles
+  - Adjustable guidance scale (7.5 default)
+  - Book-aware prompt generation from content
+- **Use Cases**:
+  - Generate audiobook cover art
+  - Create promotional imagery
+  - Visualize scenes from classic literature
 
 ### Audio Generation System
 

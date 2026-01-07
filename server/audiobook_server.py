@@ -265,6 +265,18 @@ def discover_books() -> List[Dict]:
                 except (json.JSONDecodeError, IOError):
                     pass
 
+            # Find cover image (check multiple locations)
+            cover_path = None
+            cover_locations = [
+                book_dir / "cover.png",
+                book_dir / "audio_xtts" / "cover.png",
+                book_dir / "audio_xtts" / f"{book_id}_cover.png"
+            ]
+            for loc in cover_locations:
+                if loc.exists():
+                    cover_path = str(loc.relative_to(BOOKS_DIR))
+                    break
+
             books_by_id[book_id] = {
                 'book_id': book_id,
                 'title': title,
@@ -272,6 +284,8 @@ def discover_books() -> List[Dict]:
                 'language': language or 'Unknown',
                 'chapters': chapters,
                 'has_chapters': chapters is not None,
+                'cover_image': cover_path,
+                'has_cover': cover_path is not None,
                 'variants': []
             }
 
@@ -434,6 +448,35 @@ async def stream_audio(
         audio_path,
         media_type='audio/mpeg',
         headers={'Accept-Ranges': 'bytes'}
+    )
+
+
+@app.get("/api/books/{book_id}/cover")
+async def get_book_cover(book_id: str):
+    """
+    Get cover image for a book.
+
+    Args:
+        book_id: Book identifier
+
+    Returns:
+        Cover image file (PNG)
+    """
+    book = get_book_by_id(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    if not book.get('cover_image'):
+        raise HTTPException(status_code=404, detail="No cover image found for this book")
+
+    cover_path = BOOKS_DIR / book['cover_image']
+    if not cover_path.exists():
+        raise HTTPException(status_code=404, detail="Cover image file not found")
+
+    return FileResponse(
+        cover_path,
+        media_type='image/png',
+        headers={'Cache-Control': 'public, max-age=86400'}  # Cache for 24 hours
     )
 
 

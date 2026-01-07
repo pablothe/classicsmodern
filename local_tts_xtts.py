@@ -775,7 +775,7 @@ def main():
         print("Local TTS Audio Generation using XTTS-v2")
         print("="*70)
         print("\nUsage:")
-        print("  python local_tts_xtts.py <input_file> [reference_voice...] [--lang LANGUAGE]")
+        print("  python local_tts_xtts.py <input_file> [reference_voice...] [--lang LANGUAGE] [--generate-cover]")
         print("\nExamples:")
         print("  # Basic usage (default voice)")
         print("  python local_tts_xtts.py translated.md")
@@ -786,6 +786,9 @@ def main():
         print("  # With MULTIPLE reference voices (recommended for better quality)")
         print("  python local_tts_xtts.py translated.md voice1.wav voice2.wav --lang en")
         print("  python local_tts_xtts.py book.md clean_audio.m4a voice_ref_clean.wav --lang en")
+        print()
+        print("  # Generate cover art automatically")
+        print("  python local_tts_xtts.py translated.md voice_ref.wav --lang en --generate-cover")
         print()
         print("  # Prepare reference voice first")
         print("  python local_tts_xtts.py --prepare-voice input.m4a voice_ref.wav")
@@ -806,6 +809,10 @@ def main():
         print("  • Speed: 1.20x (reduces 'robotic' feel)")
         print("  • Normalization: -16 LUFS (audiobook standard)")
         print("  • Format: MP3 @ 128kbps")
+        print("\nCover Art Generation (optional):")
+        print("  • Use --generate-cover to create AI cover art")
+        print("  • Requires: pip install diffusers transformers accelerate")
+        print("  • Uses Stable Diffusion v1.5 (local, free)")
         print("\nRequirements:")
         print("  pip install TTS==0.27.3")
         print("  brew install ffmpeg  # macOS")
@@ -826,9 +833,10 @@ def main():
     # Parse arguments
     input_file = sys.argv[1]
 
-    # Collect reference voices and language
+    # Collect reference voices, language, and flags
     reference_voices = []
     language = "en"
+    generate_cover = False
 
     i = 2
     while i < len(sys.argv):
@@ -841,6 +849,9 @@ def main():
             else:
                 print("❌ ERROR: --lang requires a language code")
                 sys.exit(1)
+        elif arg == "--generate-cover":
+            generate_cover = True
+            i += 1
         else:
             # Treat as reference voice file
             if Path(arg).exists():
@@ -854,6 +865,40 @@ def main():
     reference_voice = reference_voices if reference_voices else None
 
     try:
+        # Generate cover art if requested
+        if generate_cover:
+            print("\n" + "="*70)
+            print("COVER ART GENERATION")
+            print("="*70)
+            try:
+                from generate import CoverArtGenerator
+                from book_prompts import get_book_prompt
+
+                # Generate prompt from book title/filename
+                input_path = Path(input_file)
+                prompt = get_book_prompt(input_path.stem)
+                print(f"Prompt: {prompt}")
+
+                cover_generator = CoverArtGenerator()
+                cover_output = input_path.parent / "audio_xtts" / f"{input_path.stem}_cover.png"
+
+                cover_path = cover_generator.generate_cover(
+                    prompt,
+                    str(cover_output)
+                )
+
+                print(f"✓ Cover art saved: {cover_path}")
+                print("="*70 + "\n")
+
+            except ImportError:
+                print("⚠️  Warning: Cover art generation requires additional libraries")
+                print("  Install with: pip install diffusers transformers accelerate")
+                print("  Skipping cover generation...\n")
+            except Exception as e:
+                print(f"⚠️  Warning: Cover generation failed: {e}")
+                print("  Continuing with audio generation...\n")
+
+        # Generate audio
         generator = XTTSAudioGenerator(
             reference_voice=reference_voice,
             language=language
@@ -869,6 +914,11 @@ def main():
 
         print("\n✅ Success! Audio files ready to play.")
         print(f"\n💡 Tip: Play with: afplay {result['playlist']}")
+
+        if generate_cover:
+            cover_path = Path(result['output_directory']) / f"{Path(input_file).stem}_cover.png"
+            if cover_path.exists():
+                print(f"🎨 Cover art: {cover_path}")
 
     except Exception as e:
         print(f"\n❌ ERROR: {e}")
