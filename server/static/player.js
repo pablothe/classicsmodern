@@ -180,17 +180,23 @@ function renderLibrary() {
 
     ui.bookList.innerHTML = state.books.map((book, index) => {
         const gradient = gradients[index % gradients.length];
+        const hasCover = book.has_cover && book.cover_image;
+        const coverURL = hasCover ? `${API.baseURL}/api/books/${book.book_id}/cover` : null;
 
         return `
             <div class="book-item" data-book-id="${book.book_id}">
                 <div class="book-cover-card" style="background: ${gradient}">
-                    <div class="book-cover-content">
-                        <div class="book-cover-icon">📚</div>
-                        <div>
-                            <div class="book-cover-title">${book.title}</div>
-                            ${book.author ? `<div class="book-cover-author">${book.author}</div>` : ''}
+                    ${hasCover ? `
+                        <img src="${coverURL}" alt="${book.title} cover" class="book-cover-image" />
+                    ` : `
+                        <div class="book-cover-content">
+                            <div class="book-cover-icon">📚</div>
+                            <div>
+                                <div class="book-cover-title">${book.title}</div>
+                                ${book.author ? `<div class="book-cover-author">${book.author}</div>` : ''}
+                            </div>
                         </div>
-                    </div>
+                    `}
                 </div>
                 <div class="book-info-bottom">
                     <div class="book-meta">
@@ -373,6 +379,15 @@ function renderPlayer() {
     ui.currentBookTitle.textContent = book.title;
     ui.playerBookTitle.textContent = book.title;
     updateFileInfo();
+
+    // Update book cover in player
+    const bookCoverDiv = document.querySelector('.book-cover');
+    if (book.has_cover && book.cover_image) {
+        const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
+        bookCoverDiv.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />`;
+    } else {
+        bookCoverDiv.textContent = '🎧';
+    }
 
     // Render chapters if available
     if (book.has_chapters && book.chapters) {
