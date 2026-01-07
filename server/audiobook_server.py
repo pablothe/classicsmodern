@@ -19,6 +19,7 @@ Example:
 import json
 import os
 import re
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
@@ -29,6 +30,10 @@ from fastapi.responses import FileResponse, StreamingResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+
+# Import book catalog
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from book_catalog import get_book_info
 
 
 # Constants
@@ -222,6 +227,14 @@ def discover_books() -> List[Dict]:
             title = book_id.replace('_', ' ').title()
             language = None
             author = None
+            year = None
+
+            # Get cataloged information first (most authoritative)
+            catalog_info = get_book_info(book_id)
+            if catalog_info:
+                title = catalog_info.get('title', title)
+                author = catalog_info.get('author', author)
+                year = catalog_info.get('year', year)
 
             # Extract metadata from translated files
             translated_files = list(book_dir.glob("*_modern_*.md")) + list(book_dir.glob("*translated*.md"))
@@ -250,7 +263,7 @@ def discover_books() -> List[Dict]:
                 elif 'russian' in first_audio:
                     language = 'Russian'
 
-            # Load chapter data
+            # Load chapter data (can override catalog info)
             chapters = None
             chapter_json = list(book_dir.glob("*_chapter_data.json"))
             if chapter_json:
@@ -260,7 +273,7 @@ def discover_books() -> List[Dict]:
                         chapters = chapter_data.get('chapters', [])
                         if 'title' in chapter_data:
                             title = chapter_data['title']
-                        if 'author' in chapter_data:
+                        if 'author' in chapter_data and not author:
                             author = chapter_data['author']
                 except (json.JSONDecodeError, IOError):
                     pass
@@ -281,6 +294,7 @@ def discover_books() -> List[Dict]:
                 'book_id': book_id,
                 'title': title,
                 'author': author,
+                'year': year,
                 'language': language or 'Unknown',
                 'chapters': chapters,
                 'has_chapters': chapters is not None,

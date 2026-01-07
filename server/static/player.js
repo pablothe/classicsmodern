@@ -196,7 +196,11 @@ function renderLibrary() {
                 </div>
                 <div class="book-info-bottom">
                     <h3 class="book-title">${book.title}</h3>
-                    ${book.author ? `<p class="book-author">${book.author}</p>` : ''}
+                    ${book.author || book.year ? `
+                        <p class="book-author">
+                            ${book.author || 'Unknown Author'}${book.year ? ` (${book.year})` : ''}
+                        </p>
+                    ` : ''}
                     <div class="book-meta">
                         ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
                         <span>📋 ${book.variant_count}</span>
