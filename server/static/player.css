@@ -201,7 +201,16 @@ header h2 {
 .book-info-bottom {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
+}
+
+.book-title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin: 0;
 }
 
 .book-title-text {
@@ -214,9 +223,11 @@ header h2 {
 
 .book-author {
     color: var(--text-secondary);
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 400;
     font-style: italic;
+    margin: 0;
+    margin-top: -0.25rem;
 }
 
 .book-meta {
