@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Audiobook Player</title>
+    <link rel="stylesheet" href="/static/player.css">
+    <link rel="manifest" href="/static/manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Book Library View -->
+        <div id="library-view" class="view active">
+            <header>
+                <h1>📚 Audiobook Library</h1>
+                <div class="server-info">
+                    <span id="book-count">Loading...</span>
+                </div>
+            </header>
+
+            <div id="book-list" class="book-list">
+                <div class="loading">Loading books...</div>
+            </div>
+        </div>
+
+        <!-- Variant Selection View -->
+        <div id="variant-view" class="view">
+            <header>
+                <button id="variant-back-btn" class="icon-btn">← Library</button>
+                <h2 id="variant-book-title">Select Version</h2>
+            </header>
+
+            <div class="variant-container">
+                <div class="book-info-header">
+                    <h3 id="variant-title"></h3>
+                    <p id="variant-author" class="variant-author-header"></p>
+                </div>
+                <div id="variant-list" class="variant-list"></div>
+            </div>
+        </div>
+
+        <!-- Player View -->
+        <div id="player-view" class="view">
+            <header>
+                <button id="back-btn" class="icon-btn">← Versions</button>
+                <h2 id="current-book-title">Book Title</h2>
+            </header>
+
+            <div class="player-container">
+                <!-- Cover/Info Area -->
+                <div class="book-info">
+                    <div class="book-cover">🎧</div>
+                    <h3 id="player-book-title">Book Title</h3>
+                    <p id="file-info">File 1 of 1</p>
+                </div>
+
+                <!-- Audio Element -->
+                <audio id="audio-player" preload="metadata"></audio>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="time-display">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <input
+                        type="range"
+                        id="progress-bar"
+                        class="progress-bar"
+                        min="0"
+                        max="100"
+                        value="0"
+                        step="0.1"
+                    >
+                </div>
+
+                <!-- Main Controls -->
+                <div class="controls">
+                    <button id="prev-file-btn" class="control-btn" title="Previous file">⏮</button>
+                    <button id="rewind-btn" class="control-btn" title="Rewind 15s">⏪</button>
+                    <button id="play-pause-btn" class="control-btn primary" title="Play/Pause">▶️</button>
+                    <button id="forward-btn" class="control-btn" title="Forward 30s">⏩</button>
+                    <button id="next-file-btn" class="control-btn" title="Next file">⏭</button>
+                </div>
+
+                <!-- Speed Control -->
+                <div class="speed-control">
+                    <label for="speed-slider">
+                        Speed: <span id="speed-display">1.0x</span>
+                    </label>
+                    <input
+                        type="range"
+                        id="speed-slider"
+                        min="0.5"
+                        max="2.0"
+                        value="1.0"
+                        step="0.1"
+                    >
+                    <div class="speed-presets">
+                        <button class="preset-btn" data-speed="0.75">0.75x</button>
+                        <button class="preset-btn" data-speed="1.0">1x</button>
+                        <button class="preset-btn" data-speed="1.25">1.25x</button>
+                        <button class="preset-btn" data-speed="1.5">1.5x</button>
+                        <button class="preset-btn" data-speed="2.0">2x</button>
+                    </div>
+                </div>
+
+                <!-- Chapter Navigation (if available) -->
+                <div id="chapters-section" class="chapters-section" style="display: none;">
+                    <h4>Chapters</h4>
+                    <div id="chapters-list" class="chapters-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/player.js"></script>
+</body>
+</html>
