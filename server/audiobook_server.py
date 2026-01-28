@@ -352,6 +352,9 @@ async def list_books():
         List of books with metadata (title, file count, size, etc.)
     """
     books = discover_books()
+    print(f"[API /api/books] Returning {len(books)} books")
+    for book in books:
+        print(f"  - {book['title']} ({book['book_id']}): {book['variant_count']} variants")
     return {
         "books": books,
         "total": len(books)
@@ -395,8 +398,11 @@ async def stream_audio(
     Returns:
         Audio file stream with range support
     """
+    print(f"[AUDIO STREAM] book={book_id}, variant={variant_id[:40]}..., file_index={file_index}, range={range}")
+
     book = get_book_by_id(book_id)
     if not book:
+        print(f"[AUDIO STREAM] ERROR: Book not found: {book_id}")
         raise HTTPException(status_code=404, detail="Book not found")
 
     # Find variant
@@ -512,6 +518,7 @@ async def get_playback_position(
         Playback state (position, speed, timestamp)
     """
     if not device_id:
+        print(f"[PLAYBACK] Missing device ID for {book_id}/{variant_id}")
         raise HTTPException(status_code=400, detail="X-Device-ID header required")
 
     db = load_playback_db()
@@ -523,6 +530,8 @@ async def get_playback_position(
         'file_index': 0,
         'last_updated': None
     })
+
+    print(f"[PLAYBACK GET] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={playback['position']:.1f}s, file={playback['file_index']}")
 
     return playback
 
@@ -547,17 +556,21 @@ async def save_playback_position(
         Success status
     """
     if not device_id:
+        print(f"[PLAYBACK] Missing device ID for SAVE {book_id}/{variant_id}")
         raise HTTPException(status_code=400, detail="X-Device-ID header required")
 
     # Parse request body
     try:
         data = await request.json()
     except json.JSONDecodeError:
+        print(f"[PLAYBACK] Invalid JSON in request body")
         raise HTTPException(status_code=400, detail="Invalid JSON")
 
     position = data.get('position', 0.0)
     speed = data.get('speed', 1.0)
     file_index = data.get('file_index', 0)
+
+    print(f"[PLAYBACK SAVE] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={position:.1f}s, speed={speed}x, file={file_index}")
 
     # Load database
     db = load_playback_db()

@@ -458,33 +458,45 @@ header h2 {
 
 .book-info {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .book-cover {
-    width: 240px;
-    height: 240px;
-    margin: 0 auto 1.5rem;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 1.25rem;
     background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
-    border-radius: 24px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 5rem;
-    box-shadow: 0 20px 40px rgba(0, 122, 255, 0.25);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 .book-info h3 {
-    font-size: 1.625rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
+    color: var(--text-primary);
 }
 
-#file-info {
+.narrator-info {
     color: var(--text-secondary);
     font-size: 0.9375rem;
     font-weight: 400;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 0.8125rem;
+}
+
+.current-chapter-name {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
 }
 
 /* ============================================================================
@@ -492,22 +504,22 @@ header h2 {
    ============================================================================ */
 
 .progress-container {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
 .time-display {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.75rem;
-    font-size: 0.875rem;
+    margin-bottom: 0.625rem;
+    font-size: 0.8125rem;
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: 400;
     font-variant-numeric: tabular-nums;
 }
 
 .progress-bar {
     width: 100%;
-    height: 4px;
+    height: 3px;
     -webkit-appearance: none;
     appearance: none;
     background: var(--border-color);
@@ -553,48 +565,77 @@ header h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    margin: 2.5rem 0;
+    gap: 1.25rem;
+    margin: 2rem 0;
 }
 
 .control-btn {
-    background: var(--surface-color);
+    background: transparent;
     border: none;
     color: var(--text-primary);
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-sm);
+    position: relative;
 }
 
 .control-btn:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-md);
+    opacity: 0.7;
 }
 
 .control-btn:active {
     transform: scale(0.95);
+}
+
+.control-btn.secondary {
+    width: 48px;
+    height: 48px;
+    font-size: 1.125rem;
+}
+
+.control-btn.skip-btn {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-sm);
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem;
+}
+
+.control-btn.skip-btn:hover {
+    opacity: 1;
+    background: var(--bg-secondary);
+}
+
+.skip-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.skip-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
 }
 
 .control-btn.primary {
-    width: 72px;
-    height: 72px;
-    background: var(--primary-color);
-    color: white;
-    font-size: 1.75rem;
-    box-shadow: 0 8px 24px rgba(0, 122, 255, 0.3);
+    width: 80px;
+    height: 80px;
+    background: var(--text-primary);
+    color: var(--bg-color);
+    font-size: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .control-btn.primary:hover {
-    background: var(--primary-hover);
-    box-shadow: 0 12px 32px rgba(0, 122, 255, 0.4);
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .control-btn:disabled {
@@ -605,7 +646,102 @@ header h2 {
 
 .control-btn:disabled:hover {
     transform: scale(1);
+    opacity: 0.25;
+}
+
+/* Secondary Controls (Speed, Timer, Chapters) - Audible-style grid */
+.secondary-controls-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 2.5rem 0 1rem 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.secondary-action-btn {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 1.125rem 0.875rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: none;
+    text-align: center;
+}
+
+.secondary-action-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--text-secondary);
+}
+
+.secondary-action-btn:active {
+    transform: scale(0.97);
+}
+
+.secondary-action-btn .action-icon {
+    font-size: 1.375rem;
+}
+
+.secondary-action-btn #speed-display {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.secondary-action-btn .action-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+/* Legacy secondary controls (kept for compatibility) */
+.secondary-controls {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0 0 0;
+}
+
+.secondary-btn {
+    background: var(--surface-color);
+    border: 0.5px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     box-shadow: var(--shadow-sm);
+}
+
+.secondary-btn:hover {
+    background: var(--bg-secondary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.secondary-btn:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-sm);
+}
+
+.secondary-btn .btn-icon {
+    font-size: 1.125rem;
+}
+
+.secondary-btn .btn-label {
+    font-weight: 500;
 }
 
 .icon-btn {
@@ -631,13 +767,22 @@ header h2 {
    Speed Control
    ============================================================================ */
 
-.speed-control {
+.settings-modal {
     background: var(--surface-color);
     border-radius: 16px;
     padding: 1.75rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
     border: 0.5px solid var(--border-color);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
+}
+
+.speed-control {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
 }
 
 .speed-control label {
@@ -729,10 +874,173 @@ header h2 {
 }
 
 /* ============================================================================
-   Chapters
+   Chapters Modal (Audible-style)
    ============================================================================ */
 
-.chapters-section {
+.chapters-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.chapters-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--surface-color);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    max-height: 70vh;
+    z-index: 200;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chapters-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 0.5px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background: var(--surface-color);
+    border-radius: 20px 20px 0 0;
+    z-index: 1;
+    min-height: 56px;
+}
+
+.chapters-modal-header h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+    padding: 0;
+}
+
+.close-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.chapters-list {
+    overflow-y: auto;
+    max-height: calc(70vh - 70px);
+    padding: 0.5rem 0;
+}
+
+.chapter-item {
+    padding: 1.125rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    border-bottom: 0.5px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface-color);
+    min-height: 56px;
+}
+
+.chapter-item:last-child {
+    border-bottom: none;
+}
+
+.chapter-item:hover {
+    background: var(--bg-secondary);
+}
+
+.chapter-item:active {
+    background: var(--border-color);
+}
+
+/* Active chapter uses bold text only (like Audible) */
+.chapter-item.active {
+    background: transparent;
+}
+
+.chapter-item-info {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.chapter-item-title {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* Bold for active chapter (Audible style) */
+.chapter-item.active .chapter-item-title {
+    font-weight: 600;
+}
+
+.chapter-item-number {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.chapter-item-duration {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    white-space: nowrap;
+    margin-left: auto;
+    padding-left: 1rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   Sleep Timer
+   ============================================================================ */
+
+.sleep-timer-section {
     background: var(--surface-color);
     border-radius: 16px;
     padding: 1.75rem;
@@ -741,43 +1049,76 @@ header h2 {
     box-shadow: var(--shadow-sm);
 }
 
-.chapters-section h4 {
+.sleep-timer-section h4 {
     margin-bottom: 1rem;
     font-size: 1.125rem;
     font-weight: 600;
     letter-spacing: -0.01em;
 }
 
-.chapters-list {
-    max-height: 300px;
-    overflow-y: auto;
+.sleep-timer-content {
+    padding: 1rem 0;
 }
 
-.chapter-item {
+.sleep-timer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.timer-status {
     padding: 0.875rem 1rem;
     background: var(--bg-secondary);
     border-radius: 10px;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    border: none;
-    font-weight: 400;
-}
-
-.chapter-item:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateX(4px);
-}
-
-.chapter-item:active {
-    transform: scale(0.98);
-}
-
-.chapter-item.active {
-    background: var(--primary-color);
-    color: white;
+    text-align: center;
     font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+}
+
+.timer-status.active {
+    background: #ff9500;
+    color: white;
+}
+
+.timer-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.timer-btn {
+    padding: 0.875rem 1rem;
+    background: var(--bg-secondary);
+    border: none;
+    color: var(--text-primary);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timer-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.timer-btn:active {
+    background: var(--primary-hover);
+    color: white;
+    transform: scale(0.96);
+}
+
+.timer-btn.cancel {
+    background: #ff3b30;
+    color: white;
+    grid-column: span 2;
+}
+
+.timer-btn.cancel:hover {
+    background: #d32f2f;
 }
 
 /* ============================================================================

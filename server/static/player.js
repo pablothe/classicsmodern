@@ -19,7 +19,14 @@ const state = {
     currentFileIndex: 0,
     deviceId: null,
     isPlaying: false,
-    saveInterval: null
+    saveInterval: null,
+    sleepTimer: {
+        timeoutId: null,
+        endTime: null,
+        type: null, // 'timer' or 'end-of-chapter'
+        updateIntervalId: null
+    },
+    currentChapterIndex: null
 };
 
 // ============================================================================
@@ -115,9 +122,7 @@ const ui = {
 
     // Player
     backBtn: document.getElementById('back-btn'),
-    currentBookTitle: document.getElementById('current-book-title'),
     playerBookTitle: document.getElementById('player-book-title'),
-    fileInfo: document.getElementById('file-info'),
 
     // Audio
     audio: document.getElementById('audio-player'),
@@ -130,15 +135,28 @@ const ui = {
     // Progress
     progressBar: document.getElementById('progress-bar'),
     currentTime: document.getElementById('current-time'),
-    duration: document.getElementById('duration'),
+    timeRemaining: document.getElementById('time-remaining'),
 
     // Speed
     speedSlider: document.getElementById('speed-slider'),
     speedDisplay: document.getElementById('speed-display'),
+    speedBtn: document.getElementById('speed-btn'),
+    speedModal: document.getElementById('speed-modal'),
+
+    // Sleep Timer
+    sleepTimerBtn: document.getElementById('sleep-timer-btn'),
+    sleepTimerBackdrop: document.getElementById('sleep-timer-backdrop'),
+    sleepTimerModal: document.getElementById('sleep-timer-modal'),
+    closeSleepTimerBtn: document.getElementById('close-sleep-timer-btn'),
 
     // Chapters
-    chaptersSection: document.getElementById('chapters-section'),
-    chaptersList: document.getElementById('chapters-list')
+    secondaryControls: document.getElementById('secondary-controls-grid'),
+    chaptersBtn: document.getElementById('chapters-btn'),
+    chaptersBackdrop: document.getElementById('chapters-backdrop'),
+    chaptersModal: document.getElementById('chapters-modal'),
+    closeChaptersBtn: document.getElementById('close-chapters-btn'),
+    chaptersList: document.getElementById('chapters-list'),
+    currentChapterName: document.getElementById('current-chapter-name')
 };
 
 // ============================================================================
@@ -346,7 +364,16 @@ async function openVariant(variantId) {
     try {
         const book = state.currentBook;
         const variant = book.variants.find(v => v.variant_id === variantId);
-        if (!variant) return;
+        if (!variant) {
+            console.error('[openVariant] Variant not found:', variantId);
+            return;
+        }
+
+        console.log('[openVariant]', {
+            variantId: variantId,
+            variant: variant,
+            audio_files_count: variant.audio_files ? variant.audio_files.length : 0
+        });
 
         state.currentVariant = variant;
         state.currentFileIndex = 0;
@@ -354,7 +381,14 @@ async function openVariant(variantId) {
         // Load saved position
         const savedPosition = await API.getPlaybackPosition(book.book_id, variantId);
         if (savedPosition) {
-            state.currentFileIndex = savedPosition.file_index || 0;
+            // Validate saved file index is within bounds
+            const savedFileIndex = savedPosition.file_index || 0;
+            if (savedFileIndex >= 0 && savedFileIndex < variant.audio_files.length) {
+                state.currentFileIndex = savedFileIndex;
+            } else {
+                console.warn('[openVariant] Saved file index out of bounds:', savedFileIndex, 'max:', variant.audio_files.length - 1);
+                state.currentFileIndex = 0;
+            }
         }
 
         renderPlayer();
@@ -387,9 +421,16 @@ function renderPlayer() {
     const book = state.currentBook;
     const variant = state.currentVariant;
 
-    ui.currentBookTitle.textContent = book.title;
     ui.playerBookTitle.textContent = book.title;
-    updateFileInfo();
+
+    // Update narrator info
+    const narratorEl = document.getElementById('player-narrator');
+    if (book.author) {
+        narratorEl.textContent = `Narrated by ${book.author}`;
+        narratorEl.style.display = 'block';
+    } else {
+        narratorEl.style.display = 'none';
+    }
 
     // Update book cover in player
     const bookCoverDiv = document.querySelector('.book-cover');
@@ -400,23 +441,21 @@ function renderPlayer() {
         bookCoverDiv.textContent = '🎧';
     }
 
-    // Render chapters if available
+    // Always show secondary controls (speed, timer, and optionally chapters)
+    ui.secondaryControls.style.display = 'grid';
+
+    // Show/hide chapters button based on availability
     if (book.has_chapters && book.chapters) {
-        ui.chaptersSection.style.display = 'block';
+        ui.chaptersBtn.style.display = 'block';
         renderChapters();
+        updateCurrentChapterDisplay();
     } else {
-        ui.chaptersSection.style.display = 'none';
+        ui.chaptersBtn.style.display = 'none';
+        ui.currentChapterName.style.display = 'none';
     }
 
     // Update navigation buttons
     updateNavigationButtons();
-}
-
-function updateFileInfo() {
-    const variant = state.currentVariant;
-    const current = state.currentFileIndex + 1;
-    const total = variant.audio_files.length;
-    ui.fileInfo.textContent = `File ${current} of ${total}`;
 }
 
 function updateNavigationButtons() {
@@ -430,29 +469,164 @@ function loadAudioFile() {
     const variant = state.currentVariant;
     const audioURL = API.getAudioURL(book.book_id, variant.variant_id, state.currentFileIndex);
 
+    console.log('[loadAudioFile]', {
+        book_id: book.book_id,
+        variant_id: variant.variant_id,
+        fileIndex: state.currentFileIndex,
+        audioURL: audioURL
+    });
+
     ui.audio.src = audioURL;
     ui.audio.load();
 
-    updateFileInfo();
     updateNavigationButtons();
 }
 
 function renderChapters() {
     const chapters = state.currentBook.chapters;
+    const variant = state.currentVariant;
 
-    ui.chaptersList.innerHTML = chapters.map((chapter, index) => `
-        <div class="chapter-item" data-chapter-index="${index}">
-            ${chapter.title || `Chapter ${chapter.number}`}
-        </div>
-    `).join('');
+    console.log('[renderChapters]', {
+        totalChapters: chapters.length,
+        totalAudioFiles: variant.audio_files.length,
+        chapters: chapters
+    });
+
+    ui.chaptersList.innerHTML = chapters.map((chapter, index) => {
+        const isActive = state.currentChapterIndex === index;
+        const chapterTitle = chapter.title || `Chapter ${chapter.number || index + 1}`;
+
+        // Calculate chapter duration from audio files
+        let duration = '';
+        if (variant && variant.audio_files) {
+            // Get the audio file for this chapter
+            const audioFile = variant.audio_files[chapter.file_index];
+            if (audioFile) {
+                // If we have duration metadata, use it
+                // For now, we'll show a placeholder or calculate from next chapter
+                if (chapters[index + 1]) {
+                    const nextChapter = chapters[index + 1];
+                    if (chapter.file_index === nextChapter.file_index) {
+                        // Same file, calculate duration
+                        const durationSeconds = nextChapter.timestamp - chapter.timestamp;
+                        duration = formatTime(durationSeconds);
+                    }
+                }
+            }
+        }
+
+        // Clean, Audible-style layout: title on left, duration on right
+        return `
+            <div class="chapter-item ${isActive ? 'active' : ''}" data-chapter-index="${index}">
+                <div class="chapter-item-info">
+                    <div class="chapter-item-title">${chapterTitle}</div>
+                </div>
+                ${duration ? `<div class="chapter-item-duration">${duration}</div>` : ''}
+            </div>
+        `;
+    }).join('');
 
     // Add click handlers
     document.querySelectorAll('.chapter-item').forEach(item => {
         item.addEventListener('click', () => {
             const chapterIndex = parseInt(item.dataset.chapterIndex);
-            console.log('Jump to chapter:', chapterIndex);
+            jumpToChapter(chapterIndex);
+            closeChaptersModal();
         });
     });
+}
+
+function openChaptersModal() {
+    ui.chaptersBackdrop.style.display = 'block';
+    ui.chaptersModal.style.display = 'block';
+    renderChapters(); // Re-render to update active state
+}
+
+function closeChaptersModal() {
+    ui.chaptersBackdrop.style.display = 'none';
+    ui.chaptersModal.style.display = 'none';
+}
+
+function jumpToChapter(chapterIndex) {
+    const chapters = state.currentBook.chapters;
+    if (!chapters || chapterIndex >= chapters.length) {
+        console.error('Invalid chapter index:', chapterIndex);
+        return;
+    }
+
+    const chapter = chapters[chapterIndex];
+    const variant = state.currentVariant;
+
+    // Find which audio file contains this chapter
+    // Chapter data contains file_index and timestamp
+    if (chapter.file_index !== undefined) {
+        state.currentFileIndex = chapter.file_index;
+        loadAudioFile();
+
+        // Wait for audio to load, then seek to chapter timestamp
+        ui.audio.addEventListener('loadedmetadata', () => {
+            if (chapter.timestamp !== undefined) {
+                ui.audio.currentTime = chapter.timestamp;
+            }
+            // Auto-play when jumping to chapter
+            if (state.isPlaying || !ui.audio.paused) {
+                ui.audio.play();
+            }
+        }, { once: true });
+
+        // Update current chapter tracking
+        state.currentChapterIndex = chapterIndex;
+        updateChapterHighlight();
+    } else {
+        console.warn('Chapter does not have file_index:', chapter);
+    }
+}
+
+function updateChapterHighlight() {
+    // Update active chapter in UI
+    document.querySelectorAll('.chapter-item').forEach((item, index) => {
+        if (index === state.currentChapterIndex) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+function detectCurrentChapter() {
+    // Auto-detect which chapter we're in based on current file and time
+    if (!state.currentBook || !state.currentBook.chapters) return;
+
+    const chapters = state.currentBook.chapters;
+    const currentFile = state.currentFileIndex;
+    const currentTime = ui.audio.currentTime;
+
+    // Find the chapter that matches current file and is before current time
+    for (let i = chapters.length - 1; i >= 0; i--) {
+        const chapter = chapters[i];
+        if (chapter.file_index === currentFile && chapter.timestamp <= currentTime) {
+            if (state.currentChapterIndex !== i) {
+                state.currentChapterIndex = i;
+                updateChapterHighlight();
+                updateCurrentChapterDisplay();
+            }
+            return;
+        }
+    }
+}
+
+function updateCurrentChapterDisplay() {
+    // Update the current chapter name shown below book title
+    if (!state.currentBook || !state.currentBook.chapters || state.currentChapterIndex === null) {
+        ui.currentChapterName.style.display = 'none';
+        return;
+    }
+
+    const chapter = state.currentBook.chapters[state.currentChapterIndex];
+    const chapterTitle = chapter.title || `Chapter ${chapter.number || state.currentChapterIndex + 1}`;
+
+    ui.currentChapterName.textContent = chapterTitle;
+    ui.currentChapterName.style.display = 'block';
 }
 
 // ============================================================================
@@ -489,7 +663,7 @@ function playNextFile() {
 }
 
 function rewind() {
-    ui.audio.currentTime = Math.max(0, ui.audio.currentTime - 15);
+    ui.audio.currentTime = Math.max(0, ui.audio.currentTime - 30);
 }
 
 function forward() {
@@ -502,7 +676,10 @@ function updateProgress() {
         ui.progressBar.value = progress;
 
         ui.currentTime.textContent = formatTime(ui.audio.currentTime);
-        ui.duration.textContent = formatTime(ui.audio.duration);
+
+        // Calculate and display time remaining (Audible-style)
+        const remaining = ui.audio.duration - ui.audio.currentTime;
+        ui.timeRemaining.textContent = formatTimeRemaining(remaining);
     }
 }
 
@@ -527,6 +704,21 @@ function setSpeedPreset(speed) {
 
 function updateSpeedDisplay() {
     ui.speedDisplay.textContent = `${ui.speedSlider.value}x`;
+}
+
+function toggleSpeedModal() {
+    const isVisible = ui.speedModal.style.display === 'block';
+    ui.speedModal.style.display = isVisible ? 'none' : 'block';
+}
+
+function openSleepTimerModal() {
+    ui.sleepTimerBackdrop.style.display = 'block';
+    ui.sleepTimerModal.style.display = 'block';
+}
+
+function closeSleepTimerModal() {
+    ui.sleepTimerBackdrop.style.display = 'none';
+    ui.sleepTimerModal.style.display = 'none';
 }
 
 // ============================================================================
@@ -566,6 +758,148 @@ async function savePlaybackState() {
 }
 
 // ============================================================================
+// Sleep Timer Functions
+// ============================================================================
+
+function setSleepTimer(minutes) {
+    // Cancel any existing timer
+    cancelSleepTimer();
+
+    const endTime = Date.now() + (minutes * 60 * 1000);
+    state.sleepTimer.endTime = endTime;
+    state.sleepTimer.type = 'timer';
+
+    // Set timeout to pause playback
+    state.sleepTimer.timeoutId = setTimeout(() => {
+        pauseAndNotify('Sleep timer ended');
+    }, minutes * 60 * 1000);
+
+    // Update status display every second
+    updateTimerDisplay();
+    state.sleepTimer.updateIntervalId = setInterval(updateTimerDisplay, 1000);
+
+    // Show cancel button
+    document.getElementById('cancel-timer-btn').style.display = 'block';
+}
+
+function setEndOfChapterTimer() {
+    // Cancel any existing timer
+    cancelSleepTimer();
+
+    state.sleepTimer.type = 'end-of-chapter';
+    state.sleepTimer.endTime = null;
+
+    // Update status
+    const timerStatus = document.getElementById('timer-status');
+    timerStatus.textContent = 'Will stop at end of current chapter';
+    timerStatus.classList.add('active');
+
+    // Show cancel button
+    document.getElementById('cancel-timer-btn').style.display = 'block';
+}
+
+function cancelSleepTimer() {
+    // Clear timeout
+    if (state.sleepTimer.timeoutId) {
+        clearTimeout(state.sleepTimer.timeoutId);
+        state.sleepTimer.timeoutId = null;
+    }
+
+    // Clear update interval
+    if (state.sleepTimer.updateIntervalId) {
+        clearInterval(state.sleepTimer.updateIntervalId);
+        state.sleepTimer.updateIntervalId = null;
+    }
+
+    // Reset state
+    state.sleepTimer.endTime = null;
+    state.sleepTimer.type = null;
+
+    // Update UI
+    const timerStatus = document.getElementById('timer-status');
+    timerStatus.textContent = 'No timer set';
+    timerStatus.classList.remove('active');
+    document.getElementById('cancel-timer-btn').style.display = 'none';
+}
+
+function updateTimerDisplay() {
+    if (state.sleepTimer.type !== 'timer' || !state.sleepTimer.endTime) {
+        return;
+    }
+
+    const remaining = state.sleepTimer.endTime - Date.now();
+    if (remaining <= 0) {
+        cancelSleepTimer();
+        return;
+    }
+
+    const minutes = Math.floor(remaining / 60000);
+    const seconds = Math.floor((remaining % 60000) / 1000);
+
+    const timerStatus = document.getElementById('timer-status');
+    timerStatus.textContent = `Sleep timer: ${minutes}:${seconds.toString().padStart(2, '0')} remaining`;
+    timerStatus.classList.add('active');
+}
+
+function pauseAndNotify(message) {
+    ui.audio.pause();
+    cancelSleepTimer();
+
+    // Optional: Show notification if supported
+    if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Audiobook Player', {
+            body: message,
+            icon: '/static/icon.png'
+        });
+    }
+}
+
+function checkEndOfChapterTimer() {
+    // Check if we should stop at end of chapter
+    if (state.sleepTimer.type !== 'end-of-chapter') return;
+
+    if (!state.currentBook || !state.currentBook.chapters) {
+        // No chapters, just continue playing
+        return;
+    }
+
+    const chapters = state.currentBook.chapters;
+    const currentFile = state.currentFileIndex;
+    const currentTime = ui.audio.currentTime;
+
+    // Check if we're at the end of a chapter
+    // Find next chapter
+    let nextChapterIndex = null;
+    for (let i = 0; i < chapters.length; i++) {
+        const chapter = chapters[i];
+        if (chapter.file_index > currentFile ||
+            (chapter.file_index === currentFile && chapter.timestamp > currentTime)) {
+            nextChapterIndex = i;
+            break;
+        }
+    }
+
+    // If no next chapter found, we're in the last chapter
+    // Check if we're near the end of the current file
+    if (nextChapterIndex === null || nextChapterIndex === state.currentChapterIndex + 1) {
+        // We're in the last chapter or approaching next chapter
+        // Check if we should stop (within 1 second of next chapter or end of file)
+        if (nextChapterIndex !== null) {
+            const nextChapter = chapters[nextChapterIndex];
+            if (nextChapter.file_index === currentFile) {
+                const timeToNextChapter = nextChapter.timestamp - currentTime;
+                if (timeToNextChapter <= 1) {
+                    pauseAndNotify('End of chapter reached');
+                }
+            }
+        } else if (ui.audio.duration - currentTime <= 1) {
+            // Near end of file and no next chapter
+            pauseAndNotify('End of chapter reached');
+        }
+    }
+}
+
+// ============================================================================
 // Utility Functions
 // ============================================================================
 
@@ -580,6 +914,19 @@ function formatTime(seconds) {
         return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function formatTimeRemaining(seconds) {
+    if (!seconds || isNaN(seconds) || seconds < 0) return '0m left';
+
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+
+    // Audible-style format: "4h 45m left" or "23m left"
+    if (hrs > 0) {
+        return `${hrs}h ${mins}m left`;
+    }
+    return `${mins}m left`;
 }
 
 // ============================================================================
@@ -603,6 +950,7 @@ function setupEventListeners() {
 
     // Speed
     ui.speedSlider.addEventListener('input', updateSpeed);
+    ui.speedBtn.addEventListener('click', toggleSpeedModal);
 
     document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -610,6 +958,16 @@ function setupEventListeners() {
             setSpeedPreset(speed);
         });
     });
+
+    // Sleep timer modal
+    ui.sleepTimerBtn.addEventListener('click', openSleepTimerModal);
+    ui.closeSleepTimerBtn.addEventListener('click', closeSleepTimerModal);
+    ui.sleepTimerBackdrop.addEventListener('click', closeSleepTimerModal);
+
+    // Chapters modal
+    ui.chaptersBtn.addEventListener('click', openChaptersModal);
+    ui.closeChaptersBtn.addEventListener('click', closeChaptersModal);
+    ui.chaptersBackdrop.addEventListener('click', closeChaptersModal);
 
     // Audio events
     ui.audio.addEventListener('play', () => {
@@ -625,7 +983,11 @@ function setupEventListeners() {
         stopAutoSave();
     });
 
-    ui.audio.addEventListener('timeupdate', updateProgress);
+    ui.audio.addEventListener('timeupdate', () => {
+        updateProgress();
+        detectCurrentChapter();
+        checkEndOfChapterTimer();
+    });
 
     ui.audio.addEventListener('ended', () => {
         // Auto-advance to next file
@@ -640,8 +1002,15 @@ function setupEventListeners() {
     });
 
     ui.audio.addEventListener('error', (e) => {
-        console.error('Audio error:', e);
-        alert('Failed to load audio file');
+        console.error('[Audio Error]', {
+            error: e,
+            src: ui.audio.src,
+            networkState: ui.audio.networkState,
+            readyState: ui.audio.readyState,
+            errorCode: ui.audio.error ? ui.audio.error.code : null,
+            errorMessage: ui.audio.error ? ui.audio.error.message : null
+        });
+        console.error(`Failed to load: ${ui.audio.src}`);
     });
 
     // Keyboard shortcuts
@@ -664,11 +1033,38 @@ function setupEventListeners() {
         }
     });
 
+    // Sleep timer event listeners
+    document.querySelectorAll('.timer-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const minutes = btn.dataset.minutes;
+            const action = btn.dataset.action;
+
+            if (action === 'end-of-chapter') {
+                setEndOfChapterTimer();
+            } else if (minutes) {
+                setSleepTimer(parseInt(minutes));
+            }
+        });
+    });
+
+    document.getElementById('cancel-timer-btn').addEventListener('click', () => {
+        cancelSleepTimer();
+    });
+
+    // Request notification permission on first interaction
+    if ('Notification' in window && Notification.permission === 'default') {
+        document.addEventListener('click', () => {
+            Notification.requestPermission();
+        }, { once: true });
+    }
+
     // Save state before page unload
     window.addEventListener('beforeunload', () => {
         if (state.currentBook && state.currentVariant) {
             savePlaybackState();
         }
+        // Clean up timers
+        cancelSleepTimer();
     });
 }
 

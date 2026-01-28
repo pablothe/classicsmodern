@@ -48,7 +48,6 @@
         <div id="player-view" class="view">
             <header>
                 <button id="back-btn" class="icon-btn">← Versions</button>
-                <h2 id="current-book-title">Book Title</h2>
             </header>
 
             <div class="player-container">
@@ -56,17 +55,18 @@
                 <div class="book-info">
                     <div class="book-cover">🎧</div>
                     <h3 id="player-book-title">Book Title</h3>
-                    <p id="file-info">File 1 of 1</p>
+                    <p id="player-narrator" class="narrator-info"></p>
+                    <p id="current-chapter-name" class="current-chapter-name"></p>
                 </div>
 
                 <!-- Audio Element -->
                 <audio id="audio-player" preload="metadata"></audio>
 
-                <!-- Progress Bar -->
+                <!-- Progress Bar (Audible Style) -->
                 <div class="progress-container">
                     <div class="time-display">
                         <span id="current-time">0:00</span>
-                        <span id="duration">0:00</span>
+                        <span id="time-remaining">--:-- left</span>
                     </div>
                     <input
                         type="range"
@@ -81,39 +81,84 @@
 
                 <!-- Main Controls -->
                 <div class="controls">
-                    <button id="prev-file-btn" class="control-btn" title="Previous file">⏮</button>
-                    <button id="rewind-btn" class="control-btn" title="Rewind 15s">⏪</button>
+                    <button id="prev-file-btn" class="control-btn secondary" title="Previous file">⏮</button>
+                    <button id="rewind-btn" class="control-btn skip-btn" title="Rewind 30s">
+                        <span class="skip-icon">↶</span>
+                        <span class="skip-label">30</span>
+                    </button>
                     <button id="play-pause-btn" class="control-btn primary" title="Play/Pause">▶️</button>
-                    <button id="forward-btn" class="control-btn" title="Forward 30s">⏩</button>
-                    <button id="next-file-btn" class="control-btn" title="Next file">⏭</button>
+                    <button id="forward-btn" class="control-btn skip-btn" title="Forward 30s">
+                        <span class="skip-icon">↷</span>
+                        <span class="skip-label">30</span>
+                    </button>
+                    <button id="next-file-btn" class="control-btn secondary" title="Next file">⏭</button>
                 </div>
 
-                <!-- Speed Control -->
-                <div class="speed-control">
-                    <label for="speed-slider">
-                        Speed: <span id="speed-display">1.0x</span>
-                    </label>
-                    <input
-                        type="range"
-                        id="speed-slider"
-                        min="0.5"
-                        max="2.0"
-                        value="1.0"
-                        step="0.1"
-                    >
-                    <div class="speed-presets">
-                        <button class="preset-btn" data-speed="0.75">0.75x</button>
-                        <button class="preset-btn" data-speed="1.0">1x</button>
-                        <button class="preset-btn" data-speed="1.25">1.25x</button>
-                        <button class="preset-btn" data-speed="1.5">1.5x</button>
-                        <button class="preset-btn" data-speed="2.0">2x</button>
+                <!-- Secondary Controls (Audible Style) -->
+                <div class="secondary-controls-grid" id="secondary-controls-grid">
+                    <button id="speed-btn" class="secondary-action-btn">
+                        <span id="speed-display">1.0x</span>
+                        <span class="action-label">Narration Speed</span>
+                    </button>
+                    <button id="chapters-btn" class="secondary-action-btn" style="display: none;">
+                        <span class="action-icon">📑</span>
+                        <span class="action-label">Chapters</span>
+                    </button>
+                    <button id="sleep-timer-btn" class="secondary-action-btn">
+                        <span class="action-icon">⏱️</span>
+                        <span class="action-label">Sleep Timer</span>
+                    </button>
+                </div>
+
+                <!-- Speed Control Modal (Hidden by default) -->
+                <div id="speed-modal" class="settings-modal" style="display: none;">
+                    <div class="speed-control">
+                        <input
+                            type="range"
+                            id="speed-slider"
+                            min="0.5"
+                            max="2.0"
+                            value="1.0"
+                            step="0.05"
+                        >
+                        <div class="speed-presets">
+                            <button class="preset-btn" data-speed="0.75">0.75x</button>
+                            <button class="preset-btn" data-speed="1.0">1x</button>
+                            <button class="preset-btn" data-speed="1.25">1.25x</button>
+                            <button class="preset-btn" data-speed="1.5">1.5x</button>
+                            <button class="preset-btn" data-speed="2.0">2x</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Chapter Navigation (if available) -->
-                <div id="chapters-section" class="chapters-section" style="display: none;">
-                    <h4>Chapters</h4>
+                <!-- Chapter Navigation Modal (if available) -->
+                <div id="chapters-backdrop" class="chapters-backdrop" style="display: none;"></div>
+                <div id="chapters-modal" class="chapters-modal" style="display: none;">
+                    <div class="chapters-modal-header">
+                        <h4>Chapters</h4>
+                        <button id="close-chapters-btn" class="close-btn">✕</button>
+                    </div>
                     <div id="chapters-list" class="chapters-list"></div>
+                </div>
+
+                <!-- Sleep Timer Modal (Hidden by default) -->
+                <div id="sleep-timer-backdrop" class="chapters-backdrop" style="display: none;"></div>
+                <div id="sleep-timer-modal" class="chapters-modal" style="display: none;">
+                    <div class="chapters-modal-header">
+                        <h4>Sleep Timer</h4>
+                        <button id="close-sleep-timer-btn" class="close-btn">✕</button>
+                    </div>
+                    <div class="sleep-timer-content">
+                        <div class="timer-status" id="timer-status">No timer set</div>
+                        <div class="timer-buttons">
+                            <button class="timer-btn" data-minutes="15">15 min</button>
+                            <button class="timer-btn" data-minutes="30">30 min</button>
+                            <button class="timer-btn" data-minutes="45">45 min</button>
+                            <button class="timer-btn" data-minutes="60">60 min</button>
+                            <button class="timer-btn" data-action="end-of-chapter">End of Chapter</button>
+                            <button class="timer-btn cancel" id="cancel-timer-btn" style="display: none;">Cancel Timer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
