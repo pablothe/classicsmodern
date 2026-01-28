@@ -6,9 +6,18 @@ python-dotenv
 requests
 beautifulsoup4
 
-# Local TTS (XTTS-v2) - Optional but recommended
+# Local TTS (Edge-TTS) - RECOMMENDED for Apple Silicon
+# FREE, high quality, 400+ voices
+edge-tts
+
+# Local TTS (XTTS-v2) - Optional, for voice cloning
 # Uncomment to use local_tts_xtts.py for $0 cost audiobooks
 TTS==0.27.3
+
+# Local TTS (Orpheus) - NOT for Apple Silicon (requires NVIDIA GPU)
+# Uncomment to use local_tts_orpheus.py for human-like speech (Linux/Windows only)
+# orpheus-speech
+# vllm==0.7.3
 
 # Note: Also requires FFmpeg for audio post-processing
 # macOS: brew install ffmpeg

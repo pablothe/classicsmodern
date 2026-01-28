@@ -159,7 +159,23 @@ pip install diffusers torch transformers accelerate
 
 ### Audio Generation
 
-**Local TTS (free, voice cloning):**
+**Local TTS - Edge-TTS (RECOMMENDED - FREE, high quality):**
+```bash
+# Basic usage (default voice: Jenny - friendly)
+python3 local_tts_edge.py translated.md
+
+# Use British voice (great for classics)
+python3 local_tts_edge.py translated.md --voice en-GB-SoniaNeural
+
+# Top voices:
+# - en-US-JennyNeural (friendly female, DEFAULT)
+# - en-GB-SoniaNeural (British female, classics)
+# - en-US-AriaNeural (warm female)
+# - en-US-GuyNeural (professional male)
+# - en-US-EricNeural (deep male)
+```
+
+**Local TTS - XTTS (voice cloning):**
 ```bash
 python local_tts_xtts.py translated.md voice_ref.wav en
 ```
@@ -169,6 +185,12 @@ python local_tts_xtts.py translated.md voice_ref.wav en
 python local_reader_audio.py translated/deduplicated/ --voice fable
 python local_reader_audio_combiner.py playlist.m3u
 python local_reader_audio_compress.py combined.mp3 96k
+```
+
+**Local TTS - Orpheus (NOT for Apple Silicon - requires NVIDIA GPU):**
+```bash
+# Only works on Linux/Windows with CUDA - see ORPHEUS_APPLE_SILICON_NOTE.md
+python local_tts_orpheus.py translated.md --voice tara
 ```
 
 **See [GUIDE.md](GUIDE.md) for complete audio generation workflow.**
@@ -214,7 +236,20 @@ python local_reader_audio_compress.py combined.mp3 96k
 
 ### Audio Generation System
 
-**Local TTS (XTTS-v2):**
+**Local TTS - Orpheus (RECOMMENDED):**
+- **Model**: Llama-3b based TTS (canopylabs/orpheus-tts-0.1-finetune-prod)
+- **Quality**: SOTA open-source, superior to commercial models
+- **Features**:
+  - Human-like intonation, emotion, and rhythm
+  - 8 voices (tara, leah, jess, leo, dan, mia, zac, zoe)
+  - Emotion tags (<laugh>, <chuckle>, <sigh>, etc.)
+  - ~200ms streaming latency
+  - Automatic chapter detection and combining
+  - FFmpeg post-processing (normalization, MP3)
+- **Speed**: ~1-2x realtime (GPU recommended)
+- **Usage**: `python local_tts_orpheus.py translated.md --voice tara`
+
+**Local TTS - XTTS-v2:**
 - Free, voice cloning (10-30 sec sample)
 - 16 languages, automatic post-processing (speed, normalize, MP3)
 - 2-4x slower than realtime (CPU)
@@ -240,11 +275,17 @@ books/
 │   │           ├── audio/                      # OpenAI TTS (legacy)
 │   │           │   ├── chunk_001_part001.mp3
 │   │           │   └── audiobook_playlist.m3u
-│   │           └── audio_xtts/                 # Local TTS (recommended)
+│   │           ├── audio_xtts/                 # Local TTS (voice cloning)
+│   │           │   ├── raw/                    # Unprocessed WAV
+│   │           │   │   └── chunk_001_chunk001_raw.wav
+│   │           │   ├── chunk_001_chunk001.mp3  # Processed (speed + normalized)
+│   │           │   └── chunk_001_audiobook.m3u # Playlist
+│   │           └── audio_orpheus/              # Local TTS (RECOMMENDED)
 │   │               ├── raw/                    # Unprocessed WAV
-│   │               │   └── chunk_001_chunk001_raw.wav
-│   │               ├── chunk_001_chunk001.mp3  # Processed (speed + normalized)
-│   │               └── chunk_001_audiobook.m3u # Playlist
+│   │               │   └── chunk_001_raw.wav
+│   │               ├── chunk_001.mp3           # Processed (normalized)
+│   │               ├── chapter_01.mp3          # Combined chapters
+│   │               └── audiobook.m3u           # Master playlist
 │   ├── [book]_[language]_[date]_[model].md     # Single-file translations
 │   ├── [book]_part001_[voice]_[date].wav       # Audio parts (OpenAI)
 │   └── [book]_audiobook_playlist_[date].m3u    # Playlist
