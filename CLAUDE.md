@@ -159,28 +159,55 @@ pip install diffusers torch transformers accelerate
 
 ### Audio Generation
 
-**Local TTS - Edge-TTS (RECOMMENDED - FREE, high quality):**
+**Local TTS - Kokoro (RECOMMENDED - FREE, FAST, HIGH QUALITY):**
 ```bash
-# Basic usage (default voice: Jenny - friendly)
-python3 local_tts_edge.py translated.md
+# Basic usage (default voice: af_sky - American Female)
+python3 local_tts_kokoro.py translated.md
 
-# Use British voice (great for classics)
-python3 local_tts_edge.py translated.md --voice en-GB-SoniaNeural
+# British female voice (great for classics)
+python3 local_tts_kokoro.py translated.md --voice bf_emma
+
+# British male voice with cover art
+python3 local_tts_kokoro.py translated.md --voice bm_george --generate-cover
+
+# Custom speed
+python3 local_tts_kokoro.py translated.md --speed 1.15
 
 # Top voices:
-# - en-US-JennyNeural (friendly female, DEFAULT)
-# - en-GB-SoniaNeural (British female, classics)
-# - en-US-AriaNeural (warm female)
-# - en-US-GuyNeural (professional male)
-# - en-US-EricNeural (deep male)
+# - af_sky (American Female - Sky, DEFAULT)
+# - bf_emma (British Female - Emma, classics)
+# - bm_george (British Male - George, classics)
+# - am_adam (American Male - Adam)
+# - am_onyx (American Male - Onyx, deep)
+# Total: 52 voices available (af_*, am_*, bf_*, bm_*, etc.)
 ```
 
-**Local TTS - XTTS (voice cloning):**
+**Why Kokoro?**
+- Apache 2.0 license (commercial-friendly, unlike XTTS-v2)
+- 31× faster than Bark (6.5s vs 203s per passage)
+- 100% local inference via ONNX Runtime (no API calls)
+- Quality rivals commercial APIs
+- 52 preset voices (American, British, male/female)
+- Apple Silicon GPU acceleration (MPS)
+- Requires: `pip install kokoro-tts kokoro-onnx soundfile`
+- Models: Auto-downloaded to ~/.cache/kokoro/ (~335MB, one-time)
+
+**Local TTS - Edge-TTS (Cloud-based, but free):**
 ```bash
+# Note: Makes API calls to Microsoft (not truly local)
+python3 local_tts_edge.py translated.md
+
+# British voice
+python3 local_tts_edge.py translated.md --voice en-GB-SoniaNeural
+```
+
+**Local TTS - XTTS (voice cloning, non-commercial):**
+```bash
+# Note: Non-commercial license, not recommended for commercial use
 python local_tts_xtts.py translated.md voice_ref.wav en
 ```
 
-**Cloud TTS (paid, faster):**
+**Cloud TTS (OpenAI, paid):**
 ```bash
 python local_reader_audio.py translated/deduplicated/ --voice fable
 python local_reader_audio_combiner.py playlist.m3u

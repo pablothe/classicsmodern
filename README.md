@@ -65,7 +65,19 @@ python3 book_preprocessor.py books/crime_punishment/translated/chunk_001_english
 
 ### Generate Audiobook
 
-**Option 1: Local TTS (free, voice cloning, chapter-based)**
+**Option 1: Local TTS with Kokoro (RECOMMENDED - fast, free, commercial-friendly)**
+```bash
+# Basic usage (American Female voice)
+python3 local_tts_kokoro.py translated.md
+
+# British voice (great for classics)
+python3 local_tts_kokoro.py translated.md --voice bf_emma
+
+# With cover art generation
+python3 local_tts_kokoro.py translated.md --voice bf_emma --generate-cover
+```
+
+**Option 2: Local TTS with XTTS (voice cloning, non-commercial)**
 ```bash
 python local_tts_xtts.py translated.md voice_sample.wav en
 # Automatically creates chapter files (e.g., chapter_01.mp3, chapter_02.mp3)
