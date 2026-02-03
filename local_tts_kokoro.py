@@ -47,6 +47,10 @@ except ImportError:
 class KokoroAudioGenerator:
     """Local TTS audio generation using Kokoro (ONNX Runtime)"""
 
+    # Safety limits
+    MAX_SAFE_CHUNK_SIZE = 800              # Characters per chunk (reduced for phoneme safety)
+    KOKORO_PHONEME_LIMIT = 510             # Hard limit in kokoro-onnx library
+
     # Top recommended voices for audiobooks
     VOICE_AF_SKY = "af_sky"                # American Female - Sky (DEFAULT)
     VOICE_BF_EMMA = "bf_emma"              # British Female - Emma (classics)
@@ -181,14 +185,14 @@ class KokoroAudioGenerator:
 
         return text.strip()
 
-    def chunk_text(self, text: str, max_chars: int = 1000) -> List[str]:
+    def chunk_text(self, text: str, max_chars: int = 800) -> List[str]:
         """
         Split text into chunks for TTS.
-        Kokoro can handle moderate chunks (~1000 chars).
+        Kokoro can handle moderate chunks (~800 chars recommended for safety).
 
         Args:
             text: Text to chunk
-            max_chars: Maximum characters per chunk
+            max_chars: Maximum characters per chunk (default: 800 for phoneme safety)
 
         Returns:
             List of text chunks
@@ -245,13 +249,15 @@ class KokoroAudioGenerator:
 
         return chunks
 
-    def generate_audio_chunk(self, text: str, output_path: Path) -> Path:
+    def generate_audio_chunk(self, text: str, output_path: Path, retry_count: int = 0) -> Path:
         """
         Generate audio for a single text chunk using Kokoro.
+        Implements retry logic with recursive splitting if phoneme limit is exceeded.
 
         Args:
             text: Text to convert to speech
             output_path: Where to save the audio file
+            retry_count: Internal counter for recursion depth (max 3)
 
         Returns:
             Path to generated audio file
@@ -262,20 +268,81 @@ class KokoroAudioGenerator:
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Generate audio using Kokoro
-        audio_array, sample_rate = self.model.create(
-            text=text,
-            voice=self.voice,
-            speed=1.0,
-            lang=self.language,
-            trim=True
-        )
+        try:
+            # Generate audio using Kokoro
+            audio_array, sample_rate = self.model.create(
+                text=text,
+                voice=self.voice,
+                speed=1.0,
+                lang=self.language,
+                trim=True
+            )
 
-        # Save as WAV
-        sf.write(str(output_path), audio_array, sample_rate)
+            # Save as WAV
+            sf.write(str(output_path), audio_array, sample_rate)
 
-        print(f"✓ Saved: {output_path.name}")
-        return output_path
+            print(f"✓ Saved: {output_path.name}")
+            return output_path
+
+        except IndexError as e:
+            # Phoneme limit exceeded - split and retry
+            if "out of bounds" in str(e) and retry_count < 3:
+                print(f"⚠️  Phoneme limit hit, splitting chunk...")
+
+                # Split text in half at sentence boundary
+                mid_point = len(text) // 2
+                sentences = re.split(r'(?<=[.!?])\s+', text)
+
+                # Find best split point near middle
+                current_len = 0
+                split_idx = 0
+                for i, sent in enumerate(sentences):
+                    if current_len + len(sent) >= mid_point:
+                        split_idx = i
+                        break
+                    current_len += len(sent) + 1
+
+                # Split into two parts
+                part1 = ' '.join(sentences[:split_idx]).strip()
+                part2 = ' '.join(sentences[split_idx:]).strip()
+
+                if not part1 or not part2:
+                    # Fallback: hard split at mid_point
+                    part1 = text[:mid_point].strip()
+                    part2 = text[mid_point:].strip()
+
+                print(f"  → Split into {len(part1)} + {len(part2)} chars")
+
+                # Generate two separate files
+                base_name = output_path.stem
+                part1_path = output_path.parent / f"{base_name}_a.wav"
+                part2_path = output_path.parent / f"{base_name}_b.wav"
+
+                # Recursive retry on each part
+                self.generate_audio_chunk(part1, part1_path, retry_count + 1)
+                self.generate_audio_chunk(part2, part2_path, retry_count + 1)
+
+                # Combine the two parts using ffmpeg
+                print(f"  Combining parts...", end=" ", flush=True)
+                combine_cmd = [
+                    'ffmpeg', '-y', '-i', str(part1_path), '-i', str(part2_path),
+                    '-filter_complex', '[0:0][1:0]concat=n=2:v=0:a=1[out]',
+                    '-map', '[out]', str(output_path)
+                ]
+
+                try:
+                    subprocess.run(combine_cmd, capture_output=True, check=True)
+                    # Clean up temporary files
+                    part1_path.unlink()
+                    part2_path.unlink()
+                    print(f"✓ Combined: {output_path.name}")
+                    return output_path
+                except subprocess.CalledProcessError:
+                    print(f"⚠️  Combine failed, keeping parts")
+                    return part1_path  # Return first part as fallback
+            else:
+                # Max retries reached or other error
+                raise
 
     def detect_chapters(self, text: str, is_cleaned: bool = False) -> list:
         """
@@ -427,7 +494,7 @@ class KokoroAudioGenerator:
         self,
         input_file: str,
         output_dir: str = None,
-        chunk_size: int = 1000,
+        chunk_size: int = 800,
         speed: float = 1.0,
         normalize: bool = True,
         to_mp3: bool = True,
@@ -439,7 +506,7 @@ class KokoroAudioGenerator:
         Args:
             input_file: Path to text/markdown file
             output_dir: Output directory (auto-generated if None)
-            chunk_size: Characters per chunk (1000 recommended for Kokoro)
+            chunk_size: Characters per chunk (800 recommended for phoneme safety)
             speed: Playback speed multiplier (1.0 = normal)
             normalize: Whether to normalize loudness
             to_mp3: Whether to convert to MP3 format
@@ -729,7 +796,7 @@ def main():
         print("\nOptions:")
         print("  --voice VOICE          Voice ID (default: af_sky)")
         print("  --lang LANG            Language code (default: en-us)")
-        print("  --chunk-size SIZE      Characters per chunk (default: 1000)")
+        print("  --chunk-size SIZE      Characters per chunk (default: 800)")
         print("  --speed SPEED          Playback speed multiplier (default: 1.0)")
         print("  --no-normalize         Skip loudness normalization")
         print("  --no-mp3               Keep WAV format (don't convert to MP3)")
@@ -777,7 +844,7 @@ def main():
     input_file = sys.argv[1]
     voice = KokoroAudioGenerator.VOICE_AF_SKY
     language = "en-us"
-    chunk_size = 1000
+    chunk_size = 800
     speed = 1.0
     normalize = True
     to_mp3 = True
