@@ -127,6 +127,86 @@ class KokoroAudioGenerator:
             minutes = int((seconds % 3600) / 60)
             return f"{hours}h {minutes}m"
 
+    def strip_gutenberg_boilerplate(self, text: str) -> tuple:
+        """
+        Strip Project Gutenberg boilerplate and extract metadata.
+
+        Args:
+            text: Raw text that may contain Gutenberg boilerplate
+
+        Returns:
+            Tuple of (cleaned_text, title, author)
+        """
+        lines = text.split('\n')
+
+        # Find START and END markers
+        start_idx = -1
+        end_idx = -1
+
+        for i, line in enumerate(lines):
+            if '*** START OF THE PROJECT GUTENBERG EBOOK' in line.upper():
+                start_idx = i
+            if '*** END OF THE PROJECT GUTENBERG EBOOK' in line.upper():
+                end_idx = i
+                break
+
+        # Extract title and author from the content
+        title = None
+        author = None
+
+        if start_idx >= 0:
+            # Extract title from START line (e.g., "*** START ... EBOOK THE CALL OF CTHULHU ***")
+            start_line = lines[start_idx]
+            title_match = re.search(r'EBOOK\s+(.+?)\s*\*\*\*', start_line, re.IGNORECASE)
+            if title_match:
+                title = title_match.group(1).strip()
+
+            # Look for title in next few lines (markdown headers)
+            for j in range(start_idx, min(start_idx + 5, len(lines))):
+                line = lines[j].strip()
+                # Remove markdown markers
+                title_line = re.sub(r'^#+\s+', '', line)
+                if title_line and not title_line.startswith('***'):
+                    if not title:
+                        title = title_line
+                    # Look for author
+                    author_match = re.match(r'By\s+(.+)', title_line, re.IGNORECASE)
+                    if author_match:
+                        author = author_match.group(1).strip()
+                        break
+
+        # If we found markers, strip the boilerplate
+        if start_idx >= 0:
+            # Keep content after START marker
+            if end_idx > start_idx:
+                # Remove everything from START to END
+                content = '\n'.join(lines[start_idx + 1:end_idx])
+            else:
+                # No END marker, just remove header
+                content = '\n'.join(lines[start_idx + 1:])
+        else:
+            # No markers found, return as-is
+            content = text
+
+        # Remove any "By {author}" lines from content (already in intro)
+        if author:
+            content = re.sub(
+                rf'^##?\s*By\s+{re.escape(author)}\s*$',
+                '',
+                content,
+                flags=re.MULTILINE | re.IGNORECASE
+            )
+
+        # Generate intro if we have metadata
+        if title and author:
+            intro = f"Classics Modern presents: {title}. Written by {author}.\n\n"
+            content = intro + content
+        elif title:
+            intro = f"Classics Modern presents: {title}.\n\n"
+            content = intro + content
+
+        return content, title, author
+
     def clean_text_for_speech(self, text: str, preserve_chapter_markers: bool = False) -> str:
         """
         Clean markdown text for natural speech synthesis.
@@ -138,11 +218,22 @@ class KokoroAudioGenerator:
         Returns:
             Cleaned text suitable for TTS
         """
-        # Preserve standalone Roman numeral chapter markers FIRST
+        # Strip Gutenberg boilerplate first
+        text, _, _ = self.strip_gutenberg_boilerplate(text)
+        # Preserve chapter markers FIRST (before cleaning)
         if preserve_chapter_markers:
+            # Preserve standalone Roman numerals (e.g., "I.", "II.", "III.")
             text = re.sub(
                 r'^(X{0,3})(IX|IV|V?I{0,3})\.$',
-                lambda m: f"CHAPTER_MARKER_{m.group(0)}",
+                lambda m: f"<<<CHAPTER:MARKER:{m.group(0)}>>>",
+                text,
+                flags=re.MULTILINE
+            )
+
+            # Preserve numbered chapters (e.g., "1. The Horror in Clay.")
+            text = re.sub(
+                r'^(\d+)\.\s+(.+)$',
+                lambda m: f"<<<CHAPTER:MARKER:{m.group(1)}>>>",
                 text,
                 flags=re.MULTILINE
             )
@@ -151,8 +242,14 @@ class KokoroAudioGenerator:
         if preserve_chapter_markers:
             def replace_header(match):
                 header_text = match.group(2)
+                # Check if it's a Roman numeral marker
                 if re.match(r'^(X{0,3})(IX|IV|V?I{0,3})\.$', header_text.strip()):
-                    return f"CHAPTER_MARKER_{header_text.strip()}"
+                    return f"<<<CHAPTER:MARKER:{header_text.strip()}>>>"
+                # Check if it's a numbered chapter
+                if re.match(r'^\d+\.\s+.+$', header_text.strip()):
+                    numbered_match = re.match(r'^(\d+)\.', header_text.strip())
+                    if numbered_match:
+                        return f"<<<CHAPTER:MARKER:{numbered_match.group(1)}>>>"
                 return header_text
             text = re.sub(r'^(#{1,6})\s+(.+)$', replace_header, text, flags=re.MULTILINE)
         else:
@@ -361,8 +458,8 @@ class KokoroAudioGenerator:
         for i, line in enumerate(lines):
             line_stripped = line.strip()
 
-            if is_cleaned and line_stripped.startswith('CHAPTER_MARKER_'):
-                marker = line_stripped.replace('CHAPTER_MARKER_', '')
+            if is_cleaned and line_stripped.startswith('<<<CHAPTER:MARKER:'):
+                marker = line_stripped.replace('<<<CHAPTER:MARKER:', '').replace('>>>', '')
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, marker))
@@ -377,6 +474,14 @@ class KokoroAudioGenerator:
 
             header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)
             if header_match:
+                char_pos = len('\n'.join(lines[:i]))
+                chapter_num = len(chapters) + 1
+                chapters.append((chapter_num, char_pos, line_stripped))
+                continue
+
+            # Detect numbered list chapters (e.g., "1. The Horror in Clay.")
+            numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
+            if numbered_match:
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, line_stripped))
@@ -546,9 +651,9 @@ class KokoroAudioGenerator:
         print(f"Chunking text (max {chunk_size} chars per chunk)...")
         chunks = self.chunk_text(clean_text, chunk_size)
 
-        # Remove CHAPTER_MARKER_ tags from chunks
+        # Remove <<<CHAPTER:MARKER:...>>> tags from chunks
         if preserve_markers:
-            chunks = [re.sub(r'CHAPTER_MARKER_[^\s]*', '', chunk).strip() for chunk in chunks]
+            chunks = [re.sub(r'<<<CHAPTER:MARKER:[^>]*>>>', '', chunk).strip() for chunk in chunks]
 
         print(f"Created {len(chunks)} audio chunks")
 

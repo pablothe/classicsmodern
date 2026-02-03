@@ -23,28 +23,61 @@ Translate classic literature into modern languages and generate audiobooks using
 ### Installation
 
 ```bash
-# 1. Install dependencies
+# 1. Install core dependencies
 pip install -r requirements.txt
 
-# 2. Set up local translation model (optional)
+# 2. Install Kokoro TTS (recommended - fast, free, commercial-friendly)
+pip install kokoro-tts kokoro-onnx soundfile
+brew install ffmpeg  # macOS
+# Note: Kokoro models (~335MB) auto-download to ~/.cache/kokoro/ on first use
+
+# 3. (Optional) Set up local translation model for non-English books
 brew install ollama  # macOS
 ollama pull zongwei/gemma3-translator:4b
 
-# 3. Set up local TTS (optional - free alternative to OpenAI)
-pip install TTS==0.27.3
-brew install ffmpeg
-
-# 4. For cloud TTS, create .env file
+# 4. (Optional) For cloud TTS/translation, create .env file
 echo "OPENAI_API_KEY=your_key_here" > .env
 ```
 
-### Translate a Book
+### Create Audiobook - ONE COMMAND! ⭐
 
-**Step 0: Preprocess (validate structure)**
+**For most books (English, ready to read):**
 ```bash
-python3 book_preprocessor.py books/crime_punishment/book.md
-# Validates all chapters are present before translation
+# Single command creates complete audiobook with cover art
+python3 make_audiobook.py books/alice_adventures/alices_adventures.md --generate-cover
+
+# That's it! Output will be in: books/alice_adventures/audio_kokoro/
+# - Chapter MP3 files
+# - Cover art PNG
+# - Playlist M3U
+# - Metadata JSON (for web player)
 ```
+
+**Common options:**
+```bash
+# British female voice (recommended for classics)
+python3 make_audiobook.py INPUT.md --voice bf_emma --generate-cover
+
+# American male voice + faster playback
+python3 make_audiobook.py INPUT.md --voice am_adam --speed 1.15 --generate-cover
+
+# With summarization (50% of original length - great for long books)
+python3 make_audiobook.py INPUT.md --summarize 50 --generate-cover
+```
+
+**What it does automatically:**
+1. ✅ Strips Project Gutenberg boilerplate (if present)
+2. ✅ Detects chapters (Roman numerals, numbered lists, markdown headers)
+3. ✅ Generates high-quality audio with Kokoro TTS
+4. ✅ Creates cover art (if --generate-cover flag used)
+5. ✅ Organizes output and registers with web server
+6. ✅ Fully resumable (if interrupted, re-run same command)
+
+---
+
+## Advanced Workflows
+
+### For Non-English Books (Translation Required)
 
 **Option 1: Cloud-based (single file)**
 ```bash
@@ -59,11 +92,11 @@ python3 local_reader_smart_splitter.py books/crime_punishment/book.md
 # Translate with automatic deduplication
 python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
 
-# Validate translation completeness
-python3 book_preprocessor.py books/crime_punishment/translated/chunk_001_english.md
+# Then create audiobook
+python3 make_audiobook.py books/crime_punishment/chunks/translated/deduplicated/chunk_001_DEDUPED.md --generate-cover
 ```
 
-### Generate Audiobook
+### Alternative Audio Generation Methods
 
 **Option 1: Local TTS with Kokoro (RECOMMENDED - fast, free, commercial-friendly)**
 ```bash

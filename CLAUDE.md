@@ -22,9 +22,54 @@ pip install -r requirements.txt
 OPENAI_API_KEY=your_api_key_here
 ```
 
-## Core Commands
+## Quick Start - ONE COMMAND WORKFLOW ⭐
 
-### Book Preprocessing (Run First!)
+**For most use cases, use the unified audiobook maker:**
+
+```bash
+# Create complete audiobook from any book (ONE COMMAND!)
+python3 make_audiobook.py books/alice_adventures/alices_adventures.md --generate-cover
+
+# That's it! This will:
+# 1. Strip Gutenberg boilerplate automatically
+# 2. Detect chapters (Roman numerals, numbered lists, markdown headers)
+# 3. Generate high-quality audio with Kokoro TTS (52 voices, commercial-friendly)
+# 4. Generate cover art
+# 5. Register with web server for playback
+# 6. Create organized output in books/{book_name}/audio_kokoro/
+```
+
+**Common options:**
+```bash
+# British female voice (recommended for classics)
+python3 make_audiobook.py INPUT.md --voice bf_emma --generate-cover
+
+# American male voice + faster playback
+python3 make_audiobook.py INPUT.md --voice am_adam --speed 1.15
+
+# With summarization (50% of original length)
+python3 make_audiobook.py INPUT.md --summarize 50 --generate-cover
+
+# Available voices:
+# - bf_emma (British Female - classics)
+# - bm_george (British Male - classics)
+# - af_sky (American Female - default)
+# - am_adam (American Male)
+# - am_onyx (American Male - deep)
+# Total: 52 voices (af_*, am_*, bf_*, bm_*)
+```
+
+**Requirements:**
+```bash
+pip install kokoro-tts kokoro-onnx soundfile
+brew install ffmpeg  # macOS
+```
+
+---
+
+## Advanced Workflows
+
+### Book Preprocessing (Optional - for validation)
 
 ```bash
 # Validate book structure before translation/audio
