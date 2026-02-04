@@ -69,32 +69,65 @@ brew install ffmpeg  # macOS
 
 ## Advanced Workflows
 
-### Book Preprocessing (Optional - for validation)
+### Book Validation (RECOMMENDED - for feature readiness)
+
+**New unified validation tool for Karaoke and AI features:**
 
 ```bash
-# Validate book structure before translation/audio
-python3 book_preprocessor.py books/mybook/original.md
+# Validate book for all features
+python3 book_validator.py books/mybook/book.md
 
-# Check translation completeness after translation
-python3 book_preprocessor.py books/mybook/translated.md
+# Auto-fix common issues (Gutenberg boilerplate, missing TOC)
+python3 book_validator.py books/mybook/book.md --auto-fix
+
+# Require specific features
+python3 book_validator.py books/mybook/book.md --require karaoke,ai_chat
+
+# JSON output for scripting
+python3 book_validator.py books/mybook/book.md --json
 ```
 
-**What it does:**
-- Detects table of contents (TOC)
-- Finds all chapter markers in content (Roman numerals, Markdown headers)
-- Validates chapters are sequential (no missing chapters)
-- Identifies gaps (e.g., has I, V, VI but missing II, III, IV)
-- Compares TOC vs actual content
-- Generates JSON metadata for downstream tools
+**What it validates:**
+- ✅ **Chapter structure** - TOC, sequential chapters, no gaps
+- ✅ **Text quality** - No Gutenberg boilerplate, minimum length
+- ✅ **Metadata** - Title, author detection
+- ✅ **Feature readiness** - Karaoke, AI chat, web player support
 
-**Output files:**
-- `*_preprocessing_report.txt` - Human-readable validation report
-- `*_chapter_data.json` - Machine-readable chapter metadata
+**Feature requirements:**
+- **Karaoke Mode** - Requires: clean text + chapters
+- **AI Chat** - Requires: 3+ sequential chapters
+- **Web Player** - Requires: 1+ chapter
+
+**Auto-fix capabilities:**
+- Strip Gutenberg boilerplate (header/footer)
+- Generate missing table of contents
+- Suggest metadata additions
+
+**Output example:**
+```
+✅ VALID
+Feature support: 3/3 features ready
+  ✅ Karaoke
+  ✅ Ai_Chat
+  ✅ Web_Player
+```
+
+**Integration with processing scripts:**
+- `book_summarizer.py` - Auto-validates output after summarization
+- `local_tts_kokoro.py` - Pre-flight validation before audio generation
+- Both scripts show feature readiness and suggest fixes
 
 **Use cases:**
 1. **Before translation**: Ensure source book is complete
-2. **After translation**: Validate all chapters were translated
-3. **Before audio generation**: Confirm chapter count for proper audio splitting
+2. **After summarization**: Validate chapters preserved
+3. **Before audio generation**: Confirm Karaoke/AI support
+4. **CI/CD**: Automated quality gates
+
+**Legacy tool (still available):**
+```bash
+# Old preprocessing tool (basic chapter detection only)
+python3 book_preprocessor.py books/mybook/book.md
+```
 
 ### Text Translation
 

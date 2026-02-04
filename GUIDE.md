@@ -44,60 +44,125 @@ python3 local_reader_audio_compress.py chapter_01.mp3 96k
 
 ---
 
-## Book Preprocessing (IMPORTANT!)
+## Book Validation (IMPORTANT!)
 
-### Why Preprocess?
+### Why Validate?
 
-Before translating or generating audio, you should **always** preprocess your book to:
-1. **Detect chapter structure** - Find all chapters and validate they're sequential
-2. **Identify missing content** - Catch incomplete translations early
-3. **Validate TOC** - Ensure table of contents matches actual chapters
-4. **Plan audio production** - Know exactly how many chapter files to expect
+**NEW: Unified validation tool for Karaoke and AI features**
 
-### Usage
+Before processing books, validate they meet quality standards for:
+1. **Karaoke Mode** - Text sync requires clean chapters
+2. **AI Chat** - Question answering needs sequential chapters
+3. **Web Player** - Proper metadata and structure
+4. **Audio Generation** - Complete chapter detection
+
+### Quick Validation
 
 ```bash
-python3 book_preprocessor.py books/mybook/original.md
+# Validate any book
+python3 book_validator.py books/mybook/book.md
+
+# Auto-fix common issues
+python3 book_validator.py books/mybook/book.md --auto-fix
+
+# Require specific features
+python3 book_validator.py books/mybook/book.md --require karaoke,ai_chat
 ```
 
-**Output:**
-- Console report showing TOC, chapters, and validation results
-- `original_preprocessing_report.txt` - Human-readable analysis
-- `original_chapter_data.json` - Machine-readable chapter metadata
+### Validation Checks
+
+**Chapter Structure:**
+- ✅ Table of contents present
+- ✅ All chapters detected (Roman numerals, Markdown headers)
+- ✅ Sequential numbering (no gaps: 1, 2, 3, not 1, 3, 5)
+- ✅ No duplicate chapters
+
+**Text Quality:**
+- ✅ No Project Gutenberg boilerplate
+- ✅ Minimum word count (100+ words)
+- ✅ Clean Markdown formatting
+
+**Metadata:**
+- ✅ Title detected
+- ✅ Author detected
+
+**Feature Readiness:**
+- ✅ **Karaoke** - Clean text + chapters
+- ✅ **AI Chat** - 3+ sequential chapters
+- ✅ **Web Player** - 1+ chapter
 
 ### Example Output
 
 ```
 ======================================================================
-BOOK PREPROCESSING REPORT
+BOOK VALIDATION REPORT
 ======================================================================
-File: crime_punishment.md
-Size: 650,000 characters, 100,000 words
+File: alice_adventures.md
+Status: ✅ VALID
 
-TABLE OF CONTENTS: 18 entries found
-   1. Chapter 1: Part I (line 15)
-   2. Chapter 2: Part I (line 16)
-   ...
+FEATURE SUPPORT:
+  ✅ Karaoke: Ready
+  ✅ Ai_Chat: Ready
+  ✅ Web_Player: Ready
 
-CHAPTERS IN CONTENT: 18 found
-   1. I. (line 120, type: roman_standalone)
-   2. II. (line 5234, type: roman_standalone)
-   ...
+METRICS:
+  • Chapter Count: 12
+  • Has Toc: True
+  • Sequential Chapters: True
+  • Word Count: 26,167
+  • Has Title: True
+  • Has Author: True
 
-VALIDATION:
-  ✅ All 18 chapters present and sequential
-
-TOC vs CONTENT:
-  ✅ TOC and content match (18 chapters)
 ======================================================================
 ```
 
-### When to Preprocess
+### Auto-Fix Features
 
-✅ **ALWAYS run before translation** - Ensures source is complete
-✅ **Run after translation** - Validates all chapters were translated
-✅ **Run before audio** - Confirms chapter structure for proper splitting
-❌ **Don't run on chunked files** - Run on complete book files only
+The validator can automatically fix:
+- ❌ Gutenberg boilerplate → ✅ Clean text
+- ❌ Missing TOC → ✅ Generated from chapters
+- ❌ Poor formatting → ✅ Normalized structure
+
+```bash
+# Run auto-fix (creates backup by default)
+python3 book_validator.py book.md --auto-fix
+
+# No backup (use with caution)
+python3 book_validator.py book.md --auto-fix --no-backup
+```
+
+### Integrated Validation
+
+**Automatic validation in processing scripts:**
+
+```bash
+# Summarizer validates output
+python3 book_summarizer.py book.md 50
+# → Automatic validation at end
+
+# TTS validates input before processing
+python3 local_tts_kokoro.py book.md
+# → Pre-flight validation check
+```
+
+Both scripts show:
+- ✅ Feature readiness
+- ⚠️  Warnings and errors
+- 💡 Auto-fix suggestions
+
+### When to Validate
+
+✅ **Before translation** - Ensure source is complete
+✅ **After summarization** - Verify chapters preserved
+✅ **Before audio generation** - Confirm feature support
+✅ **After any processing** - Quality assurance
+
+### Legacy Tool
+
+```bash
+# Old preprocessing tool (basic chapter detection only)
+python3 book_preprocessor.py books/mybook/book.md
+```
 
 ---
 

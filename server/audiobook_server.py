@@ -31,9 +31,27 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-# Import book catalog
+# Import book catalog and text extractor
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from book_catalog import get_book_info
+from server.text_extractor import find_source_text, get_chapter_text_data, get_book_chapters_list
+
+# Import Gutenberg modules
+try:
+    from server.gutenberg_catalog import GutenbergCatalog
+    from server.gutenberg_downloader import create_download_job, get_job_status, get_all_jobs
+    GUTENBERG_AVAILABLE = True
+except ImportError:
+    GUTENBERG_AVAILABLE = False
+    print("⚠️  Gutenberg browser not available (catalog or downloader module missing)")
+
+# Optional: Import LLM chat (only if AI assistant is available)
+try:
+    from server.llm_chat import BookTools, ask_with_tools, check_ollama_available
+    AI_ASSISTANT_AVAILABLE = True
+except ImportError:
+    AI_ASSISTANT_AVAILABLE = False
+    print("⚠️  AI Assistant not available (llm_chat.py or ollama module missing)")
 
 
 # Constants
@@ -204,6 +222,11 @@ def discover_books() -> List[Dict]:
         # Get creation time
         created_at = datetime.fromtimestamp(playlist_path.stat().st_mtime).isoformat()
 
+        # Check for source text availability
+        book_dir = BOOKS_DIR / book_id
+        source_text_path = find_source_text(book_dir)
+        has_source_text = source_text_path is not None
+
         # Build variant object
         variant = {
             'variant_id': playlist_path.stem,
@@ -218,7 +241,9 @@ def discover_books() -> List[Dict]:
             'size_bytes': total_size,
             'size_mb': round(total_size / (1024 * 1024), 2),
             'created_at': created_at,
-            'timestamp': variant_info['timestamp']
+            'timestamp': variant_info['timestamp'],
+            'has_source_text': has_source_text,
+            'source_text_path': str(source_text_path.relative_to(book_dir)) if source_text_path else None
         }
 
         # Create or update book entry
@@ -500,6 +525,61 @@ async def get_book_cover(book_id: str):
     )
 
 
+@app.get("/api/books/{book_id}/text/{chapter_num}")
+async def get_chapter_text(book_id: str, chapter_num: int):
+    """
+    Get text content for a specific chapter (for text sync feature).
+
+    Args:
+        book_id: Book identifier
+        chapter_num: Zero-based chapter index
+
+    Returns:
+        Chapter text with paragraphs for karaoke-style sync
+    """
+    book = get_book_by_id(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    book_dir = BOOKS_DIR / book_id
+
+    # Get chapter text data
+    chapter_data = get_chapter_text_data(book_dir, chapter_num)
+    if not chapter_data:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Chapter {chapter_num} not found or source text not available"
+        )
+
+    return chapter_data
+
+
+@app.get("/api/books/{book_id}/text")
+async def get_book_chapters(book_id: str):
+    """
+    Get list of all chapters for a book.
+
+    Args:
+        book_id: Book identifier
+
+    Returns:
+        List of chapters with titles and indices
+    """
+    book = get_book_by_id(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    book_dir = BOOKS_DIR / book_id
+    chapters = get_book_chapters_list(book_dir)
+
+    return {
+        'book_id': book_id,
+        'title': book['title'],
+        'chapters': chapters,
+        'total_chapters': len(chapters)
+    }
+
+
 @app.get("/api/playback/{book_id}/{variant_id}")
 async def get_playback_position(
     book_id: str,
@@ -600,6 +680,239 @@ async def save_playback_position(
     }
 
 
+if AI_ASSISTANT_AVAILABLE:
+    @app.post("/api/ask")
+    async def ask_ai_assistant(request: Request):
+        """
+        AI assistant endpoint with tool-calling support.
+
+        Request Body:
+        {
+            "book_id": "alice_adventures",
+            "variant_id": "...",
+            "current_chapter": 3,
+            "question": "What happens to Alice in chapter 5?"
+        }
+
+        Response:
+        {
+            "answer": "In Chapter 5...",
+            "tools_used": ["get_chapter(5)"],
+            "iterations": 1,
+            "current_chapter": 3,
+            "chapters_consulted": [5],
+            "error": null
+        }
+        """
+        # Parse request body
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        book_id = data.get('book_id')
+        variant_id = data.get('variant_id')
+        current_chapter = data.get('current_chapter', 0)
+        question = data.get('question')
+
+        if not book_id or not question:
+            raise HTTPException(status_code=400, detail="Missing required fields: book_id, question")
+
+        # Get book metadata
+        book = get_book_by_id(book_id)
+        if not book:
+            raise HTTPException(status_code=404, detail="Book not found")
+
+        # Find source text
+        book_dir = BOOKS_DIR / book_id
+        source_text_path = find_source_text(book_dir)
+
+        if not source_text_path:
+            raise HTTPException(
+                status_code=404,
+                detail="Source text not available for this book. AI assistant requires the original markdown file."
+            )
+
+        # Load chapter metadata (if available)
+        chapters_metadata = book.get('chapters', [])
+
+        # Initialize BookTools with source text
+        tools = BookTools(
+            book_md_path=source_text_path,
+            chapters_metadata=chapters_metadata
+        )
+
+        # Call LLM with tools
+        try:
+            result = ask_with_tools(
+                question=question,
+                current_chapter=current_chapter,
+                tools=tools,
+                model="llama3.2:3b"
+            )
+
+            # Extract chapter numbers from tools_used
+            chapters_consulted = []
+            for tool_call in result.get('tools_used', []):
+                # Extract chapter numbers from patterns like "get_chapter(5)" or "get_chapters(3, 5)"
+                import re
+                numbers = re.findall(r'\d+', tool_call)
+                chapters_consulted.extend([int(n) for n in numbers])
+
+            # Remove duplicates and sort
+            chapters_consulted = sorted(set(chapters_consulted))
+
+            return {
+                'answer': result['answer'],
+                'tools_used': result.get('tools_used', []),
+                'iterations': result.get('iterations', 0),
+                'current_chapter': current_chapter,
+                'chapters_consulted': chapters_consulted,
+                'model': result.get('model', 'llama3.2:3b'),
+                'error': result.get('error')
+            }
+
+        except Exception as e:
+            print(f"[AI ASSISTANT ERROR] {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"AI assistant error: {str(e)}"
+            )
+
+
+# ============================================================================
+# Gutenberg API Endpoints
+# ============================================================================
+
+if GUTENBERG_AVAILABLE:
+    # Initialize catalog
+    gutenberg_catalog = GutenbergCatalog()
+
+    @app.get("/api/gutenberg/catalog")
+    async def get_gutenberg_catalog():
+        """
+        Get full Gutenberg catalog.
+
+        Returns:
+            Full catalog with all books (up to 500)
+        """
+        return {
+            'books': gutenberg_catalog.catalog.get('books', []),
+            'total': gutenberg_catalog.catalog.get('total', 0),
+            'updated_at': gutenberg_catalog.catalog.get('updated_at')
+        }
+
+    @app.get("/api/gutenberg/search")
+    async def search_gutenberg(
+        q: str = "",
+        language: str = "all",
+        limit: Optional[int] = None
+    ):
+        """
+        Search Gutenberg catalog with filters.
+
+        Args:
+            q: Search query (matches title and author)
+            language: Language filter ('all', 'en', 'fr', 'de', 'es', 'ru')
+            limit: Maximum results to return
+
+        Returns:
+            Search results
+        """
+        results = gutenberg_catalog.search(
+            query=q,
+            language=language,
+            limit=limit
+        )
+
+        return {
+            'books': results,
+            'total': len(results),
+            'query': q,
+            'language': language
+        }
+
+    @app.post("/api/gutenberg/download")
+    async def start_gutenberg_download(request: Request):
+        """
+        Start downloading a book from Gutenberg.
+
+        Request Body:
+        {
+            "gutenberg_id": 11,
+            "book_slug": "alice_adventures"
+        }
+
+        Returns:
+            Job ID and initial status
+        """
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        gutenberg_id = data.get('gutenberg_id')
+        book_slug = data.get('book_slug')
+
+        if not gutenberg_id or not book_slug:
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required fields: gutenberg_id, book_slug"
+            )
+
+        # Create download job
+        job_id = create_download_job(gutenberg_id, book_slug)
+
+        return {
+            'job_id': job_id,
+            'status': 'pending',
+            'message': f'Download started for book #{gutenberg_id}'
+        }
+
+    @app.get("/api/gutenberg/downloads")
+    async def list_gutenberg_downloads():
+        """
+        List all download jobs.
+
+        Returns:
+            List of all jobs with their status
+        """
+        jobs = get_all_jobs()
+        return {
+            'jobs': jobs,
+            'total': len(jobs)
+        }
+
+    @app.get("/api/gutenberg/downloads/{job_id}")
+    async def get_gutenberg_download_status(job_id: str):
+        """
+        Get status of a specific download job.
+
+        Args:
+            job_id: Job identifier
+
+        Returns:
+            Job status with progress
+        """
+        job = get_job_status(job_id)
+
+        if not job:
+            raise HTTPException(status_code=404, detail="Job not found")
+
+        return job
+
+    @app.get("/api/gutenberg/stats")
+    async def get_gutenberg_stats():
+        """
+        Get catalog statistics.
+
+        Returns:
+            Statistics about the catalog
+        """
+        stats = gutenberg_catalog.get_stats()
+        return stats
+
+
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint."""
@@ -607,6 +920,7 @@ async def health_check():
         'status': 'ok',
         'books_dir': str(BOOKS_DIR),
         'books_count': len(discover_books()),
+        'gutenberg_available': GUTENBERG_AVAILABLE,
         'timestamp': datetime.utcnow().isoformat() + 'Z'
     }
 
@@ -648,6 +962,26 @@ def main():
     print(f"Found {len(discover_books())} books")
     print(f"Server: http://{args.host}:{args.port}")
     print(f"API Docs: http://localhost:{args.port}/docs")
+
+    # Check Ollama availability for AI assistant
+    if AI_ASSISTANT_AVAILABLE:
+        try:
+            ollama_status = check_ollama_available()
+            if ollama_status['available']:
+                models = ollama_status.get('models', [])
+                has_llama32 = any('llama3.2' in m for m in models)
+                print(f"✓ AI Assistant: Ollama running ({len(models)} models)")
+                if not has_llama32:
+                    print("  ⚠️  WARNING: llama3.2:3b not found. Run: ollama pull llama3.2:3b")
+            else:
+                print("✗ AI Assistant: Ollama not available")
+                print("  Install: https://ollama.com/download")
+                print("  Then run: ollama serve && ollama pull llama3.2:3b")
+        except Exception as e:
+            print(f"✗ AI Assistant: Ollama check failed ({str(e)})")
+    else:
+        print("✗ AI Assistant: Not installed (optional feature)")
+
     print("=" * 60)
     print("\nPress CTRL+C to stop\n")
 

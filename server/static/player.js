@@ -26,7 +26,19 @@ const state = {
         type: null, // 'timer' or 'end-of-chapter'
         updateIntervalId: null
     },
-    currentChapterIndex: null
+    currentChapterIndex: null,
+    textSyncOpen: false,
+    textSyncData: null,
+    chatOpen: false,
+    chatHistory: [],
+    // Gutenberg search state
+    gutenberg: {
+        catalog: [],
+        filteredBooks: [],
+        activeDownloads: {},
+        pollInterval: null,
+        available: false
+    }
 };
 
 // ============================================================================
@@ -83,6 +95,55 @@ const API = {
             }
         );
         return response.ok;
+    },
+
+    // Gutenberg API methods
+    async checkGutenbergAvailable() {
+        try {
+            const response = await fetch(`${this.baseURL}/api/health`);
+            const data = await response.json();
+            return data.gutenberg_available || false;
+        } catch (e) {
+            return false;
+        }
+    },
+
+    async getGutenbergCatalog() {
+        const response = await fetch(`${this.baseURL}/api/gutenberg/catalog`);
+        if (!response.ok) throw new Error('Failed to fetch Gutenberg catalog');
+        return response.json();
+    },
+
+    async searchGutenberg(query, language = 'all') {
+        const params = new URLSearchParams({ q: query, language });
+        const response = await fetch(`${this.baseURL}/api/gutenberg/search?${params}`);
+        if (!response.ok) throw new Error('Failed to search Gutenberg');
+        return response.json();
+    },
+
+    async startGutenbergDownload(gutenbergId, bookSlug) {
+        const response = await fetch(`${this.baseURL}/api/gutenberg/download`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                gutenberg_id: gutenbergId,
+                book_slug: bookSlug
+            })
+        });
+        if (!response.ok) throw new Error('Failed to start download');
+        return response.json();
+    },
+
+    async getDownloadStatus(jobId) {
+        const response = await fetch(`${this.baseURL}/api/gutenberg/downloads/${jobId}`);
+        if (!response.ok) throw new Error('Failed to get download status');
+        return response.json();
+    },
+
+    async getAllDownloads() {
+        const response = await fetch(`${this.baseURL}/api/gutenberg/downloads`);
+        if (!response.ok) throw new Error('Failed to get downloads');
+        return response.json();
     }
 };
 
@@ -156,7 +217,42 @@ const ui = {
     chaptersModal: document.getElementById('chapters-modal'),
     closeChaptersBtn: document.getElementById('close-chapters-btn'),
     chaptersList: document.getElementById('chapters-list'),
-    currentChapterName: document.getElementById('current-chapter-name')
+    currentChapterName: document.getElementById('current-chapter-name'),
+
+    // Text Sync
+    textSyncBtn: document.getElementById('text-sync-btn'),
+    textSyncBackdrop: document.getElementById('text-sync-backdrop'),
+    textSyncPanel: document.getElementById('text-sync-panel'),
+    closeTextSyncBtn: document.getElementById('close-text-sync-btn'),
+    textChapterTitle: document.getElementById('text-chapter-title'),
+    textChapterSubtitle: document.getElementById('text-chapter-subtitle'),
+    textContent: document.getElementById('text-content'),
+
+    // AI Chat
+    aiAssistantBtn: document.getElementById('ai-assistant-btn'),
+    aiChatBackdrop: document.getElementById('ai-chat-backdrop'),
+    aiChatPanel: document.getElementById('ai-chat-panel'),
+    closeChatBtn: document.getElementById('close-chat-btn'),
+    chatBookTitle: document.getElementById('chat-book-title'),
+    chatChapterInfo: document.getElementById('chat-chapter-info'),
+    chatMessages: document.getElementById('chat-messages'),
+    chatToolsStatus: document.getElementById('chat-tools-status'),
+    toolsStatusText: document.getElementById('tools-status-text'),
+    chatForm: document.getElementById('chat-form'),
+    chatInput: document.getElementById('chat-input'),
+    chatSubmitBtn: document.getElementById('chat-submit-btn'),
+
+    // Gutenberg Search
+    searchView: document.getElementById('search-view'),
+    searchBackBtn: document.getElementById('search-back-btn'),
+    browseGutenbergBtn: document.getElementById('browse-gutenberg-btn'),
+    searchInput: document.getElementById('search-input'),
+    languageFilter: document.getElementById('language-filter'),
+    searchResults: document.getElementById('search-results'),
+    searchResultsCount: document.getElementById('search-results-count'),
+    downloadStatusPanel: document.getElementById('download-status-panel'),
+    downloadStatusList: document.getElementById('download-status-list'),
+    closeDownloadStatusBtn: document.getElementById('close-download-status-btn')
 };
 
 // ============================================================================
@@ -454,6 +550,20 @@ function renderPlayer() {
         ui.currentChapterName.style.display = 'none';
     }
 
+    // Show/hide text sync button based on source text availability
+    if (variant.has_source_text) {
+        ui.textSyncBtn.style.display = 'block';
+    } else {
+        ui.textSyncBtn.style.display = 'none';
+    }
+
+    // Show/hide AI assistant button based on source text availability
+    if (variant.has_source_text) {
+        ui.aiAssistantBtn.style.display = 'block';
+    } else {
+        ui.aiAssistantBtn.style.display = 'none';
+    }
+
     // Update navigation buttons
     updateNavigationButtons();
 }
@@ -480,6 +590,7 @@ function loadAudioFile() {
     ui.audio.load();
 
     updateNavigationButtons();
+    updateMediaSession();
 }
 
 function renderChapters() {
@@ -630,6 +741,594 @@ function updateCurrentChapterDisplay() {
 }
 
 // ============================================================================
+// Text Sync Functions
+// ============================================================================
+
+async function toggleTextSync() {
+    state.textSyncOpen = !state.textSyncOpen;
+
+    if (state.textSyncOpen) {
+        openTextSyncPanel();
+    } else {
+        closeTextSyncPanel();
+    }
+}
+
+function openTextSyncPanel() {
+    ui.textSyncBackdrop.style.display = 'block';
+    ui.textSyncPanel.style.display = 'block';
+
+    // Load text for current chapter
+    if (state.currentChapterIndex !== null && state.currentBook && state.currentVariant) {
+        loadChapterText(state.currentChapterIndex);
+    } else {
+        // No chapter detected, try loading first chapter
+        loadChapterText(0);
+    }
+}
+
+function closeTextSyncPanel() {
+    ui.textSyncBackdrop.style.display = 'none';
+    ui.textSyncPanel.style.display = 'none';
+    state.textSyncOpen = false;
+}
+
+async function loadChapterText(chapterIndex) {
+    try {
+        ui.textContent.innerHTML = '<div class="text-loading">Loading text...</div>';
+
+        const response = await fetch(
+            `${API.baseURL}/api/books/${state.currentBook.book_id}/text/${chapterIndex}`
+        );
+
+        if (!response.ok) {
+            const error = await response.json();
+            ui.textContent.innerHTML = `
+                <div class="text-error">
+                    <p>⚠️ ${error.detail || 'Text not available for this chapter'}</p>
+                    <p style="font-size: 14px; color: #666;">Make sure the source markdown file exists in the book directory.</p>
+                </div>
+            `;
+            return;
+        }
+
+        const data = await response.json();
+        state.textSyncData = data;
+
+        // Update header
+        ui.textChapterTitle.textContent = data.title;
+        ui.textChapterSubtitle.textContent = `${data.word_count} words • ~${Math.round(data.estimated_duration / 60)} min`;
+
+        // Render paragraphs
+        renderTextParagraphs(data.paragraphs);
+
+    } catch (error) {
+        console.error('Failed to load chapter text:', error);
+        ui.textContent.innerHTML = `
+            <div class="text-error">
+                <p>⚠️ Failed to load text</p>
+                <p style="font-size: 14px; color: #666;">${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+function renderTextParagraphs(paragraphs) {
+    ui.textContent.innerHTML = paragraphs.map(para => `
+        <p class="text-paragraph" data-para-id="${para.id}">
+            ${escapeHtml(para.text)}
+        </p>
+    `).join('');
+
+    // Add click handlers for seeking
+    document.querySelectorAll('.text-paragraph').forEach(para => {
+        para.addEventListener('click', () => {
+            const paraId = parseInt(para.dataset.paraId);
+            seekToParagraph(paraId);
+        });
+    });
+}
+
+function seekToParagraph(paragraphId) {
+    if (!state.textSyncData || !ui.audio.duration) return;
+
+    const totalParagraphs = state.textSyncData.paragraphs.length;
+    if (totalParagraphs === 0) return;
+
+    // Estimate audio position based on paragraph position
+    const progress = paragraphId / totalParagraphs;
+    const estimatedTime = progress * ui.audio.duration;
+
+    ui.audio.currentTime = estimatedTime;
+
+    // Highlight the paragraph immediately
+    updateTextHighlight();
+}
+
+function updateTextHighlight() {
+    if (!state.textSyncOpen || !state.textSyncData || !ui.audio.duration) return;
+
+    const totalParagraphs = state.textSyncData.paragraphs.length;
+    if (totalParagraphs === 0) return;
+
+    // Calculate which paragraph we're currently in
+    const progress = ui.audio.currentTime / ui.audio.duration;
+    const currentParagraphId = Math.floor(progress * totalParagraphs);
+
+    // Remove previous highlights
+    document.querySelectorAll('.text-paragraph').forEach(p => {
+        p.classList.remove('active');
+    });
+
+    // Highlight current paragraph
+    const currentPara = document.querySelector(`.text-paragraph[data-para-id="${currentParagraphId}"]`);
+    if (currentPara) {
+        currentPara.classList.add('active');
+
+        // Auto-scroll to keep current paragraph in view
+        currentPara.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// ============================================================================
+// AI Chat Functions
+// ============================================================================
+
+async function toggleAIChat() {
+    state.chatOpen = !state.chatOpen;
+
+    if (state.chatOpen) {
+        openAIChatPanel();
+    } else {
+        closeAIChatPanel();
+    }
+}
+
+function openAIChatPanel() {
+    // Close text sync if open (mutually exclusive)
+    if (state.textSyncOpen) {
+        closeTextSyncPanel();
+    }
+
+    ui.aiChatBackdrop.style.display = 'block';
+    ui.aiChatPanel.style.display = 'flex';
+
+    // Update header
+    if (state.currentBook) {
+        ui.chatBookTitle.textContent = state.currentBook.title;
+        if (state.currentChapterIndex !== null && state.currentBook.chapters) {
+            const chapter = state.currentBook.chapters[state.currentChapterIndex];
+            const chapterTitle = chapter.title || `Chapter ${chapter.number || state.currentChapterIndex + 1}`;
+            ui.chatChapterInfo.textContent = `Currently in ${chapterTitle}`;
+        } else {
+            ui.chatChapterInfo.textContent = 'AI Book Assistant';
+        }
+    }
+
+    // Focus input
+    ui.chatInput.focus();
+}
+
+function closeAIChatPanel() {
+    ui.aiChatBackdrop.style.display = 'none';
+    ui.aiChatPanel.style.display = 'none';
+    state.chatOpen = false;
+}
+
+async function sendChatMessage(question) {
+    if (!state.currentBook || !state.currentVariant) {
+        displayMessage('error', 'No book loaded');
+        return;
+    }
+
+    // Add user message to chat
+    displayMessage('user', question);
+
+    // Show loading state
+    showToolsLoading('Thinking...');
+    ui.chatSubmitBtn.disabled = true;
+
+    try {
+        const response = await fetch(`${API.baseURL}/api/ask`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                book_id: state.currentBook.book_id,
+                variant_id: state.currentVariant.variant_id,
+                current_chapter: state.currentChapterIndex || 0,
+                question: question
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            hideToolsLoading();
+            displayMessage('error', error.detail || 'Failed to get response from AI assistant');
+            return;
+        }
+
+        const data = await response.json();
+
+        // Hide loading
+        hideToolsLoading();
+
+        // Display AI response
+        displayMessage('assistant', data.answer, {
+            tools_used: data.tools_used,
+            chapters_consulted: data.chapters_consulted
+        });
+
+    } catch (error) {
+        hideToolsLoading();
+        console.error('AI chat error:', error);
+        displayMessage('error', 'Failed to connect to AI assistant. Make sure Ollama is running.');
+    } finally {
+        ui.chatSubmitBtn.disabled = false;
+    }
+}
+
+function displayMessage(role, text, metadata = {}) {
+    const messagesDiv = ui.chatMessages;
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message chat-message-${role}`;
+
+    // Message bubble
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'message-bubble';
+    bubbleDiv.textContent = text;
+    messageDiv.appendChild(bubbleDiv);
+
+    // Show tools used (if any)
+    if (metadata.tools_used && metadata.tools_used.length > 0) {
+        const toolsDiv = document.createElement('div');
+        toolsDiv.className = 'message-tools';
+        toolsDiv.textContent = `✓ Consulted: ${metadata.tools_used.join(', ')}`;
+        messageDiv.appendChild(toolsDiv);
+    }
+
+    messagesDiv.appendChild(messageDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll
+
+    // Store in history
+    state.chatHistory.push({ role, text, timestamp: Date.now() });
+}
+
+function showToolsLoading(text) {
+    ui.toolsStatusText.textContent = text;
+    ui.chatToolsStatus.style.display = 'flex';
+}
+
+function hideToolsLoading() {
+    ui.chatToolsStatus.style.display = 'none';
+}
+
+// ============================================================================
+// Gutenberg Search Functions
+// ============================================================================
+
+async function initGutenberg() {
+    /**
+     * Initialize Gutenberg browser (check availability and load catalog)
+     */
+    try {
+        // Check if Gutenberg feature is available
+        state.gutenberg.available = await API.checkGutenbergAvailable();
+
+        if (!state.gutenberg.available) {
+            console.log('[Gutenberg] Feature not available');
+            return;
+        }
+
+        // Show browse button
+        ui.browseGutenbergBtn.style.display = 'block';
+
+        // Load catalog
+        console.log('[Gutenberg] Loading catalog...');
+        const data = await API.getGutenbergCatalog();
+        state.gutenberg.catalog = data.books || [];
+        state.gutenberg.filteredBooks = state.gutenberg.catalog;
+
+        console.log(`[Gutenberg] Loaded ${state.gutenberg.catalog.length} books`);
+
+        // Check for active downloads
+        const downloads = await API.getAllDownloads();
+        if (downloads.jobs && downloads.jobs.length > 0) {
+            downloads.jobs.forEach(job => {
+                if (job.status !== 'complete' && job.status !== 'error') {
+                    state.gutenberg.activeDownloads[job.job_id] = job;
+                }
+            });
+
+            // Start polling if there are active downloads
+            if (Object.keys(state.gutenberg.activeDownloads).length > 0) {
+                startDownloadPolling();
+            }
+        }
+
+    } catch (error) {
+        console.error('[Gutenberg] Init error:', error);
+        state.gutenberg.available = false;
+    }
+}
+
+function showSearchView() {
+    /**
+     * Show Gutenberg search view
+     */
+    ui.libraryView.classList.remove('active');
+    ui.variantView.classList.remove('active');
+    ui.playerView.classList.remove('active');
+    ui.searchView.classList.add('active');
+
+    // Render books
+    renderSearchResults();
+
+    // Pause playback
+    if (state.isPlaying) {
+        ui.audio.pause();
+    }
+}
+
+function showLibraryFromSearch() {
+    /**
+     * Return to library view from search
+     */
+    ui.searchView.classList.remove('active');
+    ui.libraryView.classList.add('active');
+
+    // Stop polling if no active downloads
+    if (Object.keys(state.gutenberg.activeDownloads).length === 0) {
+        stopDownloadPolling();
+    }
+}
+
+function filterGutenbergBooks() {
+    /**
+     * Filter books based on search input and language
+     */
+    const query = ui.searchInput.value.trim().toLowerCase();
+    const language = ui.languageFilter.value;
+
+    let filtered = state.gutenberg.catalog;
+
+    // Text search
+    if (query) {
+        filtered = filtered.filter(book =>
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query)
+        );
+    }
+
+    // Language filter
+    if (language !== 'all') {
+        filtered = filtered.filter(book => book.language === language);
+    }
+
+    state.gutenberg.filteredBooks = filtered;
+    renderSearchResults();
+}
+
+function renderSearchResults() {
+    /**
+     * Render filtered books in search view
+     */
+    const books = state.gutenberg.filteredBooks;
+
+    // Update count
+    ui.searchResultsCount.textContent = `${books.length} book${books.length !== 1 ? 's' : ''} found`;
+
+    // Render grid
+    if (books.length === 0) {
+        ui.searchResults.innerHTML = '<div class="no-results">No books found. Try different search terms.</div>';
+        return;
+    }
+
+    ui.searchResults.innerHTML = books.map(book => {
+        // Create safe slug from title
+        const slug = book.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '_')
+            .replace(/^_+|_+$/g, '')
+            .substring(0, 50);
+
+        return `
+            <div class="gutenberg-card">
+                <div class="book-info">
+                    <h3 class="book-title">${escapeHtml(book.title)}</h3>
+                    <p class="book-author">${escapeHtml(book.author)}</p>
+                    <div class="book-meta">
+                        ${book.year ? `<span class="meta-item">📅 ${book.year}</span>` : ''}
+                        <span class="meta-item">🌐 ${book.language.toUpperCase()}</span>
+                        <span class="meta-item">↓ ${book.downloads || 0}</span>
+                    </div>
+                </div>
+                <button
+                    class="download-btn"
+                    data-gutenberg-id="${book.gutenberg_id}"
+                    data-book-slug="${slug}"
+                    onclick="startDownload(${book.gutenberg_id}, '${slug}', '${escapeHtml(book.title)}')"
+                >
+                    📥 Download
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+async function startDownload(gutenbergId, bookSlug, bookTitle) {
+    /**
+     * Start downloading a book from Gutenberg
+     */
+    try {
+        console.log(`[Download] Starting: ${bookTitle} (ID: ${gutenbergId})`);
+
+        // Start download
+        const response = await API.startGutenbergDownload(gutenbergId, bookSlug);
+        const jobId = response.job_id;
+
+        // Add to active downloads
+        state.gutenberg.activeDownloads[jobId] = {
+            job_id: jobId,
+            gutenberg_id: gutenbergId,
+            book_slug: bookSlug,
+            title: bookTitle,
+            status: 'pending',
+            progress: 0
+        };
+
+        // Show notification
+        showNotification(`📥 Downloading ${bookTitle}...`);
+
+        // Start polling
+        startDownloadPolling();
+
+        // Update UI
+        renderDownloadStatus();
+
+    } catch (error) {
+        console.error('[Download] Error:', error);
+        showNotification(`❌ Failed to start download: ${error.message}`, 'error');
+    }
+}
+
+function startDownloadPolling() {
+    /**
+     * Start polling for download status updates
+     */
+    if (state.gutenberg.pollInterval) {
+        return; // Already polling
+    }
+
+    console.log('[Download] Starting status polling');
+
+    state.gutenberg.pollInterval = setInterval(async () => {
+        await updateDownloadStatuses();
+    }, 2000); // Poll every 2 seconds
+}
+
+function stopDownloadPolling() {
+    /**
+     * Stop polling for download status
+     */
+    if (state.gutenberg.pollInterval) {
+        console.log('[Download] Stopping status polling');
+        clearInterval(state.gutenberg.pollInterval);
+        state.gutenberg.pollInterval = null;
+    }
+}
+
+async function updateDownloadStatuses() {
+    /**
+     * Update status for all active downloads
+     */
+    const jobIds = Object.keys(state.gutenberg.activeDownloads);
+
+    if (jobIds.length === 0) {
+        stopDownloadPolling();
+        return;
+    }
+
+    for (const jobId of jobIds) {
+        try {
+            const status = await API.getDownloadStatus(jobId);
+
+            // Update state
+            state.gutenberg.activeDownloads[jobId] = {
+                ...state.gutenberg.activeDownloads[jobId],
+                ...status
+            };
+
+            // Check if complete or error
+            if (status.status === 'complete') {
+                const book = state.gutenberg.activeDownloads[jobId];
+                showNotification(`✅ ${book.title} downloaded! Process with: make_audiobook.py`, 'success');
+                delete state.gutenberg.activeDownloads[jobId];
+            } else if (status.status === 'error') {
+                const book = state.gutenberg.activeDownloads[jobId];
+                showNotification(`❌ Download failed: ${book.title}`, 'error');
+                delete state.gutenberg.activeDownloads[jobId];
+            }
+
+        } catch (error) {
+            console.error(`[Download] Error checking status for ${jobId}:`, error);
+        }
+    }
+
+    // Update UI
+    renderDownloadStatus();
+
+    // Stop polling if no active downloads
+    if (Object.keys(state.gutenberg.activeDownloads).length === 0) {
+        stopDownloadPolling();
+    }
+}
+
+function renderDownloadStatus() {
+    /**
+     * Render download status panel
+     */
+    const jobs = Object.values(state.gutenberg.activeDownloads);
+
+    if (jobs.length === 0) {
+        ui.downloadStatusPanel.style.display = 'none';
+        return;
+    }
+
+    ui.downloadStatusPanel.style.display = 'block';
+
+    ui.downloadStatusList.innerHTML = jobs.map(job => {
+        const statusText = {
+            'pending': 'Pending...',
+            'downloading': 'Downloading...',
+            'processing': 'Processing...',
+            'complete': 'Complete',
+            'error': 'Error'
+        }[job.status] || job.status;
+
+        return `
+            <div class="download-status-item">
+                <div class="download-info">
+                    <strong>${escapeHtml(job.title || job.book_slug)}</strong>
+                    <span class="status-text">${statusText}</span>
+                </div>
+                <div class="download-progress-bar">
+                    <div class="download-progress-fill" style="width: ${job.progress || 0}%"></div>
+                </div>
+                <span class="progress-text">${job.progress || 0}%</span>
+            </div>
+        `;
+    }).join('');
+}
+
+function showNotification(message, type = 'info') {
+    /**
+     * Show temporary notification to user
+     */
+    console.log(`[Notification] ${message}`);
+
+    // Simple alert for now (could be replaced with toast notification)
+    // Just log to console for non-intrusive feedback
+    if (type === 'error') {
+        console.error(message);
+    } else {
+        console.info(message);
+    }
+}
+
+// Note: escapeHtml function is already defined in the Text Sync section above
+
+// ============================================================================
 // Audio Controls
 // ============================================================================
 
@@ -719,6 +1418,72 @@ function openSleepTimerModal() {
 function closeSleepTimerModal() {
     ui.sleepTimerBackdrop.style.display = 'none';
     ui.sleepTimerModal.style.display = 'none';
+}
+
+// ============================================================================
+// Media Session API (iOS Lock Screen Controls)
+// ============================================================================
+
+function updateMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+    if (!state.currentBook || !state.currentVariant) return;
+
+    const book = state.currentBook;
+    const variant = state.currentVariant;
+    const currentFile = variant.audio_files[state.currentFileIndex];
+
+    // Set metadata
+    navigator.mediaSession.metadata = new MediaMetadata({
+        title: book.title,
+        artist: book.author || 'Unknown Author',
+        album: `Chapter ${state.currentFileIndex + 1}/${variant.audio_files.length}`,
+        artwork: book.has_cover && book.cover_image ? [
+            { src: `${API.baseURL}/api/books/${book.book_id}/cover`, sizes: '512x512', type: 'image/png' }
+        ] : []
+    });
+
+    // Set action handlers
+    navigator.mediaSession.setActionHandler('play', () => {
+        ui.audio.play();
+    });
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+        ui.audio.pause();
+    });
+
+    navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+        const skipTime = details.seekOffset || 30;
+        ui.audio.currentTime = Math.max(0, ui.audio.currentTime - skipTime);
+    });
+
+    navigator.mediaSession.setActionHandler('seekforward', (details) => {
+        const skipTime = details.seekOffset || 30;
+        ui.audio.currentTime = Math.min(ui.audio.duration, ui.audio.currentTime + skipTime);
+    });
+
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+        if (state.currentFileIndex > 0) {
+            playPreviousFile();
+        } else {
+            ui.audio.currentTime = 0;
+        }
+    });
+
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+        const variant = state.currentVariant;
+        if (state.currentFileIndex < variant.audio_files.length - 1) {
+            playNextFile();
+        }
+    });
+
+    // Update playback position
+    if (ui.audio.duration && !isNaN(ui.audio.duration)) {
+        navigator.mediaSession.setPositionState({
+            duration: ui.audio.duration,
+            playbackRate: ui.audio.playbackRate,
+            position: ui.audio.currentTime
+        });
+    }
 }
 
 // ============================================================================
@@ -969,11 +1734,57 @@ function setupEventListeners() {
     ui.closeChaptersBtn.addEventListener('click', closeChaptersModal);
     ui.chaptersBackdrop.addEventListener('click', closeChaptersModal);
 
+    // Text sync modal
+    ui.textSyncBtn.addEventListener('click', toggleTextSync);
+    ui.closeTextSyncBtn.addEventListener('click', closeTextSyncPanel);
+    ui.textSyncBackdrop.addEventListener('click', closeTextSyncPanel);
+
+    // AI Chat modal
+    ui.aiAssistantBtn.addEventListener('click', toggleAIChat);
+    ui.closeChatBtn.addEventListener('click', closeAIChatPanel);
+    ui.aiChatBackdrop.addEventListener('click', closeAIChatPanel);
+
+    // Gutenberg search
+    ui.browseGutenbergBtn.addEventListener('click', showSearchView);
+    ui.searchBackBtn.addEventListener('click', showLibraryFromSearch);
+    ui.searchInput.addEventListener('input', filterGutenbergBooks);
+    ui.languageFilter.addEventListener('change', filterGutenbergBooks);
+    ui.closeDownloadStatusBtn.addEventListener('click', () => {
+        ui.downloadStatusPanel.style.display = 'none';
+    });
+
+    // Chat form submission
+    ui.chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const question = ui.chatInput.value.trim();
+        if (question) {
+            sendChatMessage(question);
+            ui.chatInput.value = '';
+        }
+    });
+
+    // Suggested questions
+    document.querySelectorAll('.suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const question = btn.dataset.question;
+            sendChatMessage(question);
+        });
+    });
+
+    // Keyboard shortcut: Cmd/Ctrl + K to open AI chat
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k' && ui.playerView.classList.contains('active')) {
+            e.preventDefault();
+            toggleAIChat();
+        }
+    });
+
     // Audio events
     ui.audio.addEventListener('play', () => {
         state.isPlaying = true;
         ui.playPauseBtn.textContent = '⏸️';
         startAutoSave();
+        updateMediaSession();
     });
 
     ui.audio.addEventListener('pause', () => {
@@ -987,6 +1798,16 @@ function setupEventListeners() {
         updateProgress();
         detectCurrentChapter();
         checkEndOfChapterTimer();
+        updateTextHighlight();
+
+        // Update Media Session position periodically (every 5 seconds)
+        if ('mediaSession' in navigator && ui.audio.currentTime % 5 < 0.5) {
+            updateMediaSession();
+        }
+    });
+
+    ui.audio.addEventListener('loadedmetadata', () => {
+        updateMediaSession();
     });
 
     ui.audio.addEventListener('ended', () => {
@@ -1082,6 +1903,9 @@ async function init() {
 
     // Load library
     await loadLibrary();
+
+    // Initialize Gutenberg browser (if available)
+    await initGutenberg();
 
     console.log('Audiobook player initialized');
 }

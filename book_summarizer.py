@@ -14,6 +14,7 @@ from datetime import datetime
 from local_reader_translation import OllamaTranslator, TranslationChunk, TranslationResult
 from local_reader_config import get_config
 from book_metadata import MetadataManager, SummarizationMetadata
+from book_validator import validate_book
 
 
 class BookSummarizer:
@@ -388,6 +389,33 @@ def main():
         print("\n✅ Ready for audiobook generation!")
         print(f"   Next step: python local_tts_xtts.py {output_path} voice_ref.wav en")
         print(f"   View metadata: python book_metadata.py {output_path}")
+
+        # Validate summarized output
+        print("\n" + "="*70)
+        print("VALIDATING OUTPUT")
+        print("="*70)
+        validation_report = validate_book(str(output_path), verbose=False)
+
+        if validation_report.valid:
+            print("✅ Output validation passed!")
+            feature_count = sum(validation_report.feature_support.values())
+            print(f"✅ Feature support: {feature_count}/3 features ready")
+            for feature, supported in validation_report.feature_support.items():
+                icon = "✅" if supported else "❌"
+                print(f"   {icon} {feature.title()}")
+        else:
+            print("⚠️  Output validation found issues:")
+            for error in validation_report.errors:
+                print(f"   ❌ {error}")
+            for warning in validation_report.warnings:
+                print(f"   ⚠️  {warning}")
+
+            if validation_report.fixes:
+                print("\n💡 Suggested fixes:")
+                for fix in validation_report.fixes:
+                    print(f"   • {fix}")
+
+        print("="*70)
 
     except Exception as e:
         print(f"\n❌ FATAL ERROR: {e}")

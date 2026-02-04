@@ -1212,3 +1212,402 @@ header h2 {
     background: var(--primary-color);
     color: white;
 }
+
+/* ============================================================================
+   Text Sync Panel - Karaoke-style text display
+   ============================================================================ */
+
+.text-sync-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    max-height: 600px;
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    z-index: 200;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.text-sync-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+}
+
+.text-sync-title h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.text-sync-title p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.text-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    max-width: 42rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.text-paragraph {
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.text-paragraph:hover {
+    background: var(--bg-secondary);
+}
+
+.text-paragraph.active {
+    background: rgba(255, 204, 0, 0.15);
+    border-left: 4px solid #ffcc00;
+    padding-left: calc(0.75rem - 4px);
+    box-shadow: 0 2px 8px rgba(255, 204, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .text-paragraph.active {
+        background: rgba(255, 204, 0, 0.12);
+        border-left-color: #ffa500;
+        box-shadow: 0 2px 8px rgba(255, 204, 0, 0.15);
+    }
+}
+
+.text-loading,
+.text-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    gap: 0.5rem;
+}
+
+.text-error p {
+    margin: 0.5rem 0;
+}
+
+.text-error p:first-child {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .text-sync-panel {
+        height: 70vh;
+        max-height: none;
+    }
+
+    .text-content {
+        padding: 1.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .text-paragraph {
+        padding: 0.5rem;
+    }
+
+    .text-paragraph.active {
+        padding-left: calc(0.5rem - 3px);
+        border-left-width: 3px;
+    }
+}
+
+/* ============================================================================
+   Gutenberg Search Styles
+   ============================================================================ */
+
+/* Browse button in library header */
+.browse-btn {
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.browse-btn:hover {
+    background: var(--primary-hover);
+}
+
+/* Search container */
+.search-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-bar input:focus {
+    border-color: var(--primary-color);
+}
+
+.search-bar select {
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Search summary */
+.search-summary {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Gutenberg book grid */
+.gutenberg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.gutenberg-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gutenberg-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gutenberg-card .book-info {
+    flex: 1;
+}
+
+.gutenberg-card .book-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.gutenberg-card .book-author {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0 0 10px 0;
+}
+
+.gutenberg-card .book-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.gutenberg-card .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.gutenberg-card .download-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.gutenberg-card .download-btn:hover {
+    background: var(--primary-hover);
+}
+
+.gutenberg-card .download-btn:disabled {
+    background: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+/* No results message */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* Download Status Panel */
+.download-status-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.download-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.download-status-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+.download-status-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.download-status-item {
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.download-status-item:last-child {
+    margin-bottom: 0;
+}
+
+.download-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.download-info strong {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-primary);
+    margin-right: 10px;
+}
+
+.status-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.download-progress-bar {
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.download-progress-fill {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .server-info {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .browse-btn {
+        width: 100%;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .gutenberg-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .download-status-panel {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+    }
+}

@@ -32,3 +32,8 @@ edge-tts
 
 # Web Player
 flask
+uvicorn  # For FastAPI server
+fastapi  # API server
+
+# AI Assistant (Optional)
+ollama>=0.1.0  # For local LLM chat with tool-calling

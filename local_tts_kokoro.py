@@ -43,6 +43,9 @@ except ImportError:
     print("  pip install soundfile")
     sys.exit(1)
 
+# Import book validator
+from book_validator import validate_book
+
 
 class KokoroAudioGenerator:
     """Local TTS audio generation using Kokoro (ONNX Runtime)"""
@@ -1010,6 +1013,36 @@ def main():
             i += 1
 
     try:
+        # Validate input file before processing
+        print("\n" + "="*70)
+        print("PRE-FLIGHT VALIDATION")
+        print("="*70)
+        validation_report = validate_book(input_file, verbose=False)
+
+        if not validation_report.valid:
+            print("⚠️  Input validation found issues:")
+            for error in validation_report.errors:
+                print(f"   ❌ {error}")
+            for warning in validation_report.warnings:
+                print(f"   ⚠️  {warning}")
+
+            if validation_report.fixes:
+                print("\n💡 Suggested fixes:")
+                for fix in validation_report.fixes:
+                    print(f"   • {fix}")
+
+            print("\n❓ Continue anyway? (y/N): ", end="")
+            response = input().strip().lower()
+            if response != 'y':
+                print("Aborted by user.")
+                sys.exit(1)
+        else:
+            print("✅ Input validation passed!")
+            feature_count = sum(validation_report.feature_support.values())
+            print(f"✅ Feature support: {feature_count}/3 features ready")
+
+        print("="*70 + "\n")
+
         generator = KokoroAudioGenerator(voice=voice, language=language)
 
         result = generator.generate_audiobook(
