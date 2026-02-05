@@ -287,7 +287,7 @@ class KokoroAudioGenerator:
 
     def chunk_text(self, text: str, max_chars: int = 800) -> List[str]:
         """
-        Split text into chunks for TTS.
+        Split text into chunks for TTS, ensuring complete sentences.
         Kokoro can handle moderate chunks (~800 chars recommended for safety).
 
         Args:
@@ -295,12 +295,13 @@ class KokoroAudioGenerator:
             max_chars: Maximum characters per chunk (default: 800 for phoneme safety)
 
         Returns:
-            List of text chunks
+            List of text chunks (each chunk contains only complete sentences)
         """
         if len(text) <= max_chars:
             return [text]
 
         chunks = []
+        # Split on sentence boundaries (period, exclamation, question mark followed by space)
         sentences = re.split(r'(?<=[.!?])\s+', text)
         current_chunk = ""
 
@@ -309,41 +310,50 @@ class KokoroAudioGenerator:
             if not sentence:
                 continue
 
-            # If single sentence is too long, split it
+            # If single sentence is too long, we must split it intelligently
             if len(sentence) > max_chars:
+                # First, save any accumulated chunk
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                     current_chunk = ""
 
-                # Split at clause boundaries
+                # Split long sentence at clause boundaries (commas, semicolons, etc.)
+                # but try to keep complete clauses together
                 clauses = re.split(r'([,;:—\-]\s+)', sentence)
                 temp_chunk = ""
 
-                for clause in clauses:
+                for i, clause in enumerate(clauses):
                     if not clause.strip():
                         continue
 
+                    # Check if adding this clause would exceed limit
                     if len(temp_chunk) + len(clause) > max_chars:
                         if temp_chunk:
+                            # Only add if we have accumulated something
                             chunks.append(temp_chunk.strip())
                         temp_chunk = clause
                     else:
                         temp_chunk += clause
 
+                # After processing all clauses, add to current_chunk
+                # This ensures the sentence parts stay together when possible
                 if temp_chunk:
                     current_chunk = temp_chunk.strip()
 
-            # Normal case: sentence fits
+            # Normal case: sentence fits in remaining space of current chunk
             elif len(current_chunk) + len(sentence) + 1 > max_chars:
+                # Current chunk is full, save it and start new chunk with this sentence
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                 current_chunk = sentence
             else:
+                # Add sentence to current chunk
                 if current_chunk:
                     current_chunk += " " + sentence
                 else:
                     current_chunk = sentence
 
+        # Don't forget the last chunk
         if current_chunk:
             chunks.append(current_chunk.strip())
 
@@ -475,6 +485,19 @@ class KokoroAudioGenerator:
                 chapters.append((chapter_num, char_pos, line_stripped))
                 continue
 
+            # Detect standalone Roman numerals in markdown headers (e.g., "## I", "## II")
+            # Common in classic literature like The Great Gatsby
+            roman_header_match = re.match(r'^#+\s+([IVXLCDM]+)$', line_stripped)
+            if roman_header_match:
+                roman_text = roman_header_match.group(1)
+                # Validate it's a valid Roman numeral (basic check)
+                if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
+                    char_pos = len('\n'.join(lines[:i]))
+                    chapter_num = len(chapters) + 1
+                    chapters.append((chapter_num, char_pos, line_stripped))
+                    continue
+
+            # Detect markdown chapter headers (e.g., "## Chapter 1: Title")
             header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)
             if header_match:
                 char_pos = len('\n'.join(lines[:i]))
@@ -482,9 +505,18 @@ class KokoroAudioGenerator:
                 chapters.append((chapter_num, char_pos, line_stripped))
                 continue
 
+            # Detect plain chapter headers without markdown (after cleaning: "Chapter 1: Title")
+            plain_header_match = re.match(r'^(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+):', line_stripped)
+            if plain_header_match:
+                char_pos = len('\n'.join(lines[:i]))
+                chapter_num = len(chapters) + 1
+                chapters.append((chapter_num, char_pos, line_stripped))
+                continue
+
             # Detect numbered list chapters (e.g., "1. The Horror in Clay.")
+            # But exclude TOC markdown links (e.g., "1. [I](#chapter-1)")
             numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
-            if numbered_match:
+            if numbered_match and not re.search(r'\[.*?\]\(#', numbered_match.group(2)):
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, line_stripped))
@@ -632,19 +664,17 @@ class KokoroAudioGenerator:
         with open(input_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
 
-        print("Detecting chapters...")
-        chapters_raw = self.detect_chapters(raw_text, is_cleaned=False)
+        print("Cleaning text for speech...")
+        clean_text = self.clean_text_for_speech(raw_text, preserve_chapter_markers=False)
 
-        preserve_markers = len(chapters_raw) > 0
-        if preserve_markers:
-            print(f"✓ Found {len(chapters_raw)} chapters - preserving markers during cleaning")
+        print("Detecting chapters...")
+        chapters = self.detect_chapters(clean_text, is_cleaned=False)
+
+        has_chapters = len(chapters) > 0
+        if has_chapters:
+            print(f"✓ Found {len(chapters)} chapters")
         else:
             print("ℹ  No chapters detected (will create single file)")
-
-        print("Cleaning text for speech...")
-        clean_text = self.clean_text_for_speech(raw_text, preserve_chapter_markers=preserve_markers)
-
-        chapters = self.detect_chapters(clean_text, is_cleaned=True) if preserve_markers else []
 
         word_count = len(clean_text.split())
         char_count = len(clean_text)
@@ -653,10 +683,6 @@ class KokoroAudioGenerator:
 
         print(f"Chunking text (max {chunk_size} chars per chunk)...")
         chunks = self.chunk_text(clean_text, chunk_size)
-
-        # Remove <<<CHAPTER:MARKER:...>>> tags from chunks
-        if preserve_markers:
-            chunks = [re.sub(r'<<<CHAPTER:MARKER:[^>]*>>>', '', chunk).strip() for chunk in chunks]
 
         print(f"Created {len(chunks)} audio chunks")
 

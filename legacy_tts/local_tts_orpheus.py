@@ -1,58 +1,76 @@
 #!/usr/bin/env python3
 """
-Local TTS Audio Generation using Edge-TTS (Microsoft)
+Local TTS Audio Generation using Orpheus-TTS (Llama-based)
 
-Generates high-quality audiobooks locally using Microsoft Edge's TTS engine.
-No API costs, fully local processing with automatic chapter detection.
-
-Features:
-- FREE - No API costs, unlimited generation
-- High Quality - Much better than XTTS-v2
-- Fast - Near realtime generation
-- 400+ Voices - Multiple languages and styles
+Generates high-quality audiobooks locally using Orpheus-TTS with natural intonation,
+emotion control, and low-latency streaming. Superior quality to commercial models.
 
 Requirements:
-    pip install edge-tts
+    pip install orpheus-speech  # uses vllm under the hood
     brew install ffmpeg  # macOS
 """
 
 import os
 import sys
 import re
-import asyncio
 import subprocess
+import wave
+import time
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, List
 
 try:
-    import edge_tts
+    from orpheus_tts import OrpheusModel
 except ImportError:
-    print("❌ ERROR: edge-tts library not installed")
-    print("\nPlease install Edge-TTS:")
-    print("  pip install edge-tts")
+    print("❌ ERROR: orpheus-speech library not installed")
+    print("\nPlease install Orpheus-TTS:")
+    print("  pip install orpheus-speech")
+    print("\nNote: Some bugs may require reverting to vllm 0.7.3:")
+    print("  pip install vllm==0.7.3")
     sys.exit(1)
 
 
-class EdgeTTSAudioGenerator:
-    """Local TTS audio generation using Edge-TTS (Microsoft)"""
+class OrpheusAudioGenerator:
+    """Local TTS audio generation using Orpheus-TTS (Llama-based)"""
 
-    # Top recommended voices
-    VOICE_JENNY = "en-US-JennyNeural"           # Friendly female (DEFAULT)
-    VOICE_SONIA = "en-GB-SoniaNeural"           # British female (classics)
-    VOICE_ARIA = "en-US-AriaNeural"             # Warm female
-    VOICE_GUY = "en-US-GuyNeural"               # Professional male
-    VOICE_ERIC = "en-US-EricNeural"             # Deep male
-    VOICE_RYAN = "en-GB-RyanNeural"             # British male
+    # Orpheus-TTS models
+    FINETUNE_MODEL = "canopylabs/orpheus-tts-0.1-finetune-prod"
+    PRETRAIN_MODEL = "canopylabs/orpheus-tts-0.1"
 
-    def __init__(self, voice: str = VOICE_JENNY):
+    # Available voices (in order of conversational realism per docs)
+    VOICES = ["tara", "leah", "jess", "leo", "dan", "mia", "zac", "zoe"]
+
+    # Emotion tags supported by Orpheus
+    EMOTION_TAGS = ["<laugh>", "<chuckle>", "<sigh>", "<cough>", "<sniffle>",
+                    "<groan>", "<yawn>", "<gasp>"]
+
+    def __init__(self, voice: str = "tara", use_pretrain: bool = False, max_model_len: int = 2048):
         """
-        Initialize Edge-TTS audio generator.
+        Initialize Orpheus-TTS audio generator.
 
         Args:
-            voice: Voice to use (default: en-US-JennyNeural)
+            voice: Voice to use (tara, leah, jess, leo, dan, mia, zac, zoe)
+            use_pretrain: Use pretrained model instead of finetuned (for custom voice cloning)
+            max_model_len: Maximum model context length
         """
         self.voice = voice
+        self.model_name = self.PRETRAIN_MODEL if use_pretrain else self.FINETUNE_MODEL
+
+        if voice not in self.VOICES:
+            print(f"⚠️  Warning: '{voice}' not in recommended voices. Using 'tara' instead.")
+            print(f"   Recommended: {', '.join(self.VOICES)}")
+            self.voice = "tara"
+
+        print(f"Loading Orpheus-TTS model ({self.model_name})...")
+        print("(This may take a moment on first run)")
+
+        self.model = OrpheusModel(
+            model_name=self.model_name,
+            max_model_len=max_model_len
+        )
+
+        print("✓ Model loaded successfully")
         print(f"✓ Using voice: {self.voice}")
 
     def _format_eta(self, seconds: float) -> str:
@@ -68,18 +86,19 @@ class EdgeTTSAudioGenerator:
             minutes = int((seconds % 3600) / 60)
             return f"{hours}h {minutes}m"
 
-    def clean_text_for_speech(self, text: str, preserve_chapter_markers: bool = False) -> str:
+    def clean_text_for_speech(self, text: str, preserve_chapter_markers: bool = False, preserve_emotions: bool = True) -> str:
         """
         Clean markdown text for natural speech synthesis.
 
         Args:
             text: Raw text with possible Markdown
             preserve_chapter_markers: If True, keep Roman numeral chapter markers
+            preserve_emotions: If True, keep emotion tags like <laugh>, <sigh>, etc.
 
         Returns:
             Cleaned text suitable for TTS
         """
-        # Preserve standalone Roman numeral chapter markers FIRST
+        # Preserve standalone Roman numeral chapter markers FIRST (before other cleaning)
         if preserve_chapter_markers:
             text = re.sub(
                 r'^(X{0,3})(IX|IV|V?I{0,3})\.$',
@@ -88,7 +107,7 @@ class EdgeTTSAudioGenerator:
                 flags=re.MULTILINE
             )
 
-        # Remove markdown headers but keep text
+        # Remove markdown headers but keep text (unless it's a chapter marker)
         if preserve_chapter_markers:
             def replace_header(match):
                 header_text = match.group(2)
@@ -117,8 +136,15 @@ class EdgeTTSAudioGenerator:
         # Remove image references
         text = re.sub(r'!\[.*?\]\(.*?\)', '', text)
 
-        # Remove URLs
-        text = re.sub(r'http[s]?://\S+', '', text)
+        # Remove URLs (but preserve emotion tags)
+        if preserve_emotions:
+            # Only remove http URLs, not emotion tags
+            text = re.sub(r'http[s]?://\S+', '', text)
+        else:
+            # Remove both URLs and emotion tags
+            text = re.sub(r'http[s]?://\S+', '', text)
+            for tag in self.EMOTION_TAGS:
+                text = text.replace(tag, '')
 
         # Clean excessive whitespace
         text = re.sub(r'\n{3,}', '\n\n', text)
@@ -126,22 +152,25 @@ class EdgeTTSAudioGenerator:
 
         return text.strip()
 
-    def chunk_text(self, text: str, max_chars: int = 3000) -> List[str]:
+    def chunk_text(self, text: str, max_chars: int = 500) -> List[str]:
         """
-        Split text into chunks for TTS.
-        Edge-TTS can handle larger chunks than XTTS (~3000 chars).
+        Split text into chunks for better TTS quality, ensuring complete sentences.
+        Orpheus can handle longer contexts than XTTS (~500 chars recommended).
+
+        PRIORITY: Always split at sentence boundaries for natural audio flow.
 
         Args:
             text: Text to chunk
-            max_chars: Maximum characters per chunk
+            max_chars: Maximum characters per chunk (500 recommended)
 
         Returns:
-            List of text chunks
+            List of text chunks (each chunk contains only complete sentences when possible)
         """
         if len(text) <= max_chars:
             return [text]
 
         chunks = []
+        # Split on sentence boundaries (period, exclamation, question mark followed by space)
         sentences = re.split(r'(?<=[.!?])\s+', text)
         current_chunk = ""
 
@@ -150,49 +179,71 @@ class EdgeTTSAudioGenerator:
             if not sentence:
                 continue
 
-            # If single sentence is too long, split it
+            # If single sentence is too long, we must split it intelligently
             if len(sentence) > max_chars:
+                # First, save any accumulated chunk
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                     current_chunk = ""
 
-                # Split at clause boundaries
+                # Split long sentence at clause boundaries (commas, semicolons, etc.)
+                # but try to keep complete clauses together
                 clauses = re.split(r'([,;:—\-]\s+)', sentence)
                 temp_chunk = ""
 
-                for clause in clauses:
+                for i, clause in enumerate(clauses):
                     if not clause.strip():
                         continue
 
+                    # Check if adding this clause would exceed limit
                     if len(temp_chunk) + len(clause) > max_chars:
                         if temp_chunk:
+                            # Only add if we have accumulated something
                             chunks.append(temp_chunk.strip())
                         temp_chunk = clause
                     else:
                         temp_chunk += clause
 
+                # After processing all clauses, add to current_chunk
+                # This ensures the sentence parts stay together when possible
                 if temp_chunk:
                     current_chunk = temp_chunk.strip()
 
-            # Normal case: sentence fits
+            # Normal case: sentence fits in remaining space of current chunk
             elif len(current_chunk) + len(sentence) + 1 > max_chars:
+                # Current chunk is full, save it and start new chunk with this sentence
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                 current_chunk = sentence
             else:
+                # Add sentence to current chunk
                 if current_chunk:
                     current_chunk += " " + sentence
                 else:
                     current_chunk = sentence
 
+        # Don't forget the last chunk
         if current_chunk:
             chunks.append(current_chunk.strip())
 
         return chunks
 
-    async def generate_audio_chunk(self, text: str, output_path: Path) -> Path:
+    def format_prompt(self, text: str) -> str:
         """
-        Generate audio for a single text chunk using Edge-TTS.
+        Format text as Orpheus prompt.
+        Format: "{voice}: {text}"
+
+        Args:
+            text: Text to speak
+
+        Returns:
+            Formatted prompt
+        """
+        return f"{self.voice}: {text}"
+
+    def generate_audio_chunk(self, text: str, output_path: Path) -> Path:
+        """
+        Generate audio for a single text chunk using Orpheus-TTS.
 
         Args:
             text: Text to convert to speech
@@ -205,11 +256,101 @@ class EdgeTTSAudioGenerator:
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        communicate = edge_tts.Communicate(text, self.voice)
-        await communicate.save(str(output_path))
+        # Format prompt for Orpheus
+        prompt = self.format_prompt(text)
 
-        print(f"✓ Saved: {output_path.name}")
+        # Generate speech with streaming
+        start_time = time.monotonic()
+        syn_tokens = self.model.generate_speech(
+            prompt=prompt,
+            voice=self.voice,
+        )
+
+        # Write to WAV file
+        with wave.open(str(output_path), "wb") as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(2)
+            wf.setframerate(24000)
+
+            total_frames = 0
+            for audio_chunk in syn_tokens:
+                frame_count = len(audio_chunk) // (wf.getsampwidth() * wf.getnchannels())
+                total_frames += frame_count
+                wf.writeframes(audio_chunk)
+
+            duration = total_frames / wf.getframerate()
+
+        end_time = time.monotonic()
+        generation_time = end_time - start_time
+
+        print(f"✓ {duration:.1f}s audio in {generation_time:.1f}s (RTF: {generation_time/duration:.2f}x)")
         return output_path
+
+    def post_process_audio(
+        self,
+        input_file: Path,
+        output_file: Path,
+        speed: float = 1.0,
+        normalize: bool = True,
+        convert_to_mp3: bool = False
+    ) -> Path:
+        """
+        Post-process audio with FFmpeg for better quality.
+
+        Args:
+            input_file: Input WAV file
+            output_file: Output file path
+            speed: Speed multiplier (1.0 = normal, Orpheus already sounds natural)
+            normalize: Apply loudness normalization
+            convert_to_mp3: Convert final output to MP3
+
+        Returns:
+            Path to processed audio file
+        """
+        try:
+            subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            print("⚠️  Warning: ffmpeg not found, skipping post-processing")
+            return input_file
+
+        print(f"  Post-processing (speed={speed}x, normalize={normalize})...", end=" ", flush=True)
+
+        filters = []
+
+        if speed != 1.0:
+            if speed > 2.0:
+                filters.append("atempo=2.0")
+                remaining = speed / 2.0
+                while remaining > 1.0:
+                    next_tempo = min(remaining, 2.0)
+                    filters.append(f"atempo={next_tempo}")
+                    remaining /= next_tempo
+            else:
+                filters.append(f"atempo={speed}")
+
+        if normalize:
+            filters.append("loudnorm=I=-16:LRA=11:TP=-1.5")
+
+        filter_string = ",".join(filters) if filters else None
+
+        cmd = ['ffmpeg', '-y', '-i', str(input_file)]
+
+        if filter_string:
+            cmd.extend(['-filter:a', filter_string])
+
+        if convert_to_mp3:
+            cmd.extend(['-c:a', 'libmp3lame', '-b:a', '128k'])
+
+        cmd.append(str(output_file))
+
+        result = subprocess.run(cmd, capture_output=True, text=True)
+
+        if result.returncode != 0:
+            print(f"✗ FFmpeg error: {result.stderr}")
+            return input_file
+
+        print(f"✓ Processed: {output_file.name}")
+        return output_file
 
     def detect_chapters(self, text: str, is_cleaned: bool = False) -> list:
         """
@@ -241,6 +382,18 @@ class EdgeTTSAudioGenerator:
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, line_stripped))
                 continue
+
+            # Detect standalone Roman numerals in markdown headers (e.g., "## I", "## II")
+            # Common in classic literature like The Great Gatsby
+            roman_header_match = re.match(r'^#+\s+([IVXLCDM]+)$', line_stripped)
+            if roman_header_match:
+                roman_text = roman_header_match.group(1)
+                # Validate it's a valid Roman numeral (basic check)
+                if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
+                    char_pos = len('\n'.join(lines[:i]))
+                    chapter_num = len(chapters) + 1
+                    chapters.append((chapter_num, char_pos, line_stripped))
+                    continue
 
             header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)
             if header_match:
@@ -297,7 +450,10 @@ class EdgeTTSAudioGenerator:
         self,
         input_file: str,
         output_dir: str = None,
-        chunk_size: int = 3000
+        chunk_size: int = 500,
+        speed: float = 1.0,
+        normalize: bool = True,
+        to_mp3: bool = True
     ) -> dict:
         """
         Generate complete audiobook from text file.
@@ -305,7 +461,10 @@ class EdgeTTSAudioGenerator:
         Args:
             input_file: Path to text/markdown file
             output_dir: Output directory (auto-generated if None)
-            chunk_size: Characters per chunk (3000 recommended for Edge-TTS)
+            chunk_size: Characters per chunk (500 recommended for Orpheus)
+            speed: Speed multiplier (1.0 recommended, Orpheus already natural)
+            normalize: Apply loudness normalization
+            to_mp3: Convert to MP3 (smaller files)
 
         Returns:
             Dictionary with generation results
@@ -329,7 +488,11 @@ class EdgeTTSAudioGenerator:
             print("ℹ  No chapters detected (will create single file)")
 
         print("Cleaning text for speech...")
-        clean_text = self.clean_text_for_speech(raw_text, preserve_chapter_markers=preserve_markers)
+        clean_text = self.clean_text_for_speech(
+            raw_text,
+            preserve_chapter_markers=preserve_markers,
+            preserve_emotions=True
+        )
 
         chapters = self.detect_chapters(clean_text, is_cleaned=True) if preserve_markers else []
 
@@ -372,7 +535,7 @@ class EdgeTTSAudioGenerator:
             print()
 
         if output_dir is None:
-            output_dir = input_path.parent / "audio_edge"
+            output_dir = input_path.parent / "audio_orpheus"
 
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -381,25 +544,72 @@ class EdgeTTSAudioGenerator:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         print("="*70)
-        print("LOCAL TTS AUDIO GENERATION (Edge-TTS)")
+        print("LOCAL TTS AUDIO GENERATION (Orpheus-TTS)")
         print("="*70)
         print(f"Input: {input_file}")
         print(f"Output directory: {output_dir}")
         print(f"Voice: {self.voice}")
+        print(f"Model: {self.model_name}")
         print(f"Chunks: {len(chunks)}")
+        print(f"Post-processing: speed={speed}x, normalize={normalize}, mp3={to_mp3}")
         print("="*70)
         print()
 
         # Generate audio for each chunk
         audio_files = []
+        raw_dir = output_dir / "raw" if (speed != 1.0 or normalize or to_mp3) else output_dir
+        raw_dir.mkdir(exist_ok=True)
 
-        import time as time_module
-        generation_start = time_module.time()
+        generation_start = time.time()
 
-        # Run async generation
-        asyncio.run(self._generate_all_chunks(chunks, base_name, output_dir, audio_files, generation_start))
+        for i, chunk_text in enumerate(chunks, 1):
+            if i == 1 or i == len(chunks) or i % 10 == 0:
+                elapsed = time.time() - generation_start
+                percentage = (i / len(chunks)) * 100
+
+                if i > 1:
+                    rate = i / elapsed
+                    remaining = len(chunks) - i
+                    eta_seconds = remaining / rate if rate > 0 else 0
+                    eta_str = self._format_eta(eta_seconds)
+                else:
+                    eta_str = "calculating..."
+
+                bar_width = 40
+                filled = int(bar_width * i / len(chunks))
+                bar = "█" * filled + "░" * (bar_width - filled)
+
+                print(f"\n  Progress: [{bar}] {i}/{len(chunks)} ({percentage:.1f}%) | ETA: {eta_str}")
+
+            raw_filename = f"{base_name}_chunk{i:03d}_raw.wav"
+            raw_path = raw_dir / raw_filename
+
+            print(f"[{i}/{len(chunks)}]", end=" ")
+            try:
+                self.generate_audio_chunk(chunk_text, raw_path)
+
+                if speed != 1.0 or normalize or to_mp3:
+                    ext = "mp3" if to_mp3 else "wav"
+                    processed_filename = f"{base_name}_chunk{i:03d}.{ext}"
+                    processed_path = output_dir / processed_filename
+
+                    final_path = self.post_process_audio(
+                        raw_path,
+                        processed_path,
+                        speed=speed,
+                        normalize=normalize,
+                        convert_to_mp3=to_mp3
+                    )
+                    audio_files.append(final_path)
+                else:
+                    audio_files.append(raw_path)
+
+            except Exception as e:
+                print(f"✗ ERROR: {e}")
+                raise
 
         # Generate playlist for individual chunks
+        ext = "mp3" if to_mp3 else "wav"
         chunks_playlist_path = output_dir / f"{base_name}_chunks_{timestamp}.m3u"
         with open(chunks_playlist_path, 'w', encoding='utf-8') as f:
             f.write("#EXTM3U\n")
@@ -421,7 +631,7 @@ class EdgeTTSAudioGenerator:
                 ]
 
                 if chapter_audio_files:
-                    chapter_filename = f"{base_name}_chapter_{chapter_num:02d}.mp3"
+                    chapter_filename = f"{base_name}_chapter_{chapter_num:02d}.{ext}"
                     chapter_path = output_dir / chapter_filename
 
                     print(f"  Chapter {chapter_num:2d}: Combining {len(chapter_audio_files)} chunks...", end=" ", flush=True)
@@ -445,7 +655,7 @@ class EdgeTTSAudioGenerator:
                 print(f"  ({len(chapter_files)} chapters)")
         else:
             print(f"\n📚 Combining all {len(audio_files)} chunks into single file...")
-            combined_path = output_dir / f"{base_name}_complete.mp3"
+            combined_path = output_dir / f"{base_name}_complete.{ext}"
 
             result = self.combine_audio_files(audio_files, combined_path)
             if result:
@@ -467,7 +677,7 @@ class EdgeTTSAudioGenerator:
         print(f"Total chunks: {len(audio_files)}")
         if chapters and len(chapters) > 1:
             print(f"Chapters: {len(chapter_files)}")
-        print(f"Format: MP3")
+        print(f"Format: {ext.upper()}")
         print(f"Playlist: {playlist_path}")
         print(f"Output directory: {output_dir}")
         print("="*70)
@@ -480,79 +690,47 @@ class EdgeTTSAudioGenerator:
             'chapters': len(chapters) if chapters else 0,
             'word_count': word_count,
             'output_directory': str(output_dir),
-            'format': 'mp3'
+            'format': ext
         }
-
-    async def _generate_all_chunks(self, chunks, base_name, output_dir, audio_files, generation_start):
-        """Generate all audio chunks asynchronously"""
-        import time as time_module
-
-        for i, chunk_text in enumerate(chunks, 1):
-            if i == 1 or i == len(chunks) or i % 10 == 0:
-                elapsed = time_module.time() - generation_start
-                percentage = (i / len(chunks)) * 100
-
-                if i > 1:
-                    rate = i / elapsed
-                    remaining = len(chunks) - i
-                    eta_seconds = remaining / rate if rate > 0 else 0
-                    eta_str = self._format_eta(eta_seconds)
-                else:
-                    eta_str = "calculating..."
-
-                bar_width = 40
-                filled = int(bar_width * i / len(chunks))
-                bar = "█" * filled + "░" * (bar_width - filled)
-
-                print(f"\n  Progress: [{bar}] {i}/{len(chunks)} ({percentage:.1f}%) | ETA: {eta_str}")
-
-            filename = f"{base_name}_chunk{i:03d}.mp3"
-            output_path = output_dir / filename
-
-            print(f"[{i}/{len(chunks)}]", end=" ")
-            try:
-                await self.generate_audio_chunk(chunk_text, output_path)
-                audio_files.append(output_path)
-            except Exception as e:
-                print(f"✗ ERROR: {e}")
-                raise
 
 
 def main():
     """Main function for command-line usage"""
 
     if len(sys.argv) < 2:
-        print("Local TTS Audio Generation using Edge-TTS (Microsoft)")
+        print("Local TTS Audio Generation using Orpheus-TTS")
         print("="*70)
         print("\nUsage:")
-        print("  python local_tts_edge.py <input_file> [--voice VOICE]")
+        print("  python local_tts_orpheus.py <input_file> [--voice VOICE] [--pretrain]")
         print("\nExamples:")
-        print("  # Basic usage (default voice: Jenny - friendly)")
-        print("  python local_tts_edge.py translated.md")
+        print("  # Basic usage (default voice: tara)")
+        print("  python local_tts_orpheus.py translated.md")
         print()
-        print("  # Use British voice (great for classics)")
-        print("  python local_tts_edge.py translated.md --voice en-GB-SoniaNeural")
+        print("  # Use different voice")
+        print("  python local_tts_orpheus.py translated.md --voice leah")
         print()
-        print("\nTop Recommended Voices:")
-        print("  en-US-JennyNeural  - Friendly female (DEFAULT)")
-        print("  en-GB-SoniaNeural  - British female (classics)")
-        print("  en-US-AriaNeural   - Warm female")
-        print("  en-US-GuyNeural    - Professional male")
-        print("  en-US-EricNeural   - Deep male")
-        print("  en-GB-RyanNeural   - British male")
+        print("  # Use pretrained model (for custom voice cloning)")
+        print("  python local_tts_orpheus.py translated.md --pretrain")
+        print()
+        print("\nAvailable voices (in order of conversational realism):")
+        print(f"  {', '.join(OrpheusAudioGenerator.VOICES)}")
+        print("\nEmotion Tags (add to text for expressive speech):")
+        print(f"  {', '.join(OrpheusAudioGenerator.EMOTION_TAGS)}")
         print("\nFeatures:")
-        print("  • FREE - No API costs")
-        print("  • High Quality - Much better than XTTS-v2")
-        print("  • Fast - Near realtime generation")
-        print("  • 400+ Voices available")
-        print("  • Automatic chapter detection")
+        print("  • Human-like intonation and emotion")
+        print("  • ~200ms streaming latency")
+        print("  • Superior to commercial TTS models")
+        print("  • Automatic chapter detection and combining")
+        print("  • FFmpeg post-processing (normalization, MP3)")
         print("\nRequirements:")
-        print("  pip install edge-tts")
+        print("  pip install orpheus-speech")
+        print("  pip install vllm==0.7.3  # if you encounter bugs")
         print("  brew install ffmpeg  # macOS")
         sys.exit(1)
 
     input_file = sys.argv[1]
-    voice = EdgeTTSAudioGenerator.VOICE_JENNY  # Default to Jenny
+    voice = "tara"
+    use_pretrain = False
 
     # Parse arguments
     i = 2
@@ -566,16 +744,25 @@ def main():
             else:
                 print("❌ ERROR: --voice requires a voice name")
                 sys.exit(1)
+        elif arg == "--pretrain":
+            use_pretrain = True
+            i += 1
         else:
             print(f"⚠️  Warning: Unknown argument: {arg}")
             i += 1
 
     try:
-        generator = EdgeTTSAudioGenerator(voice=voice)
+        generator = OrpheusAudioGenerator(
+            voice=voice,
+            use_pretrain=use_pretrain
+        )
 
         result = generator.generate_audiobook(
             input_file,
-            chunk_size=3000  # Edge-TTS can handle larger chunks
+            chunk_size=500,       # Orpheus can handle longer contexts
+            speed=1.0,            # No speed adjustment needed (already natural)
+            normalize=True,       # Audiobook-standard loudness
+            to_mp3=True          # Smaller files
         )
 
         print("\n✅ Success! Audio files ready to play.")

@@ -3,7 +3,8 @@
 LLM Chat Integration - Tool-calling AI assistant for audiobooks
 
 Features:
-- Tool-calling loop with Ollama llama3.2:3b
+- Hybrid RAG system with semantic search
+- Tool-calling loop with Ollama llama3.2:3b (fallback)
 - Dynamic chapter retrieval
 - Smart context management
 - Error handling and timeouts
@@ -11,9 +12,22 @@ Features:
 
 import re
 import json
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 import ollama
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Import hybrid RAG components
+try:
+    from improved_question_classifier import classify_question
+    from server.semantic_retrieval import build_vector_store_for_book
+    HYBRID_RAG_AVAILABLE = True
+except ImportError as e:
+    print(f"[WARNING] Hybrid RAG not available: {e}")
+    HYBRID_RAG_AVAILABLE = False
 
 
 class BookTools:
@@ -207,11 +221,185 @@ class BookTools:
         return self._load_book_text()
 
 
-def ask_with_tools(
+def ask_with_hybrid_rag(
     question: str,
     current_chapter: int,
     tools: BookTools,
     model: str = "llama3.2:3b"
+) -> Dict:
+    """
+    Hybrid RAG implementation - uses semantic search or full section retrieval.
+
+    Args:
+        question: User question
+        current_chapter: Current chapter user is listening to
+        tools: BookTools instance
+        model: Ollama model name
+
+    Returns:
+        {
+            'answer': str,
+            'tools_used': [...],
+            'method': 'semantic_search' | 'full_section',
+            'question_type': 'SPECIFIC_FACTUAL' | 'BROAD_SUMMARY',
+            'iterations': 1,
+            'model': str,
+            'error': str (if failed)
+        }
+    """
+    print(f"[Hybrid RAG] Processing question: {question[:100]}...")
+
+    # Step 1: Classify question
+    classification = classify_question(question)
+    question_type = classification['type']
+    confidence = classification['confidence']
+
+    print(f"[Hybrid RAG] Classified as: {question_type} (confidence: {confidence})")
+    print(f"[Hybrid RAG] Reasoning: {classification['reasoning']}")
+
+    # Step 2: Retrieve context based on question type
+    if question_type == 'SPECIFIC_FACTUAL':
+        # Semantic search
+        try:
+            cache_dir = tools.book_path.parent / '.vector_cache'
+            print(f"[Hybrid RAG] Using semantic search...")
+
+            vector_store = build_vector_store_for_book(
+                tools.book_path,
+                cache_dir=cache_dir
+            )
+
+            results = vector_store.search(question, top_k=10)  # Increased from 5 to 10 for better coverage
+            print(f"[Hybrid RAG] Retrieved {len(results)} chunks")
+
+            # Rerank to avoid "lost in middle" problem
+            if len(results) >= 3:
+                reranked = [results[0], *results[2:-1], results[1]]
+            else:
+                reranked = results
+
+            # Build context
+            context_parts = []
+            for i, (chunk, score) in enumerate(reranked):
+                context_parts.append(
+                    f"[Relevant Passage {i+1}, Position: {chunk['position_pct']:.1f}% through book]\n{chunk['text']}"
+                )
+
+            context = '\n\n---\n\n'.join(context_parts)
+            method = 'semantic_search'
+            tools_used = [f"semantic_search(top_k=10, avg_similarity={sum(s for _, s in reranked)/len(reranked):.2f})"]
+
+            word_count = sum(chunk['word_count'] for chunk, _ in reranked)
+            print(f"[Hybrid RAG] Context size: {word_count} words")
+
+        except Exception as e:
+            # Fallback to section retrieval
+            print(f"[Hybrid RAG] Semantic search failed ({e}), using fallback")
+            context = tools.get_book_section(0, 25)
+            method = 'fallback_section'
+            tools_used = ["get_book_section(0, 25) [semantic search fallback]"]
+            word_count = len(context.split())
+
+    else:  # BROAD_SUMMARY
+        # Full section retrieval
+        print(f"[Hybrid RAG] Using full section retrieval...")
+        question_lower = question.lower()
+
+        # Parse section from question
+        chapter_match = re.search(r'chapter\s+(\d+)', question_lower)
+        if chapter_match:
+            chapter_num = int(chapter_match.group(1))
+            context = tools.get_chapter(chapter_num)
+            tools_used = [f"get_chapter({chapter_num})"]
+        elif 'first' in question_lower or 'beginning' in question_lower:
+            context = tools.get_book_section(0, 25)
+            tools_used = ["get_book_section(0, 25)"]
+        elif 'middle' in question_lower:
+            context = tools.get_book_section(25, 75)
+            tools_used = ["get_book_section(25, 75)"]
+        elif 'end' in question_lower or 'last' in question_lower:
+            context = tools.get_book_section(75, 100)
+            tools_used = ["get_book_section(75, 100)"]
+        else:
+            context = tools.get_book_section(0, 25)
+            tools_used = ["get_book_section(0, 25) [default]"]
+
+        method = 'full_section'
+        word_count = len(context.split())
+        print(f"[Hybrid RAG] Context size: {word_count} words")
+
+    # Step 3: Build enhanced system prompt
+    chapter_list = tools.list_chapters()
+    if chapter_list:
+        chapter_titles = '\n'.join([f"Chapter {ch['number']}: {ch['title']}" for ch in chapter_list[:10]])  # Limit to first 10
+        chapters_info = f"**Book Chapters:**\n{chapter_titles}\n\n"
+    else:
+        chapters_info = ""
+
+    system_prompt = f"""You are a knowledgeable AI assistant for audiobook listeners. The user is currently listening to Chapter {current_chapter}.
+
+{chapters_info}**Context Retrieved:**
+The following text was retrieved to answer your question using {method}.
+
+**Answer Quality Guidelines:**
+1. **Answer the EXACT question asked** - Don't provide tangential information
+2. **For specific questions** (Who/What/How/When/Where):
+   - Extract the SPECIFIC fact/description from the retrieved text
+   - Quote relevant passages directly when asked about descriptions, dialogue, or events
+   - Start your answer with the direct response, then add supporting context if helpful
+
+3. **Structure your answers:**
+   - FIRST: Direct answer (1-2 sentences addressing the exact question)
+   - THEN: Supporting quotes or evidence from the text (if applicable)
+   - FINALLY: Additional context only if it enhances understanding
+
+4. **Cite sources** when answering (e.g., "In the passage about X...")
+5. **Be concise but complete** - Include all relevant facts, but avoid narrative summaries unless asked
+6. **Focus on the retrieved context** - Extract information from what was provided"""
+
+    messages = [
+        {'role': 'system', 'content': system_prompt},
+        {'role': 'user', 'content': f"Context:\n\n{context}\n\nQuestion: {question}"}
+    ]
+
+    # Step 4: Single LLM call
+    try:
+        print(f"[Hybrid RAG] Calling LLM...")
+        response = ollama.chat(model=model, messages=messages)
+        answer = response['message']['content'].strip()
+        print(f"[Hybrid RAG] ✓ Answer generated ({len(answer)} chars)")
+
+        return {
+            'answer': answer,
+            'tools_used': tools_used,
+            'iterations': 1,
+            'method': method,
+            'question_type': question_type,
+            'confidence': confidence,
+            'context_words': word_count,
+            'model': model,
+            'error': None
+        }
+
+    except Exception as e:
+        print(f"[Hybrid RAG] Error: {e}")
+        return {
+            'answer': f"Error: {str(e)}",
+            'tools_used': tools_used,
+            'iterations': 1,
+            'method': method,
+            'question_type': question_type,
+            'model': model,
+            'error': str(e)
+        }
+
+
+def ask_with_tools(
+    question: str,
+    current_chapter: int,
+    tools: BookTools,
+    model: str = "llama3.2:3b",
+    use_hybrid_rag: bool = True
 ) -> Dict:
     """
     Main LLM query handler with tool-calling loop.
@@ -229,6 +417,7 @@ def ask_with_tools(
         current_chapter: Which chapter user is currently listening to
         tools: BookTools instance for this book
         model: Ollama model name
+        use_hybrid_rag: If True and available, use hybrid RAG instead of tool-calling
 
     Returns:
         {
@@ -240,7 +429,11 @@ def ask_with_tools(
             'error': str (if failed)
         }
     """
-    # Build system prompt with tool definitions
+    # Use hybrid RAG if enabled and available
+    if use_hybrid_rag and HYBRID_RAG_AVAILABLE:
+        return ask_with_hybrid_rag(question, current_chapter, tools, model)
+
+    # Fallback: Build system prompt with tool definitions
     chapter_list = tools.list_chapters()
     if chapter_list:
         chapter_titles = '\n'.join([f"Chapter {ch['number']}: {ch['title']}" for ch in chapter_list])
@@ -273,11 +466,28 @@ You can call the following tools to retrieve book content:
 - For books without chapters, ALWAYS use get_book_section
 - After receiving tool results, provide a clear answer based on the content
 
-**Important:**
-- Be concise and accurate
-- Cite sources when answering (e.g., "In Chapter 5..." or "In the first 10%...")
-- If you already know the answer without tools, answer directly
-- Don't request the full book unless absolutely necessary
+**Answer Quality Guidelines:**
+1. **Answer the EXACT question asked** - Don't provide tangential information
+2. **For specific questions** (Who/What/How/When/Where):
+   - Extract the SPECIFIC fact/description from the retrieved text
+   - Quote relevant passages directly when asked about descriptions, dialogue, or events
+   - Start your answer with the direct response, then add supporting context if helpful
+
+3. **Structure your answers:**
+   - FIRST: Direct answer (1-2 sentences addressing the exact question)
+   - THEN: Supporting quotes or evidence from the text (if applicable)
+   - FINALLY: Additional context only if it enhances understanding
+
+4. **Example - Good vs Bad:**
+
+   Question: "How is the monster described?"
+   ❌ BAD: "The chapter discusses the protagonist's investigation into strange dreams. Several artists reported visions during March 1923..."
+   ✅ GOOD: "The creature is described as 'miles high' with a specific appearance captured in Wilcox's bas-relief sculpture. The text describes it as a 'gigantic nameless thing' that inspired acute fear in those who dreamed of it."
+
+5. **Cite sources** when answering (e.g., "In Chapter 5..." or "In the first 10%...")
+6. **Be concise but complete** - Include all relevant facts, but avoid narrative summaries unless asked for them
+7. **Always retrieve book content** - Don't rely on general knowledge about the book, use the tools to get exact quotes and details
+8. **Don't request the full book** unless absolutely necessary
 """
 
     messages = [
@@ -387,7 +597,7 @@ def check_ollama_available() -> Dict:
     try:
         # Try to list models
         models = ollama.list()
-        model_names = [m['name'] for m in models.get('models', [])]
+        model_names = [m.model for m in models.models]
 
         return {
             'available': True,

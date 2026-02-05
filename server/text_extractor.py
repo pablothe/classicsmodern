@@ -78,8 +78,9 @@ def detect_chapter_markers(text: str) -> List[Dict]:
 
     # Patterns to match
     patterns = [
-        r'^#+\s*CHAPTER\s+([IVXLCDM]+|[\d]+)[.:]\s*(.*?)$',  # ## CHAPTER I. Title
-        r'^#+\s*Chapter\s+(\d+)[.:]\s*(.*?)$',  # # Chapter 1: Title
+        r'^#+\s*CHAPTER\s+([IVXLCDM]+|[\d]+)[.:]\s*(.*?)(?:\s*\{.*?\})?$',  # ## CHAPTER I. Title {#anchor}
+        r'^#+\s*Chapter\s+(\d+)[.:]?\s*(.*?)(?:\s*\{.*?\})?$',  # ## Chapter 1: Title {#anchor} or ## Chapter 1 Title
+        r'^#+\s+([IVXLCDM]+)\s*$',  # ## I or ## IX (standalone Roman numerals, e.g., Great Gatsby)
         r'^CHAPTER\s+([IVXLCDM]+|[\d]+)[.:]\s*(.*?)$',  # CHAPTER I. Title (no markdown)
     ]
 
@@ -184,13 +185,15 @@ def split_into_paragraphs(text: str) -> List[Dict]:
     return paragraphs
 
 
-def get_chapter_text_data(book_dir: Path, chapter_index: int) -> Optional[Dict]:
+def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timing: Optional[Dict] = None, total_audio_chapters: int = None) -> Optional[Dict]:
     """
     Get chapter text data for text sync API.
 
     Args:
         book_dir: Path to book directory
         chapter_index: Zero-based chapter index
+        audio_chapter_timing: Optional dict with 'timestamp' and 'duration' from audio chapter metadata
+        total_audio_chapters: Total number of chapters in audio metadata (helps detect single-file books)
 
     Returns:
         Dictionary with chapter data, or None if not found
@@ -215,7 +218,7 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int) -> Optional[Dict]:
             return None
 
         paragraphs = split_into_paragraphs(text)
-        return {
+        result = {
             'chapter_num': 0,
             'title': 'Full Text',
             'text': text,
@@ -224,7 +227,38 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int) -> Optional[Dict]:
             'estimated_duration': len(text.split()) / 200 * 60  # 200 WPM → seconds
         }
 
-    # Extract chapter text
+        # Add audio timing if available
+        if audio_chapter_timing:
+            result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
+            result['audio_duration'] = audio_chapter_timing.get('duration')
+
+        return result
+
+    # Special case: If text has chapters but audio has only ONE chapter marker (single complete file)
+    # This happens when a book has chapter structure in markdown, but the audio was created as one file
+    # Example: Call of Cthulhu has 3 chapters in text, but only 1 "Complete Book" chapter in audio
+    if (total_audio_chapters == 1 and
+        len(chapters) > 1 and
+        chapter_index == 0 and
+        audio_chapter_timing and
+        audio_chapter_timing.get('duration')):
+
+        # This is a complete-book audio file with multi-chapter text
+        # Return full book text for linear interpolation across entire audiobook
+        paragraphs = split_into_paragraphs(text)
+        result = {
+            'chapter_num': 0,
+            'title': 'Complete Book',
+            'text': text,
+            'paragraphs': paragraphs,
+            'word_count': len(text.split()),
+            'estimated_duration': len(text.split()) / 200 * 60,  # 200 WPM → seconds
+            'audio_start': audio_chapter_timing.get('timestamp', 0),
+            'audio_duration': audio_chapter_timing.get('duration')
+        }
+        return result
+
+    # Extract chapter text (normal multi-chapter behavior)
     chapter_text = extract_chapter_text(text, chapters, chapter_index)
     if not chapter_text:
         return None
@@ -232,7 +266,7 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int) -> Optional[Dict]:
     chapter = chapters[chapter_index]
     paragraphs = split_into_paragraphs(chapter_text)
 
-    return {
+    result = {
         'chapter_num': chapter['number'],
         'title': chapter['title'],
         'text': chapter_text,
@@ -240,6 +274,13 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int) -> Optional[Dict]:
         'word_count': len(chapter_text.split()),
         'estimated_duration': len(chapter_text.split()) / 200 * 60  # 200 WPM → seconds
     }
+
+    # Add audio timing if available
+    if audio_chapter_timing:
+        result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
+        result['audio_duration'] = audio_chapter_timing.get('duration')
+
+    return result
 
 
 def get_book_chapters_list(book_dir: Path) -> List[Dict]:

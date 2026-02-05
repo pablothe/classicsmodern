@@ -1,0 +1,30 @@
+# Testing Dependencies for Modern Classics
+
+# Core testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-xdist>=3.3.1
+pytest-benchmark>=4.0.0
+pytest-timeout>=2.1.0
+pytest-mock>=3.11.1
+
+# Linting and formatting
+flake8>=6.1.0
+black>=23.7.0
+isort>=5.12.0
+mypy>=1.5.0
+
+# Security scanning
+safety>=2.3.0
+bandit>=1.7.5
+
+# Coverage reporting
+coverage>=7.3.0
+
+# HTTP testing
+httpx>=0.24.1
+requests-mock>=1.11.0
+
+# Additional utilities
+faker>=19.6.0  # For generating test data
+freezegun>=1.2.2  # For time mocking

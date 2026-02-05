@@ -150,3 +150,20 @@ venv_tts/
 audio_xtts/
 test_chunking.py
 clean_audio.m4a
+
+# Runtime files
+server.pid
+server/playback_db.json
+
+# Book processing artifacts
+books/*/.audiobook_state*.json
+books/*/.vector_cache/
+books/*/*.md.bak
+books/*/*_cleaned_*.md
+books/*/*_original_*.md
+books/*/audio_kokoro/
+
+# Test/debug scripts (ad-hoc development)
+test_sample.txt
+question_classifier_analysis.py
+debug_*.py

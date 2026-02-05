@@ -1348,6 +1348,33 @@ header h2 {
 }
 
 /* ============================================================================
+   Library Search Styles
+   ============================================================================ */
+
+/* Library search container */
+.library-search-container {
+    padding: 0 20px 15px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.library-search-container input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.library-search-container input:focus {
+    border-color: var(--primary-color);
+}
+
+/* ============================================================================
    Gutenberg Search Styles
    ============================================================================ */
 
@@ -1366,6 +1393,214 @@ header h2 {
 
 .browse-btn:hover {
     background: var(--primary-hover);
+}
+
+/* ============================================================================
+   Unified Search - Library + Store
+   ============================================================================ */
+
+.unified-search-container {
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border-bottom: 0.5px solid var(--border-color);
+}
+
+.search-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.search-tab {
+    padding: 0.5rem 1.25rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-tab:hover {
+    background: var(--surface-color);
+    border-color: var(--primary-color);
+}
+
+.search-tab.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.unified-search-container input {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.unified-search-container input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+#unified-results-container {
+    padding: 0;
+}
+
+.results-section {
+    padding: 1.5rem 0;
+}
+
+.results-section:not(:last-child) {
+    border-bottom: 8px solid var(--bg-secondary);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem 1rem 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+}
+
+.count-badge {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* Store book cards - no cover image, simpler design */
+.store-book-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.store-book-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.store-book-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.store-book-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.store-book-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.store-book-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
+.store-book-author {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.store-book-meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.store-book-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.download-book-btn {
+    padding: 0.625rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.download-book-btn:hover {
+    background: var(--primary-hover);
+}
+
+.download-book-btn:active {
+    transform: scale(0.98);
+}
+
+.download-book-btn:disabled {
+    background: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Empty states */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-message {
+    font-size: 0.9375rem;
+    line-height: 1.5;
 }
 
 /* Search container */
@@ -1421,6 +1656,56 @@ header h2 {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 16px;
     margin-bottom: 20px;
+}
+
+/* Store Pagination Controls */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.pagination-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--surface-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 110px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.pagination-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.page-info {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
 }
 
 .gutenberg-card {
@@ -1602,6 +1887,22 @@ header h2 {
 
     .gutenberg-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pagination-controls {
+        gap: 1rem;
+        padding: 1.5rem 0.75rem;
+    }
+
+    .pagination-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+        min-width: 90px;
+    }
+
+    .page-info {
+        font-size: 0.875rem;
+        min-width: 100px;
     }
 
     .download-status-panel {

@@ -237,10 +237,15 @@ pip install diffusers torch transformers accelerate
 
 ### Audio Generation
 
-**Local TTS - Kokoro (RECOMMENDED - FREE, FAST, HIGH QUALITY):**
+**IMPORTANT: This project uses Kokoro TTS ONLY. Legacy TTS scripts (Edge, XTTS, Orpheus) are deprecated and archived in `legacy_tts/`.**
+
+**Local TTS - Kokoro (ONLY SUPPORTED SYSTEM):**
 ```bash
-# Basic usage (default voice: af_sky - American Female)
-python3 local_tts_kokoro.py translated.md
+# Use the unified audiobook maker (recommended)
+python3 make_audiobook.py books/mybook/book.md --voice bf_emma --generate-cover
+
+# Or use Kokoro directly
+python3 local_tts_kokoro.py translated.md --voice bf_emma
 
 # British female voice (great for classics)
 python3 local_tts_kokoro.py translated.md --voice bf_emma
@@ -260,43 +265,35 @@ python3 local_tts_kokoro.py translated.md --speed 1.15
 # Total: 52 voices available (af_*, am_*, bf_*, bm_*, etc.)
 ```
 
-**Why Kokoro?**
+**Why Kokoro Only?**
 - Apache 2.0 license (commercial-friendly, unlike XTTS-v2)
-- 31× faster than Bark (6.5s vs 203s per passage)
-- 100% local inference via ONNX Runtime (no API calls)
-- Quality rivals commercial APIs
-- 52 preset voices (American, British, male/female)
-- Apple Silicon GPU acceleration (MPS)
+- 31× faster than alternatives (6.5s vs 203s per passage for Bark)
+- 100% local inference via ONNX Runtime (no API calls, unlike Edge-TTS)
+- Quality rivals commercial APIs (superior to Edge/XTTS)
+- 52 preset voices (American, British, male/female) - no voice cloning needed
+- Apple Silicon GPU acceleration (MPS) - no NVIDIA GPU required
 - Requires: `pip install kokoro-tts kokoro-onnx soundfile`
 - Models: Auto-downloaded to ~/.cache/kokoro/ (~335MB, one-time)
 
-**Local TTS - Edge-TTS (Cloud-based, but free):**
+**Virtual Environment Setup:**
 ```bash
-# Note: Makes API calls to Microsoft (not truly local)
-python3 local_tts_edge.py translated.md
+# Create virtual environment with Python 3.11+ (tested with 3.11, 3.13)
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate     # Windows
 
-# British voice
-python3 local_tts_edge.py translated.md --voice en-GB-SoniaNeural
+# Install dependencies
+pip install kokoro-tts kokoro-onnx soundfile
+pip install -r requirements.txt
+brew install ffmpeg  # macOS
 ```
 
-**Local TTS - XTTS (voice cloning, non-commercial):**
-```bash
-# Note: Non-commercial license, not recommended for commercial use
-python local_tts_xtts.py translated.md voice_ref.wav en
-```
+**Legacy TTS Systems (DEPRECATED - See `legacy_tts/README.md`):**
+- ~~Edge-TTS~~ - Requires Microsoft API (not truly local), inferior quality
+- ~~XTTS-v2~~ - Non-commercial license (AGPL), slow, 250-char limit
+- ~~Orpheus~~ - Requires NVIDIA GPU (incompatible with Apple Silicon)
 
-**Cloud TTS (OpenAI, paid):**
-```bash
-python local_reader_audio.py translated/deduplicated/ --voice fable
-python local_reader_audio_combiner.py playlist.m3u
-python local_reader_audio_compress.py combined.mp3 96k
-```
-
-**Local TTS - Orpheus (NOT for Apple Silicon - requires NVIDIA GPU):**
-```bash
-# Only works on Linux/Windows with CUDA - see ORPHEUS_APPLE_SILICON_NOTE.md
-python local_tts_orpheus.py translated.md --voice tara
-```
+**These scripts are archived in `legacy_tts/` and should NOT be used for new audiobooks.**
 
 **See [GUIDE.md](GUIDE.md) for complete audio generation workflow.**
 

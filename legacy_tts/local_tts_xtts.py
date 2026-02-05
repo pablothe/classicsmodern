@@ -154,7 +154,7 @@ class XTTSAudioGenerator:
 
     def chunk_text(self, text: str, max_chars: int = 250) -> List[str]:
         """
-        Split text into chunks for better TTS quality.
+        Split text into chunks for better TTS quality, ensuring complete sentences.
         XTTS-v2 has a 400 token limit (~250 chars max).
 
         PRIORITY: Always split at sentence boundaries for natural audio flow.
@@ -165,17 +165,14 @@ class XTTSAudioGenerator:
             max_chars: Maximum characters per chunk (250 max for XTTS-v2)
 
         Returns:
-            List of text chunks, guaranteed to be <= max_chars
+            List of text chunks (each chunk contains only complete sentences when possible)
         """
         if len(text) <= max_chars:
             return [text]
 
         chunks = []
-
-        # Split into sentences (respecting .!? followed by space or end)
-        # This regex keeps the punctuation with the sentence
+        # Split on sentence boundaries (period, exclamation, question mark followed by space)
         sentences = re.split(r'(?<=[.!?])\s+', text)
-
         current_chunk = ""
 
         for sentence in sentences:
@@ -183,36 +180,39 @@ class XTTSAudioGenerator:
             if not sentence:
                 continue
 
-            # If single sentence is too long, we MUST split it
+            # If single sentence is too long, we must split it intelligently
             if len(sentence) > max_chars:
                 # First, save any accumulated chunk
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                     current_chunk = ""
 
-                # Try to split at clause boundaries (comma, semicolon, colon, dash)
+                # Split long sentence at clause boundaries (commas, semicolons, etc.)
+                # but try to keep complete clauses together
                 clauses = re.split(r'([,;:—\-]\s+)', sentence)
-
                 temp_chunk = ""
+
                 for i, clause in enumerate(clauses):
                     if not clause.strip():
                         continue
 
-                    # If adding this clause would exceed limit
+                    # Check if adding this clause would exceed limit
                     if len(temp_chunk) + len(clause) > max_chars:
                         if temp_chunk:
+                            # Only add if we have accumulated something
                             chunks.append(temp_chunk.strip())
                         temp_chunk = clause
                     else:
                         temp_chunk += clause
 
-                # Save remaining as current chunk
+                # After processing all clauses, add to current_chunk
+                # This ensures the sentence parts stay together when possible
                 if temp_chunk:
                     current_chunk = temp_chunk.strip()
 
-            # Normal case: sentence fits within limit
+            # Normal case: sentence fits in remaining space of current chunk
             elif len(current_chunk) + len(sentence) + 1 > max_chars:
-                # Save current chunk and start new one
+                # Current chunk is full, save it and start new chunk with this sentence
                 if current_chunk:
                     chunks.append(current_chunk.strip())
                 current_chunk = sentence
@@ -388,6 +388,18 @@ class XTTSAudioGenerator:
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, line_stripped))
                 continue
+
+            # Detect standalone Roman numerals in markdown headers (e.g., "## I", "## II")
+            # Common in classic literature like The Great Gatsby
+            roman_header_match = re.match(r'^#+\s+([IVXLCDM]+)$', line_stripped)
+            if roman_header_match:
+                roman_text = roman_header_match.group(1)
+                # Validate it's a valid Roman numeral (basic check)
+                if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
+                    char_pos = len('\n'.join(lines[:i]))
+                    chapter_num = len(chapters) + 1
+                    chapters.append((chapter_num, char_pos, line_stripped))
+                    continue
 
             # Markdown header patterns
             header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)

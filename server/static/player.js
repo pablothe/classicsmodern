@@ -31,10 +31,15 @@ const state = {
     textSyncData: null,
     chatOpen: false,
     chatHistory: [],
+    // Unified search state
+    searchQuery: '',
+    searchTab: 'library', // 'library', 'store'
     // Gutenberg search state
     gutenberg: {
         catalog: [],
         filteredBooks: [],
+        currentPage: 1,
+        pageSize: 50,
         activeDownloads: {},
         pollInterval: null,
         available: false
@@ -174,6 +179,20 @@ const ui = {
     bookList: document.getElementById('book-list'),
     bookCount: document.getElementById('book-count'),
 
+    // Unified Search
+    unifiedSearchInput: document.getElementById('unified-search-input'),
+    tabLibrary: document.getElementById('tab-library'),
+    tabStore: document.getElementById('tab-store'),
+    librarySection: document.getElementById('library-section'),
+    storeSection: document.getElementById('store-section'),
+    libraryCount: document.getElementById('library-count'),
+    storeCount: document.getElementById('store-count'),
+    storeBookList: document.getElementById('store-book-list'),
+    storePagination: document.getElementById('store-pagination'),
+    prevPageBtn: document.getElementById('prev-page-btn'),
+    nextPageBtn: document.getElementById('next-page-btn'),
+    pageInfo: document.getElementById('page-info'),
+
     // Variant selection
     variantBackBtn: document.getElementById('variant-back-btn'),
     variantBookTitle: document.getElementById('variant-book-title'),
@@ -242,14 +261,7 @@ const ui = {
     chatInput: document.getElementById('chat-input'),
     chatSubmitBtn: document.getElementById('chat-submit-btn'),
 
-    // Gutenberg Search
-    searchView: document.getElementById('search-view'),
-    searchBackBtn: document.getElementById('search-back-btn'),
-    browseGutenbergBtn: document.getElementById('browse-gutenberg-btn'),
-    searchInput: document.getElementById('search-input'),
-    languageFilter: document.getElementById('language-filter'),
-    searchResults: document.getElementById('search-results'),
-    searchResultsCount: document.getElementById('search-results-count'),
+    // Download Status
     downloadStatusPanel: document.getElementById('download-status-panel'),
     downloadStatusList: document.getElementById('download-status-list'),
     closeDownloadStatusBtn: document.getElementById('close-download-status-btn')
@@ -262,21 +274,71 @@ const ui = {
 async function loadLibrary() {
     try {
         state.books = await API.getBooks();
-        renderLibrary();
+        renderUnifiedSearch();
     } catch (error) {
         console.error('Failed to load library:', error);
         ui.bookList.innerHTML = '<div class="error">Failed to load books. Please check server connection.</div>';
     }
 }
 
-function renderLibrary() {
-    if (state.books.length === 0) {
-        ui.bookList.innerHTML = '<div class="loading">No audiobooks found</div>';
-        ui.bookCount.textContent = '0 books available';
-        return;
+function renderUnifiedSearch() {
+    /**
+     * Render library or store results based on active tab
+     */
+    const query = state.searchQuery.toLowerCase().trim();
+    const tab = state.searchTab;
+
+    // Filter library books
+    let filteredLibraryBooks = state.books;
+    if (query) {
+        filteredLibraryBooks = state.books.filter(book => {
+            const titleMatch = book.title.toLowerCase().includes(query);
+            const authorMatch = book.author && book.author.toLowerCase().includes(query);
+            return titleMatch || authorMatch;
+        });
     }
 
-    ui.bookCount.textContent = `${state.books.length} book${state.books.length !== 1 ? 's' : ''} available`;
+    // Filter store books
+    let filteredStoreBooks = state.gutenberg.catalog;
+    if (query) {
+        filteredStoreBooks = state.gutenberg.catalog.filter(book => {
+            const titleMatch = book.title.toLowerCase().includes(query);
+            const authorMatch = book.author && book.author.toLowerCase().includes(query);
+            return titleMatch || authorMatch;
+        });
+    }
+
+    // Store filtered books for pagination
+    state.gutenberg.filteredBooks = filteredStoreBooks;
+
+    // Update counts
+    ui.libraryCount.textContent = filteredLibraryBooks.length;
+    ui.storeCount.textContent = filteredStoreBooks.length;
+    ui.bookCount.textContent = `${state.books.length} in library • ${state.gutenberg.catalog.length} in store`;
+
+    // Show/hide sections based on tab (separate views now)
+    if (tab === 'library') {
+        ui.librarySection.style.display = 'block';
+        ui.storeSection.style.display = 'none';
+        renderLibraryBooks(filteredLibraryBooks);
+    } else if (tab === 'store') {
+        ui.librarySection.style.display = 'none';
+        ui.storeSection.style.display = state.gutenberg.available ? 'block' : 'none';
+        if (state.gutenberg.available) {
+            renderStoreBooks(filteredStoreBooks);
+        }
+    }
+}
+
+function renderLibraryBooks(books) {
+    if (books.length === 0) {
+        if (state.searchQuery) {
+            ui.bookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">No books found</div><div class="empty-state-message">Try adjusting your search</div></div>';
+        } else if (state.books.length === 0) {
+            ui.bookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">Your library is empty</div><div class="empty-state-message">Browse the Store to get started!</div></div>';
+        }
+        return;
+    }
 
     // Generate different gradient colors for each book
     const gradients = [
@@ -292,7 +354,7 @@ function renderLibrary() {
         'linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%)'
     ];
 
-    ui.bookList.innerHTML = state.books.map((book, index) => {
+    ui.bookList.innerHTML = books.map((book, index) => {
         const gradient = gradients[index % gradients.length];
         const hasCover = book.has_cover && book.cover_image;
         const coverURL = hasCover ? `${API.baseURL}/api/books/${book.book_id}/cover` : null;
@@ -331,6 +393,133 @@ function renderLibrary() {
             showVariants(bookId);
         });
     });
+}
+
+function renderStoreBooks(books) {
+    if (books.length === 0) {
+        if (state.searchQuery) {
+            ui.storeBookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">No books found in store</div><div class="empty-state-message">Try adjusting your search</div></div>';
+        } else {
+            ui.storeBookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🏪</div><div class="empty-state-title">Store catalog empty</div></div>';
+        }
+        ui.storePagination.style.display = 'none';
+        return;
+    }
+
+    // Calculate pagination
+    const totalPages = Math.ceil(books.length / state.gutenberg.pageSize);
+    const currentPage = state.gutenberg.currentPage;
+
+    // Reset to page 1 if current page exceeds total pages (after search)
+    if (currentPage > totalPages) {
+        state.gutenberg.currentPage = 1;
+    }
+
+    // Get books for current page
+    const startIndex = (state.gutenberg.currentPage - 1) * state.gutenberg.pageSize;
+    const endIndex = startIndex + state.gutenberg.pageSize;
+    const pageBooks = books.slice(startIndex, endIndex);
+
+    // Render books for current page
+    ui.storeBookList.innerHTML = pageBooks.map(book => {
+        const slug = book.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '_')
+            .replace(/^_+|_+$/g, '')
+            .substring(0, 50);
+
+        return `
+            <div class="store-book-card">
+                <div class="store-book-header">
+                    <div class="store-book-icon">📚</div>
+                    <div class="store-book-info">
+                        <div class="store-book-title">${escapeHtml(book.title)}</div>
+                        <div class="store-book-author">${escapeHtml(book.author)}</div>
+                        <div class="store-book-meta">
+                            ${book.year ? `<span>📅 ${book.year}</span>` : ''}
+                            <span>🌐 ${book.language.toUpperCase()}</span>
+                            <span>↓ ${book.downloads || 0}</span>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="download-book-btn"
+                    data-gutenberg-id="${book.gutenberg_id}"
+                    data-book-slug="${slug}"
+                    data-book-title="${escapeHtml(book.title)}"
+                >
+                    📥 Download
+                </button>
+            </div>
+        `;
+    }).join('');
+
+    // Add click handlers to download buttons
+    document.querySelectorAll('.download-book-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const gutenbergId = parseInt(btn.dataset.gutenbergId);
+            const bookSlug = btn.dataset.bookSlug;
+            const bookTitle = btn.dataset.bookTitle;
+            startDownload(gutenbergId, bookSlug, bookTitle);
+        });
+    });
+
+    // Update pagination controls
+    updatePaginationControls(totalPages);
+}
+
+function updatePaginationControls(totalPages) {
+    /**
+     * Update pagination button states and page info
+     */
+    const currentPage = state.gutenberg.currentPage;
+
+    // Show/hide pagination
+    if (totalPages <= 1) {
+        ui.storePagination.style.display = 'none';
+        return;
+    }
+
+    ui.storePagination.style.display = 'flex';
+
+    // Update page info
+    ui.pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    // Update button states
+    ui.prevPageBtn.disabled = currentPage === 1;
+    ui.nextPageBtn.disabled = currentPage === totalPages;
+}
+
+function handleUnifiedSearch() {
+    /**
+     * Handle unified search input
+     */
+    state.searchQuery = ui.unifiedSearchInput.value;
+
+    // Reset store pagination to page 1 on new search
+    state.gutenberg.currentPage = 1;
+
+    renderUnifiedSearch();
+}
+
+function switchTab(tab) {
+    /**
+     * Switch between Library and Store tabs
+     */
+    state.searchTab = tab;
+
+    // Update tab active states
+    ui.tabLibrary.classList.toggle('active', tab === 'library');
+    ui.tabStore.classList.toggle('active', tab === 'store');
+
+    // Reset store pagination when switching to store tab
+    if (tab === 'store') {
+        state.gutenberg.currentPage = 1;
+    }
+
+    // Re-render
+    renderUnifiedSearch();
 }
 
 function showLibrary() {
@@ -717,9 +906,15 @@ function detectCurrentChapter() {
         const chapter = chapters[i];
         if (chapter.file_index === currentFile && chapter.timestamp <= currentTime) {
             if (state.currentChapterIndex !== i) {
+                const oldChapterIndex = state.currentChapterIndex;
                 state.currentChapterIndex = i;
                 updateChapterHighlight();
                 updateCurrentChapterDisplay();
+
+                // If text sync is open, reload the text for the new chapter
+                if (state.textSyncOpen && oldChapterIndex !== null) {
+                    loadChapterText(i);
+                }
             }
             return;
         }
@@ -852,7 +1047,33 @@ function updateTextHighlight() {
     if (totalParagraphs === 0) return;
 
     // Calculate which paragraph we're currently in
-    const progress = ui.audio.currentTime / ui.audio.duration;
+    // Use chapter-based interpolation if audio timing is available
+    let progress;
+
+    if (state.textSyncData.audio_start !== undefined && state.textSyncData.audio_duration) {
+        // Chapter-based sync: interpolate within chapter boundaries
+        const chapterStart = state.textSyncData.audio_start;
+        const chapterDuration = state.textSyncData.audio_duration;
+        const chapterEnd = chapterStart + chapterDuration;
+
+        // Clamp current time to chapter boundaries
+        const currentTime = ui.audio.currentTime;
+
+        if (currentTime < chapterStart) {
+            // Before chapter start - highlight first paragraph
+            progress = 0;
+        } else if (currentTime >= chapterEnd) {
+            // After chapter end - highlight last paragraph
+            progress = 0.999; // Not quite 1.0 to avoid out-of-bounds
+        } else {
+            // Within chapter - interpolate position
+            progress = (currentTime - chapterStart) / chapterDuration;
+        }
+    } else {
+        // Fallback to linear interpolation (legacy behavior)
+        progress = ui.audio.currentTime / ui.audio.duration;
+    }
+
     const currentParagraphId = Math.floor(progress * totalParagraphs);
 
     // Remove previous highlights
@@ -1030,16 +1251,18 @@ async function initGutenberg() {
             return;
         }
 
-        // Show browse button
-        ui.browseGutenbergBtn.style.display = 'block';
+        // Show store tab
+        ui.tabStore.style.display = 'block';
 
         // Load catalog
         console.log('[Gutenberg] Loading catalog...');
         const data = await API.getGutenbergCatalog();
         state.gutenberg.catalog = data.books || [];
-        state.gutenberg.filteredBooks = state.gutenberg.catalog;
 
         console.log(`[Gutenberg] Loaded ${state.gutenberg.catalog.length} books`);
+
+        // Initial render of unified search
+        renderUnifiedSearch();
 
         // Check for active downloads
         const downloads = await API.getAllDownloads();
@@ -1062,109 +1285,6 @@ async function initGutenberg() {
     }
 }
 
-function showSearchView() {
-    /**
-     * Show Gutenberg search view
-     */
-    ui.libraryView.classList.remove('active');
-    ui.variantView.classList.remove('active');
-    ui.playerView.classList.remove('active');
-    ui.searchView.classList.add('active');
-
-    // Render books
-    renderSearchResults();
-
-    // Pause playback
-    if (state.isPlaying) {
-        ui.audio.pause();
-    }
-}
-
-function showLibraryFromSearch() {
-    /**
-     * Return to library view from search
-     */
-    ui.searchView.classList.remove('active');
-    ui.libraryView.classList.add('active');
-
-    // Stop polling if no active downloads
-    if (Object.keys(state.gutenberg.activeDownloads).length === 0) {
-        stopDownloadPolling();
-    }
-}
-
-function filterGutenbergBooks() {
-    /**
-     * Filter books based on search input and language
-     */
-    const query = ui.searchInput.value.trim().toLowerCase();
-    const language = ui.languageFilter.value;
-
-    let filtered = state.gutenberg.catalog;
-
-    // Text search
-    if (query) {
-        filtered = filtered.filter(book =>
-            book.title.toLowerCase().includes(query) ||
-            book.author.toLowerCase().includes(query)
-        );
-    }
-
-    // Language filter
-    if (language !== 'all') {
-        filtered = filtered.filter(book => book.language === language);
-    }
-
-    state.gutenberg.filteredBooks = filtered;
-    renderSearchResults();
-}
-
-function renderSearchResults() {
-    /**
-     * Render filtered books in search view
-     */
-    const books = state.gutenberg.filteredBooks;
-
-    // Update count
-    ui.searchResultsCount.textContent = `${books.length} book${books.length !== 1 ? 's' : ''} found`;
-
-    // Render grid
-    if (books.length === 0) {
-        ui.searchResults.innerHTML = '<div class="no-results">No books found. Try different search terms.</div>';
-        return;
-    }
-
-    ui.searchResults.innerHTML = books.map(book => {
-        // Create safe slug from title
-        const slug = book.title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '_')
-            .replace(/^_+|_+$/g, '')
-            .substring(0, 50);
-
-        return `
-            <div class="gutenberg-card">
-                <div class="book-info">
-                    <h3 class="book-title">${escapeHtml(book.title)}</h3>
-                    <p class="book-author">${escapeHtml(book.author)}</p>
-                    <div class="book-meta">
-                        ${book.year ? `<span class="meta-item">📅 ${book.year}</span>` : ''}
-                        <span class="meta-item">🌐 ${book.language.toUpperCase()}</span>
-                        <span class="meta-item">↓ ${book.downloads || 0}</span>
-                    </div>
-                </div>
-                <button
-                    class="download-btn"
-                    data-gutenberg-id="${book.gutenberg_id}"
-                    data-book-slug="${slug}"
-                    onclick="startDownload(${book.gutenberg_id}, '${slug}', '${escapeHtml(book.title)}')"
-                >
-                    📥 Download
-                </button>
-            </div>
-        `;
-    }).join('');
-}
 
 async function startDownload(gutenbergId, bookSlug, bookTitle) {
     /**
@@ -1252,8 +1372,13 @@ async function updateDownloadStatuses() {
             // Check if complete or error
             if (status.status === 'complete') {
                 const book = state.gutenberg.activeDownloads[jobId];
-                showNotification(`✅ ${book.title} downloaded! Process with: make_audiobook.py`, 'success');
+                showNotification(`✅ ${book.title} downloaded! Now you can generate audio.`, 'success');
                 delete state.gutenberg.activeDownloads[jobId];
+
+                // Refresh library to show newly downloaded book (if it has been processed)
+                setTimeout(async () => {
+                    await loadLibrary();
+                }, 2000);
             } else if (status.status === 'error') {
                 const book = state.gutenberg.activeDownloads[jobId];
                 showNotification(`❌ Download failed: ${book.title}`, 'error');
@@ -1744,11 +1869,32 @@ function setupEventListeners() {
     ui.closeChatBtn.addEventListener('click', closeAIChatPanel);
     ui.aiChatBackdrop.addEventListener('click', closeAIChatPanel);
 
-    // Gutenberg search
-    ui.browseGutenbergBtn.addEventListener('click', showSearchView);
-    ui.searchBackBtn.addEventListener('click', showLibraryFromSearch);
-    ui.searchInput.addEventListener('input', filterGutenbergBooks);
-    ui.languageFilter.addEventListener('change', filterGutenbergBooks);
+    // Unified search
+    ui.unifiedSearchInput.addEventListener('input', handleUnifiedSearch);
+    ui.tabLibrary.addEventListener('click', () => switchTab('library'));
+    ui.tabStore.addEventListener('click', () => switchTab('store'));
+
+    // Store pagination
+    ui.prevPageBtn.addEventListener('click', () => {
+        if (state.gutenberg.currentPage > 1) {
+            state.gutenberg.currentPage--;
+            renderStoreBooks(state.gutenberg.filteredBooks);
+            // Scroll to top of store section
+            ui.storeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    ui.nextPageBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(state.gutenberg.filteredBooks.length / state.gutenberg.pageSize);
+        if (state.gutenberg.currentPage < totalPages) {
+            state.gutenberg.currentPage++;
+            renderStoreBooks(state.gutenberg.filteredBooks);
+            // Scroll to top of store section
+            ui.storeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    // Download status
     ui.closeDownloadStatusBtn.addEventListener('click', () => {
         ui.downloadStatusPanel.style.display = 'none';
     });
@@ -1837,6 +1983,16 @@ function setupEventListeners() {
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
         if (ui.playerView.classList.contains('active')) {
+            // Don't intercept shortcuts when typing in input fields
+            const activeElement = document.activeElement;
+            if (activeElement && (
+                activeElement.tagName === 'INPUT' ||
+                activeElement.tagName === 'TEXTAREA' ||
+                activeElement.isContentEditable
+            )) {
+                return;
+            }
+
             switch(e.key) {
                 case ' ':
                     e.preventDefault();

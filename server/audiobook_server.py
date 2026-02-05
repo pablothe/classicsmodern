@@ -20,6 +20,7 @@ import json
 import os
 import re
 import sys
+import subprocess
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
@@ -77,6 +78,38 @@ app.add_middleware(
 
 # Mount static files for web player
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+# ============================================================================
+# Utility Functions
+# ============================================================================
+
+def get_audio_duration(audio_path: Path) -> Optional[float]:
+    """
+    Get audio file duration in seconds using ffprobe.
+
+    Args:
+        audio_path: Path to audio file
+
+    Returns:
+        Duration in seconds, or None if cannot be determined
+    """
+    try:
+        result = subprocess.run(
+            ['ffprobe', '-v', 'quiet', '-show_entries',
+             'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1',
+             str(audio_path)],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+
+        if result.returncode == 0 and result.stdout.strip():
+            return float(result.stdout.strip())
+    except (subprocess.TimeoutExpired, subprocess.SubprocessError, ValueError, FileNotFoundError):
+        pass
+
+    return None
 
 
 # ============================================================================
@@ -543,8 +576,42 @@ async def get_chapter_text(book_id: str, chapter_num: int):
 
     book_dir = BOOKS_DIR / book_id
 
+    # Load audio chapter timing data if available
+    audio_chapter_timing = None
+    if book.get('chapters') and chapter_num < len(book['chapters']):
+        chapter_info = book['chapters'][chapter_num]
+
+        # Calculate duration from chapter timestamps
+        audio_start = chapter_info.get('timestamp', 0)
+        audio_duration = None
+
+        # Try to calculate duration from next chapter
+        if chapter_num + 1 < len(book['chapters']):
+            next_chapter = book['chapters'][chapter_num + 1]
+            audio_duration = next_chapter.get('timestamp', 0) - audio_start
+        else:
+            # For single-chapter books or last chapter, get duration from audio file
+            if book.get('variants') and len(book['variants']) > 0:
+                # Get the first variant's first audio file
+                variant = book['variants'][0]
+                if variant.get('audio_files') and len(variant['audio_files']) > 0:
+                    audio_file_path = BOOKS_DIR / variant['audio_files'][0]
+                    if audio_file_path.exists():
+                        total_duration = get_audio_duration(audio_file_path)
+                        if total_duration:
+                            # Duration is total - start time
+                            audio_duration = total_duration - audio_start
+
+        audio_chapter_timing = {
+            'timestamp': audio_start,
+            'duration': audio_duration
+        }
+
+    # Get total audio chapters count to help detect single-file books
+    total_audio_chapters = len(book.get('chapters', []))
+
     # Get chapter text data
-    chapter_data = get_chapter_text_data(book_dir, chapter_num)
+    chapter_data = get_chapter_text_data(book_dir, chapter_num, audio_chapter_timing, total_audio_chapters)
     if not chapter_data:
         raise HTTPException(
             status_code=404,

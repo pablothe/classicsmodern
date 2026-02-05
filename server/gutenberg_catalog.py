@@ -36,7 +36,7 @@ except ImportError:
 
 # Constants
 CATALOG_FILE = Path(__file__).parent / "gutenberg_catalog.json"
-TOP_URL = "https://www.gutenberg.org/browse/scores/top"
+TOP_URL = "https://www.gutenberg.org/browse/scores/top1000"
 DELAY_BETWEEN_REQUESTS = 1.0  # seconds (be polite)
 
 
@@ -61,12 +61,12 @@ class GutenbergCatalog:
             json.dump(self.catalog, f, indent=2, ensure_ascii=False)
         print(f"✓ Catalog saved: {self.catalog_file}")
 
-    def build_catalog(self, limit: int = 500) -> List[Dict]:
+    def build_catalog(self, limit: int = 1000) -> List[Dict]:
         """
         Build catalog by scraping Project Gutenberg top books.
 
         Args:
-            limit: Maximum number of books to catalog (default: 500)
+            limit: Maximum number of books to catalog (default: 1000)
 
         Returns:
             List of book metadata dictionaries
