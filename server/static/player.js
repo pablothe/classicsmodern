@@ -156,6 +156,17 @@ const API = {
         const response = await fetch(`${this.baseURL}/api/gutenberg/downloads`);
         if (!response.ok) throw new Error('Failed to get downloads');
         return response.json();
+    },
+
+    async deleteVariant(bookId, variantId) {
+        const response = await fetch(`${this.baseURL}/api/books/${bookId}/variants/${variantId}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.detail || 'Failed to delete variant');
+        }
+        return response.json();
     }
 };
 
@@ -271,7 +282,16 @@ const ui = {
     // Download Status
     downloadStatusPanel: document.getElementById('download-status-panel'),
     downloadStatusList: document.getElementById('download-status-list'),
-    closeDownloadStatusBtn: document.getElementById('close-download-status-btn')
+    closeDownloadStatusBtn: document.getElementById('close-download-status-btn'),
+
+    // Delete Modal
+    deleteBackdrop: document.getElementById('delete-backdrop'),
+    deleteModal: document.getElementById('delete-modal'),
+    closeDeleteBtn: document.getElementById('close-delete-btn'),
+    deleteVariantName: document.getElementById('delete-variant-name'),
+    deleteVariantDetails: document.getElementById('delete-variant-details'),
+    cancelDeleteBtn: document.getElementById('cancel-delete-btn'),
+    confirmDeleteBtn: document.getElementById('confirm-delete-btn')
 };
 
 // ============================================================================
@@ -571,6 +591,22 @@ async function showVariants(bookId) {
             variantCoverContainer.innerHTML = '<div class="variant-cover-placeholder">📚</div>';
         }
 
+        // Show/hide "Generate New Version" button based on source text availability
+        const generateBtn = document.getElementById('generate-new-version-btn');
+        if (book.has_source_text) {
+            generateBtn.style.display = 'block';
+            generateBtn.onclick = () => {
+                if (typeof pipeline !== 'undefined' && pipeline.openGenerationModal) {
+                    pipeline.openGenerationModal(book.book_id);
+                } else {
+                    console.error('Pipeline not available');
+                    alert('Audio generation not available. Please check server configuration.');
+                }
+            };
+        } else {
+            generateBtn.style.display = 'none';
+        }
+
         // Render variants
         renderVariants();
 
@@ -622,9 +658,12 @@ function renderVariants() {
                             ${langInfo ? `${langInfo} • ` : ''}${date}
                         </p>
                     </div>
-                    <div class="variant-badges">
-                        <span class="variant-badge ${variant.type}">${variant.type}</span>
-                        ${variant.is_combined ? '<span class="variant-badge combined">Single File</span>' : ''}
+                    <div class="variant-actions">
+                        <div class="variant-badges">
+                            <span class="variant-badge ${variant.type}">${variant.type}</span>
+                            ${variant.is_combined ? '<span class="variant-badge combined">Single File</span>' : ''}
+                        </div>
+                        <button class="delete-variant-btn" data-variant-id="${variant.variant_id}" title="Delete this audiobook">🗑️</button>
                     </div>
                 </div>
                 <div class="variant-meta">
@@ -635,11 +674,26 @@ function renderVariants() {
         `;
     }).join('');
 
-    // Add click handlers
+    // Add click handlers for variant items
     document.querySelectorAll('.variant-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const variantId = item.dataset.variantId;
-            openVariant(variantId);
+        item.addEventListener('click', (e) => {
+            // Don't open variant if clicking delete button
+            if (!e.target.classList.contains('delete-variant-btn')) {
+                const variantId = item.dataset.variantId;
+                openVariant(variantId);
+            }
+        });
+    });
+
+    // Add click handlers for delete buttons
+    document.querySelectorAll('.delete-variant-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent variant item click
+            const variantId = btn.dataset.variantId;
+            const variant = book.variants.find(v => v.variant_id === variantId);
+            if (variant) {
+                showDeleteConfirmation(variant);
+            }
         });
     });
 }
@@ -754,14 +808,16 @@ function renderPlayer() {
     }
 
     // Show/hide text sync button based on source text availability
-    if (variant.has_source_text) {
+    // Note: source text is a book-level property, not variant-level
+    if (book.has_source_text) {
         ui.textSyncBtn.style.display = 'block';
     } else {
         ui.textSyncBtn.style.display = 'none';
     }
 
     // Show/hide AI assistant button based on source text availability
-    if (variant.has_source_text) {
+    // Note: source text is a book-level property, not variant-level
+    if (book.has_source_text) {
         ui.aiAssistantBtn.style.display = 'block';
     } else {
         ui.aiAssistantBtn.style.display = 'none';
@@ -1368,14 +1424,25 @@ async function updateDownloadStatuses() {
      */
     const jobIds = Object.keys(state.gutenberg.activeDownloads);
 
+    console.log('[Download] Updating statuses for', jobIds.length, 'jobs:', jobIds);
+
     if (jobIds.length === 0) {
+        console.log('[Download] No jobs to update, stopping polling');
         stopDownloadPolling();
         return;
     }
 
     for (const jobId of jobIds) {
         try {
+            console.log(`[Download] Fetching status for job ${jobId}...`);
             const status = await API.getDownloadStatus(jobId);
+            console.log(`[Download] Job ${jobId} status:`, status);
+
+            if (!status) {
+                console.warn(`[Download] No status returned for job ${jobId}, removing from active downloads`);
+                delete state.gutenberg.activeDownloads[jobId];
+                continue;
+            }
 
             // Update state
             state.gutenberg.activeDownloads[jobId] = {
@@ -1386,7 +1453,8 @@ async function updateDownloadStatuses() {
             // Check if complete or error
             if (status.status === 'complete') {
                 const book = state.gutenberg.activeDownloads[jobId];
-                showNotification(`✅ ${book.title} downloaded! Now you can generate audio.`, 'success');
+                console.log(`[Download] Job ${jobId} completed!`);
+                showNotification(`✅ ${book.title || book.book_slug} downloaded! Now you can generate audio.`, 'success');
                 delete state.gutenberg.activeDownloads[jobId];
 
                 // Refresh library to show newly downloaded book (if it has been processed)
@@ -1395,12 +1463,15 @@ async function updateDownloadStatuses() {
                 }, 2000);
             } else if (status.status === 'error') {
                 const book = state.gutenberg.activeDownloads[jobId];
-                showNotification(`❌ Download failed: ${book.title}`, 'error');
+                const errorMsg = status.error || 'Unknown error';
+                console.error(`[Download] Job ${jobId} failed:`, errorMsg);
+                showNotification(`❌ Download failed: ${book.title || book.book_slug} - ${errorMsg}`, 'error');
                 delete state.gutenberg.activeDownloads[jobId];
             }
 
         } catch (error) {
             console.error(`[Download] Error checking status for ${jobId}:`, error);
+            // Don't remove job on network error, it might be temporary
         }
     }
 
@@ -1409,6 +1480,7 @@ async function updateDownloadStatuses() {
 
     // Stop polling if no active downloads
     if (Object.keys(state.gutenberg.activeDownloads).length === 0) {
+        console.log('[Download] No active downloads remaining, stopping polling');
         stopDownloadPolling();
     }
 }
@@ -1419,12 +1491,16 @@ function renderDownloadStatus() {
      */
     const jobs = Object.values(state.gutenberg.activeDownloads);
 
+    console.log('[Download] Rendering status panel, active jobs:', jobs.length, jobs);
+
     if (jobs.length === 0) {
         ui.downloadStatusPanel.style.display = 'none';
+        console.log('[Download] No active jobs, hiding panel');
         return;
     }
 
     ui.downloadStatusPanel.style.display = 'block';
+    console.log('[Download] Showing panel with', jobs.length, 'jobs');
 
     ui.downloadStatusList.innerHTML = jobs.map(job => {
         const statusText = {
@@ -1435,16 +1511,25 @@ function renderDownloadStatus() {
             'error': 'Error'
         }[job.status] || job.status;
 
+        const progress = job.progress || 0;
+        const statusIcon = {
+            'pending': '⏳',
+            'downloading': '📥',
+            'processing': '⚙️',
+            'complete': '✅',
+            'error': '❌'
+        }[job.status] || '📥';
+
         return `
             <div class="download-status-item">
                 <div class="download-info">
-                    <strong>${escapeHtml(job.title || job.book_slug)}</strong>
+                    <strong>${statusIcon} ${escapeHtml(job.title || job.book_slug)}</strong>
                     <span class="status-text">${statusText}</span>
                 </div>
                 <div class="download-progress-bar">
-                    <div class="download-progress-fill" style="width: ${job.progress || 0}%"></div>
+                    <div class="download-progress-fill" style="width: ${progress}%"></div>
                 </div>
-                <span class="progress-text">${job.progress || 0}%</span>
+                <span class="progress-text">${progress}%</span>
             </div>
         `;
     }).join('');
@@ -1804,6 +1889,99 @@ function checkEndOfChapterTimer() {
 }
 
 // ============================================================================
+// Delete Variant Functions
+// ============================================================================
+
+function showDeleteConfirmation(variant) {
+    /**
+     * Show delete confirmation modal for a variant
+     */
+    // Build variant display name
+    const typeBadge = variant.type === 'summary' && variant.summary_pct
+        ? `${variant.summary_pct}% Summary`
+        : variant.type === 'deduped'
+        ? 'Full (Deduped)'
+        : 'Full Translation';
+
+    // Populate modal
+    ui.deleteVariantName.textContent = typeBadge;
+    ui.deleteVariantDetails.textContent = `${variant.file_count} file${variant.file_count !== 1 ? 's' : ''} • ${variant.size_mb} MB`;
+
+    // Store variant info for deletion
+    ui.confirmDeleteBtn.dataset.variantId = variant.variant_id;
+
+    // Show modal
+    ui.deleteBackdrop.style.display = 'block';
+    ui.deleteModal.style.display = 'block';
+}
+
+function closeDeleteModal() {
+    /**
+     * Close delete confirmation modal
+     */
+    ui.deleteBackdrop.style.display = 'none';
+    ui.deleteModal.style.display = 'none';
+    ui.confirmDeleteBtn.dataset.variantId = '';
+}
+
+async function confirmDelete() {
+    /**
+     * Execute variant deletion after confirmation
+     */
+    const variantId = ui.confirmDeleteBtn.dataset.variantId;
+    if (!variantId || !state.currentBook) {
+        console.error('[DELETE] Missing variant ID or current book');
+        return;
+    }
+
+    const bookId = state.currentBook.book_id;
+
+    // Disable button and show loading state
+    ui.confirmDeleteBtn.disabled = true;
+    ui.confirmDeleteBtn.textContent = 'Deleting...';
+
+    try {
+        console.log(`[DELETE] Deleting variant: ${bookId}/${variantId}`);
+
+        // Call API to delete variant
+        const result = await API.deleteVariant(bookId, variantId);
+
+        console.log(`[DELETE] Success:`, result);
+
+        // Close modal
+        closeDeleteModal();
+
+        // Show success notification (simple console log for now)
+        console.log(`✅ Deleted ${result.deleted_count} file(s)`);
+
+        // Reload library to get updated book data
+        await loadLibrary();
+
+        // Find the book again (it may have been removed if no variants left)
+        const updatedBook = state.books.find(b => b.book_id === bookId);
+
+        if (!updatedBook || updatedBook.variants.length === 0) {
+            // No variants left - go back to library
+            console.log('[DELETE] No variants remaining, returning to library');
+            showLibrary();
+        } else {
+            // Update current book and re-render variants
+            state.currentBook = updatedBook;
+            renderVariants();
+            console.log(`[DELETE] ${updatedBook.variants.length} variant(s) remaining`);
+        }
+
+    } catch (error) {
+        console.error('[DELETE] Error:', error);
+        alert(`Failed to delete audiobook: ${error.message}`);
+
+        // Re-enable button
+        ui.confirmDeleteBtn.disabled = false;
+        ui.confirmDeleteBtn.textContent = 'Delete';
+    }
+}
+
+// ============================================================================
 // Utility Functions
 // ============================================================================
 
@@ -1883,6 +2061,12 @@ function setupEventListeners() {
     ui.closeChatBtn.addEventListener('click', closeAIChatPanel);
     ui.aiChatBackdrop.addEventListener('click', closeAIChatPanel);
 
+    // Delete modal
+    ui.closeDeleteBtn.addEventListener('click', closeDeleteModal);
+    ui.deleteBackdrop.addEventListener('click', closeDeleteModal);
+    ui.cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+    ui.confirmDeleteBtn.addEventListener('click', confirmDelete);
+
     // Unified search
     ui.unifiedSearchInput.addEventListener('input', handleUnifiedSearch);
     ui.tabLibrary.addEventListener('click', () => switchTab('library'));
@@ -1910,7 +2094,16 @@ function setupEventListeners() {
 
     // Download status
     ui.closeDownloadStatusBtn.addEventListener('click', () => {
+        // Clear all completed/error downloads and hide panel
+        const activeJobs = Object.keys(state.gutenberg.activeDownloads);
+        console.log('[Download] Close button clicked, active jobs:', activeJobs);
+
+        // Remove all jobs (user manually closing panel)
+        state.gutenberg.activeDownloads = {};
+        stopDownloadPolling();
+
         ui.downloadStatusPanel.style.display = 'none';
+        console.log('[Download] Panel closed and downloads cleared');
     });
 
     // Chat form submission

@@ -4,6 +4,90 @@ Version history, bug fixes, and validation results for Modern Classics.
 
 ---
 
+## February 2026 Updates
+
+### Chapter Detection Architecture Fix (Feb 8, 2026)
+
+#### Problem
+Test audiobook showing "Chapters 1 and 4" instead of "Chapters 1 and 2" despite having only 2 chapters in the source markdown.
+
+**Root Cause:**
+- Chapter detection ran AFTER text cleaning (markdown removal)
+- Table of Contents entries like `1. [Chapter 1](#chapter-1)` became `1. Chapter 1`
+- TOC filter looking for markdown links `[...]` no longer found them
+- Result: 4 "chapters" detected (2 from TOC + 2 real chapters)
+
+**Architectural Issue:**
+- Chapter structure should come from source markdown, not derived from audio generation
+- Audio generation should be a pure function transforming the original text
+- Chapter info was being inferred from audio filenames, creating circular dependency
+
+#### Solution: Three-Part Fix
+
+**1. Detect Chapters from Original Markdown**
+- Move chapter detection to run on `raw_text` (immediately after file read)
+- Ensures TOC entries with markdown links are properly filtered
+- Chapter structure now comes from source, before any processing
+
+**2. Map Chapter Positions to Clean Text**
+- Chapters detected on raw markdown, but audio chunks use cleaned text
+- Solution: Search for chapter titles in cleaned text
+- Fallback: Use proportional positioning if title not found
+
+**3. Sequential Chapter File Naming**
+- Changed: `test_book_chapter_04.mp3` (uses detected chapter number)
+- To: `test_book_chapter_02.mp3` (uses sequential index)
+- Ensures files always numbered 01, 02, 03... regardless of source
+
+**Pipeline Flow (Corrected):**
+```
+Original Markdown (raw_text)
+  ↓ [DETECT CHAPTERS HERE - TOC filter works!]
+  ↓ AudioTextPreprocessor (optional)
+  ↓ clean_text_for_speech (strips markdown)
+  ↓ [Map chapter positions to cleaned text]
+  ↓ chunk_text
+  ↓ generate_audio (using chapter metadata from step 1)
+```
+
+#### Test Results
+
+**Before Fix:**
+```json
+{
+  "chapters": [
+    {"number": 1, "title": "Chapter 1", "file_index": 0},
+    {"number": 4, "title": "Chapter 4", "file_index": 1}
+  ]
+}
+```
+Files: `test_book_chapter_01.mp3`, `test_book_chapter_04.mp3`
+
+**After Fix:**
+```json
+{
+  "chapters": [
+    {"number": 1, "title": "Chapter 1", "file_index": 0},
+    {"number": 2, "title": "Chapter 2", "file_index": 1}
+  ]
+}
+```
+Files: `test_book_chapter_01.mp3`, `test_book_chapter_02.mp3`
+
+**Files Modified:**
+- `local_tts_kokoro.py` - Moved chapter detection before text cleaning (line 713)
+- `local_tts_kokoro.py` - Added chapter position remapping to clean text (lines 765-783)
+- `local_tts_kokoro.py` - Sequential chapter file naming (line 917)
+
+**Impact:**
+- All future audiobooks will have correct chapter detection
+- TOC entries no longer mistaken for chapters
+- Chapter metadata properly reflects source structure
+
+**Status:** ✅ Production ready
+
+---
+
 ## January 2026 Updates
 
 ### Anti-Duplication System (Jan 3-5, 2026)

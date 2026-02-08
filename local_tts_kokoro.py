@@ -700,9 +700,27 @@ class KokoroAudioGenerator:
         if not input_path.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
 
+        # Extract base name for output files
+        base_name = input_path.stem
+
         print(f"Reading: {input_file}")
         with open(input_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
+
+        # IMPORTANT: Detect chapters from ORIGINAL markdown BEFORE any processing
+        # This ensures chapter structure comes from source text, not derived from audio generation
+        # TOC entries with markdown links will be properly filtered at this stage
+        print("Detecting chapters from source markdown...")
+        chapters = self.detect_chapters(raw_text, is_cleaned=False)
+
+        has_chapters = len(chapters) > 0
+        if has_chapters:
+            print(f"✓ Found {len(chapters)} chapters")
+            # Show chapter titles for verification
+            for ch_num, ch_pos, ch_title in chapters:
+                print(f"   Chapter {ch_num}: {ch_title}")
+        else:
+            print("ℹ  No chapters detected (will create single file)")
 
         # Optional: Preprocess text for natural speech (markdown → spoken form)
         preprocessed_text = raw_text
@@ -729,18 +747,6 @@ class KokoroAudioGenerator:
         print("Cleaning text for speech...")
         clean_text = self.clean_text_for_speech(preprocessed_text, preserve_chapter_markers=False)
 
-        print("Detecting chapters...")
-        chapters = self.detect_chapters(clean_text, is_cleaned=False)
-
-        has_chapters = len(chapters) > 0
-        if has_chapters:
-            print(f"✓ Found {len(chapters)} chapters")
-            # Show chapter titles for verification
-            for ch_num, ch_pos, ch_title in chapters:
-                print(f"   Chapter {ch_num}: {ch_title}")
-        else:
-            print("ℹ  No chapters detected (will create single file)")
-
         word_count = len(clean_text.split())
         char_count = len(clean_text)
 
@@ -752,15 +758,38 @@ class KokoroAudioGenerator:
         print(f"Created {len(chunks)} audio chunks")
 
         # Map chunks to chapters
+        # Challenge: chapters were detected on raw_text, but chunks are from clean_text
+        # Solution: Re-detect chapter positions in clean_text using chapter titles from raw_text
         chunk_to_chapter = []
         if chapters:
+            # Find chapter positions in clean text by searching for chapter titles
+            chapter_positions_in_clean = []
+            for ch_num, ch_pos_raw, ch_title in chapters:
+                # Search for simplified chapter title in clean text
+                # Clean the title similarly to how text is cleaned
+                clean_title = ch_title
+                clean_title = re.sub(r'^#+\s+', '', clean_title)  # Remove markdown headers
+                clean_title = re.sub(r'\{#.*?\}', '', clean_title)  # Remove anchor tags
+                clean_title = clean_title.strip()
+
+                # Find position in clean text
+                pos_in_clean = clean_text.find(clean_title)
+                if pos_in_clean >= 0:
+                    chapter_positions_in_clean.append((ch_num, pos_in_clean))
+                else:
+                    # Fallback: use proportional position if title not found
+                    ratio = ch_pos_raw / len(raw_text) if len(raw_text) > 0 else 0
+                    pos_in_clean = int(ratio * len(clean_text))
+                    chapter_positions_in_clean.append((ch_num, pos_in_clean))
+
+            # Now map chunks using clean text positions
             current_char_pos = 0
             current_chapter = 1
             chapter_idx = 0
 
             for i, chunk in enumerate(chunks):
-                while chapter_idx < len(chapters) - 1:
-                    next_chapter_pos = chapters[chapter_idx + 1][1]
+                while chapter_idx < len(chapter_positions_in_clean) - 1:
+                    next_chapter_pos = chapter_positions_in_clean[chapter_idx + 1][1]
                     if current_char_pos >= next_chapter_pos:
                         current_chapter += 1
                         chapter_idx += 1
@@ -770,7 +799,7 @@ class KokoroAudioGenerator:
                 chunk_to_chapter.append(current_chapter)
                 current_char_pos += len(chunk)
 
-            print(f"✓ Mapped {len(chunks)} chunks to {max(chunk_to_chapter)} chapters\n")
+            print(f"✓ Mapped {len(chunks)} chunks to {len(set(chunk_to_chapter))} chapters\n")
         else:
             chunk_to_chapter = [1] * len(chunks)
             print()
@@ -896,17 +925,22 @@ class KokoroAudioGenerator:
         if chapters and len(chapters) > 1:
             print(f"\n📚 Combining {len(chunks)} chunks into {len(chapters)} chapters...")
 
-            for chapter_num in range(1, max(chunk_to_chapter) + 1):
+            # Get unique chapter numbers from mapping, sorted
+            unique_chapters = sorted(set(chunk_to_chapter))
+
+            # Iterate through detected chapters and create sequential files (chapter_01, chapter_02, etc.)
+            for sequential_index, chapter_num in enumerate(unique_chapters, 1):
                 chapter_audio_files = [
                     audio_files[i] for i in range(len(audio_files))
                     if chunk_to_chapter[i] == chapter_num
                 ]
 
                 if chapter_audio_files:
-                    chapter_filename = f"{base_name}_chapter_{chapter_num:02d}{ext}"
+                    # Use sequential index for filename (not source chapter number)
+                    chapter_filename = f"{base_name}_chapter_{sequential_index:02d}{ext}"
                     chapter_path = output_dir / chapter_filename
 
-                    print(f"  Chapter {chapter_num:2d}: Combining {len(chapter_audio_files)} chunks...", end=" ", flush=True)
+                    print(f"  Chapter {sequential_index:2d}: Combining {len(chapter_audio_files)} chunks...", end=" ", flush=True)
 
                     result = self.combine_audio_files(chapter_audio_files, chapter_path)
                     if result:
