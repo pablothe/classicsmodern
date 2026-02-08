@@ -1,0 +1,10 @@
+{
+  "title": "Alice Adventures",
+  "author": "Lewis Carroll",
+  "language": "English",
+  "source_file": "book.md",
+  "translations": {
+    "spanish": "translations/spanish.md"
+  },
+  "summaries": {}
+}

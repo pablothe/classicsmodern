@@ -1,0 +1,175 @@
+{
+  "filename": "chunk_001.md",
+  "toc_entries": [],
+  "chapters": [
+    {
+      "number": 1,
+      "marker": "I.",
+      "line": 22,
+      "char_pos": 523,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 2,
+      "marker": "II.",
+      "line": 26,
+      "char_pos": 1839,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 3,
+      "marker": "III.",
+      "line": 30,
+      "char_pos": 4394,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 4,
+      "marker": "IV.",
+      "line": 34,
+      "char_pos": 6752,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 5,
+      "marker": "V.",
+      "line": 38,
+      "char_pos": 8960,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 6,
+      "marker": "VI.",
+      "line": 42,
+      "char_pos": 9880,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 7,
+      "marker": "VII.",
+      "line": 46,
+      "char_pos": 11397,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 8,
+      "marker": "VIII.",
+      "line": 50,
+      "char_pos": 15119,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 9,
+      "marker": "IX.",
+      "line": 54,
+      "char_pos": 16933,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 10,
+      "marker": "X.",
+      "line": 58,
+      "char_pos": 18766,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 11,
+      "marker": "XI.",
+      "line": 62,
+      "char_pos": 21320,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 12,
+      "marker": "XII.",
+      "line": 66,
+      "char_pos": 22339,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 13,
+      "marker": "XIII.",
+      "line": 70,
+      "char_pos": 26324,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 14,
+      "marker": "XIV.",
+      "line": 74,
+      "char_pos": 30057,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 15,
+      "marker": "XV.",
+      "line": 78,
+      "char_pos": 32179,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 16,
+      "marker": "XVI.",
+      "line": 82,
+      "char_pos": 33997,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 17,
+      "marker": "XVII.",
+      "line": 86,
+      "char_pos": 35725,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 18,
+      "marker": "XVIII.",
+      "line": 90,
+      "char_pos": 38237,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 19,
+      "marker": "XIX.",
+      "line": 94,
+      "char_pos": 40647,
+      "type": "roman_standalone"
+    },
+    {
+      "number": 20,
+      "marker": "XX.",
+      "line": 98,
+      "char_pos": 41861,
+      "type": "roman_standalone"
+    }
+  ],
+  "validation": {
+    "valid": true,
+    "total_found": 20,
+    "expected_total": 20,
+    "missing": [],
+    "duplicates": [],
+    "chapter_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  }
+}
