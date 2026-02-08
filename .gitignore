@@ -108,6 +108,11 @@ books/*/*_original.md
 *.wav
 *.m4a
 *.m3u
+# Exception: Keep primary playlists (no timestamp) for version control
+!*_audiobook.m3u
+!*_chunks.m3u
+# But exclude timestamped backup playlists (e.g., *_20260208_115152.m3u)
+*_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].m3u
 *.flac
 *.png
 

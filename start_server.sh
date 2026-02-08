@@ -7,6 +7,7 @@ cd "$(dirname "$0")"
 # Activate virtual environment
 source venv/bin/activate
 
-# Start server
+# Start server using venv Python explicitly
+# This ensures subprocess.run() commands use the venv Python with kokoro-onnx installed
 cd server
-python3 audiobook_server.py --host 0.0.0.0 --port 8000
+../venv/bin/python3 audiobook_server.py --host 0.0.0.0 --port 8000

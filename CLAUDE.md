@@ -13,13 +13,43 @@ Technical reference for AI assistants working with this repository.
 
 ## Environment Setup
 
+**IMPORTANT: This project requires a Python virtual environment (venv) to work correctly.**
+
 ```bash
-# Install dependencies
+# 1. Create virtual environment (Python 3.11+ recommended)
+python3 -m venv venv
+
+# 2. Activate virtual environment
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate     # Windows
+
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables
+# 4. Install Kokoro TTS (REQUIRED for audiobook generation)
+pip install kokoro-tts kokoro-onnx soundfile
+
+# 5. Install system dependencies
+brew install ffmpeg  # macOS
+# or apt-get install ffmpeg  # Linux
+
+# 6. Set up environment variables (optional, for translation)
 # Create .env file with:
 OPENAI_API_KEY=your_api_key_here
+```
+
+**Why venv is required:**
+- The audiobook server runs inside venv and uses `venv/bin/python3` for subprocess calls
+- Kokoro TTS dependencies (`kokoro-onnx`, `soundfile`) must be installed in venv
+- Without venv, audio generation will fail with "kokoro-onnx library not installed"
+
+**Server startup (ALWAYS use start_server.sh):**
+```bash
+# Correct (uses venv automatically)
+./start_server.sh
+
+# Incorrect (will fail - missing dependencies)
+python3 server/audiobook_server.py
 ```
 
 ## Quick Start - ONE COMMAND WORKFLOW ⭐
