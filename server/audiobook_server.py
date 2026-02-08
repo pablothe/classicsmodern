@@ -289,10 +289,12 @@ def discover_books() -> List[Dict]:
         # Find cover image (check multiple locations)
         cover_path = None
         cover_locations = [
-            book_dir / "cover.png",
-            book_dir / "audio_kokoro" / "cover.png",
-            book_dir / "audio_xtts" / "cover.png",
-            book_dir / "audio_xtts" / f"{book_id}_cover.png"
+            book_dir / "cover.png",                           # Root level
+            book_dir / "audio" / "kokoro" / "cover.png",      # New structure
+            book_dir / "audio" / "original" / "cover.png",    # New structure
+            book_dir / "audio_kokoro" / "cover.png",          # Legacy
+            book_dir / "audio_xtts" / "cover.png",            # Legacy
+            book_dir / "audio_xtts" / f"{book_id}_cover.png"  # Legacy
         ]
         for loc in cover_locations:
             if loc.exists():
@@ -322,6 +324,11 @@ def discover_books() -> List[Dict]:
 
     # STAGE 2: Find all M3U playlists and add as variants
     for playlist_path in BOOKS_DIR.rglob("*.m3u"):
+        # Skip timestamped backup playlists (e.g., *_20260208_115152.m3u)
+        # These are created for history but shouldn't appear as separate variants
+        if re.search(r'_\d{8}_\d{6}\.m3u$', playlist_path.name):
+            continue
+
         # Get book directory (top-level folder in books/)
         try:
             rel_path = playlist_path.relative_to(BOOKS_DIR)
@@ -862,6 +869,117 @@ async def save_playback_position(
         'file_index': file_index,
         'word_index': word_index
     }
+
+
+@app.delete("/api/books/{book_id}/variants/{variant_id}")
+async def delete_variant(book_id: str, variant_id: str):
+    """
+    Delete an audiobook variant and all its associated files.
+
+    Args:
+        book_id: Book identifier
+        variant_id: Variant identifier (playlist filename without .m3u)
+
+    Returns:
+        Success status with deletion details
+    """
+    print(f"[DELETE] Request to delete variant: {book_id}/{variant_id}")
+
+    # Find the book
+    book = get_book_by_id(book_id)
+    if not book:
+        print(f"[DELETE] Book not found: {book_id}")
+        raise HTTPException(status_code=404, detail=f"Book '{book_id}' not found")
+
+    # Find the variant
+    variant = None
+    for v in book['variants']:
+        if v['variant_id'] == variant_id:
+            variant = v
+            break
+
+    if not variant:
+        print(f"[DELETE] Variant not found: {variant_id}")
+        raise HTTPException(status_code=404, detail=f"Variant '{variant_id}' not found")
+
+    # Track deleted files
+    deleted_files = []
+    errors = []
+
+    try:
+        # 1. Delete the M3U playlist file
+        playlist_path = BOOKS_DIR / variant['playlist_path']
+        if playlist_path.exists():
+            try:
+                playlist_path.unlink()
+                deleted_files.append(str(variant['playlist_path']))
+                print(f"[DELETE] Deleted playlist: {playlist_path}")
+            except Exception as e:
+                errors.append(f"Failed to delete playlist: {e}")
+                print(f"[DELETE] Error deleting playlist: {e}")
+
+        # 2. Delete all audio files referenced in the playlist
+        for audio_file in variant['audio_files']:
+            audio_path = BOOKS_DIR / audio_file
+            if audio_path.exists():
+                try:
+                    audio_path.unlink()
+                    deleted_files.append(audio_file)
+                    print(f"[DELETE] Deleted audio file: {audio_path}")
+                except Exception as e:
+                    errors.append(f"Failed to delete {audio_file}: {e}")
+                    print(f"[DELETE] Error deleting {audio_file}: {e}")
+
+        # 3. Delete cover image if it exists in the variant directory
+        # Infer variant directory from playlist path
+        variant_dir = playlist_path.parent
+        cover_paths = [
+            variant_dir / "cover.png",
+            variant_dir / f"{variant_id}_cover.png",
+            variant_dir / f"{book_id}_cover.png"
+        ]
+
+        for cover_path in cover_paths:
+            if cover_path.exists():
+                # Only delete if this cover is unique to this variant
+                # Don't delete if it's the main book cover
+                if variant_dir.name != book_id:  # Not in root book directory
+                    try:
+                        cover_path.unlink()
+                        deleted_files.append(str(cover_path.relative_to(BOOKS_DIR)))
+                        print(f"[DELETE] Deleted cover: {cover_path}")
+                    except Exception as e:
+                        errors.append(f"Failed to delete cover: {e}")
+                        print(f"[DELETE] Error deleting cover: {e}")
+
+        # 4. Try to remove empty directories
+        try:
+            # Remove variant directory if empty
+            if variant_dir.exists() and variant_dir != BOOKS_DIR / book_id:
+                if not any(variant_dir.iterdir()):  # Directory is empty
+                    variant_dir.rmdir()
+                    print(f"[DELETE] Removed empty directory: {variant_dir}")
+        except Exception as e:
+            # Not critical if directory removal fails
+            print(f"[DELETE] Could not remove directory {variant_dir}: {e}")
+
+        print(f"[DELETE] Successfully deleted variant {variant_id}: {len(deleted_files)} files deleted")
+
+        return {
+            'status': 'success',
+            'book_id': book_id,
+            'variant_id': variant_id,
+            'deleted_files': deleted_files,
+            'deleted_count': len(deleted_files),
+            'errors': errors if errors else None
+        }
+
+    except Exception as e:
+        print(f"[DELETE] Unexpected error: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to delete variant: {str(e)}"
+        )
 
 
 if AI_ASSISTANT_AVAILABLE:

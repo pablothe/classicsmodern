@@ -1,0 +1,25 @@
+{
+  "job_id": "65a94e6c-46cd-469a-85e9-1e7b08bb25aa",
+  "book_id": "call_cthulhu",
+  "source_file": "book.md",
+  "config": {
+    "translate": false,
+    "source_language": "English",
+    "target_language": "Modern English",
+    "translation_model": "o3-mini-high",
+    "summarize": null,
+    "voice": "bf_emma",
+    "speed": 1,
+    "generate_cover": true
+  },
+  "status": "pending",
+  "current_stage": "queued",
+  "progress": 0,
+  "stage_progress": {},
+  "created_at": "2026-02-08T14:02:40.196423",
+  "updated_at": "2026-02-08T14:02:40.196433",
+  "started_at": null,
+  "completed_at": null,
+  "error": null,
+  "output_files": {}
+}

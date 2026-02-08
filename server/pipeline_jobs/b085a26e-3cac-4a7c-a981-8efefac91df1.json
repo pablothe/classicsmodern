@@ -1,0 +1,25 @@
+{
+  "job_id": "b085a26e-3cac-4a7c-a981-8efefac91df1",
+  "book_id": "test_audiobook",
+  "source_file": "test_book.md",
+  "config": {
+    "translate": false,
+    "source_language": "English",
+    "target_language": "Modern English",
+    "translation_model": "o3-mini-high",
+    "summarize": null,
+    "voice": "bf_emma",
+    "speed": 1,
+    "generate_cover": true
+  },
+  "status": "pending",
+  "current_stage": "queued",
+  "progress": 0,
+  "stage_progress": {},
+  "created_at": "2026-02-08T14:02:40.197238",
+  "updated_at": "2026-02-08T14:02:40.197244",
+  "started_at": null,
+  "completed_at": null,
+  "error": null,
+  "output_files": {}
+}

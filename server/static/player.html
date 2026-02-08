@@ -91,6 +91,12 @@
                         <p id="variant-author" class="variant-author-header"></p>
                     </div>
                 </div>
+
+                <!-- Generate New Version Button -->
+                <button id="generate-new-version-btn" class="generate-new-version-btn" style="display: none;">
+                    🎬 Generate New Version
+                </button>
+
                 <div id="variant-list" class="variant-list"></div>
             </div>
         </div>
@@ -227,6 +233,29 @@
                             <button class="timer-btn" data-minutes="60">60 min</button>
                             <button class="timer-btn" data-action="end-of-chapter">End of Chapter</button>
                             <button class="timer-btn cancel" id="cancel-timer-btn" style="display: none;">Cancel Timer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delete Confirmation Modal -->
+                <div id="delete-backdrop" class="chapters-backdrop" style="display: none;"></div>
+                <div id="delete-modal" class="chapters-modal" style="display: none;">
+                    <div class="chapters-modal-header">
+                        <h4>Delete Audiobook?</h4>
+                        <button id="close-delete-btn" class="close-btn">✕</button>
+                    </div>
+                    <div class="delete-modal-content">
+                        <div id="delete-variant-info" class="delete-info">
+                            <p id="delete-variant-name" class="delete-variant-name"></p>
+                            <p id="delete-variant-details" class="delete-variant-details"></p>
+                        </div>
+                        <div class="delete-warning">
+                            <p>⚠️ This action cannot be undone</p>
+                            <p>All audio files and associated data will be permanently deleted.</p>
+                        </div>
+                        <div class="delete-buttons">
+                            <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+                            <button id="confirm-delete-btn" class="btn-delete">Delete</button>
                         </div>
                     </div>
                 </div>

@@ -19,9 +19,10 @@ def find_source_text(book_dir: Path) -> Optional[Path]:
     Find the best source text file for a book.
 
     Priority order:
-    1. *_cleaned.md (best - no Gutenberg boilerplate)
-    2. *_original.md (fallback)
-    3. *.md (any markdown file)
+    1. book.md (new standard - single source of truth)
+    2. *_cleaned.md (legacy)
+    3. *_original.md (legacy)
+    4. *.md (any markdown file)
 
     Args:
         book_dir: Path to book directory
@@ -32,18 +33,23 @@ def find_source_text(book_dir: Path) -> Optional[Path]:
     if not book_dir.exists():
         return None
 
-    # Try cleaned files first
+    # NEW STANDARD: book.md is the single source of truth
+    book_md = book_dir / 'book.md'
+    if book_md.exists():
+        return book_md
+
+    # LEGACY: Try cleaned files
     cleaned_files = list(book_dir.glob("*_cleaned.md"))
     if cleaned_files:
         # Prefer shorter names (more likely to be the main book)
         return min(cleaned_files, key=lambda p: len(p.name))
 
-    # Try original files
+    # LEGACY: Try original files
     original_files = list(book_dir.glob("*_original.md"))
     if original_files:
         return min(original_files, key=lambda p: len(p.name))
 
-    # Try any markdown file
+    # LEGACY: Try any markdown file
     md_files = list(book_dir.glob("*.md"))
     if md_files:
         # Exclude chunk files and translation files
@@ -51,6 +57,8 @@ def find_source_text(book_dir: Path) -> Optional[Path]:
             f for f in md_files
             if 'chunk' not in f.name.lower()
             and not f.name.startswith('_')
+            and not f.parent.name == 'translations'  # Skip translations subdir
+            and not f.parent.name == 'summaries'      # Skip summaries subdir
         ]
         if main_files:
             return min(main_files, key=lambda p: len(p.name))

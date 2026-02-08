@@ -445,14 +445,57 @@ class PipelineRunner:
         voice = self.job.config.get('voice', 'bf_emma')
         speed = self.job.config.get('speed', 1.0)
 
-        # Run make_audiobook.py
+        # Pre-flight checks
+        if not input_file.exists():
+            raise Exception(f"Input file not found: {input_file}")
+
+        make_audiobook_script = Path(__file__).parent.parent / "make_audiobook.py"
+        if not make_audiobook_script.exists():
+            raise Exception(f"make_audiobook.py not found at: {make_audiobook_script}")
+
+        # Use venv Python explicitly (server requires venv for kokoro-onnx)
+        # The server is started via start_server.sh which activates venv, so we use that Python
+        venv_python = Path(__file__).parent.parent / "venv" / "bin" / "python3"
+
+        # Fallback to sys.executable if venv not found (development mode)
+        python_exec = str(venv_python) if venv_python.exists() else sys.executable
+
+        # Verify Python interpreter and dependencies
+        try:
+            result = subprocess.run(
+                [python_exec, '--version'],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if result.returncode != 0:
+                raise Exception(f"Python interpreter check failed: {python_exec}")
+
+            # Check kokoro-onnx is installed
+            check_cmd = [python_exec, '-c', 'import kokoro_onnx; import soundfile']
+            result = subprocess.run(check_cmd, capture_output=True, text=True, timeout=5)
+            if result.returncode != 0:
+                raise Exception(
+                    f"Missing dependencies (kokoro-onnx or soundfile)\n"
+                    f"Error: {result.stderr}\n\n"
+                    f"Fix: Activate venv and run:\n"
+                    f"  source venv/bin/activate\n"
+                    f"  pip install kokoro-tts kokoro-onnx soundfile"
+                )
+        except subprocess.TimeoutExpired as e:
+            raise Exception(f"Python interpreter check timed out: {e}")
+        except Exception as e:
+            raise Exception(f"Python interpreter verification failed: {e}")
+
+        # Run make_audiobook.py with non-interactive flag
         cmd = [
-            sys.executable,
-            str(Path(__file__).parent.parent / "make_audiobook.py"),
+            python_exec,
+            str(make_audiobook_script),
             str(input_file),
             '--voice', voice,
             '--speed', str(speed),
-            '--no-generate-cover'  # We'll generate cover separately
+            '--non-interactive'     # Skip validation prompts
+            # Note: Omit --generate-cover (we handle cover separately in _run_cover_generation)
         ]
 
         self.job.update(stage_progress={'message': f'Generating audio with voice {voice}...', 'command': ' '.join(cmd)})
@@ -465,11 +508,17 @@ class PipelineRunner:
             bufsize=1
         )
 
+        # Capture ALL output for debugging
+        all_output = []
+
         # Monitor progress
         for line in iter(process.stdout.readline, ''):
             if self.cancelled:
                 process.kill()
                 raise Exception("Job cancelled by user")
+
+            # Store all output for error reporting
+            all_output.append(line.rstrip())
 
             # Parse progress from make_audiobook.py output
             # Look for patterns like "Processing chunk 45/100"
@@ -494,7 +543,35 @@ class PipelineRunner:
         process.wait()
 
         if process.returncode != 0:
-            raise Exception(f"Audio generation failed with code {process.returncode}")
+            # Build detailed error message with command and output
+            error_lines = all_output[-30:] if len(all_output) > 30 else all_output  # Last 30 lines
+
+            # Extract actual error message if available
+            actual_error = None
+            for line in reversed(all_output):
+                if 'ERROR' in line or 'Error' in line or 'error' in line:
+                    actual_error = line.strip()
+                    break
+
+            error_msg = f"Audio generation failed with exit code {process.returncode}\n\n"
+
+            if actual_error:
+                error_msg += f"Error: {actual_error}\n\n"
+
+            error_msg += f"Command: {' '.join(cmd)}\n\n"
+
+            if error_lines:
+                error_msg += "Output (last 30 lines):\n"
+                error_msg += "\n".join(error_lines)
+            else:
+                error_msg += "No output captured (process may have crashed immediately)\n"
+
+            error_msg += "\n\n💡 Troubleshooting:\n"
+            error_msg += "  - Check that venv is activated: source venv/bin/activate\n"
+            error_msg += "  - Verify kokoro-onnx is installed: pip list | grep kokoro\n"
+            error_msg += "  - Try running manually: " + ' '.join(cmd)
+
+            raise Exception(error_msg)
 
         # Find audio output directory
         audio_dir = input_file.parent / "audio_kokoro"

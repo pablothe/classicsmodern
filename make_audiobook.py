@@ -64,7 +64,8 @@ class AudiobookMaker:
         generate_cover: bool = False,
         summarize_percentage: Optional[int] = None,
         output_dir: Optional[str] = None,
-        generate_word_timings: bool = False
+        generate_word_timings: bool = False,
+        non_interactive: bool = False
     ):
         """
         Initialize audiobook maker.
@@ -81,6 +82,7 @@ class AudiobookMaker:
             summarize_percentage: Optional summarization target % (e.g., 50)
             output_dir: Custom output directory (default: auto-organized)
             generate_word_timings: Whether to generate word timings for karaoke (default: False)
+            non_interactive: Skip validation prompts (fail fast for automation) (default: False)
         """
         self.input_file = Path(input_file)
         self.voice = voice
@@ -93,6 +95,7 @@ class AudiobookMaker:
         self.summarize_percentage = summarize_percentage
         self.output_dir = output_dir
         self.generate_word_timings = generate_word_timings
+        self.non_interactive = non_interactive
 
         if not self.input_file.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
@@ -286,6 +289,14 @@ class AudiobookMaker:
                         for fix in validation_report.fixes:
                             print(f"   • {fix}")
 
+                    # In non-interactive mode, fail immediately
+                    if self.non_interactive:
+                        print("\n❌ Validation failed in non-interactive mode.")
+                        print("   Please fix the issues and try again.")
+                        print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
+                        sys.exit(2)  # Exit code 2 for validation failure
+
+                    # Interactive mode: ask user
                     print("\n❓ Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
                     response = input().strip().lower()
                     if response != 'y':
@@ -593,6 +604,12 @@ Output:
         help='Generate word-level timing data for karaoke sync (requires ffprobe)'
     )
 
+    parser.add_argument(
+        '--non-interactive',
+        action='store_true',
+        help='Skip validation prompts and fail fast (for automation/pipelines)'
+    )
+
     args = parser.parse_args()
 
     # Validation
@@ -613,7 +630,8 @@ Output:
             generate_cover=args.generate_cover,
             summarize_percentage=args.summarize,
             output_dir=args.output_dir,
-            generate_word_timings=args.generate_word_timings
+            generate_word_timings=args.generate_word_timings,
+            non_interactive=args.non_interactive
         )
 
         result = maker.make_audiobook()
