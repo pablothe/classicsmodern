@@ -647,6 +647,99 @@ async def get_book_chapters(book_id: str):
     }
 
 
+@app.get("/api/books/{book_id}/word-timings")
+async def get_book_word_timings(book_id: str):
+    """
+    Get word-level timing data for karaoke sync (all chapters).
+
+    Args:
+        book_id: Book identifier
+
+    Returns:
+        Complete word timing data for the book
+    """
+    book_dir = BOOKS_DIR / book_id
+
+    # Look for word timing JSON file
+    word_timings_path = book_dir / f"{book_id}_word_timings.json"
+
+    if not word_timings_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="Word timing data not found. Generate with: python generate_word_timings.py"
+        )
+
+    try:
+        with open(word_timings_path, 'r', encoding='utf-8') as f:
+            word_timings = json.load(f)
+
+        return {
+            'book_id': book_id,
+            'has_word_timings': True,
+            'chapters': word_timings
+        }
+    except (json.JSONDecodeError, IOError) as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error loading word timings: {str(e)}"
+        )
+
+
+@app.get("/api/books/{book_id}/word-timings/{chapter}")
+async def get_chapter_word_timings(book_id: str, chapter: int):
+    """
+    Get word-level timing data for a specific chapter.
+
+    Args:
+        book_id: Book identifier
+        chapter: Chapter number
+
+    Returns:
+        Word timing data for the chapter:
+        {
+            "chapter_number": 1,
+            "file_index": 0,
+            "word_count": 2543,
+            "duration": 612.5,
+            "words": [
+                {"word": "Chapter", "start": 0.0, "end": 0.4, "text_pos": 0},
+                {"word": "1", "start": 0.5, "end": 0.7, "text_pos": 8},
+                ...
+            ]
+        }
+    """
+    book_dir = BOOKS_DIR / book_id
+
+    # Look for word timing JSON file
+    word_timings_path = book_dir / f"{book_id}_word_timings.json"
+
+    if not word_timings_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="Word timing data not found"
+        )
+
+    try:
+        with open(word_timings_path, 'r', encoding='utf-8') as f:
+            all_timings = json.load(f)
+
+        # Look for chapter data
+        chapter_key = f"chapter_{chapter}"
+        if chapter_key not in all_timings:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Chapter {chapter} not found in word timing data"
+            )
+
+        return all_timings[chapter_key]
+
+    except (json.JSONDecodeError, IOError) as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error loading word timings: {str(e)}"
+        )
+
+
 @app.get("/api/playback/{book_id}/{variant_id}")
 async def get_playback_position(
     book_id: str,
@@ -675,10 +768,11 @@ async def get_playback_position(
         'position': 0.0,
         'speed': 1.0,
         'file_index': 0,
+        'word_index': 0,
         'last_updated': None
     })
 
-    print(f"[PLAYBACK GET] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={playback['position']:.1f}s, file={playback['file_index']}")
+    print(f"[PLAYBACK GET] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={playback['position']:.1f}s, file={playback['file_index']}, word={playback.get('word_index', 0)}")
 
     return playback
 
@@ -716,8 +810,9 @@ async def save_playback_position(
     position = data.get('position', 0.0)
     speed = data.get('speed', 1.0)
     file_index = data.get('file_index', 0)
+    word_index = data.get('word_index', 0)
 
-    print(f"[PLAYBACK SAVE] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={position:.1f}s, speed={speed}x, file={file_index}")
+    print(f"[PLAYBACK SAVE] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={position:.1f}s, speed={speed}x, file={file_index}, word={word_index}")
 
     # Load database
     db = load_playback_db()
@@ -732,6 +827,7 @@ async def save_playback_position(
         'position': position,
         'speed': speed,
         'file_index': file_index,
+        'word_index': word_index,
         'last_updated': datetime.utcnow().isoformat() + 'Z'
     }
 
@@ -743,7 +839,8 @@ async def save_playback_position(
         'book_id': book_id,
         'position': position,
         'speed': speed,
-        'file_index': file_index
+        'file_index': file_index,
+        'word_index': word_index
     }
 
 

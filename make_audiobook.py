@@ -56,7 +56,8 @@ class AudiobookMaker:
         to_mp3: bool = True,
         generate_cover: bool = False,
         summarize_percentage: Optional[int] = None,
-        output_dir: Optional[str] = None
+        output_dir: Optional[str] = None,
+        generate_word_timings: bool = False
     ):
         """
         Initialize audiobook maker.
@@ -72,6 +73,7 @@ class AudiobookMaker:
             generate_cover: Whether to generate cover art (default: False)
             summarize_percentage: Optional summarization target % (e.g., 50)
             output_dir: Custom output directory (default: auto-organized)
+            generate_word_timings: Whether to generate word timings for karaoke (default: False)
         """
         self.input_file = Path(input_file)
         self.voice = voice
@@ -83,6 +85,7 @@ class AudiobookMaker:
         self.generate_cover = generate_cover
         self.summarize_percentage = summarize_percentage
         self.output_dir = output_dir
+        self.generate_word_timings = generate_word_timings
 
         if not self.input_file.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
@@ -161,6 +164,46 @@ class AudiobookMaker:
         except Exception as e:
             print(f"⚠️  Cover generation error: {e}")
             return None
+
+    def _generate_chapter_metadata(self, audio_dir: Path, playlist_path: str) -> bool:
+        """
+        Generate chapter metadata JSON for web player navigation.
+
+        Args:
+            audio_dir: Directory containing audio files
+            playlist_path: Path to the master playlist file
+
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Import the chapter metadata generator
+            import subprocess
+            generate_script = Path(__file__).parent / "generate_chapter_metadata.py"
+
+            if not generate_script.exists():
+                print("⚠️  generate_chapter_metadata.py not found, skipping chapter metadata")
+                return False
+
+            # Run the chapter metadata generator
+            cmd = [
+                sys.executable,
+                str(generate_script),
+                playlist_path
+            ]
+
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+
+            if result.returncode == 0:
+                print(f"✓ Chapter metadata generated")
+                return True
+            else:
+                print(f"⚠️  Chapter metadata generation failed: {result.stderr}")
+                return False
+
+        except Exception as e:
+            print(f"⚠️  Chapter metadata generation error: {e}")
+            return False
 
     def _register_with_server(self, audio_dir: Path, cover_path: Optional[Path]):
         """
@@ -251,6 +294,12 @@ class AudiobookMaker:
                 print(f"   Chapters: {result['chapters']}")
                 print(f"   Format: {result['format'].upper()}")
 
+                # Generate chapter metadata for web player
+                if result['chapters'] > 0:
+                    print(f"\n📑 Generating chapter metadata for web player...")
+                    audio_dir = Path(result['output_directory'])
+                    self._generate_chapter_metadata(audio_dir, result['playlist'])
+
             else:
                 print("✓ Audio already generated, skipping...\n")
 
@@ -274,6 +323,45 @@ class AudiobookMaker:
             elif self.generate_cover:
                 print("✓ Cover art already generated, skipping...\n")
                 cover_path = Path(self.state.get('cover_path')) if self.state.get('cover_path') else None
+
+            # STAGE 2.5: Generate Word Timings (optional, for karaoke sync)
+            if hasattr(self, 'generate_word_timings') and self.generate_word_timings and not self.state.get('word_timings_complete'):
+                print("\n📚 STAGE 2.5: WORD TIMING GENERATION (KARAOKE SYNC)")
+                print("-" * 70)
+
+                try:
+                    # Import word timing generator
+                    import subprocess
+                    generate_script = Path(__file__).parent / "generate_word_timings.py"
+
+                    if not generate_script.exists():
+                        print("⚠️  generate_word_timings.py not found, skipping word timings")
+                    else:
+                        # Run word timing generator
+                        playlist_path = Path(self.state['playlist'])
+                        cmd = [
+                            sys.executable,
+                            str(generate_script),
+                            str(playlist_path),
+                            '--method', 'fallback'  # Use fallback by default (no dependencies)
+                        ]
+
+                        print(f"  Generating word timings for {self.state['chapters']} chapters...")
+                        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+
+                        if result.returncode == 0:
+                            print("✓ Word timings generated successfully!")
+                            print("  Karaoke sync will be available in web player")
+                            self.state['word_timings_complete'] = True
+                            self._save_state()
+                        else:
+                            print(f"⚠️  Word timing generation failed: {result.stderr}")
+
+                except Exception as e:
+                    print(f"⚠️  Word timing generation error: {e}")
+
+            elif hasattr(self, 'generate_word_timings') and self.generate_word_timings:
+                print("✓ Word timings already generated, skipping...\n")
 
             # STAGE 3: Register with Server
             if not self.state.get('server_registered'):
@@ -445,6 +533,12 @@ Output:
         help='Custom output directory (default: auto-organized into books/{book_name}/audio_kokoro/)'
     )
 
+    parser.add_argument(
+        '--generate-word-timings',
+        action='store_true',
+        help='Generate word-level timing data for karaoke sync (requires ffprobe)'
+    )
+
     args = parser.parse_args()
 
     # Validation
@@ -464,7 +558,8 @@ Output:
             to_mp3=not args.no_mp3,
             generate_cover=args.generate_cover,
             summarize_percentage=args.summarize,
-            output_dir=args.output_dir
+            output_dir=args.output_dir,
+            generate_word_timings=args.generate_word_timings
         )
 
         result = maker.make_audiobook()

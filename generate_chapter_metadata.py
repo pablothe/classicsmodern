@@ -104,6 +104,79 @@ def detect_chapter_pattern(filename: str) -> Optional[int]:
     return None
 
 
+def extract_chapter_titles_from_source(book_dir: Path) -> Dict[int, str]:
+    """
+    Extract chapter titles from source markdown file.
+
+    Args:
+        book_dir: Book directory (e.g., books/call_cthulhu/)
+
+    Returns:
+        Dictionary mapping chapter number to title (e.g., {1: "The Horror in Clay"})
+    """
+    # Find source markdown file
+    source_candidates = list(book_dir.glob("*.md"))
+    if not source_candidates:
+        return {}
+
+    # Use the first .md file found
+    source_file = source_candidates[0]
+
+    try:
+        with open(source_file, 'r', encoding='utf-8') as f:
+            text = f.read()
+    except Exception as e:
+        print(f"⚠️  Could not read source file {source_file.name}: {e}")
+        return {}
+
+    chapter_titles = {}
+    lines = text.split('\n')
+
+    # Find Gutenberg boundaries to exclude boilerplate
+    gutenberg_start = -1
+    gutenberg_end = -1
+    for i, line in enumerate(lines):
+        if '*** START OF THE PROJECT GUTENBERG EBOOK' in line.upper():
+            gutenberg_start = i
+        if '*** END OF THE PROJECT GUTENBERG EBOOK' in line.upper():
+            gutenberg_end = i
+            break
+
+    for i, line in enumerate(lines):
+        line_stripped = line.strip()
+
+        # Skip Gutenberg boilerplate
+        if gutenberg_start >= 0 and i < gutenberg_start:
+            continue
+        if gutenberg_end >= 0 and i >= gutenberg_end:
+            continue
+
+        # Skip empty lines and horizontal rules
+        if not line_stripped or re.match(r'^[-*_]{3,}$', line_stripped):
+            continue
+
+        # Detect numbered chapters (e.g., "1. The Horror in Clay.")
+        numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
+        if numbered_match:
+            chapter_num = int(numbered_match.group(1))
+            chapter_text = numbered_match.group(2).strip()
+
+            # Exclude TOC entries (markdown links)
+            if re.search(r'\[.*?\]\(#', chapter_text):
+                continue
+            # Exclude short entries (likely list items)
+            if len(chapter_text) < 15:
+                continue
+
+            # Remove trailing period if present
+            if chapter_text.endswith('.'):
+                chapter_text = chapter_text[:-1]
+
+            chapter_titles[chapter_num] = chapter_text
+
+    return chapter_titles
+
+
 def generate_chapter_metadata(
     playlist_path: Path,
     title: str = None,
@@ -142,6 +215,15 @@ def generate_chapter_metadata(
         # Files are organized by chapter
         print(f"✓ Detected chapter-based organization ({len(chapter_files)} chapters)")
 
+        # Try to extract chapter titles from source markdown
+        book_dir = playlist_path.parent
+        while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio', 'deduplicated', 'translated', 'chunks']:
+            book_dir = book_dir.parent
+
+        chapter_titles = extract_chapter_titles_from_source(book_dir)
+        if chapter_titles:
+            print(f"✓ Extracted {len(chapter_titles)} chapter titles from source")
+
         for chapter_num in sorted(chapter_files.keys()):
             files = chapter_files[chapter_num]
 
@@ -149,14 +231,17 @@ def generate_chapter_metadata(
             # Timestamp is always 0.0 because each chapter is its own file(s)
             file_index = audio_files.index(files[0])
 
+            # Use extracted title if available, otherwise generic
+            chapter_title = chapter_titles.get(chapter_num, f"Chapter {chapter_num}")
+
             chapters_data.append({
                 "number": chapter_num,
-                "title": f"Chapter {chapter_num}",
+                "title": chapter_title,
                 "file_index": file_index,
                 "timestamp": 0.0
             })
 
-            print(f"  Chapter {chapter_num:2d}: file_index={file_index}, files={len(files)}")
+            print(f"  Chapter {chapter_num:2d}: {chapter_title} (file_index={file_index}, files={len(files)})")
 
     else:
         # No chapter markers in filenames
@@ -234,7 +319,7 @@ def main():
 
     # Find the book directory (may be nested in chunks/translated/etc)
     book_dir = playlist_path.parent
-    while book_dir.name in ['audio_xtts', 'audio', 'deduplicated', 'translated', 'chunks']:
+    while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio', 'deduplicated', 'translated', 'chunks']:
         book_dir = book_dir.parent
 
     # Ensure we're in the actual book directory (under books/)

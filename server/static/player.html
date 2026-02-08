@@ -241,6 +241,16 @@
                         </div>
                         <button id="close-text-sync-btn" class="close-btn">✕</button>
                     </div>
+
+                    <!-- Karaoke Mode Toggle -->
+                    <div class="karaoke-toggle" id="karaoke-toggle" style="display: none;">
+                        <input type="checkbox" id="karaoke-mode-checkbox">
+                        <label for="karaoke-mode-checkbox">🎤 Karaoke Mode (Word Highlighting)</label>
+                        <span id="karaoke-status" class="karaoke-status inactive">
+                            <span id="karaoke-status-text">Disabled</span>
+                        </span>
+                    </div>
+
                     <div id="text-content" class="text-content">
                         <div class="text-loading">Loading text...</div>
                     </div>
@@ -498,6 +508,7 @@
         }
     </style>
 
+    <script src="/static/karaoke.js?v=20260208"></script>
     <script src="/static/player.js?v=20260204"></script>
 </body>
 </html>

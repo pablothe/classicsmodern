@@ -46,6 +46,14 @@ except ImportError:
 # Import book validator
 from book_validator import validate_book
 
+# Import audio text preprocessor
+try:
+    from audio_text_preprocessor import AudioTextPreprocessor
+    PREPROCESSOR_AVAILABLE = True
+except ImportError:
+    PREPROCESSOR_AVAILABLE = False
+    print("⚠️  Warning: audio_text_preprocessor not available")
+
 
 class KokoroAudioGenerator:
     """Local TTS audio generation using Kokoro (ONNX Runtime)"""
@@ -459,8 +467,8 @@ class KokoroAudioGenerator:
         Detect chapter boundaries in text.
 
         Args:
-            text: Text to search for chapters
-            is_cleaned: Whether text has been cleaned
+            text: Text to search for chapters (should have Gutenberg boilerplate stripped)
+            is_cleaned: Whether text has been cleaned for speech
 
         Returns:
             List of tuples: (chapter_number, start_position, title)
@@ -468,8 +476,28 @@ class KokoroAudioGenerator:
         chapters = []
         lines = text.split('\n')
 
+        # Find Gutenberg boundaries to exclude boilerplate from detection
+        gutenberg_start = -1
+        gutenberg_end = -1
+        for i, line in enumerate(lines):
+            if '*** START OF THE PROJECT GUTENBERG EBOOK' in line.upper():
+                gutenberg_start = i
+            if '*** END OF THE PROJECT GUTENBERG EBOOK' in line.upper():
+                gutenberg_end = i
+                break
+
         for i, line in enumerate(lines):
             line_stripped = line.strip()
+
+            # Skip Gutenberg boilerplate regions
+            if gutenberg_start >= 0 and i < gutenberg_start:
+                continue
+            if gutenberg_end >= 0 and i >= gutenberg_end:
+                continue
+
+            # Skip empty lines and horizontal rules
+            if not line_stripped or re.match(r'^[-*_]{3,}$', line_stripped):
+                continue
 
             if is_cleaned and line_stripped.startswith('<<<CHAPTER:MARKER:'):
                 marker = line_stripped.replace('<<<CHAPTER:MARKER:', '').replace('>>>', '')
@@ -478,6 +506,7 @@ class KokoroAudioGenerator:
                 chapters.append((chapter_num, char_pos, marker))
                 continue
 
+            # Detect standalone Roman numerals (e.g., "I.", "II.", "III.")
             roman_match = re.match(r'^(X{0,3})(IX|IV|V?I{0,3})\.$', line_stripped)
             if roman_match:
                 char_pos = len('\n'.join(lines[:i]))
@@ -514,9 +543,20 @@ class KokoroAudioGenerator:
                 continue
 
             # Detect numbered list chapters (e.g., "1. The Horror in Clay.")
-            # But exclude TOC markdown links (e.g., "1. [I](#chapter-1)")
+            # Stricter validation to avoid TOC and short entries:
+            # - Must have substantial text after number (>15 chars)
+            # - Cannot contain markdown links
+            # - Must end with period (typical chapter title format)
             numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
-            if numbered_match and not re.search(r'\[.*?\]\(#', numbered_match.group(2)):
+            if numbered_match:
+                chapter_text = numbered_match.group(2).strip()
+                # Exclude TOC entries (markdown links)
+                if re.search(r'\[.*?\]\(#', chapter_text):
+                    continue
+                # Exclude very short entries (likely list items, not chapters)
+                if len(chapter_text) < 15:
+                    continue
+                # Valid chapter - add it
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, line_stripped))
@@ -664,8 +704,30 @@ class KokoroAudioGenerator:
         with open(input_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
 
+        # Optional: Preprocess text for natural speech (markdown → spoken form)
+        preprocessed_text = raw_text
+        text_mapping_file = None
+
+        if PREPROCESSOR_AVAILABLE:
+            print("Preprocessing text for natural speech...")
+            preprocessor = AudioTextPreprocessor()
+            preprocess_result = preprocessor.preprocess_for_speech(raw_text)
+            preprocessed_text = preprocess_result.spoken_text
+
+            if preprocess_result.transformations:
+                print(f"  ✓ Applied {len(preprocess_result.transformations)} transformations")
+                # Prepare output directory for saving mapping
+                temp_output_dir = output_dir if output_dir else input_path.parent / "audio_kokoro"
+                temp_output_dir = Path(temp_output_dir)
+                # Save mapping for word timing alignment later
+                text_mapping_file = temp_output_dir / f"{base_name}_text_mapping.json"
+                text_mapping_file.parent.mkdir(parents=True, exist_ok=True)
+                preprocessor.save_mapping(preprocess_result, text_mapping_file)
+            else:
+                print("  ℹ  No preprocessing needed (text already speech-ready)")
+
         print("Cleaning text for speech...")
-        clean_text = self.clean_text_for_speech(raw_text, preserve_chapter_markers=False)
+        clean_text = self.clean_text_for_speech(preprocessed_text, preserve_chapter_markers=False)
 
         print("Detecting chapters...")
         chapters = self.detect_chapters(clean_text, is_cleaned=False)
@@ -673,6 +735,9 @@ class KokoroAudioGenerator:
         has_chapters = len(chapters) > 0
         if has_chapters:
             print(f"✓ Found {len(chapters)} chapters")
+            # Show chapter titles for verification
+            for ch_num, ch_pos, ch_title in chapters:
+                print(f"   Chapter {ch_num}: {ch_title}")
         else:
             print("ℹ  No chapters detected (will create single file)")
 
@@ -807,14 +872,24 @@ class KokoroAudioGenerator:
 
         # Generate playlist for individual chunks
         ext = '.mp3' if to_mp3 else '.wav'
-        chunks_playlist_path = output_dir / f"{base_name}_chunks_{timestamp}.m3u"
+        # Primary chunks playlist (consistent name)
+        chunks_playlist_path = output_dir / f"{base_name}_chunks.m3u"
         with open(chunks_playlist_path, 'w', encoding='utf-8') as f:
             f.write("#EXTM3U\n")
             for audio_file in audio_files:
                 f.write(f"#EXTINF:-1,{audio_file.stem}\n")
                 f.write(f"{audio_file.name}\n")
 
+        # Timestamped backup
+        timestamped_chunks_path = output_dir / f"{base_name}_chunks_{timestamp}.m3u"
+        with open(timestamped_chunks_path, 'w', encoding='utf-8') as f:
+            f.write("#EXTM3U\n")
+            for audio_file in audio_files:
+                f.write(f"#EXTINF:-1,{audio_file.stem}\n")
+                f.write(f"{audio_file.name}\n")
+
         print(f"\n✓ Chunks playlist created: {chunks_playlist_path.name}")
+        print(f"  Backup: {timestamped_chunks_path.name}")
 
         # Combine chunks into chapter files
         chapter_files = []
@@ -841,15 +916,26 @@ class KokoroAudioGenerator:
                         print("✗ Failed")
 
             if chapter_files:
-                playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
-                with open(playlist_path, 'w', encoding='utf-8') as f:
+                # Create primary playlist (consistent name for server, no timestamp)
+                primary_playlist_path = output_dir / f"{base_name}_audiobook.m3u"
+                with open(primary_playlist_path, 'w', encoding='utf-8') as f:
                     f.write("#EXTM3U\n")
                     for i, chapter_file in enumerate(chapter_files, 1):
                         f.write(f"#EXTINF:-1,Chapter {i}\n")
                         f.write(f"{chapter_file.name}\n")
 
-                print(f"\n✓ Master audiobook playlist created: {playlist_path.name}")
+                # Also create timestamped backup for history
+                timestamped_playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
+                with open(timestamped_playlist_path, 'w', encoding='utf-8') as f:
+                    f.write("#EXTM3U\n")
+                    for i, chapter_file in enumerate(chapter_files, 1):
+                        f.write(f"#EXTINF:-1,Chapter {i}\n")
+                        f.write(f"{chapter_file.name}\n")
+
+                playlist_path = primary_playlist_path  # Use primary for return value
+                print(f"\n✓ Master audiobook playlist created: {primary_playlist_path.name}")
                 print(f"  ({len(chapter_files)} chapters)")
+                print(f"  Backup: {timestamped_playlist_path.name}")
         else:
             print(f"\n📚 Combining all {len(audio_files)} chunks into single file...")
             combined_filename = f"{base_name}_complete{ext}"
@@ -860,12 +946,23 @@ class KokoroAudioGenerator:
                 chapter_files.append(result)
                 print(f"✓ Complete audiobook: {combined_path.name}")
 
-                playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
-                with open(playlist_path, 'w', encoding='utf-8') as f:
+                # Create primary playlist (consistent name for server, no timestamp)
+                primary_playlist_path = output_dir / f"{base_name}_audiobook.m3u"
+                with open(primary_playlist_path, 'w', encoding='utf-8') as f:
                     f.write("#EXTM3U\n")
                     f.write(f"#EXTINF:-1,Complete Audiobook\n")
                     f.write(f"{combined_path.name}\n")
-                print(f"✓ Audiobook playlist created: {playlist_path.name}")
+
+                # Also create timestamped backup for history
+                timestamped_playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
+                with open(timestamped_playlist_path, 'w', encoding='utf-8') as f:
+                    f.write("#EXTM3U\n")
+                    f.write(f"#EXTINF:-1,Complete Audiobook\n")
+                    f.write(f"{combined_path.name}\n")
+
+                playlist_path = primary_playlist_path  # Use primary for return value
+                print(f"✓ Audiobook playlist created: {primary_playlist_path.name}")
+                print(f"  Backup: {timestamped_playlist_path.name}")
             else:
                 playlist_path = chunks_playlist_path
 

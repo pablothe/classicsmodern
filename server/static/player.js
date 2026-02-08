@@ -83,7 +83,7 @@ const API = {
         return response.json();
     },
 
-    async savePlaybackPosition(bookId, variantId, position, speed, fileIndex) {
+    async savePlaybackPosition(bookId, variantId, position, speed, fileIndex, wordIndex = 0) {
         const response = await fetch(
             `${this.baseURL}/api/playback/${bookId}/${variantId}`,
             {
@@ -95,11 +95,18 @@ const API = {
                 body: JSON.stringify({
                     position,
                     speed,
-                    file_index: fileIndex
+                    file_index: fileIndex,
+                    word_index: wordIndex
                 })
             }
         );
         return response.ok;
+    },
+
+    async getWordTimings(bookId, chapter) {
+        const response = await fetch(`${this.baseURL}/api/books/${bookId}/word-timings/${chapter}`);
+        if (!response.ok) return null;
+        return response.json();
     },
 
     // Gutenberg API methods
