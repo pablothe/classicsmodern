@@ -154,6 +154,7 @@ clean_audio.m4a
 # Runtime files
 server.pid
 server/playback_db.json
+server/playback_db.json.backup
 
 # Book processing artifacts
 books/*/.audiobook_state*.json
@@ -162,8 +163,16 @@ books/*/*.md.bak
 books/*/*_cleaned_*.md
 books/*/*_original_*.md
 books/*/audio_kokoro/
+books/*/audio_edge/
 
 # Test/debug scripts (ad-hoc development)
 test_sample.txt
+test_chunking_simple.py
+test_hybrid_rag_demo.py
+test_sentence_chunking.py
 question_classifier_analysis.py
 debug_*.py
+
+# macOS system files
+.DS_Store
+**/.DS_Store
