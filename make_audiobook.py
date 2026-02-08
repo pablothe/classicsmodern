@@ -41,6 +41,13 @@ except ImportError as e:
     print("\n   (The Kokoro models in ~/.cache/kokoro/ will be used automatically)")
     sys.exit(1)
 
+# Import book validator
+try:
+    from book_validator import validate_book
+except ImportError as e:
+    print("⚠️  Warning: book_validator not available")
+    validate_book = None
+
 
 class AudiobookMaker:
     """Unified audiobook creation pipeline"""
@@ -260,6 +267,53 @@ class AudiobookMaker:
         print()
 
         try:
+            # STAGE 0: Pre-Flight Validation
+            if validate_book:
+                print("\n📚 STAGE 0: PRE-FLIGHT VALIDATION")
+                print("-" * 70)
+
+                validation_report = validate_book(str(self.input_file), verbose=False)
+
+                if not validation_report.valid:
+                    print("⚠️  Book validation found issues:")
+                    for error in validation_report.errors:
+                        print(f"   ❌ {error}")
+                    for warning in validation_report.warnings:
+                        print(f"   ⚠️  {warning}")
+
+                    if validation_report.fixes:
+                        print("\n💡 Suggested fixes:")
+                        for fix in validation_report.fixes:
+                            print(f"   • {fix}")
+
+                    print("\n❓ Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
+                    response = input().strip().lower()
+                    if response != 'y':
+                        print("\n❌ Aborted by user.")
+                        print("   Please fix the issues and try again.")
+                        print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
+                        return {'success': False, 'reason': 'validation_failed'}
+                else:
+                    print("✅ Book validation passed!")
+                    feature_count = sum(validation_report.feature_support.values())
+                    print(f"✅ Feature support: {feature_count}/3 features ready")
+
+                    # Show feature details
+                    for feature, supported in validation_report.feature_support.items():
+                        status = "✓" if supported else "✗"
+                        print(f"   {status} {feature.title()}")
+
+                    # Show key metrics
+                    if 'chapter_count' in validation_report.metrics:
+                        print(f"   • Chapters: {validation_report.metrics['chapter_count']}")
+                    if 'has_toc' in validation_report.metrics:
+                        toc_status = "Yes" if validation_report.metrics['has_toc'] else "No"
+                        print(f"   • Table of Contents: {toc_status}")
+
+                print("-" * 70 + "\n")
+            else:
+                print("⚠️  Warning: Book validator not available, skipping validation\n")
+
             # STAGE 1: Generate Audio
             if not self.state.get('audio_complete'):
                 print("\n📚 STAGE 1: AUDIO GENERATION")

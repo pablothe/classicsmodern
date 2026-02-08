@@ -212,9 +212,14 @@ def extract_variant_info(filename: str) -> Dict:
 
 def discover_books() -> List[Dict]:
     """
-    Auto-discover books by finding M3U playlists.
+    Auto-discover all books in books/ directory.
 
-    Each playlist represents a version/variant of a book:
+    Books are discovered in two stages:
+    1. Find all book directories (folders in books/)
+    2. Find audio variants (M3U playlists) for each book
+
+    Books without audio are still included (has_audio=False).
+    Books with audio have one or more variants:
     - Full translation
     - 50% summary
     - Deduplicated
@@ -227,13 +232,105 @@ def discover_books() -> List[Dict]:
     if not BOOKS_DIR.exists():
         return []
 
-    # Find all M3U playlists
+    # STAGE 1: Discover all book directories
+    for book_dir in sorted(BOOKS_DIR.iterdir()):
+        # Skip non-directories and hidden files
+        if not book_dir.is_dir() or book_dir.name.startswith('.'):
+            continue
+
+        book_id = book_dir.name
+
+        # Initialize book entry
+        title = book_id.replace('_', ' ').title()
+        language = None
+        author = None
+        year = None
+
+        # Get cataloged information first (most authoritative)
+        catalog_info = get_book_info(book_id)
+        if catalog_info:
+            title = catalog_info.get('title', title)
+            author = catalog_info.get('author', author)
+            year = catalog_info.get('year', year)
+            language = catalog_info.get('original_language')
+
+        # Extract metadata from translated files
+        translated_files = list(book_dir.glob("*_modern_*.md")) + list(book_dir.glob("*translated*.md"))
+        if translated_files and not language:
+            filename = translated_files[0].stem
+            if 'spanish' in filename.lower():
+                language = 'Spanish'
+            elif 'english' in filename.lower():
+                language = 'English'
+            elif 'french' in filename.lower():
+                language = 'French'
+            elif 'german' in filename.lower():
+                language = 'German'
+            elif 'russian' in filename.lower():
+                language = 'Russian'
+            elif 'italian' in filename.lower():
+                language = 'Italian'
+
+        # Load chapter data (can override catalog info)
+        chapters = None
+        chapter_json = list(book_dir.glob("*_chapter_data.json"))
+        if chapter_json:
+            try:
+                with open(chapter_json[0], 'r') as f:
+                    chapter_data = json.load(f)
+                    chapters = chapter_data.get('chapters', [])
+                    if 'title' in chapter_data:
+                        title = chapter_data['title']
+                    if 'author' in chapter_data and not author:
+                        author = chapter_data['author']
+            except (json.JSONDecodeError, IOError):
+                pass
+
+        # Find cover image (check multiple locations)
+        cover_path = None
+        cover_locations = [
+            book_dir / "cover.png",
+            book_dir / "audio_kokoro" / "cover.png",
+            book_dir / "audio_xtts" / "cover.png",
+            book_dir / "audio_xtts" / f"{book_id}_cover.png"
+        ]
+        for loc in cover_locations:
+            if loc.exists():
+                cover_path = str(loc.relative_to(BOOKS_DIR))
+                break
+
+        # Check for source text availability
+        source_text_path = find_source_text(book_dir)
+        has_source_text = source_text_path is not None
+
+        # Create book entry (with empty variants initially)
+        books_by_id[book_id] = {
+            'book_id': book_id,
+            'title': title,
+            'author': author,
+            'year': year,
+            'language': language or 'Unknown',
+            'chapters': chapters,
+            'has_chapters': chapters is not None,
+            'cover_image': cover_path,
+            'has_cover': cover_path is not None,
+            'has_audio': False,  # Will be set to True if variants found
+            'has_source_text': has_source_text,
+            'source_text_path': str(source_text_path.relative_to(book_dir)) if source_text_path else None,
+            'variants': []
+        }
+
+    # STAGE 2: Find all M3U playlists and add as variants
     for playlist_path in BOOKS_DIR.rglob("*.m3u"):
         # Get book directory (top-level folder in books/)
         try:
             rel_path = playlist_path.relative_to(BOOKS_DIR)
             book_id = rel_path.parts[0]
         except (ValueError, IndexError):
+            continue
+
+        # Skip if book not in our list (shouldn't happen, but safety check)
+        if book_id not in books_by_id:
             continue
 
         # Parse playlist
@@ -255,11 +352,6 @@ def discover_books() -> List[Dict]:
         # Get creation time
         created_at = datetime.fromtimestamp(playlist_path.stat().st_mtime).isoformat()
 
-        # Check for source text availability
-        book_dir = BOOKS_DIR / book_id
-        source_text_path = find_source_text(book_dir)
-        has_source_text = source_text_path is not None
-
         # Build variant object
         variant = {
             'variant_id': playlist_path.stem,
@@ -274,100 +366,28 @@ def discover_books() -> List[Dict]:
             'size_bytes': total_size,
             'size_mb': round(total_size / (1024 * 1024), 2),
             'created_at': created_at,
-            'timestamp': variant_info['timestamp'],
-            'has_source_text': has_source_text,
-            'source_text_path': str(source_text_path.relative_to(book_dir)) if source_text_path else None
+            'timestamp': variant_info['timestamp']
         }
 
-        # Create or update book entry
-        if book_id not in books_by_id:
-            book_dir = BOOKS_DIR / book_id
-            title = book_id.replace('_', ' ').title()
-            language = None
-            author = None
-            year = None
-
-            # Get cataloged information first (most authoritative)
-            catalog_info = get_book_info(book_id)
-            if catalog_info:
-                title = catalog_info.get('title', title)
-                author = catalog_info.get('author', author)
-                year = catalog_info.get('year', year)
-
-            # Extract metadata from translated files
-            translated_files = list(book_dir.glob("*_modern_*.md")) + list(book_dir.glob("*translated*.md"))
-            if translated_files:
-                filename = translated_files[0].stem
-                if 'spanish' in filename.lower():
-                    language = 'Spanish'
-                elif 'english' in filename.lower():
-                    language = 'English'
-                elif 'french' in filename.lower():
-                    language = 'French'
-                elif 'german' in filename.lower():
-                    language = 'German'
-                elif 'russian' in filename.lower():
-                    language = 'Russian'
-                elif 'italian' in filename.lower():
-                    language = 'Italian'
-
-            # Try to extract from audio filenames as well
-            if not language and audio_files:
-                first_audio = audio_files[0].lower()
-                if 'spanish' in first_audio:
-                    language = 'Spanish'
-                elif 'english' in first_audio:
-                    language = 'English'
-                elif 'russian' in first_audio:
-                    language = 'Russian'
-
-            # Load chapter data (can override catalog info)
-            chapters = None
-            chapter_json = list(book_dir.glob("*_chapter_data.json"))
-            if chapter_json:
-                try:
-                    with open(chapter_json[0], 'r') as f:
-                        chapter_data = json.load(f)
-                        chapters = chapter_data.get('chapters', [])
-                        if 'title' in chapter_data:
-                            title = chapter_data['title']
-                        if 'author' in chapter_data and not author:
-                            author = chapter_data['author']
-                except (json.JSONDecodeError, IOError):
-                    pass
-
-            # Find cover image (check multiple locations)
-            cover_path = None
-            cover_locations = [
-                book_dir / "cover.png",
-                book_dir / "audio_xtts" / "cover.png",
-                book_dir / "audio_xtts" / f"{book_id}_cover.png"
-            ]
-            for loc in cover_locations:
-                if loc.exists():
-                    cover_path = str(loc.relative_to(BOOKS_DIR))
-                    break
-
-            books_by_id[book_id] = {
-                'book_id': book_id,
-                'title': title,
-                'author': author,
-                'year': year,
-                'language': language or 'Unknown',
-                'chapters': chapters,
-                'has_chapters': chapters is not None,
-                'cover_image': cover_path,
-                'has_cover': cover_path is not None,
-                'variants': []
-            }
-
-        # Add variant to book
+        # Add variant to book and mark book as having audio
         books_by_id[book_id]['variants'].append(variant)
+        books_by_id[book_id]['has_audio'] = True
+
+        # Try to extract language from audio filenames if not already set
+        if books_by_id[book_id]['language'] == 'Unknown' and audio_files:
+            first_audio = audio_files[0].lower()
+            if 'spanish' in first_audio:
+                books_by_id[book_id]['language'] = 'Spanish'
+            elif 'english' in first_audio:
+                books_by_id[book_id]['language'] = 'English'
+            elif 'russian' in first_audio:
+                books_by_id[book_id]['language'] = 'Russian'
 
     # Sort variants by creation date (newest first) and convert to list
     books = []
     for book_data in books_by_id.values():
-        book_data['variants'].sort(key=lambda v: v['created_at'], reverse=True)
+        if book_data['variants']:
+            book_data['variants'].sort(key=lambda v: v['created_at'], reverse=True)
         # Add summary stats
         book_data['variant_count'] = len(book_data['variants'])
         books.append(book_data)
@@ -1075,6 +1095,219 @@ if GUTENBERG_AVAILABLE:
         """
         stats = gutenberg_catalog.get_stats()
         return stats
+
+
+# ============================================================================
+# Audiobook Pipeline API Endpoints
+# ============================================================================
+
+# Import pipeline module
+try:
+    from server.audiobook_pipeline import create_job, get_job, get_all_jobs, cancel_job
+    from server.language_detector import detect_language as detect_lang_func
+    PIPELINE_AVAILABLE = True
+except ImportError as e:
+    PIPELINE_AVAILABLE = False
+    print(f"⚠️  Audiobook pipeline not available: {e}")
+
+
+if PIPELINE_AVAILABLE:
+    @app.post("/api/pipeline/generate")
+    async def start_audiobook_generation(request: Request):
+        """
+        Start audiobook generation pipeline.
+
+        Request Body:
+        {
+            "book_id": "crime_punishment",
+            "source_file": "Преступление_и_наказание.md",
+            "translate": true,
+            "source_language": "Russian",
+            "target_language": "Modern English",
+            "translation_model": "o3-mini-high",
+            "summarize": 50,  // Optional: 10-90 or null
+            "voice": "bf_emma",
+            "speed": 1.0,
+            "generate_cover": true
+        }
+
+        Returns:
+            {
+                "job_id": "...",
+                "status": "pending",
+                "estimated_duration": "2-4 hours"
+            }
+        """
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        # Validate required fields
+        book_id = data.get('book_id')
+        source_file = data.get('source_file')
+
+        if not book_id or not source_file:
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required fields: book_id, source_file"
+            )
+
+        # Validate book exists
+        book_dir = BOOKS_DIR / book_id
+        source_path = book_dir / source_file
+
+        if not source_path.exists():
+            raise HTTPException(
+                status_code=404,
+                detail=f"Source file not found: {source_file}"
+            )
+
+        # Build config
+        config = {
+            'translate': data.get('translate', False),
+            'source_language': data.get('source_language', 'Russian'),
+            'target_language': data.get('target_language', 'Modern English'),
+            'translation_model': data.get('translation_model', 'o3-mini-high'),
+            'summarize': data.get('summarize'),  # Can be None
+            'voice': data.get('voice', 'bf_emma'),
+            'speed': data.get('speed', 1.0),
+            'generate_cover': data.get('generate_cover', True)
+        }
+
+        # Create job
+        job_id = create_job(book_id, source_file, config)
+
+        return {
+            'job_id': job_id,
+            'status': 'pending',
+            'estimated_duration': '2-4 hours',
+            'message': 'Audiobook generation started'
+        }
+
+
+    @app.get("/api/pipeline/jobs/{job_id}")
+    async def get_pipeline_job_status(job_id: str):
+        """
+        Get status of a pipeline job.
+
+        Args:
+            job_id: Job identifier
+
+        Returns:
+            Job status with progress
+        """
+        job = get_job(job_id)
+
+        if not job:
+            raise HTTPException(status_code=404, detail="Job not found")
+
+        return job
+
+
+    @app.get("/api/pipeline/jobs")
+    async def list_pipeline_jobs():
+        """
+        List all pipeline jobs.
+
+        Returns:
+            List of jobs with their status
+        """
+        jobs = get_all_jobs()
+        return {
+            'jobs': jobs,
+            'total': len(jobs)
+        }
+
+
+    @app.delete("/api/pipeline/jobs/{job_id}")
+    async def cancel_pipeline_job(job_id: str):
+        """
+        Cancel a running pipeline job.
+
+        Args:
+            job_id: Job identifier
+
+        Returns:
+            Success status
+        """
+        success = cancel_job(job_id)
+
+        if not success:
+            raise HTTPException(
+                status_code=404,
+                detail="Job not found or cannot be cancelled"
+            )
+
+        return {
+            'status': 'cancelled',
+            'job_id': job_id
+        }
+
+
+    @app.get("/api/pipeline/detect-language/{book_id}/{file_name}")
+    async def detect_book_language(book_id: str, file_name: str):
+        """
+        Auto-detect language of a book file.
+
+        Args:
+            book_id: Book directory name
+            file_name: Filename to analyze
+
+        Returns:
+            Language detection results
+        """
+        book_dir = BOOKS_DIR / book_id
+        file_path = book_dir / file_name
+
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="File not found")
+
+        result = detect_lang_func(file_path)
+
+        return result
+
+
+    @app.get("/api/pipeline/source-files/{book_id}")
+    async def list_source_files(book_id: str):
+        """
+        List available source markdown files for a book.
+
+        Args:
+            book_id: Book directory name
+
+        Returns:
+            List of available source files
+        """
+        book_dir = BOOKS_DIR / book_id
+
+        if not book_dir.exists():
+            raise HTTPException(status_code=404, detail="Book not found")
+
+        # Find all markdown files (exclude generated files)
+        source_files = []
+        for md_file in book_dir.glob("*.md"):
+            # Skip generated files
+            if any(x in md_file.stem.lower() for x in ['_modern_', '_translated', '_summarized', '_cleaned_cleaned', '_original_original']):
+                continue
+
+            # Get file info
+            stat = md_file.stat()
+            source_files.append({
+                'filename': md_file.name,
+                'size_bytes': stat.st_size,
+                'size_kb': round(stat.st_size / 1024, 1),
+                'modified_at': datetime.fromtimestamp(stat.st_mtime).isoformat()
+            })
+
+        # Sort by modification date (newest first)
+        source_files.sort(key=lambda x: x['modified_at'], reverse=True)
+
+        return {
+            'book_id': book_id,
+            'files': source_files,
+            'total': len(source_files)
+        }
 
 
 @app.get("/api/health")

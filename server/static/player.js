@@ -365,6 +365,8 @@ function renderLibraryBooks(books) {
         const gradient = gradients[index % gradients.length];
         const hasCover = book.has_cover && book.cover_image;
         const coverURL = hasCover ? `${API.baseURL}/api/books/${book.book_id}/cover` : null;
+        const hasAudio = book.has_audio;
+        const hasSourceText = book.has_source_text;
 
         return `
             <div class="book-item" data-book-id="${book.book_id}">
@@ -376,6 +378,11 @@ function renderLibraryBooks(books) {
                             <div class="book-cover-icon">📚</div>
                         </div>
                     `}
+                    ${!hasAudio && hasSourceText ? `
+                        <div class="generate-audio-badge" onclick="event.stopPropagation(); pipeline.openGenerationModal('${book.book_id}')">
+                            🎬 Generate Audiobook
+                        </div>
+                    ` : ''}
                 </div>
                 <div class="book-info-bottom">
                     <h3 class="book-title">${book.title}</h3>
@@ -386,7 +393,7 @@ function renderLibraryBooks(books) {
                     ` : ''}
                     <div class="book-meta">
                         ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
-                        <span>📋 ${book.variant_count}</span>
+                        ${hasAudio ? `<span>📋 ${book.variant_count}</span>` : '<span>🎙️ No audio</span>'}
                     </div>
                 </div>
             </div>

@@ -298,6 +298,22 @@
         </div>
     </div>
 
+    <!-- Generation Modal -->
+    <div id="pipeline-modal" class="pipeline-modal" style="display: none;">
+        <div class="pipeline-modal-backdrop" onclick="pipeline.closeModal()"></div>
+        <div class="pipeline-modal-container">
+            <div class="pipeline-modal-header">
+                <h3>Generate Audiobook</h3>
+                <button onclick="pipeline.closeModal()" class="close-btn">✕</button>
+            </div>
+            <div id="pipeline-modal-content" class="pipeline-modal-content">
+                <!-- Dynamic content rendered by pipeline.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Panel (created dynamically by pipeline.js) -->
+
     <style>
         /* AI Chat Panel Styles */
         .ai-chat-panel {
@@ -510,5 +526,6 @@
 
     <script src="/static/karaoke.js?v=20260208"></script>
     <script src="/static/player.js?v=20260204"></script>
+    <script src="/static/pipeline.js?v=20260208"></script>
 </body>
 </html>
