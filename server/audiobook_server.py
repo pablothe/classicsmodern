@@ -271,20 +271,40 @@ def discover_books() -> List[Dict]:
             elif 'italian' in filename.lower():
                 language = 'Italian'
 
-        # Load chapter data (can override catalog info)
+        # Load chapter data and metadata
+        # NEW STANDARD: Check metadata.json first
         chapters = None
-        chapter_json = list(book_dir.glob("*_chapter_data.json"))
-        if chapter_json:
+        has_chapters = False
+        metadata_file = book_dir / "metadata.json"
+
+        if metadata_file.exists():
             try:
-                with open(chapter_json[0], 'r') as f:
-                    chapter_data = json.load(f)
-                    chapters = chapter_data.get('chapters', [])
-                    if 'title' in chapter_data:
-                        title = chapter_data['title']
-                    if 'author' in chapter_data and not author:
-                        author = chapter_data['author']
+                with open(metadata_file, 'r') as f:
+                    metadata = json.load(f)
+                    if 'chapters' in metadata:
+                        chapters = metadata['chapters']
+                        has_chapters = True
+                    if 'title' in metadata:
+                        title = metadata['title']
+                    if 'author' in metadata and not author:
+                        author = metadata['author']
             except (json.JSONDecodeError, IOError):
                 pass
+
+        # LEGACY: Fall back to old chapter_data.json files
+        if not has_chapters:
+            chapter_json = list(book_dir.glob("*_chapter_data.json"))
+            if chapter_json:
+                try:
+                    with open(chapter_json[0], 'r') as f:
+                        chapter_data = json.load(f)
+                        chapters = chapter_data.get('chapters', [])
+                        if 'title' in chapter_data:
+                            title = chapter_data['title']
+                        if 'author' in chapter_data and not author:
+                            author = chapter_data['author']
+                except (json.JSONDecodeError, IOError):
+                    pass
 
         # Find cover image (check multiple locations)
         cover_path = None
@@ -324,6 +344,11 @@ def discover_books() -> List[Dict]:
 
     # STAGE 2: Find all M3U playlists and add as variants
     for playlist_path in BOOKS_DIR.rglob("*.m3u"):
+        # Skip backup directories (migration artifacts)
+        path_str = str(playlist_path)
+        if '.old_structure_backup' in path_str or '.old_duplicates' in path_str:
+            continue
+
         # Skip timestamped backup playlists (e.g., *_20260208_115152.m3u)
         # These are created for history but shouldn't appear as separate variants
         if re.search(r'_\d{8}_\d{6}\.m3u$', playlist_path.name):

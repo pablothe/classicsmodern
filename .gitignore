@@ -160,6 +160,7 @@ clean_audio.m4a
 server.pid
 server/playback_db.json
 server/playback_db.json.backup
+server/pipeline_jobs/*.json
 
 # Book processing artifacts
 books/*/.audiobook_state*.json
@@ -169,6 +170,10 @@ books/*/*_cleaned_*.md
 books/*/*_original_*.md
 books/*/audio_kokoro/
 books/*/audio_edge/
+
+# Book migration backups
+books/*/.old_structure_backup/
+books/*/.old_duplicates/
 
 # Test/debug scripts (ad-hoc development)
 test_sample.txt
