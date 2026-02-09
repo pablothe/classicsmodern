@@ -29,6 +29,7 @@ const state = {
     currentChapterIndex: null,
     textSyncOpen: false,
     textSyncData: null,
+    chunkManifest: null,  // NEW: Chunk-based sync data
     chatOpen: false,
     chatHistory: [],
     // Unified search state
@@ -105,6 +106,12 @@ const API = {
 
     async getWordTimings(bookId, chapter) {
         const response = await fetch(`${this.baseURL}/api/books/${bookId}/word-timings/${chapter}`);
+        if (!response.ok) return null;
+        return response.json();
+    },
+
+    async getChunkManifest(bookId) {
+        const response = await fetch(`${this.baseURL}/api/books/${bookId}/chunk-manifest`);
         if (!response.ok) return null;
         return response.json();
     },
@@ -1022,9 +1029,19 @@ async function toggleTextSync() {
     }
 }
 
-function openTextSyncPanel() {
+async function openTextSyncPanel() {
     ui.textSyncBackdrop.style.display = 'block';
     ui.textSyncPanel.style.display = 'block';
+
+    // Load chunk manifest for precise synchronization
+    if (!state.chunkManifest && state.currentBook) {
+        try {
+            state.chunkManifest = await API.getChunkManifest(state.currentBook.book_id);
+            console.log('✓ Loaded chunk manifest:', state.chunkManifest.total_chunks, 'chunks');
+        } catch (error) {
+            console.warn('⚠️  Chunk manifest not available, falling back to chapter-based sync');
+        }
+    }
 
     // Load text for current chapter
     if (state.currentChapterIndex !== null && state.currentBook && state.currentVariant) {
@@ -1119,31 +1136,48 @@ function updateTextHighlight() {
     const totalParagraphs = state.textSyncData.paragraphs.length;
     if (totalParagraphs === 0) return;
 
-    // Calculate which paragraph we're currently in
-    // Use chapter-based interpolation if audio timing is available
     let progress;
 
-    if (state.textSyncData.audio_start !== undefined && state.textSyncData.audio_duration) {
-        // Chapter-based sync: interpolate within chapter boundaries
+    // NEW: Chunk-based synchronization (most accurate)
+    if (state.chunkManifest && state.chunkManifest.chunks && state.chunkManifest.spoken_text) {
+        // Calculate global audiobook position (across all files)
+        const globalTime = calculateGlobalAudioPosition();
+
+        // Find which chunk we're currently in
+        const currentChunk = findChunkAtTime(globalTime, state.chunkManifest.chunks);
+
+        if (currentChunk) {
+            // Interpolate position within the chunk
+            const chunkProgress = (globalTime - currentChunk.cumulative_duration) / currentChunk.duration;
+            const textPosition = currentChunk.text_start + (chunkProgress * (currentChunk.text_end - currentChunk.text_start));
+
+            // Convert text position to paragraph index
+            progress = textPosition / state.chunkManifest.total_text_length;
+
+            // Clamp to valid range
+            progress = Math.max(0, Math.min(0.999, progress));
+        } else {
+            // Fallback if chunk not found
+            progress = 0;
+        }
+    }
+    // Fallback: Chapter-based sync (if audio timing available)
+    else if (state.textSyncData.audio_start !== undefined && state.textSyncData.audio_duration) {
         const chapterStart = state.textSyncData.audio_start;
         const chapterDuration = state.textSyncData.audio_duration;
         const chapterEnd = chapterStart + chapterDuration;
-
-        // Clamp current time to chapter boundaries
         const currentTime = ui.audio.currentTime;
 
         if (currentTime < chapterStart) {
-            // Before chapter start - highlight first paragraph
             progress = 0;
         } else if (currentTime >= chapterEnd) {
-            // After chapter end - highlight last paragraph
-            progress = 0.999; // Not quite 1.0 to avoid out-of-bounds
+            progress = 0.999;
         } else {
-            // Within chapter - interpolate position
             progress = (currentTime - chapterStart) / chapterDuration;
         }
-    } else {
-        // Fallback to linear interpolation (legacy behavior)
+    }
+    // Last resort: Linear interpolation
+    else {
         progress = ui.audio.currentTime / ui.audio.duration;
     }
 
@@ -1158,13 +1192,59 @@ function updateTextHighlight() {
     const currentPara = document.querySelector(`.text-paragraph[data-para-id="${currentParagraphId}"]`);
     if (currentPara) {
         currentPara.classList.add('active');
-
-        // Auto-scroll to keep current paragraph in view
         currentPara.scrollIntoView({
             behavior: 'smooth',
             block: 'center'
         });
     }
+}
+
+// Helper: Calculate global audio position (across all chapter files)
+function calculateGlobalAudioPosition() {
+    if (!state.currentVariant || !state.currentVariant.chapters) {
+        return ui.audio.currentTime;
+    }
+
+    // Sum durations of all previous chapters
+    let cumulativeDuration = 0;
+    for (let i = 0; i < state.currentFileIndex; i++) {
+        const chapter = state.currentVariant.chapters[i];
+        if (chapter && chapter.timestamp !== undefined) {
+            // If next chapter exists, use its timestamp as duration
+            const nextChapter = state.currentVariant.chapters[i + 1];
+            if (nextChapter) {
+                cumulativeDuration += (nextChapter.timestamp - chapter.timestamp);
+            }
+        }
+    }
+
+    return cumulativeDuration + ui.audio.currentTime;
+}
+
+// Helper: Find chunk at given global time
+function findChunkAtTime(globalTime, chunks) {
+    if (!chunks || chunks.length === 0) return null;
+
+    // Binary search for efficiency (chunks are sorted by cumulative_duration)
+    let left = 0;
+    let right = chunks.length - 1;
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        const chunk = chunks[mid];
+        const chunkEnd = chunk.cumulative_duration + chunk.duration;
+
+        if (globalTime >= chunk.cumulative_duration && globalTime < chunkEnd) {
+            return chunk;
+        } else if (globalTime < chunk.cumulative_duration) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    // If not found, return last chunk (end of audiobook)
+    return chunks[chunks.length - 1];
 }
 
 function escapeHtml(text) {

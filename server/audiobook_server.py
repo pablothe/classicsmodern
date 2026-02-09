@@ -713,6 +713,73 @@ async def get_book_chapters(book_id: str):
     }
 
 
+@app.get("/api/books/{book_id}/chunk-manifest")
+async def get_chunk_manifest(book_id: str):
+    """
+    Get chunk manifest for audio-text synchronization.
+
+    This endpoint returns the chunk-level metadata that maps audio timestamps
+    to text positions, enabling precise synchronization between audio playback
+    and text highlighting.
+
+    Args:
+        book_id: Book identifier
+
+    Returns:
+        Chunk manifest with duration and text position data for each audio chunk
+    """
+    book = get_book_by_id(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    book_dir = BOOKS_DIR / book_id
+
+    # Look for chunk manifest in audio directories (try multiple locations)
+    potential_paths = [
+        book_dir / "audio_kokoro" / f"{book_id}_chunk_manifest.json",
+        book_dir / "audio_kokoro" / "book_chunk_manifest.json",
+        book_dir / f"{book_id}_chunk_manifest.json",
+    ]
+
+    chunk_manifest_path = None
+    for path in potential_paths:
+        if path.exists():
+            chunk_manifest_path = path
+            break
+
+    if not chunk_manifest_path:
+        raise HTTPException(
+            status_code=404,
+            detail="Chunk manifest not found. This audiobook may need to be regenerated with the latest version."
+        )
+
+    try:
+        with open(chunk_manifest_path, 'r', encoding='utf-8') as f:
+            manifest = json.load(f)
+
+        # Also load text mapping for spoken_text (if available)
+        text_mapping_path = chunk_manifest_path.parent / f"{book_id}_text_mapping.json"
+        if not text_mapping_path.exists():
+            text_mapping_path = chunk_manifest_path.parent / "book_text_mapping.json"
+
+        spoken_text = None
+        if text_mapping_path.exists():
+            with open(text_mapping_path, 'r', encoding='utf-8') as f:
+                text_mapping = json.load(f)
+                spoken_text = text_mapping.get('spoken_text')
+
+        # Add spoken_text to response if available
+        if spoken_text:
+            manifest['spoken_text'] = spoken_text
+
+        return manifest
+    except (IOError, json.JSONDecodeError) as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to load chunk manifest: {str(e)}"
+        )
+
+
 @app.get("/api/books/{book_id}/word-timings")
 async def get_book_word_timings(book_id: str):
     """

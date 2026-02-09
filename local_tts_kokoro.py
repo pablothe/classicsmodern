@@ -675,6 +675,90 @@ class KokoroAudioGenerator:
             print(f"⚠️  Warning: Post-processing failed: {e}")
             return input_file
 
+    def _generate_chunk_manifest(
+        self,
+        chunks: List[str],
+        audio_files: List[Path],
+        chunk_to_chapter: List[int],
+        clean_text: str,
+        base_name: str,
+        output_dir: Path
+    ) -> dict:
+        """
+        Generate chunk manifest for text synchronization.
+
+        Args:
+            chunks: List of text chunks
+            audio_files: List of generated audio file paths
+            chunk_to_chapter: List mapping chunk index to chapter number
+            clean_text: Full cleaned text (spoken version)
+            base_name: Base filename for output
+            output_dir: Output directory
+
+        Returns:
+            Chunk manifest dictionary
+        """
+        import json
+
+        manifest = {
+            "version": "1.0",
+            "created_at": datetime.now().isoformat(),
+            "total_chunks": len(chunks),
+            "total_text_length": len(clean_text),
+            "chunks": []
+        }
+
+        cumulative_duration = 0.0
+        current_text_pos = 0
+
+        for i, (chunk_text, audio_file, chapter_num) in enumerate(zip(chunks, audio_files, chunk_to_chapter), 1):
+            # Get audio duration using ffprobe
+            try:
+                result = subprocess.run(
+                    [
+                        'ffprobe', '-v', 'error',
+                        '-show_entries', 'format=duration',
+                        '-of', 'default=noprint_wrappers=1:nokey=1',
+                        str(audio_file)
+                    ],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                duration = float(result.stdout.strip())
+            except (subprocess.CalledProcessError, FileNotFoundError, ValueError) as e:
+                print(f"⚠️  Warning: Could not get duration for chunk {i}: {e}")
+                duration = 0.0
+
+            text_start = current_text_pos
+            text_end = current_text_pos + len(chunk_text)
+
+            chunk_info = {
+                "number": i,
+                "file": audio_file.name,
+                "duration": round(duration, 3),
+                "text_start": text_start,
+                "text_end": text_end,
+                "text_length": len(chunk_text),
+                "text_preview": chunk_text[:100] + "..." if len(chunk_text) > 100 else chunk_text,
+                "chapter": chapter_num,
+                "cumulative_duration": round(cumulative_duration, 3)
+            }
+
+            manifest["chunks"].append(chunk_info)
+
+            cumulative_duration += duration
+            current_text_pos = text_end
+
+        manifest["total_duration"] = round(cumulative_duration, 3)
+
+        # Save manifest
+        manifest_path = output_dir / f"{base_name}_chunk_manifest.json"
+        with open(manifest_path, 'w', encoding='utf-8') as f:
+            json.dump(manifest, f, indent=2, ensure_ascii=False)
+
+        return manifest
+
     def generate_audiobook(
         self,
         input_file: str,
@@ -906,6 +990,18 @@ class KokoroAudioGenerator:
                 audio_files.append(result)
         else:
             audio_files = raw_audio_files
+
+        # Generate chunk manifest for text synchronization
+        print(f"\n📊 Generating chunk manifest for text sync...")
+        chunk_manifest = self._generate_chunk_manifest(
+            chunks=chunks,
+            audio_files=audio_files,
+            chunk_to_chapter=chunk_to_chapter,
+            clean_text=clean_text,
+            base_name=base_name,
+            output_dir=output_dir
+        )
+        print(f"✓ Chunk manifest saved: {base_name}_chunk_manifest.json")
 
         # Generate playlist for individual chunks
         ext = '.mp3' if to_mp3 else '.wav'

@@ -6,6 +6,88 @@ Version history, bug fixes, and validation results for Modern Classics.
 
 ## February 2026 Updates
 
+### Audio-Text Synchronization Fix (Feb 9, 2026)
+
+#### Problem
+Audio and text were not synchronized in the web player's text sync feature. Text highlighting would lag behind or jump ahead of audio playback, making the karaoke-style reading experience unusable.
+
+**Root Cause Analysis:**
+1. **Text sync used wrong audio timestamp** - Used `ui.audio.currentTime` (local file time 0-60s) instead of global audiobook position
+2. **Missing chapter duration data** - Chapter metadata had `timestamp: 0.0` for all chapters, causing NaN in calculations
+3. **No chunk-to-text mapping** - System had no way to map audio chunks to their corresponding text positions
+
+**Example Issue:**
+- Call of Cthulhu has 3 chapters, 100 audio chunks
+- Playing chapter 2 at 30 seconds: `ui.audio.currentTime = 30`
+- System highlighted paragraph 30 of entire book, not paragraph 30 of chapter 2
+- Result: Text was completely out of sync
+
+#### Solution: Chunk-Based Synchronization Architecture
+
+**Implementation:** Three-layer system leveraging existing chunk data
+
+**1. Audio Generation (Python) - `local_tts_kokoro.py`**
+- Added `_generate_chunk_manifest()` method
+- Records for each chunk:
+  - Audio duration (via ffprobe)
+  - Text start/end positions in spoken_text
+  - Chapter mapping
+  - Cumulative duration (for global position tracking)
+- Saves `{book}_chunk_manifest.json`
+
+**2. Backend API - `server/audiobook_server.py`**
+- New endpoint: `GET /api/books/{book_id}/chunk-manifest`
+- Serves chunk manifest + spoken_text for synchronization
+- Handles multiple file path conventions for backwards compatibility
+
+**3. Frontend Sync - `server/static/player.js`**
+- Loads chunk manifest when text sync opens
+- Rewrote `updateTextHighlight()` with three-tier fallback:
+  1. **Chunk-based sync** (primary, most accurate)
+  2. **Chapter-based sync** (fallback if no manifest)
+  3. **Linear interpolation** (last resort)
+- Added helper functions:
+  - `calculateGlobalAudioPosition()` - sums previous chapter durations
+  - `findChunkAtTime()` - binary search for chunk (O(log n))
+
+**Synchronization Algorithm:**
+```javascript
+globalTime = Σ(previous_chapter_durations) + currentTime
+currentChunk = binarySearch(chunks, globalTime)
+textPosition = chunk.text_start + (chunkProgress × chunk.text_length)
+paragraphIndex = floor((textPosition / total_text_length) × total_paragraphs)
+```
+
+**Benefits:**
+- ✅ **Accurate sync** - Text maps 1:1 to audio chunks (not interpolated)
+- ✅ **Works with multi-file audiobooks** - Correctly handles chapter_01.mp3, chapter_02.mp3, etc.
+- ✅ **Efficient** - Binary search O(log n) lookup
+- ✅ **Backwards compatible** - Falls back gracefully for old audiobooks
+- ✅ **Scalable** - Works for any book length (tested with 100 chunks)
+
+**Testing:**
+- Tested with Call of Cthulhu (3 chapters, 100 chunks, 70K characters)
+- Verified text highlights match audio playback precisely
+- Confirmed global position tracking across chapter files
+
+**Documentation:**
+- Created comprehensive guide: [docs/AUDIO_TEXT_SYNC.md](docs/AUDIO_TEXT_SYNC.md)
+- Includes architecture diagrams, algorithm details, troubleshooting
+
+**Migration:**
+Audiobooks created before Feb 9, 2026 need regeneration:
+```bash
+python3 make_audiobook.py books/{book_name}/book.md
+```
+
+**Files Modified:**
+- `local_tts_kokoro.py` - Added chunk manifest generation
+- `server/audiobook_server.py` - Added `/chunk-manifest` endpoint
+- `server/static/player.js` - Rewrote synchronization logic
+- `docs/AUDIO_TEXT_SYNC.md` - Complete technical documentation
+
+---
+
 ### Chapter Detection Architecture Fix (Feb 8, 2026)
 
 #### Problem
