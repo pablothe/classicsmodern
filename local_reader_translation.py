@@ -304,25 +304,20 @@ class OllamaTranslator:
         Returns:
             Translated text
         """
-        # Construct the translation prompt
+        # Construct the translation prompt (SIMPLIFIED to prevent prompt leakage)
+        # LLM can auto-detect source language, we only specify target
         if previous_translation:
             # Get last 1-2 sentences from previous translation for context
             context = self._get_last_sentences(previous_translation, count=2)
 
-            prompt = f"""I will provide context from the previous section, then new text to translate.
-
-CONTEXT (already translated, for reference only):
----
+            prompt = f"""Reference (do not repeat):
 {context}
----
 
-TRANSLATE THE FOLLOWING NEW TEXT FROM {source_lang.upper()} TO {target_lang.upper()}:
-{chunk.content}
-
-Important: Only translate the new text above. Do not repeat the context. Do not include any commentary or explanations - only provide the direct translation."""
+Translate to {target_lang}:
+{chunk.content}"""
         else:
             # First chunk, no context
-            prompt = f"Translate from {source_lang} to {target_lang}. Only provide the direct translation, no commentary or explanations:\n\n{chunk.content}"
+            prompt = f"Translate to {target_lang}:\n\n{chunk.content}"
 
         # Call Ollama API
         chunk_id = f"chunk_{chunk.index}"
@@ -411,7 +406,7 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
     def translate_document_with_context(
         self,
         text: str,
-        source_lang: str = "German",
+        source_lang: Optional[str] = None,  # DEPRECATED: LLM auto-detects source
         target_lang: str = "Modern English",
         previous_context: Optional[str] = None,
         progress_callback: Optional[Callable[[int, int], None]] = None
@@ -421,8 +416,8 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
 
         Args:
             text: The text to translate
-            source_lang: Source language
-            target_lang: Target language
+            source_lang: DEPRECATED - LLM auto-detects source language
+            target_lang: Target language (e.g. "Modern English", "Spanish")
             previous_context: Context from previous file/chunk (optional)
             progress_callback: Optional callback function(current, total)
 
@@ -491,7 +486,7 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
     def translate_document(
         self,
         text: str,
-        source_lang: str = "German",
+        source_lang: Optional[str] = None,  # DEPRECATED: LLM auto-detects source
         target_lang: str = "Modern English",
         progress_callback: Optional[Callable[[int, int], None]] = None
     ) -> TranslationResult:
@@ -500,8 +495,8 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
 
         Args:
             text: The text to translate
-            source_lang: Source language
-            target_lang: Target language
+            source_lang: DEPRECATED - LLM auto-detects source language
+            target_lang: Target language (e.g. "Modern English", "Spanish")
             progress_callback: Optional callback function(current, total)
 
         Returns:

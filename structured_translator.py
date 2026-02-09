@@ -10,9 +10,10 @@ Key principles:
 
 Usage:
     python3 structured_translator.py INPUT.md \\
-        --source-lang Latin \\
         --target-lang "Modern English" \\
         --model ollama:gemma3-translator
+
+    Source language is auto-detected by the LLM (no --source-lang needed!)
 """
 
 import sys
@@ -54,10 +55,10 @@ class BookStructure:
 @dataclass
 class TranslationConfig:
     """Translation configuration"""
-    source_lang: str
-    target_lang: str
-    translator_type: str          # "ollama" or "openai"
-    model_name: str
+    source_lang: Optional[str] = None  # DEPRECATED: LLM auto-detects source
+    target_lang: str = "Modern English"
+    translator_type: str = "ollama"    # "ollama" or "openai"
+    model_name: str = "zongwei/gemma3-translator:4b"
     translate_metadata: bool = True
     preserve_markers: bool = True
 
@@ -254,11 +255,10 @@ class BlockTranslator:
                 import json
                 checkpoint_data = json.load(f)
 
-            # Verify checkpoint matches current config
+            # Verify checkpoint matches current config (only check target_lang now)
             saved_config = checkpoint_data.get('config', {})
-            if (saved_config.get('source_lang') != self.config.source_lang or
-                saved_config.get('target_lang') != self.config.target_lang):
-                print(f"  ⚠️  Checkpoint language mismatch - starting fresh")
+            if saved_config.get('target_lang') != self.config.target_lang:
+                print(f"  ⚠️  Checkpoint target language mismatch - starting fresh")
                 return None
 
             # Rebuild chapters from checkpoint
@@ -315,7 +315,10 @@ class BlockTranslator:
             New BookStructure with translated content
         """
         print(f"\n🌐 Translating {len(structure.chapters)} chapters...")
-        print(f"   Source: {self.config.source_lang}")
+        if self.config.source_lang:
+            print(f"   Source: {self.config.source_lang} (explicit)")
+        else:
+            print(f"   Source: Auto-detect")
         print(f"   Target: {self.config.target_lang}")
         print(f"   Model: {self.config.model_name}")
         print()
@@ -425,9 +428,12 @@ class OpenAITranslatorWrapper:
         self.client = client
         self.model_name = model_name
 
-    def translate(self, text: str, source_lang: str, target_lang: str) -> str:
+    def translate(self, text: str, source_lang: Optional[str], target_lang: str) -> str:
         """Translate text using OpenAI"""
-        prompt = f"Translate the following text from {source_lang} to {target_lang}. Preserve formatting and structure:\n\n{text}"
+        if source_lang:
+            prompt = f"Translate from {source_lang} to {target_lang}:\n\n{text}"
+        else:
+            prompt = f"Translate to {target_lang}:\n\n{text}"
 
         response = self.client.chat.completions.create(
             model=self.model_name,
@@ -521,7 +527,7 @@ def translate_book(input_file: Path, config: TranslationConfig) -> Path:
     print("STRUCTURED BOOK TRANSLATOR")
     print("="*70)
     print(f"Input: {input_file}")
-    print(f"Source language: {config.source_lang}")
+    print(f"Source language: {config.source_lang or 'Auto-detect'}")
     print(f"Target language: {config.target_lang}")
     print(f"Model: {config.model_name}")
     print("="*70)
@@ -584,8 +590,9 @@ def main():
     )
     parser.add_argument(
         '--source-lang',
-        required=True,
-        help='Source language (e.g., "Latin", "Russian")'
+        required=False,
+        default=None,
+        help='[OPTIONAL] Source language - LLM will auto-detect if not specified'
     )
     parser.add_argument(
         '--target-lang',

@@ -535,14 +535,19 @@ class PipelineRunner:
             # Store all output for error reporting
             all_output.append(line.rstrip())
 
+            # Echo subprocess output to server logs (real-time visibility)
+            print(f"  [audio] {line.rstrip()}", flush=True)
+
             # Parse progress from make_audiobook.py output
-            # Look for patterns like "Processing chunk 45/100"
-            if 'chunk' in line.lower() or 'processing' in line.lower():
-                import re
-                match = re.search(r'(\d+)\s*/\s*(\d+)', line)
-                if match:
-                    current = int(match.group(1))
-                    total = int(match.group(2))
+            # Look for patterns like "[20/100]" or "chunk 45/100" or "Progress: ... 20/100"
+            import re
+            match = re.search(r'(\d+)\s*/\s*(\d+)', line)
+            if match:
+                current = int(match.group(1))
+                total = int(match.group(2))
+
+                # Only update progress if it's a reasonable chunk count (not timestamps or other numbers)
+                if 10 <= total <= 10000:  # Reasonable range for audio chunks
                     chunk_progress = int((current / total) * 100)
                     overall_progress = 60 + int(chunk_progress * 0.35)  # Audio is 60-95%
                     self.job.update(

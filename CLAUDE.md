@@ -363,11 +363,100 @@ brew install ffmpeg  # macOS
 
 **See [GUIDE.md](GUIDE.md) for complete audio generation workflow.**
 
+### Web Server & Mobile Access
+
+**Starting the Server:**
+```bash
+# ALWAYS use the startup script (handles venv activation)
+./start_server.sh
+
+# Server runs on http://localhost:8080
+# Access from phone: http://[your-mac-ip]:8080
+```
+
+**Web Interface Features:**
+- **Book Catalog** (`/`) - Browse all audiobooks with cover art
+- **Audio Player** - Chapter-based playback with progress tracking
+- **Job Dashboard** (`/jobs`) - Monitor translation/audio generation jobs
+- **AI Chat** - Ask questions about book content (requires 3+ chapters)
+- **Karaoke Mode** - Synchronized text highlighting during playback
+
+**API Endpoints:**
+```
+GET  /api/books                    # List all books
+GET  /api/books/{book_id}          # Get book details
+GET  /api/books/{book_id}/audio    # Stream audio
+POST /api/playback/{book_id}       # Save playback position
+POST /api/jobs/download            # Download from Gutenberg
+POST /api/jobs/translate           # Start translation job
+POST /api/jobs/audiobook           # Generate audiobook
+```
+
 ## Architecture
+
+### Book Manifest System (NEW - February 2026)
+The project now uses a unified manifest system for consistent chapter handling:
+
+- **`book_processor.py`** - Single source of truth for book structure
+  - Detects chapters using 14+ patterns (Roman numerals, markdown headers, numbered lists, etc.)
+  - Strips Gutenberg boilerplate automatically
+  - Generates table of contents when missing
+  - Creates JSON manifest with all metadata and checkpoints
+  - Handles edge cases like Alice in Wonderland (all chapters on one line)
+
+- **`book_manifest.json`** - Human-readable structure containing:
+  ```json
+  {
+    "chapters": [...],           // All chapters with content
+    "checkpoints": {              // Per-chapter progress tracking
+      "translation": {...},
+      "audio": {...}
+    },
+    "metadata": {...},            // Title, author, language
+    "toc_markdown": "..."         // Generated table of contents
+  }
+  ```
+
+- **Manifest-Based Pipeline**:
+  - `structured_translator_v2.py` - Uses manifest chapters for translation
+  - `local_tts_kokoro_v2.py` - Uses manifest for audio boundaries
+  - `manifest_utils.py` - Shared utilities for checkpoint management
+  - Perfect chapter alignment across all processes
+  - Resume from exact chapter after interruption
+
+- **Usage**:
+  ```bash
+  # Generate manifest (one time)
+  python3 book_processor.py books/mybook/book.md
+
+  # Use manifest for translation
+  python3 structured_translator_v2.py books/mybook/book_manifest.json --target-lang Spanish
+
+  # Use manifest for audio
+  python3 local_tts_kokoro_v2.py books/mybook/book_manifest.json --voice bf_emma
+  ```
+
+### Web Server & Job Queue System
+- **FastAPI Server**: Full-featured audiobook server with web dashboard (`server/audiobook_server.py`)
+  - REST API for book catalog and metadata
+  - Audio streaming with HTTP range requests
+  - Device-specific playback position tracking
+  - Auto-discovery of books in `books/` directory
+  - CORS enabled for mobile access
+- **Unified Job Queue**: Background job processing system (`server/job_queue.py`)
+  - Download books from Project Gutenberg catalog
+  - Translate books with real-time progress tracking
+  - Generate audiobooks with pipeline integration
+  - SQLite database for job persistence (`jobs.db`)
+  - Web dashboard at `/jobs` for monitoring
+- **AI Chat Integration**: LLM-powered Q&A about book content
+  - Hybrid RAG system for context retrieval
+  - Semantic search with embeddings
+  - Question classification for targeted responses
 
 ### Translation System
 - **Multi-Model Support**: Supports o1-mini, o1-preview, o3-mini, o3-mini-high, gpt-4o-mini (cloud), and zongwei/gemma3-translator:4b (local via Ollama)
-- **Smart Chunking**: Respects Markdown structure, ~250 words per chunk
+- **Smart Chunking**: Respects Markdown structure, ~10k words per chunk (updated from ~250 for better context)
 - **Structure Preservation**: Maintains headers, links, tables, and formatting through translation
 - **Context-Aware Translation**: Each chunk receives context from previous chunk to prevent duplicates
 - **Two-Layer Deduplication**:
@@ -404,59 +493,56 @@ brew install ffmpeg  # macOS
 
 ### Audio Generation System
 
-**Local TTS - Orpheus (RECOMMENDED):**
-- **Model**: Llama-3b based TTS (canopylabs/orpheus-tts-0.1-finetune-prod)
-- **Quality**: SOTA open-source, superior to commercial models
+**Local TTS - Kokoro (ONLY SUPPORTED SYSTEM):**
+- **Model**: Kokoro TTS with ONNX Runtime
+- **Quality**: Superior to Edge-TTS/XTTS, rivals commercial APIs
+- **Performance**: 31× faster than alternatives (6.5s vs 203s per passage)
 - **Features**:
-  - Human-like intonation, emotion, and rhythm
-  - 8 voices (tara, leah, jess, leo, dan, mia, zac, zoe)
-  - Emotion tags (<laugh>, <chuckle>, <sigh>, etc.)
-  - ~200ms streaming latency
+  - 52 preset voices (American/British, male/female)
+  - Apple Silicon GPU acceleration (MPS)
+  - 100% local inference (no API calls)
+  - Apache 2.0 license (commercial-friendly)
   - Automatic chapter detection and combining
   - FFmpeg post-processing (normalization, MP3)
-- **Speed**: ~1-2x realtime (GPU recommended)
-- **Usage**: `python local_tts_orpheus.py translated.md --voice tara`
+- **Chapter Detection Architecture** (Fixed Feb 2026):
+  - Detects chapters from raw markdown BEFORE text cleaning
+  - Preserves TOC structure and chapter markers
+  - Sequential file naming (chapter_01.mp3, chapter_02.mp3)
+  - Maps chapter positions accurately to clean text
+- **Usage**: `python3 local_tts_kokoro.py translated.md --voice bf_emma`
 
-**Local TTS - XTTS-v2:**
-- Free, voice cloning (10-30 sec sample)
-- 16 languages, automatic post-processing (speed, normalize, MP3)
-- 2-4x slower than realtime (CPU)
-- **Chapter Detection**: Automatically detects chapters BEFORE text cleaning, preserves markers, then combines chunks into chapter-based audio files
-- **Smart Combining**: Uses FFmpeg to stitch 250-char audio chunks into full chapter files
-
-**Cloud TTS (OpenAI):**
+**Cloud TTS (OpenAI - Optional):**
 - ~$15/book, 6 voices, faster generation
 - Smart chunking, playlist generation
+- Used via `local_reader_audio.py` for legacy workflows
 
 ### File Organization Pattern
 ```
 books/
 ├── [book_name]/
-│   ├── [original].md
-│   ├── chunks/                                  # Split for large books
+│   ├── book.md                                 # Original/source text
+│   ├── book_manifest.json                     # NEW: Unified structure (chapters, checkpoints)
+│   ├── metadata.json                           # Legacy metadata (being replaced by manifest)
+│   ├── cover.png                               # Generated cover art
+│   ├── audio_kokoro/                           # PRIMARY audio output (Kokoro TTS)
+│   │   ├── raw/                               # Unprocessed WAV chunks
+│   │   │   └── [book]_chunk001_raw.wav
+│   │   ├── chapter_01.mp3                     # Chapter-based files (processed)
+│   │   ├── chapter_02.mp3
+│   │   ├── audiobook.m3u                      # Master playlist
+│   │   └── metadata.json                      # Audio metadata
+│   ├── chunks/                                 # Split for large books (batch translation)
 │   │   ├── chunk_001.md
 │   │   ├── chunk_002.md
 │   │   └── translated/
-│   │       ├── chunk_001_[language]_4b.md      # Raw translations
-│   │       └── deduplicated/                   # ← Use these for audio!
-│   │           ├── chunk_001_DEDUPED.md        # Clean, no overlaps
-│   │           ├── audio/                      # OpenAI TTS (legacy)
-│   │           │   ├── chunk_001_part001.mp3
-│   │           │   └── audiobook_playlist.m3u
-│   │           ├── audio_xtts/                 # Local TTS (voice cloning)
-│   │           │   ├── raw/                    # Unprocessed WAV
-│   │           │   │   └── chunk_001_chunk001_raw.wav
-│   │           │   ├── chunk_001_chunk001.mp3  # Processed (speed + normalized)
-│   │           │   └── chunk_001_audiobook.m3u # Playlist
-│   │           └── audio_orpheus/              # Local TTS (RECOMMENDED)
-│   │               ├── raw/                    # Unprocessed WAV
-│   │               │   └── chunk_001_raw.wav
-│   │               ├── chunk_001.mp3           # Processed (normalized)
-│   │               ├── chapter_01.mp3          # Combined chapters
-│   │               └── audiobook.m3u           # Master playlist
-│   ├── [book]_[language]_[date]_[model].md     # Single-file translations
-│   ├── [book]_part001_[voice]_[date].wav       # Audio parts (OpenAI)
-│   └── [book]_audiobook_playlist_[date].m3u    # Playlist
+│   │       ├── chunk_001_[language]_4b.md     # Raw translations
+│   │       └── deduplicated/                  # Clean, no overlaps
+│   │           └── chunk_001_DEDUPED.md       # Use for audio generation
+│   ├── [book]_[language]_[date]_[model].md    # Single-file translations
+│   ├── [book]_summarized_50pct.md             # Summarized versions
+│   └── legacy_audio/                          # Old TTS outputs (deprecated)
+│       ├── audio_xtts/                        # XTTS voice cloning
+│       └── audio_orpheus/                     # Orpheus TTS
 ```
 
 ## Technical Details
