@@ -161,7 +161,43 @@ python3 book_preprocessor.py books/mybook/book.md
 
 ### Text Translation
 
-**For single files (cloud-based OpenAI):**
+**NEW: Structured Translator (RECOMMENDED - Preserves Chapter Structure):**
+```bash
+# Validate and translate in one workflow (guaranteed complete)
+python3 structured_translator.py books/mybook/book.md \
+  --source-lang Latin \
+  --target-lang "Modern English" \
+  --model ollama:zongwei/gemma3-translator:4b
+
+# What it does:
+# 1. PRE-VALIDATES source (fails fast if incomplete)
+# 2. PARSES into blocks (metadata, TOC, chapters)
+# 3. TRANSLATES content ONLY (preserves chapter markers)
+# 4. ASSEMBLES clean output (auto-generates TOC)
+# Result: All chapters present, structure preserved
+
+# With OpenAI (faster, costs money):
+python3 structured_translator.py books/mybook/book.md \
+  --source-lang Latin \
+  --target-lang "Modern English" \
+  --model openai:o3-mini-high
+
+# Available models:
+# - ollama:zongwei/gemma3-translator:4b (free, local, accurate)
+# - openai:o3-mini-high (paid, cloud, fast)
+# - openai:gpt-4o-mini (paid, cloud, cheap)
+```
+
+**Why Structured Translator?**
+- ✅ Pre-validates before translation (no wasted time)
+- ✅ Translates chapter-by-chapter (progress tracking)
+- ✅ Preserves structure (markers never corrupted)
+- ✅ Guaranteed completeness (all chapters or fail)
+- ✅ Auto-generates clean TOC from markers
+
+---
+
+**Legacy: For single files (cloud-based OpenAI):**
 ```bash
 # List available AI models
 python translator.py --list-models

@@ -31,6 +31,17 @@ from enum import Enum
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from server.language_detector import detect_language
+from local_reader_translation import OllamaTranslator
+
+# Import structured translator (NEW)
+from structured_translator import (
+    BookParser,
+    StructureValidator,
+    BlockTranslator,
+    MarkdownAssembler,
+    TranslationConfig,
+    translate_book
+)
 
 
 # Constants
@@ -270,7 +281,7 @@ class PipelineRunner:
 
     def _run_translation(self) -> Path:
         """
-        Run translation using OpenAI API or Ollama.
+        Run translation using structured translator (NEW - preserves chapter structure).
 
         Returns:
             Path to translated file
@@ -278,79 +289,83 @@ class PipelineRunner:
         self.job.update(
             stage=PipelineStage.TRANSLATION,
             progress=10,
-            stage_progress={'message': 'Starting translation...'}
+            stage_progress={'message': 'Validating source book structure...'}
         )
 
         source_path = self.book_dir / self.job.source_file
         source_lang = self.job.config.get('source_language', 'Russian')
         target_lang = self.job.config.get('target_language', 'Modern English')
-        model = self.job.config.get('translation_model', 'o3-mini-high')
+        model = self.job.config.get('translation_model', 'zongwei/gemma3-translator:4b')
 
-        # Output file
+        # Create translation config for structured translator
+        config = TranslationConfig(
+            source_lang=source_lang,
+            target_lang=target_lang,
+            translator_type='ollama',
+            model_name=model,
+            translate_metadata=True,
+            preserve_markers=True
+        )
+
+        # Progress callback for chapter-by-chapter tracking
+        def progress_callback(current: int, total: int):
+            if self.cancelled:
+                raise Exception("Job cancelled by user")
+
+            chapter_progress = int((current / total) * 100)
+            overall_progress = 10 + int(chapter_progress * 0.25)  # Translation is 10-35%
+            self.job.update(
+                progress=overall_progress,
+                stage_progress={
+                    'message': f'Translating chapter {current}/{total}...',
+                    'current_chapter': current,
+                    'total_chapters': total
+                }
+            )
+
+        # STEP 1: Parse structure
+        self.job.update(stage_progress={'message': 'Parsing book structure...'})
+        parser = BookParser()
+        structure = parser.parse(source_path)
+
+        # STEP 2: Validate structure (fail-fast if incomplete)
+        self.job.update(
+            progress=12,
+            stage_progress={'message': f'Validating structure ({len(structure.chapters)} chapters)...'}
+        )
+        validator = StructureValidator()
+        try:
+            validation_report = validator.validate(structure)
+        except ValueError as e:
+            raise Exception(f"Source book validation failed: {e}")
+
+        # STEP 3: Translate blocks
+        self.job.update(
+            progress=15,
+            stage_progress={'message': f'Translating {len(structure.chapters)} chapters...'}
+        )
+
+        # Create checkpoint file for resumability
+        checkpoint_file = self.book_dir / f".translation_checkpoint_{source_path.stem}.json"
+
+        translator = BlockTranslator(config, progress_callback=progress_callback, checkpoint_file=checkpoint_file)
+        translated_structure = translator.translate_structure(structure)
+
+        # STEP 4: Assemble output
+        self.job.update(
+            progress=33,
+            stage_progress={'message': 'Assembling translated markdown...'}
+        )
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         output_file = self.book_dir / f"{source_path.stem}_{target_lang.replace(' ', '_')}_{timestamp}.md"
 
-        # Run translator.py
-        cmd = [
-            sys.executable,
-            str(Path(__file__).parent.parent / "translator.py"),
-            str(source_path),
-            '--model', model,
-            '--source-lang', source_lang,
-            '--target-lang', target_lang,
-            '--output-dir', str(self.book_dir)
-        ]
+        assembler = MarkdownAssembler()
+        output_path = assembler.assemble(translated_structure, output_file)
 
-        self.job.update(stage_progress={'message': f'Translating from {source_lang}...', 'command': ' '.join(cmd)})
-
-        process = subprocess.Popen(
-            cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True
-        )
-
-        # Monitor progress
-        for line in iter(process.stdout.readline, ''):
-            if self.cancelled:
-                process.kill()
-                raise Exception("Job cancelled by user")
-
-            # Parse progress from translator output
-            # Look for patterns like "Processing chunk 5/20"
-            if 'chunk' in line.lower():
-                # Extract chunk numbers
-                import re
-                match = re.search(r'(\d+)\s*/\s*(\d+)', line)
-                if match:
-                    current = int(match.group(1))
-                    total = int(match.group(2))
-                    chunk_progress = int((current / total) * 100)
-                    overall_progress = 10 + int(chunk_progress * 0.25)  # Translation is 10-35%
-                    self.job.update(
-                        progress=overall_progress,
-                        stage_progress={
-                            'message': f'Translating chunk {current}/{total}...',
-                            'current_chunk': current,
-                            'total_chunks': total
-                        }
-                    )
-
-        process.wait()
-
-        if process.returncode != 0:
-            raise Exception(f"Translation failed with code {process.returncode}")
-
-        # Find output file (translator creates it automatically)
-        translated_files = sorted(self.book_dir.glob(f"*{target_lang.replace(' ', '_')}*.md"))
-        if not translated_files:
-            raise Exception("Translation output file not found")
-
-        output_file = translated_files[-1]  # Get most recent
-        self.job.output_files['translation'] = str(output_file)
+        self.job.output_files['translation'] = str(output_path)
         self.job.update(progress=35)
 
-        return output_file
+        return output_path
 
     def _run_summarization(self, input_file: Path) -> Path:
         """
@@ -748,6 +763,16 @@ def load_existing_jobs():
             with open(state_file, 'r') as f:
                 state_data = json.load(f)
 
+            # Check if job is too old (orphaned)
+            created_at = datetime.fromisoformat(state_data['created_at'])
+            age_hours = (datetime.now() - created_at).total_seconds() / 3600
+
+            # Auto-cleanup: Delete orphaned jobs older than 24 hours that are still pending
+            if age_hours > 24 and state_data['status'] in ['pending', 'running']:
+                print(f"🗑️  Auto-cleanup: Removing orphaned job {state_data['job_id']} (age: {age_hours:.1f}h, status: {state_data['status']})")
+                state_file.unlink()
+                continue
+
             # Recreate job object
             job = JobState(
                 state_data['job_id'],
@@ -798,7 +823,7 @@ if __name__ == '__main__':
         'translate': args.translate,
         'source_language': 'Russian',
         'target_language': 'Modern English',
-        'translation_model': 'o3-mini-high',
+        'translation_model': 'zongwei/gemma3-translator:4b',
         'summarize': args.summarize,
         'voice': args.voice,
         'speed': args.speed,

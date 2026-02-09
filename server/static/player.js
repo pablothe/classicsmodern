@@ -148,7 +148,10 @@ const API = {
 
     async getDownloadStatus(jobId) {
         const response = await fetch(`${this.baseURL}/api/gutenberg/downloads/${jobId}`);
-        if (!response.ok) throw new Error('Failed to get download status');
+        if (!response.ok) {
+            // Include status code in error message so caller can handle 404s specially
+            throw new Error(`Failed to get download status (HTTP ${response.status})`);
+        }
         return response.json();
     },
 
@@ -1471,7 +1474,13 @@ async function updateDownloadStatuses() {
 
         } catch (error) {
             console.error(`[Download] Error checking status for ${jobId}:`, error);
-            // Don't remove job on network error, it might be temporary
+
+            // If job not found (404), remove it - it's been deleted or never existed
+            if (error.message && (error.message.includes('HTTP 404') || error.message.includes('not found'))) {
+                console.warn(`[Download] Job ${jobId} not found on server (404), removing from active downloads`);
+                delete state.gutenberg.activeDownloads[jobId];
+            }
+            // Don't remove job on other network errors (500, network timeout, etc) - they might be temporary
         }
     }
 

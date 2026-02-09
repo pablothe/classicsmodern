@@ -40,7 +40,11 @@ from server.text_extractor import find_source_text, get_chapter_text_data, get_b
 # Import Gutenberg modules
 try:
     from server.gutenberg_catalog import GutenbergCatalog
-    from server.gutenberg_downloader import create_download_job, get_job_status, get_all_jobs
+    from server.gutenberg_downloader import (
+        create_download_job,
+        get_job_status,
+        get_all_jobs as get_all_gutenberg_jobs  # Use alias to avoid namespace collision
+    )
     GUTENBERG_AVAILABLE = True
 except ImportError:
     GUTENBERG_AVAILABLE = False
@@ -54,11 +58,21 @@ except ImportError:
     AI_ASSISTANT_AVAILABLE = False
     print("⚠️  AI Assistant not available (llm_chat.py or ollama module missing)")
 
+# Import unified job queue
+try:
+    from server.job_queue import init_queue, get_queue, JobType, JobStatus
+    from server.job_handlers import download_handler, pipeline_handler, translate_handler
+    UNIFIED_QUEUE_AVAILABLE = True
+except ImportError as e:
+    UNIFIED_QUEUE_AVAILABLE = False
+    print(f"⚠️  Unified job queue not available: {e}")
+
 
 # Constants
 BOOKS_DIR = Path(__file__).parent.parent / "books"
 PLAYBACK_DB = Path(__file__).parent / "playback_db.json"
 STATIC_DIR = Path(__file__).parent / "static"
+JOB_DB_PATH = Path(__file__).parent / "jobs.db"
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1204,7 +1218,8 @@ if GUTENBERG_AVAILABLE:
         Returns:
             List of all jobs with their status
         """
-        jobs = get_all_jobs()
+        jobs = get_all_gutenberg_jobs()  # Use correct function (not pipeline jobs!)
+        print(f"[DEBUG] /api/gutenberg/downloads returning {len(jobs)} jobs: {[j.get('job_id', 'no-id') for j in jobs]}")
         return {
             'jobs': jobs,
             'total': len(jobs)
@@ -1246,7 +1261,12 @@ if GUTENBERG_AVAILABLE:
 
 # Import pipeline module
 try:
-    from server.audiobook_pipeline import create_job, get_job, get_all_jobs, cancel_job
+    from server.audiobook_pipeline import (
+        create_job,
+        get_job,
+        get_all_jobs as get_all_pipeline_jobs,  # Use alias to avoid namespace collision
+        cancel_job
+    )
     from server.language_detector import detect_language as detect_lang_func
     PIPELINE_AVAILABLE = True
 except ImportError as e:
@@ -1267,7 +1287,7 @@ if PIPELINE_AVAILABLE:
             "translate": true,
             "source_language": "Russian",
             "target_language": "Modern English",
-            "translation_model": "o3-mini-high",
+            "translation_model": "zongwei/gemma3-translator:4b",
             "summarize": 50,  // Optional: 10-90 or null
             "voice": "bf_emma",
             "speed": 1.0,
@@ -1311,7 +1331,7 @@ if PIPELINE_AVAILABLE:
             'translate': data.get('translate', False),
             'source_language': data.get('source_language', 'Russian'),
             'target_language': data.get('target_language', 'Modern English'),
-            'translation_model': data.get('translation_model', 'o3-mini-high'),
+            'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b'),
             'summarize': data.get('summarize'),  # Can be None
             'voice': data.get('voice', 'bf_emma'),
             'speed': data.get('speed', 1.0),
@@ -1356,7 +1376,7 @@ if PIPELINE_AVAILABLE:
         Returns:
             List of jobs with their status
         """
-        jobs = get_all_jobs()
+        jobs = get_all_pipeline_jobs()  # Use correct function (not gutenberg jobs!)
         return {
             'jobs': jobs,
             'total': len(jobs)
@@ -1385,6 +1405,53 @@ if PIPELINE_AVAILABLE:
         return {
             'status': 'cancelled',
             'job_id': job_id
+        }
+
+
+    @app.post("/api/pipeline/cleanup")
+    async def cleanup_old_jobs(max_age_hours: int = 24):
+        """
+        Manually cleanup old/orphaned pipeline jobs.
+
+        Query Parameters:
+            max_age_hours: Maximum age in hours (default: 24)
+
+        Returns:
+            Cleanup statistics
+        """
+        from pathlib import Path
+        import json
+        from datetime import datetime
+
+        jobs_dir = Path(__file__).parent / "pipeline_jobs"
+        if not jobs_dir.exists():
+            return {
+                'cleaned': 0,
+                'message': 'No jobs directory found'
+            }
+
+        cleaned = 0
+        for state_file in jobs_dir.glob("*.json"):
+            try:
+                with open(state_file, 'r') as f:
+                    state_data = json.load(f)
+
+                created_at = datetime.fromisoformat(state_data['created_at'])
+                age_hours = (datetime.now() - created_at).total_seconds() / 3600
+
+                # Delete old pending/running jobs
+                if age_hours > max_age_hours and state_data['status'] in ['pending', 'running']:
+                    state_file.unlink()
+                    cleaned += 1
+                    print(f"🗑️  Cleaned up job {state_data['job_id']} (age: {age_hours:.1f}h)")
+
+            except Exception as e:
+                print(f"⚠️  Failed to cleanup {state_file}: {e}")
+
+        return {
+            'cleaned': cleaned,
+            'max_age_hours': max_age_hours,
+            'message': f'Cleaned up {cleaned} orphaned jobs'
         }
 
 
@@ -1453,6 +1520,264 @@ if PIPELINE_AVAILABLE:
         }
 
 
+# ============================================================================
+# Unified Job Queue API Endpoints
+# ============================================================================
+
+if UNIFIED_QUEUE_AVAILABLE:
+    @app.get("/api/jobs")
+    async def list_all_jobs(
+        job_type: Optional[str] = None,
+        status: Optional[str] = None,
+        limit: Optional[int] = None
+    ):
+        """
+        List all jobs with optional filters.
+
+        Query Parameters:
+            job_type: Filter by type ('download', 'translate', 'audiobook')
+            status: Filter by status ('pending', 'running', 'completed', 'failed', 'cancelled')
+            limit: Maximum results to return
+
+        Returns:
+            List of jobs
+        """
+        queue = get_queue()
+        jobs = queue.get_all_jobs(
+            job_type=JobType(job_type) if job_type else None,
+            status=JobStatus(status) if status else None,
+            limit=limit
+        )
+
+        return {
+            'jobs': jobs,
+            'total': len(jobs)
+        }
+
+    @app.get("/api/jobs/{job_id}")
+    async def get_job_details(job_id: str):
+        """
+        Get detailed job information.
+
+        Args:
+            job_id: Job identifier
+
+        Returns:
+            Job details with progress and ETA
+        """
+        queue = get_queue()
+        job = queue.get_job(job_id)
+
+        if not job:
+            raise HTTPException(status_code=404, detail="Job not found")
+
+        return job
+
+    @app.post("/api/jobs/download")
+    async def create_download_job(request: Request):
+        """
+        Create a Gutenberg download job.
+
+        Request Body:
+        {
+            "gutenberg_id": 11,
+            "book_slug": "alice_adventures"
+        }
+
+        Returns:
+            Job ID and status
+        """
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        gutenberg_id = data.get('gutenberg_id')
+        book_slug = data.get('book_slug')
+
+        if not gutenberg_id or not book_slug:
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required fields: gutenberg_id, book_slug"
+            )
+
+        queue = get_queue()
+        job_id = queue.create_job(
+            job_type=JobType.DOWNLOAD,
+            config={
+                'gutenberg_id': gutenberg_id,
+                'book_slug': book_slug
+            }
+        )
+
+        return {
+            'job_id': job_id,
+            'status': 'pending',
+            'message': f'Download job created for book #{gutenberg_id}'
+        }
+
+    @app.post("/api/jobs/translate")
+    async def create_translate_job(request: Request):
+        """
+        Create a standalone translation job.
+
+        Request Body:
+        {
+            "book_id": "crime_punishment",
+            "source_file": "book.md",
+            "source_language": "Russian",
+            "target_language": "Modern English",
+            "translation_model": "zongwei/gemma3-translator:4b"
+        }
+
+        Returns:
+            Job ID and status
+        """
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        book_id = data.get('book_id')
+        source_file = data.get('source_file')
+
+        if not book_id or not source_file:
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required fields: book_id, source_file"
+            )
+
+        queue = get_queue()
+        job_id = queue.create_job(
+            job_type=JobType.TRANSLATE,
+            config={
+                'book_id': book_id,
+                'source_file': source_file,
+                'source_language': data.get('source_language', 'Russian'),
+                'target_language': data.get('target_language', 'Modern English'),
+                'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b')
+            }
+        )
+
+        return {
+            'job_id': job_id,
+            'status': 'pending',
+            'message': f'Translation job created for {book_id}/{source_file}'
+        }
+
+    @app.post("/api/jobs/audiobook")
+    async def create_audiobook_job(request: Request):
+        """
+        Create a full audiobook pipeline job.
+
+        Request Body:
+        {
+            "book_id": "crime_punishment",
+            "source_file": "translated.md",
+            "translate": false,
+            "summarize": 50,  // Optional: 10-90
+            "voice": "bf_emma",
+            "speed": 1.0,
+            "generate_cover": true
+        }
+
+        Returns:
+            Job ID and status
+        """
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        book_id = data.get('book_id')
+        source_file = data.get('source_file')
+
+        if not book_id or not source_file:
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required fields: book_id, source_file"
+            )
+
+        queue = get_queue()
+        job_id = queue.create_job(
+            job_type=JobType.AUDIOBOOK,
+            config={
+                'book_id': book_id,
+                'source_file': source_file,
+                'translate': data.get('translate', False),
+                'source_language': data.get('source_language', 'Russian'),
+                'target_language': data.get('target_language', 'Modern English'),
+                'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b'),
+                'summarize': data.get('summarize'),
+                'voice': data.get('voice', 'bf_emma'),
+                'speed': data.get('speed', 1.0),
+                'generate_cover': data.get('generate_cover', True)
+            }
+        )
+
+        return {
+            'job_id': job_id,
+            'status': 'pending',
+            'estimated_duration': '2-4 hours',
+            'message': f'Audiobook pipeline job created for {book_id}'
+        }
+
+    @app.delete("/api/jobs/{job_id}")
+    async def cancel_job_endpoint(job_id: str):
+        """
+        Cancel a pending or running job.
+
+        Args:
+            job_id: Job identifier
+
+        Returns:
+            Success status
+        """
+        queue = get_queue()
+        success = queue.cancel_job(job_id)
+
+        if not success:
+            raise HTTPException(
+                status_code=404,
+                detail="Job not found or cannot be cancelled"
+            )
+
+        return {
+            'status': 'cancelled',
+            'job_id': job_id
+        }
+
+    @app.get("/api/jobs/stats")
+    async def get_job_stats():
+        """
+        Get job queue statistics.
+
+        Returns:
+            Statistics about jobs and queue
+        """
+        queue = get_queue()
+        return queue.get_stats()
+
+    @app.post("/api/jobs/cleanup")
+    async def cleanup_jobs(max_age_hours: int = 24):
+        """
+        Cleanup old completed/failed jobs.
+
+        Query Parameters:
+            max_age_hours: Maximum age in hours (default: 24)
+
+        Returns:
+            Number of jobs cleaned
+        """
+        queue = get_queue()
+        cleaned = queue.cleanup_old_jobs(max_age_hours)
+
+        return {
+            'cleaned': cleaned,
+            'max_age_hours': max_age_hours
+        }
+
+
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint."""
@@ -1461,6 +1786,7 @@ async def health_check():
         'books_dir': str(BOOKS_DIR),
         'books_count': len(discover_books()),
         'gutenberg_available': GUTENBERG_AVAILABLE,
+        'unified_queue_available': UNIFIED_QUEUE_AVAILABLE,
         'timestamp': datetime.utcnow().isoformat() + 'Z'
     }
 
@@ -1494,14 +1820,39 @@ def main():
     # Create necessary directories
     STATIC_DIR.mkdir(parents=True, exist_ok=True)
 
+    # Initialize unified job queue
+    global UNIFIED_QUEUE_AVAILABLE  # Need global declaration to modify module-level variable
+    if UNIFIED_QUEUE_AVAILABLE:
+        try:
+            print("\n📋 Initializing unified job queue...")
+            queue = init_queue(JOB_DB_PATH, max_workers=4)
+
+            # Register job handlers
+            queue.register_handler(JobType.DOWNLOAD, download_handler)
+            queue.register_handler(JobType.TRANSLATE, translate_handler)
+            queue.register_handler(JobType.AUDIOBOOK, pipeline_handler)
+
+            print(f"✓ Job queue initialized (database: {JOB_DB_PATH})")
+
+            # Show queue stats
+            stats = queue.get_stats()
+            print(f"✓ Queue stats: {stats['total']} total jobs")
+            if stats.get('by_status'):
+                for status, count in stats['by_status'].items():
+                    print(f"  - {status}: {count}")
+        except Exception as e:
+            print(f"❌ Failed to initialize job queue: {e}")
+            UNIFIED_QUEUE_AVAILABLE = False
+
     # Print startup info
-    print("=" * 60)
+    print("\n" + "=" * 60)
     print("Audiobook Server Starting...")
     print("=" * 60)
     print(f"Books directory: {BOOKS_DIR}")
     print(f"Found {len(discover_books())} books")
     print(f"Server: http://{args.host}:{args.port}")
     print(f"API Docs: http://localhost:{args.port}/docs")
+    print(f"Jobs UI: http://localhost:{args.port}/static/jobs.html")
 
     # Check Ollama availability for AI assistant
     if AI_ASSISTANT_AVAILABLE:

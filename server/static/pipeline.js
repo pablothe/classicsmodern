@@ -160,9 +160,7 @@ class AudiobookPipeline {
                         <div class="form-group">
                             <label>Translation Model:</label>
                             <select id="translation-model" class="form-select">
-                                <option value="o3-mini-high" selected>OpenAI o3-mini (High Quality) ⭐</option>
-                                <option value="o3-mini">OpenAI o3-mini (Balanced)</option>
-                                <option value="gpt-4o-mini">OpenAI GPT-4o Mini (Fast)</option>
+                                <option value="zongwei/gemma3-translator:4b" selected>Gemma3 Translator 4B (Local) ⭐</option>
                             </select>
                         </div>
                     </div>
@@ -180,7 +178,7 @@ class AudiobookPipeline {
         this.formData.translate = needsTranslation;
         this.formData.source_language = detectedLang;
         this.formData.target_language = 'Modern English';
-        this.formData.translation_model = 'o3-mini-high';
+        this.formData.translation_model = 'zongwei/gemma3-translator:4b';
     }
 
     /**

@@ -1,0 +1,405 @@
+# Job Queue Architecture Diagram
+
+## System Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         USER INTERFACES                              │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│  ┌──────────────────┐        ┌──────────────────┐                  │
+│  │  Web Dashboard   │        │   REST API       │                  │
+│  │  jobs.html       │        │   curl/fetch     │                  │
+│  │                  │        │                  │                  │
+│  │  [Jobs List]     │        │  POST /api/jobs/ │                  │
+│  │  [Filters]       │        │  GET  /api/jobs  │                  │
+│  │  [Progress Bars] │        │  DELETE /api/...  │                  │
+│  └────────┬─────────┘        └────────┬─────────┘                  │
+│           │                           │                              │
+└───────────┼───────────────────────────┼──────────────────────────────┘
+            │                           │
+            │                           │
+            ▼                           ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                      AUDIOBOOK SERVER                                │
+│                   (audiobook_server.py)                              │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│  FastAPI Endpoints                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │ GET  /api/jobs          → list_all_jobs()                   │   │
+│  │ GET  /api/jobs/{id}     → get_job_details()                 │   │
+│  │ POST /api/jobs/download → create_download_job()             │   │
+│  │ POST /api/jobs/translate→ create_translate_job()            │   │
+│  │ POST /api/jobs/audiobook→ create_audiobook_job()            │   │
+│  │ DELETE /api/jobs/{id}   → cancel_job()                      │   │
+│  └───────────────────────────┬─────────────────────────────────┘   │
+│                              │                                       │
+└──────────────────────────────┼───────────────────────────────────────┘
+                               │
+                               │ Uses
+                               ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    UNIFIED JOB QUEUE                                 │
+│                     (job_queue.py)                                   │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│  ┌────────────────────────────────────────────────────────────┐    │
+│  │  UnifiedJobQueue                                            │    │
+│  │  ┌──────────────────────────────────────────────────────┐  │    │
+│  │  │  Job Management                                       │  │    │
+│  │  │  • create_job(type, config, priority)                │  │    │
+│  │  │  • get_job(job_id)                                   │  │    │
+│  │  │  • cancel_job(job_id)                                │  │    │
+│  │  │  • cleanup_old_jobs()                                │  │    │
+│  │  └──────────────────────────────────────────────────────┘  │    │
+│  │                                                              │    │
+│  │  ┌──────────────────────────────────────────────────────┐  │    │
+│  │  │  Priority Queue                                       │  │    │
+│  │  │  (priority, timestamp, job_id)                       │  │    │
+│  │  │                                                       │  │    │
+│  │  │  [(-1, 1707426000, job1)]  ← High priority          │  │    │
+│  │  │  [(0, 1707426001, job2)]   ← Normal priority        │  │    │
+│  │  │  [(0, 1707426002, job3)]   ← Normal priority        │  │    │
+│  │  └──────────────────────────────────────────────────────┘  │    │
+│  │                                                              │    │
+│  │  ┌──────────────────────────────────────────────────────┐  │    │
+│  │  │  Worker Threads (4 workers)                          │  │    │
+│  │  │                                                       │  │    │
+│  │  │  [Worker-0] ──┐                                      │  │    │
+│  │  │  [Worker-1] ──┼── Poll queue for jobs               │  │    │
+│  │  │  [Worker-2] ──┤   Execute handlers                  │  │    │
+│  │  │  [Worker-3] ──┘   Report progress                   │  │    │
+│  │  └──────────────────────────────────────────────────────┘  │    │
+│  │                                                              │    │
+│  │  ┌──────────────────────────────────────────────────────┐  │    │
+│  │  │  Concurrency Limits (Semaphores)                     │  │    │
+│  │  │                                                       │  │    │
+│  │  │  Downloads:   [███] (3/3 slots)                     │  │    │
+│  │  │  Translations: [█░░] (1/1 slot)                     │  │    │
+│  │  │  Audiobooks:  [██░] (2/2 slots)                     │  │    │
+│  │  └──────────────────────────────────────────────────────┘  │    │
+│  └────────────────────────────────────────────────────────────┘    │
+│                              │                                       │
+│                              │ Persists to                           │
+│                              ▼                                       │
+│  ┌────────────────────────────────────────────────────────────┐    │
+│  │  JobDatabase (job_database.py)                             │    │
+│  │                                                             │    │
+│  │  ┌──────────────────────────────────────────────────────┐ │    │
+│  │  │  SQLite Database (jobs.db)                           │ │    │
+│  │  │                                                       │ │    │
+│  │  │  jobs table:                                         │ │    │
+│  │  │  ┌─────────────────────────────────────────────┐    │ │    │
+│  │  │  │ job_id | job_type | status | progress | ... │    │ │    │
+│  │  │  ├─────────────────────────────────────────────┤    │ │    │
+│  │  │  │ abc123 | download | running | 45%      | ... │    │ │    │
+│  │  │  │ def456 | translate| pending | 0%       | ... │    │ │    │
+│  │  │  │ ghi789 | audiobook| completed| 100%    | ... │    │ │    │
+│  │  │  └─────────────────────────────────────────────┘    │ │    │
+│  │  │                                                       │ │    │
+│  │  │  Indexes: job_type, status, created_at              │ │    │
+│  │  └──────────────────────────────────────────────────────┘ │    │
+│  └────────────────────────────────────────────────────────────┘    │
+│                              │                                       │
+│                              │ Calls handlers                        │
+│                              ▼                                       │
+│  ┌────────────────────────────────────────────────────────────┐    │
+│  │  Job Handlers (job_handlers/)                              │    │
+│  │                                                             │    │
+│  │  ┌──────────────────┐  ┌──────────────────┐  ┌─────────┐ │    │
+│  │  │ download_handler │  │ translate_handler│  │pipeline │ │    │
+│  │  │                  │  │                  │  │ _handler│ │    │
+│  │  │ • Fetch HTML     │  │ • Parse book     │  │ • Trans-│ │    │
+│  │  │ • Convert MD     │  │ • Validate       │  │   late  │ │    │
+│  │  │ • Clean          │  │ • Translate      │  │ • Summa-│ │    │
+│  │  │ • Validate       │  │ • Assemble       │  │   rize  │ │    │
+│  │  │                  │  │                  │  │ • Audio │ │    │
+│  │  │ Reports progress │  │ Reports progress │  │ • Cover │ │    │
+│  │  │ 0→40→60→80→100% │  │ 0→10→90→100%    │  │ 0→100% │ │    │
+│  │  └──────────────────┘  └──────────────────┘  └─────────┘ │    │
+│  └────────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────────┘
+
+```
+
+## Job Lifecycle Flow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         JOB LIFECYCLE                            │
+└─────────────────────────────────────────────────────────────────┘
+
+1. CREATE
+   ┌─────────────┐
+   │ User/API    │
+   │ creates job │
+   └──────┬──────┘
+          │
+          ▼
+   ┌─────────────────────┐
+   │ Status: PENDING     │
+   │ Progress: 0%        │
+   │ Database: INSERT    │
+   │ Queue: ENQUEUE      │
+   └──────┬──────────────┘
+          │
+          │
+2. PICK UP
+          │
+          ▼
+   ┌─────────────────────┐
+   │ Worker thread       │
+   │ acquires job        │
+   └──────┬──────────────┘
+          │
+          ▼
+   ┌─────────────────────┐
+   │ Acquire semaphore   │
+   │ (type-specific)     │
+   └──────┬──────────────┘
+          │
+          ▼
+   ┌─────────────────────┐
+   │ Status: RUNNING     │
+   │ Progress: 0%        │
+   │ started_at: NOW     │
+   └──────┬──────────────┘
+          │
+          │
+3. EXECUTE
+          │
+          ▼
+   ┌─────────────────────┐
+   │ Call handler        │
+   │ handler(job, cb)    │
+   └──────┬──────────────┘
+          │
+          ▼
+   ┌─────────────────────────────────────────┐
+   │ Handler executes work                   │
+   │                                         │
+   │ Stage 1 → cb(20%, {msg: "Stage 1"})   │
+   │ Stage 2 → cb(40%, {msg: "Stage 2"})   │
+   │ Stage 3 → cb(60%, {msg: "Stage 3"})   │
+   │ Stage 4 → cb(80%, {msg: "Stage 4"})   │
+   │ Complete→ cb(100%, {msg: "Done"})     │
+   │                                         │
+   │ Each callback updates database:         │
+   │ • progress = X%                         │
+   │ • state = {message, stage, ...}        │
+   └──────┬──────────────────────────────────┘
+          │
+          │
+4. COMPLETE
+          │
+          ├─── Success ───┐          ├─── Failure ───┐
+          │                 │          │                │
+          ▼                 ▼          ▼                ▼
+   ┌──────────────┐  ┌──────────────┐
+   │ COMPLETED    │  │ FAILED       │
+   │ progress:100%│  │ error: msg   │
+   │ result: {...}│  │ completed_at │
+   │ completed_at │  └──────────────┘
+   └──────────────┘
+          │
+          │
+5. CLEANUP
+          │
+          ▼
+   ┌─────────────────────┐
+   │ Release semaphore   │
+   │ Remove from running │
+   └─────────────────────┘
+          │
+          │ (After 24h)
+          ▼
+   ┌─────────────────────┐
+   │ DELETE from DB      │
+   │ (via cleanup API)   │
+   └─────────────────────┘
+
+```
+
+## Data Flow: Download Job Example
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  Step 1: User clicks "Download Book" in UI                   │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 2: JavaScript sends POST request                       │
+│  POST /api/jobs/download                                     │
+│  {                                                            │
+│    "gutenberg_id": 11,                                       │
+│    "book_slug": "alice_adventures"                          │
+│  }                                                            │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 3: Server creates job                                  │
+│  queue.create_job(                                           │
+│    job_type=JobType.DOWNLOAD,                               │
+│    config={...}                                              │
+│  )                                                            │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 4: Job stored in database                              │
+│  INSERT INTO jobs (                                          │
+│    job_id='abc123',                                          │
+│    job_type='download',                                      │
+│    status='pending',                                         │
+│    config='{"gutenberg_id":11,...}'                         │
+│  )                                                            │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 5: Job added to priority queue                         │
+│  queue.put((-priority, timestamp, 'abc123'))                │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 6: Worker picks up job                                 │
+│  Worker-0: got job 'abc123'                                 │
+│  Acquire download semaphore (1/3 slots used)                │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 7: Handler executes                                    │
+│  download_handler(job, progress_callback)                   │
+│                                                               │
+│  Stage 1: Fetch HTML (0-40%)                                │
+│    progress_callback(10, {msg: "Downloading..."})          │
+│    ↓ UPDATE jobs SET progress=10, state='...' WHERE...      │
+│                                                               │
+│  Stage 2: Convert (40-60%)                                  │
+│    progress_callback(45, {msg: "Converting..."})           │
+│    ↓ UPDATE jobs SET progress=45, state='...' WHERE...      │
+│                                                               │
+│  Stage 3: Clean (60-80%)                                    │
+│    progress_callback(65, {msg: "Cleaning..."})             │
+│    ↓ UPDATE jobs SET progress=65, state='...' WHERE...      │
+│                                                               │
+│  Stage 4: Validate (80-100%)                                │
+│    progress_callback(85, {msg: "Validating..."})           │
+│    ↓ UPDATE jobs SET progress=85, state='...' WHERE...      │
+│                                                               │
+│  Return result                                               │
+│    return {                                                  │
+│      "output_file": "books/alice/source.md",               │
+│      "validation": {...}                                     │
+│    }                                                         │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 8: Job marked complete                                 │
+│  UPDATE jobs SET                                             │
+│    status='completed',                                       │
+│    progress=100,                                             │
+│    result='{"output_file":"...", ...}',                     │
+│    completed_at='2026-02-08T21:00:00'                       │
+│  WHERE job_id='abc123'                                      │
+└──────────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Step 9: UI auto-refreshes and shows completion              │
+│  ✅ Download completed                                       │
+│  📄 Output: books/alice_adventures/source.md                │
+│  ✅ 12 chapters, 27,500 words                               │
+└──────────────────────────────────────────────────────────────┘
+```
+
+## Concurrency Control
+
+```
+┌───────────────────────────────────────────────────────────────┐
+│               SEMAPHORE-BASED CONCURRENCY                      │
+└───────────────────────────────────────────────────────────────┘
+
+Type: DOWNLOAD (Max: 3)
+┌─────────────────────────────────┐
+│ Semaphore(3)                    │
+│ ┌─────┐ ┌─────┐ ┌─────┐        │
+│ │ ███ │ │ ███ │ │ ███ │  ← 3/3 slots used
+│ └─────┘ └─────┘ └─────┘        │
+│  Job A   Job B   Job C          │
+│                                  │
+│ Next job waits for slot...      │
+└─────────────────────────────────┘
+
+Type: TRANSLATE (Max: 1)
+┌─────────────────────────────────┐
+│ Semaphore(1)                    │
+│ ┌─────┐                         │
+│ │ ███ │  ← 1/1 slot used        │
+│ └─────┘                         │
+│  Job D                           │
+│                                  │
+│ Job E, F waiting in queue...    │
+└─────────────────────────────────┘
+
+Type: AUDIOBOOK (Max: 2)
+┌─────────────────────────────────┐
+│ Semaphore(2)                    │
+│ ┌─────┐ ┌─────┐                │
+│ │ ███ │ │ ░░░ │  ← 1/2 slots  │
+│ └─────┘ └─────┘                │
+│  Job G   Available              │
+│                                  │
+│ Can accept 1 more job           │
+└─────────────────────────────────┘
+```
+
+## Progress Tracking
+
+```
+┌───────────────────────────────────────────────────────────────┐
+│              REAL-TIME PROGRESS UPDATES                        │
+└───────────────────────────────────────────────────────────────┘
+
+Job: Audiobook Pipeline
+┌─────────────────────────────────────────────────────────────┐
+│  0% ──────────────────────────────────────────────────100%  │
+│   │    │         │         │         │         │         │   │
+│   │    │         │         │         │         │         │   │
+│   ▼    ▼         ▼         ▼         ▼         ▼         ▼   │
+│  Init Trans   Summar    Audio     Cover     Register   Done │
+│  0-5%  5-35%   35-55%   55-95%    95-98%    98-100%    100% │
+│                                                               │
+│  Current stage: "Translating chapter 15/36..."              │
+│  Progress: 28%                                               │
+│  ETA: ~2h 15m                                                │
+└─────────────────────────────────────────────────────────────┘
+
+Database record:
+{
+  "job_id": "xyz789",
+  "status": "running",
+  "progress": 28,
+  "state": {
+    "stage": "translation",
+    "message": "Translating chapter 15/36...",
+    "current_chapter": 15,
+    "total_chapters": 36
+  },
+  "eta_seconds": 8100
+}
+
+UI renders as:
+┌─────────────────────────────────────────────────────────────┐
+│ 🎧 AUDIOBOOK  Crime and Punishment    [RUNNING]            │
+│ translate → summarize (50%) → audio (bf_emma) → cover      │
+│ ███████████░░░░░░░░░░░░░ 28% - Translating chapter 15/36  │
+│ Created: 15 min ago | ETA: ~2h 15m                        │
+└─────────────────────────────────────────────────────────────┘
+```

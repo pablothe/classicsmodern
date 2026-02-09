@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs Queue - Audiobook Server</title>
+    <link rel="stylesheet" href="/static/jobs.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Jobs Queue</h1>
+            <div class="header-actions">
+                <button id="refresh-btn" class="btn btn-primary">🔄 Refresh</button>
+                <button id="cleanup-btn" class="btn btn-secondary">🗑️ Cleanup Old Jobs</button>
+                <a href="/" class="btn btn-secondary">← Back to Player</a>
+            </div>
+        </header>
+
+        <!-- Queue Statistics -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-label">Total Jobs</div>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Running</div>
+                <div class="stat-value" id="stat-running">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value" id="stat-pending">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Completed</div>
+                <div class="stat-value" id="stat-completed">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Failed</div>
+                <div class="stat-value" id="stat-failed">0</div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters-section">
+            <div class="filter-group">
+                <label for="filter-type">Type:</label>
+                <select id="filter-type" class="filter-select">
+                    <option value="">All Types</option>
+                    <option value="download">Downloads</option>
+                    <option value="translate">Translations</option>
+                    <option value="audiobook">Audiobooks</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-status">Status:</label>
+                <select id="filter-status" class="filter-select">
+                    <option value="">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="running">Running</option>
+                    <option value="completed">Completed</option>
+                    <option value="failed">Failed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Jobs List -->
+        <section class="jobs-section">
+            <div id="jobs-list" class="jobs-list">
+                <!-- Jobs will be inserted here dynamically -->
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <p>No jobs found</p>
+                <p class="empty-state-hint">Create a job using the API or web interface</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Job Details Modal -->
+    <div id="job-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Job Details</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Job details will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel-btn" class="btn btn-danger">Cancel Job</button>
+                <button id="modal-close-btn" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/static/jobs.js"></script>
+</body>
+</html>

@@ -17,11 +17,12 @@ End-to-end guide for translating classic literature and generating audiobooks.
 
 ## Quick Start
 
-### Full Workflow (6 Steps)
+### Full Workflow (7 Steps)
 
 ```bash
-# 0. Preprocess and validate book structure (RECOMMENDED FIRST STEP)
-python3 book_preprocessor.py books/crime_punishment/book.md
+# 0. CRITICAL: Validate and clean source book BEFORE translation
+python3 book_validator.py books/crime_punishment/book.md --auto-fix
+# → Ensures chapters are sequential, removes boilerplate, generates TOC
 
 # 1. Split book into chunks
 python3 local_reader_smart_splitter.py books/crime_punishment/book.md
@@ -29,18 +30,23 @@ python3 local_reader_smart_splitter.py books/crime_punishment/book.md
 # 2. Translate with automatic deduplication
 python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
 
-# 3. Validate translation completeness
-python3 book_preprocessor.py books/crime_punishment/translated/chunk_001_english.md
+# 3. Validate translation completeness (verify chapters survived)
+python3 book_validator.py books/crime_punishment/translated/chunk_001_english.md
 
 # 4. Generate audio from deduplicated files (auto-detects chapters)
-python local_tts_xtts.py translated/deduplicated/chunk_001_DEDUPED.md voice.wav en
+python3 local_tts_kokoro.py translated/deduplicated/chunk_001_DEDUPED.md --voice bf_emma
 
 # 5. (Optional) Combine existing chunks into chapters retroactively
-python3 combine_chapters.py translated.md audio_xtts/
+python3 combine_chapters.py translated.md audio_kokoro/
 
 # 6. (Optional) Compress for smaller file size
 python3 local_reader_audio_compress.py chapter_01.mp3 96k
 ```
+
+**⚠️ IMPORTANT:** Always run Step 0 before translation! Skipping validation can result in:
+- Lost chapters during translation (real failure case: 9 of 20 chapters dropped)
+- Hours wasted on translation only to fail at audio generation
+- Incomplete audiobooks with missing content
 
 ---
 
@@ -163,6 +169,112 @@ Both scripts show:
 # Old preprocessing tool (basic chapter detection only)
 python3 book_preprocessor.py books/mybook/book.md
 ```
+
+---
+
+## Pre-Translation Checklist (CRITICAL!)
+
+### Why Pre-Validate?
+
+**IMPORTANT:** Always validate and clean books BEFORE translation to avoid wasting time/resources on doomed workflows.
+
+**Problem:** If the source book has structural issues (missing chapters, Gutenberg boilerplate, etc.), the translation will inherit these problems and fail validation AFTER hours of processing.
+
+**Solution:** Run pre-flight validation with auto-fix to guarantee success.
+
+### Pre-Translation Workflow
+
+```bash
+# Step 1: Validate and auto-fix source book
+python3 book_validator.py books/mybook/book.md --auto-fix
+
+# Expected output:
+#   ✅ Backup created: book.md.bak
+#   ✅ Removed Gutenberg header/footer
+#   ✅ Generated TOC with N chapters
+#   ✅ VALID - Ready for Karaoke, AI Chat, Web Player
+
+# Step 2: Verify validation passes
+python3 book_validator.py books/mybook/book.md
+
+# Only proceed if you see:
+#   ✅ VALID
+#   ✅ Sequential chapters (no gaps)
+#   ✅ 3/3 features ready
+
+# Step 3: Now safe to translate
+python3 translator.py books/mybook/book.md
+# OR for large books:
+python3 local_reader_batch_translator.py books/mybook/book.md Latin "Modern English"
+```
+
+### What Auto-Fix Does
+
+1. **Strips Gutenberg Boilerplate**
+   - Removes `*** START OF THE PROJECT GUTENBERG EBOOK ***` headers
+   - Removes `*** END OF THE PROJECT GUTENBERG EBOOK ***` footers
+   - Creates backup file (`.bak`) before changes
+
+2. **Generates Missing TOC**
+   - Detects all chapter markers (Roman numerals, Markdown headers)
+   - Creates clickable Table of Contents
+   - Inserts after metadata (first 20 lines)
+
+3. **Validates Chapter Structure**
+   - Ensures chapters are sequential (I, II, III... or 1, 2, 3...)
+   - Detects gaps (e.g., missing chapters 2, 5, 7)
+   - Flags duplicates
+
+4. **Checks Feature Readiness**
+   - ✅ Karaoke Mode - Requires clean text + chapters
+   - ✅ AI Chat - Requires 3+ sequential chapters
+   - ✅ Web Player - Requires 1+ chapter
+
+### Real-World Example: De Brevitate Vitae
+
+**Problem:** Translation dropped 9 of 20 chapters, wasting hours of processing.
+
+**Root Cause:** Source book had no TOC, causing translation script to lose track of chapters.
+
+**Solution:** Pre-validate with auto-fix:
+
+```bash
+# Before translation
+$ python3 book_validator.py books/de_brevitate_vitae/book.md --auto-fix
+
+✅ Backup created: book.md.bak
+✅ Generated TOC with 20 chapters
+✅ VALID
+
+# Now translate with confidence
+$ python3 local_reader_batch_translator.py books/de_brevitate_vitae/book.md Latin "Modern English"
+# → All 20 chapters survive translation
+```
+
+### When to Use Auto-Fix
+
+**Always use for:**
+- ✅ Project Gutenberg books (has boilerplate)
+- ✅ Books without TOC
+- ✅ Books with unknown structure
+- ✅ Before any large translation job
+
+**Skip for:**
+- ❌ Already cleaned/validated books
+- ❌ Hand-curated markdown files
+- ❌ Books you know are structurally sound
+
+### Manual Fixes (If Auto-Fix Can't Help)
+
+If validation still fails after `--auto-fix`:
+
+1. **Missing chapters** - Re-download source or manually add
+2. **Non-sequential chapters** - Renumber manually
+3. **No metadata** - Add to top of file:
+   ```markdown
+   # Title of Book
+   Author: Name Here
+   ```
 
 ---
 

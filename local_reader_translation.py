@@ -8,9 +8,23 @@ Preserves Markdown structure while translating content.
 import re
 import requests
 import json
+import logging
 from typing import List, Dict, Tuple, Optional, Callable
 from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
 import time
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler('translation_debug.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -43,7 +57,7 @@ class OllamaTranslator:
         self,
         model_name: str = "zongwei/gemma3-translator:4b",
         ollama_host: str = "http://localhost:11434",
-        chunk_size_words: int = 250
+        chunk_size_words: int = 150  # Reduced from 250 for better Latin translation (less timeout risk)
     ):
         """
         Initialize the Ollama translator.
@@ -66,14 +80,50 @@ class OllamaTranslator:
             True if model is available, False otherwise
         """
         try:
-            response = requests.get(f"{self.ollama_host}/api/tags")
+            response = requests.get(f"{self.ollama_host}/api/tags", timeout=10)
             if response.status_code == 200:
                 models = response.json().get('models', [])
                 return any(model['name'] == self.model_name for model in models)
             return False
         except Exception as e:
+            logger.error(f"Error checking model availability: {e}")
             print(f"Error checking model availability: {e}")
             return False
+
+    def get_ollama_health(self) -> Dict:
+        """
+        Get Ollama health status and running models.
+
+        Returns:
+            Dict with health information
+        """
+        health = {
+            'available': False,
+            'models_loaded': [],
+            'error': None
+        }
+
+        try:
+            # Check if Ollama is running
+            response = requests.get(f"{self.ollama_host}/api/tags", timeout=5)
+            if response.status_code == 200:
+                health['available'] = True
+                models = response.json().get('models', [])
+                health['models_loaded'] = [m['name'] for m in models]
+                logger.info(f"Ollama health: OK, {len(models)} models loaded")
+            else:
+                health['error'] = f"Ollama returned status {response.status_code}"
+                logger.warning(f"Ollama health: {health['error']}")
+
+        except requests.Timeout:
+            health['error'] = "Ollama connection timeout (>5s)"
+            logger.error(f"Ollama health: {health['error']}")
+
+        except Exception as e:
+            health['error'] = f"{type(e).__name__}: {e}"
+            logger.error(f"Ollama health: {health['error']}")
+
+        return health
 
     def _chunk_markdown_text(self, text: str) -> List[TranslationChunk]:
         """
@@ -153,16 +203,17 @@ class OllamaTranslator:
         else:
             return 'paragraph'
 
-    def _get_last_sentences(self, text: str, count: int = 2) -> str:
+    def _get_last_sentences(self, text: str, count: int = 2, max_chars: int = 500) -> str:
         """
-        Extract last N sentences from text.
+        Extract last N sentences from text, with maximum character limit.
 
         Args:
             text: The text to extract from
             count: Number of sentences to extract
+            max_chars: Maximum characters to return (default 500)
 
         Returns:
-            Last N sentences as a string
+            Last N sentences as a string, truncated to max_chars if needed
         """
         # Split on sentence boundaries (., !, ?)
         sentences = re.split(r'([.!?]+\s+)', text)
@@ -179,8 +230,14 @@ class OllamaTranslator:
         if len(sentences) % 2 == 1:
             combined.append(sentences[-1])
 
-        # Return last N sentences
-        return ''.join(combined[-count:]).strip()
+        # Get last N sentences
+        result = ''.join(combined[-count:]).strip()
+
+        # Truncate if exceeds max_chars (prevents context bloat)
+        if len(result) > max_chars:
+            result = result[-max_chars:]  # Keep last max_chars characters
+
+        return result
 
     def _validate_translation(self, translated: str, original_chunk: str) -> bool:
         """
@@ -268,6 +325,10 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
             prompt = f"Translate from {source_lang} to {target_lang}. Only provide the direct translation, no commentary or explanations:\n\n{chunk.content}"
 
         # Call Ollama API
+        chunk_id = f"chunk_{chunk.index}"
+        logger.info(f"[{chunk_id}] Starting translation ({len(chunk.content)} chars, {len(chunk.content.split())} words)")
+        logger.info(f"[{chunk_id}] API: {self.api_url}, Model: {self.model_name}")
+
         payload = {
             "model": self.model_name,
             "prompt": prompt,
@@ -279,12 +340,23 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
 
         max_retries = 3
         for attempt in range(max_retries):
+            request_start = time.time()
             try:
-                response = requests.post(self.api_url, json=payload)
+                logger.info(f"[{chunk_id}] Attempt {attempt + 1}/{max_retries} - sending request to Ollama...")
+
+                # Set timeout to 5 minutes (Latin translation can be slow)
+                response = requests.post(self.api_url, json=payload, timeout=300)
+
+                request_duration = time.time() - request_start
+                logger.info(f"[{chunk_id}] Response received in {request_duration:.1f}s (status: {response.status_code})")
+
                 response.raise_for_status()
 
                 result = response.json()
                 translated = result.get('response', '').strip()
+
+                logger.info(f"[{chunk_id}] Translation received ({len(translated)} chars)")
+                logger.debug(f"[{chunk_id}] Preview: {translated[:100]}...")
 
                 # Validate the translation
                 if not self._validate_translation(translated, chunk.content):
@@ -300,12 +372,35 @@ Important: Only translate the new text above. Do not repeat the context. Do not 
 
                 return translated
 
+            except requests.Timeout:
+                request_duration = time.time() - request_start
+                logger.error(f"[{chunk_id}] TIMEOUT after {request_duration:.1f}s (attempt {attempt + 1}/{max_retries})")
+                logger.error(f"[{chunk_id}] Chunk size: {len(chunk.content)} chars, {len(chunk.content.split())} words")
+                logger.error(f"[{chunk_id}] Check Ollama status: ollama ps")
+
+                print(f"⏰ Timeout: Chunk {chunk.index} exceeded 5 minutes (attempt {attempt + 1}/{max_retries})")
+                if attempt < max_retries - 1:
+                    print(f"   Retrying with same timeout...")
+                    time.sleep(2)
+                    continue
+                else:
+                    logger.error(f"[{chunk_id}] FAILED after {max_retries} timeout attempts - returning original text")
+                    print(f"❌ Translation failed after {max_retries} timeout attempts")
+                    print(f"   Consider: 1) Checking Ollama status, 2) Reducing chunk size, 3) Using faster model")
+                    # Return original text if translation fails
+                    return chunk.content
+
             except Exception as e:
+                request_duration = time.time() - request_start
+                logger.error(f"[{chunk_id}] ERROR after {request_duration:.1f}s (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                logger.error(f"[{chunk_id}] Chunk size: {len(chunk.content)} chars")
+
                 print(f"⚠️  Error translating chunk {chunk.index} (attempt {attempt + 1}/{max_retries}): {e}")
                 if attempt < max_retries - 1:
                     time.sleep(2)  # Longer pause on API errors
                     continue
                 else:
+                    logger.error(f"[{chunk_id}] FAILED after {max_retries} attempts - returning original text")
                     print(f"❌ Translation failed after {max_retries} attempts")
                     # Return original text if translation fails
                     return chunk.content

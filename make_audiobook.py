@@ -126,14 +126,23 @@ class AudiobookMaker:
     def _generate_cover_art(self, book_title: str) -> Optional[Path]:
         """
         Generate cover art for the audiobook.
+        Checks for existing cover first and only generates if missing.
 
         Args:
             book_title: Title of the book for cover generation
 
         Returns:
-            Path to generated cover image, or None if failed
+            Path to cover image (existing or newly generated), or None if failed
         """
-        print("\n🎨 Generating cover art...")
+        print("\n🎨 Cover art check...")
+
+        # Check for existing cover in book directory FIRST
+        book_dir_cover = self.input_file.parent / "cover.png"
+        if book_dir_cover.exists():
+            print(f"✓ Using existing cover: {book_dir_cover.name}")
+            return book_dir_cover
+
+        print("No existing cover found, generating new watercolor cover...")
 
         try:
             # Check if generate.py exists
@@ -142,16 +151,21 @@ class AudiobookMaker:
                 print("⚠️  generate.py not found, skipping cover art")
                 return None
 
-            # Determine output directory (where audio files are)
-            if self.output_dir:
-                cover_dir = Path(self.output_dir)
+            # Check if book_prompts.py exists for watercolor prompts
+            book_prompts_script = Path(__file__).parent / "book_prompts.py"
+            if not book_prompts_script.exists():
+                print("⚠️  book_prompts.py not found, using generic prompt")
+                prompt = f"watercolor illustration, Book cover art for '{book_title}', classic literature style, elegant typography, vintage aesthetic, professional book cover"
             else:
-                cover_dir = self.input_file.parent / "audio_kokoro"
+                # Use watercolor prompt from book_prompts.py
+                try:
+                    from book_prompts import get_book_prompt
+                    prompt = get_book_prompt(str(self.input_file))
+                except ImportError:
+                    prompt = f"watercolor illustration, Book cover art for '{book_title}', classic literature style, elegant typography, vintage aesthetic, professional book cover"
 
-            cover_path = cover_dir / f"{self.input_file.stem}_cover.png"
-
-            # Create prompt from book title
-            prompt = f"Book cover art for '{book_title}', classic literature style, elegant typography, vintage aesthetic"
+            # Save to book directory (not audio directory)
+            cover_path = self.input_file.parent / "cover.png"
 
             # Call generate.py
             import subprocess
