@@ -179,12 +179,51 @@ class JobState:
 
     def to_dict(self) -> Dict:
         """Convert to dictionary for API response"""
-        # Calculate ETA
+        # Calculate stage-based ETA for more accurate estimates
         eta_seconds = None
-        if self.status == JobStatus.RUNNING and self.started_at and self.progress > 5:
-            elapsed = (datetime.now() - datetime.fromisoformat(self.started_at)).total_seconds()
-            estimated_total = elapsed / (self.progress / 100)
-            eta_seconds = max(0, estimated_total - elapsed)
+        if self.status == JobStatus.RUNNING and self.started_at:
+            # Stage-specific time estimates (in seconds)
+            stage_estimates = {
+                PipelineStage.LANGUAGE_DETECTION: 30,      # 30 seconds
+                PipelineStage.TRANSLATION: 3600,           # 60 minutes
+                PipelineStage.SUMMARIZATION: 1800,         # 30 minutes
+                PipelineStage.AUDIO_GENERATION: 600,       # 10 minutes
+                PipelineStage.COVER_ART: 120,              # 2 minutes
+                PipelineStage.REGISTRATION: 10             # 10 seconds
+            }
+
+            # Calculate remaining time based on current and remaining stages
+            if self.current_stage == PipelineStage.AUDIO_GENERATION:
+                # For audio generation, use chunk progress if available
+                if self.stage_progress and 'total_chunks' in self.stage_progress:
+                    current_chunk = self.stage_progress.get('current_chunk', 0)
+                    total_chunks = self.stage_progress['total_chunks']
+                    if total_chunks > 0 and current_chunk > 0:
+                        # Estimate based on average time per chunk
+                        elapsed = (datetime.now() - datetime.fromisoformat(self.started_at)).total_seconds()
+                        time_per_chunk = elapsed / current_chunk
+                        remaining_chunks = total_chunks - current_chunk
+                        eta_seconds = max(0, time_per_chunk * remaining_chunks)
+                    else:
+                        eta_seconds = stage_estimates.get(self.current_stage, 300)
+                else:
+                    eta_seconds = stage_estimates.get(self.current_stage, 300)
+            else:
+                # For other stages, use the estimate
+                eta_seconds = stage_estimates.get(self.current_stage, 300)
+
+            # Add estimates for remaining stages
+            remaining_stages = []
+            if self.current_stage != PipelineStage.REGISTRATION:
+                if self.current_stage == PipelineStage.AUDIO_GENERATION:
+                    if self.config.get('generate_cover'):
+                        remaining_stages.append(PipelineStage.COVER_ART)
+                    remaining_stages.append(PipelineStage.REGISTRATION)
+                elif self.current_stage == PipelineStage.COVER_ART:
+                    remaining_stages.append(PipelineStage.REGISTRATION)
+
+            for stage in remaining_stages:
+                eta_seconds = (eta_seconds or 0) + stage_estimates.get(stage, 0)
 
         return {
             'job_id': self.job_id,
@@ -218,6 +257,44 @@ class PipelineRunner:
         self.job = job
         self.book_dir = BOOKS_DIR / job.book_id
         self.cancelled = False
+        self.progress_map = self._calculate_progress_map()
+
+    def _calculate_progress_map(self):
+        """
+        Calculate dynamic progress ranges based on enabled stages.
+
+        Returns:
+            Dict mapping stage names to (start_pct, end_pct) tuples
+        """
+        stages = []
+
+        # Add stages based on configuration
+        if self.job.config.get('translate'):
+            stages.append(('language_detection', 5))   # 5% weight
+            stages.append(('translation', 30))          # 30% weight
+
+        if self.job.config.get('summarize'):
+            stages.append(('summarization', 20))        # 20% weight
+
+        # Always include these stages
+        stages.append(('audio_generation', 40))         # 40% weight (main work)
+
+        if self.job.config.get('generate_cover'):
+            stages.append(('cover_art', 3))             # 3% weight
+
+        stages.append(('registration', 2))              # 2% weight
+
+        # Normalize weights to 0-100%
+        total_weight = sum(weight for _, weight in stages)
+        progress_map = {}
+        current = 0
+
+        for stage_name, weight in stages:
+            stage_pct = (weight / total_weight) * 100
+            progress_map[stage_name] = (current, min(current + stage_pct, 100))
+            current = min(current + stage_pct, 100)
+
+        return progress_map
 
     def run(self):
         """Execute the pipeline"""
@@ -266,9 +343,11 @@ class PipelineRunner:
 
     def _run_language_detection(self):
         """Detect source language"""
+        start_pct, end_pct = self.progress_map.get('language_detection', (0, 5))
+
         self.job.update(
             stage=PipelineStage.LANGUAGE_DETECTION,
-            progress=2,
+            progress=int(start_pct),
             stage_progress={'message': 'Detecting source language...'}
         )
 
@@ -277,7 +356,7 @@ class PipelineRunner:
 
         self.job.config['detected_language'] = result['language']
         self.job.config['language_confidence'] = result['confidence']
-        self.job.update(progress=5)
+        self.job.update(progress=int(end_pct))
 
     def _run_translation(self) -> Path:
         """
@@ -286,9 +365,11 @@ class PipelineRunner:
         Returns:
             Path to translated file
         """
+        start_pct, end_pct = self.progress_map.get('translation', (5, 35))
+
         self.job.update(
             stage=PipelineStage.TRANSLATION,
-            progress=10,
+            progress=int(start_pct),
             stage_progress={'message': 'Validating source book structure...'}
         )
 
@@ -313,7 +394,9 @@ class PipelineRunner:
                 raise Exception("Job cancelled by user")
 
             chapter_progress = int((current / total) * 100)
-            overall_progress = 10 + int(chapter_progress * 0.25)  # Translation is 10-35%
+            # Use dynamic progress range from progress_map
+            progress_range = end_pct - start_pct
+            overall_progress = int(start_pct + (chapter_progress * progress_range / 100))
             self.job.update(
                 progress=overall_progress,
                 stage_progress={
@@ -329,8 +412,10 @@ class PipelineRunner:
         structure = parser.parse(source_path)
 
         # STEP 2: Validate structure (fail-fast if incomplete)
+        # Progress at 10% through the translation stage
+        validation_progress = int(start_pct + (end_pct - start_pct) * 0.1)
         self.job.update(
-            progress=12,
+            progress=validation_progress,
             stage_progress={'message': f'Validating structure ({len(structure.chapters)} chapters)...'}
         )
         validator = StructureValidator()
@@ -340,8 +425,10 @@ class PipelineRunner:
             raise Exception(f"Source book validation failed: {e}")
 
         # STEP 3: Translate blocks
+        # Progress at 20% through the translation stage
+        translate_start_progress = int(start_pct + (end_pct - start_pct) * 0.2)
         self.job.update(
-            progress=15,
+            progress=translate_start_progress,
             stage_progress={'message': f'Translating {len(structure.chapters)} chapters...'}
         )
 
@@ -352,8 +439,10 @@ class PipelineRunner:
         translated_structure = translator.translate_structure(structure)
 
         # STEP 4: Assemble output
+        # Progress at 90% through the translation stage
+        assembly_progress = int(start_pct + (end_pct - start_pct) * 0.9)
         self.job.update(
-            progress=33,
+            progress=assembly_progress,
             stage_progress={'message': 'Assembling translated markdown...'}
         )
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -363,7 +452,7 @@ class PipelineRunner:
         output_path = assembler.assemble(translated_structure, output_file)
 
         self.job.output_files['translation'] = str(output_path)
-        self.job.update(progress=35)
+        self.job.update(progress=int(end_pct))
 
         return output_path
 
@@ -377,9 +466,11 @@ class PipelineRunner:
         Returns:
             Path to summarized file
         """
+        start_pct, end_pct = self.progress_map.get('summarization', (35, 55))
+
         self.job.update(
             stage=PipelineStage.SUMMARIZATION,
-            progress=40,
+            progress=int(start_pct),
             stage_progress={'message': 'Starting summarization...'}
         )
 
@@ -416,7 +507,9 @@ class PipelineRunner:
                     current = int(match.group(1))
                     total = int(match.group(2))
                     chunk_progress = int((current / total) * 100)
-                    overall_progress = 40 + int(chunk_progress * 0.15)  # Summarization is 40-55%
+                    # Use dynamic progress range
+                    progress_range = end_pct - start_pct
+                    overall_progress = int(start_pct + (chunk_progress * progress_range / 100))
                     self.job.update(
                         progress=overall_progress,
                         stage_progress={
@@ -437,7 +530,7 @@ class PipelineRunner:
             raise Exception("Summarization output file not found")
 
         self.job.output_files['summarization'] = str(output_file)
-        self.job.update(progress=55)
+        self.job.update(progress=int(end_pct))
 
         return output_file
 
@@ -451,9 +544,11 @@ class PipelineRunner:
         Returns:
             Audio generation results
         """
+        start_pct, end_pct = self.progress_map.get('audio_generation', (0, 89))
+
         self.job.update(
             stage=PipelineStage.AUDIO_GENERATION,
-            progress=60,
+            progress=int(start_pct),
             stage_progress={'message': 'Starting audio generation...'}
         )
 
@@ -549,7 +644,9 @@ class PipelineRunner:
                 # Only update progress if it's a reasonable chunk count (not timestamps or other numbers)
                 if 10 <= total <= 10000:  # Reasonable range for audio chunks
                     chunk_progress = int((current / total) * 100)
-                    overall_progress = 60 + int(chunk_progress * 0.35)  # Audio is 60-95%
+                    # Use dynamic progress range
+                    progress_range = end_pct - start_pct
+                    overall_progress = int(start_pct + (chunk_progress * progress_range / 100))
                     self.job.update(
                         progress=overall_progress,
                         stage_progress={
@@ -599,7 +696,7 @@ class PipelineRunner:
             raise Exception("Audio output directory not found")
 
         self.job.output_files['audio'] = str(audio_dir)
-        self.job.update(progress=95)
+        self.job.update(progress=int(end_pct))
 
         return {
             'output_directory': str(audio_dir),
@@ -609,9 +706,11 @@ class PipelineRunner:
 
     def _run_cover_generation(self, audio_result: Dict):
         """Generate cover art"""
+        start_pct, end_pct = self.progress_map.get('cover_art', (89, 95))
+
         self.job.update(
             stage=PipelineStage.COVER_ART,
-            progress=96,
+            progress=int(start_pct),
             stage_progress={'message': 'Generating cover art...'}
         )
 
@@ -623,7 +722,7 @@ class PipelineRunner:
         # Check if generate.py exists
         generate_script = Path(__file__).parent.parent / "generate.py"
         if not generate_script.exists():
-            self.job.update(progress=98, stage_progress={'message': 'Cover generation skipped (generate.py not found)'})
+            self.job.update(progress=int(end_pct), stage_progress={'message': 'Cover generation skipped (generate.py not found)'})
             return
 
         # Generate cover
@@ -643,13 +742,15 @@ class PipelineRunner:
         else:
             self.job.update(stage_progress={'message': 'Cover generation failed (non-fatal)'})
 
-        self.job.update(progress=98)
+        self.job.update(progress=int(end_pct))
 
     def _run_registration(self, audio_result: Dict):
         """Register audiobook with server"""
+        start_pct, end_pct = self.progress_map.get('registration', (95, 100))
+
         self.job.update(
             stage=PipelineStage.REGISTRATION,
-            progress=99,
+            progress=int(start_pct),
             stage_progress={'message': 'Registering audiobook...'}
         )
 

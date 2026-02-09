@@ -526,20 +526,25 @@ class KokoroAudioGenerator:
                     chapters.append((chapter_num, char_pos, line_stripped))
                     continue
 
-            # Detect markdown chapter headers (e.g., "## Chapter 1: Title")
-            header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)
+            # Detect markdown chapter headers (e.g., "## Chapter 1: Title" or with anchors "## Chapter 1: Title {#chapter-1}")
+            # First strip any anchor tags from the line for detection
+            line_no_anchor = re.sub(r'\s*\{#[^}]+\}\s*$', '', line_stripped)
+            header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_no_anchor)
             if header_match:
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
-                chapters.append((chapter_num, char_pos, line_stripped))
+                # Store the cleaned title without anchors
+                chapters.append((chapter_num, char_pos, line_no_anchor))
                 continue
 
             # Detect plain chapter headers without markdown (after cleaning: "Chapter 1: Title")
-            plain_header_match = re.match(r'^(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+):', line_stripped)
+            # Also handle anchors here
+            line_no_anchor_plain = re.sub(r'\s*\{#[^}]+\}\s*$', '', line_stripped)
+            plain_header_match = re.match(r'^(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+):', line_no_anchor_plain)
             if plain_header_match:
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
-                chapters.append((chapter_num, char_pos, line_stripped))
+                chapters.append((chapter_num, char_pos, line_no_anchor_plain))
                 continue
 
             # Detect numbered list chapters (e.g., "1. The Horror in Clay.")
@@ -759,47 +764,50 @@ class KokoroAudioGenerator:
 
         # Map chunks to chapters
         # Challenge: chapters were detected on raw_text, but chunks are from clean_text
-        # Solution: Re-detect chapter positions in clean_text using chapter titles from raw_text
+        # Solution: Re-detect chapters in clean_text or use proportional mapping
         chunk_to_chapter = []
         if chapters:
-            # Find chapter positions in clean text by searching for chapter titles
-            chapter_positions_in_clean = []
-            for ch_num, ch_pos_raw, ch_title in chapters:
-                # Search for simplified chapter title in clean text
-                # Clean the title similarly to how text is cleaned
-                clean_title = ch_title
-                clean_title = re.sub(r'^#+\s+', '', clean_title)  # Remove markdown headers
-                clean_title = re.sub(r'\{#.*?\}', '', clean_title)  # Remove anchor tags
-                clean_title = clean_title.strip()
+            # Re-detect chapters in the clean text to get accurate positions
+            chapters_in_clean = self.detect_chapters(clean_text, is_cleaned=True)
 
-                # Find position in clean text
-                pos_in_clean = clean_text.find(clean_title)
-                if pos_in_clean >= 0:
-                    chapter_positions_in_clean.append((ch_num, pos_in_clean))
-                else:
-                    # Fallback: use proportional position if title not found
+            if chapters_in_clean and len(chapters_in_clean) == len(chapters):
+                # Successfully detected same number of chapters in clean text
+                chapter_positions_in_clean = [(ch[0], ch[1]) for ch in chapters_in_clean]
+                print(f"✓ Successfully re-detected {len(chapters_in_clean)} chapters in cleaned text")
+            else:
+                # Fallback: Use proportional positions based on raw text
+                print(f"⚠️ Chapter re-detection mismatch (found {len(chapters_in_clean)} vs expected {len(chapters)})")
+                print("  Using proportional mapping as fallback...")
+                chapter_positions_in_clean = []
+                for ch_num, ch_pos_raw, ch_title in chapters:
+                    # Calculate proportional position
                     ratio = ch_pos_raw / len(raw_text) if len(raw_text) > 0 else 0
                     pos_in_clean = int(ratio * len(clean_text))
                     chapter_positions_in_clean.append((ch_num, pos_in_clean))
 
-            # Now map chunks using clean text positions
+            # Now map chunks to chapters based on clean text positions
             current_char_pos = 0
-            current_chapter = 1
-            chapter_idx = 0
 
             for i, chunk in enumerate(chunks):
-                while chapter_idx < len(chapter_positions_in_clean) - 1:
-                    next_chapter_pos = chapter_positions_in_clean[chapter_idx + 1][1]
-                    if current_char_pos >= next_chapter_pos:
-                        current_chapter += 1
-                        chapter_idx += 1
-                    else:
+                # Find which chapter this chunk belongs to
+                chapter_num = 1  # Default to chapter 1
+
+                # Check each chapter boundary
+                for j in range(len(chapter_positions_in_clean) - 1, -1, -1):
+                    if current_char_pos >= chapter_positions_in_clean[j][1]:
+                        chapter_num = chapter_positions_in_clean[j][0]
                         break
 
-                chunk_to_chapter.append(current_chapter)
+                chunk_to_chapter.append(chapter_num)
                 current_char_pos += len(chunk)
 
-            print(f"✓ Mapped {len(chunks)} chunks to {len(set(chunk_to_chapter))} chapters\n")
+            # Debug output to verify mapping
+            unique_chapters = sorted(set(chunk_to_chapter))
+            print(f"✓ Mapped {len(chunks)} chunks to {len(unique_chapters)} chapters")
+            for ch in unique_chapters:
+                chunk_count = chunk_to_chapter.count(ch)
+                print(f"  Chapter {ch}: {chunk_count} chunks")
+            print()
         else:
             chunk_to_chapter = [1] * len(chunks)
             print()

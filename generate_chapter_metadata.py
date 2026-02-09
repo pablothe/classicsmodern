@@ -155,6 +155,22 @@ def extract_chapter_titles_from_source(book_dir: Path) -> Dict[int, str]:
         if not line_stripped or re.match(r'^[-*_]{3,}$', line_stripped):
             continue
 
+        # First remove any anchor tags from the line for processing
+        line_no_anchor = re.sub(r'\s*\{#[^}]+\}\s*$', '', line_stripped)
+
+        # Detect markdown chapter headers (e.g., "## Chapter 1: The Horror in Clay" or with anchors)
+        header_match = re.match(r'^#+\s+Chapter\s+(\d+):\s*(.+)$', line_no_anchor, re.IGNORECASE)
+        if header_match:
+            chapter_num = int(header_match.group(1))
+            chapter_text = header_match.group(2).strip()
+
+            # Remove trailing period if present
+            if chapter_text.endswith('.'):
+                chapter_text = chapter_text[:-1]
+
+            chapter_titles[chapter_num] = chapter_text
+            continue
+
         # Detect numbered chapters (e.g., "1. The Horror in Clay.")
         numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
         if numbered_match:
