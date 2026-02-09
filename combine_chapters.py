@@ -35,9 +35,18 @@ def detect_chapters(text: str) -> list:
             chapters.append((chapter_num, char_pos, line_stripped))
             continue
 
-        # Markdown header patterns
+        # Markdown header patterns - more flexible matching
+        # Match variations like "## Chapter 1: Title" or "# CHAPTER I" etc.
         header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_stripped)
         if header_match:
+            char_pos = len('\n'.join(lines[:i]))
+            chapter_num = len(chapters) + 1
+            chapters.append((chapter_num, char_pos, line_stripped))
+            continue
+
+        # Also match numbered chapters without "Chapter" prefix (e.g., "## 1. Title")
+        numbered_match = re.match(r'^#+\s+(\d+)\.\s+', line_stripped)
+        if numbered_match:
             char_pos = len('\n'.join(lines[:i]))
             chapter_num = len(chapters) + 1
             chapters.append((chapter_num, char_pos, line_stripped))
@@ -169,24 +178,84 @@ def main():
     print(f"  (~{chunks_per_chapter} chunks per chapter)")
     print()
 
-    # Create chapter mapping based on character positions
+    # Create chapter mapping based on relative chapter sizes
     text_length = len(text)
     chunk_to_chapter = []
 
-    for i, audio_file in enumerate(audio_files):
-        # Estimate position of this chunk in the text
-        chunk_ratio = i / len(audio_files)
-        estimated_pos = int(chunk_ratio * text_length)
+    # Calculate chapter boundaries and sizes
+    chapter_boundaries = []
+    for i, (ch_num, ch_pos, ch_title) in enumerate(chapters):
+        # Get end position (next chapter start or end of text)
+        if i + 1 < len(chapters):
+            end_pos = chapters[i + 1][1]
+        else:
+            end_pos = text_length
 
-        # Find which chapter this position falls into
-        chapter_num = 1
-        for j, (ch_num, ch_pos, ch_title) in enumerate(chapters):
-            if estimated_pos >= ch_pos:
-                chapter_num = ch_num
-            else:
-                break
+        chapter_boundaries.append({
+            'num': ch_num,
+            'start': ch_pos,
+            'end': end_pos,
+            'size': end_pos - ch_pos,
+            'title': ch_title
+        })
 
-        chunk_to_chapter.append(chapter_num)
+    # Calculate total text size (sum of all chapter sizes)
+    total_size = sum(ch['size'] for ch in chapter_boundaries)
+
+    # Calculate how many chunks each chapter should get based on its proportion of text
+    chunks_per_chapter = []
+    remaining_chunks = len(audio_files)
+    for i, ch in enumerate(chapter_boundaries):
+        # Calculate proportion of text this chapter represents
+        proportion = ch['size'] / total_size
+        # Allocate chunks proportionally
+        if i == len(chapter_boundaries) - 1:
+            # Last chapter gets all remaining chunks
+            num_chunks = remaining_chunks
+        else:
+            num_chunks = round(proportion * len(audio_files))
+            num_chunks = max(1, min(num_chunks, remaining_chunks))  # At least 1, at most remaining
+
+        chunks_per_chapter.append(num_chunks)
+        remaining_chunks -= num_chunks
+
+    # Assign chunks to chapters based on calculated distribution
+    chunk_index = 0
+    for ch_idx, (ch_info, num_chunks) in enumerate(zip(chapter_boundaries, chunks_per_chapter)):
+        for _ in range(num_chunks):
+            if chunk_index < len(audio_files):
+                chunk_to_chapter.append(ch_info['num'])
+                chunk_index += 1
+
+    # Validation: ensure all chunks are assigned
+    if len(chunk_to_chapter) < len(audio_files):
+        # Assign any remaining chunks to the last chapter
+        last_chapter = chapter_boundaries[-1]['num']
+        while len(chunk_to_chapter) < len(audio_files):
+            chunk_to_chapter.append(last_chapter)
+
+    print(f"Chapter size distribution:")
+    for ch in chapter_boundaries:
+        ch_chunks = sum(1 for c in chunk_to_chapter if c == ch['num'])
+        proportion = ch['size'] / total_size * 100
+        print(f"  Chapter {ch['num']}: {proportion:.1f}% of text → {ch_chunks} chunks")
+
+    # Validation: check for gaps in chapter numbering
+    unique_chapters = sorted(set(chunk_to_chapter))
+    expected_chapters = list(range(1, len(chapters) + 1))
+
+    if unique_chapters != expected_chapters:
+        print()
+        print("⚠️  WARNING: Chapter numbering mismatch!")
+        print(f"  Expected chapters: {expected_chapters}")
+        print(f"  Actual chapters: {unique_chapters}")
+        missing = set(expected_chapters) - set(unique_chapters)
+        extra = set(unique_chapters) - set(expected_chapters)
+        if missing:
+            print(f"  Missing chapters: {sorted(missing)}")
+        if extra:
+            print(f"  Extra chapters: {sorted(extra)}")
+        print("  This may indicate a problem with chapter detection or mapping.")
 
     # Combine chunks into chapter files
     base_name = markdown_file.stem
