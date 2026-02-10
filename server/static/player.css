@@ -53,7 +53,7 @@ body {
    ============================================================================ */
 
 #app {
-    max-width: 800px;
+    max-width: min(800px, 100vw);
     margin: 0 auto;
     min-height: 100vh;
 }
@@ -108,7 +108,7 @@ header h2 {
 
 .book-list {
     padding: 1.5rem;
-    max-width: 1200px;
+    max-width: min(1200px, 100vw);
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -281,7 +281,7 @@ header h2 {
 
 .variant-container {
     padding: 1.5rem;
-    max-width: 1000px;
+    max-width: min(1000px, 100vw);
     margin: 0 auto;
 }
 
@@ -511,7 +511,7 @@ header h2 {
 
 .player-container {
     padding: 2rem 1rem;
-    max-width: 600px;
+    max-width: min(600px, 100vw);
     margin: 0 auto;
 }
 
@@ -1261,6 +1261,38 @@ header h2 {
     background: var(--text-secondary);
 }
 
+/* iOS momentum scrolling for smooth scrolling */
+.chapters-list,
+.text-content,
+.chat-messages,
+.chat-suggestions,
+.download-status-list,
+.jobs-list,
+#unified-results-container {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Touch action declarations for better scroll performance */
+.chapters-list,
+.text-content,
+.chat-messages,
+.download-status-list,
+.jobs-list,
+#unified-results-container,
+.book-list {
+    touch-action: pan-y;
+}
+
+.chat-suggestions {
+    touch-action: pan-x;
+}
+
+.progress-bar,
+#speed-slider,
+.form-slider {
+    touch-action: none;
+}
+
 /* Selection color */
 ::selection {
     background: var(--primary-color);
@@ -1329,7 +1361,7 @@ header h2 {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.125rem;
     line-height: 1.8;
-    max-width: 42rem;
+    max-width: min(42rem, 100vw);
     margin: 0 auto;
     width: 100%;
 }
@@ -2154,7 +2186,7 @@ header h2 {
     border-radius: 16px;
     max-width: 600px;
     width: 90%;
-    max-height: 80vh;
+    max-height: calc(100vh - 80px);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     display: flex;

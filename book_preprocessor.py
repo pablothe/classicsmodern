@@ -118,6 +118,39 @@ class ChapterDetector:
                 })
                 continue
 
+            # Alice in Wonderland style - chapters without line breaks (## CHAPTER I.Title)
+            # This pattern catches multiple chapters on a single line
+            # Skip TOC entries that have markdown links [CHAPTER I.](#anchor)
+            alice_pattern = re.compile(r'(#{1,6}\s*)?(CHAPTER|Chapter)\s+([IVXLCDM]+|[0-9]+)\.([^#\[\n]+)', re.IGNORECASE)
+            alice_matches = list(alice_pattern.finditer(line_stripped))
+            if alice_matches:
+                for match in alice_matches:
+                    # Skip if this is a TOC link (preceded by '[' or followed by ']')
+                    match_start = match.start()
+                    match_end = match.end()
+
+                    # Check if preceded by '[' (TOC link)
+                    if match_start > 0 and line_stripped[match_start - 1] == '[':
+                        continue
+
+                    # Check if this looks like a markdown link (has ](#) pattern nearby)
+                    surrounding = line_stripped[max(0, match_start - 10):min(len(line_stripped), match_end + 20)]
+                    if '](#' in surrounding and '[CHAPTER' in surrounding:
+                        continue
+
+                    chapter_num = match.group(3)  # Roman numeral or number
+                    chapter_title = match.group(4).strip() if match.group(4) else ""
+                    full_marker = f"CHAPTER {chapter_num}. {chapter_title}"
+
+                    chapters.append({
+                        'number': len(chapters) + 1,
+                        'marker': full_marker,
+                        'line': i + 1,
+                        'char_pos': char_pos + match.start(),
+                        'type': 'alice_style'
+                    })
+                continue
+
             # Markdown header patterns: # Chapter 1, ## Part 2, etc.
             header_match = re.match(r'^(#{1,6})\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+):?\s*(.*)', line_stripped, re.IGNORECASE)
             if header_match:

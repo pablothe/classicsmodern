@@ -6,13 +6,13 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: Winnie-the-Pooh
+before using this eBook. Title: Winnie-the-Pooh
 
 Author: A. A. Milne
 
 Illustrator: Ernest H. Shepard
 
-Release date: January 3, 2022 [eBook #67098]  
+Release date: January 3, 2022 [eBook #67098]
 Most recently updated: December 31, 2024
 
 Language: English
@@ -28,33 +28,31 @@ Credits: Greg Weeks, Mary Meehan, Iona Vaughan, David T. Jones and the online Di
 
 ## BY A. A. MILNE
 
-
 ---
 
-JUVENILES  
-  
-When We Were Very Young  
+JUVENILES
+
+When We Were Very Young
 "The best book of verses for children ever
-written."—A. EDWARD NEWTON inThe Atlantic Monthly.  
-  
-Fourteen Songs from When We Were Very Young  
+written."—A. EDWARD NEWTON inThe Atlantic Monthly.
+
+Fourteen Songs from When We Were Very Young
 Words by A. A. Milne.
-Music by H. Fraser-Simson. Decorations by E. H. Shepard.  
-  
-The King's Breakfast  
+Music by H. Fraser-Simson. Decorations by E. H. Shepard.
+
+The King's Breakfast
 Words by A. A. Milne. Music by H. Fraser-Simson.
 Decorations by E. H. Shepard
 
-ESSAYS  
-  
-Not That It Matters  
-The Sunny Side  
+ESSAYS
+
+Not That It Matters
+The Sunny Side
 If I May
 
-MYSTERY STORY  
-  
-The Red House Mystery
+MYSTERY STORY
 
+The Red House Mystery
 
 ---
 
@@ -62,28 +60,25 @@ WINNIE-THE-POOH
 
 BY A. A. MILNE
 
-McCLELLAND & STEWART, LTD.  
+McCLELLAND & STEWART, LTD.
 PUBLISHERS—TORONTO
 
-
 ---
 
-Copyright, Canada, 1926  
-By McClelland & Stewart, Limited  
-Publishers, Toronto  
-First Printing, October, 1926  
-Second " July, 1927  
-Third " December, 1928  
-Fourth " December, 1929  
-Fifth " March, 1931  
+Copyright, Canada, 1926
+By McClelland & Stewart, Limited
+Publishers, Toronto
+First Printing, October, 1926
+Second " July, 1927
+Third " December, 1928
+Fourth " December, 1929
+Fifth " March, 1931
 Printed in Canada
 
-
 ---
 
-To HerHAND IN HAND WE COMECHRISTOPHER ROBIN AND ITO LAY THIS BOOK IN YOUR LAP.SAY YOU'RE SURPRISED?SAY YOU LIKE IT?SAY IT'S JUST WHAT YOU WANTED?BECAUSE IT'S YOURS——BECAUSE WE LOVE YOU.
+To HerHAND IN HAND WE COMECHRISTOPHER ROBIN AND ITO LAY THIS BOOK IN YOUR LAP. SAY YOU'RE SURPRISED? SAY YOU LIKE IT? SAY IT'S JUST WHAT YOU WANTED? BECAUSE IT'S YOURS——BECAUSE WE LOVE YOU.
 ---
-
 
 ---
 
@@ -133,7 +128,6 @@ book.
 
 A. A. M.
 
-
 ---
 
 ## CONTENTS
@@ -143,19 +137,16 @@ STORIES BEGIN[II.](#CHAPTER_II)IN WHICH POOH GOES VISITING AND GETS INTO A TIGHT
 BATH[VIII.](#CHAPTER_VIII)IN WHICH CHRISTOPHER ROBIN LEADS AN EXPOTITION TO THE NORTH POLE[IX.](#CHAPTER_IX)IN WHICH PIGLET IS ENTIRELY SURROUNDED BY WATER[X.](#CHAPTER_X)IN WHICH CHRISTOPHER ROBIN GIVES A POOH PARTY, AND WE SAY GOOD-BYE
 ---
 
-
 ---
 
 ## WINNIE-THE-POOH
 
-
 ---
 
-## CHAPTER I
+## Chapter 1
 
 ### IN WHICH WE ARE INTRODUCED TO WINNIE-THE-POOH AND SOME BEES, AND THE
 STORIES BEGIN
-
 
 ---
 
@@ -204,16 +195,13 @@ and listen to a story. This evening——
 
 So I tried.
 
-
 ---
 
 Once upon a time, a very long time ago now, about last Friday,
 Winnie-the-Pooh lived in a forest all by himself under the name of
 Sanders.
 
-
 ---
-
 
 ---
 
@@ -232,9 +220,7 @@ One day when he was out walking, he came to an open place in the middle
 of the forest, and in the middle of this place was a large oak-tree,
 and, from the top of the tree, there came a loud buzzing-noise.
 
-
 ---
-
 
 ---
 
@@ -253,19 +239,17 @@ being a bee that I know of is making honey."
 And then he got up, and said: "And the only reason for making honey is
 so asIcan eat it." So he began to climb the tree.
 
-
 ---
-
 
 ---
 
 He climbed and he climbed and he climbed, and as he climbed he sang a
 little song to himself. It went like this:
 
-Isn't it funnyHow a bear likes honey?Buzz! Buzz! Buzz!I wonder why he does?Then he climbed a little further ... and a little further ... and
+Isn't it funnyHow a bear likes honey? Buzz! Buzz! Buzz! I wonder why he does? Then he climbed a little further ... and a little further ... and
 then just a little further. By that time he had thought of another song.
 
-It's a very funny thought that, if Bears were Bees,They'd build their nests at thebottomof trees.And that being so (if the Bees were Bears),We shouldn't have to climb up all these stairs.He was getting rather tired by this time, so that is why he sang a
+It's a very funny thought that, if Bears were Bees,They'd build their nests at thebottomof trees. And that being so (if the Bees were Bears),We shouldn't have to climb up all these stairs. He was getting rather tired by this time, so that is why he sang a
 Complaining Song. He was nearly there now, and if he just stood on that
 branch ...
 
@@ -273,9 +257,7 @@ Crack!
 
 "Oh, help!" said Pooh, as he dropped ten feet on the branch below him.
 
-
 ---
-
 
 ---
 
@@ -297,9 +279,7 @@ He crawled out of the gorse-bush, brushed the prickles from his nose,
 and began to think again. And the first person he thought of was
 Christopher Robin.
 
-
 ---
-
 
 ---
 
@@ -314,9 +294,7 @@ his face got pinker and pinker.)
 So Winnie-the-Pooh went round to his friend Christopher Robin, who lived
 behind a green door in another part of the forest.
 
-
 ---
-
 
 ---
 
@@ -365,18 +343,14 @@ Which is most likely?"
 tell with bees." He thought for a moment and said: "I shall try to look
 like a small black cloud. That will deceive them."
 
-
 ---
-
 
 ---
 
 "Then you had better have the blue balloon," you said; and so it was
 decided.
 
-
 ---
-
 
 ---
 
@@ -389,9 +363,7 @@ suddenly, and Pooh Bear floated gracefully up into the sky, and stayed
 there—level with the top of the tree and about twenty feet away from
 it.
 
-
 ---
-
 
 ---
 
@@ -426,9 +398,7 @@ After a little while he called down to you.
 
 "I don't know. But something tells me that they'resuspicious!"
 
-
 ---
-
 
 ---
 
@@ -455,9 +425,7 @@ Well, you laughed to yourself, "Silly old Bear!" but you didn't say it
 aloud because you were so fond of him, and you went home for your
 umbrella.
 
-
 ---
-
 
 ---
 
@@ -480,14 +448,12 @@ Cloud Song, such as a cloud might sing.... Go!"
 So, while you walked up and down and wondered if it would rain,
 Winnie-the-Pooh sang this song:
 
-How sweet to be a CloudFloating in the Blue!Every little cloudAlwayssings aloud."How sweet to be a CloudFloating in the Blue!"It makes him very proudTo be a little cloud.The bees were still buzzing as suspiciously as ever. Some of them,
+How sweet to be a CloudFloating in the Blue! Every little cloudAlwayssings aloud."How sweet to be a CloudFloating in the Blue!"It makes him very proudTo be a little cloud. The bees were still buzzing as suspiciously as ever. Some of them,
 indeed, left their nests and flew all round the cloud as it began the
 second verse of this song, and one bee sat down on the nose of the cloud
 for a moment, and then got up again.
 
-
 ---
-
 
 ---
 
@@ -496,16 +462,14 @@ for a moment, and then got up again.
 "Yes?"
 
 "I have just been thinking, and I have come to a very important
-decision.These are the wrong sort of bees."
+decision. These are the wrong sort of bees."
 
 "Are they?"
 
 "Quite the wrong sort. So I should think they would make the wrong sort
 of honey, shouldn't you?"
 
-
 ---
-
 
 ---
 
@@ -547,9 +511,7 @@ week, and whenever a fly came and settled on his nose he had to blow it
 off. And I think—but I am not sure—thatthatis why he was always
 called Pooh.
 
-
 ---
-
 
 ---
 
@@ -594,16 +556,13 @@ and said, "Coming to see me have my bath?"
 He nodded and went out, and in a moment I heard Winnie-the-Pooh—bump,
 bump, bump—going up the stairs behind him.
 
+---
 
 ---
 
-
----
-
-## CHAPTER II
+## Chapter 2
 
 ### IN WHICH POOH GOES VISITING AND GETS INTO A TIGHT PLACE
-
 
 ---
 
@@ -617,9 +576,8 @@ he had said it over and over to himself until he had learnt it off by
 heart, and now he was humming it right through, properly. It went like
 this:
 
-Tra-la-la, tra-la-la,Tra-la-la, tra-la-la,Rum-tum-tiddle-um-tum.Tiddle-iddle, tiddle-iddle,Tiddle-iddle, tiddle-iddle,Rum-tum-tum-tiddle-um.
+Tra-la-la, tra-la-la,Tra-la-la, tra-la-la,Rum-tum-tiddle-um-tum. Tiddle-iddle, tiddle-iddle,Tiddle-iddle, tiddle-iddle,Rum-tum-tum-tiddle-um.
 ---
-
 
 ---
 
@@ -631,7 +589,7 @@ was a large hole.
 "Aha!" said Pooh. (Rum-tum-tiddle-um-tum.) "If I know anything about
 anything, that hole means Rabbit," he said, "and Rabbit means Company,"
 he said, "and Company means Food and Listening-to-Me-Humming and such
-like.Rum-tum-tum-tiddle-um."
+like. Rum-tum-tum-tiddle-um."
 
 So he bent down, put his head into the hole, and called out:
 
@@ -683,9 +641,7 @@ it back, and said:
 
 "Oh, well, then, come in."
 
-
 ---
-
 
 ---
 
@@ -726,9 +682,7 @@ Rabbit took the covers off the dishes, and said, "No, there wasn't."
 "I thought not," said Pooh, nodding to himself. "Well, good-bye. I must
 be going on."
 
-
 ---
-
 
 ---
 
@@ -747,9 +701,7 @@ Now by this time Rabbit wanted to go for a walk too, and finding the
 front door full, he went out by the back door, and came round to Pooh,
 and looked at him.
 
-
 ---
-
 
 ---
 
@@ -833,9 +785,7 @@ stuck; and a tear rolled down his eye, as he said:
 "Then would you read a Sustaining Book, such as would help and comfort a
 Wedged Bear in Great Tightness?"
 
-
 ---
-
 
 ---
 
@@ -844,9 +794,7 @@ of Pooh, and Rabbit hung his washing on the South end ... and in
 between Bear felt himself getting slenderer and slenderer. And at the
 end of the week Christopher Robin said, "Now!"
 
-
 ---
-
 
 ---
 
@@ -858,9 +806,7 @@ And for a long time Pooh only said "Ow!" ...
 
 And "Oh!" ...
 
-
 ---
-
 
 ---
 
@@ -875,13 +821,11 @@ So, with a nod of thanks to his friends, he went on with his walk
 through the forest, humming proudly to himself. But, Christopher Robin
 looked after him lovingly, and said to himself, "Silly old Bear!"
 
-
 ---
 
-## CHAPTER III
+## Chapter 3
 
 ### IN WHICH POOH AND PIGLET GO HUNTING AND NEARLY CATCH A WOOZLE
-
 
 ---
 
@@ -923,9 +867,7 @@ when Piglet called to him, he just went on walking.
 "Now, look there." He pointed to the ground in front of him. "What do
 you see there?"
 
-
 ---
-
 
 ---
 
@@ -954,9 +896,7 @@ reallywasa Woozle.
 Piglet said that anyhow he had nothing to do until Friday. So off they
 went together.
 
-
 ---
-
 
 ---
 
@@ -979,9 +919,7 @@ Suddenly Winnie-the-Pooh stopped, and pointed excitedly in front of him.
 been frightened, he jumped up and down once or twice more in an
 exercising sort of way.
 
-
 ---
-
 
 ---
 
@@ -1000,19 +938,17 @@ Pooh thought how nice it would be if they met Christopher Robin suddenly
 but quite accidentally, and only because he liked Christopher Robin so
 much. And then, all of a sudden, Winnie-the-Pooh stopped again, and
 licked the tip of his nose in a cooling manner, for he was feeling more
-hot and anxious than ever in his life before.There were four animals
+hot and anxious than ever in his life before. There were four animals
 in front of them!
 
 "Do you see, Piglet? Look at their tracks! Three, as it were, Woozles,
-and one, as it was, Wizzle.Another Woozle has joined them!"
+and one, as it was, Wizzle. Another Woozle has joined them!"
 
 And so it seemed to be. There were the tracks; crossing over each other
 here, getting muddled up with each other there; but, quite plainly every
 now and then, the tracks of four sets of paws.
 
-
 ---
-
 
 ---
 
@@ -1038,9 +974,7 @@ Pooh looked up at the sky, and then, as he heard the whistle again, he
 looked up into the branches of a big oak-tree, and then he saw a friend
 of his.
 
-
 ---
-
 
 ---
 
@@ -1049,9 +983,7 @@ of his.
 "Ah, then you'll be all right," said Piglet. "You'll be quite safe withhim. Good-bye," and he trotted off home as quickly as he could, very
 glad to be Out of All Danger again.
 
-
 ---
-
 
 ---
 
@@ -1084,13 +1016,11 @@ soothingly.
 
 So he went home for it.
 
-
 ---
 
-## CHAPTER IV
+## Chapter 4
 
 ### IN WHICH EEYORE LOSES A TAIL AND POOH FINDS ONE
-
 
 ---
 
@@ -1116,9 +1046,7 @@ you."
 So Eeyore stood there, gazing sadly at the ground, and Winnie-the-Pooh
 walked all round him once.
 
-
 ---
-
 
 ---
 
@@ -1137,9 +1065,7 @@ mistake about it. And yoursisn'tthere!"
 
 "Nothing."
 
-
 ---
-
 
 ---
 
@@ -1160,9 +1086,7 @@ Everything. No Wonder."
 "Somebody must have taken it," said Eeyore. "How Like Them," he added,
 after a long silence.
 
-
 ---
-
 
 ---
 
@@ -1205,9 +1129,7 @@ Underneath the bell-pull there was a notice which said:
 
 PLEZ CNOKE IF AN RNSR IS NOT REQID.
 
-
 ---
-
 
 ---
 
@@ -1259,9 +1181,7 @@ me."
 "A Reward!" said Owl very loudly. "We write a notice to say that we will
 give a large something to anybody who finds Eeyore's tail."
 
-
 ---
-
 
 ---
 
@@ -1305,9 +1225,7 @@ Pooh nodded.
 "It reminds me of something," he said, "but I can't think what. Where
 did you get it?"
 
-
 ---
-
 
 ---
 
@@ -1326,9 +1244,7 @@ hand, and as nobody seemed to want it, I took it home, and——"
 
 "Attached to it," said Winnie-the-Pooh sadly.
 
-
 ---
-
 
 ---
 
@@ -1342,13 +1258,11 @@ afterwards, he sang to himself proudly:
 Who found the Tail?"I," said Pooh,"At a quarter to two(Only it was quarter to eleven really),Ifound the Tail!"
 ---
 
-
 ---
 
-## CHAPTER V
+## Chapter 5
 
 ### IN WHICH PIGLET MEETS A HEFFALUMP
-
 
 ---
 
@@ -1430,7 +1344,7 @@ was a Cunning Trap.
 
 Pooh was very proud when he heard this, and he felt that the Heffalump
 was as good as caught already, but there was just one other thing which
-had to be thought about, and it was this.Where should they dig the
+had to be thought about, and it was this. Where should they dig the
 Very Deep Pit?
 
 Piglet said that the best place would be somewhere where a Heffalump
@@ -1484,9 +1398,7 @@ settled. "I'lldig the pit, whileyougo and get the honey."
 
 "Very well," said Pooh, and he stumped off.
 
-
 ---
-
 
 ---
 
@@ -1500,9 +1412,7 @@ said, "it is. No doubt about that. And honey, I should say, right down
 to the bottom of the jar. Unless, of course," he said, "somebody put
 cheese in at the bottom just for a joke. Perhaps I had better go alittlefurther ... just in case ... in case Heffalumpsdon'tlike cheese ... same as me.... Ah!" And he gave a deep sigh. "Iwasright. Itishoney, right the way down."
 
-
 ---
-
 
 ---
 
@@ -1513,9 +1423,7 @@ Piglet, and Piglet said, "No, it isn't! Is that all you've got left?"
 and Pooh said "Yes." Because it was. So Piglet put the jar at the bottom
 of the Pit, and climbed out, and they went off home together.
 
-
 ---
-
 
 ---
 
@@ -1541,7 +1449,7 @@ preparations for bed.
 
 Some hours later, just as the night was beginning to steal away, Pooh
 woke up suddenly with a sinking feeling. He had had that sinking feeling
-before, and he knew what it meant.He was hungry.So he went to the
+before, and he knew what it meant. He was hungry. So he went to the
 larder, and he stood on a chair and reached up to the top shelf, and
 found—nothing.
 
@@ -1551,7 +1459,7 @@ so that I should know it was honey. That's very funny." And then he
 began to wander up and down, wondering where it was and murmuring a
 murmur to himself. Like this:
 
-It's very, very funny,'Cos IknowI had some honey;'Cos it had a label on,Saying HUNNY.A goloptious full-up pot too,And I don't know where it's got to,No, I don't know where it's gone—Well, it's funny.He had murmured this to himself three times in a singing sort of way,
+It's very, very funny,'Cos IknowI had some honey;'Cos it had a label on,Saying HUNNY. A goloptious full-up pot too,And I don't know where it's got to,No, I don't know where it's gone—Well, it's funny. He had murmured this to himself three times in a singing sort of way,
 when suddenly he remembered. He had put it into the Cunning Trap to
 catch the Heffalump.
 
@@ -1569,9 +1477,7 @@ don't know when I've tasted better," Pooh could bear it no longer. He
 jumped out of bed, he ran out of the house, and he ran straight to the
 Six Pine Trees.
 
-
 ---
-
 
 ---
 
@@ -1584,9 +1490,7 @@ no more. But as he got nearer to it his nose told him that it was indeed
 honey, and his tongue came out and began to polish up his mouth, ready
 for it.
 
-
 ---
-
 
 ---
 
@@ -1597,9 +1501,7 @@ Indeed, he had eaten most of it. But there was a little left at the very
 bottom of the jar, and he pushed his head right in, and began to
 lick....
 
-
 ---
-
 
 ---
 
@@ -1621,9 +1523,7 @@ If it was Fond of Pigs, did it make any differencewhat sort of Pig?
 Supposing it was Fierce with Pigs, would it make any differenceif the
 Pig had a grandfather called TRESPASSERS WILLIAM?
 
-
 ---
-
 
 ---
 
@@ -1652,9 +1552,7 @@ run away. But somehow, having got so near, he felt that he must just see
 what a Heffalump was like. So he crept to the side of the Trap and
 looked in....
 
-
 ---
-
 
 ---
 
@@ -1669,9 +1567,7 @@ of that, he couldn't find his way. So at last he lifted up his head, jar
 and all, and made a loud, roaring noise of Sadness and Despair ... and
 it was at that moment that Piglet looked down.
 
-
 ---
-
 
 ---
 
@@ -1700,9 +1596,7 @@ don't know—like an enormous big nothing. Like a jar."
 "Well," said Christopher Robin, putting on his shoes, "I shall go and
 look at it. Come on."
 
-
 ---
-
 
 ---
 
@@ -1722,9 +1616,7 @@ Suddenly Christopher Robin began to laugh ... and he laughed ... and he
 laughed ... and he laughed. And while he was still laughing—Crashwent the Heffalump's head against the tree-root, Smash went the jar,
 and out came Pooh's head again....
 
-
 ---
-
 
 ---
 
@@ -1737,13 +1629,11 @@ together.
 
 "So do I," said Pooh.
 
-
 ---
 
-## CHAPTER VI
+## Chapter 6
 
 ### IN WHICH EEYORE HAS A BIRTHDAY AND GETS TWO PRESENTS
-
 
 ---
 
@@ -1782,9 +1672,7 @@ mulberry bush is that?"
 "Bon-hommy," went on Eeyore gloomily. "French word meaning bonhommy," he
 explained. "I'm not complaining, but There It Is."
 
-
 ---
-
 
 ---
 
@@ -1792,16 +1680,15 @@ Pooh sat down on a large stone, and tried to think this out. It sounded
 to him like a riddle, and he was never much good at riddles, being a
 Bear of Very Little Brain. So he sangCottleston Pieinstead:
 
-Cottleston, Cottleston, Cottleston Pie,A fly can't bird, but a bird can fly.Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."That was the first verse. When he had finished it, Eeyore didn't
+Cottleston, Cottleston, Cottleston Pie,A fly can't bird, but a bird can fly. Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."That was the first verse. When he had finished it, Eeyore didn't
 actually say that he didn't like it, so Pooh very kindly sang the second
 verse to him:
 
-Cottleston, Cottleston, Cottleston Pie,A fish can't whistle and neither can I.Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."Eeyore still said nothing at all, so Pooh hummed the third verse quietly
+Cottleston, Cottleston, Cottleston Pie,A fish can't whistle and neither can I. Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."Eeyore still said nothing at all, so Pooh hummed the third verse quietly
 to himself:
 
-Cottleston, Cottleston, Cottleston Pie,Why does a chicken, I don't know why.Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."
+Cottleston, Cottleston, Cottleston Pie,Why does a chicken, I don't know why. Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."
 ---
-
 
 ---
 
@@ -1868,9 +1755,7 @@ turned and hurried back home as quick as he could; for he felt that he
 must get poor Eeyore a present ofsomesort at once, and he could
 always think of a proper one afterwards.
 
-
 ---
-
 
 ---
 
@@ -1901,9 +1786,7 @@ So in they went. The first thing Pooh did was to go to the cupboard to
 see if he had quite a small jar of honey left; and he had, so he took it
 down.
 
-
 ---
-
 
 ---
 
@@ -1922,9 +1805,7 @@ cheer him up. Nobody can be uncheered with a balloon."
 So off Piglet trotted; and in the other direction went Pooh, with his
 jar of honey.
 
-
 ---
-
 
 ---
 
@@ -1940,9 +1821,7 @@ with me," he thought. "Many a bear going out on a warm day like this
 would never have thought of bringing a little something with him." And
 he began to eat.
 
-
 ---
-
 
 ---
 
@@ -1954,9 +1833,7 @@ present!
 
 "Bother!" said Pooh. "WhatshallI do? Imustgive himsomething."
 
-
 ---
-
 
 ---
 
@@ -2014,9 +1891,7 @@ wrote. Could you read it?"
 
 "Well, I'll tell you whatthissays, and then you'll be able to."
 
-
 ---
-
 
 ---
 
@@ -2045,9 +1920,7 @@ being told by anybody. And running along, and thinking how pleased
 Eeyore would be, he didn't look where he was going ... and suddenly he
 put his foot in a rabbit hole, and fell down flat on his face.
 
-
 ---
-
 
 ---
 
@@ -2098,9 +1971,7 @@ fell down for the third time. "It's quite easy. It's so as I can hear
 better.... There, that's done it! Now then, what were you saying?" He
 pushed his ear forward with his hoof.
 
-
 ---
-
 
 ---
 
@@ -2137,9 +2008,7 @@ with great difficulty put up his left hoof.
 
 "Yes, Eeyore, and I brought you a balloon."
 
-
 ---
-
 
 ---
 
@@ -2240,9 +2109,7 @@ Something to put in a Useful Pot."
 But Eeyore wasn't listening. He was taking the balloon out, and putting
 it back again, as happy as could be....
 
-
 ---
-
 
 ---
 
@@ -2263,13 +2130,11 @@ and——"
 
 "Yes,Iremember," said Christopher Robin.
 
-
 ---
 
-## CHAPTER VII
+## Chapter 7
 
 ### IN WHICH KANGA AND BABY ROO COME TO THE FOREST, AND PIGLET HAS A BATH
-
 
 ---
 
@@ -2368,9 +2233,7 @@ Animals. In which case 'Aha!' is perhaps afoolishthing to say."
 "It is hard to be brave," said Piglet, sniffing slightly, "when you're
 only a Very Small Animal."
 
-
 ---
-
 
 ---
 
@@ -2394,7 +2257,7 @@ adventure would be impossible."
 
 "Oh!" said Piglet, and tried not to look disappointed. But Pooh went
 into a corner of the room and said proudly to himself, "Impossible
-without Me!Thatsort of Bear."
+without Me! Thatsort of Bear."
 
 "Now listen all of you," said Rabbit when he had finished writing, and
 Pooh and Piglet sat listening very eagerly with their mouths open. This
@@ -2402,10 +2265,9 @@ was what Rabbit read out:
 
 PLAN TO CAPTURE BABY ROO
 
-1.General Remarks.Kanga runs faster than any of Us, even Me.2.More General Remarks.Kanga never takes her eye off Baby Roo, except when he's safely buttoned up in her pocket.3.Therefore.If we are to capture Baby Roo, we must get a Long Start, because Kanga runs faster than any of Us, even Me.
-(See1.)4.A Thought.If Roo had jumped out of Kanga's pocket and Piglet had jumped in, Kanga wouldn't know the difference, because Piglet is a Very Small Animal.5.Like Roo.6.But Kanga would have to be looking the other way first, so as not to see Piglet jumping in.7.See 2.8.Another Thought.But if Pooh was talking to her very excitedly, shemightlook the other way for a moment.9.And then I could run away with Roo.10.Quickly.11.And Kanga wouldn't discover the difference until Afterwards.
+1. General Remarks. Kanga runs faster than any of Us, even Me.2. More General Remarks. Kanga never takes her eye off Baby Roo, except when he's safely buttoned up in her pocket.3. Therefore. If we are to capture Baby Roo, we must get a Long Start, because Kanga runs faster than any of Us, even Me.
+(See1.)4. A Thought. If Roo had jumped out of Kanga's pocket and Piglet had jumped in, Kanga wouldn't know the difference, because Piglet is a Very Small Animal.5. Like Roo.6. But Kanga would have to be looking the other way first, so as not to see Piglet jumping in.7. See 2.8. Another Thought. But if Pooh was talking to her very excitedly, shemightlook the other way for a moment.9. And then I could run away with Roo.10. Quickly.11. And Kanga wouldn't discover the difference until Afterwards.
 ---
-
 
 ---
 
@@ -2465,9 +2327,7 @@ fidgeting about and saying "Just one more jump, dear, and then we must
 go home." And at that moment who should come stumping up the hill but
 Pooh.
 
-
 ---
-
 
 ---
 
@@ -2520,13 +2380,11 @@ coming along. It went like this. Er—now let me see——"
 
 Pooh gave a little cough and began.
 
-LINES WRITTEN BY A BEAR OF VERY LITTLE BRAINOn Monday, when the sun is hotI wonder to myself a lot:"Now is it true, or is it not,"That what is which and which is what?"On Tuesday, when it hails and snows,The feeling on me grows and growsThat hardly anybody knowsIf those are these or these are those.On Wednesday, when the sky is blue,And I have nothing else to do,I sometimes wonder if it's trueThat who is what and what is who.On Thursday, when it starts to freezeAnd hoar-frost twinkles on the trees,How very readily one seesThat these are whose—but whose are these?On Friday——"Yes, it is, isn't it?" said Kanga, not waiting to hear what happened on
+LINES WRITTEN BY A BEAR OF VERY LITTLE BRAINOn Monday, when the sun is hotI wonder to myself a lot:"Now is it true, or is it not,"That what is which and which is what?"On Tuesday, when it hails and snows,The feeling on me grows and growsThat hardly anybody knowsIf those are these or these are those. On Wednesday, when the sky is blue,And I have nothing else to do,I sometimes wonder if it's trueThat who is what and what is who. On Thursday, when it starts to freezeAnd hoar-frost twinkles on the trees,How very readily one seesThat these are whose—but whose are these? On Friday——"Yes, it is, isn't it?" said Kanga, not waiting to hear what happened on
 Friday. "Just one more jump, Roo, dear, and then we reallymustbe
 going."
 
-
 ---
-
 
 ---
 
@@ -2575,9 +2433,7 @@ had to go and see about suddenly."
 
 "I think Piglet thought of something at the same time. Suddenly."
 
-
 ---
-
 
 ---
 
@@ -2606,9 +2462,7 @@ she knew she wasn't; for she felt quite sure that Christopher Robin
 would never let any harm happen to Roo. So she said to herself, "If they
 are having a joke with me, I will have a joke with them."
 
-
 ---
-
 
 ---
 
@@ -2627,9 +2481,7 @@ house, and feeling more fond of him every minute, and Pooh, who had
 decided to be a Kanga, was still at the sandy place on the top of the
 Forest, practising jumps.
 
-
 ---
-
 
 ---
 
@@ -2650,7 +2502,7 @@ indignant shudder, and said in as brave a voice as he could:
 too! So clever of him," she went on, as she took a large bar of yellow
 soap out of the cupboard. "Whatwillhe be doing next?"
 
-"Can't yousee?" shouted Piglet. "Haven't you goteyes?Lookat
+"Can't yousee?" shouted Piglet. "Haven't you goteyes? Lookat
 me!"
 
 "Iamlooking, Roo, dear," said Kanga rather severely. "And you know
@@ -2662,9 +2514,7 @@ speak to you about it again."
 Before he knew where he was, Piglet was in the bath, and Kanga was
 scrubbing him firmly with a large lathery flannel.
 
-
 ---
-
 
 ---
 
@@ -2691,9 +2541,7 @@ At that moment there was a knock at the door.
 
 "Come in," said Kanga, and in came Christopher Robin.
 
-
 ---
-
 
 ---
 
@@ -2738,9 +2586,7 @@ But when he was a hundred yards away he stopped running, and rolled the
 rest of the way home, so as to get his own nice comfortable colour
 again....
 
-
 ---
-
 
 ---
 
@@ -2750,10 +2596,9 @@ with her great friend Pooh, teaching him to jump, and every Tuesday
 Piglet spent the day with his great friend Christopher Robin. So they
 were all happy again.
 
-
 ---
 
-## CHAPTER VIII
+## Chapter 8
 
 ### IN WHICH CHRISTOPHER ROBIN LEADS AN EXPOTITION TO THE NORTH POLE
 
@@ -2773,7 +2618,7 @@ very quickly, I shall find myself singing the third and fourth lines
 before I have time to think of them, and that will be a Good Song. Now
 then:"
 
-Sing Ho! for the life of a Bear!Sing Ho! for the life of a Bear!I don't much mind if it rains or snows,'Cos I've got a lot of honey on my nice new nose,I don't much care if it snows or thaws,'Cos I've got a lot of honey on my nice clean paws!Sing Ho! for a Bear!Sing Ho! for a Pooh!And I'll have a little something in an hour or two!He was so pleased with this song that he sang it all the way to the top
+Sing Ho! for the life of a Bear! Sing Ho! for the life of a Bear! I don't much mind if it rains or snows,'Cos I've got a lot of honey on my nice new nose,I don't much care if it snows or thaws,'Cos I've got a lot of honey on my nice clean paws! Sing Ho! for a Bear! Sing Ho! for a Pooh! And I'll have a little something in an hour or two! He was so pleased with this song that he sang it all the way to the top
 of the Forest, "and if I go on singing it much longer," he thought, "it
 will be time for the little something, and then the last line won't be
 true." So he turned it into a hum instead.
@@ -2793,9 +2638,7 @@ for Anything.
 "Do you think you could very kindly lean against me, 'cos I keep pulling
 so hard that I fall over backwards."
 
-
 ---
-
 
 ---
 
@@ -2838,9 +2681,7 @@ tell them." And he stumped off.
 
 The first person he met was Rabbit.
 
-
 ---
-
 
 ---
 
@@ -2875,9 +2716,7 @@ sometime or never. He had just discovered that it would be never, and
 was trying to remember what "it" was, and hoping it wasn't anything
 nice, when Pooh came up.
 
-
 ---
-
 
 ---
 
@@ -2901,9 +2740,7 @@ Expotition started. First came Christopher Robin and Rabbit, then Piglet
 and Pooh; then Kanga, with Roo in her pocket, and Owl; then Eeyore; and,
 at the end, in a long line, all Rabbit's friends-and-relations.
 
-
 ---
-
 
 ---
 
@@ -2918,9 +2755,7 @@ little rest, I have to brush away half a dozen of Rabbit's smaller
 friends-and-relations first, then this isn't an Expo—whatever it
 is—at all, it's simply a Confused Noise. That's whatIsay."
 
-
 ---
-
 
 ---
 
@@ -2965,12 +2800,10 @@ making up a song.
 
 Pooh couldn't answer that one, so he began to sing.
 
-They all went off to discover the Pole,Owl and Piglet and Rabbit and all;It's a Thing you Discover, as I've been toleBy Owl and Piglet and Rabbit and all.Eeyore, Christopher Robin and PoohAnd Rabbit's relations all went too—And where the Pole was none of them knew....Sing Hey! for Owl and Rabbit and all!"Hush!" said Christopher Robin turning round to Pooh, "we're just coming
+They all went off to discover the Pole,Owl and Piglet and Rabbit and all;It's a Thing you Discover, as I've been toleBy Owl and Piglet and Rabbit and all. Eeyore, Christopher Robin and PoohAnd Rabbit's relations all went too—And where the Pole was none of them knew.... Sing Hey! for Owl and Rabbit and all!"Hush!" said Christopher Robin turning round to Pooh, "we're just coming
 to a Dangerous Place."
 
-
 ---
-
 
 ---
 
@@ -2992,9 +2825,7 @@ downwards in a crack in the ground, and stayed there for two days until
 the danger was over, and then went home in a great hurry, and lived
 quietly with his Aunt ever-afterwards. His name was Alexander Beetle.
 
-
 ---
-
 
 ---
 
@@ -3060,9 +2891,7 @@ chance?"
 "Thank you, Pooh. If you've quite finished with it." He moved across to
 Pooh's place, and began to eat.
 
-
 ---
-
 
 ---
 
@@ -3122,9 +2951,7 @@ squeak from Roo, a splash, and a loud cry of alarm from Kanga.
 "Roo's fallen in!" cried Rabbit, and he and Christopher Robin came
 rushing down to the rescue.
 
-
 ---
-
 
 ---
 
@@ -3160,9 +2987,7 @@ between them they held it across the lower part of the pool; and Roo,
 still bubbling proudly, "Look at me swimming," drifted up against it,
 and climbed out.
 
-
 ---
-
 
 ---
 
@@ -3189,9 +3014,7 @@ have found the North Pole!"
 Eeyore was sitting with his tail in the water when they all got back to
 him.
 
-
 ---
-
 
 ---
 
@@ -3268,9 +3091,7 @@ DISCOVERED BY POOH
 
 POOH FOUND IT.
 
-
 ---
-
 
 ---
 
@@ -3279,10 +3100,9 @@ that Roo had a hot bath and went straight to bed. But Pooh went back to
 his own house, and feeling very proud of what he had done, had a little
 something to revive himself.
 
-
 ---
 
-## CHAPTER IX
+## Chapter 9
 
 ### IN WHICH PIGLET IS ENTIRELY SURROUNDED BY WATER
 
@@ -3320,9 +3140,7 @@ It went on raining, and every day the water got a little higher, until
 now it was nearly up to Piglet's window ... and still he hadn't done
 anything.
 
-
 ---
-
 
 ---
 
@@ -3347,7 +3165,7 @@ under water, and at last he found a pencil and a small piece of dry
 paper, and a bottle with a cork to it. And he wrote on one side of the
 paper:
 
-HELP!  
+HELP!
 PIGLET (ME)
 
 and on the other side:
@@ -3364,9 +3182,7 @@ sometimes he thought it was just a ripple on the water which he was
 following, and then suddenly he knew that he would never see it again
 and that he had done all that he could do to save himself.
 
-
 ---
-
 
 ---
 
@@ -3375,7 +3191,6 @@ hope they will do it soon, because if they don't I shall have to swim,
 which I can't, so I hope they do it soon." And then he gave a very long
 sigh and said, "I wish Pooh were here. It's so much more friendly with
 two."
-
 
 ---
 
@@ -3415,9 +3230,7 @@ and escaped with another pot ... and when the whole Escape was
 finished, there was Pooh sitting on his branch, dangling his legs, and
 there, beside him, were ten pots of honey....
 
-
 ---
-
 
 ---
 
@@ -3429,9 +3242,7 @@ legs, and there beside him, was one pot of honey.
 
 Four days later, there was Pooh ...
 
-
 ---
-
 
 ---
 
@@ -3457,9 +3268,7 @@ it was a good idea. He said to himself:
 "If a bottle can float, then a jar can float, and if a jar floats, I can
 sit on the top of it, if it's a very big jar."
 
-
 ---
-
 
 ---
 
@@ -3467,9 +3276,7 @@ So he took his biggest jar, and corked it up. "All boats have to have a
 name," he said, "so I shall call mineThe Floating Bear." And with
 these words he dropped his boat into the water and jumped in after it.
 
-
 ---
-
 
 ---
 
@@ -3478,9 +3285,7 @@ which of them was meant to be on the top, but after trying one or two
 different positions, they settled down withThe Floating Bearunderneath and Pooh triumphantly astride it, paddling vigorously with
 his feet.
 
-
 ---
-
 
 ---
 
@@ -3497,9 +3302,7 @@ he had had the morning before. On the morning of the fifth day he saw
 the water all round him, and knew that for the first time in his life he
 was on a real island. Which was very exciting.
 
-
 ---
-
 
 ---
 
@@ -3555,9 +3358,7 @@ house with nine pots of honey. But he isn't there now."
 
 "Oh, Pooh!" cried Christopher Robin. "Whereareyou?"
 
-
 ---
-
 
 ---
 
@@ -3574,9 +3375,7 @@ to talk again.
 in a bottle, and owing to having got some water in my eyes, I couldn't
 read it, so I brought it to you. On my boat."
 
-
 ---
-
 
 ---
 
@@ -3627,9 +3426,9 @@ nose and tried to pretend he wasn't.
 
 "That makes it smaller still. Oh, Pooh Bear, what shall we do?"
 
-And then this Bear, Pooh Bear, Winnie-the-Pooh, F.O.P. (Friend of
-Piglet's), R.C. (Rabbit's Companion), P.D. (Pole Discoverer), E.C. and
-T.F. (Eeyore's Comforter and Tail-finder)—in fact, Pooh himself—said
+And then this Bear, Pooh Bear, Winnie-the-Pooh, F. O. P. (Friend of
+Piglet's), R. C. (Rabbit's Companion), P. D. (Pole Discoverer), E. C. and
+T. F. (Eeyore's Comforter and Tail-finder)—in fact, Pooh himself—said
 something so clever that Christopher Robin could only look at him with
 mouth open and eyes staring, wondering if this was really the Bear of
 Very Little Brain whom he had known and loved so long.
@@ -3653,9 +3452,7 @@ now, when he found that it wasn't, so after a short drink which he
 didn't really want he waded back to Christopher Robin. Then they both
 got in together, and it wobbled no longer.
 
-
 ---
-
 
 ---
 
@@ -3663,9 +3460,7 @@ got in together, and it wobbled no longer.
 andThe Brain of Poohset sail forthwith in a south-westerly
 direction, revolving gracefully.
 
-
 ---
-
 
 ---
 
@@ -3686,22 +3481,18 @@ you can imagine his joy when at last he saw the good ship,Brain of
 Pooh(Captain, C. Robin;1st Mate, P. Bear) coming over the sea to
 rescue him. Christopher Robin and Pooh again....
 
-
 ---
-
 
 ---
 
 And that is really the end of the story, and I am very tired after that
 last sentence, I think I shall stop there.
 
-
 ---
 
-## CHAPTER X
+## Chapter 10
 
 ### IN WHICH CHRISTOPHER ROBIN GIVES POOH A PARTY, AND WE SAY GOOD-BYE
-
 
 ---
 
@@ -3746,9 +3537,7 @@ Owl felt that it was rather beneath him to talk about little cake things
 with pink sugar icing, so he told Pooh exactly what Christopher Robin
 had said, and flew off to Eeyore.
 
-
 ---
-
 
 ---
 
@@ -3761,7 +3550,7 @@ the more he thought like this, the more the party got muddled in his
 mind, like a dream when nothing goes right. And the dream began to sing
 itself over in his head until it became a sort of song. It was an
 
-ANXIOUS POOH SONG.3 Cheers for Pooh!(For Who?)For Pooh—(Why what did he do?)I thought you knew;He saved his friend from a wetting!3 Cheers for Bear!(For where?)For Bear—He couldn't swim,But he rescued him!(He rescued who?)Oh, listen, do!I am talking of Pooh—(Of who?)Of Pooh!(I'm sorry I keep forgetting).Well, Pooh was a Bear of Enormous Brain(Just say it again!)Of enormous brain—(Of enormous what?)Well, he ate a lot,And I don't know if he could swim or not,But he managed to floatOn a sort of boat(On a sort of what?)Well, a sort of pot—So now let's give him three hearty cheers(So now let's give him three hearty whiches?)And hope he'll be with us for years and years,And grow in health and wisdom and riches!3 Cheers for Pooh!(For who?)For Pooh—3 Cheers for Bear!(For where?)For Bear—3 Cheers for the wonderful Winnie-the-Pooh!(Just tell me, somebody—WHAT DID HE DO?)While this was going on inside him, Owl was talking to Eeyore.
+ANXIOUS POOH SONG.3 Cheers for Pooh!(For Who?)For Pooh—(Why what did he do?)I thought you knew;He saved his friend from a wetting!3 Cheers for Bear!(For where?)For Bear—He couldn't swim,But he rescued him!(He rescued who?)Oh, listen, do! I am talking of Pooh—(Of who?)Of Pooh!(I'm sorry I keep forgetting). Well, Pooh was a Bear of Enormous Brain(Just say it again!)Of enormous brain—(Of enormous what?)Well, he ate a lot,And I don't know if he could swim or not,But he managed to floatOn a sort of boat(On a sort of what?)Well, a sort of pot—So now let's give him three hearty cheers(So now let's give him three hearty whiches?)And hope he'll be with us for years and years,And grow in health and wisdom and riches!3 Cheers for Pooh!(For who?)For Pooh—3 Cheers for Bear!(For where?)For Bear—3 Cheers for the wonderful Winnie-the-Pooh!(Just tell me, somebody—WHAT DID HE DO?)While this was going on inside him, Owl was talking to Eeyore.
 
 "Eeyore," said Owl, "Christopher Robin is giving a party."
 
@@ -3769,9 +3558,7 @@ ANXIOUS POOH SONG.3 Cheers for Pooh!(For Who?)For Pooh—(Why what did he do?)I 
 the odd bits which got trodden on. Kind and Thoughtful. Not at all,
 don't mention it."
 
-
 ---
-
 
 ---
 
@@ -3781,9 +3568,7 @@ don't mention it."
 
 "An Invitation!"
 
-
 ---
-
 
 ---
 
@@ -3796,9 +3581,7 @@ Eeyore shook his head slowly.
 "You mean Piglet. The little fellow with the excited ears. That's
 Piglet. I'll tell him."
 
-
 ---
-
 
 ---
 
@@ -3852,9 +3635,7 @@ was drinking his milk, tried to say that he could do both at once ...
 and had to be patted on the back and dried for quite a long time
 afterwards.
 
-
 ---
-
 
 ---
 
@@ -3863,9 +3644,7 @@ table with his spoon, and everybody stopped talking and was very silent,
 except Roo who was just finishing a loud attack of hiccups and trying to
 look as if it was one of Rabbit's relations.
 
-
 ---
-
 
 ---
 
@@ -3924,9 +3703,7 @@ have my friends. Somebody spoke to me only yesterday. And was it last
 week or the week before that Rabbit bumped into me and said 'Bother!'
 The Social Round. Always something going on."
 
-
 ---
-
 
 ---
 
@@ -3961,9 +3738,7 @@ Later on, when they had all said "Good-bye" and "Thank-you" to
 Christopher Robin, Pooh and Piglet walked home thoughtfully together in
 the golden evening, and for a long time they were silent.
 
-
 ---
-
 
 ---
 
@@ -3977,7 +3752,6 @@ the first thing you say to yourself?"
 Pooh nodded thoughtfully.
 
 "It's the same thing," he said.
-
 
 ---
 
@@ -4008,17 +3782,14 @@ said "Coming to see me have my bath?"
 He nodded and went out ... and in a moment I heard
 Winnie-the-Pooh—bump, bump, bump—going up the stairs behind him.
 
+---
 
 ---
 
-
----
-
-Printed in Canada  
-by Warwick Bros. & Rutter, Limited  
-Printers and Bookbinders  
+Printed in Canada
+by Warwick Bros. & Rutter, Limited
+Printers and Bookbinders
 Toronto
-
 
 ---
 
@@ -4027,7 +3798,7 @@ read "... and every Tuesday Kanga spent the day with her great friend
 Pooh ..."]
 
 *** END OF THE PROJECT GUTENBERG EBOOK WINNIE-THE-POOH ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -4043,16 +3814,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -4061,15 +3832,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -4084,7 +3855,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -4092,7 +3863,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -4103,28 +3874,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -4134,9 +3905,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -4157,40 +3928,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -4201,17 +3972,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -4221,11 +3992,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -4233,13 +4004,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -4249,31 +4020,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

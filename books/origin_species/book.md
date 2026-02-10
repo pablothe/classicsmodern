@@ -1,6 +1,6 @@
 **_ START OF THE PROJECT GUTENBERG EBOOK 1228 _**There are several editions of this ebook in the Project Gutenberg collection.
 Various characteristics of each ebook are listed to aid in selecting the
-preferred file.  
+preferred file.
 Click on any of the filenumbers below to quickly view each ebook.
 
 [1228](http://www.gutenberg.org/files/1228/1228-h/1228-h.htm)1859, First Edition[22764](http://www.gutenberg.org/files/22764/22764-h/22764-h.htm)1860, Second Edition[2009](http://www.gutenberg.org/files/2009/2009-h/2009-h.htm)1872, Sixth Edition, considered the definitive edition.# Onthe Origin of Species
@@ -9,9 +9,9 @@ Click on any of the filenumbers below to quickly view each ebook.
 
 ### OR THEPRESERVATION OF FAVOURED RACES IN THE STRUGGLE FOR LIFE.
 
-## By Charles Darwin, M.A.,
+## By Charles Darwin, M. A.,
 
-#### Fellow Of The Royal, Geological, Linnæan, Etc., Societies;Author Of ‘Journal Of Researches During H.M.S. Beagle’s Voyage
+#### Fellow Of The Royal, Geological, Linnæan, Etc., Societies;Author Of ‘Journal Of Researches During H. M. S. Beagle’s Voyage
 
 Round The World.’LONDON:JOHN MURRAY, ALBEMARLE STREET.1859.
 
@@ -32,7 +32,7 @@ endless progress or proficience in both.”
 
 BACON:Advancement of Learning.
 
-Down, Bromley, Kent,  
+Down, Bromley, Kent,
 October, 1st, 1859.
 
 ---
@@ -45,209 +45,209 @@ October, 1st, 1859.
 
 [CHAPTER I. VARIATION UNDER DOMESTICATION.](#chap01)
 
-Causes of Variability.  
-Effects of Habit.  
-Correlation of Growth.  
-Inheritance.  
-Character of Domestic Varieties.  
-Difficulty of distinguishing between Varieties and Species.  
-Origin of Domestic Varieties from one or more Species.  
-Domestic Pigeons, their Differences and Origin.  
-Principle of Selection anciently followed, its Effects.  
-Methodical and Unconscious Selection.  
-Unknown Origin of our Domestic Productions.  
+Causes of Variability.
+Effects of Habit.
+Correlation of Growth.
+Inheritance.
+Character of Domestic Varieties.
+Difficulty of distinguishing between Varieties and Species.
+Origin of Domestic Varieties from one or more Species.
+Domestic Pigeons, their Differences and Origin.
+Principle of Selection anciently followed, its Effects.
+Methodical and Unconscious Selection.
+Unknown Origin of our Domestic Productions.
 Circumstances favourable to Man’s power of Selection.
 
 [CHAPTER 2. VARIATION UNDER NATURE.](#chap02)
 
-Variability.  
-Individual Differences.  
-Doubtful species.  
-Wide ranging, much diffused, and common species vary most.  
+Variability.
+Individual Differences.
+Doubtful species.
+Wide ranging, much diffused, and common species vary most.
 Species of the larger genera in any country vary more than the species
-of the smaller genera.  
+of the smaller genera.
 Many of the species of the larger genera resemble varieties in being
 very closely, but unequally, related to each other, and in having
 restricted ranges.
 
 [CHAPTER 3. STRUGGLE FOR EXISTENCE.](#chap03)
 
-Bears on natural selection.  
-The term used in a wide sense.  
-Geometrical powers of increase.  
-Rapid increase of naturalised animals and plants.  
-Nature of the checks to increase.  
-Competition universal.  
-Effects of climate.  
-Protection from the number of individuals.  
-Complex relations of all animals and plants throughout nature.  
+Bears on natural selection.
+The term used in a wide sense.
+Geometrical powers of increase.
+Rapid increase of naturalised animals and plants.
+Nature of the checks to increase.
+Competition universal.
+Effects of climate.
+Protection from the number of individuals.
+Complex relations of all animals and plants throughout nature.
 Struggle for life most severe between individuals and varieties of the
-same species; often severe between species of the same genus.  
+same species; often severe between species of the same genus.
 The relation of organism to organism the most important of all relations.
 
 [CHAPTER 4. NATURAL SELECTION.](#chap04)
 
 Natural Selection: its power compared with man’s selection, its power
 on characters of trifling importance, its power at all ages and on
-both sexes.  
-Sexual Selection.  
+both sexes.
+Sexual Selection.
 On the generality of intercrosses between individuals of the same
-species.  
-Circumstances favourable and unfavourable to Natural Selection,  
-namely, intercrossing, isolation, number of individuals.  
-Slow action.  
-Extinction caused by Natural Selection.  
+species.
+Circumstances favourable and unfavourable to Natural Selection,
+namely, intercrossing, isolation, number of individuals.
+Slow action.
+Extinction caused by Natural Selection.
 Divergence of Character, related to the diversity of inhabitants of
-any small area, and to naturalisation.  
-Action of Natural Selection, through Divergence of Character and  
-Extinction, on the descendants from a common parent.  
+any small area, and to naturalisation.
+Action of Natural Selection, through Divergence of Character and
+Extinction, on the descendants from a common parent.
 Explains the Grouping of all organic beings.
 
 [CHAPTER 5. LAWS OF VARIATION.](#chap05)
 
-Effects of external conditions.  
+Effects of external conditions.
 Use and disuse, combined with natural selection; organs of flight and
-of vision.  
-Acclimatisation.  
-Correlation of growth.  
-Compensation and economy of growth.  
-False correlations.  
-Multiple, rudimentary, and lowly organised structures variable.  
+of vision.
+Acclimatisation.
+Correlation of growth.
+Compensation and economy of growth.
+False correlations.
+Multiple, rudimentary, and lowly organised structures variable.
 Parts developed in an unusual manner are highly variable: specific
 characters more variable than generic: secondary sexual characters
-variable.  
-Species of the same genus vary in an analogous manner.  
-Reversions to long-lost characters.  
+variable.
+Species of the same genus vary in an analogous manner.
+Reversions to long-lost characters.
 Summary.
 
 [CHAPTER 6. DIFFICULTIES ON THEORY.](#chap06)
 
-Difficulties on the theory of descent with modification.  
-Transitions.  
-Absence or rarity of transitional varieties.  
-Transitions in habits of life.  
-Diversified habits in the same species.  
-Species with habits widely different from those of their allies.  
-Organs of extreme perfection.  
-Means of transition.  
-Cases of difficulty.  
-Natura non facit saltum.  
-Organs of small importance.  
-Organs not in all cases absolutely perfect.  
+Difficulties on the theory of descent with modification.
+Transitions.
+Absence or rarity of transitional varieties.
+Transitions in habits of life.
+Diversified habits in the same species.
+Species with habits widely different from those of their allies.
+Organs of extreme perfection.
+Means of transition.
+Cases of difficulty.
+Natura non facit saltum.
+Organs of small importance.
+Organs not in all cases absolutely perfect.
 The law of Unity of Type and of the Conditions of Existence embraced
 by the theory of Natural Selection.
 
 [CHAPTER 7. INSTINCT.](#chap07)
 
-Instincts comparable with habits, but different in their origin.  
-Instincts graduated.  
-Aphides and ants.  
-Instincts variable.  
-Domestic instincts, their origin.  
-Natural instincts of the cuckoo, ostrich, and parasitic bees.  
-Slave-making ants.  
-Hive-bee, its cell-making instinct.  
-Difficulties on the theory of the Natural Selection of instincts.  
+Instincts comparable with habits, but different in their origin.
+Instincts graduated.
+Aphides and ants.
+Instincts variable.
+Domestic instincts, their origin.
+Natural instincts of the cuckoo, ostrich, and parasitic bees.
+Slave-making ants.
+Hive-bee, its cell-making instinct.
+Difficulties on the theory of the Natural Selection of instincts.
 Neuter or sterile insects.
 
 Summary.
 
 [CHAPTER 8. HYBRIDISM.](#chap08)
 
-Distinction between the sterility of first crosses and of hybrids.  
+Distinction between the sterility of first crosses and of hybrids.
 Sterility various in degree, not universal, affected by close
-interbreeding, removed by domestication.  
-Laws governing the sterility of hybrids.  
+interbreeding, removed by domestication.
+Laws governing the sterility of hybrids.
 Sterility not a special endowment, but incidental on other
-differences.  
-Causes of the sterility of first crosses and of hybrids.  
+differences.
+Causes of the sterility of first crosses and of hybrids.
 Parallelism between the effects of changed conditions of life and
-crossing.  
+crossing.
 Fertility of varieties when crossed and of their mongrel offspring not
-universal.  
-Hybrids and mongrels compared independently of their fertility.  
+universal.
+Hybrids and mongrels compared independently of their fertility.
 Summary.
 
 [CHAPTER 9. ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.](#chap09)
 
-On the absence of intermediate varieties at the present day.  
-On the nature of extinct intermediate varieties; on their number.  
+On the absence of intermediate varieties at the present day.
+On the nature of extinct intermediate varieties; on their number.
 On the vast lapse of time, as inferred from the rate of deposition and
-of denudation.  
-On the poorness of our palæontological collections.  
-On the intermittence of geological formations.  
-On the absence of intermediate varieties in any one formation.  
-On the sudden appearance of groups of species.  
+of denudation.
+On the poorness of our palæontological collections.
+On the intermittence of geological formations.
+On the absence of intermediate varieties in any one formation.
+On the sudden appearance of groups of species.
 On their sudden appearance in the lowest known fossiliferous strata.
 
 [CHAPTER 10. ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.](#chap10)
 
-On the slow and successive appearance of new species.  
-On their different rates of change.  
-Species once lost do not reappear.  
+On the slow and successive appearance of new species.
+On their different rates of change.
+Species once lost do not reappear.
 Groups of species follow the same general rules in their appearance
-and disappearance as do single species.  
-On Extinction.  
-On simultaneous changes in the forms of life throughout the world.  
-On the affinities of extinct species to each other and to living species.  
-On the state of development of ancient forms.  
-On the succession of the same types within the same areas.  
+and disappearance as do single species.
+On Extinction.
+On simultaneous changes in the forms of life throughout the world.
+On the affinities of extinct species to each other and to living species.
+On the state of development of ancient forms.
+On the succession of the same types within the same areas.
 Summary of preceding and present chapters.
 
 [CHAPTER 11. GEOGRAPHICAL DISTRIBUTION.](#chap11)
 
 Present distribution cannot be accounted for by differences in
-physical conditions.  
-Importance of barriers.  
-Affinity of the productions of the same continent.  
-Centres of creation.  
+physical conditions.
+Importance of barriers.
+Affinity of the productions of the same continent.
+Centres of creation.
 Means of dispersal, by changes of climate and of the level of the
-land, and by occasional means.  
+land, and by occasional means.
 Dispersal during the Glacial period co-extensive with the world.
 
 [CHAPTER 12. GEOGRAPHICAL DISTRIBUTION—continued.](#chap12)
 
-Distribution of fresh-water productions.  
-On the inhabitants of oceanic islands.  
-Absence of Batrachians and of terrestrial Mammals.  
+Distribution of fresh-water productions.
+On the inhabitants of oceanic islands.
+Absence of Batrachians and of terrestrial Mammals.
 On the relation of the inhabitants of islands to those of the nearest
-mainland.  
-On colonisation from the nearest source with subsequent modification.  
+mainland.
+On colonisation from the nearest source with subsequent modification.
 Summary of the last and present chapters.
 
 [CHAPTER 13. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY: EMBRYOLOGY:
 RUDIMENTARY ORGANS.](#chap13)
 
-CLASSIFICATION, groups subordinate to groups.  
-Natural system.  
+CLASSIFICATION, groups subordinate to groups.
+Natural system.
 Rules and difficulties in classification, explained on the theory of
-descent with modification.  
-Classification of varieties.  
-Descent always used in classification.  
-Analogical or adaptive characters.  
-Affinities, general, complex and radiating.  
-Extinction separates and defines groups.  
+descent with modification.
+Classification of varieties.
+Descent always used in classification.
+Analogical or adaptive characters.
+Affinities, general, complex and radiating.
+Extinction separates and defines groups.
 MORPHOLOGY, between members of the same class, between parts of the
-same individual.  
+same individual.
 EMBRYOLOGY, laws of, explained by variations not supervening at an
-early age, and being inherited at a corresponding age.  
-RUDIMENTARY ORGANS; their origin explained.  
+early age, and being inherited at a corresponding age.
+RUDIMENTARY ORGANS; their origin explained.
 Summary.
 
 [CHAPTER 14. RECAPITULATION AND CONCLUSION.](#chap14)
 
-Recapitulation of the difficulties on the theory of Natural Selection.  
-Recapitulation of the general and special circumstances in its favour.  
-Causes of the general belief in the immutability of species.  
-How far the theory of natural selection may be extended.  
-Effects of its adoption on the study of Natural history.  
+Recapitulation of the difficulties on the theory of Natural Selection.
+Recapitulation of the general and special circumstances in its favour.
+Causes of the general belief in the immutability of species.
+How far the theory of natural selection may be extended.
+Effects of its adoption on the study of Natural history.
 Concluding remarks.
 
 ## ON THE ORIGIN OF SPECIES.
 
 end chapter## INTRODUCTION.
 
-[](#)When on board H.M.S. ‘Beagle,’ as naturalist, I was much struck
+[](#)When on board H. M. S. ‘Beagle,’ as naturalist, I was much struck
 with certain facts in the distribution of the inhabitants of South America, and
 in the geological relations of the present to the past inhabitants of that
 continent. These facts seemed to me to throw some light on the origin of
@@ -390,7 +390,7 @@ manner as the acknowledged varieties of any one species are the descendants of
 that species. Furthermore, I am convinced that Natural Selection has been the
 main but not exclusive means of modification.
 
-end chapter## CHAPTER I.VARIATION UNDER DOMESTICATION.
+end chapter## CHAPTER I. VARIATION UNDER DOMESTICATION.
 
 Causes of Variability. Effects of Habit. Correlation of Growth. Inheritance.
 Character of Domestic Varieties. Difficulty of distinguishing between Varieties
@@ -933,7 +933,7 @@ when we come to treat of selection. Fourthly, pigeons have been watched, and
 tended with the utmost care, and loved by many people. They have been
 domesticated for thousands of years in several quarters of the world; the
 earliest known record of pigeons is in the fifth Aegyptian dynasty, about 3000
-B.C., as was pointed out to me by Professor Lepsius; but Mr. Birch informs me
+B. C., as was pointed out to me by Professor Lepsius; but Mr. Birch informs me
 that pigeons are given in a bill[](#)of fare in the previous dynasty. In the time of the Romans, as we hear from
 Pliny, immense prices were given for pigeons; “nay, they are come to this
 pass, that they can reckon up their pedigree and race.” Pigeons were much
@@ -1356,7 +1356,7 @@ of Change I am convinced that the accumulative action of Selection, whether
 applied methodically and more quickly, or unconsciously and more slowly, but
 more efficiently, is by far the predominant Power.
 
-end chapter## CHAPTER II.VARIATION UNDER NATURE.
+end chapter## CHAPTER II. VARIATION UNDER NATURE.
 
 Variability. Individual differences. Doubtful species. Wide ranging, much
 diffused, and common species vary most. Species of the larger genera in any
@@ -1772,7 +1772,7 @@ modified and dominant descendants. But by steps hereafter to be explained, the
 larger genera also tend to break up into smaller genera. And thus, the forms of
 life throughout the universe become divided into groups subordinate to groups.
 
-end chapter## CHAPTER III.STRUGGLE FOR EXISTENCE.
+end chapter## CHAPTER III. STRUGGLE FOR EXISTENCE.
 
 Bears on natural selection. The term used in a wide sense. Geometrical powers
 of increase. Rapid increase of naturalised animals and plants. Nature of the
@@ -2273,7 +2273,7 @@ with the full belief, that the war of nature is not incessant, that no fear is
 felt, that death is generally prompt, and that the vigorous, the healthy, and
 the happy survive and multiply.
 
-end chapter## CHAPTER IV.NATURAL SELECTION.
+end chapter## CHAPTER IV. NATURAL SELECTION.
 
 Natural Selection: its power compared with man’s selection, its power on
 characters of trifling importance, its power at all ages and on both sexes.
@@ -3579,7 +3579,7 @@ feebler branch, so by generation I believe it has been with the great Tree of
 Life, which fills with its dead and broken branches the crust of the earth, and
 covers the surface with its ever branching and beautiful ramifications.
 
-end chapter## CHAPTER V.LAWS OF VARIATION.
+end chapter## CHAPTER V. LAWS OF VARIATION.
 
 Effects of external conditions. Use and disuse, combined with natural
 selection; organs of flight and of vision. Acclimatisation. Correlation of
@@ -4584,7 +4584,7 @@ to the individual, that gives rise to all the more important modifications of
 structure, by which the innumerable beings on the face of this earth are
 enabled to struggle with each other, and the best adapted to survive.
 
-end chapter## CHAPTER VI.DIFFICULTIES ON THEORY.
+end chapter## CHAPTER VI. DIFFICULTIES ON THEORY.
 
 Difficulties on the theory of descent with modification. Transitions. Absence
 or rarity of transitional varieties. Transitions in habits of life. Diversified
@@ -5523,7 +5523,7 @@ of life, and being in all cases subjected to the several laws of growth. Hence,
 in fact, the law of the Conditions of Existence is the higher law; as it
 includes, through the inheritance of former adaptations, that of Unity of Type.
 
-end chapter## CHAPTER VII.INSTINCT.
+end chapter## CHAPTER VII. INSTINCT.
 
 Instincts comparable with habits, but different in their origin. Instincts
 graduated. Aphides and ants. Instincts variable. Domestic instincts, their
@@ -6478,7 +6478,7 @@ specially endowed or created instincts, but as small consequences of one
 general law, leading to the advancement of all organic beings, namely,
 multiply, vary, let the strongest live and the weakest die.
 
-end chapter## CHAPTER VIII.HYBRIDISM.
+end chapter## CHAPTER VIII. HYBRIDISM.
 
 Distinction between the sterility of first crosses and of hybrids. Sterility
 various in degree, not universal, affected by close interbreeding, removed by
@@ -7344,7 +7344,7 @@ facts briefly given in this chapter do not seem to me opposed to, but even
 rather to support the view, that there is no fundamental distinction between
 species and varieties.
 
-end chapter## CHAPTER IX.ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.
+end chapter## CHAPTER IX. ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.
 
 On the absence of intermediate varieties at the present day. On the nature of
 extinct intermediate varieties; on their number. On the vast lapse of time, as
@@ -8168,7 +8168,7 @@ represent the apparently abruptly changed forms of life, entombed in our
 consecutive, but widely separated formations. On this view, the difficulties
 above discussed are greatly diminished, or even disappear.
 
-end chapter## CHAPTER X.ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.
+end chapter## CHAPTER X. ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.
 
 On the slow and successive appearance of new species. On their different rates
 of change. Species once lost do not reappear. Groups of species follow the same
@@ -9034,7 +9034,7 @@ generation: old forms having been supplanted by new and improved forms of life,
 produced by the laws of variation still acting round us, and preserved by
 Natural Selection.
 
-end chapter## CHAPTER XI.GEOGRAPHICAL DISTRIBUTION.
+end chapter## CHAPTER XI. GEOGRAPHICAL DISTRIBUTION.
 
 Present distribution cannot be accounted for by differences in physical
 conditions. Importance of barriers. Affinity of the productions of the same
@@ -9968,7 +9968,7 @@ with savage races of man, driven up and surviving in the mountain-fastnesses of
 almost every land, which serve as a record, full of interest to us, of the
 former inhabitants of the surrounding lowlands.
 
-end chapter## CHAPTER XII.GEOGRAPHICAL DISTRIBUTION—continued.
+end chapter## CHAPTER XII. GEOGRAPHICAL DISTRIBUTION—continued.
 
 Distribution of fresh-water productions. On the inhabitants of oceanic islands.
 Absence of Batrachians and of terrestrial Mammals. On the relation of the
@@ -10665,7 +10665,7 @@ they will generally stand to each other in time and space; in both cases the
 laws of variation have been the same, and modifications have been accumulated
 by the same power of natural selection.
 
-end chapter## CHAPTER XIII.MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY:
+end chapter## CHAPTER XIII. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY:
 EMBRYOLOGY: RUDIMENTARY ORGANS.
 
 CLASSIFICATION, groups subordinate to groups. Natural system.
@@ -11887,7 +11887,7 @@ parents, and have all been modified in the course of descent, that I should
 without hesitation adopt this view, even if it were unsupported by other facts
 or arguments.
 
-end chapter## CHAPTER XIV.RECAPITULATION AND CONCLUSION.
+end chapter## CHAPTER XIV. RECAPITULATION AND CONCLUSION.
 
 Recapitulation of the difficulties on the theory of Natural Selection.
 Recapitulation of the general and special circumstances in its favour. Causes
@@ -12706,17 +12706,17 @@ Abyssinia, plants of,[375](#Page375).
 
 Acclimatisation,[139](#Page139).
 
-Affinities:  
-of extinct species,[329](#Page329).  
+Affinities:
+of extinct species,[329](#Page329).
 of organic beings,[411](#Page411).
 
-Agassiz:  
-on Amblyopsis,[139](#Page139).  
-on groups of species suddenly appearing,[302](#Page302),[305](#Page305).  
-on embryological succession,[338](#Page338).  
-on the glacial period,[366](#Page366).  
-on embryological characters,[418](#Page418).  
-on the embryos of vertebrata,[439](#Page439).  
+Agassiz:
+on Amblyopsis,[139](#Page139).
+on groups of species suddenly appearing,[302](#Page302),[305](#Page305).
+on embryological succession,[338](#Page338).
+on the glacial period,[366](#Page366).
+on embryological characters,[418](#Page418).
+on the embryos of vertebrata,[439](#Page439).
 on parallelism of embryological development and geological succession,[449](#Page449).
 
 Algæ of New Zealand,[376](#Page376).
@@ -12725,9 +12725,9 @@ Alligators, males, fighting,[88.](#Page88)
 
 Amblyopsis, blind fish,[139](#Page139).
 
-America, North:  
-productions allied to those of Europe,[371](#Page371).  
-boulders and glaciers of,[373](#Page373).  
+America, North:
+productions allied to those of Europe,[371](#Page371).
+boulders and glaciers of,[373](#Page373).
 South, no modern formations on west coast,[290](#Page290).
 
 Ammonites, sudden extinction of,[321](#Page321).
@@ -12738,13 +12738,13 @@ Analogy of variations,[159](#Page159).
 
 Ancylus,[386](#Page386).
 
-Animals:  
-not domesticated from being variable,[17](#Page17).  
-domestic, descended from several stocks,[19](#Page19).  
-acclimatisation of,[141](#Page141).  
-of Australia,[116](#Page116).  
-with thicker fur in cold climates,[133](#Page133).  
-blind, in caves,[137](#Page137).  
+Animals:
+not domesticated from being variable,[17](#Page17).
+domestic, descended from several stocks,[19](#Page19).
+acclimatisation of,[141](#Page141).
+of Australia,[116](#Page116).
+with thicker fur in cold climates,[133](#Page133).
+blind, in caves,[137](#Page137).
 extinct, of Australia,[339](#Page339).
 
 Anomma,[240](#Page240).
@@ -12753,8 +12753,8 @@ Antarctic islands, ancient flora of,[399](#Page399).
 
 Antirrhinum,[161](#Page161).
 
-Ants:  
-attending aphides,[211](#Page211).  
+Ants:
+attending aphides,[211](#Page211).
 slave-making instinct,[219](#Page219).
 
 Ants, neuter, structure of,[236](#Page236).
@@ -12785,15 +12785,15 @@ Asses, striped,[163](#Page163).
 
 Ateuchus,[135](#Page135).
 
-Audubon:  
-on habits of frigate-bird,[185](#Page185).  
-on variation in birds’-nests,[212](#Page212).  
+Audubon:
+on habits of frigate-bird,[185](#Page185).
+on variation in birds’-nests,[212](#Page212).
 on heron eating seeds,[387](#Page387).
 
-Australia:  
-animals of,[116](#Page116).  
-dogs of,[215](#Page215).  
-extinct animals of,[339](#Page339).  
+Australia:
+animals of,[116](#Page116).
+dogs of,[215](#Page215).
+extinct animals of,[339](#Page339).
 European plants in,[375](#Page375).
 
 Azara on flies destroying cattle,[72](#Page72).
@@ -12808,68 +12808,68 @@ Bamboo with hooks,[197](#Page197).
 
 Barberry, flowers of,[98](#Page98).
 
-Barrande, M.:  
-on Silurian colonies,[313](#Page313).  
-on the succession of species,[325](#Page325).  
-on parallelism of palæozoic formations,[328](#Page328).  
+Barrande, M.:
+on Silurian colonies,[313](#Page313).
+on the succession of species,[325](#Page325).
+on parallelism of palæozoic formations,[328](#Page328).
 on affinities of ancient species,[330](#Page330).
 
 Barriers, importance of,[347](#Page347).
 
 Batrachians on islands,[393](#Page393).
 
-Bats:  
-how structure acquired,[180](#Page180).  
+Bats:
+how structure acquired,[180](#Page180).
 distribution of,[394](#Page394).
 
 Bear, catching water-insects,[184](#Page184).
 
-Bee:  
-sting of,[202](#Page202).  
+Bee:
+sting of,[202](#Page202).
 queen, killing rivals,[202](#Page202).
 
 Bees fertilising flowers,[73](#Page73).
 
-Bees:  
-hive, not sucking the red clover,[95](#Page95).  
-cell-making instinct,[224](#Page224).  
-humble, cells of,[225](#Page225).  
+Bees:
+hive, not sucking the red clover,[95](#Page95).
+cell-making instinct,[224](#Page224).
+humble, cells of,[225](#Page225).
 parasitic,[218](#Page218).
 
-Beetles:  
-wingless, in Madeira,[135](#Page135).  
+Beetles:
+wingless, in Madeira,[135](#Page135).
 with deficient tarsi,[135](#Page135).
 
-Bentham, Mr.:  
-on British plants,[48](#Page48).  
+Bentham, Mr.:
+on British plants,[48](#Page48).
 on classification,[419](#Page419).
 
 Berkeley, Mr., on seeds in salt-water,[358](#Page358).
 
 Bermuda, birds of,[391](#Page391).
 
-Birds:  
-acquiring fear,[212](#Page212).  
-annually cross the Atlantic,[364](#Page364).  
-colour of, on continents,[132](#Page132).  
-fossil, in caves of Brazil,[339](#Page339).  
-of Madeira, Bermuda, and Galapagos,[390](#Page390).  
-song of males,[89](#Page89).  
-transporting seeds,[361](#Page361).  
-waders,[386](#Page386).  
-wingless,[134](#Page134),[182](#Page182).  
+Birds:
+acquiring fear,[212](#Page212).
+annually cross the Atlantic,[364](#Page364).
+colour of, on continents,[132](#Page132).
+fossil, in caves of Brazil,[339](#Page339).
+of Madeira, Bermuda, and Galapagos,[390](#Page390).
+song of males,[89](#Page89).
+transporting seeds,[361](#Page361).
+waders,[386](#Page386).
+wingless,[134](#Page134),[182](#Page182).
 with traces of embryonic teeth,[451](#Page451).
 
-Bizcacha,[349](#Page349).  
+Bizcacha,[349](#Page349).
 affinities of,[429](#Page429).
 
 Bladder for swimming in fish,[190](#Page190).
 
 Blindness of cave animals,[137](#Page137),
 
-Blyth, Mr.:  
-on distinctness of Indian cattle,[18](#Page18).  
-on striped Hemionus,[163](#Page163).  
+Blyth, Mr.:
+on distinctness of Indian cattle,[18](#Page18).
+on striped Hemionus,[163](#Page163).
 on crossed geese,[253](#Page253).
 
 Boar, shoulder-pad of,[88](#Page88).
@@ -12884,8 +12884,8 @@ Boulders, erratic, on the Azores,[363](#Page363).
 
 Branchiæ,[190](#Page190).
 
-Brent, Mr.:  
-on house-tumblers,[214](#Page214).  
+Brent, Mr.:
+on house-tumblers,[214](#Page214).
 on hawks killing pigeons,[362](#Page362).
 
 Brewer, Dr., on American cuckoo,[217](#Page217).
@@ -12916,15 +12916,15 @@ Cassini on flowers of compositæ,[145](#Page145).
 
 Catasetum,[424](#Page424).
 
-Cats:  
-with blue eyes, deaf,[12](#Page12).  
-variation in habits of,[91](#Page91).  
+Cats:
+with blue eyes, deaf,[12](#Page12).
+variation in habits of,[91](#Page91).
 curling tail when going to spring,[201](#Page201).
 
-Cattle:  
-destroying fir-trees,[71](#Page71).  
-destroyed by flies in La Plata,[72](#Page72).  
-breeds of, locally extinct,[111](#Page111).  
+Cattle:
+destroying fir-trees,[71](#Page71).
+destroyed by flies in La Plata,[72](#Page72).
+breeds of, locally extinct,[111](#Page111).
 fertility of Indian and European breeds,[254](#Page254).
 
 Cave, inhabitants of, blind,[137](#Page137).
@@ -12941,15 +12941,15 @@ Ceylon, plants of,[375](#Page375).
 
 Chalk formation,[322](#Page322).
 
-Characters:  
-divergence of,[111](#Page111).  
-sexual, variable,[156](#Page156).  
+Characters:
+divergence of,[111](#Page111).
+sexual, variable,[156](#Page156).
 adaptive or analogical,[427](#Page427).
 
 Charlock,[76](#Page76).
 
-Checks:  
-to increase,[67](#Page67).  
+Checks:
+to increase,[67](#Page67).
 mutual,[71](#Page71).
 
 Chickens, instinctive tameness of,[216](#Page216).
@@ -12958,23 +12958,23 @@ Chthamalinæ,[288](#Page288).
 
 Chthamalus, cretacean species of,[304](#Page304).
 
-Circumstances favourable:  
-to selection of domestic products,[40](#Page40).  
+Circumstances favourable:
+to selection of domestic products,[40](#Page40).
 to natural selection,[101](#Page101).
 
-Cirripedes:  
-capable of crossing,[101](#Page101).  
-carapace aborted,[148](#Page148).  
-their ovigerous frena,[192](#Page192).  
-fossil,[304](#Page304).  
+Cirripedes:
+capable of crossing,[101](#Page101).
+carapace aborted,[148](#Page148).
+their ovigerous frena,[192](#Page192).
+fossil,[304](#Page304).
 larvæ of,[440](#Page440).
 
 Classification,[413](#Page413).
 
 Clift, Mr., on the succession of types,[339](#Page339).
 
-Climate:  
-effects of, in checking increase of beings,[68](#Page68).  
+Climate:
+effects of, in checking increase of beings,[68](#Page68).
 adaptation of, to organisms,[139](#Page139).
 
 Cobites, intestine of,[190](#Page190).
@@ -12983,8 +12983,8 @@ Cockroach,[76](#Page76).
 
 Collections, palæontological, poor,[287](#Page287).
 
-Colour:  
-influenced by climate,[132](#Page132).  
+Colour:
+influenced by climate,[132](#Page132).
 in relation to attacks by flies,[198](#Page198).
 
 Columba livia, parent of domestic pigeons,[23](#Page23).
@@ -12993,8 +12993,8 @@ Colymbetes,[386](#Page386).
 
 Compensation of growth,[147](#Page147).
 
-Compositæ:  
-outer and inner florets of,[144](#Page144).  
+Compositæ:
+outer and inner florets of,[144](#Page144).
 male flowers of,[451](#Page451).
 
 Conclusion, general,[480](#Page480).
@@ -13003,14 +13003,14 @@ Conditions, slight changes in, favourable to fertility,[267](#Page267).
 
 Coot,[185](#Page185).
 
-Coral:  
-islands, seeds drifted to,[360](#Page360).  
+Coral:
+islands, seeds drifted to,[360](#Page360).
 reefs, indicating movements of earth,[309](#Page309).
 
 Corn-crake,[185](#Page185).
 
-Correlation:  
-of growth in domestic productions,[11](#Page11).  
+Correlation:
+of growth in domestic productions,[11](#Page11).
 of growth,[143](#Page143),[198](#Page198).
 
 Cowslip,[49](#Page49).
@@ -13021,9 +13021,9 @@ Crinum,[250](#Page250).
 
 Crosses, reciprocal,[258](#Page258).
 
-Crossing:  
-of domestic animals, importance in altering breeds,[20](#Page20).  
-advantages of,[96](#Page96).  
+Crossing:
+of domestic animals, importance in altering breeds,[20](#Page20).
+advantages of,[96](#Page96).
 unfavourable to selection,[102](#Page102).
 
 Crustacea of New Zealand,[376](#Page376).
@@ -13040,37 +13040,37 @@ Currants, grafts of,[262](#Page262).
 
 Currents of sea, rate of,[359](#Page359).
 
-Cuvier:  
-on conditions of existence,[206](#Page206).  
+Cuvier:
+on conditions of existence,[206](#Page206).
 on fossil monkeys,[303](#Page303).
 
 Cuvier, Fred., on instinct,[208](#Page208).
 
-Dana, Professor:  
-on blind cave-animals,[139](#Page139).  
-on relations of crustaceans of Japan,[372](#Page372).  
+Dana, Professor:
+on blind cave-animals,[139](#Page139).
+on relations of crustaceans of Japan,[372](#Page372).
 on crustaceans of New Zealand,[376](#Page376).
 
-De Candolle:  
-on struggle for existence,[62](#Page62).  
-on umbelliferæ,[146](#Page146).  
+De Candolle:
+on struggle for existence,[62](#Page62).
+on umbelliferæ,[146](#Page146).
 on general affinities,[430](#Page430).
 
-De Candolle, Alph.:  
-on low plants, widely dispersed,[406](#Page406).  
-on widely-ranging plants being variable,[53](#Page53).  
-on naturalisation,[115](#Page115).  
-on winged seeds,[146](#Page146).  
-on Alpine species suddenly becoming rare,[175](#Page175).  
-on distribution of plants with large seeds,[360](#Page360).  
-on vegetation of Australia,[379](#Page379).  
-on fresh-water plants,[386](#Page386).  
+De Candolle, Alph.:
+on low plants, widely dispersed,[406](#Page406).
+on widely-ranging plants being variable,[53](#Page53).
+on naturalisation,[115](#Page115).
+on winged seeds,[146](#Page146).
+on Alpine species suddenly becoming rare,[175](#Page175).
+on distribution of plants with large seeds,[360](#Page360).
+on vegetation of Australia,[379](#Page379).
+on fresh-water plants,[386](#Page386).
 on insular plants,[389](#Page389).
 
 Degradation of coast-rocks,[282](#Page282).
 
-Denudation:  
-rate of,[285](#Page285).  
+Denudation:
+rate of,[285](#Page285).
 of oldest rocks,[308](#Page308).
 
 Development of ancient forms,[336](#Page336).
@@ -13081,12 +13081,12 @@ Dianthus, fertility of crosses,[256](#Page256).
 
 Dirt on feet of birds,[362](#Page362).
 
-Dispersal:  
-means of,[356](#Page356).  
+Dispersal:
+means of,[356](#Page356).
 during glacial period,[365](#Page365).
 
-Distribution:  
-geographical,[346](#Page346).  
+Distribution:
+geographical,[346](#Page346).
 means of,[356](#Page356).
 
 Disuse, effects of, under nature,[134](#Page134).
@@ -13095,13 +13095,13 @@ Divergence of character,[111](#Page111).
 
 Division, physiological, of labour,[115](#Page115).
 
-Dogs:  
-hairless, with imperfect teeth,[12](#Page12).  
-descended from several wild stocks,[18](#Page18).  
-domestic instincts of,[213](#Page213).  
-inherited civilisation of,[215](#Page215).  
-fertility of breeds together,[254](#Page254).  
-of crosses,[268](#Page268).  
+Dogs:
+hairless, with imperfect teeth,[12](#Page12).
+descended from several wild stocks,[18](#Page18).
+domestic instincts of,[213](#Page213).
+inherited civilisation of,[215](#Page215).
+fertility of breeds together,[254](#Page254).
+of crosses,[268](#Page268).
 proportions of, when young,[444](#Page444).
 
 Domestication, variation under,[7](#Page7).
@@ -13118,8 +13118,8 @@ Driver-ant,[240](#Page240).
 
 Drones killed by other bees,[202](#Page202).
 
-Duck:  
-domestic, wings of, reduced,[11](#Page11).  
+Duck:
+domestic, wings of, reduced,[11](#Page11).
 logger-headed,[182](#Page182).
 
 Duckweed,[385](#Page385).
@@ -13132,8 +13132,8 @@ Dyticus,[386](#Page386).
 
 Earl, Mr. W., on the Malay Archipelago,[395](#Page395).
 
-Ears:  
-drooping, in domestic animals,[11](#Page11).  
+Ears:
+drooping, in domestic animals,[11](#Page11).
 rudimentary,[454](#Page454).
 
 Earth, seeds in roots of trees,[361](#Page361).
@@ -13142,46 +13142,46 @@ Eciton,[238](#Page238).
 
 Economy of organisation,[147](#Page147).
 
-Edentata:  
-teeth and hair,[144](#Page144).  
+Edentata:
+teeth and hair,[144](#Page144).
 fossil species of,[339](#Page339).
 
-Edwards, Milne:  
-on physiological divisions of labour,[115](#Page115).  
-on gradations of structure,[194](#Page194).  
+Edwards, Milne:
+on physiological divisions of labour,[115](#Page115).
+on gradations of structure,[194](#Page194).
 on embryological characters,[418](#Page418).
 
 Eggs, young birds escaping from,[87](#Page87).
 
 Electric organs,[192](#Page192).
 
-Elephant:  
-rate of increase,[64](#Page64).  
+Elephant:
+rate of increase,[64](#Page64).
 of glacial period,[141](#Page141).
 
 Embryology,[439](#Page439).
 
-Existence:  
-struggle for,[60](#Page60).  
+Existence:
+struggle for,[60](#Page60).
 conditions of,[206](#Page206).
 
-Extinction:  
-as bearing on natural selection,[109](#Page109).  
-of domestic varieties,[111](#Page111).  
+Extinction:
+as bearing on natural selection,[109](#Page109).
+of domestic varieties,[111](#Page111).
 [317](#Page317).
 
-Eye:  
-structure of,[187](#Page187).  
+Eye:
+structure of,[187](#Page187).
 correction for aberration,[202](#Page202).
 
 Eyes reduced in moles,[137](#Page137).
 
 Fabre, M., on parasitic sphex,[218](#Page218).
 
-Falconer, Dr.:  
-on naturalization of plants in India,[65](#Page65).  
-on fossil crocodile,[313](#Page313).  
-on elephants and mastodons,[334](#Page334).  
+Falconer, Dr.:
+on naturalization of plants in India,[65](#Page65).
+on fossil crocodile,[313](#Page313).
+on elephants and mastodons,[334](#Page334).
 and Cautley on mammals of sub-Himalayan beds,[340](#Page340).
 
 Falkland Island, wolf of,[393](#Page393).
@@ -13194,48 +13194,48 @@ Fear, instinctive, in birds,[212](#Page212).
 
 Feet of birds, young molluscs adhering to,[385](#Page385).
 
-Fertility:  
-of hybrids,[249](#Page249).  
-from slight changes in conditions,[267](#Page267).  
+Fertility:
+of hybrids,[249](#Page249).
+from slight changes in conditions,[267](#Page267).
 of crossed varieties,[267](#Page267).
 
-Fir-trees:  
-destroyed by cattle,[71](#Page71).  
+Fir-trees:
+destroyed by cattle,[71](#Page71).
 pollen of,[203](#Page203).
 
-Fish:  
-flying,[182](#Page182).  
-teleostean, sudden appearance of,[305](#Page305).  
-eating seeds,[362](#Page362),[387](#Page387).  
+Fish:
+flying,[182](#Page182).
+teleostean, sudden appearance of,[305](#Page305).
+eating seeds,[362](#Page362),[387](#Page387).
 fresh-water, distribution of,[384](#Page384).
 
-Fishes:  
-ganoid, now confined to fresh water,[107](#Page107).  
-electric organs of,[192](#Page192).  
-ganoid, living in fresh water,[321](#Page321).  
+Fishes:
+ganoid, now confined to fresh water,[107](#Page107).
+electric organs of,[192](#Page192).
+ganoid, living in fresh water,[321](#Page321).
 of southern hemisphere,[376](#Page376).
 
 Flight, powers of, how acquired,[182](#Page182).
 
-Flowers:  
-structure of, in relation to crossing,[97](#Page97).  
+Flowers:
+structure of, in relation to crossing,[97](#Page97).
 of compositæ and umbelliferæ,[144](#Page144).
 
-Forbes, E.:  
-on colours of shells,[132](#Page132).  
-on abrupt range of shells in depth,[175](#Page175).  
-on poorness of palæontological collections,[287](#Page287).  
-on continuous succession of genera,[316](#Page316).  
-on continental extensions,[357](#Page357).  
-on distribution during glacial period,[366](#Page366)  
+Forbes, E.:
+on colours of shells,[132](#Page132).
+on abrupt range of shells in depth,[175](#Page175).
+on poorness of palæontological collections,[287](#Page287).
+on continuous succession of genera,[316](#Page316).
+on continental extensions,[357](#Page357).
+on distribution during glacial period,[366](#Page366)
 on parallelism in time and space,[409](#Page409).
 
 Forests, changes in, in America,[74](#Page74).
 
 Formation, Devonian,[334](#Page334).
 
-Formations:  
-thickness of, in Britain,[284](#Page284).  
+Formations:
+thickness of, in Britain,[284](#Page284).
 intermittent,[290](#Page290).
 
 Formica rufescens,[219](#Page219).
@@ -13254,9 +13254,9 @@ Frigate-bird,[185](#Page185).
 
 Frogs on islands,[393](#Page393).
 
-Fruit-trees:  
-gradual improvement of,[37](#Page37).  
-in United States,[85](#Page85).  
+Fruit-trees:
+gradual improvement of,[37](#Page37).
+in United States,[85](#Page85).
 varieties of, acclimatised in United States,[142](#Page142).
 
 Fuci, crossed,[258](#Page258).
@@ -13265,42 +13265,42 @@ Fur, thicker in cold climates,[133](#Page133).
 
 Furze,[439](#Page439).
 
-Galapagos Archipelago:  
-birds of,[390](#Page390).  
+Galapagos Archipelago:
+birds of,[390](#Page390).
 productions of,[398](#Page398),[400](#Page400).
 
 Galeopithecus,[181](#Page181).
 
 Game, increase of, checked by vermin,[68](#Page68).
 
-Gärtner:  
-on sterility of hybrids,[247](#Page247),[255](#Page255).  
-on reciprocal crosses,[258](#Page258).  
-on crossed maize and verbascum,[270](#Page270).  
+Gärtner:
+on sterility of hybrids,[247](#Page247),[255](#Page255).
+on reciprocal crosses,[258](#Page258).
+on crossed maize and verbascum,[270](#Page270).
 on comparison of hybrids and mongrels,[272](#Page272).
 
-Geese:  
-fertility when crossed,[253](#Page253).  
+Geese:
+fertility when crossed,[253](#Page253).
 upland,[185](#Page185).
 
 Genealogy important in classification,[425](#Page425).
 
-Geoffrey St. Hilaire:  
-on balancement,[147](#Page147).  
+Geoffrey St. Hilaire:
+on balancement,[147](#Page147).
 on homologous organs,[434](#Page434).
 
-Geoffrey St. Hilaire, Isidore:  
-on variability of repeated parts,[149](#Page149).  
-on correlation in monstrosities,[11](#Page11).  
-on correlation,[144](#Page144).  
+Geoffrey St. Hilaire, Isidore:
+on variability of repeated parts,[149](#Page149).
+on correlation in monstrosities,[11](#Page11).
+on correlation,[144](#Page144).
 on variable parts being often monstrous,[155](#Page155).
 
 Geographical distribution,[346](#Page346).
 
 Geography, ancient,[487](#Page487).
 
-Geology:  
-future progress of,[487](#Page487).  
+Geology:
+future progress of,[487](#Page487).
 imperfection of the record,[279](#Page279).
 
 Giraffe, tail of,[195](#Page195).
@@ -13319,9 +13319,9 @@ Gooseberry, grafts of,[262](#Page262).
 
 Gould, Dr. A., on land-shells,[397](#Page397).
 
-Gould, Mr.:  
-on colours of birds,[132](#Page132).  
-on birds of the Galapagos,[398](#Page398).  
+Gould, Mr.:
+on colours of birds,[132](#Page132).
+on birds of the Galapagos,[398](#Page398).
 on distribution of genera of birds,[404](#Page404).
 
 Gourds, crossed,[270](#Page270).
@@ -13330,10 +13330,10 @@ Grafts, capacity of,[261](#Page261).
 
 Grasses, varieties of,[113](#Page113).
 
-Gray, Dr. Asa:  
-on trees of United States,[100](#Page100).  
-on naturalised plants in the United States,[115](#Page115).  
-on rarity of intermediate varieties,[176](#Page176).  
+Gray, Dr. Asa:
+on trees of United States,[100](#Page100).
+on naturalised plants in the United States,[115](#Page115).
+on rarity of intermediate varieties,[176](#Page176).
 on Alpine plants,[365](#Page365).
 
 Gray, Dr. J. E., on striped mule,[165](#Page165).
@@ -13342,18 +13342,18 @@ Grebe,[185](#Page185).
 
 Groups, aberrant,[429](#Page429).
 
-Grouse:  
-colours of,[84](#Page84).  
+Grouse:
+colours of,[84](#Page84).
 red, a doubtful species,[49](#Page49).
 
-Growth:  
-compensation of,[147](#Page147).  
-correlation of, in domestic products,[11](#Page11).  
+Growth:
+compensation of,[147](#Page147).
+correlation of, in domestic products,[11](#Page11).
 correlation of,[143](#Page143).
 
-Habit:  
-effect of, under domestication,[11](#Page11).  
-effect of, under nature,[134](#Page134).  
+Habit:
+effect of, under domestication,[11](#Page11).
+effect of, under nature,[134](#Page134).
 diversified, of same species,[183](#Page183).
 
 Hair and teeth, correlated,[144](#Page144).
@@ -13376,8 +13376,8 @@ Helosciadium,[359](#Page359).
 
 Hemionus, striped,[163](#Page163).
 
-Herbert, W.:  
-on struggle for existence,[62](#Page62).  
+Herbert, W.:
+on struggle for existence,[62](#Page62).
 on sterility of hybrids,[249](#Page249).
 
 Hermaphrodites crossing,[96](#Page96).
@@ -13390,8 +13390,8 @@ Heusinger on white animals not poisoned by certain plants,[12](#Page12).
 
 Hewitt, Mr., on sterility of first crosses,[264](#Page264).
 
-Himalaya:  
-glaciers of,[373](#Page373).  
+Himalaya:
+glaciers of,[373](#Page373).
 plants of,[375](#Page375).
 
 Hippeastrum,[250](#Page250).
@@ -13402,20 +13402,20 @@ Hollyhock, varieties of, crossed,[271](#Page271).
 
 Hooker, Dr., on trees of New Zealand,[100](#Page100).
 
-Hooker, Dr.:  
-on acclimatisation of Himalayan trees,[140](#Page140).  
-on flowers of umbelliferæ,[145](#Page145).  
-on glaciers of Himalaya,[373](#Page373).  
-on algæ of New Zealand,[376](#Page376).  
-on vegetation at the base of the Himalaya,[378](#Page378).  
-on plants of Tierra del Fuego,[374](#Page374),[378](#Page378).  
-on Australian plants,[375](#Page375),[399](#Page399).  
-on relations of flora of South America,[379](#Page379).  
-on flora of the Antarctic lands,[381](#Page381),[399](#Page399).  
+Hooker, Dr.:
+on acclimatisation of Himalayan trees,[140](#Page140).
+on flowers of umbelliferæ,[145](#Page145).
+on glaciers of Himalaya,[373](#Page373).
+on algæ of New Zealand,[376](#Page376).
+on vegetation at the base of the Himalaya,[378](#Page378).
+on plants of Tierra del Fuego,[374](#Page374),[378](#Page378).
+on Australian plants,[375](#Page375),[399](#Page399).
+on relations of flora of South America,[379](#Page379).
+on flora of the Antarctic lands,[381](#Page381),[399](#Page399).
 on the plants of the Galapagos,[391](#Page391),[398](#Page398).
 
-Hooks:  
-on bamboos,[197](#Page197).  
+Hooks:
+on bamboos,[197](#Page197).
 to seeds on islands,[392](#Page392).
 
 Horner, Mr., on the antiquity of Egyptians,[18](#Page18).
@@ -13424,19 +13424,19 @@ Horns, rudimentary,[454](#Page454).
 
 Horse, fossil, in La Plata,[318](#Page318).
 
-Horses:  
-destroyed by flies in La Plata,[72](#Page72).  
-striped,[163](#Page163).  
+Horses:
+destroyed by flies in La Plata,[72](#Page72).
+striped,[163](#Page163).
 proportions of, when young,[445](#Page445).
 
 Horticulturists, selection applied by,[32](#Page32).
 
 Huber on cells of bees,[230](#Page230).
 
-Huber, P.:  
-on reason blended with instinct,[208](#Page208).  
-on habitual nature of instincts,[208](#Page208).  
-on slave making ants,[219](#Page219).  
+Huber, P.:
+on reason blended with instinct,[208](#Page208).
+on habitual nature of instincts,[208](#Page208).
+on slave making ants,[219](#Page219).
 on Melipona domestica,[225](#Page225).
 
 Humble-bees, cells of,[225](#Page225).
@@ -13445,10 +13445,10 @@ Hunter, J., on secondary sexual characters,[150](#Page150).
 
 Hutton, Captain, on crossed geese,[253](#Page253).
 
-Huxley, Professor:  
-on structure of hermaphrodites,[101](#Page101).  
-on embryological succession,[338](#Page338).  
-on homologous organs,[438](#Page438).  
+Huxley, Professor:
+on structure of hermaphrodites,[101](#Page101).
+on embryological succession,[338](#Page338).
+on homologous organs,[438](#Page438).
 on the development of aphis,[442](#Page442).
 
 Hybrids and mongrels compared,[272](#Page272).
@@ -13463,19 +13463,19 @@ Icebergs transporting seeds,[363](#Page363).
 
 Increase, rate of,[63](#Page63).
 
-Individuals:  
-numbers favourable to selection,[102](#Page102).  
+Individuals:
+numbers favourable to selection,[102](#Page102).
 many, whether simultaneously created,[356](#Page356).
 
-Inheritance:  
-laws of,[12](#Page12).  
+Inheritance:
+laws of,[12](#Page12).
 at corresponding ages,[14](#Page14),[86](#Page86).
 
-Insects:  
-colour of, fitted for habitations,[84](#Page84).  
-sea-side, colours of,[132](#Page132).  
-blind, in caves,[138](#Page138).  
-luminous,[193](#Page193).  
+Insects:
+colour of, fitted for habitations,[84](#Page84).
+sea-side, colours of,[132](#Page132).
+blind, in caves,[138](#Page138).
+luminous,[193](#Page193).
 neuter,[236](#Page236).
 
 Instinct,[207](#Page207).
@@ -13508,17 +13508,17 @@ Kirby on tarsi deficient in beetles,[135](#Page135).
 
 Knight, Andrew, on cause of variation,[7](#Page7).
 
-Kölreuter:  
-on the barberry,[98](#Page98).  
-on sterility of hybrids,[247](#Page247).  
-on reciprocal crosses,[258](#Page258).  
-on crossed varieties of nicotiana,[271](#Page271).  
+Kölreuter:
+on the barberry,[98](#Page98).
+on sterility of hybrids,[247](#Page247).
+on reciprocal crosses,[258](#Page258).
+on crossed varieties of nicotiana,[271](#Page271).
 on crossing male and hermaphrodite flowers,[451](#Page451).
 
 Lamarck on adaptive characters,[427](#Page427).
 
-Land-shells:  
-distribution of,[397](#Page397).  
+Land-shells:
+distribution of,[397](#Page397).
 of Madeira, naturalised,[402](#Page402).
 
 Languages, classification of,[422](#Page422).
@@ -13543,8 +13543,8 @@ Lingula, Silurian,[306](#Page306).
 
 Linnæus, aphorism of,[413](#Page413).
 
-Lion:  
-mane of,[88](#Page88).  
+Lion:
+mane of,[88](#Page88).
 young of, striped,[439](#Page439).
 
 Lobelia fulgens,[73](#Page73),[98](#Page98).
@@ -13559,61 +13559,61 @@ Lowness, related to wide distribution,[406](#Page406).
 
 Lubbock, Mr., on the nerves of coccus,[46](#Page46).
 
-Lucas, Dr. P.:  
-on inheritance,[12](#Page12).  
+Lucas, Dr. P.:
+on inheritance,[12](#Page12).
 on resemblance of child to parent,[275](#Page275).
 
 Lund and Clausen on fossils of Brazil,[339](#Page339).
 
-Lyell, Sir C.:  
-on the struggle for existence,[62](#Page62).  
-on modern changes of the earth,[95](#Page95).  
-on measure of denudation,[283](#Page283).  
-on a carboniferous land-shell,[289](#Page289).  
-on fossil whales,[303](#Page303).  
-on strata beneath Silurian system,[307](#Page307).  
-on the imperfection of the geological record,[310](#Page310).  
-on the appearance of species,[312](#Page312).  
-on Barrande’s colonies,[313](#Page313).  
-on tertiary formations of Europe and North America,[323](#Page323).  
-on parallelism of tertiary formations,[328](#Page328).  
-on transport of seeds by icebergs,[363](#Page363).  
-on great alternations of climate,[382](#Page382).  
-on the distribution of fresh-water shells,[385](#Page385).  
+Lyell, Sir C.:
+on the struggle for existence,[62](#Page62).
+on modern changes of the earth,[95](#Page95).
+on measure of denudation,[283](#Page283).
+on a carboniferous land-shell,[289](#Page289).
+on fossil whales,[303](#Page303).
+on strata beneath Silurian system,[307](#Page307).
+on the imperfection of the geological record,[310](#Page310).
+on the appearance of species,[312](#Page312).
+on Barrande’s colonies,[313](#Page313).
+on tertiary formations of Europe and North America,[323](#Page323).
+on parallelism of tertiary formations,[328](#Page328).
+on transport of seeds by icebergs,[363](#Page363).
+on great alternations of climate,[382](#Page382).
+on the distribution of fresh-water shells,[385](#Page385).
 on land-shells of Madeira,[402](#Page402).
 
 Lyell and Dawson on fossilized trees in Nova Scotia,[296](#Page296).
 
 Macleay on analogical characters,[427](#Page427).
 
-Madeira:  
-plants of,[107](#Page107).  
-beetles of, wingless,[135](#Page135).  
-fossil land-shells of,[339](#Page339).  
+Madeira:
+plants of,[107](#Page107).
+beetles of, wingless,[135](#Page135).
+fossil land-shells of,[339](#Page339).
 birds of,[390](#Page390).
 
 Magpie tame in Norway,[212](#Page212).
 
 Maize, crossed,[270](#Page270).
 
-Malay Archipelago:  
-compared with Europe,[299](#Page299).  
+Malay Archipelago:
+compared with Europe,[299](#Page299).
 mammals of,[395](#Page395).
 
 Malpighiaceæ,[417](#Page417).
 
 Mammæ, rudimentary,[451](#Page451).
 
-Mammals:  
-fossil, in secondary formation,[303](#Page303).  
+Mammals:
+fossil, in secondary formation,[303](#Page303).
 insular,[393](#Page393).
 
 Man, origin of races of,[199](#Page199).
 
 Manatee, rudimentary nails of,[454](#Page454).
 
-Marsupials:  
-of Australia,[116](#Page116).  
+Marsupials:
+of Australia,[116](#Page116).
 fossil species of,[339](#Page339).
 
 Martens, M., experiment on seeds,[360](#Page360).
@@ -13630,8 +13630,8 @@ Melipona domestica,[225](#Page225).
 
 Metamorphism of oldest rocks,[308](#Page308).
 
-Mice:  
-destroying bees,[74](#Page74).  
+Mice:
+destroying bees,[74](#Page74).
 acclimatisation of,[141](#Page141).
 
 Migration, bears on first appearance of fossils,[296](#Page296).
@@ -13652,8 +13652,8 @@ Modification of species, how far applicable,[483](#Page483).
 
 Moles, blind,[137](#Page137).
 
-Mongrels:  
-fertility and sterility of,[267](#Page267).  
+Mongrels:
+fertility and sterility of,[267](#Page267).
 and hybrids compared,[272](#Page272).
 
 Monkeys, fossil,[303](#Page303),
@@ -13674,9 +13674,9 @@ Mules, striped,[165](#Page165).
 
 Müller, Dr. F., on Alpine Australian plants,[375](#Page375).
 
-Murchison, Sir R.:  
-on the formations of Russia,[289](#Page289).  
-on azoic formations,[307](#Page307).  
+Murchison, Sir R.:
+on the formations of Russia,[289](#Page289).
+on azoic formations,[307](#Page307).
 on extinction,[317](#Page317).
 
 Mustela vison,[179](#Page179).
@@ -13689,13 +13689,13 @@ Myrmica, eyes of,[240](#Page240).
 
 Nails, rudimentary,[453](#Page453).
 
-Natural history:  
-future progress of,[484](#Page484).  
-selection,[80](#Page80).  
+Natural history:
+future progress of,[484](#Page484).
+selection,[80](#Page80).
 system,[413](#Page413).
 
-Naturalisation:  
-of forms distinct from the indigenous species,[115](#Page115).  
+Naturalisation:
+of forms distinct from the indigenous species,[115](#Page115).
 in New Zealand,[201](#Page201).
 
 Nautilus, Silurian,[306](#Page306).
@@ -13712,18 +13712,18 @@ Neuter insects,[236](#Page236).
 
 Newman, Mr., on humble-bees,[74](#Page74).
 
-New Zealand:  
-productions of, not perfect,[201](#Page201).  
-naturalised products of,[337](#Page337).  
-fossil birds of,[339](#Page339).  
-glacial action in,[373](#Page373).  
-crustaceans of,[376](#Page376).  
-algæ of,[376](#Page376).  
-number of plants of,[389](#Page389).  
+New Zealand:
+productions of, not perfect,[201](#Page201).
+naturalised products of,[337](#Page337).
+fossil birds of,[339](#Page339).
+glacial action in,[373](#Page373).
+crustaceans of,[376](#Page376).
+algæ of,[376](#Page376).
+number of plants of,[389](#Page389).
 flora of,[399](#Page399).
 
-Nicotiana:  
-crossed varieties of,[271](#Page271).  
+Nicotiana:
+crossed varieties of,[271](#Page271).
 certain species very sterile,[257](#Page257).
 
 Noble, Mr., on fertility of Rhododendron,[251](#Page251).
@@ -13736,36 +13736,36 @@ Onites apelles,[135](#Page135).
 
 Orchis, pollen of,[193](#Page193).
 
-Organs:  
-of extreme perfection,[186](#Page186).  
-electric, of fishes,[192](#Page192).  
-of little importance,[194](#Page194).  
-homologous,[434](#Page434).  
+Organs:
+of extreme perfection,[186](#Page186).
+electric, of fishes,[192](#Page192).
+of little importance,[194](#Page194).
+homologous,[434](#Page434).
 rudiments of,[450](#Page450).
 
 Ornithorhynchus,[107](#Page107),[416](#Page416).
 
-Ostrich:  
-not capable of flight,[134](#Page134).  
-habit of laying eggs together,[218](#Page218).  
+Ostrich:
+not capable of flight,[134](#Page134).
+habit of laying eggs together,[218](#Page218).
 American, two species of,[349](#Page349).
 
 Otter, habits of, how acquired,[179](#Page179).
 
 Ouzel, water,[185](#Page185).
 
-Owen, Professor:  
-on birds not flying,[134](#Page134).  
-on vegetative repetition,[149](#Page149).  
-on variable length of arms in ourang-outang,[150](#Page150).  
-on the swim-bladder of fishes,[191](#Page191).  
-on electric organs,[192](#Page192).  
-on fossil horse of La Plata,[319](#Page319).  
-on relations of ruminants and pachyderms,[329](#Page329).  
-on fossil birds of New Zealand,[339](#Page339).  
-on succession of types,[339](#Page339).  
-on affinities of the dugong,[414](#Page414).  
-on homologous organs,[435](#Page435).  
+Owen, Professor:
+on birds not flying,[134](#Page134).
+on vegetative repetition,[149](#Page149).
+on variable length of arms in ourang-outang,[150](#Page150).
+on the swim-bladder of fishes,[191](#Page191).
+on electric organs,[192](#Page192).
+on fossil horse of La Plata,[319](#Page319).
+on relations of ruminants and pachyderms,[329](#Page329).
+on fossil birds of New Zealand,[339](#Page339).
+on succession of types,[339](#Page339).
+on affinities of the dugong,[414](#Page414).
+on homologous organs,[435](#Page435).
 on the metamorphosis of cephalopods and spiders,[442](#Page442).
 
 Pacific Ocean, faunas of,[348](#Page348).
@@ -13780,8 +13780,8 @@ Parasites,[217](#Page217).
 
 Partridge, dirt on feet,[362](#Page362).
 
-Parts:  
-greatly developed, variable,[150](#Page150).  
+Parts:
+greatly developed, variable,[150](#Page150).
 degrees of utility of,[201](#Page201).
 
 Parus major,[183](#Page183).
@@ -13792,8 +13792,8 @@ Peaches in United States,[85](#Page85).
 
 Pear, grafts of,[261](#Page261).
 
-Pelargonium:  
-flowers of,[145](#Page145).  
+Pelargonium:
+flowers of,[145](#Page145).
 sterility of,[251](#Page251).
 
 Pelvis of women,[144](#Page144).
@@ -13810,45 +13810,45 @@ Pheasant, young, wild,[216](#Page216).
 
 Philippi on tertiary species in Sicily,[312](#Page312).
 
-Pictet, Professor:  
-on groups of species suddenly appearing,[302](#Page302),[305](#Page305).  
-on rate of organic change,[313](#Page313).  
-on continuous succession of genera,[316](#Page316).  
-on close alliance of fossils in consecutive formations,[335](#Page335).  
+Pictet, Professor:
+on groups of species suddenly appearing,[302](#Page302),[305](#Page305).
+on rate of organic change,[313](#Page313).
+on continuous succession of genera,[316](#Page316).
+on close alliance of fossils in consecutive formations,[335](#Page335).
 on embryological succession,[338](#Page338).
 
 Pierce, Mr., on varieties of wolves,[91](#Page91).
 
-Pigeons:  
-with feathered feet and skin between toes,[12](#Page12).  
-breeds described, and origin of,[20](#Page20).  
-breeds of, how produced,[39](#Page39),[42](#Page42).  
-tumbler, not being able to get out of egg,[87](#Page87).  
-reverting to blue colour,[160](#Page160).  
-instinct of tumbling,[214](#Page214).  
-carriers, killed by hawks,[362](#Page362).  
+Pigeons:
+with feathered feet and skin between toes,[12](#Page12).
+breeds described, and origin of,[20](#Page20).
+breeds of, how produced,[39](#Page39),[42](#Page42).
+tumbler, not being able to get out of egg,[87](#Page87).
+reverting to blue colour,[160](#Page160).
+instinct of tumbling,[214](#Page214).
+carriers, killed by hawks,[362](#Page362).
 young of,[445](#Page445).
 
 Pistil, rudimentary,[451](#Page451).
 
-Plants:  
-poisonous, not affecting certain coloured animals,[12](#Page12).  
-selection applied to,[32](#Page32).  
-gradual improvement of,[37](#Page37).  
-not improved in barbarous countries,[38](#Page38).  
-destroyed by insects,[67](#Page67).  
-in midst of range, have to struggle with other plants,[77](#Page77).  
-nectar of,[92](#Page92).  
-fleshy, on sea-shores,[132](#Page132).  
-fresh-water, distribution of,[386](#Page386).  
+Plants:
+poisonous, not affecting certain coloured animals,[12](#Page12).
+selection applied to,[32](#Page32).
+gradual improvement of,[37](#Page37).
+not improved in barbarous countries,[38](#Page38).
+destroyed by insects,[67](#Page67).
+in midst of range, have to struggle with other plants,[77](#Page77).
+nectar of,[92](#Page92).
+fleshy, on sea-shores,[132](#Page132).
+fresh-water, distribution of,[386](#Page386).
 low in scale, widely distributed,[406](#Page406).
 
 Plumage, laws of change in sexes of birds,[89](#Page89).
 
 Plums in the United States,[85](#Page85).
 
-Pointer dog:  
-origin of,[35](#Page35).  
+Pointer dog:
+origin of,[35](#Page35).
 habits of,[213](#Page213).
 
 Poison not affecting certain coloured animals,[12](#Page12).
@@ -13863,7 +13863,7 @@ Potamogeton,[387](#Page387).
 
 Prestwich, Mr., on English and French eocene formations,[328](#Page328).
 
-Primrose,[49](#Page49).  
+Primrose,[49](#Page49).
 sterility of,[247](#Page247).
 
 Primula, varieties of,[49](#Page49).
@@ -13882,21 +13882,21 @@ Rabbit, disposition of young,[215](#Page215).
 
 Races, domestic, characters of,[16](#Page16).
 
-Race-horses:  
-Arab,[35](#Page35).  
+Race-horses:
+Arab,[35](#Page35).
 English,[356](#Page356).
 
 Ramond on plants of Pyrenees,[368](#Page368).
 
-Ramsay, Professor:  
-on thickness of the British formations,[284](#Page284).  
+Ramsay, Professor:
+on thickness of the British formations,[284](#Page284).
 on faults,[285](#Page285).
 
 Ratio of increase,[63](#Page63).
 
-Rats:  
-supplanting each other,[76](#Page76).  
-acclimatisation of,[141](#Page141).  
+Rats:
+supplanting each other,[76](#Page76).
+acclimatisation of,[141](#Page141).
 blind in cave,[137](#Page137).
 
 Rattle-snake,[201](#Page201).
@@ -13915,16 +13915,16 @@ Reproduction, rate of,[63](#Page63).
 
 Resemblance to parents in mongrels and hybrids,[273](#Page273).
 
-Reversion:  
-law of inheritance,[14](#Page14).  
+Reversion:
+law of inheritance,[14](#Page14).
 in pigeons to blue colour,[160](#Page160).
 
 Rhododendron, sterility of,[251](#Page251).
 
 Richard, Professor, on Aspicarpa,[417](#Page417).
 
-Richardson, Sir J.:  
-on structure of squirrels,[180](#Page180).  
+Richardson, Sir J.:
+on structure of squirrels,[180](#Page180).
 on fishes of the southern hemisphere,[376](#Page376).
 
 Robinia, grafts of,[262](#Page262).
@@ -13949,47 +13949,47 @@ Schlegel on snakes,[144](#Page144).
 
 Sea-water, how far injurious to seeds,[358](#Page358).
 
-Sebright, Sir J.:  
-on crossed animals,[20](#Page20).  
+Sebright, Sir J.:
+on crossed animals,[20](#Page20).
 on selection of pigeons,[31](#Page31).
 
 Sedgwick, Professor, on groups of species suddenly appearing,[302](#Page302).
 
 Seedlings destroyed by insects,[67](#Page67).
 
-Seeds:  
-nutriment in,[77](#Page77).  
-winged,[146](#Page146).  
-power of resisting salt-water,[358](#Page358).  
-in crops and intestines of birds,[361](#Page361).  
-eaten by fish,[362](#Page362),[387](#Page387).  
-in mud,[386](#Page386).  
+Seeds:
+nutriment in,[77](#Page77).
+winged,[146](#Page146).
+power of resisting salt-water,[358](#Page358).
+in crops and intestines of birds,[361](#Page361).
+eaten by fish,[362](#Page362),[387](#Page387).
+in mud,[386](#Page386).
 hooked, on islands,[392](#Page392).
 
-Selection:  
-of domestic products,[29](#Page29).  
-principle not of recent origin,[33](#Page33).  
-unconscious,[34](#Page34).  
-natural,[80](#Page80).  
-sexual,[87](#Page87).  
+Selection:
+of domestic products,[29](#Page29).
+principle not of recent origin,[33](#Page33).
+unconscious,[34](#Page34).
+natural,[80](#Page80).
+sexual,[87](#Page87).
 natural, circumstances favourable to,[101](#Page101).
 
 Sexes, relations of,[87](#Page87).
 
-Sexual:  
-characters variable,[156](#Page156).  
+Sexual:
+characters variable,[156](#Page156).
 selection,[87](#Page87).
 
-Sheep:  
-Merino, their selection,[31](#Page31).  
-two sub-breeds unintentionally produced,[36](#Page36).  
+Sheep:
+Merino, their selection,[31](#Page31).
+two sub-breeds unintentionally produced,[36](#Page36).
 mountain, varieties of,[76](#Page76).
 
-Shells:  
-colours of,[132](#Page132).  
-littoral, seldom embedded,[288](#Page288).  
-fresh-water, dispersal of,[385](#Page385).  
-of Madeira,[391](#Page391).  
+Shells:
+colours of,[132](#Page132).
+littoral, seldom embedded,[288](#Page288).
+fresh-water, dispersal of,[385](#Page385).
+of Madeira,[391](#Page391).
 land, distribution of,[397](#Page397).
 
 Silene, fertility of crosses,[257](#Page257).
@@ -14002,8 +14002,8 @@ Slave-making instinct,[219](#Page219).
 
 Smith, Col. Hamilton, on striped horses,[164](#Page164).
 
-Smith, Mr. Fred.:  
-on slave-making ants,[219](#Page219).  
+Smith, Mr. Fred.:
+on slave-making ants,[219](#Page219).
 on neuter ants,[239](#Page239).
 
 Smith, Mr., of Jordan Hill, on the degradation of coast-rocks,[283](#Page283).
@@ -14016,13 +14016,13 @@ Sorbus, grafts of,[262](#Page262).
 
 Spaniel, King Charles’s breed,[35](#Page35).
 
-Species:  
-polymorphic,[46](#Page46).  
-common, variable,[53](#Page53).  
-in large genera variable,[54](#Page54).  
-groups of, suddenly appearing,[302](#Page302),[306](#Page306).  
-beneath Silurian formations,[306](#Page306).  
-successively appearing,[312](#Page312).  
+Species:
+polymorphic,[46](#Page46).
+common, variable,[53](#Page53).
+in large genera variable,[54](#Page54).
+groups of, suddenly appearing,[302](#Page302),[306](#Page306).
+beneath Silurian formations,[306](#Page306).
+successively appearing,[312](#Page312).
 changing simultaneously throughout the world,[322](#Page322).
 
 Spencer, Lord, on increase in size of cattle,[35](#Page35).
@@ -14035,8 +14035,8 @@ Spitz-dog crossed with fox,[268](#Page268).
 
 Sports in plants,[9](#Page9).
 
-Sprengel, C. C.:  
-on crossing,[98](#Page98).  
+Sprengel, C. C.:
+on crossing,[98](#Page98).
 on ray-florets,[145](#Page145).
 
 Squirrels, gradations in structure,[180](#Page180).
@@ -14045,12 +14045,12 @@ Staffordshire, heath, changes in,[72](#Page72).
 
 Stag-beetles, fighting,[88](#Page88).
 
-Sterility:  
-from changed conditions of life,[9](#Page9).  
-of hybrids,[246](#Page246).  
-laws of,[254](#Page254).  
-causes of,[263](#Page263).  
-from unfavourable conditions,[265](#Page265).  
+Sterility:
+from changed conditions of life,[9](#Page9).
+of hybrids,[246](#Page246).
+laws of,[254](#Page254).
+causes of,[263](#Page263).
+from unfavourable conditions,[265](#Page265).
 of certain varieties,[269](#Page269).
 
 St. Helena, productions of,[389](#Page389).
@@ -14081,18 +14081,18 @@ Swim-bladder,[190](#Page190).
 
 System, natural,[413](#Page413).
 
-Tail:  
-of giraffe,[195](#Page195).  
-of aquatic animals,[196](#Page196).  
+Tail:
+of giraffe,[195](#Page195).
+of aquatic animals,[196](#Page196).
 rudimentary,[454](#Page454).
 
 Tarsi deficient,[135](#Page135).
 
 Tausch on umbelliferous flowers,[146](#Page146).
 
-Teeth and hair:  
-correlated,[144](#Page144).  
-embryonic, traces of, in birds,[451](#Page451).  
+Teeth and hair:
+correlated,[144](#Page144).
+embryonic, traces of, in birds,[451](#Page451).
 rudimentary, in embryonic calf,[450](#Page450),[480](#Page480).
 
 Tegetmeier, Mr., on cells of bees,[228](#Page228),[233](#Page233).
@@ -14101,18 +14101,18 @@ Temminck on distribution aiding classification,[419](#Page419).
 
 Thouin on grafts,[262](#Page262).
 
-Thrush:  
-aquatic species of,[185](#Page185).  
-mocking, of the Galapagos,[402](#Page402).  
-young of, spotted,[439](#Page439).  
+Thrush:
+aquatic species of,[185](#Page185).
+mocking, of the Galapagos,[402](#Page402).
+young of, spotted,[439](#Page439).
 nest of,[243](#Page243).
 
 Thuret, >M., on crossed fuci,[258](#Page258).
 
 Thwaites, Mr., on acclimatisation,[140](#Page140).
 
-Tierra del Fuego:  
-dogs of,[215](#Page215).  
+Tierra del Fuego:
+dogs of,[215](#Page215).
 plants of,[374](#Page374),[378](#Page378).
 
 Timber-drift,[360](#Page360).
@@ -14129,8 +14129,8 @@ Tomes, Mr., on the distribution of bats,[394](#Page394).
 
 Transitions in varieties rare,[172](#Page172).
 
-Trees:  
-on islands belong to peculiar orders,[392](#Page392).  
+Trees:
+on islands belong to peculiar orders,[392](#Page392).
 with separated sexes,[99](#Page99).
 
 Trifolium pratense,[73](#Page73),[94](#Page94).
@@ -14139,21 +14139,21 @@ Trifolium incarnatum,[94](#Page94).
 
 Trigonia,[321](#Page321).
 
-Trilobites,[306](#Page306).  
+Trilobites,[306](#Page306).
 sudden extinction of,[321](#Page321).
 
 Troglodytes,[243](#Page243).
 
 Tucutucu, blind,[137](#Page137).
 
-Tumbler pigeons:  
-habits of, hereditary,[214](#Page214).  
+Tumbler pigeons:
+habits of, hereditary,[214](#Page214).
 young of,[446](#Page446).
 
 Turkey-cock, brush of hair on breast,[90](#Page90).
 
-Turkey:  
-naked skin on head,[197](#Page197).  
+Turkey:
+naked skin on head,[197](#Page197).
 young, wild,[216](#Page216).
 
 Turnip and cabbage, analogous variations of,[159](#Page159).
@@ -14162,8 +14162,8 @@ Type, unity of,[206](#Page206).
 
 Types, succession of, in same areas,[338](#Page338).
 
-Udders:  
-enlarged by use,[11](#Page11).  
+Udders:
+enlarged by use,[11](#Page11).
 rudimentary,[451](#Page451).
 
 Ulex, young leaves of,[439](#Page439).
@@ -14172,8 +14172,8 @@ Umbelliferæ, outer and inner florets of,[144](#Page144).
 
 Unity of type,[206](#Page206).
 
-Use:  
-effects of, under domestication,[11](#Page11).  
+Use:
+effects of, under domestication,[11](#Page11).
 effects of, in a state of nature,[134](#Page134).
 
 Utility, how far important in the construction of each part,[199](#Page199).
@@ -14182,27 +14182,27 @@ Valenciennes on fresh-water fish,[384](#Page384).
 
 Variability of mongrels and hybrids,[274](#Page274).
 
-Variation:  
-under domestication,[7](#Page7).  
-caused by reproductive system being affected by conditions of life,[8](#Page8).  
-under nature,[44](#Page44).  
+Variation:
+under domestication,[7](#Page7).
+caused by reproductive system being affected by conditions of life,[8](#Page8).
+under nature,[44](#Page44).
 laws of,[131](#Page131).
 
-Variations:  
-appear at corresponding ages,[14](#Page14),[86](#Page86).  
+Variations:
+appear at corresponding ages,[14](#Page14),[86](#Page86).
 analogous in distinct species,[159](#Page159).
 
-Varieties:  
-natural,[44](#Page44).  
-struggle between,[75](#Page75).  
-domestic, extinction of,[111](#Page111).  
-transitional, rarity of,[172](#Page172).  
-when crossed, fertile,[267](#Page267).  
-when crossed, sterile,[269](#Page269).  
+Varieties:
+natural,[44](#Page44).
+struggle between,[75](#Page75).
+domestic, extinction of,[111](#Page111).
+transitional, rarity of,[172](#Page172).
+when crossed, fertile,[267](#Page267).
+when crossed, sterile,[269](#Page269).
 classification of,[423](#Page423).
 
-Verbascum:  
-sterility of,[251](#Page251).  
+Verbascum:
+sterility of,[251](#Page251).
 varieties of, crossed,[270](#Page270).
 
 Verneuil, M. de, on the succession of species,[325](#Page325).
@@ -14215,9 +14215,9 @@ Vulture, naked skin on head,[197](#Page197).
 
 Wading-birds,[386](#Page386).
 
-Wallace, Mr.:  
-on origin of species,[2](#Page2).  
-on law of geographical distribution,[355](#Page355).  
+Wallace, Mr.:
+on origin of species,[2](#Page2).
+on law of geographical distribution,[355](#Page355).
 on the Malay Archipelago,[395](#Page395).
 
 Wasp, sting of,[202](#Page202).
@@ -14226,19 +14226,19 @@ Water, fresh, productions of,[383](#Page383).
 
 Water-hen,[185](#Page185).
 
-Waterhouse, Mr.:  
-on Australian marsupials,[116](#Page116).  
-on greatly developed parts being variable,[150](#Page150).  
-on the cells of bees,[225](#Page225).  
+Waterhouse, Mr.:
+on Australian marsupials,[116](#Page116).
+on greatly developed parts being variable,[150](#Page150).
+on the cells of bees,[225](#Page225).
 on general affinities,[429](#Page429).
 
 Water-ouzel,[185](#Page185).
 
-Watson, Mr. H. C.:  
-on range of varieties of British plants,[58](#Page58).  
-on acclimatisation,[140](#Page140).  
-on flora of Azores,[363](#Page363).  
-on Alpine plants,[367](#Page367),[376](#Page376).  
+Watson, Mr. H. C.:
+on range of varieties of British plants,[58](#Page58).
+on acclimatisation,[140](#Page140).
+on flora of Azores,[363](#Page363).
+on Alpine plants,[367](#Page367),[376](#Page376).
 on rarity of intermediate varieties,[176](#Page176).
 
 Weald, denudation of,[285](#Page285).
@@ -14247,9 +14247,9 @@ Web of feet in water-birds,[185](#Page185).
 
 West Indian islands, mammals of,[395](#Page395).
 
-Westwood:  
-on species in large genera being closely allied to others,[57](#Page57).  
-on the tarsi of Engidæ,[157](#Page157).  
+Westwood:
+on species in large genera being closely allied to others,[57](#Page57).
+on the tarsi of Engidæ,[157](#Page157).
 on the antennæ of hymenopterous insects,[416](#Page416).
 
 Whales, fossil,[303](#Page303).
@@ -14260,41 +14260,41 @@ White Mountains, flora of,[365](#Page365).
 
 Wings, reduction of size,[134](#Page134).
 
-Wings:  
-of insects homologous with branchiæ,[191](#Page191).  
+Wings:
+of insects homologous with branchiæ,[191](#Page191).
 rudimentary, in insects,[451](#Page451).
 
-Wolf:  
-crossed with dog,[214](#Page214).  
+Wolf:
+crossed with dog,[214](#Page214).
 of Falkland Isles,[393](#Page393).
 
-Wollaston, Mr.:  
-on varieties of insects,[48](#Page48).  
-on fossil varieties of land-shells in Madeira,[52](#Page52).  
-on colours of insects on sea-shore,[132](#Page132).  
-on wingless beetles,[135](#Page135).  
-on rarity of intermediate varieties,[176](#Page176).  
-on insular insects,[389](#Page389).  
+Wollaston, Mr.:
+on varieties of insects,[48](#Page48).
+on fossil varieties of land-shells in Madeira,[52](#Page52).
+on colours of insects on sea-shore,[132](#Page132).
+on wingless beetles,[135](#Page135).
+on rarity of intermediate varieties,[176](#Page176).
+on insular insects,[389](#Page389).
 on land-shells of Madeira, naturalised,[402](#Page402).
 
 Wolves, varieties of,[90](#Page90).
 
-Woodpecker:  
-habits of,[184](#Page184).  
+Woodpecker:
+habits of,[184](#Page184).
 green colour of,[197](#Page197).
 
-Woodward, Mr.:  
-on the duration of specific forms,[293](#Page293).  
-on the continuous succession of genera,[316](#Page316).  
+Woodward, Mr.:
+on the duration of specific forms,[293](#Page293).
+on the continuous succession of genera,[316](#Page316).
 on the succession of types,[339](#Page339).
 
 World, species changing simultaneously throughout,[322](#Page322).
 
 Wrens, nest of,[243](#Page243).
 
-Youatt, Mr.:  
-on selection,[31](#Page31).  
-on sub-breeds of sheep,[36](#Page36).  
+Youatt, Mr.:
+on selection,[31](#Page31).
+on sub-breeds of sheep,[36](#Page36).
 on rudimentary horns in young cattle,[454](#Page454).
 
 Zebra, stripes on,[163](#Page163).

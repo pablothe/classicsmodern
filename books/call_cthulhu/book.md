@@ -1,5 +1,5 @@
 # The CALL of CTHULHU
-**by H.P. LOVECRAFT**
+**by H. P. LOVECRAFT**
 
 ---
 
@@ -12,11 +12,11 @@
 ---
 
 # The CALL of CTHULHU
-## By H.P. LOVECRAFT
-[Transcriber's Note: This etext was produced from  
-Weird Tales, February 1928.  
-Extensive research did not uncover any evidence that  
-the U.S. copyright on this publication was renewed.]
+## By H. P. LOVECRAFT
+[Transcriber's Note: This etext was produced from
+Weird Tales, February 1928.
+Extensive research did not uncover any evidence that
+the U. S. copyright on this publication was renewed.]
 
 ---
 
@@ -36,7 +36,7 @@ between the ring of bodies and the ring of fire."[](#)[[1]](#Footnote_1_1)
 
 ---
 
-## Chapter 1: The Horror in Clay. {#chapter-1}
+## Chapter 1: The Horror in Clay.
 
 The most merciful thing in the world, I think, is the inability of the
 human mind to correlate all its contents. We live on a placid island
@@ -315,7 +315,7 @@ mentioned by the professor.
 
 ---
 
-## Chapter 2: The Tale of Inspector Legrasse. {#chapter-2}
+## Chapter 2: The Tale of Inspector Legrasse.
 
 The older matters which had made the sculptor's dream and bas-relief so
 significant to my uncle formed the subject of the second half of his
@@ -792,7 +792,7 @@ he did remains to be seen, for I have learned much now.
 
 ---
 
-## Chapter 3: The Madness from the Sea. {#chapter-3}
+## Chapter 3: The Madness from the Sea.
 
 If heaven ever wishes to grant me a boon, it will be a total effacing
 of the results of a mere chance which fixed my eye on a certain stray

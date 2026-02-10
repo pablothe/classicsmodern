@@ -6,11 +6,11 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: Moby Dick; Or, The Whale
+before using this eBook. Title: Moby Dick; Or, The Whale
 
 Author: Herman Melville
 
-Release date: July 1, 2001 [eBook #2701]  
+Release date: July 1, 2001 [eBook #2701]
 Most recently updated: January 19, 2025
 
 Language: English
@@ -19,33 +19,15 @@ Credits: Daniel Lazarus, Jonesey, and David Widger
 
 *** START OF THE PROJECT GUTENBERG EBOOK MOBY DICK; OR, THE WHALE ***# MOBY-DICK;or, THE WHALE.
 
-  
-
-
 ## By Herman Melville
-
-  
-  
-
-
 
 ---
 
-  
-  
-
-
 CONTENTS
-
-  
-
 
 [ETYMOLOGY.](#link2H_4_0002)
 
 [EXTRACTS (Supplied by a Sub-Sub-Librarian).](#link2H_4_0003)
-
-  
-
 
 [CHAPTER 1. Loomings.](#link2HCH0001)
 
@@ -330,11 +312,6 @@ CONTENTS
 
 [Epilogue](#link2H_EPIL)
 
-  
-  
-
-
-
 ---
 
 #### Original Transcriber’s Notes:
@@ -345,11 +322,8 @@ This text is a combination of etexts, one from the now-defunct ERIS
         Library for preserving the Virginia Tech version. The resulting etext
         was compared with a public domain hard copy version of the text.
 
-  
-[H2 anchor](#)  
-  
-  
-  
+[H2 anchor](#)
+
 ## ETYMOLOGY.
 
 ### (Supplied by a Late Consumptive Usher to a Grammar School.)
@@ -369,12 +343,10 @@ The pale Usher—threadbare in coat, heart, body, and brain; I see
         rolling; for in Dan.hvaltis arched or vaulted.” —Webster’s
         Dictionary.
 
-“WHALE. * * * It is more immediately from the Dut. and Ger.Wallen; A.S.Walw-ian, to roll, to wallow.” —Richardson’s Dictionary.
+“WHALE. * * * It is more immediately from the Dut. and Ger. Wallen; A. S. Walw-ian, to roll, to wallow.” —Richardson’s Dictionary.
 
-חו,Hebrew.ϰητος,Greek.CETUS,Latin.WHŒL,Anglo-Saxon.HVALT,Danish.WAL,Dutch.HWAL,Swedish.HVALUR,Icelandic.WHALE,English.BALEINE,French.BALLENA,Spanish.PEKEE-NUEE-NUEE,Fegee.PEHEE-NUEE-NUEE,Erromangoan.[H2 anchor](#)  
-  
-  
-  
+חו,Hebrew.ϰητος,Greek. CETUS,Latin. WHŒL,Anglo-Saxon. HVALT,Danish. WAL,Dutch. HWAL,Swedish. HVALUR,Icelandic. WHALE,English. BALEINE,French. BALLENA,Spanish. PEKEE-NUEE-NUEE,Fegee. PEHEE-NUEE-NUEE,Erromangoan.[H2 anchor](#)
+
 ## EXTRACTS. (Supplied by a Sub-Sub-Librarian).
 
 It will be seen that this mere painstaking burrower and grub-worm of a
@@ -441,7 +413,7 @@ So fare thee well, poor devil of a Sub-Sub, whose commentator I am. Thou
         some to the king.... The best whales were catched in his own country, of
         which some were forty-eight, some fifty yards long. He said that he was
         one of six who had killed sixty in two days.” —Other or Other’s
-        verbal narrative taken down from his mouth by King Alfred, A.D.890.
+        verbal narrative taken down from his mouth by King Alfred, A. D.890.
 
 “And whereas all the other things, whether beast or vessel, that enter
         into the dreadful gulf of this monster’s (whale’s) mouth, are
@@ -522,14 +494,14 @@ So fare thee well, poor devil of a Sub-Sub, whose commentator I am. Thou
         proceed with a great deal of caution for fear they should run their ship
         upon them.” —Schouten’s Sixth Circumnavigation.
 
-“We set sail from the Elbe, wind N.E. in the ship called The
+“We set sail from the Elbe, wind N. E. in the ship called The
         Jonas-in-the-Whale.... Some say the whale can’t open his mouth, but that
         is a fable.... They frequently climb up the masts to see whether they
         can see a whale, for the first discoverer has a ducat for his pains....
         I was told of a whale taken near Shetland, that had above a barrel of
         herrings in his belly.... One of our harpooneers told me that he caught
         once a whale in Spitzbergen that was white all over.” —A Voyage to
-        Greenland, A.D.1671.Harris Coll.
+        Greenland, A. D.1671. Harris Coll.
 
 “Several whales have come in upon this coast (Fife) Anno 1652, one
         eighty feet in length of the whale-bone kind came in, which (as I was
@@ -540,13 +512,13 @@ So fare thee well, poor devil of a Sub-Sub, whose commentator I am. Thou
 “Myself have agreed to try whether I can master and kill this
         Sperma-ceti whale, for I could never hear of any of that sort that was
         killed by any man, such is his fierceness and swiftness.” —Richard
-        Strafford’s Letter from the Bermudas. Phil. Trans. A.D.1668.
+        Strafford’s Letter from the Bermudas. Phil. Trans. A. D.1668.
 
 “Whales in the sea God’s voice obey.” —N. E. Primer.
 
 “We saw also abundance of large whales, there being more in those
         southern seas, as I may say, by a hundred to one; than we have to the
-        northward of us.” —Captain Cowley’s Voyage round the Globe, A.D.1729.
+        northward of us.” —Captain Cowley’s Voyage round the Globe, A. D.1729.
 
 “... and the breath of the whale is frequently attended with such an
         insupportable smell, as to bring on a disorder of the brain.” —Ulloa’s
@@ -718,7 +690,7 @@ October 13.  “There she blows,” was sung out from the mast-head.
       —J. Ross Browne’s Etchings of a Whaling Cruize.  1846.“The Whale-ship Globe, on board of which vessel occurred the horrid
         transactions we are about to relate, belonged to the island of
         Nantucket.” —“Narrative of the Globe Mutiny,”by Lay and Hussey
-        survivors. A.D.1828.
+        survivors. A. D.1828.
 
 Being once pursued by a whale which he had wounded, he parried the
         assault for some time with a lance; but the furious monster at length
@@ -757,7 +729,7 @@ Being once pursued by a whale which he had wounded, he parried the
         by her near appearance. The vessel under short sail, with look-outs at
         the mast-heads, eagerly scanning the wide expanse around them, has a
         totally different air from those engaged in regular voyage.” —Currents
-        and Whaling. U.S. Ex. Ex.
+        and Whaling. U. S. Ex. Ex.
 
 “Pedestrians in the vicinity of London and elsewhere may recollect
         having seen large curved bones set upright in the earth, either to form
@@ -800,14 +772,10 @@ Being once pursued by a whale which he had wounded, he parried the
      In his ocean home will be
      A giant in might, where might is right,
      And King of the boundless sea.”
-      —Whale Song.  
+      —Whale Song.
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 1. Loomings.
+## Chapter 1: . Loomings.
 
 Call me Ishmael. Some years ago—never mind how long precisely—having
       little or no money in my purse, and nothing particular to interest me on
@@ -1003,11 +971,7 @@ By reason of these things, then, the whaling voyage was welcome; the great
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 2. The Carpet-Bag.
+## Chapter 2: . The Carpet-Bag.
 
 I stuffed a shirt or two into my old carpet-bag, tucked it under my arm,
       and started for Cape Horn and the Pacific. Quitting the good city of old
@@ -1139,11 +1103,7 @@ But no more of this blubbering now, we are going a-whaling, and there is
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 3. The Spouter-Inn.
+## Chapter 3: . The Spouter-Inn.
 
 Entering that gable-ended Spouter-Inn, you found yourself in a wide, low,
       straggling entry with old-fashioned wainscots, reminding one of the
@@ -1172,7 +1132,7 @@ But what most puzzled and confounded you was a long, limber, portentous,
       four primal elements.—It’s a blasted heath.—It’s a Hyperborean
       winter scene.—It’s the breaking-up of the icebound stream of Time.
       But at last all these fancies yielded to that one portentous something in
-      the picture’s midst.Thatonce found out, and all the rest were plain. But
+      the picture’s midst. Thatonce found out, and all the rest were plain. But
       stop; does it not bear a faint resemblance to a gigantic fish? even the
       great leviathan himself?
 
@@ -1702,11 +1662,7 @@ I turned in, and never slept better in my life.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 4. The Counterpane.
+## Chapter 4: . The Counterpane.
 
 Upon waking next morning about daylight, I found Queequeg’s arm thrown
       over me in the most loving and affectionate manner. You had almost thought
@@ -1849,11 +1805,7 @@ The rest of his toilet was soon achieved, and he proudly marched out of
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 5. Breakfast.
+## Chapter 5: . Breakfast.
 
 I quickly followed suit, and descending into the bar-room accosted the
       grinning landlord very pleasantly. I cherished no malice towards him,
@@ -1929,11 +1881,7 @@ We will not speak of all Queequeg’s peculiarities here; how he eschewed
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 6. The Street.
+## Chapter 6: . The Street.
 
 If I had been astonished at first catching a glimpse of so outlandish an
       individual as Queequeg circulating among the polite society of a civilized
@@ -2017,11 +1965,7 @@ And the women of New Bedford, they bloom like their own red roses. But
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 7. The Chapel.
+## Chapter 7: . The Chapel.
 
 In this same New Bedford there stands a Whaleman’s Chapel, and few are the
       moody fishermen, shortly bound for the Indian Ocean or Pacific, who fail
@@ -2113,11 +2057,7 @@ It needs scarcely to be told, with what feelings, on the eve of a
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 8. The Pulpit.
+## Chapter 8: . The Pulpit.
 
 I had not been seated very long ere a man of a certain venerable
       robustness entered; immediately as the storm-pelted door flew back upon
@@ -2207,11 +2147,7 @@ What could be more full of meaning?—for the pulpit is ever this
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 9. The Sermon.
+## Chapter 9: . The Sermon.
 
 Father Mapple rose, and in a mild voice of unassuming authority ordered
       the scattered people to condense. “Starboard gangway, there! side away to
@@ -2423,7 +2359,7 @@ This ended, in prolonged solemn tones, like the continual tolling of a
 
 “‘I am a Hebrew,’ he cries—and then—‘I fear the Lord the God
       of Heaven who hath made the sea and the dry land!’ Fear him, O Jonah? Aye,
-      well mightest thou fear the Lord Godthen!Straightway, he now goes on to
+      well mightest thou fear the Lord Godthen! Straightway, he now goes on to
       make a full confession; whereupon the mariners became more and more
       appalled, but still are pitiful. For when Jonah, not yet supplicating God
       for mercy, since he but too well knew the darkness of his deserts,—when
@@ -2533,11 +2469,7 @@ He said no more, but slowly waving a benediction, covered his face with
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 10. A Bosom Friend.
+## Chapter 10: . A Bosom Friend.
 
 Returning to the Spouter-Inn from the Chapel, I found Queequeg there quite
       alone; he having left the Chapel before the benediction some time. He was
@@ -2675,11 +2607,7 @@ How it is I know not; but there is no place like a bed for confidential
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 11. Nightgown.
+## Chapter 11: . Nightgown.
 
 We had lain thus in bed, chatting and napping at short intervals, and
       Queequeg now and then affectionately throwing his brown tattooed legs over
@@ -2743,11 +2671,7 @@ Whether it was that this undulating tester rolled the savage away to far
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 12. Biographical.
+## Chapter 12: . Biographical.
 
 Queequeg was a native of Rokovoko, an island far away to the West and
       South. It is not down in any map; true places never are.
@@ -2831,11 +2755,7 @@ His story being ended with his pipe’s last dying puff, Queequeg embraced
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 13. Wheelbarrow.
+## Chapter 13: . Wheelbarrow.
 
 Next morning, Monday, after disposing of the embalmed head to a barber,
       for a block, I settled my own and comrade’s bill; using, however, my
@@ -2996,11 +2916,7 @@ Was there ever such unconsciousness? He did not seem to think that he at
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 14. Nantucket.
+## Chapter 14: . Nantucket.
 
 Nothing more happened on the passage worthy the mentioning; so, after a
       fine run, we safely arrived in Nantucket.
@@ -3059,7 +2975,7 @@ And thus have these naked Nantucketers, these sea hermits, issuing from
       themselves, without seeking to draw their living from the bottomless deep
       itself. The Nantucketer, he alone resides and riots on the sea; he alone,
       in Bible language, goes down to it in ships; to and fro ploughing it as
-      his own special plantation.Thereis his home;therelies his business,
+      his own special plantation. Thereis his home;therelies his business,
       which a Noah’s flood would not interrupt, though it overwhelmed all the
       millions in China. He lives on the sea, as prairie cocks in the prairie;
       he hides among the waves, he climbs them as chamois hunters climb the
@@ -3072,11 +2988,7 @@ And thus have these naked Nantucketers, these sea hermits, issuing from
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 15. Chowder.
+## Chapter 15: . Chowder.
 
 It was quite late in the evening when the little Moss came snugly to
       anchor, and Queequeg and I went ashore; so we could attend to no business
@@ -3193,11 +3105,7 @@ Supper concluded, we received a lamp, and directions from Mrs. Hussey
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 16. The Ship.
+## Chapter 16: . The Ship.
 
 In bed we concocted our plans for the morrow. But to my surprise and no
       small concern, Queequeg now gave me to understand, that he had been
@@ -3234,7 +3142,7 @@ Now, this plan of Queequeg’s, or rather Yojo’s, touching the selection of
       his sacrificial fire of shavings, I sallied out among the shipping. After
       much prolonged sauntering and many random inquiries, I learnt that there
       were three ships up for three-years’ voyages—The Devil-dam, the
-      Tit-bit, and the Pequod.Devil-Dam, I do not know the origin of;Tit-bitis obvious;Pequod, you will no doubt remember, was the name of a
+      Tit-bit, and the Pequod. Devil-Dam, I do not know the origin of;Tit-bitis obvious;Pequod, you will no doubt remember, was the name of a
       celebrated tribe of Massachusetts Indians; now extinct as the ancient
       Medes. I peered and pryed about the Devil-dam; from her, hopped over to
       the Tit-bit; and finally, going on board the Pequod, looked around her for
@@ -3370,7 +3278,7 @@ I was a little alarmed by his energy, perhaps also a little touched at the
       inferred as much from the simple fact of the accident.”
 
 “Look ye now, young man, thy lungs are a sort of soft, d’ye see; thou dost
-      not talk shark a bit.Sure, ye’ve been to sea before now; sure of that?”
+      not talk shark a bit. Sure, ye’ve been to sea before now; sure of that?”
 
 “Sir,” said I, “I thought I told you that I had been four voyages in the
       merchant—”
@@ -3742,11 +3650,7 @@ As I walked away, I was full of thoughtfulness; what had been incidentally
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 17. The Ramadan.
+## Chapter 17: . The Ramadan.
 
 As Queequeg’s Ramadan, or Fasting and Humiliation, was to continue all
       day, I did not choose to disturb him till towards night-fall; for I
@@ -3972,11 +3876,7 @@ At last we rose and dressed; and Queequeg, taking a prodigiously hearty
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 18. His Mark.
+## Chapter 18: . His Mark.
 
 As we were walking down the end of the wharf towards the ship, Queequeg
       carrying his harpoon, Captain Peleg in his gruff voice loudly hailed us
@@ -4124,11 +4024,7 @@ Bildad said no more, but buttoning up his coat, stalked on deck, where we
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 19. The Prophet.
+## Chapter 19: . The Prophet.
 
 “Shipmates, have ye shipped in that ship?”
 
@@ -4275,11 +4171,7 @@ I was resolved to satisfy myself whether this ragged Elijah was really
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 20. All Astir.
+## Chapter 20: . All Astir.
 
 A day or two passed, and there was great activity aboard the Pequod. Not
       only were the old sails being mended, but new sails were coming on board,
@@ -4364,11 +4256,7 @@ At last it was given out that some time next day the ship would certainly
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 21. Going Aboard.
+## Chapter 21: . Going Aboard.
 
 It was nearly six o’clock, but only grey imperfect misty dawn, when we
       drew nigh the wharf.
@@ -4513,11 +4401,7 @@ It was now clear sunrise. Soon the crew came on board in twos and threes;
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 22. Merry Christmas.
+## Chapter 22: . Merry Christmas.
 
 At length, towards noon, upon the final dismissal of the ship’s riggers,
       and after the Pequod had been hauled out from the wharf, and after the
@@ -4679,11 +4563,7 @@ Ship and boat diverged; the cold, damp night breeze blew between; a
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 23. The Lee Shore.
+## Chapter 23: . The Lee Shore.
 
 Some chapters back, one Bulkington was spoken of, a tall, newlanded
       mariner, encountered in New Bedford at the inn.
@@ -4723,11 +4603,7 @@ But as in landlessness alone resides highest truth, shoreless, indefinite
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 24. The Advocate.
+## Chapter 24: . The Advocate.
 
 As Queequeg and I are now fairly embarked in this business of whaling; and
       as this business of whaling has somehow come to be regarded among landsmen
@@ -4741,7 +4617,7 @@ In the first place, it may be deemed almost superfluous to establish the
       were introduced into any miscellaneous metropolitan society, it would but
       slightly advance the general opinion of his merits, were he presented to
       the company as a harpooneer, say; and if in emulation of the naval
-      officers he should append the initials S.W.F. (Sperm Whale Fishery) to his
+      officers he should append the initials S. W. F. (Sperm Whale Fishery) to his
       visiting card, such a procedure would be deemed pre-eminently presuming
       and ridiculous.
 
@@ -4847,7 +4723,7 @@ But if, in the face of all this, you still declare that whaling has no
 The whale has no famous author, and whaling no famous chronicler, you will
       say.
 
-The whale no famous author, and whaling no famous chronicler?Who wrote
+The whale no famous author, and whaling no famous chronicler? Who wrote
       the first account of our Leviathan? Who but mighty Job! And who composed
       the first narrative of a whaling-voyage? Who, but no less a prince than
       Alfred the Great, who, with his own royal pen, took down the words from
@@ -4857,7 +4733,7 @@ The whale no famous author, and whaling no famous chronicler?Who wrote
 True enough, but then whalemen themselves are poor devils; they have no
       good blood in their veins.
 
-No good blood in their veins?They have something better than royal blood
+No good blood in their veins? They have something better than royal blood
       there. The grandmother of Benjamin Franklin was Mary Morrel; afterwards,
       by marriage, Mary Folger, one of the old settlers of Nantucket, and the
       ancestress to a long line of Folgers and harpooneers—all kith and
@@ -4866,13 +4742,13 @@ No good blood in their veins?They have something better than royal blood
 
 Good again; but then all confess that somehow whaling is not respectable.
 
-Whaling not respectable?Whaling is imperial! By old English statutory
+Whaling not respectable? Whaling is imperial! By old English statutory
       law, the whale is declared “a royal fish.” *
 
 Oh, that’s only nominal! The whale himself has never figured in any grand
       imposing way.
 
-The whale never figured in any grand imposing way?In one of the mighty
+The whale never figured in any grand imposing way? In one of the mighty
       triumphs given to a Roman general upon his entering the world’s capital,
       the bones of a whale, brought all the way from the Syrian coast, were the
       most conspicuous object in the cymballed procession.*
@@ -4882,7 +4758,7 @@ The whale never figured in any grand imposing way?In one of the mighty
 Grant it, since you cite it; but, say what you will, there is no real
       dignity in whaling.
 
-No dignity in whaling?The dignity of our calling the very heavens attest.
+No dignity in whaling? The dignity of our calling the very heavens attest.
       Cetus is a constellation in the South! No more! Drive down your hat in
       presence of the Czar, and take it off to Queequeg! No more! I know a man
       that, in his lifetime, has taken three hundred and fifty whales. I account
@@ -4900,11 +4776,7 @@ And, as for me, if, by any possibility, there be any as yet undiscovered
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 25. Postscript.
+## Chapter 25: . Postscript.
 
 In behalf of the dignity of whaling, I would fain advance naught but
       substantiated facts. But after embattling his facts, an advocate who
@@ -4937,11 +4809,7 @@ Think of that, ye loyal Britons! we whalemen supply your kings and queens
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 26. Knights and Squires.
+## Chapter 26: . Knights and Squires.
 
 The chief mate of the Pequod was Starbuck, a native of Nantucket, and a
       Quaker by descent. He was a long, earnest man, and though born on an icy
@@ -5049,11 +4917,7 @@ If, then, to meanest mariners, and renegades and castaways, I shall
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 27. Knights and Squires.
+## Chapter 27: . Knights and Squires.
 
 Stubb was the second mate. He was a native of Cape Cod; and hence,
       according to local usage, was called a Cape-Cod-man. A happy-go-lucky;
@@ -5202,11 +5066,7 @@ Third among the harpooneers was Daggoo, a gigantic, coal-black
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 28. Ahab.
+## Chapter 28: . Ahab.
 
 For several days after leaving Nantucket, nothing above hatches was seen
       of Captain Ahab. The mates regularly relieved each other at the watches,
@@ -5333,11 +5193,7 @@ Nevertheless, ere long, the warm, warbling persuasiveness of the pleasant,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 29. Enter Ahab; to Him, Stubb.
+## Chapter 29: . Enter Ahab; to Him, Stubb.
 
 Some days elapsed, and ice and icebergs all astern, the Pequod now went
       rolling through the bright Quito spring, which, at sea, almost perpetually
@@ -5436,7 +5292,7 @@ As he said this, Ahab advanced upon him with such overbearing terrors in
       queer, come to think of ’em. But that’s against my principles. Think not,
       is my eleventh commandment; and sleep when you can, is my twelfth—So
       here goes again. But how’s that? didn’t he call me a dog? blazes! he
-      called me ten times a donkey, and piled a lot of jackasses on top ofthat!He might as well have kicked me, and done with it. Maybe hedidkick me,
+      called me ten times a donkey, and piled a lot of jackasses on top ofthat! He might as well have kicked me, and done with it. Maybe hedidkick me,
       and I didn’t observe it, I was so taken all aback with his brow, somehow.
       It flashed like a bleached bone. What the devil’s the matter with me? I
       don’t stand right on my legs. Coming afoul of that old man has a sort of
@@ -5447,11 +5303,7 @@ As he said this, Ahab advanced upon him with such overbearing terrors in
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 30. The Pipe.
+## Chapter 30: . The Pipe.
 
 When Stubb had departed, Ahab stood for a while leaning over the bulwarks;
       and then, as had been usual with him of late, calling a sailor of the
@@ -5483,11 +5335,7 @@ He tossed the still lighted pipe into the sea. The fire hissed in the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 31. Queen Mab.
+## Chapter 31: . Queen Mab.
 
 Next morning Stubb accosted Flask.
 
@@ -5562,11 +5410,7 @@ Next morning Stubb accosted Flask.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 32. Cetology.
+## Chapter 32: . Cetology.
 
 Already we are boldly launched upon the deep; but soon we shall be lost in
       its unshored, harbourless immensities. Ere that come to pass; ere the
@@ -5581,12 +5425,12 @@ It is some systematized exhibition of the whale in his broad genera, that
       essayed. Listen to what the best and latest authorities have laid down.
 
 “No branch of Zoology is so much involved as that which is entitled
-      Cetology,” says Captain Scoresby, A.D. 1820.
+      Cetology,” says Captain Scoresby, A. D. 1820.
 
 “It is not my intention, were it in my power, to enter into the inquiry as
       to the true method of dividing the cetacea into groups and families. * * *
       Utter confusion exists among the historians of this animal” (sperm whale),
-      says Surgeon Beale, A.D. 1839.
+      says Surgeon Beale, A. D. 1839.
 
 “Unfitness to pursue our research in the unfathomable waters.”
        “Impenetrable veil covering our knowledge of the cetacea.” “A field strewn
@@ -5661,7 +5505,7 @@ But it is a ponderous task; no ordinary letter-sorter in the Post-Office
 First: The uncertain, unsettled condition of this science of Cetology is
       in the very vestibule attested by the fact, that in some quarters it still
       remains a moot point whether a whale be a fish. In his System of Nature,
-      A.D. 1776, Linnæus declares, “I hereby separate the whales from the
+      A. D. 1776, Linnæus declares, “I hereby separate the whales from the
       fish.” But of my own knowledge, I know that down to the year 1850, sharks
       and shad, alewives and herring, against Linnæus’s express edict, were
       still found dividing the possession of the same seas with the Leviathan.
@@ -6050,11 +5894,7 @@ Finally: It was stated at the outset, that this system would not be here,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 33. The Specksnyder.
+## Chapter 33: . The Specksnyder.
 
 Concerning the officers of the whale-craft, this seems as good a place as
       any to set down a little domestic peculiarity on ship-board, arising from
@@ -6149,11 +5989,7 @@ But Ahab, my Captain, still moves before me in all his Nantucket grimness
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 34. The Cabin-Table.
+## Chapter 34: . The Cabin-Table.
 
 It is noon; and Dough-Boy, the steward, thrusting his pale loaf-of-bread
       face from the cabin-scuttle, announces dinner to his lord and master; who,
@@ -6349,11 +6185,7 @@ In this one matter, Ahab seemed no exception to most American whale
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 35. The Mast-Head.
+## Chapter 35: . The Mast-Head.
 
 It was during the more pleasant weather, that in due rotation with the
       other seamen my first mast-head came round.
@@ -6578,11 +6410,7 @@ There is no life in thee, now, except that rocking life imparted by a
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 36. The Quarter-Deck.
+## Chapter 36: . The Quarter-Deck.
 
 (Enter Ahab: Then, all.)
 
@@ -6881,11 +6709,7 @@ Silently obeying the order, the three harpooneers now stood with the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 37. Sunset.
+## Chapter 37: . Sunset.
 
 The cabin; by the stern windows; Ahab sitting alone, and gazing out.
 
@@ -6922,7 +6746,7 @@ Dry heat upon my brow? Oh! time was, when as the sunrise nobly spurred me,
       then, be the prophet and the fulfiller one. That’s more than ye, ye great
       gods, ever were. I laugh and hoot at ye, ye cricket-players, ye pugilists,
       ye deaf Burkes and blinded Bendigoes! I will not say as schoolboys do to
-      bullies—Take some one of your own size; don’t pommelme!No, ye’ve
+      bullies—Take some one of your own size; don’t pommelme! No, ye’ve
       knocked me down, and I am up again; butyehave run and hidden. Come forth
       from behind your cotton bags! I have no long gun to reach ye. Come, Ahab’s
       compliments to ye; come and see if ye can swerve me. Swerve me? ye cannot
@@ -6934,11 +6758,7 @@ Dry heat upon my brow? Oh! time was, when as the sunrise nobly spurred me,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 38. Dusk.
+## Chapter 38: . Dusk.
 
 By the Mainmast; Starbuck leaning against it.
 
@@ -6976,11 +6796,7 @@ Oh, God! to sail with such a heathen crew that have small touch of human
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 39. First Night-Watch.
+## Chapter 39: . First Night-Watch.
 
 Fore-Top.
 
@@ -7005,17 +6821,13 @@ Ha! ha! ha! ha! hem! clear my throat!—I’ve been thinking over it
 We’ll drink to-night with hearts as light,
          To love, as gay and fleeting
       As bubbles that swim, on the beaker’s brim,
-         And break on the lips while meeting.A brave stave that—who calls? Mr. Starbuck? Aye, aye, sir—(Aside)
+         And break on the lips while meeting. A brave stave that—who calls? Mr. Starbuck? Aye, aye, sir—(Aside)
       he’s my superior, he has his too, if I’m not mistaken.—Aye, aye,
       sir, just through with this job—coming.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 40. Midnight, Forecastle.
+## Chapter 40: . Midnight, Forecastle.
 
 HARPOONEERS AND SAILORS.
 
@@ -7038,7 +6850,7 @@ Our captain stood upon the deck,
     And we’ll have one of those fine whales,
     Hand, boys, over hand!
     So, be cheery, my lads! may your hearts never fail!
-    While the bold harpooner is striking the whale!MATE’S VOICE FROM THE QUARTER-DECK. Eight bells there, forward!
+    While the bold harpooner is striking the whale! MATE’S VOICE FROM THE QUARTER-DECK. Eight bells there, forward!
 
 2ND NANTUCKET SAILOR. Avast the chorus! Eight bells there! d’ye hear,
       bell-boy? Strike the bell eight, thou Pip! thou blackling! and let me call
@@ -7221,11 +7033,7 @@ PIP (shrinking under the windlass). Jollies? Lord help such jollies!
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 41. Moby Dick.
+## Chapter 41: . Moby Dick.
 
 I, Ishmael, was one of that crew; my shouts had gone up with the rest; my
       oath had been welded with theirs; and stronger I shouted, and more did I
@@ -7569,11 +7377,7 @@ Here, then, was this grey-headed, ungodly old man, chasing with curses a
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 42. The Whiteness of the Whale.
+## Chapter 42: . The Whiteness of the Whale.
 
 What the white whale was to Ahab, has been hinted; what, at times, he was
       to me, as yet remains unsaid.
@@ -7915,11 +7719,7 @@ Is it that by its indefiniteness it shadows forth the heartless voids and
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 43. Hark!
+## Chapter 43: . Hark!
 
 “HIST! Did you hear that noise, Cabaco?”
 
@@ -7967,11 +7767,7 @@ It was in the midst of this repose, that Archy, one of the cordon, whose
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 44. The Chart.
+## Chapter 44: . The Chart.
 
 Had you followed Captain Ahab down into his cabin after the squall that
       took place on the night succeeding that wild ratification of his purpose
@@ -8158,11 +7954,7 @@ Often, when forced from his hammock by exhausting and intolerably vivid
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 45. The Affidavit.
+## Chapter 45: . The Affidavit.
 
 So far as what there may be of a narrative in this book; and, indeed, as
       indirectly touching one or two very interesting and curious particulars in
@@ -8481,11 +8273,7 @@ In the Propontis, as far as I can learn, none of that peculiar substance
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 46. Surmises.
+## Chapter 46: . Surmises.
 
 Though, consumed with the hot fire of his purpose, Ahab in all his
       thoughts and actions ever had in view the ultimate capture of Moby Dick;
@@ -8581,11 +8369,7 @@ Be all this as it may, his voice was now often heard hailing the three
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 47. The Mat-Maker.
+## Chapter 47: . The Mat-Maker.
 
 It was a cloudy, sultry afternoon; the seamen were lazily lounging about
       the decks, or vacantly gazing over into the lead-coloured waters. Queequeg
@@ -8685,11 +8469,7 @@ But at this critical instant a sudden exclamation was heard that took
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 48. The First Lowering.
+## Chapter 48: . The First Lowering.
 
 The phantoms, for so they then seemed, were flitting on the other side of
       the deck, and, with a noiseless celerity, were casting loose the tackles
@@ -9027,7 +8807,7 @@ Though not one of the oarsmen was then facing the life and death peril so
       mist, the waves curling and hissing around us like the erected crests of
       enraged serpents.
 
-“That’s his hump.There,there, give it to him!” whispered Starbuck.
+“That’s his hump. There,there, give it to him!” whispered Starbuck.
 
 A short rushing sound leaped out of the boat; it was the darted iron of
       Queequeg. Then all in one welded commotion came an invisible push from
@@ -9083,11 +8863,7 @@ Floating on the waves we saw the abandoned boat, as for one instant it
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 49. The Hyena.
+## Chapter 49: . The Hyena.
 
 There are certain queer times and occasions in this strange mixed affair
       we call life when a man takes this whole universe for a vast practical
@@ -9169,11 +8945,7 @@ Now then, thought I, unconsciously rolling up the sleeves of my frock,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 50. Ahab’s Boat and Crew. Fedallah.
+## Chapter 50: . Ahab’s Boat and Crew. Fedallah.
 
 “Who would have thought it, Flask!” cried Stubb; “if I had but one leg you
       would not catch me in a boat, unless maybe to stop the plug-hole with my
@@ -9268,11 +9040,7 @@ But be all this as it may, certain it is that while the subordinate
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 51. The Spirit-Spout.
+## Chapter 51: . The Spirit-Spout.
 
 Days, weeks passed, and under easy sail, the ivory Pequod had slowly swept
       across four several cruising-grounds; that off the Azores; off the Cape de
@@ -9412,11 +9180,7 @@ Terrible old man! thought Starbuck with a shudder, sleeping in this gale,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 52. The Albatross.
+## Chapter 52: . The Albatross.
 
 South-eastward from the Cape, off the distant Crozetts, a good cruising
       ground for Right Whalemen, a sail loomed ahead, the Goney (Albatross) by
@@ -9487,11 +9251,7 @@ Were this world an endless plain, and by sailing eastward we could for
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 53. The Gam.
+## Chapter 53: . The Gam.
 
 The ostensible reason why Ahab did not go on board of the whaler we had
       spoken was this: the wind and sea betokened storms. But even had this not
@@ -9588,7 +9348,7 @@ But look at the godly, honest, unostentatious, hospitable, sociable,
       himself to be high lifted above a whaleman, in that assertion the pirate
       has no solid basis to stand on.
 
-But what is aGam?You might wear out your index-finger running up and
+But what is aGam? You might wear out your index-finger running up and
       down the columns of dictionaries, and never find the word. Dr. Johnson
       never attained to that erudition; Noah Webster’s ark does not hold it.
       Nevertheless, this same expressive word has now for many years been in
@@ -9639,11 +9399,7 @@ There is another little item about Gamming which must not be forgotten
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 54. The Town-Ho’s Story.
+## Chapter 54: . The Town-Ho’s Story.
 
 (As told at the Golden Inn.)
 
@@ -10428,11 +10184,7 @@ For my humor’s sake, I shall preserve the style in which I once narrated
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 55. Of the Monstrous Pictures of Whales.
+## Chapter 55: . Of the Monstrous Pictures of Whales.
 
 I shall ere long paint to you as well as one can without canvas, something
       like the true form of the whale as he actually appears to the eye of the
@@ -10500,7 +10252,7 @@ In the vignettes and other embellishments of some ancient books you will
 But quitting all these unprofessional attempts, let us glance at those
       pictures of leviathan purporting to be sober, scientific delineations, by
       those who know. In old Harris’s collection of voyages there are some
-      plates of whales extracted from a Dutch book of voyages, A.D. 1671,
+      plates of whales extracted from a Dutch book of voyages, A. D. 1671,
       entitled “A Whaling Voyage to Spitzbergen in the ship Jonas in the Whale,
       Peter Peterson of Friesland, master.” In one of those plates the whales,
       like great rafts of logs, are represented lying among ice-isles, with
@@ -10608,11 +10360,7 @@ For all these reasons, then, any way you may look at it, you must needs
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 56. Of the Less Erroneous Pictures of Whales, and the True Pictures of Whaling Scenes.
+## Chapter 56: . Of the Less Erroneous Pictures of Whales, and the True Pictures of Whaling Scenes.
 
 In connexion with the monstrous pictures of whales, I am strongly tempted
       here to enter upon those still more monstrous stories of them which are to
@@ -10732,11 +10480,7 @@ In addition to those fine engravings from Garnery, there are two other
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 57. Of Whales in Paint; in Teeth; in Wood; in Sheet-Iron; in Stone; in Mountains; in Stars.
+## Chapter 57: . Of Whales in Paint; in Teeth; in Wood; in Sheet-Iron; in Stone; in Mountains; in Stars.
 
 On Tower-hill, as you go down to the London docks, you may have seen a
       crippled beggar (orkedger, as the sailors say) holding a painted board
@@ -10832,11 +10576,7 @@ With a frigate’s anchors for my bridle-bitts and fasces of harpoons for
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 58. Brit.
+## Chapter 58: . Brit.
 
 Steering north-eastward from the Crozetts, we fell in with vast meadows of
       brit, the minute, yellow substance, upon which the Right Whale largely
@@ -10936,11 +10676,7 @@ Consider all this; and then turn to this green, gentle, and most docile
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 59. Squid.
+## Chapter 59: . Squid.
 
 Slowly wading through the meadows of brit, the Pequod still held on her
       way north-eastward towards the island of Java; a gentle air impelling her
@@ -11037,11 +10773,7 @@ By some naturalists who have vaguely heard rumors of the mysterious
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 60. The Line.
+## Chapter 60: . The Line.
 
 With reference to the whaling scene shortly to be described, as well as
       for the better understanding of all similar scenes elsewhere presented, I
@@ -11173,11 +10905,7 @@ Again: as the profound calm which only apparently precedes and prophesies
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 61. Stubb Kills a Whale.
+## Chapter 61: . Stubb Kills a Whale.
 
 If to Starbuck the apparition of the Squid was a thing of portents, to
       Queequeg it was quite a different object.
@@ -11369,11 +11097,7 @@ And now abating in his flurry, the whale once more rolled out into view;
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 62. The Dart.
+## Chapter 62: . The Dart.
 
 A word concerning an incident in the last chapter.
 
@@ -11428,11 +11152,7 @@ To insure the greatest efficiency in the dart, the harpooneers of this
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 63. The Crotch.
+## Chapter 63: . The Crotch.
 
 Out of the trunk, the branches grow; out of them, the twigs. So, in
       productive subjects, grow the chapters.
@@ -11482,11 +11202,7 @@ Consider, now, how it must be in the case of four boats all engaging one
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 64. Stubb’s Supper.
+## Chapter 64: . Stubb’s Supper.
 
 Stubb’s whale had been killed some distance from the ship. It was a calm;
       so, forming a tandem of three boats, we commenced the slow business of
@@ -11807,11 +11523,7 @@ But Fleece had hardly got three paces off, when he was recalled.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 65. The Whale as a Dish.
+## Chapter 65: . The Whale as a Dish.
 
 That mortal man should feed upon the creature that feeds his lamp, and,
       like Stubb, eat him by his own light, as you may say; this seems so
@@ -11900,11 +11612,7 @@ But Stubb, he eats the whale by its own light, does he? and that is adding
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 66. The Shark Massacre.
+## Chapter 66: . The Shark Massacre.
 
 When in the Southern Fishery, a captured Sperm Whale, after long and weary
       toil, is brought alongside late at night, it is not, as a general thing at
@@ -11965,11 +11673,7 @@ Nevertheless, upon Stubb setting the anchor-watch after his supper was
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 67. Cutting In.
+## Chapter 67: . Cutting In.
 
 It was a Saturday night, and such a Sabbath as followed! Ex officio
       professors of Sabbath breaking are all whalemen. The ivory Pequod was
@@ -12036,11 +11740,7 @@ One of the attending harpooneers now advances with a long, keen weapon
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 68. The Blanket.
+## Chapter 68: . The Blanket.
 
 I have given no small attention to that not unvexed subject, the skin of
       the whale. I have had controversies about it with experienced whalemen
@@ -12150,11 +11850,7 @@ But how easy and how hopeless to teach these fine things! Of erections,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 69. The Funeral.
+## Chapter 69: . The Funeral.
 
 “Haul in the chains! Let the carcase go astern!”
 
@@ -12185,7 +11881,7 @@ Nor is this the end. Desecrated as the body is, a vengeful ghost survives
       fowls, nevertheless still shows the white mass floating in the sun, and
       the white spray heaving high against it; straightway the whale’s unharming
       corpse, with trembling fingers is set down in the log—shoals, rocks,
-      and breakers hereabouts: beware!And for years afterwards, perhaps, ships
+      and breakers hereabouts: beware! And for years afterwards, perhaps, ships
       shun the place; leaping over it as silly sheep leap over a vacuum, because
       their leader originally leaped there when a stick was held. There’s your
       law of precedents; there’s your utility of traditions; there’s the story
@@ -12200,11 +11896,7 @@ Are you a believer in ghosts, my friend? There are other ghosts than the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 70. The Sphynx.
+## Chapter 70: . The Sphynx.
 
 It should not have been omitted that previous to completely stripping the
       body of the leviathan, he was beheaded. Now, the beheading of the Sperm
@@ -12294,11 +11986,7 @@ It was a black and hooded head; and hanging there in the midst of so
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 71. The Jeroboam’s Story.
+## Chapter 71: . The Jeroboam’s Story.
 
 Hand in hand, ship and breeze blew on; but the breeze came faster than the
       ship, and soon the Pequod began to rock.
@@ -12530,11 +12218,7 @@ As, after this interlude, the seamen resumed their work upon the jacket of
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 72. The Monkey-Rope.
+## Chapter 72: . The Monkey-Rope.
 
 In the tumultuous business of cutting-in and attending to a whale, there
       is much running backwards and forwards among the crew. Now hands are
@@ -12694,11 +12378,7 @@ When Stubb reappeared, he came with a dark flask in one hand, and a sort
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 73. Stubb and Flask kill a Right Whale; and Then Have a Talk over Him.
+## Chapter 73: . Stubb and Flask kill a Right Whale; and Then Have a Talk over Him.
 
 It must be borne in mind that all this time we have a Sperm Whale’s
       prodigious head hanging to the Pequod’s side. But we must let it continue
@@ -12922,11 +12602,7 @@ Meantime, Fedallah was calmly eyeing the right whale’s head, and ever and
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 74. The Sperm Whale’s Head—Contrasted View.
+## Chapter 74: . The Sperm Whale’s Head—Contrasted View.
 
 Here, now, are two great whales, laying their heads together; let us join
       them, and lay together our own.
@@ -13077,11 +12753,7 @@ With a long, weary hoist the jaw is dragged on board, as if it were an
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 75. The Right Whale’s Head—Contrasted View.
+## Chapter 75: . The Right Whale’s Head—Contrasted View.
 
 Crossing the deck, let us now have a good long look at the Right Whale’s
       head.
@@ -13194,11 +12866,7 @@ Can you catch the expression of the Sperm Whale’s there? It is the same he
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 76. The Battering-Ram.
+## Chapter 76: . The Battering-Ram.
 
 Ere quitting, for the nonce, the Sperm Whale’s head, I would have you, as
       a sensible physiologist, simply—particularly remark its front
@@ -13278,11 +12946,7 @@ Now, mark. Unerringly impelling this dead, impregnable, uninjurable wall,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 77. The Great Heidelburgh Tun.
+## Chapter 77: . The Great Heidelburgh Tun.
 
 Now comes the Baling of the Case. But to comprehend it aright, you must
       know something of the curious internal structure of the thing operated
@@ -13351,11 +13015,7 @@ Thus much being said, attend now, I pray you, to that marvellous and—in
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 78. Cistern and Buckets.
+## Chapter 78: . Cistern and Buckets.
 
 Nimble as a cat, Tashtego mounts aloft; and without altering his erect
       posture, runs straight out upon the overhanging mainyard-arm, to the part
@@ -13512,11 +13172,7 @@ Now, had Tashtego perished in that head, it had been a very precious
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 79. The Prairie.
+## Chapter 79: . The Prairie.
 
 To scan the lines of his face, or feel the bumps on the head of this
       Leviathan; this is a thing which no Physiognomist or Phrenologist has as
@@ -13603,11 +13259,7 @@ Champollion deciphered the wrinkled granite hieroglyphics. But there is no
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 80. The Nut.
+## Chapter 80: . The Nut.
 
 If the Sperm Whale be physiognomically a Sphinx, to the phrenologist his
       brain seems that geometrical circle which it is impossible to square.
@@ -13692,11 +13344,7 @@ But leaving this hint to operate as it may with the phrenologists, I would
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 81. The Pequod Meets The Virgin.
+## Chapter 81: . The Pequod Meets The Virgin.
 
 The predestinated day arrived, and we duly met the ship Jungfrau, Derick
       De Deer, master, of Bremen.
@@ -14109,11 +13757,7 @@ Oh! many are the Fin-Backs, and many are the Dericks, my friend.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 82. The Honor and Glory of Whaling.
+## Chapter 82: . The Honor and Glory of Whaling.
 
 There are some enterprises in which a careful disorderliness is the true
       method.
@@ -14220,11 +13864,7 @@ Perseus, St. George, Hercules, Jonah, and Vishnoo! there’s a member-roll
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 83. Jonah Historically Regarded.
+## Chapter 83: . Jonah Historically Regarded.
 
 Reference was made to the historical story of Jonah and the whale in the
       preceding chapter. Now some Nantucketers rather distrust this historical
@@ -14297,11 +13937,7 @@ But all these foolish arguments of old Sag-Harbor only evinced his foolish
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 84. Pitchpoling.
+## Chapter 84: . Pitchpoling.
 
 To make them run easily and swiftly, the axles of carriages are anointed;
       and for much the same purpose, some whalers perform an analogous operation
@@ -14382,11 +14018,7 @@ Again and again to such gamesome talk, the dexterous dart is repeated, the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 85. The Fountain.
+## Chapter 85: . The Fountain.
 
 That for six thousand years—and no one knows how many millions of
       ages before—the great whales should have been spouting all over the
@@ -14395,7 +14027,7 @@ That for six thousand years—and no one knows how many millions of
       thousands of hunters should have been close by the fountain of the whale,
       watching these sprinklings and spoutings—that all this should be,
       and yet, that down to this blessed minute (fifteen and a quarter minutes
-      past one o’clock P.M. of this sixteenth day of December, A.D. 1851), it
+      past one o’clock P. M. of this sixteenth day of December, A. D. 1851), it
       should still remain a problem, whether these spoutings are, after all,
       really water, or nothing but vapor—this is surely a noteworthy
       thing.
@@ -14567,11 +14199,7 @@ And how nobly it raises our conceit of the mighty, misty monster, to
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 86. The Tail.
+## Chapter 86: . The Tail.
 
 Other poets have warbled the praises of the soft eye of the antelope, and
       the lovely plumage of the bird that never alights; less celestial, I
@@ -14742,11 +14370,7 @@ The more I consider this mighty tail, the more do I deplore my inability
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 87. The Grand Armada.
+## Chapter 87: . The Grand Armada.
 
 The long and narrow peninsula of Malacca, extending south-eastward from
       the territories of Birmah, forms the most southerly point of all Asia. In
@@ -15186,11 +14810,7 @@ The result of this lowering was somewhat illustrative of that sagacious
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 88. Schools and Schoolmasters.
+## Chapter 88: . Schools and Schoolmasters.
 
 The previous chapter gave account of an immense body or herd of Sperm
       Whales, and there was also then given the probable cause inducing those
@@ -15309,11 +14929,7 @@ Another point of difference between the male and female schools is still
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 89. Fast-Fish and Loose-Fish.
+## Chapter 89: . Fast-Fish and Loose-Fish.
 
 The allusion to the waif and waif-poles in the last chapter but one,
       necessitates some account of the laws and regulations of the whale
@@ -15332,7 +14948,7 @@ It frequently happens that when several ships are cruising in company, a
       cases.
 
 Perhaps the only formal whaling code authorized by legislative enactment,
-      was that of Holland. It was decreed by the States-General in A.D. 1695.
+      was that of Holland. It was decreed by the States-General in A. D. 1695.
       But though no other nation has ever had any written whaling law, yet the
       American fishermen have been their own legislators and lawyers in this
       matter. They have provided a system which for terse comprehensiveness
@@ -15455,11 +15071,7 @@ What are the Rights of Man and the Liberties of the World but Loose-Fish?
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 90. Heads or Tails.
+## Chapter 90: . Heads or Tails.
 
 “De balena vero sufficit, si rex habeat caput, et regina caudam.”Bracton,
       l. 3, c. 3.
@@ -15579,14 +15191,10 @@ There are two royal fish so styled by the English law writers—the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 91. The Pequod Meets The Rose-Bud.
+## Chapter 91: . The Pequod Meets The Rose-Bud.
 
 “In vain it was to rake for Ambergriese in the paunch of this Leviathan,
-      insufferable fetor denying not inquiry.”Sir T. Browne, V.E.
+      insufferable fetor denying not inquiry.”Sir T. Browne, V. E.
 
 It was a week or two after the last whaling scene recounted, and when we
       were slowly sailing over a sleepy, vapory, mid-day sea, that the many
@@ -15851,11 +15459,7 @@ Dropping his spade, he thrust both hands in, and drew out handfuls of
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 92. Ambergris.
+## Chapter 92: . Ambergris.
 
 Now this ambergris is a very curious substance, and so important as an
       article of commerce, that in 1791 a certain Nantucket-born Captain Coffin
@@ -15944,11 +15548,7 @@ I partly surmise also, that this wicked charge against whalers may be
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 93. The Castaway.
+## Chapter 93: . The Castaway.
 
 It was but some few days after encountering the Frenchman, that a most
       significant event befell the most insignificant of the Pequod’s crew; an
@@ -16102,11 +15702,7 @@ For the rest, blame not Stubb too hardly. The thing is common in that
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 94. A Squeeze of the Hand.
+## Chapter 94: . A Squeeze of the Hand.
 
 That whale of Stubb’s, so dearly purchased, was duly brought to the
       Pequod’s side, where all those cutting and hoisting operations previously
@@ -16229,11 +15825,7 @@ But to learn all about these recondite matters, your best way is at once
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 95. The Cassock.
+## Chapter 95: . The Cassock.
 
 Had you stepped on board the Pequod at a certain juncture of this
       post-mortemizing of the whale; and had you strolled forward nigh the
@@ -16282,11 +15874,7 @@ That office consists in mincing the horse-pieces of blubber for the pots;
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 96. The Try-Works.
+## Chapter 96: . The Try-Works.
 
 Besides her hoisted boats, an American whaler is outwardly distinguished
       by her try-works. She presents the curious anomaly of the most solid
@@ -16448,11 +16036,7 @@ But even Solomon, he says, “the man that wandereth out of the way of
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 97. The Lamp.
+## Chapter 97: . The Lamp.
 
 Had you descended from the Pequod’s try-works to the Pequod’s forecastle,
       where the off duty watch were sleeping, for one single moment you would
@@ -16479,11 +16063,7 @@ See with what entire freedom the whaleman takes his handful of lamps—often
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 98. Stowing Down and Clearing Up.
+## Chapter 98: . Stowing Down and Clearing Up.
 
 Already has it been related how the great leviathan is afar off descried
       from the mast-head; how he is chased over the watery moors, and
@@ -16579,11 +16159,7 @@ Oh! the metempsychosis! Oh! Pythagoras, that in bright Greece, two
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 99. The Doubloon.
+## Chapter 99: . The Doubloon.
 
 Ere now it has been related how Ahab was wont to pace his quarter-deck,
       taking regular turns at either limit, the binnacle and mainmast; but in
@@ -16805,11 +16381,7 @@ Before this equatorial coin, Ahab, not unobserved by others, was now
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 100. Leg and Arm.
+## Chapter 100: . Leg and Arm.
 
 ### The Pequod, of Nantucket, Meets the Samuel Enderby, of London.
 
@@ -17083,11 +16655,7 @@ In a moment he was standing in the boat’s stern, and the Manilla men were
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 101. The Decanter.
+## Chapter 101: . The Decanter.
 
 Ere the English ship fades from sight, be it set down here, that she
       hailed from London, and was named after the late Samuel Enderby, merchant
@@ -17246,11 +16814,7 @@ But no more; enough has been said to show that the old Dutch whalers of
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 102. A Bower in the Arsacides.
+## Chapter 102: . A Bower in the Arsacides.
 
 Hitherto, in descriptively treating of the Sperm Whale, I have chiefly
       dwelt upon the marvels of his outer aspect; or separately and in detail
@@ -17401,11 +16965,7 @@ The skeleton dimensions I shall now proceed to set down are copied
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 103. Measurement of The Whale’s Skeleton.
+## Chapter 103: . Measurement of The Whale’s Skeleton.
 
 In the first place, I wish to lay before you a particular, plain
       statement, touching the living bulk of this leviathan, whose skeleton we
@@ -17497,11 +17057,7 @@ There are forty and odd vertebræ in all, which in the skeleton are not
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 104. The Fossil Whale.
+## Chapter 104: . The Fossil Whale.
 
 From his mighty bulk the whale affords a most congenial theme whereon to
       enlarge, amplify, and generally expatiate. Would you, you could not
@@ -17636,11 +17192,7 @@ In this Afric Temple of the Whale I leave you, reader, and if you be a
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 105. Does the Whale’s Magnitude Diminish?—Will He Perish?
+## Chapter 105: . Does the Whale’s Magnitude Diminish?—Will He Perish?
 
 Inasmuch, then, as this Leviathan comes floundering down upon us from the
       head-waters of the Eternities, it may be fitly inquired, whether, in the
@@ -17675,7 +17227,7 @@ Assuredly, we must conclude so, if we are to credit the accounts of such
       Lacépède, the French naturalist, in his elaborate history of whales, in
       the very beginning of his work (page 3), sets down the Right Whale at one
       hundred metres, three hundred and twenty-eight feet. And this work was
-      published so late as A.D. 1825.
+      published so late as A. D. 1825.
 
 But will any whaleman believe these stories? No. The whale of to-day is as
       big as his ancestors in Pliny’s time. And if ever I go where Pliny is, I,
@@ -17790,11 +17342,7 @@ Wherefore, for all these things, we account the whale immortal in his
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 106. Ahab’s Leg.
+## Chapter 106: . Ahab’s Leg.
 
 The precipitating manner in which Captain Ahab had quitted the Samuel
       Enderby of London, had not been unattended with some small violence to his
@@ -17882,11 +17430,7 @@ And when that functionary appeared before him, he bade him without delay
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 107. The Carpenter.
+## Chapter 107: . The Carpenter.
 
 Seat thyself sultanically among the moons of Saturn, and take high
       abstracted man alone; and he seems a wonder, a grandeur, and a woe. But
@@ -17986,11 +17530,7 @@ Yet, as previously hinted, this omnitooled, open-and-shut carpenter, was,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 108. Ahab and the Carpenter.
+## Chapter 108: . Ahab and the Carpenter.
 
 ### The Deck—First Night Watch.
 
@@ -18168,11 +17708,7 @@ Well, well, well! Stubb knows him best of all, and Stubb always says he’s
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 109. Ahab and Starbuck in the Cabin.
+## Chapter 109: . Ahab and Starbuck in the Cabin.
 
 According to usage they were pumping the ship next morning; and lo! no
       inconsiderable oil came up with the water; the casks below must have
@@ -18276,11 +17812,7 @@ It were perhaps vain to surmise exactly why it was, that as respecting
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 110. Queequeg in His Coffin.
+## Chapter 110: . Queequeg in His Coffin.
 
 Upon searching, it was found that the casks last struck into the hold were
       perfectly sound, and that the leak must be further off. So, it being calm
@@ -18487,11 +18019,7 @@ With a wild whimsiness, he now used his coffin for a sea-chest; and
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 111. The Pacific.
+## Chapter 111: . The Pacific.
 
 When gliding by the Bashee isles we emerged at last upon the great South
       Sea; were it not for other things, I could have greeted my dear Pacific
@@ -18535,11 +18063,7 @@ But few thoughts of Pan stirred Ahab’s brain, as standing like an iron
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 112. The Blacksmith.
+## Chapter 112: . The Blacksmith.
 
 Availing himself of the mild, summer-cool weather that now reigned in
       these latitudes, and in preparation for the peculiarly active pursuits
@@ -18631,11 +18155,7 @@ Hearkening to these voices, East and West, by early sunrise, and by fall
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 113. The Forge.
+## Chapter 113: . The Forge.
 
 With matted beard, and swathed in a bristling shark-skin apron, about
       mid-day, Perth was standing between his forge and anvil, the latter placed
@@ -18775,11 +18295,7 @@ At one extremity the rope was unstranded, and the separate spread yarns
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 114. The Gilder.
+## Chapter 114: . The Gilder.
 
 Penetrating further and further into the heart of the Japanese cruising
       ground, the Pequod was soon all astir in the fishery. Often, in mild,
@@ -18850,11 +18366,7 @@ And Stubb, fish-like, with sparkling scales, leaped up in that same golden
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 115. The Pequod Meets The Bachelor.
+## Chapter 115: . The Pequod Meets The Bachelor.
 
 And jolly enough were the sights and the sounds that came bearing down
       before the wind, some few weeks after Ahab’s harpoon had been welded.
@@ -18948,11 +18460,7 @@ And thus, while the one ship went cheerily before the breeze, the other
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 116. The Dying Whale.
+## Chapter 116: . The Dying Whale.
 
 Not seldom in this life, when, on the right side, fortune’s favourites
       sail close by us, we, though all adroop before, catch somewhat of the
@@ -19007,11 +18515,7 @@ Soothed again, but only soothed to deeper gloom, Ahab, who had sterned off
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 117. The Whale Watch.
+## Chapter 117: . The Whale Watch.
 
 The four whales slain that evening had died wide apart; one, far to
       windward; one, less distant, to leeward; one ahead; one astern. These last
@@ -19071,11 +18575,7 @@ Both were silent again, as one man. The grey dawn came on, and the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 118. The Quadrant.
+## Chapter 118: . The Quadrant.
 
 The season for the Line at length drew near; and every day when Ahab,
       coming from his cabin, cast his eyes aloft, the vigilant helmsman would
@@ -19160,11 +18660,7 @@ Standing between the knight-heads, Starbuck watched the Pequod’s
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 119. The Candles.
+## Chapter 119: . The Candles.
 
 Warmest climes but nurse the cruellest fangs: the tiger of Bengal crouches
       in spiced groves of ceaseless verdure. Skies the most effulgent but basket
@@ -19422,11 +18918,7 @@ As in the hurricane that sweeps the plain, men fly the neighborhood of
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 120. The Deck Towards the End of the First Night Watch.
+## Chapter 120: . The Deck Towards the End of the First Night Watch.
 
 Ahab standing by the helm. Starbuck approaching him.
 
@@ -19453,11 +18945,7 @@ Ahab standing by the helm. Starbuck approaching him.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 121. Midnight.—The Forecastle Bulwarks.
+## Chapter 121: . Midnight.—The Forecastle Bulwarks.
 
 Stubb and Flask mounted on them, and passing additional lashings over the
       anchors there hanging.
@@ -19515,11 +19003,7 @@ Stubb and Flask mounted on them, and passing additional lashings over the
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 122. Midnight Aloft.—Thunder and Lightning.
+## Chapter 122: . Midnight Aloft.—Thunder and Lightning.
 
 The main-top-sail yard.—Tashtego passing new lashings around it.
 
@@ -19529,11 +19013,7 @@ The main-top-sail yard.—Tashtego passing new lashings around it.
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 123. The Musket.
+## Chapter 123: . The Musket.
 
 During the most violent shocks of the Typhoon, the man at the Pequod’s
       jaw-bone tiller had several times been reelingly hurled to the deck by its
@@ -19650,11 +19130,7 @@ The yet levelled musket shook like a drunkard’s arm against the panel;
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 124. The Needle.
+## Chapter 124: . The Needle.
 
 Next morning the not-yet-subsided sea rolled in long slow billows of
       mighty bulk, and striving in the Pequod’s gurgling track, pushed her on
@@ -19784,11 +19260,7 @@ In his fiery eyes of scorn and triumph, you then saw Ahab in all his fatal
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 125. The Log and Line.
+## Chapter 125: . The Log and Line.
 
 While now the fated Pequod had been so long afloat this voyage, the log
       and line had but very seldom been in use. Owing to a confident reliance
@@ -19920,11 +19392,7 @@ Snap! the overstrained line sagged down in one long festoon; the tugging
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 126. The Life-Buoy.
+## Chapter 126: . The Life-Buoy.
 
 Steering now south-eastward by Ahab’s levelled steel, and her progress
       solely determined by Ahab’s level log and line; the Pequod held on her
@@ -20061,11 +19529,7 @@ The lost life-buoy was now to be replaced; Starbuck was directed to see to
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 127. The Deck.
+## Chapter 127: . The Deck.
 
 The coffin laid upon two line-tubs, between the vice-bench and the open
       hatchway; the Carpenter caulking its seams; the string of twisted oakum
@@ -20158,11 +19622,7 @@ The coffin laid upon two line-tubs, between the vice-bench and the open
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 128. The Pequod Meets The Rachel.
+## Chapter 128: . The Pequod Meets The Rachel.
 
 Next day, a large ship, the Rachel, was descried, bearing directly down
       upon the Pequod, all her spars thickly clustering with men. At the time
@@ -20302,11 +19762,7 @@ But by her still halting course and winding, woeful way, you plainly saw
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 129. The Cabin.
+## Chapter 129: . The Cabin.
 
 (Ahab moving to go on deck; Pip catches him by the hand to follow.)
 
@@ -20368,11 +19824,7 @@ But by her still halting course and winding, woeful way, you plainly saw
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 130. The Hat.
+## Chapter 130: . The Hat.
 
 And now that at the proper time and place, after so long and wide a
       preliminary cruise, Ahab,—all other whaling waters swept—seemed
@@ -20534,11 +19986,7 @@ An eagle flew thrice round Tarquin’s head, removing his cap to replace it,
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 131. The Pequod Meets The Delight.
+## Chapter 131: . The Pequod Meets The Delight.
 
 The intense Pequod sailed on; the rolling waves and days went by; the
       life-buoy-coffin still lightly swung; and another ship, most miserably
@@ -20593,11 +20041,7 @@ As Ahab now glided from the dejected Delight, the strange life-buoy
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 132. The Symphony.
+## Chapter 132: . The Symphony.
 
 It was a clear steel-blue day. The firmaments of air and sea were hardly
       separable in that all-pervading azure; only, the pensive air was
@@ -20752,11 +20196,7 @@ Ahab crossed the deck to gaze over on the other side; but started at two
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 133. The Chase—First Day.
+## Chapter 133: . The Chase—First Day.
 
 That night, in the mid-watch, when the old man—as his wont at
       intervals—stepped forth from the scuttle in which he leaned, and
@@ -20813,7 +20253,7 @@ Fired by the cry which seemed simultaneously taken up by the three
       cried out,” said Tashtego.
 
 “Not the same instant; not the same—no, the doubloon is mine, Fate
-      reserved the doubloon for me.Ionly; none of ye could have raised the
+      reserved the doubloon for me. Ionly; none of ye could have raised the
       White Whale first. There she blows!—there she blows!—there she
       blows! There again!—there again!” he cried, in long-drawn,
       lingering, methodic tones, attuned to the gradual prolongings of the
@@ -21115,11 +20555,7 @@ And so saying, he placed himself half way within the scuttle, and
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 134. The Chase—Second Day.
+## Chapter 134: . The Chase—Second Day.
 
 At day-break, the three mast-heads were punctually manned afresh.
 
@@ -21436,7 +20872,7 @@ But quickly they returned to him with the tidings that the Parsee was
       Parsee—the Parsee!—gone, gone? and he was to go before:—but
       still was to be seen again ere I could perish—How’s that?—There’s
       a riddle now might baffle all the lawyers backed by the ghosts of the
-      whole line of judges:—like a hawk’s beak it pecks my brain.I’ll,I’llsolve it, though!”
+      whole line of judges:—like a hawk’s beak it pecks my brain. I’ll,I’llsolve it, though!”
 
 When dusk descended, the whale was still in sight to leeward.
 
@@ -21452,11 +20888,7 @@ So once more the sail was shortened, and everything passed nearly as on
 
 [H2 anchor](#)
 
-  
-  
-  
-  
-## CHAPTER 135. The Chase.—Third Day.
+## Chapter 135: . The Chase.—Third Day.
 
 The morning of the third day dawned fair and fresh, and once more the
       solitary night-man at the fore-mast-head was relieved by crowds of the
@@ -21853,7 +21285,7 @@ Diving beneath the settling ship, the whale ran quivering along its keel;
       with thee; from hell’s heart I stab at thee; for hate’s sake I spit my
       last breath at thee. Sink all coffins and all hearses to one common pool!
       and since neither can be mine, let me then tow to pieces, while still
-      chasing thee, though tied to thee, thou damned whale!Thus, I give up the
+      chasing thee, though tied to thee, thou damned whale! Thus, I give up the
       spear!”
 
 The harpoon was darted; the stricken whale flew forward; with igniting
@@ -21898,10 +21330,6 @@ Now small fowls flew screaming over the yet yawning gulf; a sullen white
 
 [H2 anchor](#)
 
-  
-  
-  
-  
 ## Epilogue
 
 ### “AND I ONLY AM ESCAPED ALONE TO TELL THEE” Job.
@@ -21930,7 +21358,7 @@ It so chanced, that after the Parsee’s disappearance, I was he whom the
       missing children, only found another orphan.
 
 *** END OF THE PROJECT GUTENBERG EBOOK MOBY DICK; OR, THE WHALE ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -21946,16 +21374,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -21964,15 +21392,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -21987,7 +21415,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -21995,7 +21423,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -22006,28 +21434,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -22037,9 +21465,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -22060,40 +21488,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -22104,17 +21532,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -22124,11 +21552,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -22136,13 +21564,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -22152,31 +21580,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

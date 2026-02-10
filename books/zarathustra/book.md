@@ -6,41 +6,40 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: Also sprach Zarathustra: Ein Buch für Alle und Keinen
+before using this eBook. Title: Also sprach Zarathustra: Ein Buch für Alle und Keinen
 
 Author: Friedrich Wilhelm Nietzsche
 
-Release date: January 1, 2005 [eBook #7205]  
+Release date: January 1, 2005 [eBook #7205]
 Most recently updated: February 12, 2023
 
 Language: German
 
 Credits: Peter Bellen
 
-*** START OF THE PROJECT GUTENBERG EBOOK ALSO SPRACH ZARATHUSTRA: EIN BUCH FÜR ALLE UND KEINEN ***  
-  
+*** START OF THE PROJECT GUTENBERG EBOOK ALSO SPRACH ZARATHUSTRA: EIN BUCH FÜR ALLE UND KEINEN ***
+
 # Also sprach Zarathustra
 
 #### Ein Buch für Alle und Keinen
 
 ## von Friedrich Wilhelm Nietzsche
 
-
 ---
 
 ### Inhaltsverzeichnis
 
-[Erster Theil](#part01)[Zarathustra’s Vorrede](#chap01)[Die Reden Zarathustra’s](#chap02)[Von den drei Verwandlungen](#chap03)[Von den Lehrstühlen der Tugend](#chap04)[Von den Hinterweltlern](#chap05)[Von den Verächtern des Leibes](#chap06)[Von den Freuden- und Leidenschaften](#chap07)[Vom bleichen Verbrecher](#chap08)[Vom Lesen und Schreiben](#chap09)[Vom Baum am Berge](#chap10)[Von den Predigern des Todes](#chap11)[Vom Krieg und Kriegsvolke](#chap12)[Vom neuen Götzen](#chap13)[Von den Fliegen des Marktes](#chap14)[Von der Keuschheit](#chap15)[Vom Freunde](#chap16)[Von tausend und Einem Ziele](#chap17)[Von der Nächstenliebe](#chap18)[Vom Wege des Schaffenden](#chap19)[Von alten und jungen Weiblein](#chap20)[Vom Biss der Natter](#chap21)[Von Kind und Ehe](#chap22)[Vom freien Tode](#chap23)[Von der schenkenden Tugend](#chap24)  
-  
-[Zweiter Theil](#part02)[Das Kind mit dem Spiegel](#chap25)[Auf den glückseligen Inseln](#chap26)[Von den Mitleidigen](#chap27)[Von den Priestern](#chap28)[Von den Tugendhaften](#chap29)[Vom Gesindel](#chap30)[Von den Taranteln](#chap31)[Von den berühmten Weisen](#chap32)[Das Nachtlied](#chap33)[Das Tanzlied](#chap34)[Das Grablied](#chap35)[Von der Selbst-Überwindung](#chap36)[Von den Erhabenen](#chap37)[Vom Lande der Bildung](#chap38)[Von der unbefleckten Erkenntniss](#chap39)[Von den Gelehrten](#chap40)[Von den Dichtern](#chap41)[Von grossen Ereignissen](#chap42)[Der Wahrsager](#chap43)[Von der Erlösung](#chap44)[Von der Menschen-Klugheit](#chap45)[Die stillste Stunde](#chap46)  
-  
-[Dritter Theil](#part03)[Der Wanderer](#chap47)[Vom Gesicht und Räthsel](#chap48)[Von der Seligkeit wider Willen](#chap49)[Vor Sonnen-Aufgang](#chap50)[Von der verkleinernden Tugend](#chap51)[Auf dem Ölberge](#chap52)[Vom Vorübergehen](#chap53)[Von den Abtrünnigen](#chap54)[Die Heimkehr](#chap55)[Von den drei Bösen](#chap56)[Vom Geist der Schwere](#chap57)[Von alten und neuen Tafeln](#chap58)[Der Genesende](#chap59)[Von der grossen Sehnsucht](#chap60)[Das andere Tanzlied](#chap61)[Die sieben Siegel (Oder: das Ja- und Amen-Lied)](#chap62)  
-  
+[Erster Theil](#part01)[Zarathustra’s Vorrede](#chap01)[Die Reden Zarathustra’s](#chap02)[Von den drei Verwandlungen](#chap03)[Von den Lehrstühlen der Tugend](#chap04)[Von den Hinterweltlern](#chap05)[Von den Verächtern des Leibes](#chap06)[Von den Freuden- und Leidenschaften](#chap07)[Vom bleichen Verbrecher](#chap08)[Vom Lesen und Schreiben](#chap09)[Vom Baum am Berge](#chap10)[Von den Predigern des Todes](#chap11)[Vom Krieg und Kriegsvolke](#chap12)[Vom neuen Götzen](#chap13)[Von den Fliegen des Marktes](#chap14)[Von der Keuschheit](#chap15)[Vom Freunde](#chap16)[Von tausend und Einem Ziele](#chap17)[Von der Nächstenliebe](#chap18)[Vom Wege des Schaffenden](#chap19)[Von alten und jungen Weiblein](#chap20)[Vom Biss der Natter](#chap21)[Von Kind und Ehe](#chap22)[Vom freien Tode](#chap23)[Von der schenkenden Tugend](#chap24)
+
+[Zweiter Theil](#part02)[Das Kind mit dem Spiegel](#chap25)[Auf den glückseligen Inseln](#chap26)[Von den Mitleidigen](#chap27)[Von den Priestern](#chap28)[Von den Tugendhaften](#chap29)[Vom Gesindel](#chap30)[Von den Taranteln](#chap31)[Von den berühmten Weisen](#chap32)[Das Nachtlied](#chap33)[Das Tanzlied](#chap34)[Das Grablied](#chap35)[Von der Selbst-Überwindung](#chap36)[Von den Erhabenen](#chap37)[Vom Lande der Bildung](#chap38)[Von der unbefleckten Erkenntniss](#chap39)[Von den Gelehrten](#chap40)[Von den Dichtern](#chap41)[Von grossen Ereignissen](#chap42)[Der Wahrsager](#chap43)[Von der Erlösung](#chap44)[Von der Menschen-Klugheit](#chap45)[Die stillste Stunde](#chap46)
+
+[Dritter Theil](#part03)[Der Wanderer](#chap47)[Vom Gesicht und Räthsel](#chap48)[Von der Seligkeit wider Willen](#chap49)[Vor Sonnen-Aufgang](#chap50)[Von der verkleinernden Tugend](#chap51)[Auf dem Ölberge](#chap52)[Vom Vorübergehen](#chap53)[Von den Abtrünnigen](#chap54)[Die Heimkehr](#chap55)[Von den drei Bösen](#chap56)[Vom Geist der Schwere](#chap57)[Von alten und neuen Tafeln](#chap58)[Der Genesende](#chap59)[Von der grossen Sehnsucht](#chap60)[Das andere Tanzlied](#chap61)[Die sieben Siegel (Oder: das Ja- und Amen-Lied)](#chap62)
+
 [Vierter und letzter Theil](#part04)[Das Honig-Opfer](#chap63)[Der Nothschrei](#chap64)[Gespräch mit den Königen](#chap65)[Der Blutegel](#chap66)[Der Zauberer](#chap67)[Ausser Dienst](#chap68)[Der hässlichste Mensch](#chap69)[Der freiwillige Bettler](#chap70)[Der Schatten](#chap71)[Mittags](#chap72)[Die Begrüssung](#chap73)[Das Abendmahl](#chap74)[Vom höheren Menschen](#chap75)[Das Lied der Schwermuth](#chap76)[Von der Wissenschaft](#chap77)[Unter Töchtern der Wüste](#chap78)[Die Erweckung](#chap79)[Das Eselsfest](#chap80)[Das Nachtwandler-Lied](#chap81)[Das Zeichen](#chap82)## Erster Theil
 
 end chapter### Zarathustra’s Vorrede.
 
-#### 1.
+#### Chapter 1: .
 
 Als Zarathustra dreissig Jahr alt war, verliess er seine Heimat und den See
 seiner Heimat und ging in das Gebirge. Hier genoss er seines Geistes und seiner
@@ -80,7 +79,7 @@ Mensch werden.“
 
 —Also begann Zarathustra’s Untergang.
 
-#### 2.
+#### Chapter 2: .
 
 Zarathustra stieg allein das Gebirge abwärts und Niemand begegnete ihm. Als er
 aber in die Wälder kam, stand auf einmal ein Greis vor ihm, der seine heilige
@@ -151,7 +150,7 @@ Als Zarathustra aber allein war, sprach er also zu seinem Herzen: „Sollte
 es denn möglich sein! Dieser alte Heilige hat in seinem Walde noch Nichts davon
 gehört, dassGott todtist!“—
 
-#### 3.
+#### Chapter 3: .
 
 Als Zarathustra in die nächste Stadt kam, die an den Wäldern liegt, fand er
 daselbst viel Volk versammelt auf dem Markte: denn es war verheissen worden,
@@ -248,7 +247,7 @@ hörten nun genug von dem Seiltänzer; nun lasst uns ihn auch sehen!“ Und
 alles Volk lachte über Zarathustra. Der Seiltänzer aber, welcher glaubte, dass
 das Wort ihm gälte, machte sich an sein Werk.
 
-#### 4.
+#### Chapter 4: .
 
 Zarathustra aber sahe das Volk an und wunderte sich. Dann sprach er also:
 
@@ -323,7 +322,7 @@ kommt, und gehn als Verkündiger zu Grunde.
 Seht, ich bin ein Verkündiger des Blitzes und ein schwerer Tropfen aus der
 Wolke: dieser Blitz aber heisst Übermensch.—
 
-#### 5.
+#### Chapter 5: .
 
 Als Zarathustra diese Worte gesprochen hatte, sahe er wieder das Volk an und
 schwieg. „Da stehen sie“, sprach er zu seinem Herzen, „da
@@ -422,7 +421,7 @@ meinen, ich sei kalt und ein Spötter in furchtbaren Spässen.
 Und nun blicken sie mich an und lachen: und indem sie lachen, hassen sie mich
 noch. Es ist Eis in ihrem Lachen.
 
-#### 6.
+#### Chapter 6: .
 
 Da aber geschah Etwas, das jeden Mund stumm und jedes Auge starr machte.
 Inzwischen nämlich hatte der Seiltänzer sein Werk begonnen: er war aus einer
@@ -468,7 +467,7 @@ Als Zarathustra diess gesagt hatte, antwortete der Sterbende nicht mehr; aber
 er bewegte die Hand, wie als ob er die Hand Zarathustra’s zum Danke
 suche.—
 
-#### 7.
+#### Chapter 7: .
 
 Inzwischen kam der Abend, und der Markt barg sich in Dunkelheit: da verlief
 sich das Volk, denn selbst Neugierde und Schrecken werden müde. Zarathustra
@@ -492,7 +491,7 @@ Dunkel ist die Nacht, dunkel sind die Wege Zarathustra’s. Komm, du kalter
 und steifer Gefährte! Ich trage dich dorthin, wo ich dich mit meinen Händen
 begrabe.
 
-#### 8.
+#### Chapter 8: .
 
 Als Zarathustra diess zu seinem Herzen gesagt hatte, lud er den Leichnam auf
 seinem Rücken und machte sich auf den Weg. Und noch nicht war er hundert
@@ -553,7 +552,7 @@ er den Todten in einen hohlen Baum sich zu Häupten—denn er wollte ihn vor
 den Wölfen schützen—und sich selber auf den Boden und das Moos. Und
 alsbald schlief er ein, müden Leibes, aber mit einer unbewegten Seele.
 
-#### 8.
+#### Chapter 8: .
 
 Lange schlief Zarathustra, und nicht nur die Morgenröthe gieng über sein
 Antlitz, sondern auch der Vormittag. Endlich aber that sein Auge sich auf:
@@ -619,7 +618,7 @@ Glücke.
 Zu meinem Ziele will ich, ich gehe meinen Gang; über die Zögernden und
 Saumseligen werde ich hinwegspringen. Also sei mein Gang ihr Untergang!
 
-#### 10.
+#### Chapter 10: .
 
 Diess hatte Zarathustra zu seinem Herzen gesprochen, als die Sonne im Mittag
 stand: da blickte er fragend in die Höhe—denn er hörte über sich den
@@ -2647,7 +2646,7 @@ Also sprach Zarathustra.
 
 end chapter### Von der schenkenden Tugend
 
-#### 1.
+#### Chapter 1: .
 
 Als Zarathustra von der Stadt Abschied genommen hatte, welcher sein Herz
 zugethan war und deren Name lautet: „die bunte Kuh“—folgten ihm Viele,
@@ -2736,7 +2735,7 @@ Rauschen und eines neuen Quelles Stimme!
 Macht ist sie, diese neue Tugend; ein herrschender Gedanke ist sie und um ihn
 eine kluge Seele: eine goldene Sonne und um sie die Schlange der Erkenntniss.
 
-#### 2.
+#### Chapter 2: .
 
 Hier schwieg Zarathustra eine Weile und sah mit Liebe auf seine Jünger. Dann
 fuhr er also fort zu reden:—und seine Stimme hatte sich verwandelt.
@@ -2789,7 +2788,7 @@ erwachsen:—und aus ihm der Übermensch.
 Wahrlich, eine Stätte der Genesung soll noch die Erde werden! Und schon liegt
 ein neuer Geruch um sie, ein Heil bringender,—und eine neue Hoffnung!
 
-#### 3.
+#### Chapter 3: .
 
 Als Zarathustra diese Worte gesagt hatte, schwieg er, wie Einer, der nicht sein
 letztes Wort gesagt hat; lange wog er den Stab zweifelnd in seiner Hand.
@@ -2841,7 +2840,7 @@ Also sprach Zarathustra.
 end chapter## Zweiter Theil
 
 „—und erst, wenn ihr mich Alle verleugnet habt, will ich euch
-wiederkehren.  
+wiederkehren.
 Wahrlich, mit andernAugen, meine Brüder, werde ich mir dann meine
 Verlorenen suchen; mit einer andern Liebe werde ich euch dann lieben.“
 
@@ -2999,7 +2998,7 @@ Weder in’s Unbegreifliche dürftet ihr eingeboren sein, noch in’s
 Unvernünftige.
 
 Aber dass ich euch ganz mein Herz offenbare, ihr Freunde:wennes Götter
-gäbe, wie hielte ich’s aus, kein Gott zu sein!Alsogiebt es keine
+gäbe, wie hielte ich’s aus, kein Gott zu sein! Alsogiebt es keine
 Götter.
 
 Wohl zog ich den Schluss; nun aber zieht er mich.—
@@ -4474,7 +4473,7 @@ Ja, wie solltet ihr glaubenkönnen, ihr Buntgesprenkelten!—die ihr
 Gemälde seid von Allem, was je geglaubt wurde!
 
 Wandelnde Widerlegungen seid ihr des Glaubens selber, und aller Gedanken
-Gliederbrechen.Unglaubwürdige: also heisseicheuch, ihr
+Gliederbrechen. Unglaubwürdige: also heisseicheuch, ihr
 Wirklichen!
 
 Alle Zeiten schwätzen wider einander in euren Geistern; und aller Zeiten Träume
@@ -5646,8 +5645,8 @@ und verliess seine Freunde.
 end chapter## Dritter Theil
 
 „Ihr seht nach Oben, wenn ihr nach Erhebung verlangt. Und ich sehe hinab,
-weil ich erhoben bin.  
-Wer von euch kann zugleich lachen und erhoben sein?  
+weil ich erhoben bin.
+Wer von euch kann zugleich lachen und erhoben sein?
 Wer auf den höchsten Bergen steigt, der lacht über alle Trauer-Spiele und
 Trauer-Ernste.“
 
@@ -5780,7 +5779,7 @@ bitterlich.
 
 end chapter### Vom Gesicht und Räthsel
 
-#### 1.
+#### Chapter 1: .
 
 Als es unter den Schiffsleuten ruchbar wurde, dass Zarathustra auf dem Schiffe
 sei,—denn es war ein Mann zugleich mit ihm an Bord gegangen, der von den
@@ -5862,10 +5861,10 @@ Tod todt, denn er spricht: „Wardasdas Leben? Wohlan! Noch Ein Mal!“
 In solchem Spruche aber ist viel klingendes Spiel. Wer Ohren hat, der
 höre.—
 
-#### 2.
+#### Chapter 2: .
 
 „Halt! Zwerg! sprach ich. Ich! Oder du! Ich aber bin der Stärkere von uns
-Beiden—: du kennst meinen abgründlichen Gedanken nicht!Den—könntest du nicht tragen!“—
+Beiden—: du kennst meinen abgründlichen Gedanken nicht! Den—könntest du nicht tragen!“—
 
 Da geschah, was mich leichter machte: denn der Zwerg sprang mir von der
 Schulter, der Neugierige! Und er hockte sich auf einen Stein vor mich hin. Es
@@ -5900,7 +5899,7 @@ einmal geschehn, gethan, vorübergelaufen sein?
 Und wenn Alles schon dagewesen ist: was hältst du Zwerg von diesem Augenblick?
 Muss auch dieser Thorweg nicht schon—dagewesen sein?
 
-Und sind nicht solchermaassen fest alle Dinge verknotet, dass dieser Augenblickallekommenden Dinge nach sich zieht?Also—- sich selber
+Und sind nicht solchermaassen fest alle Dinge verknotet, dass dieser Augenblickallekommenden Dinge nach sich zieht? Also—- sich selber
 noch?
 
 Denn, was laufenkannvon allen Dingen: auch in dieser langen Gassehinaus—musses einmal noch laufen!—
@@ -5961,7 +5960,7 @@ Gesicht des Einsamsten!
 Denn ein Gesicht war’s und ein Vorhersehn:—wassah ich
 damals im Gleichnisse? Undwerist, der einst noch kommen muss?
 
-Werist der Hirt, dem also die Schlange in den Schlund kroch?Werist der Mensch, dem also alles Schwerste, Schwärzeste in den Schlund kriechen
+Werist der Hirt, dem also die Schlange in den Schlund kroch? Werist der Mensch, dem also alles Schwerste, Schwärzeste in den Schlund kriechen
 wird?
 
 —Der Hirt aber biss, wie mein Schrei ihm rieth; er biss mit gutem Bisse!
@@ -6135,7 +6134,7 @@ Scham redet Offenbarung zu meiner brausenden Seele.
 Dass du schön zu mir kamst, verhüllt in deine Schönheit, dass du stumm zu mir
 sprichst, offenbar in deiner Weisheit:
 
-Oh wie erriethe ich nicht alles Schamhafte deiner Seele!Vorder Sonne
+Oh wie erriethe ich nicht alles Schamhafte deiner Seele! Vorder Sonne
 kamst du zu mir, dem Einsamsten.
 
 Wir sind Freunde von Anbeginn: uns ist Gram und Grauen und Grund gemeinsam;
@@ -6247,7 +6246,7 @@ Also sprach Zarathustra.
 
 end chapter### Von der verkleinernden Tugend
 
-#### 1.
+#### Chapter 1: .
 
 Als Zarathustra wieder auf dem festen Lande war, gieng er nicht stracks auf
 sein Gebirge und seine Höhle los, sondern that viele Wege und Fragen und
@@ -6278,7 +6277,7 @@ seufzte und blickte in die Ferne.—
 
 Desselbigen Tages aber redete er seine Rede über die verkleinernde Tugend.
 
-#### 2.
+#### Chapter 2: .
 
 Ich gehe durch diess Volk und halte meine Augen offen: sie vergeben mir es
 nicht, dass ich auf ihre Tugenden nicht neidisch bin.
@@ -6389,7 +6388,7 @@ Säuen.“
 Diess aber ist—Mittelmässigkeit: ob es schon Mässigkeit
 heisst.—
 
-#### 3.
+#### Chapter 3: .
 
 Ich gehe durch diess Volk und lasse manches Wort fallen: aber sie wissen weder
 zu nehmen noch zu behalten.
@@ -6748,7 +6747,7 @@ Also sprach Zarathustra und gieng an dem Narren und der grossen Stadt vorüber.
 
 end chapter### Von den Abtrünnigen
 
-#### 1.
+#### Chapter 1: .
 
 Ach, liegt Alles schon welk und grau, was noch jüngst auf dieser Wiese grün und
 bunt stand? Und wie vielen Honig der Hoffnung trug ich von hier in meine
@@ -6800,7 +6799,7 @@ mit raschelnden Winden unter sie,—
 
 —blase unter diese Blätter, oh Zarathustra: dass allesWelkeschneller noch von dir davonlaufen!—
 
-#### 2.
+#### Chapter 2: .
 
 „Wir sind wieder fromm geworden“ —so bekennen diese Abtrünnigen; und
 Manche von ihnen sind noch zu feige, also zu bekennen.
@@ -6924,7 +6923,7 @@ Mütter lächeln, nun sprich nur: „Und wer war das, der wie ein Sturmwind eins
 von mir davonstürmte?—
 
 —der scheidend rief: zu lange sass ich bei der Einsamkeit, da verlernte
-ich das Schweigen!Das—lerntest du nun wohl?
+ich das Schweigen! Das—lerntest du nun wohl?
 
 Oh Zarathustra, Alles weiss ich: und dass du unter den Vielenverlassenerwarst, du Einer, als je bei mir!
 
@@ -7064,7 +7063,7 @@ Also sprach Zarathustra.
 
 end chapter### Von den drei Bösen
 
-#### 1.
+#### Chapter 1: .
 
 Im Traum, im letzten Morgentraume stand ich heut auf einem
 Vorgebirge,—jenseits der Welt, hielt eine Wage undwogdie Welt.
@@ -7132,7 +7131,7 @@ noch—hinaufwachsen?—
 Nun steht die Wage gleich und still: drei schwere Fragen warf ich hinein, drei
 schwere Antworten trägt die andre Wagschale.
 
-#### 2.
+#### Chapter 2: .
 
 Wollust: allen busshemdigen Leib-Verächtern ihr Stachel und Pfahl, und als
 „Welt“ verflucht bei allen Hinterweltlern: denn sie höhnt und narrt alle Wirr-
@@ -7257,7 +7256,7 @@ Also sprach Zarathustra.
 
 end chapter### Vom Geist der Schwere
 
-#### 1.
+#### Chapter 1: .
 
 Mein Mundwerk—ist des Volks: zu grob und herzlich rede ich für die
 Seidenhasen. Und noch fremder klingt mein Wort allen Tinten-Fischen und
@@ -7288,7 +7287,7 @@ Andre Sänger giebt es freilich, denen macht das volle Haus erst ihre Kehle
 weide, ihre Hand gesprächig, ihr Auge ausdrücklich, ihr Herz wach:—Denen
 gleiche ich nicht.—
 
-#### 2.
+#### Chapter 2: .
 
 Wer die Menschen einst fliegen lehrt, der hat alle Grenzsteine verrückt; alle
 Grenzsteine selber werden ihm in die Luft fliegen, die Erde wird er neu taufen
@@ -7423,14 +7422,14 @@ muss manlernenauf solches Fragen! Das aber—ist mein Geschmack:
 weder Scham noch Hehl mehr habe.
 
 „Das—ist nunmeinWeg,—wo ist der eure?“ so antwortete ich
-Denen, welche mich „nach dem Wege“  fragten.DenWeg nämlich—den
+Denen, welche mich „nach dem Wege“  fragten. DenWeg nämlich—den
 giebt es nicht!
 
 Also sprach Zarathustra.
 
 end chapter### Von alten und neuen Tafeln
 
-#### 1.
+#### Chapter 1: .
 
 Hier sitze ich und warte, alte zerbrochene Tafeln um mich und auch neue halb
 beschriebene Tafeln. Wann kommt meine Stunde?
@@ -7444,7 +7443,7 @@ Taubenschwarme.
 Inzwischen rede ich als Einer, der Zeit hat, zu mir selber. Niemand erzählt mir
 Neues: so erzähle ich mir mich selber.—
 
-#### 2.
+#### Chapter 2: .
 
 Als ich zu den Menschen kam, da fand ich sie sitzen auf einem alten Dünkel:
 Alle dünkten sich lange schon zu wissen, was dem Menschen gut und böse sei.
@@ -7507,7 +7506,7 @@ Denn muss nicht dasein,überdas getanzt, hinweggetanzt werde? Müssen
 nicht um der Leichten, Leichtesten willen—Maulwürfe und schwere Zwerge
 dasein?—
 
-#### 3.
+#### Chapter 3: .
 
 Dort war’s auch, wo ich das Wort „Übermensch“ vom Wege auflas, und dass
 der Mensch Etwas sei, das überwunden werden müsse,
@@ -7550,7 +7549,7 @@ Zuschauen.—
 Der Sonne gleich will auch Zarathustra untergehn: nun sitzt er hier und wartet,
 alte zerbrochne Tafeln um sich und auch neue Tafeln,—halbbeschriebene.
 
-#### 4.
+#### Chapter 4: .
 
 Siehe, hier ist eine neue Tafel: aber wo sind meine Brüder, die sie mit mir zu
 Thale und in fleischerne Herzen tragen?—
@@ -7570,7 +7569,7 @@ Vergeltung.
 Wer sich nicht befehlen kann, der soll gehorchen. Und Mancherkannsich
 befehlen, aber da fehlt noch Viel, dass er sich auch gehorche!
 
-#### 5.
+#### Chapter 5: .
 
 Also will es die Art edler Seelen: sie wollen Nichtsumsonsthaben, am
 wenigsten das Leben.
@@ -7588,7 +7587,7 @@ Genuss und Unschuld nämlich sind die schamhaftesten Dinge: Beide wollen nicht
 gesucht sein. Man soll siehaben—, aber man soll eher noch nach
 Schuld und Schmerzensuchen!—
 
-#### 6.
+#### Chapter 6: .
 
 Oh meine Brüder, wer ein Erstling ist, der wird immer geopfert. Nun aber sind
 wir Erstlinge.
@@ -7608,7 +7607,7 @@ Aber so will es unsre Art; und ich liebe Die, welche sich nicht bewahren
 wollen. Die Untergehenden liebe ich mit meiner ganzen Liebe: denn sie gehn
 hinüber.—
 
-#### 7.
+#### Chapter 7: .
 
 Wahr sein—daskönnenWenige! Und wer es kann, der will es noch
 nicht! Am wenigsten aber können es die Guten.
@@ -7629,7 +7628,7 @@ Aus solchem Samen aber wird Wahrheit gezeugt!
 Nebendem bösen Gewissen wuchs bisher allesWissen! Zerbrecht,
 zerbrecht mir, ihr Erkennenden, die alten Tafeln!
 
-#### 8.
+#### Chapter 8: .
 
 Wenn das Wasser Balken hat, wenn Stege und Geländer über den Fluss springen:
 wahrlich, da findet Keiner Glauben, der da spricht: „Alles ist im Fluss.“
@@ -7661,7 +7660,7 @@ Geländer und Stege in’s Wasser gefallen? Werhieltesich noch an
 „Wehe uns! Heil uns! Der Thauwind weht!“—Also predigt mir, oh meine
 Brüder, durch alle Gassen!
 
-#### 8.
+#### Chapter 8: .
 
 Es giebt einen alten Wahn, der heisst Gut und Böse. Um Wahrsager und
 Sterndeuter drehte sich bisher das Rad dieses Wahns.
@@ -7675,7 +7674,7 @@ Oh meine Brüder, über Sterne und Zukunft ist bisher nur gewähnt, nicht gewuss
 worden: unddarumist über Gut und Böse bisher nur gewähnt, nicht
 gewusst worden!
 
-#### 10.
+#### Chapter 10: .
 
 „Du sollst nicht rauben! Du sollst nicht todtschlagen!“—solche Worte
 hiess man einst heilig; vor ihnen beugte man Knie und Köpfe und zog die Schuhe
@@ -7692,7 +7691,7 @@ Oder war es eine Predigt des Todes, dass heilig hiess, was allem Leben
 widersprach und widerrieth?—Oh meine Brüder, zerbrecht, zerbrecht mir die
 alten tafeln!
 
-#### 11.
+#### Chapter 11: .
 
 Diess ist mein Mitleid mit allem Vergangenen, dass ich sehe: es ist
 preisgegeben,—
@@ -7719,7 +7718,7 @@ Vieler Edlen nämlich bedarf es und vielerlei Edlen, dass es Adel gebe! Oder,
 wie ich einst im Gleichniss sprach: „Das eben ist Göttlichkeit, dass es Götter,
 aber keinen Gott giebt!“
 
-#### 12.
+#### Chapter 12: .
 
 Oh meine Brüder, ich weihe und weise euch zu einem neuen Adel: ihr sollt mir
 Zeuger und Züchter werden und Säemänner der Zukunft,—
@@ -7759,7 +7758,7 @@ An euren Kindern sollt ihrgutmachen, dass ihr eurer Väter Kinder seid:
 alles Vergangene sollt ihrsoerlösen! Diese neue Tafel stelle ich über
 euch!
 
-#### 13.
+#### Chapter 13: .
 
 „Wozu leben? Alles ist eitel! Leben—das ist Stroh dreschen;
 Leben—das ist sich verbrennen und doch nicht warm werden.“—
@@ -7780,7 +7779,7 @@ nicht:—und nun lästern sie „Alles ist eitel!“
 Aber gut essen und trinken, oh meine Brüder, ist wahrlich keine eitle Kunst!
 Zerbrecht, zerbrecht mir die Tafeln der Nimmer-Frohen!
 
-#### 14.
+#### Chapter 14: .
 
 „Dem Reinen ist Alles rein“ —so spricht das Volk. Ich aber sage euch: den
 Schweinen wird Alles Schwein!
@@ -7808,7 +7807,7 @@ An dem Besten ist noch Etwas zum Ekeln; und der Beste ist noch Etwas, das
 Oh meine Brüder, es ist viel Weisheit darin, dass viel Koth in der Welt
 ist!—
 
-#### 15.
+#### Chapter 15: .
 
 Solche Sprüche hörte ich fromme Hinterweltler zu ihrem Gewissen reden; und
 wahrlich, ohne Arg und Falsch,—ob es Schon nichts Falscheres in der Welt
@@ -7827,7 +7826,7 @@ absagen.“ -
 —Zerbrecht, zerbrecht mir, oh meine Brüder, diese alten Tafeln der
 Frommen! Zersprecht mir die Sprüche der Welt-Verleumder!
 
-#### 16.
+#### Chapter 16: .
 
 „Wer viel lernt, der verlernt alles heftige Begehren“ —das flüstert man
 heute sich zu auf allen dunklen Gassen.
@@ -7872,7 +7871,7 @@ Schaffen sollt ihr lernen!
 Und auch das Lernen sollt ihr erst von mirlernen, das
 Gut-Lernen!—Wer Ohren hat, der höre!
 
-#### 17.
+#### Chapter 17: .
 
 Da steht der Nachen,—dort hinüber geht es vielleicht in’s grosse
 Nichts.—Aber wer will in diess „Vielleicht“ einsteigen?
@@ -7905,7 +7904,7 @@ Zarathustra:—so sollt ihr dahinfahren!
 Aber es gehört mehrMuthdazu, ein Ende zu machen, als einen neuen Vers:
 das wissen alle Ärzte und Dichter.—
 
-#### 18.
+#### Chapter 18: .
 
 Oh meine Brüder, es giebt Tafeln, welche die Ermüdung, und Tafeln, welche die
 Faulheit schuf, die faulige: ob sie schon gleich reden, so wollen sie doch
@@ -7936,7 +7935,7 @@ und all das schwärmende Geschmeiss:—
 —all das schwärmende Geschmeiss der „Gebildeten“ , das sich am Schweisse
 jedes Helden—gütlich thut!—
 
-#### 19.
+#### Chapter 19: .
 
 Ich schliesse Kreise um mich und heilige Grenzen; immer Wenigere steigen mit
 mir auf immer höhere Berge,—ich baue ein Gebirge aus immer heiligeren
@@ -7975,7 +7974,7 @@ die weiseste Seele, welcher die Narrheit am süssesten zuredet:—
 Wiederströmen und Ebbe und Fluth haben:—oh wie solltedie höchste
 Seelenicht die schlimmsten Schmarotzer haben?
 
-#### 20.
+#### Chapter 20: .
 
 Oh meine Brüder, bin ich denn grausam? Aber ich sage: was fällt, das soll man
 auch noch stossen!
@@ -7986,11 +7985,11 @@ ich—ichwilles noch stossen!
 Kennt ihr die Wollust, die Steine in steile Tiefen rollt?—Diese Menschen
 von heute: seht sie doch, wie sie in meine Tiefen rollen!
 
-Ein Vorspiel bin ich besserer Spieler, oh meine Brüder! Ein Beispiel!Thutnach meinem Beispiele!
+Ein Vorspiel bin ich besserer Spieler, oh meine Brüder! Ein Beispiel! Thutnach meinem Beispiele!
 
 Und wen ihr nicht fliegen lehrt, den lehrt mir—schneller fallen!—
 
-#### 21.
+#### Chapter 21: .
 
 Ich liebe die Tapferen: aber es ist nicht genug, Hau-Degen sein,—man muss
 auch wissen Hau-schau-Wen!
@@ -8029,7 +8028,7 @@ Sie lauern einander auf, sie lauern einander Etwas ab,—das heissen sie
 Denn, meine Brüder: das Beste soll herrschen, das Beste will auch herrschen!
 Und wo die Lehre anders lautet, da—fehltes am Besten.
 
-#### 22.
+#### Chapter 22: .
 
 WennDie—Brod umsonst hätten, wehe! Wonach würdenDieschrein! Ihr Unterhalt—das ist ihre rechte Unterhaltung; und sie sollen
 es schwer haben!
@@ -8046,7 +8045,7 @@ allen Thieren hat es der Mensch am schwersten gehabt.
 Nur noch die Vögel sind über ihm. Und wenn der Mensch noch fliegen lernte,
 wehe!wohinauf—würde seine Raublust fliegen!
 
-#### 23.
+#### Chapter 23: .
 
 So will ich Mann und Weib: kriegstüchtig den Einen, gebärtüchtig das Andre,
 beide aber tanztüchtig mit Kopf und Beinen.
@@ -8054,7 +8053,7 @@ beide aber tanztüchtig mit Kopf und Beinen.
 Und verloren sei uns der Tag, wo nicht Ein Mal getanzt wurde! Und falsch heisse
 uns jede Wahrheit, bei der es nicht Ein Gelächter gab!
 
-#### 24.
+#### Chapter 24: .
 
 Euer Eheschliessen: seht zu, dass es nicht ein schlechtesSchliessensei! Ihr schlosset zu schnell: sofolgtdaraus—Ehebrechen!
 
@@ -8077,7 +8076,7 @@ und zu Allem, was kommen soll, wenn ich anders riethe und redete!
 Nicht nur fort euch zu pflanzen, sondernhinauf—dazu, oh meine
 Brüder, helfe euch der Garten der Ehe!
 
-#### 25.
+#### Chapter 25: .
 
 Wer über alte Ursprünge weise wurde, siehe, der wird zuletzt nach Quellen der
 Zukunft suchen und nach neuen Ursprüngen.—
@@ -8102,7 +8101,7 @@ langes Suchen: sie sucht aber den Befehlenden!—
 —ein Versuch, oh meine Brüder! Undkein„Vertrag“! Zerbrecht,
 zerbrecht mir solch Wort der Weich-Herzen und Halb- und Halben!
 
-#### 26.
+#### Chapter 26: .
 
 Oh meine Brüder! Bei Welchen liegt doch die grösste Gefahr aller
 Menschen-Zukunft? Ist es nicht bei den Guten und Gerechten?—
@@ -8143,7 +8142,7 @@ Anfang vom Ende:-
 
 Die Guten—die waren immer der Anfang vom Ende.—
 
-#### 27.
+#### Chapter 27: .
 
 Oh meine Brüder, verstandet ihr auch diess Wort? Und was ich einst sagte vom
 „letzten Menschen“ ?—
@@ -8154,7 +8153,7 @@ den Guten und Gerechten?
 Zerbrecht, zerbrecht mir die Guten und Gerechten!—Oh meine Brüder,
 verstandet ihr auch diess Wort?
 
-#### 28.
+#### Chapter 28: .
 
 Ihr flieht von mir? Ihr seid erschreckt? Ihr zittert vor diesem Worte?
 
@@ -8177,10 +8176,10 @@ stürmt: Viele wollen an euch sich wieder aufrichten.
 Das Meer stürmt: Alles ist im Meere. Wohlan! Wohlauf! Ihr alten
 Seemanns-Herzen!
 
-Was Vaterland!Dorthinwill unser Steuer, wo unserKinder-Landist! Dorthinaus, stürmischer als das Meer, stürmt unsre grosse
+Was Vaterland! Dorthinwill unser Steuer, wo unserKinder-Landist! Dorthinaus, stürmischer als das Meer, stürmt unsre grosse
 Sehnsucht!—
 
-#### 29.
+#### Chapter 29: .
 
 „Warum so hart!—sprach zum Diamanten einst die Küchen-Kohle; sind wir
 denn nicht Nah-Verwandte?“—
@@ -8205,7 +8204,7 @@ Erz,—härter als Erz, edler als Erz. Ganz hart ist allein das Edelste.
 
 Diese neue Tafel, oh meine Brüder, stelle ich über euch: werdet hart!—
 
-#### 30.
+#### Chapter 30: .
 
 Oh du mein Wille! Du Wende aller Noth dumeineNothwendigkeit! Bewahre
 mich vor allen kleinen Siegen!
@@ -8240,7 +8239,7 @@ Also sprach Zarathustra.
 
 end chapter### Der Genesende
 
-#### 1.
+#### Chapter 1: .
 
 Eines Morgens, nicht lange nach seiner Rückkehr zur Höhle, sprang Zarathustra
 von seinem Lager auf wie ein Toller, schrie mit furchtbarer Stimme und
@@ -8276,7 +8275,7 @@ letzte Tiefe habe ich an’s Licht gestülpt!
 Heil mir! Heran! Gieb die Hand—ha! lass! Haha!—Ekel, Ekel,
 Ekel—wehe mir!
 
-#### 2.
+#### Chapter 2: .
 
 Kaum aber hatte Zarathustra diese Worte gesprochen, da stürzte er nieder gleich
 einem Todten und blieb lange wie ein Todter. Als er aber wieder zu sich kam, da
@@ -8619,7 +8618,7 @@ Also sprach Zarathustra.
 
 end chapter### Das andere Tanzlied
 
-#### 1.
+#### Chapter 1: .
 
 „In dein Auge schaute ich jüngst, oh Leben: Gold sah ich in deinem Nacht-Auge
 blinken,—mein Herz stand still vor dieser Wollust:
@@ -8697,7 +8696,7 @@ ich dir bisher gesungen, nun sollstdumir—schrein!
 Nach dem Takt meiner Peitsche sollst du mir tanzen und schrein! Ich vergass
 doch die Peitsche nicht?—Nein!“—
 
-#### 2.
+#### Chapter 2: .
 
 Da antwortete mir das Leben also und hielt sich dabei die zierlichen Ohren zu:
 
@@ -8746,30 +8745,30 @@ lieber, als je alle meine Weisheit.—
 
 Also sprach Zarathustra.
 
-#### 3.
+#### Chapter 3: .
 
-Eins!  
-Oh Mensch! Gieb Acht!  
-Zwei!  
-Was spricht die tiefe Mitternacht?  
-Drei!  
-„Ich schlief, ich schlief—,“  
-Vier!  
-„Auf tiefen Traum bin ich erwacht:—“  
-Fünf!  
-„Die Welt ist tief,“  
-Sechs!  
-„Und tiefer als der Tag gedacht.“  
-Sieben!  
-„Tief ist ihr Weh—,“  
-Acht!  
-„Lust—tiefer noch als Herzeleid:“  
-Neun!  
-„Weh spricht: Vergeh!“  
-Zehn!  
-„Doch alle Lust will Ewigkeit—,“  
-Elf!  
-„—will tiefe, tiefe Ewigkeit!“  
+Eins!
+Oh Mensch! Gieb Acht!
+Zwei!
+Was spricht die tiefe Mitternacht?
+Drei!
+„Ich schlief, ich schlief—,“
+Vier!
+„Auf tiefen Traum bin ich erwacht:—“
+Fünf!
+„Die Welt ist tief,“
+Sechs!
+„Und tiefer als der Tag gedacht.“
+Sieben!
+„Tief ist ihr Weh—,“
+Acht!
+„Lust—tiefer noch als Herzeleid:“
+Neun!
+„Weh spricht: Vergeh!“
+Zehn!
+„Doch alle Lust will Ewigkeit—,“
+Elf!
+„—will tiefe, tiefe Ewigkeit!“
 Zwölf!
 
 end chapter### Die sieben Siegel
@@ -8777,7 +8776,7 @@ end chapter### Die sieben Siegel
 #### (Oder: das Ja- und
 Amen-Lied)
 
-#### 1.
+#### Chapter 1: .
 
 Wenn ich ein Wahrsager bin und voll jenes wahrsagerischen Geistes, der auf
 hohem Joche zwischen zwei Meeren wandelt,—
@@ -8801,7 +8800,7 @@ das ich lieb: denn ich liebe dich, oh Ewigkeit!
 
 Denn ich liebe dich, oh Ewigkeit!
 
-#### 2.
+#### Chapter 2: .
 
 Wenn mein Zorn je Gräber brach, Grenzsteine rückte und alte Tafeln zerbrochen
 in steile Tiefen rollte:
@@ -8824,7 +8823,7 @@ das ich lieb: denn ich liebe dich, oh Ewigkeit!
 
 Denn ich liebe dich, oh Ewigkeit!
 
-#### 3.
+#### Chapter 3: .
 
 Wenn je ein Hauch zu mir kam vom schöpferischen Hauche und von jener
 himmlischen Noth, die noch Zufälle zwingt, Sternen-Reigen zu tanzen:
@@ -8846,7 +8845,7 @@ das ich lieb: denn ich liebe dich, oh Ewigkeit!
 
 Denn ich liebe dich, oh Ewigkeit!
 
-#### 4.
+#### Chapter 4: .
 
 Wenn ich je vollen Zuges trank aus jenem schäumenden Würz- und Mischkruge, in
 dem alle Dinge gut gemischt sind:
@@ -8868,7 +8867,7 @@ das ich lieb: denn ich liebe dich, oh Ewigkeit!
 
 Denn ich liebe dich, oh Ewigkeit!
 
-#### 5.
+#### Chapter 5: .
 
 Wenn ich dem Meere hold bin und Allem, was Meeres-Art ist, und am holdesten
 noch, wenn es mir zornig widerspricht:
@@ -8890,7 +8889,7 @@ das ich lieb: denn ich liebe dich, oh Ewigkeit!
 
 Denn ich liebe dich, oh Ewigkeit!
 
-#### 6.
+#### Chapter 6: .
 
 Wenn meine Tugend eines Tänzers Tugend ist, und ich oft mit beiden Füssen in
 gold-smaragdenes Entzücken sprang:
@@ -8912,7 +8911,7 @@ das ich lieb: denn ich liebe dich, oh Ewigkeit!
 
 Denn ich liebe dich, oh Ewigkeit!
 
-#### 7.
+#### Chapter 7: .
 
 Wenn ich je stille Himmel über mir ausspannte und mit eignen Flügeln in eigne
 Himmel flog:
@@ -8937,14 +8936,13 @@ Denn ich liebe dich, oh Ewigkeit!
 end chapter## Vierter und letzter Theil
 
 Ach, wo in der Welt geschahen grössere Thorheiten, als bei den Mitleidigen? Und
-was in der Weit stiftete mehr Leid, als die Thorheiten der Mitleidigen?  
+was in der Weit stiftete mehr Leid, als die Thorheiten der Mitleidigen?
 Wehe allen Liebenden, die nicht noch eine Höhe haben, welche über ihrem
-Mitleiden ist!  
+Mitleiden ist!
 Also sprach der Teufel einst zu mir: „auch Gott hat seine Hölle: das
-ist seine Liebe zu den Menschen.“  
+ist seine Liebe zu den Menschen.“
 Und jüngst hörte ich ihn diess Wort sagen: „Gott ist todt; an seinem
-Mitleiden mit den Menschen ist Gott gestorben.“  
-
+Mitleiden mit den Menschen ist Gott gestorben.“
 
 Zarathustra, Von den Mitleidigen
 
@@ -9139,7 +9137,7 @@ komm, komm, es ist Zeit, es ist höchste Zeit!“—
 Zarathustra schwieg hierauf, verwirrt und erschüttert; endlich fragte er, wie
 Einer, der bei sich selber zögert: „Und wer ist das, der dort mich ruft?“
 
-„Aber du weisst es ja, antwortete der Wahrsager heftig, was verbirgst du dich?Der höhere Menschist es, der nach dir schreit!“
+„Aber du weisst es ja, antwortete der Wahrsager heftig, was verbirgst du dich? Der höhere Menschist es, der nach dir schreit!“
 
 „Der höhere Mensch? schrie Zarathustra von Grausen erfasst: was willder? Was willder? Der höhere Mensch! Was will der
 hier?“—und seine Haut bedeckte sich mit Schweiss.
@@ -9213,7 +9211,7 @@ Also sprach Zarathustra.
 
 end chapter### Gespräch mit den Königen
 
-#### 1.
+#### Chapter 1: .
 
 Zarathustra war noch keine Stunde in seinen Bergen und Wäldern unterwegs, da
 sahe er mit Einem Male einen seltsamen Aufzug. Gerade auf dem Wege, den er
@@ -9319,14 +9317,14 @@ verlernte seit langem schon die Rücksicht auf lange Ohren. Wohlan! Wohlauf!
 (Hier aber geschah es, dass auch der Esel zu Worte kam: er sagte aber deutlich
 und mit bösem Willen I-A.)
 
-Einstmals—ich glaub’, im Jahr des Heiles Eins—  
-Sprach die Sibylle, trunken sonder Weins:  
-„Weh, nun geht’s schief!  
-Verfall! Verfall! Nie sank die Welt so tief!  
-Rom sank zur Hure und zur Huren-Bude,  
+Einstmals—ich glaub’, im Jahr des Heiles Eins—
+Sprach die Sibylle, trunken sonder Weins:
+„Weh, nun geht’s schief!
+Verfall! Verfall! Nie sank die Welt so tief!
+Rom sank zur Hure und zur Huren-Bude,
 Rom’s Caesar sank zum Vieh, Gott selbst—ward Jude!“
 
-#### 2.
+#### Chapter 2: .
 
 An diesen Reimen Zarathustra’s weideten sich die Könige; der König zur
 Rechten aber sprach: „oh Zarathustra, wie gut thaten wir, dass wir auszogen,
@@ -9507,7 +9505,7 @@ Also sprach Zarathustra.
 
 end chapter### Der Zauberer
 
-#### 1.
+#### Chapter 1: .
 
 Als aber Zarathustra um einen Felsen herumbog, da sahe er, nicht weit unter
 sich, auf dem gleichen Wege, einen Menschen, der die Glieder warf wie ein
@@ -9520,144 +9518,124 @@ mühte, dass er ihn aufrichte und wieder auf seine Beine stelle, es war umsonst.
 Auch schien der Unglückliche nicht zu merken, dass jemand um ihn sei; vielmehr
 sah er sich immer mit rührenden Gebärden um, wie ein von aller Welt Verlassener
 und Vereinsamter. Zuletzt aber, nach vielem Zittern, Zucken und
-Sich-zusammen-Krümmen, begann er also zu jammern:  
-  
+Sich-zusammen-Krümmen, begann er also zu jammern:
 
+Wer wärmt mich, wer liebt mich noch?
+Gebt heisse Hände!
+Gebt Herzens-Kohlenbecken!
+Hingestreckt, schaudernd,
+Halbtodtem gleich, dem man die Füsse wärmt—
+Geschüttelt, ach! von unbekannten Fiebern,
+Zitternd vor spitzen eisigen Frost-Pfeilen,
+Von dir gejagt, Gedanke!
+Unnennbarer! Verhüllter! Entsetzlicher!
+Du Jäger hinter Wolken!
+Darniedergeblitzt von dir,
+Du höhnisch Auge, das mich aus Dunklem anblickt:
+—so liege ich,
+Biege mich, winde mich, gequält
+Von allen ewigen Martern,
+Getroffen
+Von Dir, grausamster Jäger,
+Du unbekannter—Gott!
 
-Wer wärmt mich, wer liebt mich noch?  
-Gebt heisse Hände!  
-Gebt Herzens-Kohlenbecken!  
-Hingestreckt, schaudernd,  
-Halbtodtem gleich, dem man die Füsse wärmt—  
-Geschüttelt, ach! von unbekannten Fiebern,  
-Zitternd vor spitzen eisigen Frost-Pfeilen,  
-Von dir gejagt, Gedanke!  
-Unnennbarer! Verhüllter! Entsetzlicher!  
-Du Jäger hinter Wolken!  
-Darniedergeblitzt von dir,  
-Du höhnisch Auge, das mich aus Dunklem anblickt:  
-—so liege ich,  
-Biege mich, winde mich, gequält  
-Von allen ewigen Martern,  
-Getroffen  
-Von Dir, grausamster Jäger,  
-Du unbekannter—Gott!  
-  
+Triff tiefer,
+Triff Ein Mal noch!
+Zerstich, zerbrich diess Herz!
+Was soll diess Martern
+Mit zähnestumpfen Pfeilen?
+Was blickst du wieder,
+Der Menschen-Qual nicht müde,
+Mit schadenfrohen Götter-Blitz-Augen?
+Nicht tödten willst du,
+Nur martern, martern?
+Wozu—michmartern,
+Du schadenfroher unbekannter Gott?—
 
+Haha! Du schleichst heran?
+Bei solcher Mitternacht
+Was willst du? Sprich!
+Du drängst mich, drückst mich—
+Ha! schon viel zu nahe!
+Weg! Weg!
+Du hörst mich athmen,
+Du behorchst mein Herz,
+Du Eifersüchtiger—
+Worauf doch eifersüchtig?
+Weg! Weg! Wozu die Leiter?
+Willstdu hinein,
+In’s Herz,
+Einsteigen, in meine heimlichsten
+Gedanken einsteigen?
+Schamloser! Unbekannter—Dieb!
+Was willst du dir erstehlen,
+Was willst du dir erhorchen,
+Was willst du dir erfoltern,
+Du Folterer!
+Du—Henker-Gott!
+Oder soll ich, dem Hunde gleich,
+Vor dir mich wälzen?
+Hingebend, begeistert-ausser-mir,
+Dir—Liebe zuwedeln?
 
-Triff tiefer,  
-Triff Ein Mal noch!  
-Zerstich, zerbrich diess Herz!  
-Was soll diess Martern  
-Mit zähnestumpfen Pfeilen?  
-Was blickst du wieder,  
-Der Menschen-Qual nicht müde,  
-Mit schadenfrohen Götter-Blitz-Augen?  
-Nicht tödten willst du,  
-Nur martern, martern?  
-Wozu—michmartern,  
-Du schadenfroher unbekannter Gott?—  
-  
+Umsonst!
+Stich weiter,
+Grausamster Stachel! Nein,
+Kein Hund—dein Wild nur bin ich,
+Grausamster Jäger!
+Dein stolzester Gefangner,
+Du Räuber hinter Wolken...
+Sprich endlich,
+Was willst du, Wegelagerer, vonmir?
+Du Blitz-Verhüllter! Unbekannter! Sprich,
+Waswillstdu, unbekannter Gott?—-
 
+Wie?
+Lösegeld?
+Was willst du Lösegelds?
+Verlange Viel—das räth mein Stolz!
+Und rede kurz—das räth mein andrer Stolz!
 
-Haha! Du schleichst heran?  
-Bei solcher Mitternacht  
-Was willst du? Sprich!  
-Du drängst mich, drückst mich—  
-Ha! schon viel zu nahe!  
-Weg! Weg!  
-Du hörst mich athmen,  
-Du behorchst mein Herz,  
-Du Eifersüchtiger—  
-Worauf doch eifersüchtig?  
-Weg! Weg! Wozu die Leiter?  
-Willstdu hinein,  
-In’s Herz,  
-Einsteigen, in meine heimlichsten  
-Gedanken einsteigen?  
-Schamloser! Unbekannter—Dieb!  
-Was willst du dir erstehlen,  
-Was willst du dir erhorchen,  
-Was willst du dir erfoltern,  
-Du Folterer!  
-Du—Henker-Gott!  
-Oder soll ich, dem Hunde gleich,  
-Vor dir mich wälzen?  
-Hingebend, begeistert-ausser-mir,  
-Dir—Liebe zuwedeln?  
-  
+Haha!
+Mich—willst du? Mich?
+Mich—ganz?
 
+Haha!
+Und marterst mich, Narr, der du bist,
+Zermarterst meinen Stolz?
+GiebLiebemir—wer wärmt mich noch?
+Wer liebt mich noch?—gieb heisse Hände,
+Gieb Herzens-Kohlenbecken,
+Gieb mir, dem Einsamsten,
+Den Eis, ach! siebenfaches Eis
+Nach Feinden selber,
+Nach Feinden schmachten lehrt,
+Gieb, ja ergieb,
+Grausamster Feind,
+Mir—dich!...
 
-Umsonst!  
-Stich weiter,  
-Grausamster Stachel! Nein,  
-Kein Hund—dein Wild nur bin ich,  
-Grausamster Jäger!  
-Dein stolzester Gefangner,  
-Du Räuber hinter Wolken...  
-Sprich endlich,  
-Was willst du, Wegelagerer, vonmir?  
-Du Blitz-Verhüllter! Unbekannter! Sprich,  
-Waswillstdu, unbekannter Gott?—-  
-  
+Davon!
+Da floh er selber,
+Mein letzter einziger Genoss,
+Mein grosser Feind,
+Mein Unbekannter,
+Mein Henker-Gott!...
 
+—Nein!
+Komm zurück,
+Mit allen deinen Martern!
+Zum Letzten aller Einsamen
+Oh komm zurück!
+All meine Thränen-Bäche laufen
+Zu dir den Lauf!
 
-Wie?  
-Lösegeld?  
-Was willst du Lösegelds?  
-Verlange Viel—das räth mein Stolz!  
-Und rede kurz—das räth mein andrer Stolz!  
-  
-
-
-Haha!  
-Mich—willst du? Mich?  
-Mich—ganz?  
-  
-
-
-Haha!  
-Und marterst mich, Narr, der du bist,  
-Zermarterst meinen Stolz?  
-GiebLiebemir—wer wärmt mich noch?  
-Wer liebt mich noch?—gieb heisse Hände,  
-Gieb Herzens-Kohlenbecken,  
-Gieb mir, dem Einsamsten,  
-Den Eis, ach! siebenfaches Eis  
-Nach Feinden selber,  
-Nach Feinden schmachten lehrt,  
-Gieb, ja ergieb,  
-Grausamster Feind,  
-Mir—dich!...  
-  
-
-
-Davon!  
-Da floh er selber,  
-Mein letzter einziger Genoss,  
-Mein grosser Feind,  
-Mein Unbekannter,  
-Mein Henker-Gott!...  
-  
-
-
-—Nein!  
-Komm zurück,  
-Mit allen deinen Martern!  
-Zum Letzten aller Einsamen  
-Oh komm zurück!  
-All meine Thränen-Bäche laufen  
-Zu dir den Lauf!  
-  
-
-
-Und meine letzte Herzens-Flamme—  
-Dirglüht sie auf!  
-Oh komm zurück,  
-Mein unbekannter Gott! Mein Schmerz!  
+Und meine letzte Herzens-Flamme—
+Dirglüht sie auf!
+Oh komm zurück,
+Mein unbekannter Gott! Mein Schmerz!
 Mein letztes Glück!
 
-#### 2.
+#### Chapter 2: .
 
 —Hier aber konnte sich Zarathustra nicht länger halten, nahm seinen Stock
 und schlug mit allen Kräften auf den jammernden los. „Halt ein! schrie er ihm
@@ -9693,7 +9671,7 @@ selber erfandest einst diess Wort—
 wendet, den Verwandelten, der an seinem bösen Wissen und Gewissen erfriert.
 
 Und gesteh es nur ein: es währte lange, oh Zarathustra, bis du hinter meine
-Kunst und Lüge kamst!Du glaubtestan meine Noth, als du mir den Kopf
+Kunst und Lüge kamst! Du glaubtestan meine Noth, als du mir den Kopf
 mit beiden Händen hieltest,—
 
 —ich hörte dich jammern „man hat ihn zu wenig geliebt, zu wenig
@@ -10048,7 +10026,7 @@ umsonst.
 Zu wem wollte ich, wenn nicht zu dir? Bleib, setze dich! Blicke mich aber nicht
 an! Ehre also—meine Hässlichkeit!
 
-Sie verfolgen mich: nun bistdumeine letzte Zuflucht.Nichtmit
+Sie verfolgen mich: nun bistdumeine letzte Zuflucht. Nichtmit
 ihrem Hasse,nichtmit ihren Häschern:—oh solcher Verfolgung würde
 ich spotten und stolz und froh sein!
 
@@ -10060,7 +10038,7 @@ Zarathustra, schütze mich, du meine letzte Zuflucht, du Einziger, der mich
 errieth:
 
 —du erriethest, wie Dem zu Muthe ist, welcherihntödtete. Bleib!
-Und willst du gehn, du Ungeduldiger: geh nicht den Weg, den ich kam.DerWeg ist schlecht.
+Und willst du gehn, du Ungeduldiger: geh nicht den Weg, den ich kam. DerWeg ist schlecht.
 
 Zürnst du mir, dass ich zu lange schon rede-rade-breche? Dass ich schon dir
 rathe? Aber wisse, ich bin’s, der hässlichste Mensch,
@@ -10674,7 +10652,7 @@ König zur Rechten aber antwortete ihm in ihrem Namen.
 Zarathustra. Du erniedrigtest dich vor uns; fast thatest du unserer Ehrfurcht
 wehe—:
 
-—wer aber vermochte gleich dir sich mit solchem Stolze zu erniedrigen?Dasrichtet uns selber auf, ein Labsal ist es unsern Augen und Herzen.
+—wer aber vermochte gleich dir sich mit solchem Stolze zu erniedrigen? Dasrichtet uns selber auf, ein Labsal ist es unsern Augen und Herzen.
 
 Diess allein nur zu schaun, stiegen gern wir auf höhere Berge, als dieser Berg
 ist. Als Schaulustige nämlich kamen wir, wir wollten sehn, was trübe Augen hell
@@ -10900,7 +10878,7 @@ Menschen.
 
 end chapter### Vom höheren Menschen
 
-#### 1.
+#### Chapter 1: .
 
 Als ich zum ersten Male zu den Menschen kam, da that ich die
 Einsiedler-Thorheit, die grosse Thorheit: ich stellte mich auf den Markt.
@@ -10922,7 +10900,7 @@ gleich!“
 Vor Gott!—Nun aber starb dieser Gott. Vor dem Pöbel aber wollen wir nicht
 gleich sein. Ihr höheren Menschen, geht weg vom Markt!
 
-#### 2.
+#### Chapter 2: .
 
 Vor Gott!—Nun aber starb dieser Gott! Ihr höheren Menschen, dieser Gott
 war eure grösste Gefahr.
@@ -10938,7 +10916,7 @@ Wohlan! Wohlauf! Ihr höheren Menschen! Nun erst kreisst der Berg der
 Menschen-Zukunft. Gott starb: nun wollenwir,—dass der Übermensch
 lebe.
 
-#### 3.
+#### Chapter 3: .
 
 Die Sorglichsten fragen heute: „wie bleibt der Mensch erhalten?“ Zarathustra
 aber fragt als der Einzige und Erste: „wie wird der Menschüberwunden?“
@@ -10980,9 +10958,9 @@ Und lieber verzweifelt, als dass ihr euch ergebt. Und, wahrlich, ich liebe euch
 dafür, dass ihr heute nicht zu leben wisst, ihr höheren Menschen! So nämlich
 lebtihr—am Besten!
 
-#### 4.
+#### Chapter 4: .
 
-Habt ihr Muth, oh meine Brüder? Seid ihr herzhaft?NichtMuth vor
+Habt ihr Muth, oh meine Brüder? Seid ihr herzhaft? NichtMuth vor
 Zeugen, sondern Einsiedler- und Adler-Muth, dem auch kein Gott mehr zusieht?
 
 Kalte Seelen, Maulthiere, Blinde, Trunkene heissen mir nicht herzhaft. Herz
@@ -10992,7 +10970,7 @@ mitStolz.
 Wer den Abgrund sieht, aber mit Adlers-Augen, wer mit Adlers-Krallen den
 Abgrundfasst: Der hat Muth.—
 
-#### 5.
+#### Chapter 5: .
 
 „Der Mensch ist böse“ —so sprachen mir zum Troste alle Weisesten. Ach,
 wenn es heute nur noch wahr ist! Denn das Böse ist des Menschen beste Kraft.
@@ -11008,7 +10986,7 @@ Solches ist aber nicht für lange Ohren gesagt. Jedwedes Wort gehört auch nicht
 in jedes Maul. Das sind feine ferne Dinge: nach denen sollen nicht
 Schafs-Klauen greifen!
 
-#### 6.
+#### Chapter 6: .
 
 Ihr höheren Menschen, meint ihr, ich sei da, gut zu machen, was ihr schlecht
 machtet?
@@ -11029,7 +11007,7 @@ gienge mich euer kleines, vieles, kurzes Elend an!
 Ihr leidet mir noch nicht genug! Denn ihr leidet an euch, ihr littet noch nichtam Menschen. Ihr würdet lügen, wenn ihr’s anders sagtet! Ihr
 leidet Alle nicht, woran ich litt.—
 
-#### 7.
+#### Chapter 7: .
 
 Es ist mir nicht genug, dass der Blitz nicht mehr schadet. Nicht ableiten will
 ich ihn: er soll lernen fürmich—arbeiten.—
@@ -11039,10 +11017,10 @@ und dunkler. So thut jede Weisheit, welcheeinstBlitze gebären
 soll.—
 
 Diesen Menschen von Heute will ich nichtLichtsein, nicht Licht
-heissen.Die—will ich blenden: Blitz meiner Weisheit! Stich ihnen
+heissen. Die—will ich blenden: Blitz meiner Weisheit! Stich ihnen
 die Augen aus!
 
-#### 8.
+#### Chapter 8: .
 
 Wollt Nichts über euer Vermögen: es giebt eine schlimme Falschheit bei Solchen,
 die über ihr Vermögen wollen.
@@ -11060,7 +11038,7 @@ kostbarer und seltner als Redlichkeit.
 Ist diess Heute nicht des Pöbels? Pöbel aber weiss nicht, was gross, was klein,
 was gerade und redlich ist: der ist unschuldig krumm, der lügt immer.
 
-#### 8.
+#### Chapter 8: .
 
 Habt heute ein gutes Misstrauen, ihr höheren Menschen, ihr Beherzten! Ihr
 Offenherzigen! Und haltet eure Gründe geheim! Diess Heute nämlich ist des
@@ -11084,7 +11062,7 @@ lange noch nicht Liebe zur Wahrheit. Hütet euch!
 Freiheit von Fieber ist lange noch nicht Erkenntniss! Ausgekälteten Geistern
 glaube ich nicht. Wer nicht lügen kann, weiss nicht, was Wahrheit ist.
 
-#### 10.
+#### Chapter 10: .
 
 Wollt ihr hoch hinaus, so braucht die eignen Beine! Lasst euch nicht emportragen, setzt euch nicht auf fremde Rücken und Köpfe!
 
@@ -11093,7 +11071,7 @@ Wohlan, mein Freund! Aber dein lahmer Fuss sitzt auch mit zu Pferde!
 
 Wenn du an deinem Ziele bist, wenn du von deinem Pferde springst: auf deinerHöhegerade, du höherer Mensch—wirst du stolpern!
 
-#### 11.
+#### Chapter 11: .
 
 Ihr Schaffenden, ihr höheren Menschen! Man ist nur für das eigne Kind
 schwanger.
@@ -11117,7 +11095,7 @@ Wo eure ganze Liebe ist, bei eurem Kinde, da ist auch eure ganze Tugend! Euer
 Werk, euer Wille isteuer„Nächster“: lasst euch keine falschen Werthe
 einreden!
 
-#### 12.
+#### Chapter 12: .
 
 Ihr Schaffenden, ihr höheren Menschen! Wer gebären muss, der ist krank; wer
 aber geboren hat, ist unrein.
@@ -11130,7 +11108,7 @@ Ihr Schaffenden, an euch ist viel Unreines. Das macht, ihr musstet Mütter sein.
 Ein neues Kind: oh wie viel neuer Schmutz kam auch zur Welt! Geht bei Seite!
 Und wer geboren hat, soll seine Seele rein waschen!
 
-#### 13.
+#### Chapter 13: .
 
 Seid nicht tugendhaft über eure Kräfte! Und wollt Nichts von euch wider die
 Wahrscheinlichkeit!
@@ -11156,10 +11134,10 @@ ich glaube nicht daran.
 In der Einsamkeit wächst, was Einer in sie bringt, auch das innere Vieh.
 Solchergestalt widerräth sich Vielen die Einsamkeit.
 
-Gab es Schmutzigeres bisher auf Erden als Wüsten-Heilige?Um dieherum
+Gab es Schmutzigeres bisher auf Erden als Wüsten-Heilige? Um dieherum
 war nicht nur der Teufel los,—sondern auch das Schwein.
 
-#### 14.
+#### Chapter 14: .
 
 Scheu, beschämt, ungeschickt, einem Tiger gleich, dem der Sprung missrieth:
 also, ihr höheren Menschen, sah ich oft euch bei Seite schleichen. EinWurfmissrieth euch.
@@ -11172,7 +11150,7 @@ Und wenn euch Grosses missrieth, seid ihr selber darum—missrathen? Und
 missriethet ihr selber, missrieth darum—der Mensch? Missrieth aber der
 Mensch: wohlan! wohlauf!
 
-#### 15.
+#### Chapter 15: .
 
 Je höher von Art, je seltener geräth ein Ding. Ihr höheren Menschen hier, seid
 ihr nicht alle—missgerathen?
@@ -11195,7 +11173,7 @@ vollkommenen Dingen, an Wohlgerathenem!
 Stellt kleine gute vollkommne Dinge um euch, ihr höheren Menschen! Deren
 goldene Reife heilt das Herz. Vollkommnes lehrt hoffen.
 
-#### 16.
+#### Chapter 16: .
 
 Welches war hier auf Erden bisher die grösste Sünde? War es nicht das Wort
 Dessen, der sprach: „Wehe Denen, die hier lachen!“
@@ -11221,7 +11199,7 @@ Geht aus dem Wege allen solchen Unbedingten! Sie haben Schwere Füsse und
 schwüle Herzen:—sie wissen nicht zu tanzen. Wie möchte Solchen wohl die
 Erde leicht sein!
 
-#### 17.
+#### Chapter 17: .
 
 Krumm kommen alle guten Dinge ihrem Ziele nahe. Gleich Katzen machen sie
 Buckel, sie schnurren innewendig vor ihrem nahen Glücke,—alle guten Dinge
@@ -11240,7 +11218,7 @@ Erhebt eure Herzen, meine Brüder, hoch! höher! Und vergesst mir auch die Beine
 nicht! Erhebt auch eure Beine, ihr guten Tänzer, und besser noch: ihr steht
 auch auf dem Kopf!
 
-#### 18.
+#### Chapter 18: .
 
 Diese Krone des Lachenden, diese Rosenkranz-Krone: ich selber setzte mir diese
 Krone auf, ich selber sprach heilig mein Gelächter. Keinen Anderen fand ich
@@ -11254,7 +11232,7 @@ Zarathustra der Wahrsager, Zarathustra der Wahrlacher, kein Ungeduldiger, kein
 Unbedingter, Einer, der Sprünge und Seitensprünge liebt; ich selber setzte mir
 diese Krone auf!
 
-#### 19.
+#### Chapter 19: .
 
 Erhebt eure Herzen, meine Brüder, hoch! höher! Und vergesst mir auch die Beine
 nicht! Erhebt auch eure Beine, ihr guten Tänzer, und besser noch: ihr steht
@@ -11274,7 +11252,7 @@ selbst, ihr höheren Menschen, auf eure rechten Beine stellen!
 So verlernt mir doch Trübsal-Blasen und alle Pöbel-Traurigkeit! Oh wie traurig
 dünken mich heute des Pöbels Hanswürste noch! Diess Heute aber ist des Pöbels.
 
-#### 20.
+#### Chapter 20: .
 
 Dem Winde thut mir gleich, wenn er aus seinen Berghöhlen stürzt: nach seiner
 eignen Pfeife will er tanzen, die Meere zittern und hüpfen unter seinen
@@ -11305,7 +11283,7 @@ ich diese Krone zu! Das Lachen sprach ich heilig; ihr höheren Menschen,lerntmir
 
 end chapter### Das Lied der Schwermuth
 
-#### 1.
+#### Chapter 1: .
 
 Als Zarathustra diese Reden sprach, stand er nahe dem Eingange seiner Höhle;
 mit den letzten Worten aber entschlüpfte er seinen Gästen und floh für eine
@@ -11324,7 +11302,7 @@ und sahen zu ihm hinauf. Solchergestalt waren sie zu drei still beisammen und
 schnüffelten und schlürften mit einander die gute Luft. Denn die Luft war hier
 draussen besser als bei den höheren Menschen.
 
-#### 2.
+#### Chapter 2: .
 
 Kaum aber hatte Zarathustra seine Höhle verlassen, da erhob sich der alte
 Zauberer, sah listig umher und sprach: „Er ist hinaus!
@@ -11368,132 +11346,118 @@ dieser Geist der Abend-Schwermuth ist!“
 
 Also sprach der alte Zauberer, sah listig umher und griff dann zu seiner Harfe.
 
-#### 3.
+#### Chapter 3: .
 
-Bei abgehellter Luft,  
-Wenn schon des Thau’s Tröstung  
-Zur Erde niederquillt,  
-Unsichtbar, auch ungehört:  
-—Denn zartes Schuhwerk trägt  
-Der Tröster Thau gleich allen Trost-Milden—:  
-Gedenkst du da, gedenkst du, heisses Herz,  
-Wie einst du durstetest,  
-Nach himmlischen Thränen und Thau-Geträufel  
-Versengt und müde durstetest,  
-Dieweil auf gelben Gras-Pfaden  
-Boshaft abendliche Sonnenblicke  
-Durch schwarze Bäume um dich liefen,  
-Blendende Sonnen-Gluthblicke, schadenfrohe.  
-  
-
+Bei abgehellter Luft,
+Wenn schon des Thau’s Tröstung
+Zur Erde niederquillt,
+Unsichtbar, auch ungehört:
+—Denn zartes Schuhwerk trägt
+Der Tröster Thau gleich allen Trost-Milden—:
+Gedenkst du da, gedenkst du, heisses Herz,
+Wie einst du durstetest,
+Nach himmlischen Thränen und Thau-Geträufel
+Versengt und müde durstetest,
+Dieweil auf gelben Gras-Pfaden
+Boshaft abendliche Sonnenblicke
+Durch schwarze Bäume um dich liefen,
+Blendende Sonnen-Gluthblicke, schadenfrohe.
 
 „DerWahrheitFreier? Du?—so höhnten
-sie—  
-Nein! Nur ein Dichter!  
-Ein Thier, ein listiges, raubendes, schleichendes,  
-Das lügen muss,  
-Das wissentlich, willentlich lügen muss:  
-Nach Beute lüstern,  
-Bunt verlarvt,  
-Sich selber Larve,  
-Sich selbst zur Beute—  
-Das—der Wahrheit Freier? Nein!  
-Nur Narr! Nur Dichter!  
-Nur Buntes redend,  
-Aus Narren-Larven bunt herausschreiend,  
-Herumsteigend auf lügnerischen Wort-Brücken,  
-Auf bunten Regenbogen,  
-Zwischen falschen Himmeln  
-Und falschen Erden,  
-Herumschweifend, herumschwebend,—  
-NurNarr!NurDichter!...  
-  
+sie—
+Nein! Nur ein Dichter!
+Ein Thier, ein listiges, raubendes, schleichendes,
+Das lügen muss,
+Das wissentlich, willentlich lügen muss:
+Nach Beute lüstern,
+Bunt verlarvt,
+Sich selber Larve,
+Sich selbst zur Beute—
+Das—der Wahrheit Freier? Nein!
+Nur Narr! Nur Dichter!
+Nur Buntes redend,
+Aus Narren-Larven bunt herausschreiend,
+Herumsteigend auf lügnerischen Wort-Brücken,
+Auf bunten Regenbogen,
+Zwischen falschen Himmeln
+Und falschen Erden,
+Herumschweifend, herumschwebend,—
+NurNarr! NurDichter!...
 
+Das—der Wahrheit Freier?
+Nicht still, starr, glatt, kalt,
+Zum Bilde worden,
+Zur Gottes-Säule,
+Nicht aufgestellt vor Tempeln,
+Eines Gottes Thürwart:
+Nein! Feindselig solchen Wahrheits-Standbildern,
+In jeder Wildniss heimischer als vor Tempeln,
+Voll Katzen-Muthwillens,
+Durch jedes Fenster springend
+Husch! in jeden Zufall,
+Jedem Urwalde zuschnüffelnd,
+Süchtig-sehnsüchtig zuschnüffelnd,
+Dass du in Urwäldern
+Unter buntgefleckten Raubthieren
+Sündlich-gesund und bunt und schön liefest,
+Mit lüsternen Lefzen,
+Selig-höhnisch, selig-höllisch, selig-blutgierig,
+Raubend, schleichend, lügend liefest:...
 
-Das—der Wahrheit Freier?  
-Nicht still, starr, glatt, kalt,  
-Zum Bilde worden,  
-Zur Gottes-Säule,  
-Nicht aufgestellt vor Tempeln,  
-Eines Gottes Thürwart:  
-Nein! Feindselig solchen Wahrheits-Standbildern,  
-In jeder Wildniss heimischer als vor Tempeln,  
-Voll Katzen-Muthwillens,  
-Durch jedes Fenster springend  
-Husch! in jeden Zufall,  
-Jedem Urwalde zuschnüffelnd,  
-Süchtig-sehnsüchtig zuschnüffelnd,  
-Dass du in Urwäldern  
-Unter buntgefleckten Raubthieren  
-Sündlich-gesund und bunt und schön liefest,  
-Mit lüsternen Lefzen,  
-Selig-höhnisch, selig-höllisch, selig-blutgierig,  
-Raubend, schleichend, lügend liefest:...  
-  
+Oder, dem Adler gleich, der lange,
+Lange starr in Abgründe blickt,
+InseineAbgründe:...
+-- Oh wie sie sich hier hinab,
+Hinunter, hinein,
+In immer tiefere Tiefen ringeln!—
+Dann,
+Plötzlich,
+geraden Zugs,
+Gezückten Flugs,
+Auf Lämmer stossen,
+Jach hinab, heisshungrig,
+Nach Lämmern lüstern,
+Gram allen Lamms-Seelen,
+Grimmig-gram Allem, was blickt
+Schafmässig, lammäugig, krauswollig,
+Grau, mit Lamms-Schafs-Wohlwollen!
 
+Also
+Adlerhaft, pantherhaft
+Sind des Dichters Sehnsüchte,
+SinddeineSehnsüchte unter tausend Larven,
+Du Narr! Du Dichter!
 
-Oder, dem Adler gleich, der lange,  
-Lange starr in Abgründe blickt,  
-InseineAbgründe:...  
--- Oh wie sie sich hier hinab,  
-Hinunter, hinein,  
-In immer tiefere Tiefen ringeln!—  
-Dann,  
-Plötzlich,  
-geraden Zugs,  
-Gezückten Flugs,  
-Auf Lämmer stossen,  
-Jach hinab, heisshungrig,  
-Nach Lämmern lüstern,  
-Gram allen Lamms-Seelen,  
-Grimmig-gram Allem, was blickt  
-Schafmässig, lammäugig, krauswollig,  
-Grau, mit Lamms-Schafs-Wohlwollen!  
-  
-
-
-Also  
-Adlerhaft, pantherhaft  
-Sind des Dichters Sehnsüchte,  
-SinddeineSehnsüchte unter tausend Larven,  
-Du Narr! Du Dichter!  
-  
-
-
-Der du den Menschen schautest  
-So Gott als Schaf—:  
-Den Gottzerreissenim Menschen  
-Wie das Schaf im Menschen,  
-Und zerreisendlachen—  
-  
-
+Der du den Menschen schautest
+So Gott als Schaf—:
+Den Gottzerreissenim Menschen
+Wie das Schaf im Menschen,
+Und zerreisendlachen—
 
 Das,Dasist deine Seligkeit! Eines Panthers
 und Adlers Seligkeit! Eines Dichters und Narren Seligkeit!“—
 
-Bei abgehellter Luft,  
-Wenn schon des Monds Sichel  
-Grün zwischen Purpurröthen  
-Und neidisch hinschleicht:  
-—dem Tage feind,  
-Mit jedem Schritte heimlich  
-An Rosen-Hängematten  
-Hinsichelnd, bis sie sinken,  
-Nacht-abwärts blass hinabsinken:  
-  
+Bei abgehellter Luft,
+Wenn schon des Monds Sichel
+Grün zwischen Purpurröthen
+Und neidisch hinschleicht:
+—dem Tage feind,
+Mit jedem Schritte heimlich
+An Rosen-Hängematten
+Hinsichelnd, bis sie sinken,
+Nacht-abwärts blass hinabsinken:
 
-
-So sank ich selber einstmals  
-Aus meinem Wahrheits-Wahnsinne,  
-Aus meinen Tages-Sehnsüchten,  
-Des Tages müde, krank vom Lichte,  
-—sank abwärts, abendwärts, schattenwärts:  
-Von Einer Wahrheit  
-Verbrannt und durstig:  
-—gedenkst du noch, gedenkst du, heisses Herz,  
-Wie da du durstetest?—  
-Dass ich verbannt sei  
-VonallerWahrheit,  
+So sank ich selber einstmals
+Aus meinem Wahrheits-Wahnsinne,
+Aus meinen Tages-Sehnsüchten,
+Des Tages müde, krank vom Lichte,
+—sank abwärts, abendwärts, schattenwärts:
+Von Einer Wahrheit
+Verbrannt und durstig:
+—gedenkst du noch, gedenkst du, heisses Herz,
+Wie da du durstetest?—
+Dass ich verbannt sei
+VonallerWahrheit,
 Nur Narr! Nur Dichter!
 
 end chapter### Von der Wissenschaft
@@ -11609,7 +11573,7 @@ Thieren,—und er wollte hinaus schlüpfen.
 
 end chapter### Unter Töchtern der Wüste
 
-#### 1.
+#### Chapter 1: .
 
 „Gehe nicht davon! sagte da der Wanderer, welcher sich den Schatten
 Zarathustra’s nannte, bleibe bei uns, es möchte uns sonst die alte dumpfe
@@ -11661,181 +11625,165 @@ gelassen und weise um sich:—mit den Nüstern aber zog er langsam und
 fragend die Luft ein, wie Einer, der in neuen Ländern neue fremde Luft kostet.
 Darauf hob er mit einer Art Gebrüll zu singen an.
 
-#### 2.
+#### Chapter 2: .
 
 Die Wüste wächst: weh Dem, der Wüsten birgt!
 
-—Ha! Feierlich!  
-In der That feierlich!  
-Ein würdiger Anfang!  
-Afrikanisch feierlich!  
-Eines Löwen würdig,  
-Oder eines moralischen Brüllaffen—  
-—aber Nichts für euch,  
-Ihr allerliebsten Freundinnen,  
-Zu deren Füssen mir  
-Zum ersten Male,  
-Einem Europäer, unter Palmen  
-Zu sitzen vergönnt ist. Sela.  
-  
+—Ha! Feierlich!
+In der That feierlich!
+Ein würdiger Anfang!
+Afrikanisch feierlich!
+Eines Löwen würdig,
+Oder eines moralischen Brüllaffen—
+—aber Nichts für euch,
+Ihr allerliebsten Freundinnen,
+Zu deren Füssen mir
+Zum ersten Male,
+Einem Europäer, unter Palmen
+Zu sitzen vergönnt ist. Sela.
 
+Wunderbar wahrlich!
+Da sitze ich nun,
+Der Wüste nahe und bereits
+So fern wieder der Wüste,
+Auch in Nichts noch verwüstet:
+Nämlich hinabgeschluckt
+Von dieser kleinsten Oasis—:
+—sie sperrte gerade gähnend
+Ihr liebliches Maul auf.
+Das wohlriechendste aller Mäulchen:
+Da fiel ich hinein,
+Hinab, hindurch—unter euch,
+Ihr allerliebsten Freundinnen! Sela.
 
-Wunderbar wahrlich!  
-Da sitze ich nun,  
-Der Wüste nahe und bereits  
-So fern wieder der Wüste,  
-Auch in Nichts noch verwüstet:  
-Nämlich hinabgeschluckt  
-Von dieser kleinsten Oasis—:  
-—sie sperrte gerade gähnend  
-Ihr liebliches Maul auf.  
-Das wohlriechendste aller Mäulchen:  
-Da fiel ich hinein,  
-Hinab, hindurch—unter euch,  
-Ihr allerliebsten Freundinnen! Sela.  
-  
+Heil, Heil jenem Wallfische,
+Wenn er also es seinem Gaste
+Wohl sein liess!—ihr versteht
+Meine gelehrte Anspielung?
+Heil seinem Bauche,
+Wenn er also
+Ein so lieblicher Oasis-Bauch war
+Gleich diesem: was ich aber in Zweifel ziehe,
+—dafür komme ich aus Europa,
+Das zweifelsüchtiger ist als alle
+Ältlichen Eheweibchen.
+Möge Gott es bessern!
+Amen!
 
+Da sitze ich nun,
+In dieser kleinsten Oasis,
+Einer Dattel gleich,
+Braun, durchsüsst, goldschwürig, lüstern
+Nach einem runden Mädchenmunde,
+Mehr noch aber nach mädchenhaften
+Eiskalten schneeweissen schneidigen
+Beisszähnen: nach denen nämlich
+Lechzt das Herz allen heissen Datteln. Sela.
 
-Heil, Heil jenem Wallfische,  
-Wenn er also es seinem Gaste  
-Wohl sein liess!—ihr versteht  
-Meine gelehrte Anspielung?  
-Heil seinem Bauche,  
-Wenn er also  
-Ein so lieblicher Oasis-Bauch war  
-Gleich diesem: was ich aber in Zweifel ziehe,  
-—dafür komme ich aus Europa,  
-Das zweifelsüchtiger ist als alle  
-Ältlichen Eheweibchen.  
-Möge Gott es bessern!  
-Amen!  
-  
+Den genannten Südfrüchten
+Ähnlich, allzuähnlich
+Liege ich hier, von kleinen
+Flügelkäfern
+Umtänzelt und umspielt,
+Insgleichen von noch kleineren
+Thörichteren boshafteren
+Wünschen und Einfällen,
+Umlagert von euch,
+Ihr stummen, ihr ahnungsvollen
+Mädchen-Katzen,
+Dudu und Suleika,
+—umsphinxt, dass ich in Ein Wort
+Viel Gefühle stopfe:
+(Vergebe mir Gott
+Diese Sprach-Sünde!)
+—sitze hier, die beste Luft schnüffelnd,
+Paradieses-Luft wahrlich,
+Lichte leichte Luft, goldgestreifte,
+So gute Luft nur je
+Vom Monde herabfiel—
+Sei es aus Zufall,
+Oder geschah es aus Übermuthe?
+Wie die alten Dichter erzählen.
+Ich Zweifler aber ziehe es
+In Zweifel, dafür aber komme ich
+Aus Europa,
+Das zweifelsüchtiger ist als alle
+Ältlichen Eheweibchen.
+Möge Gott es bessern!
+Amen!
 
+Diese schönste Luft trinkend,
+Mit Nüstern geschwellt gleich Bechern, Ohne Zukunft, ohne Erinnerungen,
+So sitze ich hier, ihr
+Allerliebsten Freundinnen,
+Und sehe der Palme zu,
+Wie sie, einer Tänzerin gleich,
+Sich biegt und schmiegt und in der Hüfte wiegt,
+—man thut es mit, sieht man lange zu!
+Einer Tänzerin gleich, die, wie mir scheinen will,
+Zu lange schon, gefährlich lange
+Immer, immer nur auf Einem Beine stand?
+—da vergass sie darob, wie mir scheinen will,
+Das andre Beinchen?
+Vergebens wenigstens
+Suchte ich das vermisste Zwillings-Kleinod
+—nämlich das andre Bein—
+In der heiligen Nähe
+Ihres allerliebsten, allerzierlichsten
+Fächer- und Flatter- und Flitterröckchens.
+ja, wenn ihr mir, ihr schönen Freundinnen,
+Ganz glauben wollt:
+Sie hat es verloren!
+Es ist dahin!
+Auf ewig dahin!
+Das andre Bein!
+Oh schade um dieses liebliche andre Bein!
+Wo—mag es wohl weilen und verlassen trauern?
+Das einsame Bein?
+In Furcht vielleicht vor einem
+Grimmen gelben blondgelockten
+Löwen-Unthiere? Oder gar schon
+Abgenagt, abgeknabbert—
+Erbärmlich, wehe! wehe! abgeknabbert! Sela.
 
-Da sitze ich nun,  
-In dieser kleinsten Oasis,  
-Einer Dattel gleich,  
-Braun, durchsüsst, goldschwürig, lüstern  
-Nach einem runden Mädchenmunde,  
-Mehr noch aber nach mädchenhaften  
-Eiskalten schneeweissen schneidigen  
-Beisszähnen: nach denen nämlich  
-Lechzt das Herz allen heissen Datteln. Sela.  
-  
+Oh weint mir nicht,
+Weiche Herzen!
+Weint mir nicht, ihr
+Dattel-Herzen! Milch-Busen!
+Ihr Süssholz-Herz-
+Beutelchen!
+Weine nicht mehr,
+Bleiche Dudu!
+Sei ein Mann, Suleika! Muth! Muth!
+—Oder sollte vielleicht
+Etwas Stärkendes, Herz-Stärkendes,
+Hier am Platze sein?
+Ein gesalbter Spruch?
+Ein feierlicher Zuspruch?—
 
-
-Den genannten Südfrüchten  
-Ähnlich, allzuähnlich  
-Liege ich hier, von kleinen  
-Flügelkäfern  
-Umtänzelt und umspielt,  
-Insgleichen von noch kleineren  
-Thörichteren boshafteren  
-Wünschen und Einfällen,  
-Umlagert von euch,  
-Ihr stummen, ihr ahnungsvollen  
-Mädchen-Katzen,  
-Dudu und Suleika,  
-—umsphinxt, dass ich in Ein Wort  
-Viel Gefühle stopfe:  
-(Vergebe mir Gott  
-Diese Sprach-Sünde!)  
-—sitze hier, die beste Luft schnüffelnd,  
-Paradieses-Luft wahrlich,  
-Lichte leichte Luft, goldgestreifte,  
-So gute Luft nur je  
-Vom Monde herabfiel—  
-Sei es aus Zufall,  
-Oder geschah es aus Übermuthe?  
-Wie die alten Dichter erzählen.  
-Ich Zweifler aber ziehe es  
-In Zweifel, dafür aber komme ich  
-Aus Europa,  
-Das zweifelsüchtiger ist als alle  
-Ältlichen Eheweibchen.  
-Möge Gott es bessern!  
-Amen!  
-  
-
-
-Diese schönste Luft trinkend,  
-Mit Nüstern geschwellt gleich Bechern, Ohne Zukunft, ohne Erinnerungen,  
-So sitze ich hier, ihr  
-Allerliebsten Freundinnen,  
-Und sehe der Palme zu,  
-Wie sie, einer Tänzerin gleich,  
-Sich biegt und schmiegt und in der Hüfte wiegt,  
-—man thut es mit, sieht man lange zu!  
-Einer Tänzerin gleich, die, wie mir scheinen will,  
-Zu lange schon, gefährlich lange  
-Immer, immer nur auf Einem Beine stand?  
-—da vergass sie darob, wie mir scheinen will,  
-Das andre Beinchen?  
-Vergebens wenigstens  
-Suchte ich das vermisste Zwillings-Kleinod  
-—nämlich das andre Bein—  
-In der heiligen Nähe  
-Ihres allerliebsten, allerzierlichsten  
-Fächer- und Flatter- und Flitterröckchens.  
-ja, wenn ihr mir, ihr schönen Freundinnen,  
-Ganz glauben wollt:  
-Sie hat es verloren!  
-Es ist dahin!  
-Auf ewig dahin!  
-Das andre Bein!  
-Oh schade um dieses liebliche andre Bein!  
-Wo—mag es wohl weilen und verlassen trauern?  
-Das einsame Bein?  
-In Furcht vielleicht vor einem  
-Grimmen gelben blondgelockten  
-Löwen-Unthiere? Oder gar schon  
-Abgenagt, abgeknabbert—  
-Erbärmlich, wehe! wehe! abgeknabbert! Sela.  
-  
-
-
-Oh weint mir nicht,  
-Weiche Herzen!  
-Weint mir nicht, ihr  
-Dattel-Herzen! Milch-Busen!  
-Ihr Süssholz-Herz-  
-Beutelchen!  
-Weine nicht mehr,  
-Bleiche Dudu!  
-Sei ein Mann, Suleika! Muth! Muth!  
-—Oder sollte vielleicht  
-Etwas Stärkendes, Herz-Stärkendes,  
-Hier am Platze sein?  
-Ein gesalbter Spruch?  
-Ein feierlicher Zuspruch?—  
-  
-
-
-Ha! Herauf, Würde!  
-Tugend-Würde! Europäer-Würde!  
-Blase, blase wieder,  
-Blasebalg der Tugend!  
-Ha!  
-Noch Ein Mal brüllen,  
-Moralisch brüllen!  
-Als moralischer Löwe  
-Vor den Töchtern der Wüste brüllen!  
-—Denn Tugend-Geheul,  
-Ihr allerliebsten Mädchen,  
-Ist mehr als Alles  
-Europäer-Inbrunst, Europäer-Heisshunger!  
-Und da stehe ich schon,  
-Als Europäer,  
-Ich kann nicht anders, Gott helfe mir!  
-Amen!  
-  
-
+Ha! Herauf, Würde!
+Tugend-Würde! Europäer-Würde!
+Blase, blase wieder,
+Blasebalg der Tugend!
+Ha!
+Noch Ein Mal brüllen,
+Moralisch brüllen!
+Als moralischer Löwe
+Vor den Töchtern der Wüste brüllen!
+—Denn Tugend-Geheul,
+Ihr allerliebsten Mädchen,
+Ist mehr als Alles
+Europäer-Inbrunst, Europäer-Heisshunger!
+Und da stehe ich schon,
+Als Europäer,
+Ich kann nicht anders, Gott helfe mir!
+Amen!
 
 Die Wüste wächst: weh Dem, der Wüsten birgt!
 
 end chapter### Die Erweckung
 
-#### 1.
+#### Chapter 1: .
 
 Nach dem Liede des Wanderers und Schattens wurde die Höhle mit Einem Male voll
 Lärmens und Lachens; und da die versammelten Gäste alle zugleich redeten, und
@@ -11902,7 +11850,7 @@ Es sindGenesende!“ Also sprach Zarathustra fröhlich zu seinem Herzen
 und schaute hinaus; seine Thiere aber drängten sich an ihn und ehrten sein
 Glück und sein Stillschweigen.
 
-#### 2.
+#### Chapter 2: .
 
 Plötzlich aber erschrak das Ohr Zarathustra’s: die Höhle nämlich, welche
 bisher voller Lärmens und Gelächters war, wurde mit Einem Male
@@ -11973,7 +11921,7 @@ Weisheit.
 
 end chapter### Das Eselsfest
 
-#### 1.
+#### Chapter 1: .
 
 An dieser Stelle der Litanei aber konnte Zarathustra sich nicht länger
 bemeistern, schrie selber I-A, lauter noch als der Esel, und sprang mitten
@@ -12077,7 +12025,7 @@ Zarathustra: wer am gründlichsten tödten will, derlacht.
 sprachst du einst. Oh Zarathustra, du Verborgener, du Vernichter ohne Zorn, du
 gefährlicher Heiliger, - du bist ein Schelm!“
 
-#### 2.
+#### Chapter 2: .
 
 Da aber geschah es, dass Zarathustra, verwundert über lauter solche
 Schelmen-Antworten, zur Thür seiner Höhle zurück sprang und, gegen alle seine
@@ -12101,7 +12049,7 @@ Freilich: so ihr nicht werdet wie die Kindlein, so kommt ihr nicht indasHimmelre
 Aber wir wollen auch gar nicht in’s Himmelreich: Männer sind wir
 worden,—so wollen wir das Erdenreich.“
 
-#### 3.
+#### Chapter 3: .
 
 Und noch einmal hob Zarathustra an zu reden. „Oh meine neuen Freunde, sprach
 er,—ihr Wunderlichen, ihr höheren Menschen, wie gut gefallt ihr mir
@@ -12114,7 +12062,7 @@ dünkt, solchen Blumen, wie ihr seid, thunneue Festenoth,
 irgend ein alter fröhlicher Zarathustra-Narr, ein Brausewind, der euch die
 Seelen hell bläst.
 
-Vergesst die Nacht und diess Eselsfest nicht, ihr höheren Menschen!Daserfandet ihr bei mir, Das nehme ich als gutes Wahrzeichen,—Solcherlei
+Vergesst die Nacht und diess Eselsfest nicht, ihr höheren Menschen! Daserfandet ihr bei mir, Das nehme ich als gutes Wahrzeichen,—Solcherlei
 erfinden nur Genesende!
 
 Und feiert ihr es abermals, dieses Eselsfest, thut’s euch zu Liebe,
@@ -12124,7 +12072,7 @@ Also sprach Zarathustra.
 
 end chapter### Das Nachtwandler-Lied
 
-#### 1.
+#### Chapter 1: .
 
 Inzwischen aber war Einer nach dem Andern hinaus getreten, in’s Freie und
 in die kühle nachdenkliche Nacht; Zarathustra selber aber führte den
@@ -12173,7 +12121,7 @@ getanzt hat, so geschahen doch damals grössere und seltsamere Wunderdinge als
 es das Tanzen eines Esels wäre. Kurz, wie das Sprichwort Zarathustra’s
 lautet: „was liegt daran!“
 
-#### 2.
+#### Chapter 2: .
 
 Zarathustra aber, als sich diess mit dem hässlichsten Menschen zutrug, stand
 da, wie ein Trunkener: sein Blick erlosch, seine Zunge lallte, seine Füsse
@@ -12202,7 +12150,7 @@ Zarathustra aber legte zum dritten Male die Hand an den Mund und sprach:
 Kommt! Kommt! Kommt! Lasst uns jetzo wandeln! Es ist die Stunde: lasst uns in
 die Nacht wandeln!
 
-#### 3.
+#### Chapter 3: .
 
 Ihr höheren Menschen, es geht gen Mitternacht: da will ich euch Etwas in die
 Ohren sagen, wie jene alte Glocke es mir in’s Ohr sagt,—
@@ -12221,7 +12169,7 @@ aber, bei kühler Luft, da auch aller Lärm eurer Herzen stille ward,—
 
 —hörst du’s nicht, wie sie heimlich, schrecklich, herzlich zudirredet, die alte tiefe tiefe Mitternacht? Oh Mensch, gieb Acht!
 
-#### 4.
+#### Chapter 4: .
 
 Wehe mir! Wo ist die Zeit hin? Sank ich nicht in tiefe Brunnen? Die Welt
 schläft—
@@ -12241,7 +12189,7 @@ ihr grossen und kleinen Ströme!“
 —die Stunde naht: oh Mensch, du höherer Mensch, gieb Acht! diese Rede ist
 für feine Ohren, für deine Ohren was spricht die tiefe Mitternacht?
 
-#### 5.
+#### Chapter 5: .
 
 Es trägt mich dahin, meine Seele tanzt. Tagewerk! Tagewerk! Wer soll der Erde
 Herr sein?
@@ -12261,7 +12209,7 @@ gräbt noch der Wurm? Es naht, es naht die Stunde,—
 —es brummt die Glocke, es schnarrt noch das Herz, es gräbt noch der
 Holzwurm, der Herzenswurm. Ach! Ach! Die Welt ist tief!
 
-#### 6.
+#### Chapter 6: .
 
 Süsse Leier! Süsse Leier! Ich liebe deinen Ton, deinen trunkenen
 Unken-Ton!—wie lang her, wie fern her kommt mir dein Ton, weit her, von
@@ -12282,7 +12230,7 @@ Gold-Wein-Geruch von altem Glücke,
 von trunkenem Mitternachts-Sterbeglücke, welches singt: die Welt ist tief und
 tiefer als der Tag gedacht!
 
-#### 7.
+#### Chapter 7: .
 
 Lass mich! Lass mich! Ich bin zu rein für dich. Rühre mich nicht an! Ward meine
 Welt nicht eben vollkommen?
@@ -12305,7 +12253,7 @@ greift nach irgend einem Gotte, greift nicht nach mir:
 —mein Unglück, mein Glück ist tief, du wunderlicher Tag, aber doch bin
 ich kein Gott, keine Gottes-Hölle: tief ist ihr Weh.
 
-#### 8.
+#### Chapter 8: .
 
 Gottes Weh ist tiefer, du wunderliche Welt! Greife nach Gottes Weh, nicht nach
 mir! Was bin ich! Eine trunkene süsse Leier,—
@@ -12327,7 +12275,7 @@ Trunkenheit? sie wurde überwach? sie käut zurück?
 noch ihre Lust. Lust nämlich, wenn schon Weh tief ist: Lust ist tiefer noch als
 Herzeleid.
 
-#### 8.
+#### Chapter 8: .
 
 Du Weinstock! Was preisest du mich? Ich schnitt dich doch! Ich bin grausam, du
 blutest—: was will dein Lob meiner trunkenen Grausamkeit?
@@ -12347,7 +12295,7 @@ Ewigkeit, will Wiederkunft, will Alles-sich-ewig-gleich.
 Weh spricht: „Brich, blute, Herz! Wandle, Bein! Flügel, flieg! Hinan! Hinauf!
 Schmerz!“ Wohlan! Wohlauf! Oh mein altes Herz: Weh spricht: „vergeh!“
 
-#### 10.
+#### Chapter 10: .
 
 Ihr höheren Menschen, was dünket euch? Bin ich ein Wahrsager? Ein Träumender?
 Trunkener? Ein Traumdeuter? Eine Mitternachts-Glocke?
@@ -12369,7 +12317,7 @@ mir, Glück! Husch! Augenblick!“ so wolltet ihrAlleszurück!
 —ihr Ewigen, liebt sie ewig und allezeit: und auch zum Weh sprecht ihr:
 vergeh, aber komm zurück! Denn alle Lust will—Ewigkeit!
 
-#### 11.
+#### Chapter 11: .
 
 Alle Lust will aller Dinge Ewigkeit, will Honig, will Hefe, will trunkene
 Mitternacht, will Gräber, will Gräber-Thränen-Trost, will vergüldetes Abendroth
@@ -12396,7 +12344,7 @@ Ewigkeit,
 
 —Lust willallerDinge Ewigkeit, will tiefe, tiefe Ewigkeit!
 
-#### 12.
+#### Chapter 12: .
 
 Lerntet ihr nun mein Lied? Erriethet ihr, was es will? Wohlan! Wohlauf! Ihr
 höheren Menschen, so singt mir nun meinen Rundgesang!
@@ -12404,16 +12352,16 @@ höheren Menschen, so singt mir nun meinen Rundgesang!
 Singt mir nun selber das Lied, dess Name ist „Noch ein Mal“, dess Sinn ist „in
 alle Ewigkeit!“, singt, ihr höheren Menschen, Zarathustra’s Rundgesang!
 
-Oh Mensch! Gieb Acht!  
-Was spricht die tiefe Mitternacht?  
-„Ich schlief, ich schlief—,  
-Aus tiefem Traum bin ich erwacht:—  
-Die Welt ist tief,  
-Und tiefer als der Tag gedacht.  
-Tief ist ihr Weh—,  
-Lust—tiefer noch als Herzeleid:  
-Weh spricht: Vergeh!  
-Doch alle Lust will Ewigkeit  
+Oh Mensch! Gieb Acht!
+Was spricht die tiefe Mitternacht?
+„Ich schlief, ich schlief—,
+Aus tiefem Traum bin ich erwacht:—
+Die Welt ist tief,
+Und tiefer als der Tag gedacht.
+Tief ist ihr Weh—,
+Lust—tiefer noch als Herzeleid:
+Weh spricht: Vergeh!
+Doch alle Lust will Ewigkeit
 will tiefe, tiefe Ewigkeit!“
 
 end chapter### Das Zeichen
@@ -12517,7 +12465,7 @@ Wort:wasblieb mir doch aufgespart als meine letzte Sünde?“
 den grossen Stein nieder und sann nach. Plötzlich sprang er empor,—
 
 „Mitleiden! Das Mitleiden mit dem höheren Menschen! schrie er auf, und sein
-Antlitz verwandelte sich in Erz. Wohlan!Das—hatte seine Zeit!
+Antlitz verwandelte sich in Erz. Wohlan! Das—hatte seine Zeit!
 
 Mein Leid und mein Mitleiden—was liegt daran! Trachte ich denn nachGlücke? Ich trachte nach meinemWerke!
 
@@ -12531,7 +12479,7 @@ Also sprach Zarathustra und verliess seine Höhle, glühend und stark, wie eine
 Morgensonne, die aus dunklen Bergen kommt.
 
 end chapter*** END OF THE PROJECT GUTENBERG EBOOK ALSO SPRACH ZARATHUSTRA: EIN BUCH FÜR ALLE UND KEINEN ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -12547,16 +12495,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -12565,15 +12513,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -12588,7 +12536,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -12596,7 +12544,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -12607,28 +12555,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -12638,9 +12586,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -12661,40 +12609,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -12705,17 +12653,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -12725,11 +12673,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -12737,13 +12685,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -12753,31 +12701,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

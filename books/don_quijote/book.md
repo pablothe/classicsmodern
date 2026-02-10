@@ -4,11 +4,10 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this eBook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you
 are not located in the United States, you will have to check the laws of the
-country where you are located before using this eBook.Title: Don QuijoteAuthor: Miguel de Cervantes SaavedraRelease Date: December, 1999 [eBook #2000]  
+country where you are located before using this eBook. Title: Don QuijoteAuthor: Miguel de Cervantes SaavedraRelease Date: December, 1999 [eBook #2000]
 [Most recently updated: January 2, 2020]Language: SpanishCharacter set encoding: UTF-8Produced by: an anonymous Project Gutenberg volunteer and Joaquin Cuenca Abela*** START OF THE PROJECT GUTENBERG EBOOK DON QUIJOTE ***# El ingenioso hidalgo don Quijote de la Mancha
 
 ## por Miguel de Cervantes Saavedra
-
 
 ---
 
@@ -467,7 +466,7 @@ destraído y en otro hacen un sermoncico cristiano, que es un contento y un
 regalo oílle o leelle. De todo esto ha de carecer mi libro, porque ni tengo
 qué acotar en el margen, ni qué anotar en el fin, ni menos sé qué autores
 sigo en él, para ponerlos al principio, como hacen todos, por las letras
-del A.B.C., comenzando en Aristóteles y acabando en Xenofonte y en Zoílo o
+del A. B. C., comenzando en Aristóteles y acabando en Xenofonte y en Zoílo o
 Zeuxis, aunque fue maldiciente el uno y pintor el otro. También ha de
 carecer mi libro de sonetos al principio, a lo menos de sonetos cuyos
 autores sean duques, marqueses, condes, obispos, damas o poetas
@@ -525,7 +524,7 @@ Non bene pro toto libertas venditur auro.
 Y luego, en el margen, citar a Horacio, o a quien lo dijo. Si tratáredes
 del poder de la muerte, acudir luego con:
 
-Pallida mors aequo pulsat pede pauperum tabernas,  
+Pallida mors aequo pulsat pede pauperum tabernas,
 Regumque turres.
 
 Si de la amistad y amor que Dios manda que se tenga al enemigo, entraros
@@ -535,7 +534,7 @@ dico vobis: diligite inimicos vestros. Si tratáredes de malos pensamientos,
 acudid con el Evangelio: De corde exeunt cogitationes malae. Si de la
 instabilidad de los amigos, ahí está Catón, que os dará su dístico:
 
-Donec eris felix, multos numerabis amicos,  
+Donec eris felix, multos numerabis amicos,
 tempora si fuerint nubila, solus eris.
 
 Y con estos latinicos y otros tales os tendrán siquiera por gramático, que
@@ -625,254 +624,254 @@ Y con esto, Dios te dé salud, y a mí no olvide. Vale.
 
 ### AL LIBRO DE DON QUIJOTE DE LA MANCHA
 
-Urganda la desconocida  
-Si de llegarte a los bue-,  
-libro, fueres con letu-,  
-no te dirá el boquirru-  
-que no pones bien los de-.  
-Mas si el pan no se te cue-  
-por ir a manos de idio-,  
-verás de manos a bo-,  
-aun no dar una en el cla-,  
-si bien se comen las ma-  
-por mostrar que son curio-.  
-Y, pues la expiriencia ense-  
-que el que a buen árbol se arri-  
-buena sombra le cobi-,  
-en Béjar tu buena estre-  
-un árbol real te ofre-  
-que da príncipes por fru-,  
-en el cual floreció un du-  
-que es nuevo Alejandro Ma-:  
-llega a su sombra, que a osa-  
-favorece la fortu-.  
-De un noble hidalgo manche-  
-contarás las aventu-,  
-a quien ociosas letu-,  
-trastornaron la cabe-:  
-damas, armas, caballe-,  
-le provocaron de mo-,  
-que, cual Orlando furio-,  
-templado a lo enamora-,  
-alcanzó a fuerza de bra-  
-a Dulcinea del Tobo-.  
-No indiscretos hieroglí-  
-estampes en el escu-,  
-que, cuando es todo figu-,  
-con ruines puntos se envi-.  
+Urganda la desconocida
+Si de llegarte a los bue-,
+libro, fueres con letu-,
+no te dirá el boquirru-
+que no pones bien los de-.
+Mas si el pan no se te cue-
+por ir a manos de idio-,
+verás de manos a bo-,
+aun no dar una en el cla-,
+si bien se comen las ma-
+por mostrar que son curio-.
+Y, pues la expiriencia ense-
+que el que a buen árbol se arri-
+buena sombra le cobi-,
+en Béjar tu buena estre-
+un árbol real te ofre-
+que da príncipes por fru-,
+en el cual floreció un du-
+que es nuevo Alejandro Ma-:
+llega a su sombra, que a osa-
+favorece la fortu-.
+De un noble hidalgo manche-
+contarás las aventu-,
+a quien ociosas letu-,
+trastornaron la cabe-:
+damas, armas, caballe-,
+le provocaron de mo-,
+que, cual Orlando furio-,
+templado a lo enamora-,
+alcanzó a fuerza de bra-
+a Dulcinea del Tobo-.
+No indiscretos hieroglí-
+estampes en el escu-,
+que, cuando es todo figu-,
+con ruines puntos se envi-.
 Si en la dirección te humi-,
 
-no dirá, mofante, algu-:  
-''¡Qué don Álvaro de Lu-,  
-qué Anibal el de Carta-,  
-qué rey Francisco en Espa-  
-se queja de la Fortu-!''  
-Pues al cielo no le plu-  
-que salieses tan ladi-  
-como el negro Juan Lati-,  
-hablar latines rehú-.  
-No me despuntes de agu-,  
-ni me alegues con filó-,  
-porque, torciendo la bo-,  
-dirá el que entiende la le-,  
-no un palmo de las ore-:  
-''¿Para qué conmigo flo-?''  
-No te metas en dibu-,  
-ni en saber vidas aje-,  
+no dirá, mofante, algu-:
+''¡Qué don Álvaro de Lu-,
+qué Anibal el de Carta-,
+qué rey Francisco en Espa-
+se queja de la Fortu-!''
+Pues al cielo no le plu-
+que salieses tan ladi-
+como el negro Juan Lati-,
+hablar latines rehú-.
+No me despuntes de agu-,
+ni me alegues con filó-,
+porque, torciendo la bo-,
+dirá el que entiende la le-,
+no un palmo de las ore-:
+''¿Para qué conmigo flo-?''
+No te metas en dibu-,
+ni en saber vidas aje-,
 que, en lo que no va ni vie-,
 
-pasar de largo es cordu-.  
-Que suelen en caperu-  
-darles a los que grace-;  
-mas tú quémate las ce-  
-sólo en cobrar buena fa-;  
-que el que imprime neceda-  
-dalas a censo perpe-.  
-Advierte que es desati-,  
-siendo de vidrio el teja-,  
-tomar piedras en las ma-  
-para tirar al veci-.  
-Deja que el hombre de jui-,  
-en las obras que compo-,  
-se vaya con pies de plo-;  
-que el que saca a luz pape-  
-para entretener donce-  
+pasar de largo es cordu-.
+Que suelen en caperu-
+darles a los que grace-;
+mas tú quémate las ce-
+sólo en cobrar buena fa-;
+que el que imprime neceda-
+dalas a censo perpe-.
+Advierte que es desati-,
+siendo de vidrio el teja-,
+tomar piedras en las ma-
+para tirar al veci-.
+Deja que el hombre de jui-,
+en las obras que compo-,
+se vaya con pies de plo-;
+que el que saca a luz pape-
+para entretener donce-
 escribe a tontas y a lo-.
 
 AMADÍS DE GAULA A DON QUIJOTE DE LA MANCHA
 
 Soneto
 
-Tú, que imitaste la llorosa vida  
-que tuve, ausente y desdeñado sobre  
-el gran ribazo de la Peña Pobre,  
-de alegre a penitencia reducida;  
-tú, a quien los ojos dieron la bebida  
-de abundante licor, aunque salobre,  
-y alzándote la plata, estaño y cobre,  
-te dio la tierra en tierra la comida,  
-vive seguro de que eternamente,  
-en tanto, al menos, que en la cuarta esfera,  
-sus caballos aguije el rubio Apolo,  
-tendrás claro renombre de valiente;  
-tu patria será en todas la primera;  
+Tú, que imitaste la llorosa vida
+que tuve, ausente y desdeñado sobre
+el gran ribazo de la Peña Pobre,
+de alegre a penitencia reducida;
+tú, a quien los ojos dieron la bebida
+de abundante licor, aunque salobre,
+y alzándote la plata, estaño y cobre,
+te dio la tierra en tierra la comida,
+vive seguro de que eternamente,
+en tanto, al menos, que en la cuarta esfera,
+sus caballos aguije el rubio Apolo,
+tendrás claro renombre de valiente;
+tu patria será en todas la primera;
 tu sabio autor, al mundo único y solo.
 
 DON BELIANÍS DE GRECIA A DON QUIJOTE DE LA MANCHA
 
 Soneto
 
-Rompí, corté, abollé, y dije y hice  
-más que en el orbe caballero andante;  
-fui diestro, fui valiente, fui arrogante;  
-mil agravios vengué, cien mil deshice.  
-Hazañas di a la Fama que eternice;  
-fui comedido y regalado amante;  
-fue enano para mí todo gigante,  
-y al duelo en cualquier punto satisfice.  
-Tuve a mis pies postrada la Fortuna,  
-y trajo del copete mi cordura  
-a la calva Ocasión al estricote.  
-Más, aunque sobre el cuerno de la luna  
-siempre se vio encumbrada mi ventura,  
+Rompí, corté, abollé, y dije y hice
+más que en el orbe caballero andante;
+fui diestro, fui valiente, fui arrogante;
+mil agravios vengué, cien mil deshice.
+Hazañas di a la Fama que eternice;
+fui comedido y regalado amante;
+fue enano para mí todo gigante,
+y al duelo en cualquier punto satisfice.
+Tuve a mis pies postrada la Fortuna,
+y trajo del copete mi cordura
+a la calva Ocasión al estricote.
+Más, aunque sobre el cuerno de la luna
+siempre se vio encumbrada mi ventura,
 tus proezas envidio, ¡oh gran Quijote!
 
 LA SEÑORA ORIANA A DULCINEA DEL TOBOSO
 
 Soneto
 
-¡Oh, quién tuviera, hermosa Dulcinea,  
-por más comodidad y más reposo,  
-a Miraflores puesto en el Toboso,  
-y trocara sus Londres con tu aldea!  
-¡Oh, quién de tus deseos y librea  
-alma y cuerpo adornara, y del famoso  
-caballero que hiciste venturoso  
-mirara alguna desigual pelea!  
-¡Oh, quién tan castamente se escapara  
-del señor Amadís como tú hiciste  
-del comedido hidalgo don Quijote!  
-Que así envidiada fuera, y no envidiara,  
-y fuera alegre el tiempo que fue triste,  
+¡Oh, quién tuviera, hermosa Dulcinea,
+por más comodidad y más reposo,
+a Miraflores puesto en el Toboso,
+y trocara sus Londres con tu aldea!
+¡Oh, quién de tus deseos y librea
+alma y cuerpo adornara, y del famoso
+caballero que hiciste venturoso
+mirara alguna desigual pelea!
+¡Oh, quién tan castamente se escapara
+del señor Amadís como tú hiciste
+del comedido hidalgo don Quijote!
+Que así envidiada fuera, y no envidiara,
+y fuera alegre el tiempo que fue triste,
 y gozara los gustos sin escote.
 
 GANDALÍN, ESCUDERO DE AMADÍS DE GAULA, A SANCHO PANZA, ESCUDERO DE DON QUIJOTE
 
 Soneto
 
-Salve, varón famoso, a quien Fortuna,  
-cuando en el trato escuderil te puso,  
-tan blanda y cuerdamente lo dispuso,  
-que lo pasaste sin desgracia alguna.  
-Ya la azada o la hoz poco repugna  
-al andante ejercicio; ya está en uso  
-la llaneza escudera, con que acuso  
-al soberbio que intenta hollar la luna.  
-Envidio a tu jumento y a tu nombre,  
-y a tus alforjas igualmente invidio,  
-que mostraron tu cuerda providencia.  
-Salve otra vez, ¡oh Sancho!, tan buen hombre,  
-que a solo tú nuestro español Ovidio  
+Salve, varón famoso, a quien Fortuna,
+cuando en el trato escuderil te puso,
+tan blanda y cuerdamente lo dispuso,
+que lo pasaste sin desgracia alguna.
+Ya la azada o la hoz poco repugna
+al andante ejercicio; ya está en uso
+la llaneza escudera, con que acuso
+al soberbio que intenta hollar la luna.
+Envidio a tu jumento y a tu nombre,
+y a tus alforjas igualmente invidio,
+que mostraron tu cuerda providencia.
+Salve otra vez, ¡oh Sancho!, tan buen hombre,
+que a solo tú nuestro español Ovidio
 con buzcorona te hace reverencia.
 
 DEL DONOSO, POETA ENTREVERADO, A SANCHO PANZA Y ROCINANTE
 
-Soy Sancho Panza, escude-  
-del manchego don Quijo-.  
-Puse pies en polvoro-,  
-por vivir a lo discre-;  
-que el tácito Villadie-  
-toda su razón de esta-  
-cifró en una retira-,  
-según siente Celesti-,  
-libro, en mi opinión, divi-  
-si encubriera más lo huma-.  
-A Rocinante  
-Soy Rocinante, el famo-  
-bisnieto del gran Babie-.  
-Por pecados de flaque-,  
-fui a poder de un don Quijo-.  
-Parejas corrí a lo flo-;  
-mas, por uña de caba-,  
-no se me escapó ceba-;  
-que esto saqué a Lazari-  
-cuando, para hurtar el vi-  
+Soy Sancho Panza, escude-
+del manchego don Quijo-.
+Puse pies en polvoro-,
+por vivir a lo discre-;
+que el tácito Villadie-
+toda su razón de esta-
+cifró en una retira-,
+según siente Celesti-,
+libro, en mi opinión, divi-
+si encubriera más lo huma-.
+A Rocinante
+Soy Rocinante, el famo-
+bisnieto del gran Babie-.
+Por pecados de flaque-,
+fui a poder de un don Quijo-.
+Parejas corrí a lo flo-;
+mas, por uña de caba-,
+no se me escapó ceba-;
+que esto saqué a Lazari-
+cuando, para hurtar el vi-
 al ciego, le di la pa-.
 
 ORLANDO FURIOSO A DON QUIJOTE DE LA MANCHA
 
 Soneto
 
-Si no eres par, tampoco le has tenido:  
-que par pudieras ser entre mil pares;  
-ni puede haberle donde tú te hallares,  
-invito vencedor, jamás vencido.  
-Orlando soy, Quijote, que, perdido  
-por Angélica, vi remotos mares,  
-ofreciendo a la Fama en sus altares  
-aquel valor que respetó el olvido.  
-No puedo ser tu igual; que este decoro  
-se debe a tus proezas y a tu fama,  
-puesto que, como yo, perdiste el seso.  
-Mas serlo has mío, si al soberbio moro  
-y cita fiero domas, que hoy nos llama  
+Si no eres par, tampoco le has tenido:
+que par pudieras ser entre mil pares;
+ni puede haberle donde tú te hallares,
+invito vencedor, jamás vencido.
+Orlando soy, Quijote, que, perdido
+por Angélica, vi remotos mares,
+ofreciendo a la Fama en sus altares
+aquel valor que respetó el olvido.
+No puedo ser tu igual; que este decoro
+se debe a tus proezas y a tu fama,
+puesto que, como yo, perdiste el seso.
+Mas serlo has mío, si al soberbio moro
+y cita fiero domas, que hoy nos llama
 iguales en amor con mal suceso.
 
 EL CABALLERO DEL FEBO A DON QUIJOTE DE LA MANCHA
 
 Soneto
 
-A vuestra espada no igualó la mía,  
-Febo español, curioso cortesano,  
-ni a la alta gloria de valor mi mano,  
-que rayo fue do nace y muere el día.  
-Imperios desprecié; la monarquía  
-que me ofreció el Oriente rojo en vano  
-dejé, por ver el rostro soberano  
-de Claridiana, aurora hermosa mía.  
-Améla por milagro único y raro,  
-y, ausente en su desgracia, el propio infierno  
-temió mi brazo, que domó su rabia.  
-Mas vos, godo Quijote, ilustre y claro,  
-por Dulcinea sois al mundo eterno,  
+A vuestra espada no igualó la mía,
+Febo español, curioso cortesano,
+ni a la alta gloria de valor mi mano,
+que rayo fue do nace y muere el día.
+Imperios desprecié; la monarquía
+que me ofreció el Oriente rojo en vano
+dejé, por ver el rostro soberano
+de Claridiana, aurora hermosa mía.
+Améla por milagro único y raro,
+y, ausente en su desgracia, el propio infierno
+temió mi brazo, que domó su rabia.
+Mas vos, godo Quijote, ilustre y claro,
+por Dulcinea sois al mundo eterno,
 y ella, por vos, famosa, honesta y sabia.
 
 DE SOLISDÁN A DON QUIJOTE DE LA MANCHA
 
 Soneto
 
-Maguer, señor Quijote, que sandeces  
-vos tengan el cerbelo derrumbado,  
-nunca seréis de alguno reprochado  
-por home de obras viles y soeces.  
-Serán vuesas fazañas los joeces,  
-pues tuertos desfaciendo habéis andado,  
-siendo vegadas mil apaleado  
-por follones cautivos y raheces.  
-Y si la vuesa linda Dulcinea  
-desaguisado contra vos comete,  
-ni a vuesas cuitas muestra buen talante,  
-en tal desmán, vueso conorte sea  
-que Sancho Panza fue mal alcagüete,  
+Maguer, señor Quijote, que sandeces
+vos tengan el cerbelo derrumbado,
+nunca seréis de alguno reprochado
+por home de obras viles y soeces.
+Serán vuesas fazañas los joeces,
+pues tuertos desfaciendo habéis andado,
+siendo vegadas mil apaleado
+por follones cautivos y raheces.
+Y si la vuesa linda Dulcinea
+desaguisado contra vos comete,
+ni a vuesas cuitas muestra buen talante,
+en tal desmán, vueso conorte sea
+que Sancho Panza fue mal alcagüete,
 necio él, dura ella, y vos no amante.
 
 DIÁLOGO ENTRE BABIECA Y ROCINANTE
 
 Soneto
 
-B. ¿Cómo estáis, Rocinante, tan delgado?  
-R. Porque nunca se come, y se trabaja.  
-B. Pues, ¿qué es de la cebada y de la paja?  
-R. No me deja mi amo ni un bocado.  
-B. Andá, señor, que estáis muy mal criado,  
-pues vuestra lengua de asno al amo ultraja.  
-R. Asno se es de la cuna a la mortaja.  
-¿Queréislo ver? Miraldo enamorado.  
-B. ¿Es necedad amar? R. No es gran prudencia.  
-B. Metafísico estáis. R. Es que no como.  
-B. Quejaos del escudero. R. No es bastante.  
-¿Cómo me he de quejar en mi dolencia,  
-si el amo y escudero o mayordomo  
+B. ¿Cómo estáis, Rocinante, tan delgado?
+R. Porque nunca se come, y se trabaja.
+B. Pues, ¿qué es de la cebada y de la paja?
+R. No me deja mi amo ni un bocado.
+B. Andá, señor, que estáis muy mal criado,
+pues vuestra lengua de asno al amo ultraja.
+R. Asno se es de la cuna a la mortaja.
+¿Queréislo ver? Miraldo enamorado.
+B. ¿Es necedad amar? R. No es gran prudencia.
+B. Metafísico estáis. R. Es que no como.
+B. Quejaos del escudero. R. No es bastante.
+¿Cómo me he de quejar en mi dolencia,
+si el amo y escudero o mayordomo
 son tan rocines como Rocinante?
 
 Primera parte del ingenioso hidalgo don Quijote de la Mancha
@@ -1172,8 +1171,8 @@ abundancia.
 Viendo don Quijote la humildad del alcaide de la fortaleza, que tal le
 pareció a él el ventero y la venta, respondió:
 
--Para mí, señor castellano, cualquiera cosa basta, porque  
-mis arreos son las armas,  
+-Para mí, señor castellano, cualquiera cosa basta, porque
+mis arreos son las armas,
 mi descanso el pelear, etc.
 
 Pensó el huésped que el haberle llamado castellano había sido por haberle
@@ -1204,11 +1203,11 @@ figura que se pudiera pensar; y, al desarmarle, como él se imaginaba que
 aquellas traídas y llevadas que le desarmaban eran algunas principales
 señoras y damas de aquel castillo, les dijo con mucho donaire:
 
--Nunca fuera caballero  
-de damas tan bien servido  
-como fuera don Quijote  
-cuando de su aldea vino:  
-doncellas curaban dél;  
+-Nunca fuera caballero
+de damas tan bien servido
+como fuera don Quijote
+cuando de su aldea vino:
+doncellas curaban dél;
 princesas, del su rocino,
 
 o Rocinante, que éste es el nombre, señoras mías, de mi caballo, y don
@@ -1727,15 +1726,15 @@ muestras de grande sentimiento, se comenzó a volcar por la tierra y a decir
 con debilitado aliento lo mesmo que dicen decía el herido caballero del
 bosque:
 
--¿Donde estás, señora mía,  
-que no te duele mi mal?  
-O no lo sabes, señora,  
+-¿Donde estás, señora mía,
+que no te duele mi mal?
+O no lo sabes, señora,
 o eres falsa y desleal.
 
 Y, desta manera, fue prosiguiendo el romance hasta aquellos versos que
 dicen:
 
--¡Oh noble marqués de Mantua,  
+-¡Oh noble marqués de Mantua,
 mi tío y señor carnal!
 
 Y quiso la suerte que, cuando llegó a este verso, acertó a pasar por allí
@@ -2666,7 +2665,7 @@ imposible y fuera de toda buena costumbre que a tan buen caballero le
 hubiese faltado algún sabio que tomara a cargo el escrebir sus nunca vistas
 hazañas, cosa que no faltó a ninguno de los caballeros andantes,
 
-de los que dicen las gentes  
+de los que dicen las gentes
 que van a sus aventuras,
 
 porque cada uno dellos tenía uno o dos sabios, como de molde, que no
@@ -3163,73 +3162,73 @@ comenzó a cantar, diciendo desta manera:
 
 Antonio
 
--Yo sé, Olalla, que me adoras,  
-puesto que no me lo has dicho  
-ni aun con los ojos siquiera,  
-mudas lenguas de amoríos.  
-Porque sé que eres sabida,  
-en que me quieres me afirmo;  
-que nunca fue desdichado  
-amor que fue conocido.  
-Bien es verdad que tal vez,  
-Olalla, me has dado indicio  
-que tienes de bronce el alma  
-y el blanco pecho de risco.  
-Mas allá entre tus reproches  
-y honestísimos desvíos,  
-tal vez la esperanza muestra  
-la orilla de su vestido.  
-Abalánzase al señuelo  
-mi fe, que nunca ha podido,  
-ni menguar por no llamado,  
-ni crecer por escogido.  
-Si el amor es cortesía,  
-de la que tienes colijo  
-que el fin de mis esperanzas  
-ha de ser cual imagino.  
-Y si son servicios parte  
-de hacer un pecho benigno,  
-algunos de los que he hecho  
-fortalecen mi partido.  
-Porque si has mirado en ello,  
-más de una vez habrás visto  
-que me he vestido en los lunes  
-lo que me honraba el domingo.  
-Como el amor y la gala  
-andan un mesmo camino,  
-en todo tiempo a tus ojos  
-quise mostrarme polido.  
-Dejo el bailar por tu causa,  
-ni las músicas te pinto  
-que has escuchado a deshoras  
-y al canto del gallo primo.  
-No cuento las alabanzas  
-que de tu belleza he dicho;  
-que, aunque verdaderas, hacen  
-ser yo de algunas malquisto.  
-Teresa del Berrocal,  
-yo alabándote, me dijo:  
-''Tal piensa que adora a un ángel,  
-y viene a adorar a un jimio;  
-merced a los muchos dijes  
-y a los cabellos postizos,  
-y a hipócritas hermosuras,  
-que engañan al Amor mismo''.  
-Desmentíla y enojóse;  
-volvió por ella su primo:  
-desafióme, y ya sabes  
-lo que yo hice y él hizo.  
-No te quiero yo a montón,  
-ni te pretendo y te sirvo  
-por lo de barraganía;  
-que más bueno es mi designio.  
-Coyundas tiene la Iglesia  
-que son lazadas de sirgo;  
-pon tú el cuello en la gamella;  
-verás como pongo el mío.  
-Donde no, desde aquí juro,  
-por el santo más bendito,  
-de no salir destas sierras  
+-Yo sé, Olalla, que me adoras,
+puesto que no me lo has dicho
+ni aun con los ojos siquiera,
+mudas lenguas de amoríos.
+Porque sé que eres sabida,
+en que me quieres me afirmo;
+que nunca fue desdichado
+amor que fue conocido.
+Bien es verdad que tal vez,
+Olalla, me has dado indicio
+que tienes de bronce el alma
+y el blanco pecho de risco.
+Mas allá entre tus reproches
+y honestísimos desvíos,
+tal vez la esperanza muestra
+la orilla de su vestido.
+Abalánzase al señuelo
+mi fe, que nunca ha podido,
+ni menguar por no llamado,
+ni crecer por escogido.
+Si el amor es cortesía,
+de la que tienes colijo
+que el fin de mis esperanzas
+ha de ser cual imagino.
+Y si son servicios parte
+de hacer un pecho benigno,
+algunos de los que he hecho
+fortalecen mi partido.
+Porque si has mirado en ello,
+más de una vez habrás visto
+que me he vestido en los lunes
+lo que me honraba el domingo.
+Como el amor y la gala
+andan un mesmo camino,
+en todo tiempo a tus ojos
+quise mostrarme polido.
+Dejo el bailar por tu causa,
+ni las músicas te pinto
+que has escuchado a deshoras
+y al canto del gallo primo.
+No cuento las alabanzas
+que de tu belleza he dicho;
+que, aunque verdaderas, hacen
+ser yo de algunas malquisto.
+Teresa del Berrocal,
+yo alabándote, me dijo:
+''Tal piensa que adora a un ángel,
+y viene a adorar a un jimio;
+merced a los muchos dijes
+y a los cabellos postizos,
+y a hipócritas hermosuras,
+que engañan al Amor mismo''.
+Desmentíla y enojóse;
+volvió por ella su primo:
+desafióme, y ya sabes
+lo que yo hice y él hizo.
+No te quiero yo a montón,
+ni te pretendo y te sirvo
+por lo de barraganía;
+que más bueno es mi designio.
+Coyundas tiene la Iglesia
+que son lazadas de sirgo;
+pon tú el cuello en la gamella;
+verás como pongo el mío.
+Donde no, desde aquí juro,
+por el santo más bendito,
+de no salir destas sierras
 sino para capuchino.
 
 Con esto dio el cabrero fin a su canto; y, aunque don Quijote le rogó que
@@ -3534,9 +3533,9 @@ cuentan de don Lanzarote del Lago con la reina Ginebra, siendo medianera
 dellos y sabidora aquella tan honrada dueña Quintañona, de donde nació
 aquel tan sabido romance, y tan decantado en nuestra España, de:
 
-Nunca fuera caballero  
-de damas tan bien servido  
-como fuera Lanzarote  
+Nunca fuera caballero
+de damas tan bien servido
+como fuera Lanzarote
 cuando de Bretaña vino;
 
 con aquel progreso tan dulce y tan suave de sus amorosos y fuertes fechos.
@@ -3689,7 +3688,7 @@ de los venideros siglos. Y no se me replique en esto, si no fuere con las
 condiciones que puso Cervino al pie del trofeo de las armas de Orlando, que
 decía:
 
-nadie las mueva  
+nadie las mueva
 que estar no pueda con Roldán a prueba.
 
 — Aunque el mío es de los Cachopines de Laredo —respondió el caminante—, no
@@ -3807,146 +3806,146 @@ con otros no esperados sucesos
 
 Canción de Grisóstomo
 
-Ya que quieres, cruel, que se publique,  
-de lengua en lengua y de una en otra gente,  
-del áspero rigor tuyo la fuerza,  
-haré que el mesmo infierno comunique  
-al triste pecho mío un son doliente,  
-con que el uso común de mi voz tuerza.  
-Y al par de mi deseo, que se esfuerza  
-a decir mi dolor y tus hazañas,  
-de la espantable voz irá el acento,  
-y en él mezcladas, por mayor tormento,  
-pedazos de las míseras entrañas.  
-Escucha, pues, y presta atento oído,  
-no al concertado son, sino al rüido  
-que de lo hondo de mi amargo pecho,  
-llevado de un forzoso desvarío,  
+Ya que quieres, cruel, que se publique,
+de lengua en lengua y de una en otra gente,
+del áspero rigor tuyo la fuerza,
+haré que el mesmo infierno comunique
+al triste pecho mío un son doliente,
+con que el uso común de mi voz tuerza.
+Y al par de mi deseo, que se esfuerza
+a decir mi dolor y tus hazañas,
+de la espantable voz irá el acento,
+y en él mezcladas, por mayor tormento,
+pedazos de las míseras entrañas.
+Escucha, pues, y presta atento oído,
+no al concertado son, sino al rüido
+que de lo hondo de mi amargo pecho,
+llevado de un forzoso desvarío,
 por gusto mío sale y tu despecho.
 
-El rugir del león, del lobo fiero  
-el temeroso aullido, el silbo horrendo  
-de escamosa serpiente, el espantable  
-baladro de algún monstruo, el agorero  
-graznar de la corneja, y el estruendo  
-del viento contrastado en mar instable;  
-del ya vencido toro el implacable  
-bramido, y de la viuda tortolilla  
-el sentible arrullar; el triste canto  
-del envidiado búho, con el llanto  
-de toda la infernal negra cuadrilla,  
-salgan con la doliente ánima fuera,  
-mezclados en un son, de tal manera  
-que se confundan los sentidos todos,  
-pues la pena cruel que en mí se halla  
+El rugir del león, del lobo fiero
+el temeroso aullido, el silbo horrendo
+de escamosa serpiente, el espantable
+baladro de algún monstruo, el agorero
+graznar de la corneja, y el estruendo
+del viento contrastado en mar instable;
+del ya vencido toro el implacable
+bramido, y de la viuda tortolilla
+el sentible arrullar; el triste canto
+del envidiado búho, con el llanto
+de toda la infernal negra cuadrilla,
+salgan con la doliente ánima fuera,
+mezclados en un son, de tal manera
+que se confundan los sentidos todos,
+pues la pena cruel que en mí se halla
 para contalla pide nuevos modos.
 
-De tanta confusión no las arenas  
-del padre Tajo oirán los tristes ecos,  
-ni del famoso Betis las olivas:  
-que allí se esparcirán mis duras penas  
-en altos riscos y en profundos huecos,  
-con muerta lengua y con palabras vivas;  
-o ya en escuros valles, o en esquivas  
-playas, desnudas de contrato humano,  
-o adonde el sol jamás mostró su lumbre,  
-o entre la venenosa muchedumbre  
-de fieras que alimenta el libio llano;  
-que, puesto que en los páramos desiertos  
-los ecos roncos de mi mal, inciertos,  
-suenen con tu rigor tan sin segundo,  
-por privilegio de mis cortos hados,  
+De tanta confusión no las arenas
+del padre Tajo oirán los tristes ecos,
+ni del famoso Betis las olivas:
+que allí se esparcirán mis duras penas
+en altos riscos y en profundos huecos,
+con muerta lengua y con palabras vivas;
+o ya en escuros valles, o en esquivas
+playas, desnudas de contrato humano,
+o adonde el sol jamás mostró su lumbre,
+o entre la venenosa muchedumbre
+de fieras que alimenta el libio llano;
+que, puesto que en los páramos desiertos
+los ecos roncos de mi mal, inciertos,
+suenen con tu rigor tan sin segundo,
+por privilegio de mis cortos hados,
 serán llevados por el ancho mundo.
 
-Mata un desdén, atierra la paciencia,  
-o verdadera o falsa, una sospecha;  
-matan los celos con rigor más fuerte;  
-desconcierta la vida larga ausencia;  
-contra un temor de olvido no aprovecha  
-firme esperanza de dichosa suerte.  
-En todo hay cierta, inevitable muerte;  
-mas yo, ¡milagro nunca visto!, vivo  
-celoso, ausente, desdeñado y cierto  
-de las sospechas que me tienen muerto;  
-y en el olvido en quien mi fuego avivo,  
-y, entre tantos tormentos, nunca alcanza  
-mi vista a ver en sombra a la esperanza,  
-ni yo, desesperado, la procuro;  
-antes, por estremarme en mi querella,  
+Mata un desdén, atierra la paciencia,
+o verdadera o falsa, una sospecha;
+matan los celos con rigor más fuerte;
+desconcierta la vida larga ausencia;
+contra un temor de olvido no aprovecha
+firme esperanza de dichosa suerte.
+En todo hay cierta, inevitable muerte;
+mas yo, ¡milagro nunca visto!, vivo
+celoso, ausente, desdeñado y cierto
+de las sospechas que me tienen muerto;
+y en el olvido en quien mi fuego avivo,
+y, entre tantos tormentos, nunca alcanza
+mi vista a ver en sombra a la esperanza,
+ni yo, desesperado, la procuro;
+antes, por estremarme en mi querella,
 estar sin ella eternamente juro.
 
-¿Puédese, por ventura, en un instante  
-esperar y temer, o es bien hacello,  
-siendo las causas del temor más ciertas?  
-¿Tengo, si el duro celo está delante,  
-de cerrar estos ojos, si he de vello  
-por mil heridas en el alma abiertas?  
-¿Quién no abrirá de par en par las puertas  
-a la desconfianza, cuando mira  
-descubierto el desdén, y las sospechas,  
-¡oh amarga conversión!, verdades hechas,  
-y la limpia verdad vuelta en mentira?  
-¡Oh, en el reino de amor fieros tiranos  
-celos, ponedme un hierro en estas manos!  
-Dame, desdén, una torcida soga.  
-Mas, ¡ay de mí!, que, con cruel vitoria,  
+¿Puédese, por ventura, en un instante
+esperar y temer, o es bien hacello,
+siendo las causas del temor más ciertas?
+¿Tengo, si el duro celo está delante,
+de cerrar estos ojos, si he de vello
+por mil heridas en el alma abiertas?
+¿Quién no abrirá de par en par las puertas
+a la desconfianza, cuando mira
+descubierto el desdén, y las sospechas,
+¡oh amarga conversión!, verdades hechas,
+y la limpia verdad vuelta en mentira?
+¡Oh, en el reino de amor fieros tiranos
+celos, ponedme un hierro en estas manos!
+Dame, desdén, una torcida soga.
+Mas, ¡ay de mí!, que, con cruel vitoria,
 vuestra memoria el sufrimiento ahoga.
 
-Yo muero, en fin; y, porque nunca espere  
-buen suceso en la muerte ni en la vida,  
-pertinaz estaré en mi fantasía.  
-Diré que va acertado el que bien quiere,  
-y que es más libre el alma más rendida  
-a la de amor antigua tiranía.  
-Diré que la enemiga siempre mía  
-hermosa el alma como el cuerpo tiene,  
-y que su olvido de mi culpa nace,  
-y que, en fe de los males que nos hace,  
-amor su imperio en justa paz mantiene.  
-Y, con esta opinión y un duro lazo,  
-acelerando el miserable plazo  
-a que me han conducido sus desdenes,  
-ofreceré a los vientos cuerpo y alma,  
+Yo muero, en fin; y, porque nunca espere
+buen suceso en la muerte ni en la vida,
+pertinaz estaré en mi fantasía.
+Diré que va acertado el que bien quiere,
+y que es más libre el alma más rendida
+a la de amor antigua tiranía.
+Diré que la enemiga siempre mía
+hermosa el alma como el cuerpo tiene,
+y que su olvido de mi culpa nace,
+y que, en fe de los males que nos hace,
+amor su imperio en justa paz mantiene.
+Y, con esta opinión y un duro lazo,
+acelerando el miserable plazo
+a que me han conducido sus desdenes,
+ofreceré a los vientos cuerpo y alma,
 sin lauro o palma de futuros bienes.
 
-Tú, que con tantas sinrazones muestras  
-la razón que me fuerza a que la haga  
-a la cansada vida que aborrezco,  
-pues ya ves que te da notorias muestras  
-esta del corazón profunda llaga,  
-de cómo, alegre, a tu rigor me ofrezco,  
-si, por dicha, conoces que merezco  
-que el cielo claro de tus bellos ojos  
-en mi muerte se turbe, no lo hagas;  
-que no quiero que en nada satisfagas,  
-al darte de mi alma los despojos.  
-Antes, con risa en la ocasión funesta,  
-descubre que el fin mío fue tu fiesta;  
-mas gran simpleza es avisarte desto,  
-pues sé que está tu gloria conocida  
+Tú, que con tantas sinrazones muestras
+la razón que me fuerza a que la haga
+a la cansada vida que aborrezco,
+pues ya ves que te da notorias muestras
+esta del corazón profunda llaga,
+de cómo, alegre, a tu rigor me ofrezco,
+si, por dicha, conoces que merezco
+que el cielo claro de tus bellos ojos
+en mi muerte se turbe, no lo hagas;
+que no quiero que en nada satisfagas,
+al darte de mi alma los despojos.
+Antes, con risa en la ocasión funesta,
+descubre que el fin mío fue tu fiesta;
+mas gran simpleza es avisarte desto,
+pues sé que está tu gloria conocida
 en que mi vida llegue al fin tan presto.
 
-Venga, que es tiempo ya, del hondo abismo  
-Tántalo con su sed; Sísifo venga  
-con el peso terrible de su canto;  
-Ticio traya su buitre, y ansimismo  
-con su rueda Egïón no se detenga,  
-ni las hermanas que trabajan tanto;  
-y todos juntos su mortal quebranto  
-trasladen en mi pecho, y en voz baja  
--si ya a un desesperado son debidas-  
-canten obsequias tristes, doloridas,  
-al cuerpo a quien se niegue aun la mortaja.  
-Y el portero infernal de los tres rostros,  
-con otras mil quimeras y mil monstros,  
-lleven el doloroso contrapunto;  
-que otra pompa mejor no me parece  
+Venga, que es tiempo ya, del hondo abismo
+Tántalo con su sed; Sísifo venga
+con el peso terrible de su canto;
+Ticio traya su buitre, y ansimismo
+con su rueda Egïón no se detenga,
+ni las hermanas que trabajan tanto;
+y todos juntos su mortal quebranto
+trasladen en mi pecho, y en voz baja
+-si ya a un desesperado son debidas-
+canten obsequias tristes, doloridas,
+al cuerpo a quien se niegue aun la mortaja.
+Y el portero infernal de los tres rostros,
+con otras mil quimeras y mil monstros,
+lleven el doloroso contrapunto;
+que otra pompa mejor no me parece
 que la merece un amador difunto.
 
-Canción desesperada, no te quejes  
-cuando mi triste compañía dejes;  
-antes, pues que la causa do naciste  
-con mi desdicha augmenta su ventura,  
+Canción desesperada, no te quejes
+cuando mi triste compañía dejes;
+antes, pues que la causa do naciste
+con mi desdicha augmenta su ventura,
 aun en la sepultura no estés triste.
 
 Bien les pareció, a los que escuchado habían, la canción de Grisóstomo,
@@ -4097,13 +4096,13 @@ de los circunstantes. Cerraron la sepultura con una gruesa peña, en tanto
 que se acababa una losa que, según Ambrosio dijo, pensaba mandar hacer, con
 un epitafio que había de decir desta manera:
 
-Yace aquí de un amador  
-el mísero cuerpo helado,  
-que fue pastor de ganado,  
-perdido por desamor.  
-Murió a manos del rigor  
-de una esquiva hermosa ingrata,  
-con quien su imperio dilata  
+Yace aquí de un amador
+el mísero cuerpo helado,
+que fue pastor de ganado,
+perdido por desamor.
+Murió a manos del rigor
+de una esquiva hermosa ingrata,
+con quien su imperio dilata
 la tiranía de su amor.
 
 Luego esparcieron por cima de la sepultura muchas flores y ramos, y, dando
@@ -8201,40 +8200,40 @@ acomodados a su tristeza, y algunos en alabanza de Dulcinea. Mas los que se
 pudieron hallar enteros y que se pudiesen leer, después que a él allí le
 hallaron, no fueron más que estos que aquí se siguen:
 
-Árboles, yerbas y plantas  
-que en aqueste sitio estáis,  
-tan altos, verdes y tantas,  
-si de mi mal no os holgáis,  
-escuchad mis quejas santas.  
-Mi dolor no os alborote,  
-aunque más terrible sea,  
-pues, por pagaros escote,  
-aquí lloró don Quijote  
-ausencias de Dulcinea  
+Árboles, yerbas y plantas
+que en aqueste sitio estáis,
+tan altos, verdes y tantas,
+si de mi mal no os holgáis,
+escuchad mis quejas santas.
+Mi dolor no os alborote,
+aunque más terrible sea,
+pues, por pagaros escote,
+aquí lloró don Quijote
+ausencias de Dulcinea
 del Toboso.
 
-Es aquí el lugar adonde  
-el amador más leal  
-de su señora se esconde,  
-y ha venido a tanto mal  
-sin saber cómo o por dónde.  
-Tráele amor al estricote,  
-que es de muy mala ralea;  
-y así, hasta henchir un pipote,  
-aquí lloró don Quijote  
-ausencias de Dulcinea  
+Es aquí el lugar adonde
+el amador más leal
+de su señora se esconde,
+y ha venido a tanto mal
+sin saber cómo o por dónde.
+Tráele amor al estricote,
+que es de muy mala ralea;
+y así, hasta henchir un pipote,
+aquí lloró don Quijote
+ausencias de Dulcinea
 del Toboso.
 
-Buscando las aventuras  
-por entre las duras peñas,  
-maldiciendo entrañas duras,  
-que entre riscos y entre breñas  
-halla el triste desventuras,  
-hirióle amor con su azote,  
-no con su blanda correa;  
-y, en tocándole el cogote,  
-aquí lloró don Quijote  
-ausencias de Dulcinea  
+Buscando las aventuras
+por entre las duras peñas,
+maldiciendo entrañas duras,
+que entre riscos y entre breñas
+halla el triste desventuras,
+hirióle amor con su azote,
+no con su blanda correa;
+y, en tocándole el cogote,
+aquí lloró don Quijote
+ausencias de Dulcinea
 del Toboso.
 
 No causó poca risa en los que hallaron los versos referidos el añadidura
@@ -8521,35 +8520,35 @@ advirtieron que lo que oían cantar eran versos, no de rústicos ganaderos,
 sino de discretos cortesanos. Y confirmó esta verdad haber sido los versos
 que oyeron éstos:
 
-¿Quién menoscaba mis bienes?  
-Desdenes.  
-Y ¿quién aumenta mis duelos?  
-Los celos.  
-Y ¿quién prueba mi paciencia?  
-Ausencia.  
-De ese modo, en mi dolencia  
-ningún remedio se alcanza,  
-pues me matan la esperanza  
-desdenes, celos y ausencia.  
-¿Quién me causa este dolor?  
-Amor.  
-Y ¿quién mi gloria repugna?  
-Fortuna.  
-Y ¿quién consiente en mi duelo?  
-El cielo  
-De ese modo, yo recelo  
-morir deste mal estraño,  
-pues se aumentan en mi daño,  
-amor, fortuna y el cielo.  
-¿Quién mejorará mi suerte?  
-La muerte.  
-Y el bien de amor, ¿quién le alcanza?  
-Mudanza.  
-Y sus males, ¿quién los cura?  
-Locura.  
-De ese modo, no es cordura  
-querer curar la pasión  
-cuando los remedios son  
+¿Quién menoscaba mis bienes?
+Desdenes.
+Y ¿quién aumenta mis duelos?
+Los celos.
+Y ¿quién prueba mi paciencia?
+Ausencia.
+De ese modo, en mi dolencia
+ningún remedio se alcanza,
+pues me matan la esperanza
+desdenes, celos y ausencia.
+¿Quién me causa este dolor?
+Amor.
+Y ¿quién mi gloria repugna?
+Fortuna.
+Y ¿quién consiente en mi duelo?
+El cielo
+De ese modo, yo recelo
+morir deste mal estraño,
+pues se aumentan en mi daño,
+amor, fortuna y el cielo.
+¿Quién mejorará mi suerte?
+La muerte.
+Y el bien de amor, ¿quién le alcanza?
+Mudanza.
+Y sus males, ¿quién los cura?
+Locura.
+De ese modo, no es cordura
+querer curar la pasión
+cuando los remedios son
 muerte, mudanza y locura.
 
 La hora, el tiempo, la soledad, la voz y la destreza del que cantaba causó
@@ -8561,19 +8560,19 @@ moviesen, la cual llegó de nuevo a sus oídos, cantando este soneto:
 
 Soneto
 
-Santa amistad, que con ligeras alas,  
-tu apariencia quedándose en el suelo,  
-entre benditas almas, en el cielo,  
-subiste alegre a las impíreas salas,  
-desde allá, cuando quieres, nos señalas  
-la justa paz cubierta con un velo,  
-por quien a veces se trasluce el celo  
-de buenas obras que, a la fin, son malas.  
-Deja el cielo, ¡oh amistad!, o no permitas  
-que el engaño se vista tu librea,  
-con que destruye a la intención sincera;  
-que si tus apariencias no le quitas,  
-presto ha de verse el mundo en la pelea  
+Santa amistad, que con ligeras alas,
+tu apariencia quedándose en el suelo,
+entre benditas almas, en el cielo,
+subiste alegre a las impíreas salas,
+desde allá, cuando quieres, nos señalas
+la justa paz cubierta con un velo,
+por quien a veces se trasluce el celo
+de buenas obras que, a la fin, son malas.
+Deja el cielo, ¡oh amistad!, o no permitas
+que el engaño se vista tu librea,
+con que destruye a la intención sincera;
+que si tus apariencias no le quitas,
+presto ha de verse el mundo en la pelea
 de la discorde confusión primera.
 
 El canto se acabó con un profundo suspiro, y los dos, con atención,
@@ -11053,13 +11052,13 @@ Y, para confirmación desta verdad, te quiero decir una estancia que hizo el
 famoso poeta Luis Tansilo, en el fin de su primera parte de Las lágrimas de
 San Pedro, que dice así:
 
-Crece el dolor y crece la vergüenza  
-en Pedro, cuando el día se ha mostrado;  
-y, aunque allí no ve a nadie, se avergüenza  
-de sí mesmo, por ver que había pecado:  
-que a un magnánimo pecho a haber vergüenza  
-no sólo ha de moverle el ser mirado;  
-que de sí se avergüenza cuando yerra,  
+Crece el dolor y crece la vergüenza
+en Pedro, cuando el día se ha mostrado;
+y, aunque allí no ve a nadie, se avergüenza
+de sí mesmo, por ver que había pecado:
+que a un magnánimo pecho a haber vergüenza
+no sólo ha de moverle el ser mirado;
+que de sí se avergüenza cuando yerra,
 si bien otro no vee que cielo y tierra.
 
 Así que, no escusarás con el secreto tu dolor; antes, tendrás que llorar
@@ -11122,17 +11121,17 @@ una comedia moderna, que me parece que hacen al propósito de lo que vamos
 tratando. Aconsejaba un prudente viejo a otro, padre de una doncella, que
 la recogiese, guardase y encerrase, y entre otras razones, le dijo éstas:
 
-Es de vidrio la mujer;  
-pero no se ha de probar  
-si se puede o no quebrar,  
-porque todo podría ser.  
-Y es más fácil el quebrarse,  
-y no es cordura ponerse  
-a peligro de romperse  
-lo que no puede soldarse.  
-Y en esta opinión estén  
-todos, y en razón la fundo:  
-que si hay Dánaes en el mundo,  
+Es de vidrio la mujer;
+pero no se ha de probar
+si se puede o no quebrar,
+porque todo podría ser.
+Y es más fácil el quebrarse,
+y no es cordura ponerse
+a peligro de romperse
+lo que no puede soldarse.
+Y en esta opinión estén
+todos, y en razón la fundo:
+que si hay Dánaes en el mundo,
 hay pluvias de oro también.
 
 Cuanto hasta aquí te he dicho, ¡oh Anselmo!, ha sido por lo que a ti te
@@ -11354,15 +11353,15 @@ sustenta sobre los débiles arrimos de su flaca naturaleza? Mira que el que
 busca lo imposible es justo que lo posible se le niegue, como lo dijo mejor
 un poeta, diciendo:
 
-Busco en la muerte la vida,  
-salud en la enfermedad,  
-en la prisión libertad,  
-en lo cerrado salida  
-y en el traidor lealtad.  
-Pero mi suerte, de quien  
-jamás espero algún bien,  
-con el cielo ha estatuido  
-que, pues lo imposible pido,  
+Busco en la muerte la vida,
+salud en la enfermedad,
+en la prisión libertad,
+en lo cerrado salida
+y en el traidor lealtad.
+Pero mi suerte, de quien
+jamás espero algún bien,
+con el cielo ha estatuido
+que, pues lo imposible pido,
 lo posible aun no me den.
 
 »Fuese otro día Anselmo a la aldea, dejando dicho a Camila que el tiempo
@@ -11557,19 +11556,19 @@ oprobrio hace a su buen crédito. Pero, sea lo que fuere, lo que sé decir,
 que ayer hice un soneto a la ingratitud desta Clori, que dice ansí:
 Soneto
 
-En el silencio de la noche, cuando  
-ocupa el dulce sueño a los mortales,  
-la pobre cuenta de mis ricos males  
-estoy al cielo y a mi Clori dando.  
-Y, al tiempo cuando el sol se va mostrando  
-por las rosadas puertas orientales,  
-con suspiros y acentos desiguales,  
-voy la antigua querella renovando.  
-Y cuando el sol, de su estrellado asiento,  
-derechos rayos a la tierra envía,  
-el llanto crece y doblo los gemidos.  
-Vuelve la noche, y vuelvo al triste cuento,  
-y siempre hallo, en mi mortal porfía,  
+En el silencio de la noche, cuando
+ocupa el dulce sueño a los mortales,
+la pobre cuenta de mis ricos males
+estoy al cielo y a mi Clori dando.
+Y, al tiempo cuando el sol se va mostrando
+por las rosadas puertas orientales,
+con suspiros y acentos desiguales,
+voy la antigua querella renovando.
+Y cuando el sol, de su estrellado asiento,
+derechos rayos a la tierra envía,
+el llanto crece y doblo los gemidos.
+Vuelve la noche, y vuelvo al triste cuento,
+y siempre hallo, en mi mortal porfía,
 al cielo, sordo; a Clori, sin oídos.
 
 »Bien le pareció el soneto a Camila, pero mejor a Anselmo, pues le alabó, y
@@ -11595,19 +11594,19 @@ o, por mejor decir, menos malo. Y podréislo bien juzgar, pues es éste:
 
 Soneto
 
-Yo sé que muero; y si no soy creído,  
-es más cierto el morir, como es más cierto  
-verme a tus pies, ¡oh bella ingrata!, muerto,  
-antes que de adorarte arrepentido.  
-Podré yo verme en la región de olvido,  
-de vida y gloria y de favor desierto,  
-y allí verse podrá en mi pecho abierto  
-cómo tu hermoso rostro está esculpido.  
-Que esta reliquia guardo para el duro  
-trance que me amenaza mi porfía,  
-que en tu mismo rigor se fortalece.  
-¡Ay de aquel que navega, el cielo escuro,  
-por mar no usado y peligrosa vía,  
+Yo sé que muero; y si no soy creído,
+es más cierto el morir, como es más cierto
+verme a tus pies, ¡oh bella ingrata!, muerto,
+antes que de adorarte arrepentido.
+Podré yo verme en la región de olvido,
+de vida y gloria y de favor desierto,
+y allí verse podrá en mi pecho abierto
+cómo tu hermoso rostro está esculpido.
+Que esta reliquia guardo para el duro
+trance que me amenaza mi porfía,
+que en tu mismo rigor se fortalece.
+¡Ay de aquel que navega, el cielo escuro,
+por mar no usado y peligrosa vía,
 adonde norte o puerto no se ofrece!
 
 »También alabó este segundo soneto Anselmo, como había hecho el primero, y
@@ -12289,7 +12288,7 @@ fue adonde la había dejado encerrada. Abrió y entró en el aposento, pero no
 halló en él a Leonela: sólo halló puestas unas sábanas añudadas a la
 ventana, indicio y señal que por allí se había descolgado e ido. Volvió
 luego muy triste a decírselo a Camila, y, no hallándola en la cama ni en
-toda la casa, quedó asombrado.Preguntó a los criados de casa por ella, pero
+toda la casa, quedó asombrado. Preguntó a los criados de casa por ella, pero
 nadie le supo dar razón de lo que pedía.
 
 »Acertó acaso, andando a buscar a Camila, que vio sus cofres abiertos y que
@@ -13496,19 +13495,19 @@ que yo.
 
 Soneto
 
-Almas dichosas que del mortal velo  
-libres y esentas, por el bien que obrastes,  
-desde la baja tierra os levantastes  
-a lo más alto y lo mejor del cielo,  
-y, ardiendo en ira y en honroso celo,  
-de los cuerpos la fuerza ejercitastes,  
-que en propia y sangre ajena colorastes  
-el mar vecino y arenoso suelo;  
-primero que el valor faltó la vida  
-en los cansados brazos, que, muriendo,  
-con ser vencidos, llevan la vitoria.  
-Y esta vuestra mortal, triste caída  
-entre el muro y el hierro, os va adquiriendo  
+Almas dichosas que del mortal velo
+libres y esentas, por el bien que obrastes,
+desde la baja tierra os levantastes
+a lo más alto y lo mejor del cielo,
+y, ardiendo en ira y en honroso celo,
+de los cuerpos la fuerza ejercitastes,
+que en propia y sangre ajena colorastes
+el mar vecino y arenoso suelo;
+primero que el valor faltó la vida
+en los cansados brazos, que, muriendo,
+con ser vencidos, llevan la vitoria.
+Y esta vuestra mortal, triste caída
+entre el muro y el hierro, os va adquiriendo
 fama que el mundo os da, y el cielo gloria.
 
 — Desa mesma manera le sé yo —dijo el cautivo.
@@ -13517,19 +13516,19 @@ fama que el mundo os da, y el cielo gloria.
 
 Soneto
 
-De entre esta tierra estéril, derribada,  
-destos terrones por el suelo echados,  
-las almas santas de tres mil soldados  
-subieron vivas a mejor morada,  
-siendo primero, en vano, ejercitada  
-la fuerza de sus brazos esforzados,  
-hasta que, al fin, de pocos y cansados,  
-dieron la vida al filo de la espada.  
-Y éste es el suelo que continuo ha sido  
-de mil memorias lamentables lleno  
-en los pasados siglos y presentes.  
-Mas no más justas de su duro seno  
-habrán al claro cielo almas subido,  
+De entre esta tierra estéril, derribada,
+destos terrones por el suelo echados,
+las almas santas de tres mil soldados
+subieron vivas a mejor morada,
+siendo primero, en vano, ejercitada
+la fuerza de sus brazos esforzados,
+hasta que, al fin, de pocos y cansados,
+dieron la vida al filo de la espada.
+Y éste es el suelo que continuo ha sido
+de mil memorias lamentables lleno
+en los pasados siglos y presentes.
+Mas no más justas de su duro seno
+habrán al claro cielo almas subido,
 ni aun él sostuvo cuerpos tan valientes.
 
 No parecieron mal los sonetos, y el cautivo se alegró con las nuevas que de
@@ -14769,25 +14768,25 @@ entendió que lo que se cantaba era esto:
 ### Capítulo XLIII. Donde se cuenta la agradable historia del mozo de mulas,
 con otros estraños acaecimientos en la venta sucedidos]
 
--Marinero soy de amor,  
-y en su piélago profundo  
-navego sin esperanza  
-de llegar a puerto alguno.  
-Siguiendo voy a una estrella  
-que desde lejos descubro,  
-más bella y resplandeciente  
-que cuantas vio Palinuro.  
-Yo no sé adónde me guía,  
-y así, navego confuso,  
-el alma a mirarla atenta,  
-cuidadosa y con descuido.  
-Recatos impertinentes,  
-honestidad contra el uso,  
-son nubes que me la encubren  
-cuando más verla procuro.  
-¡Oh clara y luciente estrella,  
-en cuya lumbre me apuro!;  
-al punto que te me encubras,  
+-Marinero soy de amor,
+y en su piélago profundo
+navego sin esperanza
+de llegar a puerto alguno.
+Siguiendo voy a una estrella
+que desde lejos descubro,
+más bella y resplandeciente
+que cuantas vio Palinuro.
+Yo no sé adónde me guía,
+y así, navego confuso,
+el alma a mirarla atenta,
+cuidadosa y con descuido.
+Recatos impertinentes,
+honestidad contra el uso,
+son nubes que me la encubren
+cuando más verla procuro.
+¡Oh clara y luciente estrella,
+en cuya lumbre me apuro!;
+al punto que te me encubras,
 será de mi muerte el punto.
 
 Llegando el que cantaba a este punto, le pareció a Dorotea que no sería
@@ -14831,29 +14830,29 @@ Y, por no oílle, se tapó con las manos entrambos oídos, de lo que también
 se admiró Dorotea; la cual, estando atenta a lo que se cantaba, vio que
 proseguían en esta manera:
 
--Dulce esperanza mía,  
-que, rompiendo imposibles y malezas,  
-sigues firme la vía  
-que tú mesma te finges y aderezas:  
-no te desmaye el verte  
-a cada paso junto al de tu muerte.  
-No alcanzan perezosos  
-honrados triunfos ni vitoria alguna,  
-ni pueden ser dichosos  
-los que, no contrastando a la fortuna,  
-entregan, desvalidos,  
-al ocio blando todos los sentidos.  
-Que amor sus glorias venda  
-caras, es gran razón, y es trato justo,  
-pues no hay más rica prenda  
-que la que se quilata por su gusto;  
-y es cosa manifiesta  
-que no es de estima lo que poco cuesta.  
-Amorosas porfías  
-tal vez alcanzan imposibles cosas;  
-y ansí, aunque con las mías  
-sigo de amor las más dificultosas,  
-no por eso recelo  
+-Dulce esperanza mía,
+que, rompiendo imposibles y malezas,
+sigues firme la vía
+que tú mesma te finges y aderezas:
+no te desmaye el verte
+a cada paso junto al de tu muerte.
+No alcanzan perezosos
+honrados triunfos ni vitoria alguna,
+ni pueden ser dichosos
+los que, no contrastando a la fortuna,
+entregan, desvalidos,
+al ocio blando todos los sentidos.
+Que amor sus glorias venda
+caras, es gran razón, y es trato justo,
+pues no hay más rica prenda
+que la que se quilata por su gusto;
+y es cosa manifiesta
+que no es de estima lo que poco cuesta.
+Amorosas porfías
+tal vez alcanzan imposibles cosas;
+y ansí, aunque con las mías
+sigo de amor las más dificultosas,
+no por eso recelo
 de no alcanzar desde la tierra el cielo.
 
 Aquí dio fin la voz, y principio a nuevos sollozos Clara. Todo lo cual
@@ -16224,7 +16223,7 @@ pensará que yo no calo y adivino adónde se encaminan estos nuevos
 encantamentos? Pues sepa que le conozco, por más que se encubra el rostro,
 y sepa que le entiendo, por más que disimule sus embustes. En fin, donde
 reina la envidia no puede vivir la virtud, ni adonde hay escaseza la
-liberalidad. !Mal haya el diablo!; que, si por su reverencia no fuera, ésta
+liberalidad. ! Mal haya el diablo!; que, si por su reverencia no fuera, ésta
 fuera ya la hora que mi señor estuviera casado con la infanta Micomicona, y
 yo fuera conde, por lo menos, pues no se podía esperar otra cosa, así de la
 bondad de mi señor el de la Triste Figura como de la grandeza de mis
@@ -16798,7 +16797,7 @@ cuerno de Roldán, tamaño como una grande viga: de donde se infiere que hubo
 Doce Pares, que hubo Pierres, que hubo Cides, y otros caballeros
 semejantes,
 
-déstos que dicen las gentes  
+déstos que dicen las gentes
 que a sus aventuras van.
 
 Si no, díganme también que no es verdad que fue caballero andante el
@@ -17568,31 +17567,31 @@ menos de tanta invención y pasatiempo.
 Las palabras primeras que estaban escritas en el pergamino que se halló en
 la caja de plomo eran éstas:
 
-LOS ACADÉMICOS DE LA ARGAMASILLA,  
-LUGAR DE LA MANCHA,  
-EN VIDA Y MUERTE DEL VALEROSO  
+LOS ACADÉMICOS DE LA ARGAMASILLA,
+LUGAR DE LA MANCHA,
+EN VIDA Y MUERTE DEL VALEROSO
 DON QUIJOTE DE LA MANCHA,
 
 HOC SCRIPSERUNT:
 
-EL MONICONGO, ACADÉMICO DE LA ARGAMASILLA,  
+EL MONICONGO, ACADÉMICO DE LA ARGAMASILLA,
 A LA SEPULTURA DE DON QUIJOTE
 
 Epitafio
 
-El calvatrueno que adornó a la Mancha  
-de más despojos que Jasón decreta;  
-el jüicio que tuvo la veleta  
-aguda donde fuera mejor ancha,  
-el brazo que su fuerza tanto ensancha,  
-que llegó del Catay hasta Gaeta,  
-la musa más horrenda y más discreta  
-que grabó versos en la broncínea plancha,  
-el que a cola dejó los Amadises,  
-y en muy poquito a Galaores tuvo,  
-estribando en su amor y bizarría,  
-el que hizo callar los Belianises,  
-aquel que en Rocinante errando anduvo,  
+El calvatrueno que adornó a la Mancha
+de más despojos que Jasón decreta;
+el jüicio que tuvo la veleta
+aguda donde fuera mejor ancha,
+el brazo que su fuerza tanto ensancha,
+que llegó del Catay hasta Gaeta,
+la musa más horrenda y más discreta
+que grabó versos en la broncínea plancha,
+el que a cola dejó los Amadises,
+y en muy poquito a Galaores tuvo,
+estribando en su amor y bizarría,
+el que hizo callar los Belianises,
+aquel que en Rocinante errando anduvo,
 yace debajo desta losa fría.
 
 DEL PANIAGUADO, ACADÉMICO DE LA ARGAMASILLA,
@@ -17601,45 +17600,45 @@ In laudem Dulcineae del Toboso
 
 Soneto
 
-Esta que veis de rostro amondongado,  
-alta de pechos y ademán brioso,  
-es Dulcinea, reina del Toboso,  
-de quien fue el gran Quijote aficionado.  
-Pisó por ella el uno y otro lado  
-de la gran Sierra Negra, y el famoso  
-campo de Montïel, hasta el herboso  
-llano de Aranjüez, a pie y cansado.  
-Culpa de Rocinante, ¡oh dura estrella!,  
-que esta manchega dama, y este invito  
-andante caballero, en tiernos años,  
-ella dejó, muriendo, de ser bella;  
-y él, aunque queda en mármores escrito,  
+Esta que veis de rostro amondongado,
+alta de pechos y ademán brioso,
+es Dulcinea, reina del Toboso,
+de quien fue el gran Quijote aficionado.
+Pisó por ella el uno y otro lado
+de la gran Sierra Negra, y el famoso
+campo de Montïel, hasta el herboso
+llano de Aranjüez, a pie y cansado.
+Culpa de Rocinante, ¡oh dura estrella!,
+que esta manchega dama, y este invito
+andante caballero, en tiernos años,
+ella dejó, muriendo, de ser bella;
+y él, aunque queda en mármores escrito,
 no pudo huir de amor, iras y engaños.
 
-DEL CAPRICHOSO, DISCRETÍSIMO ACADÉMICO DE LA ARGAMASILLA,  
+DEL CAPRICHOSO, DISCRETÍSIMO ACADÉMICO DE LA ARGAMASILLA,
 EN LOOR DE ROCINANTE, CABALLO DE DON QUIJOTE DE LA MANCHA
 
 Soneto
 
-En el soberbio trono diamantino  
-que con sangrientas plantas huella Marte,  
-frenético, el Manchego su estandarte  
-tremola con esfuerzo peregrino.  
-Cuelga las armas y el acero fino  
-con que destroza, asuela, raja y parte:  
-¡nuevas proezas!, pero inventa el arte  
-un nuevo estilo al nuevo paladino.  
-Y si de su Amadís se precia Gaula,  
-por cuyos bravos descendientes Grecia  
-triunfó mil veces y su fama ensancha,  
-hoy a Quijote le corona el aula  
-do Belona preside, y dél se precia,  
-más que Grecia ni Gaula, la alta Mancha.  
-Nunca sus glorias el olvido mancha,  
-pues hasta Rocinante, en ser gallardo,  
+En el soberbio trono diamantino
+que con sangrientas plantas huella Marte,
+frenético, el Manchego su estandarte
+tremola con esfuerzo peregrino.
+Cuelga las armas y el acero fino
+con que destroza, asuela, raja y parte:
+¡nuevas proezas!, pero inventa el arte
+un nuevo estilo al nuevo paladino.
+Y si de su Amadís se precia Gaula,
+por cuyos bravos descendientes Grecia
+triunfó mil veces y su fama ensancha,
+hoy a Quijote le corona el aula
+do Belona preside, y dél se precia,
+más que Grecia ni Gaula, la alta Mancha.
+Nunca sus glorias el olvido mancha,
+pues hasta Rocinante, en ser gallardo,
 excede a Brilladoro y a Bayardo.
 
-DEL BURLADOR, ACADÉMICO ARGAMASILLESCO,  
+DEL BURLADOR, ACADÉMICO ARGAMASILLESCO,
 A SANCHO PANZA
 
 Soneto
@@ -17659,32 +17658,32 @@ Caballo Rocinante y tras su dueño.
 ¡Cómo pasais con prometer descanso,
 Y al fin parais en sombra, en humo, en sueño!
 
-DEL CACHIDIABLO, ACADÉMICO DE LA ARGAMASILLA,  
+DEL CACHIDIABLO, ACADÉMICO DE LA ARGAMASILLA,
 EN LA SEPULTURA DE DON QUIJOTE
 
 Epitafio
 
-Aquí yace el caballero,  
-bien molido y mal andante,  
-a quien llevó Rocinante  
-por uno y otro sendero.  
-Sancho Panza el majadero  
-yace también junto a él,  
-escudero el más fïel  
+Aquí yace el caballero,
+bien molido y mal andante,
+a quien llevó Rocinante
+por uno y otro sendero.
+Sancho Panza el majadero
+yace también junto a él,
+escudero el más fïel
 que vio el trato de escudero.
 
-DEL TIQUITOC, ACADÉMICO DE LA ARGAMASILLA,  
+DEL TIQUITOC, ACADÉMICO DE LA ARGAMASILLA,
 EN LA SEPULTURA DE DULCINEA DEL TOBOSO
 
 Epitafio
 
-Reposa aquí Dulcinea;  
-y, aunque de carnes rolliza,  
-la volvió en polvo y ceniza  
-la muerte espantable y fea.  
-Fue de castiza ralea,  
-y tuvo asomos de dama;  
-del gran Quijote fue llama,  
+Reposa aquí Dulcinea;
+y, aunque de carnes rolliza,
+la volvió en polvo y ceniza
+la muerte espantable y fea.
+Fue de castiza ralea,
+y tuvo asomos de dama;
+del gran Quijote fue llama,
 y fue gloria de su aldea.
 
 Éstos fueron los versos que se pudieron leer; los demás, por estar
@@ -20884,19 +20883,19 @@ Replicar quería Sancho a su amo, pero la voz del Caballero del Bosque, que
 no era muy mala mi muy buena, lo estorbó; y, estando los dos atónitos,
 oyeron que lo que cantó fue este soneto:
 
-— Dadme, señora, un término que siga,  
-conforme a vuestra voluntad cortado;  
-que será de la mía así estimado,  
-que por jamás un punto dél desdiga.  
-Si gustáis que callando mi fatiga  
-muera, contadme ya por acabado:  
-si queréis que os la cuente en desusado  
-modo, haré que el mesmo amor la diga.  
-A prueba de contrarios estoy hecho,  
-de blanda cera y de diamante duro,  
-y a las leyes de amor el ama ajusto.  
-Blando cual es, o fuerte, ofrezco el pecho:  
-entallad o imprimid lo que os dé gusto,  
+— Dadme, señora, un término que siga,
+conforme a vuestra voluntad cortado;
+que será de la mía así estimado,
+que por jamás un punto dél desdiga.
+Si gustáis que callando mi fatiga
+muera, contadme ya por acabado:
+si queréis que os la cuente en desusado
+modo, haré que el mesmo amor la diga.
+A prueba de contrarios estoy hecho,
+de blanda cera y de diamante duro,
+y a las leyes de amor el ama ajusto.
+Blando cual es, o fuerte, ofrezco el pecho:
+entallad o imprimid lo que os dé gusto,
 que de guardarlo eternamente juro.
 
 Con un ¡ay!, arrancado, al parecer, de lo íntimo de su corazón, dio fin a
@@ -22601,52 +22600,52 @@ decir en eso del deslizarme.
 — Yo me daré a entender —respondió don Lorenzo—; y por ahora esté vuesa
 merced atento a los versos glosados y a la glosa, que dicen desta manera:
 
-¡Si mi fue tornase a es,  
-sin esperar más será,  
-o viniese el tiempo ya  
+¡Si mi fue tornase a es,
+sin esperar más será,
+o viniese el tiempo ya
 de lo que será después...!
 
 Glosa
 
-Al fin, como todo pasa,  
-se pasó el bien que me dio  
-Fortuna, un tiempo no escasa,  
-y nunca me le volvió,  
-ni abundante, ni por tasa.  
-Siglos ha ya que me vees,  
-Fortuna, puesto a tus pies;  
-vuélveme a ser venturoso,  
-que será mi ser dichoso  
-si mi fue tornase a es.  
-No quiero otro gusto o gloria,  
-otra palma o vencimiento,  
-otro triunfo, otra vitoria,  
-sino volver al contento  
-que es pesar en mi memoria.  
-Si tú me vuelves allá,  
-Fortuna, templado está  
-todo el rigor de mi fuego,  
-y más si este bien es luego,  
-sin esperar más será.  
-Cosas imposibles pido,  
-pues volver el tiempo a ser  
-después que una vez ha sido,  
-no hay en la tierra poder  
-que a tanto se haya estendido.  
-Corre el tiempo, vuela y va  
-ligero, y no volverá,  
-y erraría el que pidiese,  
-o que el tiempo ya se fuese,  
-o volviese el tiempo ya.  
-Vivo en perpleja vida,  
-ya esperando, ya temiendo:  
-es muerte muy conocida,  
-y es mucho mejor muriendo  
-buscar al dolor salida.  
-A mí me fuera interés  
-acabar, mas no lo es,  
-pues, con discurso mejor,  
-me da la vida el temor  
+Al fin, como todo pasa,
+se pasó el bien que me dio
+Fortuna, un tiempo no escasa,
+y nunca me le volvió,
+ni abundante, ni por tasa.
+Siglos ha ya que me vees,
+Fortuna, puesto a tus pies;
+vuélveme a ser venturoso,
+que será mi ser dichoso
+si mi fue tornase a es.
+No quiero otro gusto o gloria,
+otra palma o vencimiento,
+otro triunfo, otra vitoria,
+sino volver al contento
+que es pesar en mi memoria.
+Si tú me vuelves allá,
+Fortuna, templado está
+todo el rigor de mi fuego,
+y más si este bien es luego,
+sin esperar más será.
+Cosas imposibles pido,
+pues volver el tiempo a ser
+después que una vez ha sido,
+no hay en la tierra poder
+que a tanto se haya estendido.
+Corre el tiempo, vuela y va
+ligero, y no volverá,
+y erraría el que pidiese,
+o que el tiempo ya se fuese,
+o volviese el tiempo ya.
+Vivo en perpleja vida,
+ya esperando, ya temiendo:
+es muerte muy conocida,
+y es mucho mejor muriendo
+buscar al dolor salida.
+A mí me fuera interés
+acabar, mas no lo es,
+pues, con discurso mejor,
+me da la vida el temor
 de lo que será después.
 
 En acabando de decir su glosa don Lorenzo, se levantó en pie don Quijote,
@@ -22671,19 +22670,19 @@ Tisbe:
 
 Soneto
 
-El muro rompe la doncella hermosa  
-que de Píramo abrió el gallardo pecho:  
-parte el Amor de Chipre, y va derecho  
-a ver la quiebra estrecha y prodigiosa.  
-Habla el silencio allí, porque no osa  
-la voz entrar por tan estrecho estrecho;  
-las almas sí, que amor suele de hecho  
-facilitar la más difícil cosa.  
-Salió el deseo de compás, y el paso  
-de la imprudente virgen solicita  
-por su gusto su muerte; ved qué historia:  
-que a entrambos en un punto, ¡oh estraño caso!,  
-los mata, los encubre y resucita  
+El muro rompe la doncella hermosa
+que de Píramo abrió el gallardo pecho:
+parte el Amor de Chipre, y va derecho
+a ver la quiebra estrecha y prodigiosa.
+Habla el silencio allí, porque no osa
+la voz entrar por tan estrecho estrecho;
+las almas sí, que amor suele de hecho
+facilitar la más difícil cosa.
+Salió el deseo de compás, y el paso
+de la imprudente virgen solicita
+por su gusto su muerte; ved qué historia:
+que a entrambos en un punto, ¡oh estraño caso!,
+los mata, los encubre y resucita
 una espada, un sepulcro, una memoria.
 
 — ¡Bendito sea Dios! —dijo don Quijote habiendo oído el soneto a don
@@ -23184,59 +23183,59 @@ Comenzaba la danza Cupido, y, habiendo hecho dos mudanzas, alzaba los ojos
 y flechaba el arco contra una doncella que se ponía entre las almenas del
 castillo, a la cual desta suerte dijo:
 
--Yo soy el dios poderoso  
-en el aire y en la tierra  
-y en el ancho mar undoso,  
-y en cuanto el abismo encierra  
-en su báratro espantoso.  
-Nunca conocí qué es miedo;  
-todo cuanto quiero puedo,  
-aunque quiera lo imposible,  
-y en todo lo que es posible  
+-Yo soy el dios poderoso
+en el aire y en la tierra
+y en el ancho mar undoso,
+y en cuanto el abismo encierra
+en su báratro espantoso.
+Nunca conocí qué es miedo;
+todo cuanto quiero puedo,
+aunque quiera lo imposible,
+y en todo lo que es posible
 mando, quito, pongo y vedo.
 
 Acabó la copla, disparó una flecha por lo alto del castillo y retiróse a
 su puesto. Salió luego el Interés, y hizo otras dos mudanzas; callaron los
 tamborinos, y él dijo:
 
--Soy quien puede más que Amor,  
-y es Amor el que me guía;  
-soy de la estirpe mejor  
-que el cielo en la tierra cría,  
-más conocida y mayor.  
-Soy el Interés, en quien  
-pocos suelen obrar bien,  
-y obrar sin mí es gran milagro;  
-y cual soy te me consagro,  
+-Soy quien puede más que Amor,
+y es Amor el que me guía;
+soy de la estirpe mejor
+que el cielo en la tierra cría,
+más conocida y mayor.
+Soy el Interés, en quien
+pocos suelen obrar bien,
+y obrar sin mí es gran milagro;
+y cual soy te me consagro,
 por siempre jamás, amén.
 
 Retiróse el Interés, y hízose adelante la Poesía; la cual, después de haber
 hecho sus mudanzas como los demás, puestos los ojos en la doncella del
 castillo, dijo:
 
--En dulcísimos conceptos,  
-la dulcísima Poesía,  
-altos, graves y discretos,  
-señora, el alma te envía  
-envuelta entre mil sonetos.  
-Si acaso no te importuna  
-mi porfía, tu fortuna,  
-de otras muchas invidiada,  
-será por mí levantada  
+-En dulcísimos conceptos,
+la dulcísima Poesía,
+altos, graves y discretos,
+señora, el alma te envía
+envuelta entre mil sonetos.
+Si acaso no te importuna
+mi porfía, tu fortuna,
+de otras muchas invidiada,
+será por mí levantada
 sobre el cerco de la luna.
 
 Desvióse la Poesía, y de la parte del Interés salió la Liberalidad, y,
 después de hechas sus mudanzas, dijo:
 
--Llaman Liberalidad  
-al dar que el estremo huye  
-de la prodigalidad,  
-y del contrario, que arguye  
-tibia y floja voluntad.  
-Mas yo, por te engrandecer,  
-de hoy más, pródiga he de ser;  
-que, aunque es vicio, es vicio honrado  
-y de pecho enamorado,  
+-Llaman Liberalidad
+al dar que el estremo huye
+de la prodigalidad,
+y del contrario, que arguye
+tibia y floja voluntad.
+Mas yo, por te engrandecer,
+de hoy más, pródiga he de ser;
+que, aunque es vicio, es vicio honrado
+y de pecho enamorado,
 que en el dar se echa de ver.
 
 Deste modo salieron y se retiraron todas las dos figuras de las dos
@@ -23958,13 +23957,13 @@ caballero, ¿cómo ahora se queja y sospira de cuando en cuando, como si
 estuviese vivo?'' Esto dicho, el mísero Durandarte, dando una gran voz,
 dijo:
 
-''¡Oh, mi primo Montesinos!  
-Lo postrero que os rogaba,  
-que cuando yo fuere muerto,  
-y mi ánima arrancada,  
-que llevéis mi corazón  
-adonde Belerma estaba,  
-sacándomele del pecho,  
+''¡Oh, mi primo Montesinos!
+Lo postrero que os rogaba,
+que cuando yo fuere muerto,
+y mi ánima arrancada,
+que llevéis mi corazón
+adonde Belerma estaba,
+sacándomele del pecho,
 ya con puñal, ya con daga.''
 
 Oyendo lo cual el venerable Montesinos, se puso de rodillas ante el
@@ -24349,9 +24348,9 @@ rostro, y, al parecer, ágil de su persona. Iba cantando seguidillas, para
 entretener el trabajo del camino. Cuando llegaron a él, acababa de cantar
 una, que el primo tomó de memoria, que dicen que decía:
 
-A la guerra me lleva  
-mi necesidad;  
-si tuviera dineros,  
+A la guerra me lleva
+mi necesidad;
+si tuviera dineros,
 no fuera, en verdad.
 
 El primero que le habló fue don Quijote, diciéndole:
@@ -24799,7 +24798,7 @@ así se llamaba entonces la que hoy se llama Zaragoza; y vean vuesas
 mercedes allí cómo está jugando a las tablas don Gaiferos, según aquello
 que se canta:
 
-Jugando está a las tablas don Gaiferos,  
+Jugando está a las tablas don Gaiferos,
 que ya de Melisendra está olvidado.
 
 Y aquel personaje que allí asoma, con corona en la cabeza y ceptro en las
@@ -24839,7 +24838,7 @@ puesto que era un pariente y gran privado suyo, le mandó luego prender, y
 que le den docientos azotes, llevándole por las calles acostumbradas de la
 ciudad,
 
-con chilladores delante  
+con chilladores delante
 y envaramiento detrás;
 
 y veis aquí donde salen a ejecutar la sentencia, aun bien apenas no
@@ -24863,7 +24862,7 @@ moro, con mejor y más sosegado semblante, se ha puesto a los miradores de
 la torre, y habla con su esposo, creyendo que es algún pasajero, con quien
 pasó todas aquellas razones y coloquios de aquel romance que dicen:
 
-Caballero, si a Francia ides,  
+Caballero, si a Francia ides,
 por Gaiferos preguntad;
 
 las cuales no digo yo ahora, porque de la prolijidad se suele engendrar el
@@ -24969,8 +24968,8 @@ hoy viven en la tierra!
 — ¡Vivan en hora buena —dijo a esta sazón con voz enfermiza maese Pedro—, y
 muera yo, pues soy tan desdichado que puedo decir con el rey don Rodrigo:
 
-Ayer fui señor de España...  
-y hoy no tengo una almena  
+Ayer fui señor de España...
+y hoy no tengo una almena
 que pueda decir que es mía!
 
 No ha media hora, ni aun un mediano momento, que me vi señor de reyes y de
@@ -25184,7 +25183,7 @@ levantada, la boca abierta y la lengua de fuera, en acto y postura como si
 estuviera rebuznando; alrededor dél estaban escritos de letras grandes
 estos dos versos:
 
-No rebuznaron en balde  
+No rebuznaron en balde
 el uno y el otro alcalde.
 
 Por esta insignia sacó don Quijote que aquella gente debía de ser del
@@ -25983,8 +25982,8 @@ estamos acostumbradas a semejantes haciendas.
 — Pues en verdad —respondió Sancho— que he oído yo decir a mi señor, que es
 zahorí de las historias, contando aquella de Lanzarote,
 
-cuando de Bretaña vino,  
-que damas curaban dél,  
+cuando de Bretaña vino,
+que damas curaban dél,
 y dueñas del su rocino;
 
 y que en el particular de mi asno, que no le trocara yo con el rocín del
@@ -27040,7 +27039,7 @@ verse en este estremo. Yo no sé qué gusto se recibe de esperar a un animal
 que, si os alcanza con un colmillo, os puede quitar la vida; yo me acuerdo
 haber oído cantar un romance antiguo que dice:
 
-De los osos seas comido,  
+De los osos seas comido,
 como Favila el nombrado.
 
 — Ése fue un rey godo —dijo don Quijote—, que, yendo a caza de montería, le
@@ -27268,54 +27267,54 @@ Quijote recibió pesadumbre y Sancho miedo, y los duques hicieron algún
 sentimiento temeroso. Alzada y puesta en pie esta muerte viva, con voz algo
 dormida y con lengua no muy despierta, comenzó a decir desta manera:
 
--Yo soy Merlín, aquel que las historias  
-dicen que tuve por mi padre al diablo  
-(mentira autorizada de los tiempos),  
-príncipe de la Mágica y monarca  
-y archivo de la ciencia zoroástrica,  
-émulo a las edades y a los siglos  
-que solapar pretenden las hazañas  
-de los andantes bravos caballeros  
-a quien yo tuve y tengo gran cariño.  
-Y, puesto que es de los encantadores,  
-de los magos o mágicos contino  
-dura la condición, áspera y fuerte,  
-la mía es tierna, blanda y amorosa,  
-y amiga de hacer bien a todas gentes.  
-En las cavernas lóbregas de Dite,  
-donde estaba mi alma entretenida  
-en formar ciertos rombos y caráteres,  
-llegó la voz doliente de la bella  
-y sin par Dulcinea del Toboso.  
-Supe su encantamento y su desgracia,  
-y su trasformación de gentil dama  
-en rústica aldeana; condolíme,  
-y, encerrando mi espíritu en el hueco  
-desta espantosa y fiera notomía,  
-después de haber revuelto cien mil libros  
-desta mi ciencia endemoniada y torpe,  
-vengo a dar el remedio que conviene  
-a tamaño dolor, a mal tamaño.  
-¡Oh tú, gloria y honor de cuantos visten  
-las túnicas de acero y de diamante,  
-luz y farol, sendero, norte y guía  
-de aquellos que, dejando el torpe sueño  
-y las ociosas plumas, se acomodan  
-a usar el ejercicio intolerable  
-de las sangrientas y pesadas armas!  
-A ti digo ¡oh varón, como se debe  
-por jamás alabado!, a ti, valiente  
-juntamente y discreto don Quijote,  
-de la Mancha esplendor, de España estrella,  
-que para recobrar su estado primo  
-la sin par Dulcinea del Toboso,  
-es menester que Sancho, tu escudero,  
-se dé tres mil azotes y trecientos  
-en ambas sus valientes posaderas,  
-al aire descubiertas, y de modo  
-que le escuezan, le amarguen y le enfaden.  
-Y en esto se resuelven todos cuantos  
-de su desgracia han sido los autores,  
+-Yo soy Merlín, aquel que las historias
+dicen que tuve por mi padre al diablo
+(mentira autorizada de los tiempos),
+príncipe de la Mágica y monarca
+y archivo de la ciencia zoroástrica,
+émulo a las edades y a los siglos
+que solapar pretenden las hazañas
+de los andantes bravos caballeros
+a quien yo tuve y tengo gran cariño.
+Y, puesto que es de los encantadores,
+de los magos o mágicos contino
+dura la condición, áspera y fuerte,
+la mía es tierna, blanda y amorosa,
+y amiga de hacer bien a todas gentes.
+En las cavernas lóbregas de Dite,
+donde estaba mi alma entretenida
+en formar ciertos rombos y caráteres,
+llegó la voz doliente de la bella
+y sin par Dulcinea del Toboso.
+Supe su encantamento y su desgracia,
+y su trasformación de gentil dama
+en rústica aldeana; condolíme,
+y, encerrando mi espíritu en el hueco
+desta espantosa y fiera notomía,
+después de haber revuelto cien mil libros
+desta mi ciencia endemoniada y torpe,
+vengo a dar el remedio que conviene
+a tamaño dolor, a mal tamaño.
+¡Oh tú, gloria y honor de cuantos visten
+las túnicas de acero y de diamante,
+luz y farol, sendero, norte y guía
+de aquellos que, dejando el torpe sueño
+y las ociosas plumas, se acomodan
+a usar el ejercicio intolerable
+de las sangrientas y pesadas armas!
+A ti digo ¡oh varón, como se debe
+por jamás alabado!, a ti, valiente
+juntamente y discreto don Quijote,
+de la Mancha esplendor, de España estrella,
+que para recobrar su estado primo
+la sin par Dulcinea del Toboso,
+es menester que Sancho, tu escudero,
+se dé tres mil azotes y trecientos
+en ambas sus valientes posaderas,
+al aire descubiertas, y de modo
+que le escuezan, le amarguen y le enfaden.
+Y en esto se resuelven todos cuantos
+de su desgracia han sido los autores,
 y a esto es mi venida, mis señores.
 
 — ¡Voto a tal! —dijo a esta sazón Sancho—. No digo yo tres mil azotes, pero
@@ -27943,9 +27942,9 @@ conmigo por el suelo fueron unas coplas que le oí cantar una noche desde
 una reja que caía a una callejuela donde él estaba, que, si mal no me
 acuerdo, decían:
 
-De la dulce mi enemiga  
-nace un mal que al alma hiere,  
-y, por más tormento, quiere  
+De la dulce mi enemiga
+nace un mal que al alma hiere,
+y, por más tormento, quiere
 que se sienta y no se diga.
 
 Parecióme la trova de perlas, y su voz de almíbar, y después acá, digo,
@@ -27957,9 +27956,9 @@ entretienen y hacen llorar los niños y a las mujeres, sino unas agudezas
 que, a modo de blandas espinas, os atraviesan el alma, y como rayos os
 hieren en ella, dejando sano el vestido. Y otra vez cantó:
 
-Ven, muerte, tan escondida  
-que no te sienta venir,  
-porque el placer del morir  
+Ven, muerte, tan escondida
+que no te sienta venir,
+porque el placer del morir
 no me torne a dar la vida.
 
 Y deste jaez otras coplitas y estrambotes, que cantados encantan y escritos
@@ -29297,81 +29296,81 @@ alegraron las doncellas, que otra cosa no deseaban sino que don Quijote las
 oyese. Recorrida, pues, y afinada la arpa, Altisidora dio principio a este
 romance:
 
--¡Oh, tú, que estás en tu lecho,  
-entre sábanas de holanda,  
-durmiendo a pierna tendida  
-de la noche a la mañana,  
-caballero el más valiente  
-que ha producido la Mancha,  
-más honesto y más bendito  
-que el oro fino de Arabia!  
-Oye a una triste doncella,  
-bien crecida y mal lograda,  
-que en la luz de tus dos soles  
-se siente abrasar el alma.  
-Tú buscas tus aventuras,  
-y ajenas desdichas hallas;  
-das las feridas, y niegas  
-el remedio de sanarlas.  
-Dime, valeroso joven,  
-que Dios prospere tus ansias,  
-si te criaste en la Libia,  
-o en las montañas de Jaca;  
-si sierpes te dieron leche;  
-si, a dicha, fueron tus amas  
-la aspereza de las selvas  
-y el horror de las montañas.  
-Muy bien puede Dulcinea,  
-doncella rolliza y sana,  
-preciarse de que ha rendido  
-a una tigre y fiera brava.  
-Por esto será famosa  
-desde Henares a Jarama,  
-desde el Tajo a Manzanares,  
-desde Pisuerga hasta Arlanza.  
-Trocáreme yo por ella,  
-y diera encima una saya  
-de las más gayadas mías,  
-que de oro le adornan franjas.  
-¡Oh, quién se viera en tus brazos,  
-o si no, junto a tu cama,  
-rascándote la cabeza  
-y matándote la caspa!  
-Mucho pido, y no soy digna  
-de merced tan señalada:  
-los pies quisiera traerte,  
-que a una humilde esto le basta.  
-¡Oh, qué de cofias te diera,  
-qué de escarpines de plata,  
-qué de calzas de damasco,  
-qué de herreruelos de holanda!  
-¡Qué de finísimas perlas,  
-cada cual como una agalla,  
-que, a no tener compañeras,  
-Las solas fueran llamadas!  
-No mires de tu Tarpeya  
-este incendio que me abrasa,  
-Nerón manchego del mundo,  
-ni le avives con tu saña.  
-Niña soy, pulcela tierna,  
-mi edad de quince no pasa:  
-catorce tengo y tres meses,  
-te juro en Dios y en mi ánima.  
-No soy renca, ni soy coja,  
-ni tengo nada de manca;  
-los cabellos, como lirios,  
-que, en pie, por el suelo arrastran.  
-Y, aunque es mi boca aguileña  
-y la nariz algo chata,  
-ser mis dientes de topacios  
-mi belleza al cielo ensalza.  
-Mi voz, ya ves, si me escuchas,  
-que a la que es más dulce iguala,  
-y soy de disposición  
-algo menos que mediana.  
-Estas y otras gracias mías,  
-son despojos de tu aljaba;  
-desta casa soy doncella,  
+-¡Oh, tú, que estás en tu lecho,
+entre sábanas de holanda,
+durmiendo a pierna tendida
+de la noche a la mañana,
+caballero el más valiente
+que ha producido la Mancha,
+más honesto y más bendito
+que el oro fino de Arabia!
+Oye a una triste doncella,
+bien crecida y mal lograda,
+que en la luz de tus dos soles
+se siente abrasar el alma.
+Tú buscas tus aventuras,
+y ajenas desdichas hallas;
+das las feridas, y niegas
+el remedio de sanarlas.
+Dime, valeroso joven,
+que Dios prospere tus ansias,
+si te criaste en la Libia,
+o en las montañas de Jaca;
+si sierpes te dieron leche;
+si, a dicha, fueron tus amas
+la aspereza de las selvas
+y el horror de las montañas.
+Muy bien puede Dulcinea,
+doncella rolliza y sana,
+preciarse de que ha rendido
+a una tigre y fiera brava.
+Por esto será famosa
+desde Henares a Jarama,
+desde el Tajo a Manzanares,
+desde Pisuerga hasta Arlanza.
+Trocáreme yo por ella,
+y diera encima una saya
+de las más gayadas mías,
+que de oro le adornan franjas.
+¡Oh, quién se viera en tus brazos,
+o si no, junto a tu cama,
+rascándote la cabeza
+y matándote la caspa!
+Mucho pido, y no soy digna
+de merced tan señalada:
+los pies quisiera traerte,
+que a una humilde esto le basta.
+¡Oh, qué de cofias te diera,
+qué de escarpines de plata,
+qué de calzas de damasco,
+qué de herreruelos de holanda!
+¡Qué de finísimas perlas,
+cada cual como una agalla,
+que, a no tener compañeras,
+Las solas fueran llamadas!
+No mires de tu Tarpeya
+este incendio que me abrasa,
+Nerón manchego del mundo,
+ni le avives con tu saña.
+Niña soy, pulcela tierna,
+mi edad de quince no pasa:
+catorce tengo y tres meses,
+te juro en Dios y en mi ánima.
+No soy renca, ni soy coja,
+ni tengo nada de manca;
+los cabellos, como lirios,
+que, en pie, por el suelo arrastran.
+Y, aunque es mi boca aguileña
+y la nariz algo chata,
+ser mis dientes de topacios
+mi belleza al cielo ensalza.
+Mi voz, ya ves, si me escuchas,
+que a la que es más dulce iguala,
+y soy de disposición
+algo menos que mediana.
+Estas y otras gracias mías,
+son despojos de tu aljaba;
+desta casa soy doncella,
 y Altisidora me llaman.
 
 Aquí dio fin el canto de la malferida Altisidora, y comenzó el asombro del
@@ -29734,41 +29733,41 @@ lo mejor que supo, escupió y remondóse el pecho, y luego, con una voz
 ronquilla, aunque entonada, cantó el siguiente romance, que él mismo aquel
 día había compuesto:
 
--Suelen las fuerzas de amor  
-sacar de quicio a las almas,  
-tomando por instrumento  
-la ociosidad descuidada.  
-Suele el coser y el labrar,  
-y el estar siempre ocupada,  
-ser antídoto al veneno  
-de las amorosas ansias.  
-Las doncellas recogidas  
-que aspiran a ser casadas,  
-la honestidad es la dote  
-y voz de sus alabanzas.  
-Los andantes caballeros,  
-y los que en la corte andan,  
-requiébranse con las libres,  
-con las honestas se casan.  
-Hay amores de levante,  
-que entre huéspedes se tratan,  
-que llegan presto al poniente,  
-porque en el partirse acaban.  
-El amor recién venido,  
-que hoy llegó y se va mañana,  
-las imágines no deja  
-bien impresas en el alma.  
-Pintura sobre pintura  
-ni se muestra ni señala;  
-y do hay primera belleza,  
-la segunda no hace baza.  
-Dulcinea del Toboso  
-del alma en la tabla rasa  
-tengo pintada de modo  
-que es imposible borrarla.  
-La firmeza en los amantes  
-es la parte más preciada,  
-por quien hace amor milagros,  
+-Suelen las fuerzas de amor
+sacar de quicio a las almas,
+tomando por instrumento
+la ociosidad descuidada.
+Suele el coser y el labrar,
+y el estar siempre ocupada,
+ser antídoto al veneno
+de las amorosas ansias.
+Las doncellas recogidas
+que aspiran a ser casadas,
+la honestidad es la dote
+y voz de sus alabanzas.
+Los andantes caballeros,
+y los que en la corte andan,
+requiébranse con las libres,
+con las honestas se casan.
+Hay amores de levante,
+que entre huéspedes se tratan,
+que llegan presto al poniente,
+porque en el partirse acaban.
+El amor recién venido,
+que hoy llegó y se va mañana,
+las imágines no deja
+bien impresas en el alma.
+Pintura sobre pintura
+ni se muestra ni señala;
+y do hay primera belleza,
+la segunda no hace baza.
+Dulcinea del Toboso
+del alma en la tabla rasa
+tengo pintada de modo
+que es imposible borrarla.
+La firmeza en los amantes
+es la parte más preciada,
+por quien hace amor milagros,
 y asimesmo los levanta.
 
 Aquí llegaba don Quijote de su canto, a quien estaban escuchando el duque y
@@ -32735,61 +32734,61 @@ Estando, como queda dicho, mirándole todos, a deshora, entre las otras
 dueñas y doncellas de la duquesa, que le miraban, alzó la voz la
 desenvuelta y discreta Altisidora, y en son lastimero dijo:
 
--Escucha, mal caballero;  
-detén un poco las riendas;  
-no fatigues las ijadas  
-de tu mal regida bestia.  
-Mira, falso, que no huyas  
-de alguna serpiente fiera,  
-sino de una corderilla  
-que está muy lejos de oveja.  
-Tú has burlado, monstruo horrendo,  
-la más hermosa doncella  
-que Dïana vio en sus montes,  
-que Venus miró en sus selvas.  
-Cruel Vireno, fugitivo Eneas,  
-Barrabás te acompañe; allá te avengas.  
-Tú llevas, ¡llevar impío!,  
-en las garras de tus cerras  
-las entrañas de una humilde,  
-como enamorada, tierna.  
-Llévaste tres tocadores,  
-y unas ligas, de unas piernas  
-que al mármol puro se igualan  
-en lisas, blancas y negras.  
-Llévaste dos mil suspiros,  
-que, a ser de fuego, pudieran  
-abrasar a dos mil Troyas,  
-si dos mil Troyas hubiera.  
-Cruel Vireno, fugitivo Eneas,  
-Barrabás te acompañe; allá te avengas.  
-De ese Sancho, tu escudero,  
-las entrañas sean tan tercas  
-y tan duras, que no salga  
-de su encanto Dulcinea.  
-De la culpa que tú tienes  
-lleve la triste la pena;  
-que justos por pecadores  
-tal vez pagan en mi tierra.  
-Tus más finas aventuras  
-en desventuras se vuelvan,  
-en sueños tus pasatiempos,  
-en olvidos tus firmezas.  
-Cruel Vireno, fugitivo Eneas,  
-Barrabás te acompañe; allá te avengas.  
-Seas tenido por falso  
-desde Sevilla a Marchena,  
-desde Granada hasta Loja,  
-de Londres a Inglaterra.  
-Si jugares al reinado,  
-los cientos, o la primera,  
-los reyes huyan de ti;  
-ases ni sietes no veas.  
-Si te cortares los callos,  
-sangre las heridas viertan,  
-y quédente los raigones  
-si te sacares las muelas.  
-Cruel Vireno, fugitivo Eneas,  
+-Escucha, mal caballero;
+detén un poco las riendas;
+no fatigues las ijadas
+de tu mal regida bestia.
+Mira, falso, que no huyas
+de alguna serpiente fiera,
+sino de una corderilla
+que está muy lejos de oveja.
+Tú has burlado, monstruo horrendo,
+la más hermosa doncella
+que Dïana vio en sus montes,
+que Venus miró en sus selvas.
+Cruel Vireno, fugitivo Eneas,
+Barrabás te acompañe; allá te avengas.
+Tú llevas, ¡llevar impío!,
+en las garras de tus cerras
+las entrañas de una humilde,
+como enamorada, tierna.
+Llévaste tres tocadores,
+y unas ligas, de unas piernas
+que al mármol puro se igualan
+en lisas, blancas y negras.
+Llévaste dos mil suspiros,
+que, a ser de fuego, pudieran
+abrasar a dos mil Troyas,
+si dos mil Troyas hubiera.
+Cruel Vireno, fugitivo Eneas,
+Barrabás te acompañe; allá te avengas.
+De ese Sancho, tu escudero,
+las entrañas sean tan tercas
+y tan duras, que no salga
+de su encanto Dulcinea.
+De la culpa que tú tienes
+lleve la triste la pena;
+que justos por pecadores
+tal vez pagan en mi tierra.
+Tus más finas aventuras
+en desventuras se vuelvan,
+en sueños tus pasatiempos,
+en olvidos tus firmezas.
+Cruel Vireno, fugitivo Eneas,
+Barrabás te acompañe; allá te avengas.
+Seas tenido por falso
+desde Sevilla a Marchena,
+desde Granada hasta Loja,
+de Londres a Inglaterra.
+Si jugares al reinado,
+los cientos, o la primera,
+los reyes huyan de ti;
+ases ni sietes no veas.
+Si te cortares los callos,
+sangre las heridas viertan,
+y quédente los raigones
+si te sacares las muelas.
+Cruel Vireno, fugitivo Eneas,
 Barrabás te acompañe; allá te avengas.
 
 En tanto que, de la suerte que se ha dicho, se quejaba la lastimada
@@ -35765,17 +35764,17 @@ Quijote, arrimado a un tronco de una haya o de un alcornoque —que Cide
 Hamete Benengeli no distingue el árbol que era—, al son de sus mesmos
 suspiros, cantó de esta suerte:
 
--Amor, cuando yo pienso  
-en el mal que me das, terrible y fuerte,  
-voy corriendo a la muerte,  
-pensando así acabar mi mal inmenso;  
-mas, en llegando al paso  
-que es puerto en este mar de mi tormento,  
-tanta alegría siento,  
-que la vida se esfuerza y no le paso.  
-Así el vivir me mata,  
-que la muerte me torna a dar la vida.  
-¡Oh condición no oída,  
+-Amor, cuando yo pienso
+en el mal que me das, terrible y fuerte,
+voy corriendo a la muerte,
+pensando así acabar mi mal inmenso;
+mas, en llegando al paso
+que es puerto en este mar de mi tormento,
+tanta alegría siento,
+que la vida se esfuerza y no le paso.
+Así el vivir me mata,
+que la muerte me torna a dar la vida.
+¡Oh condición no oída,
 la que conmigo muerte y vida trata!
 
 Cada verso déstos acompañaba con muchos suspiros y no pocas lágrimas, bien
@@ -35899,21 +35898,21 @@ Luego hizo de sí improvisa muestra, junto a la almohada del, al parecer,
 cadáver, un hermoso mancebo vestido a lo romano, que, al son de una arpa,
 que él mismo tocaba, cantó con suavísima y clara voz estas dos estancias:
 
--En tanto que en sí vuelve Altisidora,  
-muerta por la crueldad de don Quijote,  
-y en tanto que en la corte encantadora  
-se vistieren las damas de picote,  
-y en tanto que a sus dueñas mi señora  
-vistiere de bayeta y de anascote,  
-cantaré su belleza y su desgracia,  
-con mejor plectro que el cantor de Tracia.  
-Y aun no se me figura que me toca  
-aqueste oficio solamente en vida;  
-mas, con la lengua muerta y fría en la boca,  
-pienso mover la voz a ti debida.  
-Libre mi alma de su estrecha roca,  
-por el estigio lago conducida,  
-celebrándote irá, y aquel sonido  
+-En tanto que en sí vuelve Altisidora,
+muerta por la crueldad de don Quijote,
+y en tanto que en la corte encantadora
+se vistieren las damas de picote,
+y en tanto que a sus dueñas mi señora
+vistiere de bayeta y de anascote,
+cantaré su belleza y su desgracia,
+con mejor plectro que el cantor de Tracia.
+Y aun no se me figura que me toca
+aqueste oficio solamente en vida;
+mas, con la lengua muerta y fría en la boca,
+pienso mover la voz a ti debida.
+Libre mi alma de su estrecha roca,
+por el estigio lago conducida,
+celebrándote irá, y aquel sonido
 hará parar las aguas del olvido.
 
 — No más —dijo a esta sazón uno de los dos que parecían reyes—: no más,
@@ -36291,7 +36290,7 @@ de mis ojos ya no su triste figura, sino su fea y abominable catadura.
 
 — Eso me parece —dijo el duque— a lo que suele decirse:
 
-Porque aquel que dice injurias,  
+Porque aquel que dice injurias,
 cerca está de perdonar.
 
 Hizo Altisidora muestra de limpiarse las lágrimas con un pañuelo, y,
@@ -36856,7 +36855,7 @@ dijo:
 volvía a reducirse en su casa, y pasar en ella una vida quieta y honrada,
 se quiere meter en nuevos laberintos, haciéndose
 
-Pastorcillo, tú que vienes,  
+Pastorcillo, tú que vienes,
 pastorcico, tú que vas?
 
 Pues en verdad que está ya duro el alcacel para zampoñas.
@@ -37089,15 +37088,15 @@ contendieron las siete ciudades de Grecia por Homero.
 Déjanse de poner aquí los llantos de Sancho, sobrina y ama de don Quijote,
 los nuevos epitafios de su sepultura, aunque Sansón Carrasco le puso éste:
 
-Yace aquí el Hidalgo fuerte  
-que a tanto estremo llegó  
-de valiente, que se advierte  
-que la muerte no triunfó  
-de su vida con su muerte.  
-Tuvo a todo el mundo en poco;  
-fue el espantajo y el coco  
-del mundo, en tal coyuntura,  
-que acreditó su ventura  
+Yace aquí el Hidalgo fuerte
+que a tanto estremo llegó
+de valiente, que se advierte
+que la muerte no triunfó
+de su vida con su muerte.
+Tuvo a todo el mundo en poco;
+fue el espantajo y el coco
+del mundo, en tal coyuntura,
+que acreditó su ventura
 morir cuerdo y vivir loco.
 
 Y el prudentísimo Cide Hamete dijo a su pluma:
@@ -37108,9 +37107,9 @@ presuntuosos y malandrines historiadores no te descuelgan para profanarte.
 Pero, antes que a ti lleguen, les puedes advertir, y decirles en el mejor
 modo que pudieres:
 
-''¡Tate, tate, folloncicos!  
-De ninguno sea tocada;  
-porque esta impresa, buen rey,  
+''¡Tate, tate, folloncicos!
+De ninguno sea tocada;
+porque esta impresa, buen rey,
 para mí estaba guardada.
 
 Para mí sola nació don Quijote, y yo para él; él supo obrar y yo escribir;
@@ -37136,7 +37135,7 @@ Quijote, van ya tropezando, y han de caer del todo, sin duda alguna. Vale.
 Fin
 
 end chapter*** END OF THE PROJECT GUTENBERG EBOOK DON QUIJOTE ***This file should be named 2000-h.htm or 2000-h.zipThis and all associated files of various formats will be found in https://www.gutenberg.org/2/0/0/2000/Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -37150,15 +37149,15 @@ eBook, complying with the rules is very easy. You may use this eBook
 for nearly any purpose such as creation of derivative works, reports,
 performances and research. They may be modified and printed and given
 away—you may do practically ANYTHING in the United States with eBooks
-not protected by U.S. copyright law. Redistribution is subject to the
-trademark license, especially commercial redistribution.START: FULL LICENSE  
-THE FULL PROJECT GUTENBERG LICENSE  
+not protected by U. S. copyright law. Redistribution is subject to the
+trademark license, especially commercial redistribution. START: FULL LICENSE
+THE FULL PROJECT GUTENBERG LICENSE
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™ electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™ electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -37167,15 +37166,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -37190,7 +37189,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -37198,7 +37197,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country outside the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country outside the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -37209,28 +37208,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -37240,9 +37239,9 @@ version posted on the official Project Gutenberg™ web site
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that- You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -37263,40 +37262,40 @@ provided that- You pay a royalty fee of 20% of the gross profits you derive from
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- You provide, in accordance with paragraph 1.F.3, a full refund of
+- You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from both the Project Gutenberg Literary Archive Foundation and The
 Project Gutenberg Trademark LLC, the owner of the Project Gutenberg™
-trademark. Contact the Foundation as set forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+trademark. Contact the Foundation as set forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -37307,17 +37306,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -37327,11 +37326,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -37339,51 +37338,51 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s principal office is in Fairbanks, Alaska, with the
+U. S. federal laws and your state’s laws. The Foundation’s principal office is in Fairbanks, Alaska, with the
 mailing address: PO Box 750175, Fairbanks, AK 99775, but its
 volunteers and employees are scattered throughout numerous
 locations. Its business office is located at 809 North 1500 West, Salt
 Lake City, UT 84116, (801) 596-1887. Email contact links and up to
 date contact information can be found at the Foundation’s web site and
-official page at www.gutenberg.org/contactFor additional contact information:Dr. Gregory B. Newby  
-Chief Executive and Director  
+official page at www.gutenberg.org/contactFor additional contact information:Dr. Gregory B. Newby
+Chief Executive and Director
 gbnewby@pglaf.orgSection 4. Information about Donations to the Project Gutenberg Literary Archive FoundationProject Gutenberg™ depends upon and cannot survive without wide
 spread public support and donations to carry out its mission of
 increasing the number of public domain and licensed works that can be
 freely distributed in machine readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg Web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg Web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donateSection 5. General Information About Project Gutenberg™ electronic works.Professor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donateSection 5. General Information About Project Gutenberg™ electronic works. Professor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our Web site which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This Web site includes information about Project Gutenberg™,
+edition. Most people start at our Web site which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This Web site includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

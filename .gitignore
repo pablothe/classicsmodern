@@ -171,10 +171,12 @@ books/*/call_*_chapter_data.json
 books/*/.audiobook_state*.json
 books/*/.vector_cache/
 books/*/*.md.bak
+books/*/*.md.backup*
 books/*/*_cleaned_*.md
 books/*/*_original_*.md
 books/*/audio_kokoro/
 books/*/audio_edge/
+books/*/*_chapter_data.json
 
 # Book migration backups
 books/*/.old_structure_backup/

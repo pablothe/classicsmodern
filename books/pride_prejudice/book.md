@@ -6,11 +6,11 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: Pride and Prejudice
+before using this eBook. Title: Pride and Prejudice
 
 Author: Jane Austen
 
-Release date: June 1, 1998 [eBook #1342]  
+Release date: June 1, 1998 [eBook #1342]
 Most recently updated: October 29, 2024
 
 Language: English
@@ -20,28 +20,26 @@ Credits: Chuck Greif and the Online Distributed Proofreading Team at http://www.
 *** START OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***
 ---
 
-[PREFACE.](#PREFACE)  
-[List of Illustrations.](#LIST_OF_ILLUSTRATIONS)  
+[PREFACE.](#PREFACE)
+[List of Illustrations.](#LIST_OF_ILLUSTRATIONS)
 [Chapter: I.,](#Chapter_I)[II.,](#CHAPTER_II)[III.,](#CHAPTER_III)[IV.,](#CHAPTER_IV)[V.,](#CHAPTER_V)[VI.,](#CHAPTER_VI)[VII.,](#CHAPTER_VII)[VIII.,](#CHAPTER_VIII)[IX.,](#CHAPTER_IX)[X.,](#CHAPTER_X)[XI.,](#CHAPTER_XI)[XII.,](#CHAPTER_XII)[XIII.,](#CHAPTER_XIII)[XIV.,](#CHAPTER_XIV)[XV.,](#CHAPTER_XV)[XVI.,](#CHAPTER_XVI)[XVII.,](#CHAPTER_XVII)[XVIII.,](#CHAPTER_XVIII)[XIX.,](#CHAPTER_XIX)[XX.,](#CHAPTER_XX)[XXI.,](#CHAPTER_XXI)[XXII.,](#CHAPTER_XXII)[XXIII.,](#CHAPTER_XXIII)[XXIV.,](#CHAPTER_XXIV)[XXV.,](#CHAPTER_XXV)[XXVI.,](#CHAPTER_XXVI)[XXVII.,](#CHAPTER_XXVII)[XXVIII.,](#CHAPTER_XXVIII)[XXIX.,](#CHAPTER_XXIX)[XXX.,](#CHAPTER_XXX)[XXXI.,](#CHAPTER_XXXI)[XXXII.,](#CHAPTER_XXXII)[XXXIII.,](#CHAPTER_XXXIII)[XXXIV.,](#CHAPTER_XXXIV)[XXXV.,](#CHAPTER_XXXV)[XXXVI.,](#CHAPTER_XXXVI)[XXXVII.,](#CHAPTER_XXXVII)[XXXVIII.,](#CHAPTER_XXXVIII)[XXXIX.,](#CHAPTER_XXXIX)[XL.,](#CHAPTER_XL)[XLI.,](#CHAPTER_XLI)[XLII.,](#CHAPTER_XLII)[XLIII.,](#CHAPTER_XLIII)[XLIV.,](#CHAPTER_XLIV)[XLV.,](#CHAPTER_XLV)[XLVI.,](#CHAPTER_XLVI)[XLVII.,](#CHAPTER_XLVII)[XLVIII.,](#CHAPTER_XLVIII)[XLIX.,](#CHAPTER_XLIX)[L.,](#CHAPTER_L)[LI.,](#CHAPTER_LI)[LII.,](#CHAPTER_LII)[LIII.,](#CHAPTER_LIII)[LIV.,](#CHAPTER_LIV)[LV.,](#CHAPTER_LV)[LVI.,](#CHAPTER_LVI)[LVII.,](#CHAPTER_LVII)[LVIII.,](#CHAPTER_LVIII)[LIX.,](#CHAPTER_LIX)[LX.,](#CHAPTER_LX)[LXI.](#CHAPTER_LXI)
 
 [](images/cover.jpg)[{iv}](#)[{v}](#)# PRIDE.andPREJUDICE
 
-by  
-Jane Austen,  
-  
-with a Preface by  
-George Saintsbury  
-and  
-Illustrations by  
-Hugh Thomson  
+by
+Jane Austen,
 
+with a Preface by
+George Saintsbury
+and
+Illustrations by
+Hugh Thomson
 
-Ruskin  
-House.156. Charing  
-Cross Road.London  
-George Allen.CHISWICK PRESS:—CHARLES WHITTINGHAM AND CO.  
-TOOKS COURT, CHANCERY LANE, LONDON.  
-
+Ruskin
+House.156. Charing
+Cross Road. London
+George Allen. CHISWICK PRESS:—CHARLES WHITTINGHAM AND CO.
+TOOKS COURT, CHANCERY LANE, LONDON.
 
 [{vii}](#)## {ix}
 
@@ -59,14 +57,14 @@ novels. To some the delightful freshness and humour ofNorthanger
 Abbey,its completeness, finish, andentrain,obscure the undoubted
 critical facts that its scale is small, and its scheme, after all, that
 of burlesque or parody, a kind in which the first rank is reached with
-difficulty.Persuasion,relatively faint in tone, and not enthralling
+difficulty. Persuasion,relatively faint in tone, and not enthralling
 in interest, has devotees who exalt above all the others its exquisite
 delicacy and keeping. The catastrophe ofMansfield Parkis admittedly
 theatrical, the hero and heroine are insipid, and the author has almost[{x}](#)wickedly destroyed all romantic interest by expressly admitting that
 Edmund only took Fanny because Mary shocked him, and that Fanny might
 very likely have taken Crawford if he had been a little more assiduous;
 yet the matchless rehearsal-scenes and the characters of Mrs. Norris and
-others have secured, I believe, a considerable party for it.Sense and
+others have secured, I believe, a considerable party for it. Sense and
 Sensibilityhas perhaps the fewest out-and-out admirers; but it does
 not want them.
 
@@ -74,7 +72,7 @@ I suppose, however, that the majority of at least competent votes
 would, all things considered, be divided betweenEmmaand the present
 book; and perhaps the vulgar verdict (if indeed a fondness for Miss
 Austen be not of itself a patent of exemption from any possible charge
-of vulgarity) would go forEmma.It is the larger, the more varied, the
+of vulgarity) would go forEmma. It is the larger, the more varied, the
 more popular; the author had by the time of its composition seen rather
 more of the world, and had improved her general, though not her most
 peculiar and characteristic dialogue; such figures as Miss Bates, as the
@@ -421,14 +419,14 @@ should, I think, for mere occasional companionship, have preferred Diana
 and Barbara. But to live with and to marry, I do not know that any one
 of the four can come into competition with Elizabeth.
 
-George Saintsbury.  
+George Saintsbury.
 [{xxiv}](#)
 
 ## {xxv}
 
 PAGEFrontispiece[iv](#page_iv)Title-page[v](#page_v)Dedication[vii](#page_vii)Heading to Preface[ix](#page_ix)Heading to List of Illustrations[xxv](#page_xxv)Heading to Chapter I.[1](#page_1)“He came down to see the place”[2](#page_2)Mr. and Mrs. Bennet[5](#page_5)“I hope Mr. Bingley will like it”[6](#page_6)“I’m the tallest”[9](#page_9)“He rode a black horse”[10](#page_10)“When the party entered”[12](#page_12)“She is tolerable”[15](#page_15)Heading to Chapter IV.[18](#page_18)Heading to Chapter V.[22](#page_22)“Without once opening his lips”[24](#page_24)Tailpiece to Chapter V.[26](#page_26)Heading to Chapter VI.[27](#page_27)“The entreaties of several”[31](#page_31)“A note for Miss Bennet”[36](#page_36)“Cheerful prognostics”[40](#page_40)“The apothecary came”[43](#page_43)“Covering a screen”[45](#page_45)“Mrs. Bennet and her two youngest girls”[53](#page_53)Heading to Chapter X.[60](#page_60)“No, no; stay where you are”[67](#page_67)“Piling up the fire”[69](#page_69)Heading to Chapter XII.[75](#page_75)Heading to Chapter XIII.[78](#page_78)Heading to Chapter XIV.[84](#page_84)“Protested that he never read novels”[87](#page_87)Heading to Chapter XV.[89](#page_89)Heading to Chapter XVI.[95](#page_95)“The officers of the ——shire”[97](#page_97)“Delighted to see their dear friend again”[108](#page_108)Heading to Chapter XVIII.[113](#page_113)“Such very superior dancing is not often seen”[118](#page_118)“To assure you in the most animated language”[132](#page_132)Heading to Chapter XX.[139](#page_139)“They entered the breakfast-room”[143](#page_143)Heading to Chapter XXI.[146](#page_146)“Walked back with them”[148](#page_148)Heading to Chapter XXII.[154](#page_154)“So much love and eloquence”[156](#page_156)“Protested he must be entirely mistaken”[161](#page_161)“Whenever she spoke in a low voice”[166](#page_166)Heading to Chapter XXIV.[168](#page_168)Heading to Chapter XXV.[175](#page_175)“Offended two or three young ladies”[177](#page_177)“Will you come and see me?”[181](#page_181)“On the stairs”[189](#page_189)“At the door”[194](#page_194)“In conversation with the ladies”[198](#page_198)“Lady Catherine,” said she, “you have given me a treasure”[200](#page_200)Heading to Chapter XXX.[209](#page_209)“He never failed to inform them”[211](#page_211)“The gentlemen accompanied him”[213](#page_213)Heading to Chapter XXXI.[215](#page_215)Heading to Chapter XXXII.[221](#page_221)“Accompanied by their aunt”[225](#page_225)“On looking up”[228](#page_228)Heading to Chapter XXXIV.[235](#page_235)“Hearing herself called”[243](#page_243)Heading to Chapter XXXVI.[253](#page_253)“Meeting accidentally in town”[256](#page_256)“His parting obeisance”[261](#page_261)“Dawson”[263](#page_263)“The elevation of his feelings”[267](#page_267)“They had forgotten to leave any message”[270](#page_270)“How nicely we are crammed in!”[272](#page_272)Heading to Chapter XL.[278](#page_278)“I am determined never to speak of it again”[283](#page_283)“When Colonel Miller’s regiment went away”[285](#page_285)“Tenderly flirting”[290](#page_290)The arrival of the Gardiners[294](#page_294)“Conjecturing as to the date”[301](#page_301)Heading to Chapter XLIV.[318](#page_318)“To make herself agreeable to all”[321](#page_321)“Engaged by the river”[327](#page_327)Heading to Chapter XLVI.[334](#page_334)“I have not an instant to lose”[339](#page_339)“The first pleasing earnest of their welcome”[345](#page_345)The Post[359](#page_359)“To whom I have related the affair”[363](#page_363)Heading to Chapter XLIX.[368](#page_368)“But perhaps you would like to read it”[370](#page_370)“The spiteful old ladies”[377](#page_377)“With an affectionate smile”[385](#page_385)“I am sure she did not listen”[393](#page_393)“Mr. Darcy with him”[404](#page_404)“Jane happened to look round”[415](#page_415)“Mrs. Long and her nieces”[420](#page_420)“Lizzy, my dear, I want to speak to you”[422](#page_422)Heading to Chapter LVI.[431](#page_431)“After a short survey”[434](#page_434)“But now it comes out”[442](#page_442)“The efforts of his aunt”[448](#page_448)“Unable to utter a syllable”[457](#page_457)“The obsequious civility”[466](#page_466)Heading to Chapter LXI.[472](#page_472)The End[476](#page_476)[{1}](#)
 
-## Chapter I.
+## Chapter 1: .
 
 IT is a truth universally acknowledged, that a single man in possession
 of a good fortune must be in want of a wife.
@@ -452,8 +450,7 @@ Mr. Bennet made no answer.
 
 “Youwant to tell me, and I have no objection to hearing it.”
 
-“He came down to see the place”  
-
+“He came down to see the place”
 
 [Copyright 1894 by George Allen.]
 
@@ -539,19 +536,19 @@ all.”
 
 Mr. Bennet was so odd a mixture of quick parts, sarcastic humour,
 reserve, and caprice, that the experience of three-and-twenty years had
-been insufficient to[{5}](#)make his wife understand his character.Hermind
+been insufficient to[{5}](#)make his wife understand his character. Hermind
 was less difficult to develope. She was a woman of mean understanding,
 little information, and uncertain temper. When she was discontented, she
 fancied herself nervous. The business of her life was to get her
 daughters married: its solace was visiting and news.
 
-Mr.& Mrs.Bennet
+Mr.& Mrs. Bennet
 
 [Copyright 1894 by George Allen.]
 
 [{6}](#)
 
-## I hope Mr. Bingley will like it.CHAPTER II.
+## Chapter 1: hope Mr. Bingley will like it. CHAPTER II.
 
 R. BENNET was among the earliest of those who waited on Mr. Bingley. He
 had always intended to visit him, though to the last always assuring his
@@ -656,7 +653,7 @@ dinner.
 
 “I’m the tallest[{10}](#)”
 
-## He rode a black horse.CHAPTER III.
+## He rode a black horse. CHAPTER III.
 
 OT all that Mrs. Bennet, however, with the assistance of her five
 daughters, could ask on the subject, was sufficient to draw from her
@@ -763,8 +760,7 @@ Darcy, looking at the eldest Miss Bennet.
 of her sisters sitting down just behind you, who is very pretty, and I
 dare say very agreeable. Do let me ask my partner to introduce you.”
 
-“She is tolerable”  
-
+“She is tolerable”
 
 [Copyright 1894 by George Allen.]
 
@@ -832,7 +828,7 @@ him! He walked here, and he walked there, fancying himself so very
 great! Not handsome enough to dance with! I wish you had been there, my
 dear, to have given him one of your set-downs. I quite detest the man.[{18}](#)”
 
-## CHAPTER IV.
+## Chapter 4: .
 
 HEN Jane and Elizabeth were alone, the former, who had been cautious in
 her praise of Mr. Bingley before, expressed to her sister how very much
@@ -848,7 +844,7 @@ likewise to be if he possibly can. His character is thereby complete.”
 “I was very much flattered by his asking me to dance a second time. I
 did not expect such a compliment.”
 
-“Did not you?Idid for you. But that is one great difference between
+“Did not you? Idid for you. But that is one great difference between
 us. Compliments always takeyouby surprise, andmenever. What
 could be more natural than his asking you again? He could not help
 seeing that you[{19}](#)were about five times as pretty as every other woman in
@@ -942,7 +938,7 @@ they should not object to know more of. Miss Bennet was therefore
 established as a sweet girl; and their brother felt authorized by such
 commendation to think of her as he chose.[{22}](#)
 
-## CHAPTER V.
+## Chapter 5: .
 
 ITHIN a short walk of Longbourn lived a family with whom the Bennets
 were particularly intimate. Sir William Lucas had been formerly in trade
@@ -1055,7 +1051,7 @@ would; and the argument ended only with the visit.
 
 [{27}](#)
 
-## CHAPTER VI.
+## Chapter 6: .
 
 HE ladies of Longbourn soon waited on those of Netherfield. The visit
 was returned in due form. Miss Bennet’s pleasing manners grew on the
@@ -1321,7 +1317,7 @@ He listened to her with perfect indifference, while she chose to
 entertain herself in this manner; and as his composure convinced her
 that all was safe, her wit flowed along.[{36}](#)
 
-## A note for Miss Bennet.CHAPTER VII.
+## A note for Miss Bennet. CHAPTER VII.
 
 R. BENNET’S property consisted almost entirely in an estate of two
 thousand a year, which, unfortunately for his daughters, was entailed,
@@ -1415,8 +1411,7 @@ end without a quarrel. Come as soon as you can on the receipt of
 this. My brother and the gentlemen are to dine with the officers.
 Yours ever,
 
-“Caroline Bingley.”  
-
+“Caroline Bingley.”
 
 “With the officers!” cried Lydia: “I wonder my aunt did not tell us ofthat.”
 
@@ -1468,8 +1463,7 @@ my seeing Mr. Jones—therefore do not be alarmed if you should hear
 of his having been to me—and, excepting a sore throat and a
 headache, there is not much the matter with me.
 
-“Yours, etc.”  
-
+“Yours, etc.”
 
 “Well, my dear,” said Mr. Bennet, when Elizabeth had read the note
 aloud, “if your daughter should have a dangerous fit of illness—if she
@@ -1539,8 +1533,7 @@ could attempt little beside expressions of gratitude for the
 extraordinary kindness she was treated with. Elizabeth silently attended
 her.
 
-“The Apothecary came”  
-
+“The Apothecary came”
 
 When breakfast was over, they were joined by the sisters; and Elizabeth
 began to like them herself, when she saw how much affection and
@@ -1564,7 +1557,7 @@ back a supply of clothes.
 
 [{45}](#)
 
-## Covering a screen.CHAPTER VIII.
+## Covering a screen. CHAPTER VIII.
 
 T five o’clock the two ladies retired to dress, and at half-past six
 Elizabeth was summoned to dinner. To the civil inquiries which then
@@ -1773,7 +1766,7 @@ I rather wonder now at your knowingany.”
 “Are you so severe upon your own sex as to doubt the possibility of all
 this?”
 
-“Inever saw such a woman.Inever saw such capacity, and taste, and
+“Inever saw such a woman. Inever saw such capacity, and taste, and
 application, and elegance, as you describe, united.”
 
 Mrs. Hurst and Miss Bingley both cried out against the injustice of her
@@ -1808,7 +1801,7 @@ however, by duets after supper; while he could find no better relief to
 his feelings than by giving his housekeeper directions that every
 possible attention might be paid to the sick lady and her sister.[{53}](#)
 
-## Mrs Bennet and her two youngest girls.CHAPTER IX.
+## Mrs Bennet and her two youngest girls. CHAPTER IX.
 
 LIZABETH passed the chief of the night in her sister’s room, and in the
 morning had the pleasure of being able to send a tolerable answer to the
@@ -1921,7 +1914,7 @@ Charlotte Lucas had been at Longbourn sincehercoming away.
 
 “Yes, she called yesterday with her father. What an agreeable man Sir
 William is, Mr. Bingley—is not he? so much the man of fashion! so
-genteel and so easy! He has always something to say to everybody.Thatis my idea of good breeding; and those persons who fancy themselves very
+genteel and so easy! He has always something to say to everybody. Thatis my idea of good breeding; and those persons who fancy themselves very
 important and never open their mouths quite mistake the matter.”
 
 “Did Charlotte dine with you?”
@@ -1996,7 +1989,7 @@ remarks of the two ladies and Mr. Darcy; the latter of whom, however,
 could not be prevailed on to join in their censure ofher, in spite of
 all Miss Bingley’s witticisms onfine eyes.[{60}](#)
 
-## CHAPTER X.
+## Chapter 10: .
 
 HE day passed much as the day before had done. Mrs. Hurst and Miss
 Bingley had spent some hours of the morning with the invalid, who
@@ -2275,7 +2268,7 @@ She then ran gaily off, rejoicing, as she rambled about, in the hope of
 being at home again in a day or two. Jane was already so much recovered
 as to intend leaving her room for a couple of hours that evening.[{69}](#)
 
-## Piling up the fire.CHAPTER XI.
+## Piling up the fire. CHAPTER XI.
 
 HEN the ladies removed after dinner Elizabeth ran up to her sister, and
 seeing her well guarded from cold, attended her into the drawing-room,
@@ -2457,7 +2450,7 @@ Her sister made not the smallest objection, and the pianoforte was
 opened; and Darcy, after a few moments’ recollection, was not sorry for
 it. He began to feel the danger of paying Elizabeth too much attention.[{75}](#)
 
-## CHAPTER XII.
+## Chapter 12: .
 
 N consequence of an agreement between the sisters, Elizabeth wrote the
 next morning to her mother, to beg that the carriage might be sent for
@@ -2523,7 +2516,7 @@ in the regiment since the preceding Wednesday; several of the officers
 had dined lately with their uncle; a private had been flogged; and it
 had actually been hinted that Colonel Forster was going to be married.[{78}](#)
 
-## CHAPTER XIII
+## Chapter 13
 
 hope, my dear,” said Mr. Bennet to his wife, as they were at
 breakfast the next morning, “that you have ordered a good dinner to-day,
@@ -2582,8 +2575,7 @@ head, as you will hear.[{80}](#)”
 
 “Hunsford, near Westerham, Kent,15th October.
 
-“Dear Sir,  
-
+“Dear Sir,
 
 “The disagreement subsisting between yourself and my late honoured
 father always gave me much uneasiness; and, since I have had the
@@ -2620,8 +2612,7 @@ clergyman is engaged to do the duty of the day. I remain, dear sir,
 with respectful compliments to your lady and daughters, your
 well-wisher and friend,
 
-“William Collins.”  
-
+“William Collins.”
 
 “At four o’clock, therefore, we may expect this peace-making gentleman,”
 said Mr. Bennet, as he folded up the letter. “He seems to be a most
@@ -2706,7 +2697,7 @@ pardon for having displeased her. In a softened tone she declared
 herself not at all offended; but he continued to apologize for about a
 quarter of an hour.[{84}](#)
 
-## CHAPTER XIV
+## Chapter 14
 
 URING dinner, Mr. Bennet scarcely spoke at all; but when the servants
 were withdrawn, he thought it time to have some conversation with his
@@ -2793,9 +2784,8 @@ By tea-time, however, the dose had been enough, and[{87}](#)Mr. Bennet was glad
 to take his guest into the drawing-room again, and when tea was over,
 glad to invite him
 
-“Protested  
-that he never read novels”      H.T Feb 94  
-
+“Protested
+that he never read novels”      H. T Feb 94
 
 to read aloud to the ladies. Mr. Collins readily assented, and a book
 was produced; but on beholding it (for everything announced it to be
@@ -2829,7 +2819,7 @@ young cousin no ill-will, and should never resent her behaviour as any
 affront, seated himself at another table with Mr. Bennet, and prepared
 for backgammon.[{89}](#)
 
-## CHAPTER XV.
+## Chapter 15: .
 
 R. COLLINS was not a sensible man, and the deficiency of nature had
 been but little assisted by education or society; the greatest part of
@@ -2987,7 +2977,7 @@ utterly unknown to her before. Something, he supposed, might be
 attributed to his connection with them, but yet he had never met with so
 much attention in the whole course of his life.[{95}](#)
 
-## CHAPTER XVI.
+## Chapter 16: .
 
 S no objection was made to the young people’s engagement with their
 aunt, and all Mr. Collins’s scruples of leaving Mr. and Mrs. Bennet for
@@ -3028,8 +3018,7 @@ Mr, Wickham was as far beyond them all in person, countenance, air, and
 walk, astheywere superior to the broad-faced stuffy uncle Philips,
 breathing port wine, who followed them into the room.
 
-“The officers of the ——shire”  
-
+“The officers of the ——shire”
 
 [Copyright 1894 by George Allen.]
 
@@ -3216,7 +3205,7 @@ manner.”
 
 “We were born in the same parish, within the same park; the greatest
 part of our youth was passed together: inmates of the same house,
-sharing the same amusements, objects of the same parental care.Myfather began life in the profession which your uncle, Mr. Philips,
+sharing the same amusements, objects of the same parental care. Myfather began life in the profession which your uncle, Mr. Philips,
 appears to do so much credit to; but he gave up everything to be of use
 to the late Mr. Darcy, and devoted all his time to the care of the
 Pemberley property. He was most highly esteemed by Mr. Darcy, a most
@@ -3351,7 +3340,7 @@ at whist, enumerating all the dishes at supper, and repeatedly fearing
 that he crowded his cousins, had more to say than he could well manage
 before the carriage stopped at Longbourn House.[{108}](#)
 
-## delighted to see their dear friend again.CHAPTER XVII.
+## delighted to see their dear friend again. CHAPTER XVII.
 
 LIZABETH related to Jane, the next day, what had passed between Mr.
 Wickham and herself. Jane listened with astonishment and concern: she
@@ -3480,7 +3469,7 @@ of her acquaintance with Mr. Wickham; and nothing less than a dance on
 Tuesday could have made such a Friday, Saturday, Sunday, and Monday
 endurable to Kitty and Lydia.[{113}](#)
 
-## CHAPTER XVIII.
+## Chapter 18: .
 
 ILL Elizabeth entered the drawing-room at Netherfield, and looked in
 vain for Mr. Wickham among the cluster of red coats there assembled, a
@@ -3535,7 +3524,7 @@ mind: Charlotte tried to console her.
 
 “I dare say you will find him very agreeable.”
 
-“Heaven forbid!Thatwould be the greatest misfortune of all! To find
+“Heaven forbid! Thatwould be the greatest misfortune of all! To find
 a man agreeable whom one is determined to hate! Do not wish me such an
 evil.”
 
@@ -3553,7 +3542,7 @@ would be the greater punishment to her partner to oblige him to talk,[{116}](#)s
 silent. After a pause of some minutes, she addressed him a second time,
 with—
 
-“It isyourturn to say something now, Mr. Darcy.Italked about the
+“It isyourturn to say something now, Mr. Darcy. Italked about the
 dance, andyouought to make some kind of remark on the size of the
 room, or the number of couples.”
 
@@ -3579,7 +3568,7 @@ something that will amaze the whole room, and be handed down to
 posterity with all theéclatof a proverb.”
 
 “This is no very striking resemblance of your own character, I am sure,”
-said he. “How near it may be tomine, I cannot pretend to say.Youthink it a faithful portrait, undoubtedly.”
+said he. “How near it may be tomine, I cannot pretend to say. Youthink it a faithful portrait, undoubtedly.”
 
 “I must not decide on my own performance.”
 
@@ -3617,9 +3606,8 @@ then flow in! I appeal to Mr. Darcy;—but let me not interrupt you, sir.
 You will not thank me for detaining you from the bewitching converse of
 that young lady, whose bright eyes are also upbraiding me.[{118}](#)”
 
-“Such very superior dancing is not  
-often seen.”  
-
+“Such very superior dancing is not
+often seen.”
 
 [Copyright 1894 by George Allen.]
 
@@ -4197,7 +4185,7 @@ encouragement, to apply to her father, whose negative might be uttered
 in such a manner as must be decisive, and whose behaviour at least could
 not be mistaken for the affectation and coquetry of an elegant female.[{139}](#)
 
-## CHAPTER XX.
+## Chapter 20: .
 
 R. COLLINS was not left long to the silent contemplation of his
 successful love; for Mrs. Bennet, having dawdled about in the vestibule
@@ -4332,7 +4320,7 @@ may be, and caring no more for us than if we were at York, provided she
 can have her own way. But I tell you what, Miss Lizzy, if you take it
 into your head to go on refusing every offer of marriage in this way,
 you will never get a husband at all—and I am sure I do not know who is
-to maintain you when your father is dead.Ishall not be able to keep
+to maintain you when your father is dead. Ishall not be able to keep
 you—and so I warn you. I have done with you from this very day. I told
 you in the library, you know, that I should never speak to you again,
 and you will find me as good as my word. I have no pleasure in talking
@@ -4379,7 +4367,7 @@ liable to error. I have certainly meant well through the whole affair.
 My object has been to secure an amiable companion for myself, with due
 consideration for the advantage of all your family; and if mymannerhas been at all reprehensible, I here beg leave to apologize.[{146}](#)”
 
-## CHAPTER XXI.
+## Chapter 21: .
 
 HE discussion of Mr. Collins’s offer was now nearly at an end, and
 Elizabeth had only to suffer from the uncomfortable feelings necessarily
@@ -4586,7 +4574,7 @@ Longbourn; and the conclusion of all was the comfortable declaration,
 that, though he had been invited only to a family dinner, she would take
 care to have two full courses.[{154}](#)
 
-## CHAPTER XXII.
+## Chapter 22: .
 
 HE Bennets were engaged to dine with the Lucases; and again, during the
 chief of the day, was Miss Lucas so kind as to listen to Mr. Collins.
@@ -4935,7 +4923,7 @@ Why shouldhehave it more than anybody else?”
 
 “I leave it to yourself to determine,” said Mr. Bennet.[{168}](#)
 
-## CHAPTER XXIV.
+## Chapter 24: .
 
 ISS BINGLEY’S letter arrived, and put an end to doubt. The very first
 sentence conveyed the assurance of their being all settled in London for
@@ -5005,8 +4993,8 @@ deserve.”
 Miss Bennet eagerly disclaimed all extraordinary merit, and threw back
 the praise on her sister’s warm affection.
 
-“Nay,” said Elizabeth, “this is not fair.Youwish to think all the
-world respectable, and are hurt if I speak ill of anybody.Ionly want
+“Nay,” said Elizabeth, “this is not fair. Youwish to think all the
+world respectable, and are hurt if I speak ill of anybody. Ionly want
 to thinkyouperfect, and you set yourself against it. Do not be
 afraid of my running into any excess, of my encroaching on your
 privilege of universal good-will. You need not. There are few people
@@ -5136,7 +5124,7 @@ Hertfordshire: her mild and steady candour always pleaded for
 allowances, and urged the possibility of mistakes; but by everybody else
 Mr. Darcy was condemned as the worst of men.[{175}](#)
 
-## CHAPTER XXV.
+## Chapter 25: .
 
 FTER a week spent in professions of love and schemes of felicity, Mr.
 Collins was called from his amiable Charlotte by the arrival of
@@ -5242,7 +5230,7 @@ impurities, were he once to enter it; and, depend upon it, Mr. Bingley
 never stirs without him.”
 
 “So much the better. I hope they will not meet at all. But does not Jane
-correspond with his sister?Shewill not be able to help calling.”
+correspond with his sister? Shewill not be able to help calling.”
 
 “She will drop the acquaintance entirely.”
 
@@ -5480,8 +5468,7 @@ glad that you have such pleasant accounts from our friends at
 Hunsford. Pray go to see them, with Sir William and Maria. I am
 sure you will be very comfortable there.
 
-“Yours, etc.”  
-
+“Yours, etc.”
 
 This letter gave Elizabeth some pain; but her spirits returned, as she
 considered that Jane would no longer be duped, by the sister at least.
@@ -5628,7 +5615,7 @@ why shouldwe?”
 “Hernot objecting does not justifyhim. It only shows her being
 deficient in something herself—sense or feeling.[{193}](#)”
 
-“Well,” cried Elizabeth, “have it as you choose.Heshall be
+“Well,” cried Elizabeth, “have it as you choose. Heshall be
 mercenary, andsheshall be foolish.”
 
 “No, Lizzy, that is what I donotchoose. I should be sorry, you know,
@@ -6077,7 +6064,7 @@ her commendation, though costing her some trouble, could by no means
 satisfy Mr. Collins, and he was very soon obliged to take her Ladyship’s
 praise into his own hands.[{209}](#)
 
-## CHAPTER XXX.
+## Chapter 30: .
 
 IR WILLIAM stayed only a week at Hunsford; but his visit was long
 enough to convince him of his daughter’s being most comfortably settled,
@@ -6159,8 +6146,7 @@ His arrival was soon known at the Parsonage; for Mr. Collins was walking
 the whole morning within view of the lodges opening into Hunsford Lane,
 in order to have[{213}](#)
 
-“The gentlemen accompanied him.”  
-
+“The gentlemen accompanied him.”
 
 [Copyright 1894 by George Allen.]
 
@@ -6205,7 +6191,7 @@ answered that he had never been so fortunate as to meet Miss Bennet. The
 subject was pursued no further, and the gentlemen soon afterwards went
 away.[{215}](#)
 
-## CHAPTER XXXI.
+## Chapter 31: .
 
 OLONEL FITZWILLIAM’S manners were very much admired at the Parsonage,
 and the ladies all felt that he must add considerably to the pleasure of
@@ -6233,7 +6219,7 @@ talked so agreeably of Kent and Hertfordshire, of travelling and staying
 at home, of new books and music, that Elizabeth had never been half so
 well entertained in that room before; and they conversed with so much
 spirit and flow as to draw the attention of Lady Catherine herself, as
-well as of Mr. Darcy.Hiseyes had been soon and repeatedly turned
+well as of Mr. Darcy. Hiseyes had been soon and repeatedly turned
 towards them with a look of curiosity; and that her Ladyship, after a
 while, shared the feeling, was more openly acknowledged, for she did not
 scruple to call out,—
@@ -6372,7 +6358,7 @@ them with all the forbearance of civility; and at the request of the
 gentlemen remained at the instrument till her Ladyship’s carriage was
 ready to take them all home.[{221}](#)
 
-## CHAPTER XXXII.
+## Chapter 32: .
 
 LIZABETH was sitting by herself the next morning, and writing to Jane,
 while Mrs. Collins and Maria were gone on business into the village,
@@ -6469,7 +6455,7 @@ such a one as will allow of frequent journeys—and I am persuaded my
 friend would not call herselfnearher family under less thanhalfthe present distance.”
 
 Mr. Darcy drew his chair a little towards her, and said, “Youcannot
-have a right to such very strong local attachment.Youcannot have
+have a right to such very strong local attachment. Youcannot have
 been always at Longbourn.”
 
 Elizabeth looked surprised. The gentleman experienced some change of
@@ -6751,7 +6737,7 @@ as possible prevented her husband from pressing her; but Mr. Collins
 could not conceal his apprehension of Lady Catherine’s being rather
 displeased by her staying at home.[{235}](#)
 
-## CHAPTER XXXIV.
+## Chapter 34: .
 
 HEN they were gone, Elizabeth, as if intending to exasperate herself as
 much as possible against Mr. Darcy, chose for her employment the
@@ -7219,10 +7205,10 @@ that there may be the possibility of consulting him, I shall endeavour
 to find some opportunity of putting this letter in your hands in the
 course of the morning. I will only add, God bless you.
 
-“Fitzwilliam Darcy.”  
+“Fitzwilliam Darcy.”
 [{253}](#)
 
-## CHAPTER XXXVI.
+## Chapter XXXVI: .
 
 ELIZABETH, when Mr. Darcy gave her the letter, did not expect it to
 contain a renewal of his offers, she had formed no expectation at all of
@@ -7464,8 +7450,7 @@ spare you for another fortnight.”
 
 “But my father cannot. He wrote last week to hurry my return.”
 
-“Dawson”  
-
+“Dawson”
 
 [Copyright 1894 by George Allen.]
 
@@ -7635,8 +7620,7 @@ compliments to Mr. and Mrs. Gardiner, though unknown. He then handed[{270}](#)he
 when he suddenly reminded them, with some consternation, that they had
 hitherto forgotten to leave any message for the ladies of Rosings.
 
-“They had forgotten to leave any message”  
-
+“They had forgotten to leave any message”
 
 “But,” he added, “you will of course wish to have your humble respects
 delivered to them, with your grateful thanks for their kindness to you
@@ -7834,7 +7818,7 @@ father had not the smallest intention of yielding; but his answers were
 at the same time so vague and equivocal, that her mother, though often
 disheartened, had never yet despaired of succeeding at last.[{278}](#)
 
-## CHAPTER XL.
+## Chapter 40: .
 
 LIZABETH’S impatience to acquaint Jane with what had happened could no
 longer be overcome; and at length resolving to suppress every particular
@@ -8008,8 +7992,8 @@ she is saving enough. There is nothing extravagant intheirhousekeeping, I dare s
 
 “No, nothing at all.”
 
-“A great deal of good management, depend upon it. Yes, yes.Theywill
-take care not to outrun their income.Theywill never be distressed
+“A great deal of good management, depend upon it. Yes, yes. Theywill
+take care not to outrun their income. Theywill never be distressed
 for money. Well, much good may it do them! And so, I suppose, they often
 talk of having Longbourn when your father is dead. They look upon it
 quite as their own, I dare say, whenever that happens.”
@@ -8018,7 +8002,7 @@ quite as their own, I dare say, whenever that happens.”
 
 “No; it would have been strange if they had. But I make no doubt they
 often talk of it between themselves. Well, if they can be easy with an
-estate that is not lawfully their own, so much the better.Ishould be
+estate that is not lawfully their own, so much the better. Ishould be
 ashamed of having one that was only entailed on me.[{285}](#)”
 
 ## “When Colonel Miller’s regiment went.”CHAPTER XLI.
@@ -8161,8 +8145,7 @@ and the gay, and dazzling with scarlet; and, to complete the view, she
 saw herself seated beneath a tent, tenderly flirting with at least six
 officers at once.
 
-“Tenderly flirting”  
-
+“Tenderly flirting”
 
 [Copyright 1894 by George Allen.]
 
@@ -8955,7 +8938,7 @@ much attention for any of these new friends; and she could do nothing
 but think, and think with wonder, of Mr. Darcy’s civility, and, above
 all, of his wishing her to be acquainted with his sister.[{318}](#)
 
-## CHAPTER XLIV.
+## Chapter XLIV: .
 
 LIZABETH had settled it that Mr. Darcy would bring his sister to visit
 her the very day after her reaching Pemberley; and was, consequently,
@@ -9346,7 +9329,7 @@ himself; yet Elizabeth was longing to know what Mrs. Gardiner thought of
 him, and Mrs. Gardiner would have been highly gratified by her niece’s
 beginning the subject.[{334}](#)
 
-## Chapter XLVI.
+## Chapter XLVI: .
 
 LIZABETH had been a good deal disappointed in not finding a letter from
 Jane on their first arrival at Lambton; and this disappointment had been
@@ -9484,13 +9467,13 @@ something indistinctly of his[{339}](#)
 concern, and observe her in compassionate silence. At length she spoke
 again. “I have just had a letter from Jane, with such dreadful news. It
 cannot be concealed from anyone. My youngest sister has left all her
-friends—has eloped; has thrown herself into the power of—of Mr.[{340}](#)Wickham. They are gone off together from Brighton.Youknow him too
+friends—has eloped; has thrown herself into the power of—of Mr.[{340}](#)Wickham. They are gone off together from Brighton. Youknow him too
 well to doubt the rest. She has no money, no connections, nothing that
 can tempt him to—she is lost for ever.”
 
 Darcy was fixed in astonishment.
 
-“When I consider,” she added, in a yet more agitated voice, “thatImight have prevented it!Iwho knew what he was. Had I but explained
+“When I consider,” she added, in a yet more agitated voice, “thatImight have prevented it! Iwho knew what he was. Had I but explained
 some part of it only—some part of what I learnt, to my own family! Had
 his character been known, this could not have happened. But it is all,
 all too late now.”
@@ -9615,7 +9598,7 @@ settled. They were to be off as soon as possible. “But what is to be
 done about Pemberley?” cried Mrs. Gardiner. “John told us Mr. Darcy was
 here when you sent for us;—was it so?”
 
-“Yes; and I told him we should not be able to keep our engagement.Thatis all settled.”
+“Yes; and I told him we should not be able to keep our engagement. Thatis all settled.”
 
 “What is all settled?” repeated the other, as she ran into her room to
 prepare. “And are they upon such terms as for her to disclose the real
@@ -9997,10 +9980,9 @@ mend a great slit in my worked muslin gown before they are packed
 up. Good-bye. Give my love to Colonel Forster. I hope you will
 drink to our good journey.
 
-“Your affectionate friend,  
-  
-“Lydia Bennet.”  
+“Your affectionate friend,
 
+“Lydia Bennet.”
 
 “Oh, thoughtless, thoughtless Lydia!” cried Elizabeth when she had
 finished it. “What a letter is this, to be written at such a moment! But
@@ -10160,8 +10142,7 @@ this. And it is the more to be lamented, because there is reason to
 suppose, as my dear Charlotte informs me, that this licentiousness
 of behaviour in your
 
-“To whom I have related the affair”  
-
+“To whom I have related the affair”
 
 [Copyright 1894 by George Allen.]
 
@@ -10183,8 +10164,7 @@ my dear sir, to console yourself as much as possible, to throw off
 your unworthy child from your affection for ever, and leave her to
 reap the fruits of her own heinous offence.
 
-“I am, dear sir,” etc., etc.  
-
+“I am, dear sir,” etc., etc.
 
 Mr. Gardiner did not write again, till he had received an answer from
 Colonel Forster; and then he had nothing of a pleasant nature to send.
@@ -10294,7 +10274,7 @@ Kitty, who took all these threats in a serious light, began to cry.
 girl for the next ten years, I will take you to a review at the end of
 them.[{368}](#)”
 
-## CHAPTER XLIX.
+## Chapter XLIX: .
 
 WO days after Mr. Bennet’s return, as Jane and Elizabeth were walking
 together in the shrubbery behind the house, they saw the housekeeper
@@ -10343,8 +10323,7 @@ about.”
 
 “Gracechurch Street,Monday, August 2.
 
-“My dear Brother,  
-
+“My dear Brother,
 
 “At last I am able to send you some tidings of my niece, and such
 as, upon the whole, I hope will give[{370}](#)you satisfaction. Soon after
@@ -10353,8 +10332,7 @@ part of London they were. The particulars I reserve till we meet.
 It is enough to know they are discovered: I have seen them
 both——”
 
-“But perhaps you would like to read it”  
-
+“But perhaps you would like to read it”
 
 [Copyright 1894 by George Allen.]
 
@@ -10388,7 +10366,7 @@ niece should be married from this house, of which I hope you will
 approve. She comes to us to-day. I shall write again as soon as
 anything more is determined on. Yours, etc.
 
-“Edw. Gardiner.”  
+“Edw. Gardiner.”
 [{372}](#)
 
 “Is it possible?” cried Elizabeth, when she had finished. “Can it be
@@ -10739,8 +10717,7 @@ Gardiner that my niece is very desirous of seeing you all before she
 leaves the south. She is well, and begs to be dutifully remembered to
 you and her mother.—Yours, etc.
 
-“E. Gardiner.”  
-
+“E. Gardiner.”
 
 Mr. Bennet and his daughters saw all the advantages[{384}](#)of Wickham’s
 removal from the ——shire, as clearly as Mr. Gardiner could do. But
@@ -10810,7 +10787,7 @@ were always so pleasing, that, had his character and his marriage been
 exactly what they ought, his smiles and his easy address, while he
 claimed their relationship, would have delighted them all. Elizabeth[{387}](#)had not before believed him quite equal to such assurance; but she sat
 down, resolving within herself to draw no limits in future to the
-impudence of an impudent man.Sheblushed, and Jane blushed; but the
+impudence of an impudent man. Sheblushed, and Jane blushed; but the
 cheeks of the two who caused their confusion suffered no variation of
 colour.
 
@@ -11004,8 +10981,7 @@ contain a denial.
 
 “Gracechurch Street,Sept. 6.
 
-“My dear Niece,  
-
+“My dear Niece,
 
 “I have just received your letter, and shall devote this whole
 morning to answering it, as I foresee that alittlewriting will
@@ -11125,7 +11101,7 @@ when the wedding took place, and all money matters were then to
 receive the last finish. I believe I have now told you everything.
 It is a relation which you tell me is to give you great surprise; I
 hope at least it will not afford you any displeasure. Lydia came to
-us, and Wickham had constant admission to the house.Hewas
+us, and Wickham had constant admission to the house. Hewas
 exactly what he had been when I knew him in Hertfordshire; but I
 would not tell you how little I was satisfied withherbehaviour
 while she stayed with us, if I had not perceived, by Jane’s letter
@@ -11152,9 +11128,8 @@ have been all round the park. A low phaeton with a nice little pair
 of ponies would be the very thing. But I must write no more. The
 children have been wanting me this half hour.
 
-“Yours, very sincerely,  
-“M. Gardiner.”  
-
+“Yours, very sincerely,
+“M. Gardiner.”
 
 The contents of this letter threw Elizabeth into a flutter of spirits,
 in which it was difficult to determine whether pleasure or pain bore the
@@ -11206,7 +11181,7 @@ as he joined her.
 “You certainly do,” she replied with a smile; “but it does not follow
 that the interruption must be unwelcome.”
 
-“I should be sorry, indeed, if it were.Wewere always good friends,
+“I should be sorry, indeed, if it were. Wewere always good friends,
 and now we are better.”
 
 “True. Are the others coming out?”
@@ -11900,7 +11875,7 @@ mother had been too ingenious for her. On opening the door, she
 perceived her sister and Bingley standing together over the hearth, as
 if engaged in earnest conversation; and had this led to no suspicion,
 the faces of both, as they hastily turned round and moved away from each
-other, would have told it all.Theirsituation was awkward enough; buthersshe thought was still worse. Not a syllable was uttered by
+other, would have told it all. Theirsituation was awkward enough; buthersshe thought was still worse. Not a syllable was uttered by
 either; and Elizabeth was on the point of going away again, when
 Bingley, who as well as the other had sat[{426}](#)down, suddenly rose, and,
 whispering a few words to her sister, ran out of the room.
@@ -12064,7 +12039,7 @@ The Bennets were speedily pronounced to be the luckiest family in the
 world; though only a few weeks before, when Lydia had first run away,
 they had been generally proved to be marked out for misfortune.[{431}](#)
 
-## CHAPTER LVI.
+## Chapter LVI: .
 
 NE morning, about a week after Bingley’s engagement with Jane had been
 formed, as he and the females of the family were sitting together in the
@@ -12151,8 +12126,7 @@ that led to the copse; Elizabeth was determined to make no effort for
 conversation with a woman who was now more than usually insolent and
 disagreeable.
 
-“After a short survey”  
-
+“After a short survey”
 
 [Copyright 1894 by George Allen.]
 
@@ -12203,7 +12177,7 @@ report is spread abroad?”
 
 “And can you likewise declare, that there is nofoundationfor it?”
 
-“I do not pretend to possess equal frankness with your Ladyship.Youmay ask questions whichIshall not choose to answer.”
+“I do not pretend to possess equal frankness with your Ladyship. Youmay ask questions whichIshall not choose to answer.”
 
 “This is not to be borne. Miss Bennet, I insist on being satisfied. Has
 he, has my nephew, made you an offer of marriage?”
@@ -12603,7 +12577,7 @@ only ofyou.”
 
 Elizabeth was too much embarrassed to say a word. After a short pause,
 her companion added, “You are too generous to trifle with me. If your
-feelings are still what they were last April, tell me so at once.Myaffections and wishes are unchanged; but one word from you will silence
+feelings are still what they were last April, tell me so at once. Myaffections and wishes are unchanged; but one word from you will silence
 me on this subject for ever.”
 
 Elizabeth, feeling all the more than common awkwardness and anxiety of
@@ -12702,7 +12676,7 @@ attending it ought to be forgotten. You must learn some of my
 philosophy. Think only of the past as its remembrance gives you
 pleasure.”
 
-“I cannot give you credit for any philosophy of the kind.Yourretrospections must be so totally void of reproach, that the contentment
+“I cannot give you credit for any philosophy of the kind. Yourretrospections must be so totally void of reproach, that the contentment
 arising from them is not of philosophy, but, what is much better, of
 ignorance. But withme, it is not so. Painful recollections will
 intrude, which cannot, which ought not to be repelled. I have been a
@@ -12848,7 +12822,7 @@ are engaged.”
 Jane looked at her doubtingly. “Oh, Lizzy! it cannot be. I know how much
 you dislike him.”
 
-“You know nothing of the matter.Thatis all to be forgot. Perhaps I
+“You know nothing of the matter. Thatis all to be forgot. Perhaps I
 did not always love him so well as I do now; but in such cases as these
 a good memory is unpardonable. This is the last time I shall ever
 remember it myself.[{459}](#)”
@@ -13139,7 +13113,7 @@ called, did you look as if you did not care about me?”
 “How unlucky that you should have a reasonable answer to give, and that
 I should be so reasonable as to admit it! But I wonder how long youwouldhave gone on, if you had been left to yourself. I wonder when
 youwouldhave spoken if I had not asked you! My resolution of
-thanking you for your kindness to Lydia had certainly great effect.Too
+thanking you for your kindness to Lydia had certainly great effect. Too
 much, I am afraid; for what becomes of the moral, if our comfort
 springs from a breach of promise, for I ought not to have mentioned the
 subject? This will never do.”
@@ -13206,8 +13180,7 @@ soon be the wife of Mr. Darcy. Console Lady Catherine as well as
 you can. But, if I were you, I would stand by the nephew. He has
 more to give.
 
-“Yours sincerely,” etc.  
-
+“Yours sincerely,” etc.
 
 Miss Bingley’s congratulations to her brother on his approaching
 marriage were all that was affectionate and insincere. She wrote even to
@@ -13252,7 +13225,7 @@ with delight to the time when they should be removed from society so
 little pleasing to either, to all the comfort and elegance of their
 family party at Pemberley.[{472}](#)
 
-## CHAPTER LXI.
+## Chapter LXI: .
 
 APPY for all her maternal feelings was the day on which Mrs. Bennet got
 rid of her two most deserving daughters. With what delighted pride she
@@ -13314,8 +13287,7 @@ upon without some help. Any place would do of about three or four
 hundred a year; but, however, do not speak to Mr. Darcy about it,
 if you had rather not.
 
-“Yours,” etc.  
-
+“Yours,” etc.
 
 As it happened that Elizabeth had much rather not, she endeavoured in
 her answer to put an end to every entreaty and expectation of the kind.
@@ -13375,12 +13347,11 @@ as well as Elizabeth, really loved them; and they were both ever
 sensible of the warmest gratitude towards the persons who, by bringing
 her into Derbyshire, had been the means of uniting them.
 
-CHISWICK PRESS:—CHARLES WHITTINGHAM AND CO.  
-TOOKS COURT, CHANCERY LANE, LONDON.  
-
+CHISWICK PRESS:—CHARLES WHITTINGHAM AND CO.
+TOOKS COURT, CHANCERY LANE, LONDON.
 
 *** END OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -13396,16 +13367,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -13414,15 +13385,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -13437,7 +13408,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -13445,7 +13416,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -13456,28 +13427,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -13487,9 +13458,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -13510,40 +13481,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -13554,17 +13525,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -13574,11 +13545,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -13586,13 +13557,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -13602,31 +13573,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

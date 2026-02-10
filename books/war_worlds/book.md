@@ -6,41 +6,39 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: The War of the Worlds
+before using this eBook. Title: The War of the Worlds
 
 Author: H. G. Wells
 
-Release date: October 1, 2004 [eBook #36]  
+Release date: October 1, 2004 [eBook #36]
 Most recently updated: November 27, 2021
 
 Language: English
 
-*** START OF THE PROJECT GUTENBERG EBOOK THE WAR OF THE WORLDS ***  
-  
+*** START OF THE PROJECT GUTENBERG EBOOK THE WAR OF THE WORLDS ***
+
 # The War of the Worlds
 
 ## by H. G. Wells
 
-
 ---
 
-‘But who shall dwell in these worlds if they be inhabited?  
-. . . Are we or they Lords of the World? . . . And  
-how are all things made for man?’  
-KEPLER (quoted inThe Anatomy of Melancholy)  
-
+‘But who shall dwell in these worlds if they be inhabited?
+. . . Are we or they Lords of the World? . . . And
+how are all things made for man?’
+KEPLER (quoted inThe Anatomy of Melancholy)
 
 ## Contents
 
-[BOOK ONE.—THE COMING OF THE MARTIANS](#book01)  
-  
-[I. THE EVE OF THE WAR.](#chap01)[II. THE FALLING STAR.](#chap02)[III. ON HORSELL COMMON.](#chap03)[IV. THE CYLINDER OPENS.](#chap04)[V. THE HEAT-RAY.](#chap05)[VI. THE HEAT-RAY IN THE CHOBHAM ROAD.](#chap06)[VII. HOW I REACHED HOME.](#chap07)[VIII. FRIDAY NIGHT.](#chap08)[IX. THE FIGHTING BEGINS.](#chap09)[X. IN THE STORM.](#chap10)[XI. AT THE WINDOW.](#chap11)[XII. WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.](#chap12)[XIII. HOW I FELL IN WITH THE CURATE.](#chap13)[XIV. IN LONDON.](#chap14)[XV. WHAT HAD HAPPENED IN SURREY.](#chap15)[XVI. THE EXODUS FROM LONDON.](#chap16)[XVII. THE “THUNDER CHILD”.](#chap17)  
-  
-[BOOK TWO.—THE EARTH UNDER THE MARTIANS](#book02)  
-  
+[BOOK ONE.—THE COMING OF THE MARTIANS](#book01)
+
+[I. THE EVE OF THE WAR.](#chap01)[II. THE FALLING STAR.](#chap02)[III. ON HORSELL COMMON.](#chap03)[IV. THE CYLINDER OPENS.](#chap04)[V. THE HEAT-RAY.](#chap05)[VI. THE HEAT-RAY IN THE CHOBHAM ROAD.](#chap06)[VII. HOW I REACHED HOME.](#chap07)[VIII. FRIDAY NIGHT.](#chap08)[IX. THE FIGHTING BEGINS.](#chap09)[X. IN THE STORM.](#chap10)[XI. AT THE WINDOW.](#chap11)[XII. WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.](#chap12)[XIII. HOW I FELL IN WITH THE CURATE.](#chap13)[XIV. IN LONDON.](#chap14)[XV. WHAT HAD HAPPENED IN SURREY.](#chap15)[XVI. THE EXODUS FROM LONDON.](#chap16)[XVII. THE “THUNDER CHILD”.](#chap17)
+
+[BOOK TWO.—THE EARTH UNDER THE MARTIANS](#book02)
+
 [I. UNDER FOOT.](#chap18)[II. WHAT WE SAW FROM THE RUINED HOUSE.](#chap19)[III. THE DAYS OF IMPRISONMENT.](#chap20)[IV. THE DEATH OF THE CURATE.](#chap21)[V. THE STILLNESS.](#chap22)[VI. THE WORK OF FIFTEEN DAYS.](#chap23)[VII. THE MAN ON PUTNEY HILL.](#chap24)[VIII. DEAD LONDON.](#chap25)[IX. WRECKAGE.](#chap26)[X. THE EPILOGUE.](#chap27)## BOOK ONETHE COMING OF THE MARTIANS
 
-end chapter## I.THE EVE OF THE WAR.
+end chapter## I. THE EVE OF THE WAR.
 
 No one would have believed in the last years of the nineteenth century that
 this world was being watched keenly and closely by intelligences greater than
@@ -237,7 +235,7 @@ melody by the distance. My wife pointed out to me the brightness of the red,
 green, and yellow signal lights hanging in a framework against the sky. It
 seemed so safe and tranquil.
 
-end chapter## II.THE FALLING STAR.
+end chapter## II. THE FALLING STAR.
 
 Then came the night of the first falling star. It was seen early in the
 morning, rushing over Winchester eastward, a line of flame high in the
@@ -373,7 +371,7 @@ nine when I went out to get myDaily Chronicle. I was naturally
 startled, and lost no time in going out and across the Ottershaw bridge to the
 sand-pits.
 
-end chapter## III.ON HORSELL COMMON.
+end chapter## III. ON HORSELL COMMON.
 
 I found a little crowd of perhaps twenty people surrounding the huge hole in
 which the cylinder lay. I have already described the appearance of that
@@ -470,7 +468,7 @@ his house, but I was told he was expected from London by the six o’clock
 train from Waterloo; and as it was then about a quarter past five, I went home,
 had some tea, and walked up to the station to waylay him.
 
-end chapter## IV.THE CYLINDER OPENS.
+end chapter## IV. THE CYLINDER OPENS.
 
 When I returned to the common the sun was setting. Scattered groups were
 hurrying from the direction of Woking, and one or two persons were returning.
@@ -586,7 +584,7 @@ few heaps of sand. The barrow of ginger beer stood, a queer derelict, black
 against the burning sky, and in the sand-pits was a row of deserted vehicles
 with their horses feeding out of nosebags or pawing the ground.
 
-end chapter## V.THE HEAT-RAY.
+end chapter## V. THE HEAT-RAY.
 
 After the glimpse I had had of the Martians emerging from the cylinder in which
 they had come to the earth from their planet, a kind of fascination paralysed
@@ -728,7 +726,7 @@ that presently, when I was upon the very verge of safety, this mysterious
 death—as swift as the passage of light—would leap after me from the
 pit about the cylinder, and strike me down.
 
-end chapter## VI.THE HEAT-RAY IN THE CHOBHAM ROAD.
+end chapter## VI. THE HEAT-RAY IN THE CHOBHAM ROAD.
 
 It is still a matter of wonder how the Martians are able to slay men so swiftly
 and so silently. Many think that in some way they are able to generate an
@@ -807,7 +805,7 @@ desperate struggle occurred. All that crowd did not escape; three persons at
 least, two women and a little boy, were crushed and trampled there, and left to
 die amid the terror and the darkness.
 
-end chapter## VII.HOW I REACHED HOME.
+end chapter## VII. HOW I REACHED HOME.
 
 For my own part, I remember nothing of my flight except the stress of
 blundering against trees and stumbling through the heather. All about me
@@ -956,7 +954,7 @@ food. “We will peck them to death tomorrow, my dear.”
 I did not know it, but that was the last civilised dinner I was to eat for very
 many strange and terrible days.
 
-end chapter## VIII.FRIDAY NIGHT.
+end chapter## VIII. FRIDAY NIGHT.
 
 The most extraordinary thing to my mind, of all the strange and wonderful
 things that happened upon that Friday, was the dovetailing of the commonplace
@@ -1046,7 +1044,7 @@ fall from heaven into the pine woods to the northwest. It had a greenish
 colour, and caused a silent brightness like summer lightning. This was the
 second cylinder.
 
-end chapter## IX.THE FIGHTING BEGINS.
+end chapter## IX. THE FIGHTING BEGINS.
 
 Saturday lives in my memory as a day of suspense. It was a day of lassitude
 too, hot and close, with, I am told, a rapidly fluctuating barometer. I had
@@ -1267,7 +1265,7 @@ slashed the horse with the whip, and gave him a loose rein until Woking and
 Send lay between us and that quivering tumult. I overtook and passed the doctor
 between Woking and Send.
 
-end chapter## X.IN THE STORM.
+end chapter## X. IN THE STORM.
 
 Leatherhead is about twelve miles from Maybury Hill. The scent of hay was in
 the air through the lush meadows beyond Pyrford, and the hedges on either side
@@ -1470,7 +1468,7 @@ monsters, and of the dead body smashed against the fence.
 I crouched at the foot of the staircase with my back to the wall, shivering
 violently.
 
-end chapter## XI.AT THE WINDOW.
+end chapter## XI. AT THE WINDOW.
 
 I have already said that my storms of emotion have a trick of exhausting
 themselves. After a time I discovered that I was cold and wet, and with little
@@ -1670,7 +1668,7 @@ dawn—streamed up, whirled, broke, and vanished.
 Beyond were the pillars of fire about Chobham. They became pillars of bloodshot
 smoke at the first touch of day.
 
-end chapter## XII.WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.
+end chapter## XII. WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.
 
 As the dawn grew brighter we withdrew from the window from which we had watched
 the Martians, and went very quietly downstairs.
@@ -2062,7 +2060,7 @@ through a veil of smoke, receding interminably, as it seemed to me, across a
 vast space of river and meadow. And then, very slowly, I realised that by a
 miracle I had escaped.
 
-end chapter## XIII.HOW I FELL IN WITH THE CURATE.
+end chapter## XIII. HOW I FELL IN WITH THE CURATE.
 
 After getting this sudden lesson in the power of terrestrial weapons, the
 Martians retreated to their original position upon Horsell Common; and in their
@@ -2268,7 +2266,7 @@ splendour of the sunset.
 
 “We had better follow this path,” I said, “northward.”
 
-end chapter## XIV.IN LONDON.
+end chapter## XIV. IN LONDON.
 
 My younger brother was in London when the Martians fell at Woking. He was a
 medical student working for an imminent examination, and he heard nothing of
@@ -2639,7 +2637,7 @@ As my brother began to realise the import of all these things, he turned
 hastily to his own room, put all his available money—some ten pounds
 altogether—into his pockets, and went out again into the streets.
 
-end chapter## XV.WHAT HAD HAPPENED IN SURREY.
+end chapter## XV. WHAT HAD HAPPENED IN SURREY.
 
 It was while the curate had sat and talked so wildly to me under the hedge in
 the flat meadows near Halliford, and while my brother was watching the
@@ -2902,7 +2900,7 @@ Before dawn the black vapour was pouring through the streets of Richmond, and
 the disintegrating organism of government was, with a last expiring effort,
 rousing the population of London to the necessity of flight.
 
-end chapter## XVI.THE EXODUS FROM LONDON.
+end chapter## XVI. THE EXODUS FROM LONDON.
 
 So you understand the roaring wave of fear that swept through the greatest city
 in the world just as Monday was dawning—the stream of flight rising
@@ -3349,7 +3347,7 @@ And in the evening many people came hurrying along the road nearby their
 stopping place, fleeing from unknown dangers before them, and going in the
 direction from which my brother had come.
 
-end chapter## XVII.THE “THUNDER CHILD”.
+end chapter## XVII. THE “THUNDER CHILD”.
 
 Had the Martians aimed only at destruction, they might on Monday have
 annihilated the entire population of London, as it spread itself slowly through
@@ -3649,7 +3647,7 @@ down darkness upon the land.
 
 end chapter## BOOK TWOTHE EARTH UNDER THE MARTIANS.
 
-end chapter## I.UNDER FOOT.
+end chapter## I. UNDER FOOT.
 
 In the first book I have wandered so much from my own adventures to tell of the
 experiences of my brother that all through the last two chapters I and the
@@ -3896,7 +3894,7 @@ to seek food, and felt my way towards the pantry. He made me no answer, but so
 soon as I began eating the faint noise I made stirred him up and I heard him
 crawling after me.
 
-end chapter## II.WHAT WE SAW FROM THE RUINED HOUSE.
+end chapter## II. WHAT WE SAW FROM THE RUINED HOUSE.
 
 After eating we crept back to the scullery, and there I must have dozed again,
 for when presently I looked round I was alone. The thudding vibration continued
@@ -4187,7 +4185,7 @@ rhythmic shocks that had kept our ruinous refuge quivering. It piped and
 whistled as it worked. So far as I could see, the thing was without a directing
 Martian at all.
 
-end chapter## III.THE DAYS OF IMPRISONMENT.
+end chapter## III. THE DAYS OF IMPRISONMENT.
 
 The arrival of a second fighting-machine drove us from our peephole into the
 scullery, for we feared that from his elevation the Martian might see down upon
@@ -4352,7 +4350,7 @@ listen. Then I heard quite distinctly a booming exactly like the sound of great
 guns. Six distinct reports I counted, and after a long interval six again. And
 that was all.
 
-end chapter## IV.THE DEATH OF THE CURATE.
+end chapter## IV. THE DEATH OF THE CURATE.
 
 It was on the sixth day of our imprisonment that I peeped for the last time,
 and presently found myself alone. Instead of keeping close to me and trying to
@@ -4512,7 +4510,7 @@ darkness, buried among coals and firewood, not daring even to crawl out for the
 drink for which I craved. It was the eleventh day before I ventured so far from
 my security.
 
-end chapter## V.THE STILLNESS.
+end chapter## V. THE STILLNESS.
 
 My first act before I went into the pantry was to fasten the door between the
 kitchen and the scullery. But the pantry was empty; every scrap of food had
@@ -4610,7 +4608,7 @@ The day seemed, by contrast with my recent confinement, dazzlingly bright, the
 sky a glowing blue. A gentle breeze kept the red weed that covered every scrap
 of unoccupied ground gently swaying. And oh! the sweetness of the air!
 
-end chapter## VI.THE WORK OF FIFTEEN DAYS.
+end chapter## VI. THE WORK OF FIFTEEN DAYS.
 
 For some time I stood tottering on the mound regardless of my safety. Within
 that noisome den from which I had emerged I had thought with a narrow intensity
@@ -4718,7 +4716,7 @@ accomplished in this part of the world. The Martians, I thought, had gone on
 and left the country desolated, seeking food elsewhere. Perhaps even now they
 were destroying Berlin or Paris, or it might be they had gone northward.
 
-end chapter## VII.THE MAN ON PUTNEY HILL.
+end chapter## VII. THE MAN ON PUTNEY HILL.
 
 I spent that night in the inn that stands at the top of Putney Hill, sleeping
 in a made bed for the first time since my flight to Leatherhead. I will not
@@ -5284,7 +5282,7 @@ to his drink and gluttony, and to go on into London. There, it seemed to me, I
 had the best chance of learning what the Martians and my fellowmen were doing.
 I was still upon the roof when the late moon rose.
 
-end chapter## VIII.DEAD LONDON.
+end chapter## VIII. DEAD LONDON.
 
 After I had parted from the artilleryman, I went down the hill, and by the High
 Street across the bridge to Fulham. The red weed was tumultuous at that time,
@@ -5557,7 +5555,7 @@ towards the sky and began thanking God. In a year, thought I—in a year. .
 With overwhelming force came the thought of myself, of my wife, and the old
 life of hope and tender helpfulness that had ceased for ever.
 
-end chapter## IX.WRECKAGE.
+end chapter## IX. WRECKAGE.
 
 And now comes the strangest thing in my story. Yet, perhaps, it is not
 altogether strange. I remember, clearly and coldly and vividly, all that I did
@@ -5718,7 +5716,7 @@ and my wife—my wife white and tearless. She gave a faint cry.
 She put her hand to her throat—swayed. I made a step forward, and caught
 her in my arms.
 
-end chapter## X.THE EPILOGUE.
+end chapter## X. THE EPILOGUE.
 
 I cannot but regret, now that I am concluding my story, how little I am able to
 contribute to the discussion of the many debatable questions which are still
@@ -5839,7 +5837,7 @@ And strangest of all is it to hold my wife’s hand again, and to think
 that I have counted her, and that she has counted me, among the dead.
 
 end chapter*** END OF THE PROJECT GUTENBERG EBOOK THE WAR OF THE WORLDS ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -5855,16 +5853,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -5873,15 +5871,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -5896,7 +5894,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -5904,7 +5902,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -5915,28 +5913,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -5946,9 +5944,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -5969,40 +5967,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -6013,17 +6011,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -6033,11 +6031,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -6045,13 +6043,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -6061,31 +6059,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

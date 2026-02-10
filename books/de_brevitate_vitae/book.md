@@ -1,4 +1,3 @@
-
 Wikisource
 Quaerere apud Wikisource
 Photograph your local culture, help Wikipedia and win!

@@ -98,10 +98,14 @@ class GutenbergDownloader:
             print("✂️  Stripping Gutenberg boilerplate...")
             cleaned = self._strip_boilerplate(markdown)
 
+            # Normalize markdown formatting
+            print("🔧 Normalizing markdown formatting...")
+            normalized = self._normalize_markdown(cleaned)
+
             # Save to file
             output_file = book_dir / "source.md"
             with open(output_file, 'w', encoding='utf-8') as f:
-                f.write(cleaned)
+                f.write(normalized)
 
             print(f"✓ Saved: {output_file}")
 
@@ -342,6 +346,28 @@ class GutenbergDownloader:
         content = re.sub(r'\n{3,}', '\n\n', content)
 
         return content.strip()
+
+    def _normalize_markdown(self, markdown: str) -> str:
+        """
+        Normalize markdown formatting.
+
+        Removes anchor tags, standardizes chapter headers.
+
+        Args:
+            markdown: Markdown content
+
+        Returns:
+            Normalized markdown
+        """
+        try:
+            # Import normalizer (lazy import to avoid circular dependencies)
+            sys.path.insert(0, str(Path(__file__).parent.parent))
+            from markdown_normalizer import normalize_markdown
+            return normalize_markdown(markdown, verbose=False)
+        except ImportError as e:
+            print(f"⚠️  Warning: Could not import markdown_normalizer: {e}")
+            print("   Skipping normalization step")
+            return markdown
 
     def _validate_book(self, file_path: Path) -> Dict:
         """

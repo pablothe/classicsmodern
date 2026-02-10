@@ -17,7 +17,7 @@ This tests standalone Roman numeral detection for classic literature.
 
 ---
 
-## CHAPTER II.The Alice Style {#chapter-2}
+## Chapter 2: . The Alice Style
 
 This tests Alice in Wonderland style chapters without proper spacing.
 

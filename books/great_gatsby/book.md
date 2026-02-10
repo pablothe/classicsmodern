@@ -6,11 +6,11 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: The Great Gatsby
+before using this eBook. Title: The Great Gatsby
 
 Author: F. Scott Fitzgerald
 
-Release date: January 17, 2021 [eBook #64317]  
+Release date: January 17, 2021 [eBook #64317]
 Most recently updated: January 26, 2025
 
 Language: English
@@ -31,13 +31,13 @@ Credits: Produced by Alex Cabal for the Standard Ebooks project, based on a tran
 8. [VIII](#chapter-8)
 9. [IX](#chapter-9)
 
-Once again  
-to  
+Once again
+to
 Zelda
 
-Then wear the gold hat, if that will move her;  
-If you can bounce high, bounce for her too,  
-Till she cry “Lover, gold-hatted, high-bouncing lover,  
+Then wear the gold hat, if that will move her;
+If you can bounce high, bounce for her too,
+Till she cry “Lover, gold-hatted, high-bouncing lover,
 I must have you!”
 
 Thomas Parke d’Invilliers
@@ -51,7 +51,6 @@ In my younger and more vulnerable years my father gave me some advice that I’v
 He didn’t say any more, but we’ve always been unusually communicative in a reserved way, and I understood that he meant a great deal more than that. In consequence, I’m inclined to reserve all judgements, a habit that has opened up many curious natures to me and also made me the victim of not a few veteran bores. The abnormal mind is quick to detect and attach itself to this quality when it appears in a normal person, and so it came about that in college I was unjustly accused of being a politician, because I was privy to the secret griefs of wild, unknown men. Most of the confidences were unsought—frequently I have feigned sleep, preoccupation, or a hostile levity when I realized by some unmistakable sign that an intimate revelation was quivering on the horizon; for the intimate revelations of young men, or at least the terms in which they express them, are usually plagiaristic and marred by obvious suppressions. Reserving judgements is a matter of infinite hope. I am still a little afraid of missing something if I forget that, as my father snobbishly suggested, and I snobbishly repeat, a sense of the fundamental decencies is parcelled out unequally at birth.
 
 And, after boasting this way of my tolerance, I come to the admission that it has a limit. Conduct may be founded on the hard rock or the wet marshes, but after a certain point I don’t care what it’s founded on. When I came back from the East last autumn I felt that I wanted the world to be in uniform and at a sort of moral attention forever; I wanted no more riotous excursions with privileged glimpses into the human heart. Only Gatsby, the man who gives his name to this book, was exempt from my reaction—Gatsby, who represented everything for which I have an unaffected scorn. If personality is an unbroken series of successful gestures, then there was something gorgeous about him, some heightened sensitivity to the promises of life, as if he were related to one of those intricate machines that register earthquakes ten thousand miles away. This responsiveness had nothing to do with that flabby impressionability which is dignified under the name of the “creative temperament”—it was an extraordinary gift for hope, a romantic readiness such as I have never found in any other person and which it is not likely I shall ever find again. No—Gatsby turned out all right at the end; it is what preyed on Gatsby, what foul dust floated in the wake of his dreams that temporarily closed out my interest in the abortive sorrows and short-winded elations of men.
-
 
 ---
 
@@ -287,7 +286,6 @@ Evidently she had reason to be. I waited but she didn’t say any more, and afte
 
 The instant her voice broke off, ceasing to compel my attention, my belief, I felt the basic insincerity of what she had said. It made me uneasy, as though the whole evening had been a trick of some sort to exact a contributory emotion from me. I waited, and sure enough, in a moment she looked at me with an absolute smirk on her lovely face, as if she had asserted her membership in a rather distinguished secret society to which she and Tom belonged.
 
-
 ---
 
 Inside, the crimson room bloomed with light. Tom and Miss Baker sat at either end of the long couch and she read aloud to him from theSaturday Evening Post—the words, murmurous and uninflected, running together in a soothing tune. The lamplight, bright on his boots and dull on the autumn-leaf yellow of her hair, glinted along the paper as she turned a page with a flutter of slender muscles in her arms.
@@ -368,7 +366,7 @@ The fact that he had one was insisted upon wherever he was known. His acquaintan
 
 I think he’d tanked up a good deal at luncheon, and his determination to have my company bordered on violence. The supercilious assumption was that on Sunday afternoon I had nothing better to do.
 
-I followed him over a low whitewashed railroad fence, and we walked back a hundred yards along the road under Doctor Eckleburg’s persistent stare. The only building in sight was a small block of yellow brick sitting on the edge of the waste land, a sort of compact Main Street ministering to it, and contiguous to absolutely nothing. One of the three shops it contained was for rent and another was an all-night restaurant, approached by a trail of ashes; the third was a garage—Repairs.George B. Wilson.Cars bought and sold.—and I followed Tom inside.
+I followed him over a low whitewashed railroad fence, and we walked back a hundred yards along the road under Doctor Eckleburg’s persistent stare. The only building in sight was a small block of yellow brick sitting on the edge of the waste land, a sort of compact Main Street ministering to it, and contiguous to absolutely nothing. One of the three shops it contained was for rent and another was an all-night restaurant, approached by a trail of ashes; the third was a garage—Repairs. George B. Wilson. Cars bought and sold.—and I followed Tom inside.
 
 The interior was unprosperous and bare; the only car visible was the dust-covered wreck of a Ford which crouched in a dim corner. It had occurred to me that this shadow of a garage must be a blind, and that sumptuous and romantic apartments were concealed overhead, when the proprietor himself appeared in the door of an office, wiping his hands on a piece of waste. He was a blond, spiritless man, anaemic, and faintly handsome. When he saw us a damp gleam of hope sprang into his light blue eyes.
 
@@ -938,7 +936,6 @@ He hesitated.
 
 The caterwauling horns had reached a crescendo and I turned away and cut across the lawn toward home. I glanced back once. A wafer of a moon was shining over Gatsby’s house, making the night fine as before, and surviving the laughter and the sound of his still glowing garden. A sudden emptiness seemed to flow now from the windows and the great doors, endowing with complete isolation the figure of the host, who stood on the porch, his hand up in a formal gesture of farewell.
 
-
 ---
 
 Reading over what I have written so far, I see I have given the impression that the events of three nights several weeks apart were all that absorbed me. On the contrary, they were merely casual events in a crowded summer, and, until much later, they absorbed me infinitely less than my personal affairs.
@@ -998,7 +995,6 @@ Benny McClenahan arrived always with four girls. They were never quite the same 
 In addition to all these I can remember that Faustina O’Brien came there at least once and the Baedeker girls and young Brewer, who had his nose shot off in the war, and Mr. Albrucksburger and Miss Haag, his fiancée, and Ardita Fitz-Peters and Mr. P. Jewett, once head of the American Legion, and Miss Claudia Hip, with a man reputed to be her chauffeur, and a prince of something, whom we called Duke, and whose name, if I ever knew it, I have forgotten.
 
 All these people came to Gatsby’s house in the summer.
-
 
 ---
 
@@ -1097,7 +1093,6 @@ A dead man passed us in a hearse heaped with blooms, followed by two carriages w
 “Anything can happen now that we’ve slid over this bridge,” I thought; “anything at all…”
 
 Even Gatsby could happen, without any particular wonder.
-
 
 ---
 
@@ -1241,7 +1236,6 @@ They shook hands briefly, and a strained, unfamiliar look of embarrassment came 
 
 I turned toward Mr. Gatsby, but he was no longer there.
 
-
 ---
 
 One October day in nineteen-seventeen—
@@ -1282,14 +1276,13 @@ The next April Daisy had her little girl, and they went to France for a year. I 
 
 Well, about six weeks ago, she heard the name Gatsby for the first time in years. It was when I asked you—do you remember?—if you knew Gatsby in West Egg. After you had gone home she came into my room and woke me up, and said: “What Gatsby?” and when I described him—I was half asleep—she said in the strangest voice that it must be the man she used to know. It wasn’t until then that I connected this Gatsby with the officer in her white car.
 
-
 ---
 
 When Jordan Baker had finished telling all this we had left the Plaza for half an hour and were driving in a victoria through Central Park. The sun had gone down behind the tall apartments of the movie stars in the West Fifties, and the clear voices of children, already gathered like crickets on the grass, rose through the hot twilight:
 
-“I’m the Sheik of Araby.  
-Your love belongs to me.  
-At night when you’re asleep  
+“I’m the Sheik of Araby.
+Your love belongs to me.
+At night when you’re asleep
 Into your tent I’ll creep—”
 
 “It was a strange coincidence,” I said.
@@ -1572,7 +1565,6 @@ He took out a pile of shirts and began throwing them, one by one, before us, shi
 
 “They’re such beautiful shirts,” she sobbed, her voice muffled in the thick folds. “It makes me sad because I’ve never seen such—such beautiful shirts before.”
 
-
 ---
 
 After the house, we were to see the grounds and the swimming pool, and the hydroplane, and the midsummer flowers—but outside Gatsby’s window it began to rain again, so we stood in a row looking at the corrugated surface of the Sound.
@@ -1633,15 +1625,15 @@ When Klipspringer had played “The Love Nest” he turned around on the bench a
 
 “Don’t talk so much, old sport,” commanded Gatsby. “Play!”
 
-“In the morning,  
-In the evening,  
+“In the morning,
+In the evening,
 Ain’t we got fun—”
 
 Outside the wind was loud and there was a faint flow of thunder along the Sound. All the lights were going on in West Egg now; the electric trains, men-carrying, were plunging home through the rain from New York. It was the hour of a profound human change, and excitement was generating on the air.
 
-“One thing’s sure and nothing’s surer  
-The rich get richer and the poor get—children.  
-In the meantime,  
+“One thing’s sure and nothing’s surer
+The rich get richer and the poor get—children.
+In the meantime,
 In between time—”
 
 As I went over to say goodbye I saw that the expression of bewilderment had come back into Gatsby’s face, as though a faint doubt had occurred to him as to the quality of his present happiness. Almost five years! There must have been moments even that afternoon when Daisy tumbled short of his dreams—not through her own fault, but because of the colossal vitality of his illusion. It had gone beyond her, beyond everything. He had thrown himself into it with a creative passion, adding to it all the time, decking it out with every bright feather that drifted his way. No amount of fire or freshness can challenge what a man can store up in his ghostly heart.
@@ -1681,7 +1673,6 @@ He was employed in a vague personal capacity—while he remained with Cody he wa
 I remember the portrait of him up in Gatsby’s bedroom, a grey, florid man with a hard, empty face—the pioneer debauchee, who during one phase of American life brought back to the Eastern seaboard the savage violence of the frontier brothel and saloon. It was indirectly due to Cody that Gatsby drank so little. Sometimes in the course of gay parties women used to rub champagne into his hair; for himself he formed the habit of letting liquor alone.
 
 And it was from Cody that he inherited money—a legacy of twenty-five thousand dollars. He didn’t get it. He never understood the legal device that was used against him, but what remained of the millions went intact to Ella Kaye. He was left with his singularly appropriate education; the vague contour of Jay Gatsby had filled out to the substantiality of a man.
-
 
 ---
 
@@ -2251,7 +2242,6 @@ That locality was always vaguely disquieting, even in the broad glare of afterno
 
 In one of the windows over the garage the curtains had been moved aside a little, and Myrtle Wilson was peering down at the car. So engrossed was she that she had no consciousness of being observed, and one emotion after another crept into her face like objects into a slowly developing picture. Her expression was curiously familiar—it was an expression I had often seen on women’s faces, but on Myrtle Wilson’s face it seemed purposeless and inexplicable until I realized that her eyes, wide with jealous terror, were fixed not on Tom, but on Jordan Baker, whom she took to be his wife.
 
-
 ---
 
 There is no confusion like the confusion of a simple mind, and as we drove away Tom was feeling the hot whips of panic. His wife and his mistress, until an hour ago secure and inviolate, were slipping precipitately from his control. Instinct made him step on the accelerator with the double purpose of overtaking Daisy and leaving Wilson behind, and we sped along toward Astoria at fifty miles an hour, until, among the spidery girders of the elevated, we came in sight of the easygoing blue coupé.
@@ -2546,7 +2536,6 @@ It was seven o’clock when we got into the coupé with him and started for Long
 
 So we drove on toward death through the cooling twilight.
 
-
 ---
 
 The young Greek, Michaelis, who ran the coffee joint beside the ash-heaps was the principal witness at the inquest. He had slept through the heat until after five, when he strolled over to the garage, and found George Wilson sick in his office—really sick, pale as his own pale hair and shaking all over. Michaelis advised him to go to bed, but Wilson refused, saying that he’d miss a lot of business if he did. While his neighbour was trying to persuade him a violent racket broke out overhead.
@@ -2564,7 +2553,6 @@ A moment later she rushed out into the dusk, waving her hands and shouting—bef
 The “death car” as the newspapers called it, didn’t stop; it came out of the gathering darkness, wavered tragically for a moment, and then disappeared around the next bend. Mavro Michaelis wasn’t even sure of its colour—he told the first policeman that it was light green. The other car, the one going toward New York, came to rest a hundred yards beyond, and its driver hurried back to where Myrtle Wilson, her life violently extinguished, knelt in the road and mingled her thick dark blood with the dust.
 
 Michaelis and this man reached her first, but when they had torn open her shirtwaist, still damp with perspiration, they saw that her left breast was swinging loose like a flap, and there was no need to listen for the heart beneath. The mouth was wide open and ripped a little at the corners, as though she had choked a little in giving up the tremendous vitality she had stored so long.
-
 
 ---
 
@@ -2669,7 +2657,6 @@ Self-consciously, with his authoritative arms breaking the way, we pushed throug
 Tom drove slowly until we were beyond the bend—then his foot came down hard, and the coupé raced along through the night. In a little while I heard a low husky sob, and saw that the tears were overflowing down his face.
 
 “The God damned coward!” he whimpered. “He didn’t even stop his car.”
-
 
 ---
 
@@ -2799,13 +2786,11 @@ But he didn’t despise himself and it didn’t turn out as he had imagined. He 
 
 When they met again, two days later, it was Gatsby who was breathless, who was, somehow, betrayed. Her porch was bright with the bought luxury of star-shine; the wicker of the settee squeaked fashionably as she turned toward him and he kissed her curious and lovely mouth. She had caught a cold, and it made her voice huskier and more charming than ever, and Gatsby was overwhelmingly aware of the youth and mystery that wealth imprisons and preserves, of the freshness of many clothes, and of Daisy, gleaming like silver, safe and proud above the hot struggles of the poor.
 
-
 ---
 
 “I can’t describe to you how surprised I was to find out I loved her, old sport. I even hoped for a while that she’d throw me over, but she didn’t, because she was in love with me too. She thought I knew a lot because I knew different things from her… Well, there I was, way off my ambitions, getting deeper in love every minute, and all of a sudden I didn’t care. What was the use of doing great things if I could have a better time telling her what I was going to do?”
 
 On the last afternoon before he went abroad, he sat with Daisy in his arms for a long, silent time. It was a cold fall day, with fire in the room and her cheeks flushed. Now and then she moved and he changed his arm a little, and once he kissed her dark shining hair. The afternoon had made them tranquil for a while, as if to give them a deep memory for the long parting the next day promised. They had never been closer in their month of love, nor communicated more profoundly one with another, than when she brushed silent lips against his coat’s shoulder or when he touched the end of her fingers, gently, as though she were asleep.
-
 
 ---
 
@@ -2816,7 +2801,6 @@ For Daisy was young and her artificial world was redolent of orchids and pleasan
 Through this twilight universe Daisy began to move again with the season; suddenly she was again keeping half a dozen dates a day with half a dozen men, and drowsing asleep at dawn with the beads and chiffon of an evening-dress tangled among dying orchids on the floor beside her bed. And all the time something within her was crying for a decision. She wanted her life shaped now, immediately—and the decision must be made by some force—of love, of money, of unquestionable practicality—that was close at hand.
 
 That force took shape in the middle of spring with the arrival of Tom Buchanan. There was a wholesome bulkiness about his person and his position, and Daisy was flattered. Doubtless there was a certain struggle and a certain relief. The letter reached Gatsby while he was still at Oxford.
-
 
 ---
 
@@ -2876,7 +2860,6 @@ I thanked him for his hospitality. We were always thanking him for that—I and 
 
 “Goodbye,” I called. “I enjoyed breakfast, Gatsby.”
 
-
 ---
 
 Up in the city, I tried for a while to list the quotations on an interminable amount of stock, then I fell asleep in my swivel-chair. Just before noon the phone woke me, and I started up with sweat breaking out on my forehead. It was Jordan Baker; she often called me up at this hour because the uncertainty of her own movements between hotels and clubs and private houses made her hard to find in any other way. Usually her voice came over the wire as something fresh and cool, as if a divot from a green golf-links had come sailing in at the office window, but this morning it seemed harsh and dry.
@@ -2906,7 +2889,6 @@ Silence for a moment. Then:
 We talked like that for a while, and then abruptly we weren’t talking any longer. I don’t know which of us hung up with a sharp click, but I know I didn’t care. I couldn’t have talked to her across a tea-table that day if I never talked to her again in this world.
 
 I called Gatsby’s house a few minutes later, but the line was busy. I tried four times; finally an exasperated central told me the wire was being kept open for long distance from Detroit. Taking out my timetable, I drew a small circle around the three-fifty train. Then I leaned back in my chair and tried to think. It was just noon.
-
 
 ---
 
@@ -2996,13 +2978,11 @@ Standing behind him, Michaelis saw with a shock that he was looking at the eyes 
 
 “That’s an advertisement,” Michaelis assured him. Something made him turn away from the window and look back into the room. But Wilson stood there a long time, his face close to the window pane, nodding into the twilight.
 
-
 ---
 
 By six o’clock Michaelis was worn out, and grateful for the sound of a car stopping outside. It was one of the watchers of the night before who had promised to come back, so he cooked breakfast for three, which he and the other man ate together. Wilson was quieter now, and Michaelis went home to sleep; when he awoke four hours later and hurried back to the garage, Wilson was gone.
 
 His movements—he was on foot all the time—were afterward traced to Port Roosevelt and then to Gad’s Hill, where he bought a sandwich that he didn’t eat, and a cup of coffee. He must have been tired and walking slowly, for he didn’t reach Gad’s Hill until noon. Thus far there was no difficulty in accounting for his time—there were boys who had seen a man “acting sort of crazy,” and motorists at whom he stared oddly from the side of the road. Then for three hours he disappeared from view. The police, on the strength of what he said to Michaelis, that he “had a way of finding out,” supposed that he spent that time going from garage to garage thereabout, inquiring for a yellow car. On the other hand, no garage man who had seen him ever came forward, and perhaps he had an easier, surer way of finding out what he wanted to know. By half-past two he was in West Egg, where he asked someone the way to Gatsby’s house. So by that time he knew Gatsby’s name.
-
 
 ---
 
@@ -3085,7 +3065,6 @@ When the phone rang that afternoon and Long Distance said Chicago was calling I 
 “Hello!” I interrupted breathlessly. “Look here—this isn’t Mr. Gatsby. Mr. Gatsby’s dead.”
 
 There was a long silence on the other end of the wire, followed by an exclamation… then a quick squawk as the connection was broken.
-
 
 ---
 
@@ -3243,26 +3222,19 @@ He seemed reluctant to put away the picture, held it for another minute, lingeri
 
 He opened it at the back cover and turned it around for me to see. On the last flyleaf was printed the wordschedule, and the date September 12, 1906. And underneath:
 
-Rise from bed6:00a.m.Dumbell exercise and wall-scaling6:15⁠–⁠6:30“Study electricity, etc.7:15⁠–⁠8:15“Work8:30⁠–⁠4:30p.m.Baseball and sports4:30⁠–⁠5:00“Practise elocution, poise and how to attain it5:00⁠–⁠6:00“Study needed inventions7:00⁠–⁠9:00“General Resolves
+Rise from bed6:00a.m. Dumbell exercise and wall-scaling6:15⁠–⁠6:30“Study electricity, etc.7:15⁠–⁠8:15“Work8:30⁠–⁠4:30p.m. Baseball and sports4:30⁠–⁠5:00“Practise elocution, poise and how to attain it5:00⁠–⁠6:00“Study needed inventions7:00⁠–⁠9:00“General Resolves
 
 - No wasting time at Shafters or [a name, indecipherable]
 
-
 - No more smokeing or chewing.
-
 
 - Bath every other day
 
-
 - Read one improving book or magazine per week
-
 
 - Save $5.00 [crossed out] $3.00 per week
 
-
 - Be better to parents
-
-
 
 “I came across this book by accident,” said the old man. “It just shows you, don’t it?”
 
@@ -3273,7 +3245,6 @@ Rise from bed6:00a.m.Dumbell exercise and wall-scaling6:15⁠–⁠6:30“Study 
 He was reluctant to close the book, reading each item aloud and then looking eagerly at me. I think he rather expected me to copy down the list for my own use.
 
 A little before three the Lutheran minister arrived from Flushing, and I began to look involuntarily out the windows for other cars. So did Gatsby’s father. And as the time passed and the servants came in and stood waiting in the hall, his eyes began to blink anxiously, and he spoke of the rain in a worried, uncertain way. The minister glanced several times at his watch, so I took him aside and asked him to wait for half an hour. But it wasn’t any use. Nobody came.
-
 
 ---
 
@@ -3294,7 +3265,6 @@ We straggled down quickly through the rain to the cars. Owl-eyes spoke to me by 
 He took off his glasses and wiped them again, outside and in.
 
 “The poor son-of-a-bitch,” he said.
-
 
 ---
 
@@ -3326,7 +3296,6 @@ We shook hands.
 
 She didn’t answer. Angry, and half in love with her, and tremendously sorry, I turned away.
 
-
 ---
 
 One afternoon late in October I saw Tom Buchanan. He was walking ahead of me along Fifth Avenue in his alert, aggressive way, his hands out a little from his body as if to fight off interference, his head moving sharply here and there, adapting itself to his restless eyes. Just as I slowed up to avoid overtaking him he stopped and began frowning into the windows of a jewellery store. Suddenly he saw me and walked back, holding out his hand.
@@ -3351,7 +3320,6 @@ I couldn’t forgive him or like him, but I saw that what he had done was, to hi
 
 I shook hands with him; it seemed silly not to, for I felt suddenly as though I were talking to a child. Then he went into the jewellery store to buy a pearl necklace—or perhaps only a pair of cuff buttons—rid of my provincial squeamishness forever.
 
-
 ---
 
 Gatsby’s house was still empty when I left—the grass on his lawn had grown as long as mine. One of the taxi drivers in the village never took a fare past the entrance gate without stopping for a minute and pointing inside; perhaps it was he who drove Daisy and Gatsby over to East Egg the night of the accident, and perhaps he had made a story about it all his own. I didn’t want to hear it and I avoided him when I got off the train.
@@ -3369,7 +3337,7 @@ Gatsby believed in the green light, the orgiastic future that year by year reced
 So we beat on, boats against the current, borne back ceaselessly into the past.
 
 *** END OF THE PROJECT GUTENBERG EBOOK THE GREAT GATSBY ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -3385,16 +3353,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -3403,15 +3371,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -3426,7 +3394,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -3434,7 +3402,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -3445,28 +3413,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -3476,9 +3444,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -3499,40 +3467,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -3543,17 +3511,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -3563,11 +3531,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -3575,13 +3543,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -3591,31 +3559,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

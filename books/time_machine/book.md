@@ -6,11 +6,11 @@ whatsoever. You may copy it, give it away or re-use it under the terms
 of the Project Gutenberg License included with this ebook or online
 at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
 you will have to check the laws of the country where you are located
-before using this eBook.Title: The Time Machine
+before using this eBook. Title: The Time Machine
 
 Author: H. G. Wells
 
-Release date: October 2, 2004 [eBook #35]  
+Release date: October 2, 2004 [eBook #35]
 Most recently updated: March 30, 2021
 
 Language: English
@@ -21,12 +21,11 @@ Language: English
 
 ## by H. G. Wells
 
-
 ---
 
 ## CONTENTS
 
-I[Introduction](#chap01)II[The Machine](#chap02)III[The Time Traveller Returns](#chap03)IV[Time Travelling](#chap04)V[In the Golden Age](#chap05)VI[The Sunset of Mankind](#chap06)VII[A Sudden Shock](#chap07)VIII[Explanation](#chap08)IX[The Morlocks](#chap09)X[When Night Came](#chap10)XI[The Palace of Green Porcelain](#chap11)XII[In the Darkness](#chap12)XIII[The Trap of the White Sphinx](#chap13)XIV[The Further Vision](#chap14)XV[The Time Traveller’s Return](#chap15)XVI[After the Story](#chap16)[Epilogue](#chap17)## I.Introduction
+I[Introduction](#chap01)II[The Machine](#chap02)III[The Time Traveller Returns](#chap03)IV[Time Travelling](#chap04)V[In the Golden Age](#chap05)VI[The Sunset of Mankind](#chap06)VII[A Sudden Shock](#chap07)VIII[Explanation](#chap08)IX[The Morlocks](#chap09)X[When Night Came](#chap10)XI[The Palace of Green Porcelain](#chap11)XII[In the Darkness](#chap12)XIII[The Trap of the White Sphinx](#chap13)XIV[The Further Vision](#chap14)XV[The Time Traveller’s Return](#chap15)XVI[After the Story](#chap16)[Epilogue](#chap17)## I. Introduction
 
 The Time Traveller (for so it will be convenient to speak of him) was
 expounding a recondite matter to us. His pale grey eyes shone and twinkled, and
@@ -86,7 +85,7 @@ indeed.”
 overlooked,” continued the Time Traveller, with a slight accession of
 cheerfulness. “Really this is what is meant by the Fourth Dimension,
 though some people who talk about the Fourth Dimension do not know they
-mean it. It is only another way of looking at Time.There is no
+mean it. It is only another way of looking at Time. There is no
 difference between Time and any of the three dimensions of Space except
 that our consciousness moves along it. But some foolish people have got
 hold of the wrong side of that idea. You have all heard what they have to
@@ -252,7 +251,7 @@ and Filby tried to tell us about a conjuror he had seen at Burslem, but before
 he had finished his preface the Time Traveller came back, and Filby’s
 anecdote collapsed.
 
-end chapter## II.The Machine
+end chapter## II. The Machine
 
 The thing the Time Traveller held in his hand was a glittering metallic
 framework, scarcely larger than a small clock, and very delicately made.
@@ -356,7 +355,7 @@ we were here; and the Thursday before that; and so forth!”
 air of impartiality, turning towards the Time Traveller.
 
 “Not a bit,” said the Time Traveller, and, to the
-Psychologist: “You think.Youcan explain that. It’s
+Psychologist: “You think. Youcan explain that. It’s
 presentation below the threshold, you know, diluted
 presentation.”
 
@@ -404,7 +403,7 @@ None of us quite knew how to take it.
 I caught Filby’s eye over the shoulder of the Medical Man, and he
 winked at me solemnly.
 
-end chapter## III.The Time Traveller Returns
+end chapter## III. The Time Traveller Returns
 
 I think that at that time none of us quite believed in the Time Machine.
 The fact is, the Time Traveller was one of those men who are too clever to
@@ -605,7 +604,7 @@ the legs of the Silent Man from the knees downward were illuminated. At
 first we glanced now and again at each other. After a time we ceased to do
 that, and looked only at the Time Traveller’s face.
 
-end chapter## IV.Time Travelling
+end chapter## IV. Time Travelling
 
 >“I told some of you last Thursday of the principles of the Time
 Machine, and showed you the actual thing itself, incomplete in the
@@ -793,7 +792,7 @@ kind of consumptive—that hectic beauty of which we used to hear so
 much. At the sight of him I suddenly regained confidence. I took my hands
 from the machine.
 
-end chapter## V.In the Golden Age
+end chapter## V. In the Golden Age
 
 “In another moment we were standing face to face, I and this
 fragile thing out of futurity. He came straight up to me and laughed into
@@ -942,7 +941,7 @@ rather of necessity, to let them give their lessons in little doses when
 they felt inclined. And very little doses I found they were before long,
 for I never met people more indolent or more easily fatigued.
 
-end chapter## VI.The Sunset of Mankind
+end chapter## VI. The Sunset of Mankind
 
 “A queer thing I soon discovered about my little hosts, and that
 was their lack of interest. They would come to me with eager cries of
@@ -964,7 +963,7 @@ was situated on the slope of a broad river valley, but the Thames had
 shifted, perhaps, a mile from its present position. I resolved to mount to
 the summit of a crest, perhaps a mile and a half away, from which I could
 get a wider view of this our planet in the year Eight Hundred and Two
-Thousand Seven Hundred and One, A.D. For that, I should explain, was the
+Thousand Seven Hundred and One, A. D. For that, I should explain, was the
 date the little dials of my machine recorded.
 
 “As I walked I was watching for every impression that could
@@ -1100,7 +1099,7 @@ wall; conditions that put a premium upon the loyal alliance of capable men,
 upon self-restraint, patience, and decision. And the institution of the
 family, and the emotions that arise therein, the fierce jealousy, the
 tenderness for offspring, parental self-devotion, all found their
-justification and support in the imminent dangers of the young.Now,
+justification and support in the imminent dangers of the young. Now,
 where are these imminent dangers? There is a sentiment arising, and it will
 grow, against connubial jealousy, against fierce maternity, against passion
 of all sorts; unnecessary things now, and things that make us
@@ -1148,7 +1147,7 @@ numbers had rather diminished than kept stationary. That would account for
 the abandoned ruins. Very simple was my explanation, and plausible
 enough—as most wrong theories are!
 
-end chapter## VII.A Sudden Shock
+end chapter## VII. A Sudden Shock
 
 “As I stood there musing over this too perfect triumph of man, the
 full moon, yellow and gibbous, came up out of an overflow of silver light
@@ -1347,7 +1346,7 @@ knowledge would lead me back to them in a natural way. Yet a certain
 feeling, you may understand, tethered me in a circle of a few miles round
 the point of my arrival.
 
-end chapter## VIII.Explanation
+end chapter## VIII. Explanation
 
 “So far as I could see, all the world displayed the same exuberant
 richness as the Thames valley. From every hill I climbed I saw the same
@@ -1420,7 +1419,7 @@ fashion, in eating fruit and sleeping. I could not see how things were kept
 going.
 
 “Then, again, about the Time Machine: something, I knew not what,
-had taken it into the hollow pedestal of the White Sphinx.Why?For
+had taken it into the hollow pedestal of the White Sphinx. Why? For
 the life of me I could not imagine. Those waterless wells, too, those
 flickering pillars. I felt I lacked a clue. I felt—how shall I put
 it? Suppose you found an inscription, with sentences here and there in
@@ -1714,7 +1713,7 @@ concerned in banishing these signs of her human inheritance from
 Weena’s eyes. And very soon she was smiling and clapping her hands,
 while I solemnly burnt a match.
 
-end chapter## IX.The Morlocks
+end chapter## IX. The Morlocks
 
 “It may seem odd to you, but it was two days before I could follow
 up the new-found clue in what was manifestly the proper way. I felt a
@@ -1901,7 +1900,7 @@ face. Even the soil smelt sweet and clean. Then I remember Weena kissing my
 hands and ears, and the voices of others among the Eloi. Then, for a time,
 I was insensible.
 
-end chapter## X.When Night Came
+end chapter## X. When Night Came
 
 “Now, indeed, I seemed in a worse case than before. Hitherto,
 except during my night’s anguish at the loss of the Time Machine, I
@@ -2116,7 +2115,7 @@ move it far away. Weena I had resolved to bring with me to our own time.
 And turning such schemes over in my mind I pursued our way towards the
 building which my fancy had chosen as our dwelling.
 
-end chapter## XI.The Palace of Green Porcelain
+end chapter## XI. The Palace of Green Porcelain
 
 “I found the Palace of Green Porcelain, when we approached it
 about noon, deserted and falling into ruin. Only ragged vestiges of glass
@@ -2330,7 +2329,7 @@ largely because of the mystery on the other side. They had never impressed
 me as being very strong, and I hoped to find my bar of iron not altogether
 inadequate for the work.
 
-end chapter## XII.In the Darkness
+end chapter## XII. In the Darkness
 
 “We emerged from the Palace while the sun was still in part above the
 horizon. I was determined to reach the White Sphinx early the next morning,
@@ -2550,7 +2549,7 @@ thoughts came a longing that was pain.
 sky, I made a discovery. In my trouser pocket were still some loose
 matches. The box must have leaked before it was lost.
 
-end chapter## XIII.The Trap of the White Sphinx
+end chapter## XIII. The Trap of the White Sphinx
 
 “About eight or nine in the morning I came to the same seat of
 yellow metal from which I had viewed the world upon the evening of my
@@ -2657,7 +2656,7 @@ nearer thing than the fight in the forest, I think, this last scramble.
 hands slipped from me. The darkness presently fell from my eyes. I found
 myself in the same grey light and tumult I have already described.
 
-end chapter## XIV.The Further Vision
+end chapter## XIV. The Further Vision
 
 “I have already told you of the sickness and confusion that comes
 with time travelling. And this time I was not seated properly in the
@@ -2822,7 +2821,7 @@ blood-red water, and it was hopping fitfully about. Then I felt I was
 fainting. But a terrible dread of lying helpless in that remote and awful
 twilight sustained me while I clambered upon the saddle.
 
-end chapter## XV.The Time Traveller’s Return
+end chapter## XV. The Time Traveller’s Return
 
 “So I came back. For a long time I must have been insensible upon
 the machine. The blinking succession of the days and nights was resumed,
@@ -2868,7 +2867,7 @@ clatter of plates. I hesitated—I felt so sick and weak. Then I
 sniffed good wholesome meat, and opened the door on you. You know the rest.
 I washed, and dined, and now I am telling you the story.
 
-end chapter## XVI.After the Story
+end chapter## XVI. After the Story
 
 “I know,” he said, after a pause, “that all this will be
 absolutely incredible to you, but to me the one incredible thing is that I
@@ -3046,7 +3045,7 @@ witness that even when mind and strength had gone, gratitude and a mutual
 tenderness still lived on in the heart of man.
 
 end chapter*** END OF THE PROJECT GUTENBERG EBOOK THE TIME MACHINE ***Updated editions will replace the previous one—the old editions will
-be renamed.Creating the works from print editions not protected by U.S. copyright
+be renamed. Creating the works from print editions not protected by U. S. copyright
 law means that no one owns a United States copyright in these works,
 so the Foundation (and you!) can copy and distribute it in the United
 States without permission and without paying copyright
@@ -3062,16 +3061,16 @@ easy. You may use this eBook for nearly any purpose such as creation
 of derivative works, reports, performances and research. Project
 Gutenberg eBooks may be modified and printed and given away—you may
 do practically ANYTHING in the United States with eBooks not protected
-by U.S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution.START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
+by U. S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
 
 PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
 distribution of electronic works, by using or distributing this work
 (or any other work associated in any way with the phrase “Project
 Gutenberg”), you agree to comply with all the terms of the Full
 Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license.Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1.A. By reading or using any part of this Project Gutenberg™
+www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works1. A. By reading or using any part of this Project Gutenberg™
 electronic work, you indicate that you have read, understand, agree to
 and accept all the terms of this license and intellectual property
 (trademark/copyright) agreement. If you do not agree to abide by all
@@ -3080,15 +3079,15 @@ destroy all copies of Project Gutenberg™ electronic works in your
 possession. If you paid a fee for obtaining a copy of or access to a
 Project Gutenberg™ electronic work and you do not agree to be bound
 by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1.E.8.1.B. “Project Gutenberg” is a registered trademark. It may only be
+or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
 used on or associated in any way with an electronic work by people who
 agree to be bound by the terms of this agreement. There are a few
 things that you can do with most Project Gutenberg™ electronic works
 even without complying with the full terms of this agreement. See
-paragraph 1.C below. There are a lot of things you can do with Project
+paragraph 1. C below. There are a lot of things you can do with Project
 Gutenberg™ electronic works if you follow the terms of this
 agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1.E below.1.C. The Project Gutenberg Literary Archive Foundation (“the
+electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
 Foundation” or PGLAF), owns a compilation copyright in the collection
 of Project Gutenberg™ electronic works. Nearly all the individual
 works in the collection are in the public domain in the United
@@ -3103,7 +3102,7 @@ works in compliance with the terms of this agreement for keeping the
 Project Gutenberg™ name associated with the work. You can easily
 comply with the terms of this agreement by keeping this work in the
 same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1.D. The copyright laws of the place where you are located also govern
+you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
 what you can do with this work. Copyright laws in most countries are
 in a constant state of change. If you are outside the United States,
 check the laws of your country in addition to the terms of this
@@ -3111,7 +3110,7 @@ agreement before downloading, copying, displaying, performing,
 distributing or creating derivative works based on this work or any
 other Project Gutenberg™ work. The Foundation makes no
 representations concerning the copyright status of any work in any
-country other than the United States.1.E. Unless you have removed all references to Project Gutenberg:1.E.1. The following sentence, with active links to, or other
+country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
 immediate access to, the full Project Gutenberg™ License must appear
 prominently whenever any copy of a Project Gutenberg™ work (any work
 on which the phrase “Project Gutenberg” appears, or with which the
@@ -3122,28 +3121,28 @@ performed, viewed, copied or distributed:This eBook is for the use of anyone any
     of the Project Gutenberg License included with this eBook or online
     at[www.gutenberg.org](https://www.gutenberg.org). If you
     are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1.E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U.S. copyright law (does not
+    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U. S. copyright law (does not
 contain a notice indicating that it is posted with permission of the
 copyright holder), the work can be copied and distributed to anyone in
 the United States without paying any fees or charges. If you are
 redistributing or providing access to a work with the phrase “Project
 Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+either with the requirements of paragraphs 1. E.1 through 1. E.7 or
 obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1.E.8 or 1.E.9.1.E.3. If an individual Project Gutenberg™ electronic work is posted
+trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
 with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1.E.1 through 1.E.7 and any
+must comply with both paragraphs 1. E.1 through 1. E.7 and any
 additional terms imposed by the copyright holder. Additional terms
 will be linked to the Project Gutenberg™ License for all works
 posted with the permission of the copyright holder found at the
-beginning of this work.1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
 License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1.E.5. Do not copy, display, perform, distribute or redistribute this
+work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1.E.1 with
+prominently displaying the sentence set forth in paragraph 1. E.1 with
 active links or immediate access to the full terms of the Project
-Gutenberg™ License.1.E.6. You may convert to and distribute this work in any binary,
+Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
 compressed, marked up, nonproprietary or proprietary form, including
 any word processing or hypertext form. However, if you provide access
 to or distribute copies of a Project Gutenberg™ work in a format
@@ -3153,9 +3152,9 @@ version posted on the official Project Gutenberg™ website
 to the user, provide a copy, a means of exporting a copy, or a means
 of obtaining a copy upon request, of the work in its original “Plain
 Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1.E.1.1.E.7. Do not charge a fee for access to, viewing, displaying,
+full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
 performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1.E.8 or 1.E.9.1.E.8. You may charge a reasonable fee for copies of or providing
+unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
 access to or distributing Project Gutenberg™ electronic works
 provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
         the use of Project Gutenberg™ works calculated using the method
@@ -3176,40 +3175,40 @@ provided that:- • You pay a royalty fee of 20% of the gross profits you derive
         copies of the works possessed in a physical medium and discontinue
         all use of and all access to other copies of Project Gutenberg™
         works.
-- • You provide, in accordance with paragraph 1.F.3, a full refund of
+- • You provide, in accordance with paragraph 1. F.3, a full refund of
         any money paid for a work or a replacement copy, if a defect in the
         electronic work is discovered and reported to you within 90 days of
         receipt of the work.
 - • You comply with all other terms of this agreement for free
         distribution of Project Gutenberg™ works.
 
-1.E.9. If you wish to charge a fee or distribute a Project
+1. E.9. If you wish to charge a fee or distribute a Project
 Gutenberg™ electronic work or group of works on different terms than
 are set forth in this agreement, you must obtain permission in writing
 from the Project Gutenberg Literary Archive Foundation, the manager of
 the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1.F.1.F.1. Project Gutenberg volunteers and employees expend considerable
+forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
 effort to identify, do copyright research on, transcribe and proofread
-works not protected by U.S. copyright law in creating the Project
+works not protected by U. S. copyright law in creating the Project
 Gutenberg™ collection. Despite these efforts, Project Gutenberg™
 electronic works, and the medium on which they may be stored, may
 contain “Defects,” such as, but not limited to, incomplete, inaccurate
 or corrupt data, transcription errors, a copyright or other
 intellectual property infringement, a defective or damaged disk or
 other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1.F.3, the Project
+cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1. F.3, the Project
 Gutenberg Literary Archive Foundation, the owner of the Project
 Gutenberg™ trademark, and any other party distributing a Project
 Gutenberg™ electronic work under this agreement, disclaim all
 liability to you for damages, costs and expenses, including legal
 fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
 LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
 TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
 LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
 INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
 defect in this electronic work within 90 days of receiving it, you can
 receive a refund of the money (if any) you paid for it by sending a
 written explanation to the person you received the work from. If you
@@ -3220,17 +3219,17 @@ lieu of a refund. If you received the work electronically, the person
 or entity providing it to you may choose to give you a second
 opportunity to receive the work electronically in lieu of a refund. If
 the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1.F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
 OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1.F.5. Some states do not allow disclaimers of certain implied
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
 warranties or the exclusion or limitation of certain types of
 damages. If any disclaimer or limitation set forth in this agreement
 violates the law of the state applicable to this agreement, the
 agreement shall be interpreted to make the maximum disclaimer or
 limitation permitted by the applicable state law. The invalidity or
 unenforceability of any provision of this agreement shall not void the
-remaining provisions.1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
 trademark owner, any agent or employee of the Foundation, anyone
 providing copies of Project Gutenberg™ electronic works in
 accordance with this agreement, and any volunteers associated with the
@@ -3240,11 +3239,11 @@ including legal fees, that arise directly or indirectly from any of
 the following which you do or cause to occur: (a) distribution of this
 or any Project Gutenberg™ work, (b) alteration, modification, or
 additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause.Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
+Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
 electronic works in formats readable by the widest variety of
 computers including obsolete, old, middle-aged and new computers. It
 exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life.Volunteers and financial support to provide volunteers with the
+from people in all walks of life. Volunteers and financial support to provide volunteers with the
 assistance they need are critical to reaching Project Gutenberg™’s
 goals and ensuring that the Project Gutenberg™ collection will
 remain freely available for generations to come. In 2001, the Project
@@ -3252,13 +3251,13 @@ Gutenberg Literary Archive Foundation was created to provide a secure
 and permanent future for Project Gutenberg™ and future
 generations. To learn more about the Project Gutenberg Literary
 Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
 501(c)(3) educational corporation organized under the laws of the
 state of Mississippi and granted tax exempt status by the Internal
 Revenue Service. The Foundation’s EIN or federal tax identification
 number is 64-6221541. Contributions to the Project Gutenberg Literary
 Archive Foundation are tax deductible to the full extent permitted by
-U.S. federal laws and your state’s laws.The Foundation’s business office is located at 809 North 1500 West,
+U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
 Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
 to date contact information can be found at the Foundation’s website
 and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
@@ -3268,31 +3267,31 @@ increasing the number of public domain and licensed works that can be
 freely distributed in machine-readable form accessible by the widest
 array of equipment including outdated equipment. Many small donations
 ($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS.The Foundation is committed to complying with the laws regulating
+status with the IRS. The Foundation is committed to complying with the laws regulating
 charities and charitable donations in all 50 states of the United
 States. Compliance requirements are not uniform and it takes a
 considerable effort, much paperwork and many fees to meet and keep up
 with these requirements. We do not solicit donations in locations
 where we have not received written confirmation of compliance. To SEND
 DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/).While we cannot and do not solicit contributions from states where we
+visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
 have not met the solicitation requirements, we know of no prohibition
 against accepting unsolicited donations from donors in such states who
-approach us with offers to donate.International donations are gratefully accepted, but we cannot make
+approach us with offers to donate. International donations are gratefully accepted, but we cannot make
 any statements concerning tax treatment of donations received from
-outside the United States. U.S. laws alone swamp our small staff.Please check the Project Gutenberg web pages for current donation
+outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
 methods and addresses. Donations are accepted in a number of other
 ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate.Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
+donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
 Gutenberg™ concept of a library of electronic works that could be
 freely shared with anyone. For forty years, he produced and
 distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support.Project Gutenberg™ eBooks are often created from several printed
+volunteer support. Project Gutenberg™ eBooks are often created from several printed
 editions, all of which are confirmed as not protected by copyright in
-the U.S. unless a copyright notice is included. Thus, we do not
+the U. S. unless a copyright notice is included. Thus, we do not
 necessarily keep eBooks in compliance with any particular paper
-edition.Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org).This website includes information about Project Gutenberg™,
+edition. Most people start at our website which has the main PG search
+facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
 including how to make donations to the Project Gutenberg Literary
 Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.

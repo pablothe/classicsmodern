@@ -1,14 +1,12 @@
-
 ## by Lewis Carroll
 
 #### THE MILLENNIUM FULCRUM EDITION 3.0
-
 
 ---
 
 ## Contents
 
-[CHAPTER I.](#chap01)Down the Rabbit-Hole[CHAPTER II.](#chap02)The Pool of Tears[CHAPTER III.](#chap03)A Caucus-Race and a Long Tale[CHAPTER IV.](#chap04)The Rabbit Sends in a Little Bill[CHAPTER V.](#chap05)Advice from a Caterpillar[CHAPTER VI.](#chap06)Pig and Pepper[CHAPTER VII.](#chap07)A Mad Tea-Party[CHAPTER VIII.](#chap08)The Queen’s Croquet-Ground[CHAPTER IX.](#chap09)The Mock Turtle’s Story[CHAPTER X.](#chap10)The Lobster Quadrille[CHAPTER XI.](#chap11)Who Stole the Tarts?[CHAPTER XII.](#chap12)Alice’s Evidence## CHAPTER I.Down the Rabbit-Hole
+[CHAPTER I.](#chap01)Down the Rabbit-Hole[CHAPTER II.](#chap02)The Pool of Tears[CHAPTER III.](#chap03)A Caucus-Race and a Long Tale[CHAPTER IV.](#chap04)The Rabbit Sends in a Little Bill[CHAPTER V.](#chap05)Advice from a Caterpillar[CHAPTER VI.](#chap06)Pig and Pepper[CHAPTER VII.](#chap07)A Mad Tea-Party[CHAPTER VIII.](#chap08)The Queen’s Croquet-Ground[CHAPTER IX.](#chap09)The Mock Turtle’s Story[CHAPTER X.](#chap10)The Lobster Quadrille[CHAPTER XI.](#chap11)Who Stole the Tarts?[CHAPTER XII.](#chap12)Alice’s Evidence## CHAPTER I. Down the Rabbit-Hole
 
 Alice was beginning to get very tired of sitting by her sister on the bank, and
 of having nothing to do: once or twice she had peeped into the book her sister
@@ -148,12 +146,11 @@ ventured to taste it, and finding it very nice, (it had, in fact, a sort of
 mixed flavour of cherry-tart, custard, pine-apple, roast turkey, toffee, and
 hot buttered toast,) she very soon finished it off.
 
-*      *      *      *      *      *      *  
-  
-*      *      *      *      *      *  
-  
-*      *      *      *      *      *      *  
+*      *      *      *      *      *      *
 
+*      *      *      *      *      *
+
+*      *      *      *      *      *      *
 
 “What a curious feeling!” said Alice; “I must be shutting up
 like a telescope.”
@@ -203,14 +200,13 @@ that it seemed quite dull and stupid for life to go on in the common way.
 
 So she set to work, and very soon finished off the cake.
 
-*      *      *      *      *      *      *  
-  
-*      *      *      *      *      *  
-  
-*      *      *      *      *      *      *  
+*      *      *      *      *      *      *
 
+*      *      *      *      *      *
 
-end chapter## CHAPTER II.The Pool of Tears
+*      *      *      *      *      *      *
+
+end chapter## CHAPTER II. The Pool of Tears
 
 “Curiouser and curiouser!” cried Alice (she was so much surprised,
 that for the moment she quite forgot how to speak good English); “now
@@ -230,7 +226,7 @@ sending presents to one’s own feet! And how odd the directions will look!
 
 Alice’s Right Foot, Esq.,
        Hearthrug,
-         near the Fender,(with Alice’s love).Oh dear, what nonsense I’m talking!”
+         near the Fender,(with Alice’s love). Oh dear, what nonsense I’m talking!”
 
 Just then her head struck against the roof of the hall: in fact she was now
 more than nine feet high, and she at once took up the little golden key and
@@ -280,14 +276,14 @@ crossed her hands on her lap as if she were saying lessons, and began to repeat
 it, but her voice sounded hoarse and strange, and the words did not come the
 same as they used to do:—
 
-“How doth the little crocodile  
-Improve his shining tail,  
-And pour the waters of the Nile  
-On every golden scale!  
-  
-“How cheerfully he seems to grin,  
-How neatly spread his claws,  
-And welcome little fishes in  
+“How doth the little crocodile
+Improve his shining tail,
+And pour the waters of the Nile
+On every golden scale!
+
+“How cheerfully he seems to grin,
+How neatly spread his claws,
+And welcome little fishes in
 With gently smiling jaws!”
 
 “I’m sure those are not the right words,” said poor Alice,
@@ -405,7 +401,7 @@ and animals that had fallen into it: there were a Duck and a Dodo, a Lory and
 an Eaglet, and several other curious creatures. Alice led the way, and the
 whole party swam to the shore.
 
-end chapter## CHAPTER III.A Caucus-Race and a Long Tale
+end chapter## CHAPTER III. A Caucus-Race and a Long Tale
 
 They were indeed a queer-looking party that assembled on the bank—the
 birds with draggled feathers, the animals with their fur clinging close to
@@ -420,7 +416,7 @@ and this Alice would not allow without knowing how old it was, and, as the Lory
 positively refused to tell its age, there was no more to be said.
 
 At last the Mouse, who seemed to be a person of authority among them, called
-out, “Sit down, all of you, and listen to me!I’llsoon make
+out, “Sit down, all of you, and listen to me! I’llsoon make
 you dry enough!” They all sat down at once, in a large ring, with the
 Mouse in the middle. Alice kept her eyes anxiously fixed on it, for she felt
 sure she would catch a bad cold if she did not get dry very soon.
@@ -639,7 +635,7 @@ a little pattering of footsteps in the distance, and she looked up eagerly,
 half hoping that the Mouse had changed his mind, and was coming back to finish
 his story.
 
-end chapter## CHAPTER IV.The Rabbit Sends in a Little Bill
+end chapter## CHAPTER IV. The Rabbit Sends in a Little Bill
 
 It was the White Rabbit, trotting slowly back again, and looking anxiously
 about as it went, as if it had lost something; and she heard it muttering to
@@ -774,7 +770,7 @@ all!” “Do as I tell you, you coward!” and at last she spread
 out her hand again, and made another snatch in the air. This time there weretwolittle shrieks, and more sounds of broken glass. “What a
 number of cucumber-frames there must be!” thought Alice. “I wonder
 what they’ll do next! As for pulling me out of the window, I only wish
-theycould!I’m sureIdon’t want to stay in here any
+theycould! I’m sureIdon’t want to stay in here any
 longer!”
 
 She waited for some time without hearing anything more: at last came a rumbling
@@ -787,7 +783,7 @@ they’ll do well enough; don’t be particular—Here, Bill! catch
 hold of this rope—Will the roof bear?—Mind that loose
 slate—Oh, it’s coming down! Heads below!” (a loud
 crash)—“Now, who did that?—It was Bill, I
-fancy—Who’s to go down the chimney?—Nay,Ishan’t!Youdo it!—ThatI won’t,
+fancy—Who’s to go down the chimney?—Nay,Ishan’t! Youdo it!—ThatI won’t,
 then!—Bill’s to go down—Here, Bill! the master says
 you’re to go down the chimney!”
 
@@ -898,7 +894,7 @@ and her eyes immediately met those of a large blue caterpillar, that was
 sitting on the top with its arms folded, quietly smoking a long hookah, and
 taking not the smallest notice of her or of anything else.
 
-end chapter## CHAPTER V.Advice from a Caterpillar
+end chapter## CHAPTER V. Advice from a Caterpillar
 
 The Caterpillar and Alice looked at each other for some time in silence: at
 last the Caterpillar took the hookah out of its mouth, and addressed her in a
@@ -981,44 +977,44 @@ the Caterpillar.
 
 Alice folded her hands, and began:—
 
-“You are old, Father William,” the young man said,  
-“And your hair has become very white;  
-And yet you incessantly stand on your head—  
-Do you think, at your age, it is right?”  
-  
-“In my youth,” Father William replied to his son,  
-“I feared it might injure the brain;  
-But, now that I’m perfectly sure I have none,  
-Why, I do it again and again.”  
-  
-“You are old,” said the youth, “as I mentioned before,  
-And have grown most uncommonly fat;  
-Yet you turned a back-somersault in at the door—  
-Pray, what is the reason of that?”  
-  
-“In my youth,” said the sage, as he shook his grey locks,  
-“I kept all my limbs very supple  
-By the use of this ointment—one shilling the box—  
-Allow me to sell you a couple?”  
-  
-“You are old,” said the youth, “and your jaws are too weak  
-For anything tougher than suet;  
-Yet you finished the goose, with the bones and the beak—  
-Pray, how did you manage to do it?”  
-  
-“In my youth,” said his father, “I took to the law,  
-And argued each case with my wife;  
-And the muscular strength, which it gave to my jaw,  
-Has lasted the rest of my life.”  
-  
-“You are old,” said the youth, “one would hardly suppose  
-That your eye was as steady as ever;  
-Yet you balanced an eel on the end of your nose—  
-What made you so awfully clever?”  
-  
-“I have answered three questions, and that is enough,”  
-Said his father; “don’t give yourself airs!  
-Do you think I can listen all day to such stuff?  
+“You are old, Father William,” the young man said,
+“And your hair has become very white;
+And yet you incessantly stand on your head—
+Do you think, at your age, it is right?”
+
+“In my youth,” Father William replied to his son,
+“I feared it might injure the brain;
+But, now that I’m perfectly sure I have none,
+Why, I do it again and again.”
+
+“You are old,” said the youth, “as I mentioned before,
+And have grown most uncommonly fat;
+Yet you turned a back-somersault in at the door—
+Pray, what is the reason of that?”
+
+“In my youth,” said the sage, as he shook his grey locks,
+“I kept all my limbs very supple
+By the use of this ointment—one shilling the box—
+Allow me to sell you a couple?”
+
+“You are old,” said the youth, “and your jaws are too weak
+For anything tougher than suet;
+Yet you finished the goose, with the bones and the beak—
+Pray, how did you manage to do it?”
+
+“In my youth,” said his father, “I took to the law,
+And argued each case with my wife;
+And the muscular strength, which it gave to my jaw,
+Has lasted the rest of my life.”
+
+“You are old,” said the youth, “one would hardly suppose
+That your eye was as steady as ever;
+Yet you balanced an eel on the end of your nose—
+What made you so awfully clever?”
+
+“I have answered three questions, and that is enough,”
+Said his father; “don’t give yourself airs!
+Do you think I can listen all day to such stuff?
 Be off, or I’ll kick you down stairs!”
 
 “That is not said right,” said the Caterpillar.
@@ -1063,7 +1059,7 @@ and shook itself. Then it got down off the mushroom, and crawled away in the
 grass, merely remarking as it went, “One side will make you grow taller,
 and the other side will make you grow shorter.”
 
-“One side ofwhat?The other side ofwhat?” thought
+“One side ofwhat? The other side ofwhat?” thought
 Alice to herself.
 
 “Of the mushroom,” said the Caterpillar, just as if she had asked
@@ -1085,12 +1081,11 @@ at once to eat some of the other bit. Her chin was pressed so closely against
 her foot, that there was hardly room to open her mouth; but she did it at last,
 and managed to swallow a morsel of the lefthand bit.
 
-*      *      *      *      *      *      *  
-  
-*      *      *      *      *      *  
-  
-*      *      *      *      *      *      *  
+*      *      *      *      *      *      *
 
+*      *      *      *      *      *
+
+*      *      *      *      *      *      *
 
 “Come, my head’s free at last!” said Alice in a tone of
 delight, which changed into alarm in another moment, when she found that her
@@ -1146,7 +1141,7 @@ from the sky! Ugh, Serpent!”
 “But I’mnota serpent, I tell you!” said Alice.
 “I’m a—I’m a—”
 
-“Well!Whatare you?” said the Pigeon. “I can see
+“Well! Whatare you?” said the Pigeon. “I can see
 you’re trying to invent something!”
 
 “I—I’m a little girl,” said Alice, rather doubtfully,
@@ -1194,7 +1189,7 @@ themthissize: why, I should frighten them out of their wits!” So
 she began nibbling at the righthand bit again, and did not venture to go near
 the house till she had brought herself down to nine inches high.
 
-end chapter## CHAPTER VI.Pig and Pepper
+end chapter## CHAPTER VI. Pig and Pepper
 
 For a minute or two she stood looking at the house, and wondering what to do
 next, when suddenly a footman in livery came running out of the wood—(she
@@ -1343,12 +1338,12 @@ never could abide figures!” And with that she began nursing her child
 again, singing a sort of lullaby to it as she did so, and giving it a violent
 shake at the end of every line:
 
-“Speak roughly to your little boy,  
-And beat him when he sneezes:  
-He only does it to annoy,  
+“Speak roughly to your little boy,
+And beat him when he sneezes:
+He only does it to annoy,
 Because he knows it teases.”
 
-CHORUS.  
+CHORUS.
 (In which the cook and the baby joined):
 
 “Wow! wow! wow!”
@@ -1357,9 +1352,9 @@ While the Duchess sang the second verse of the song, she kept tossing the baby
 violently up and down, and the poor little thing howled so, that Alice could
 hardly hear the words:—
 
-“I speak severely to my boy,  
-I beat him when he sneezes;  
-For he can thoroughly enjoy  
+“I speak severely to my boy,
+I beat him when he sneezes;
+For he can thoroughly enjoy
 The pepper when he pleases!”
 
 CHORUS.
@@ -1518,7 +1513,7 @@ she walked up towards it rather timidly, saying to herself “Suppose it
 should be raving mad after all! I almost wish I’d gone to see the Hatter
 instead!”
 
-end chapter## CHAPTER VII.A Mad Tea-Party
+end chapter## CHAPTER VII. A Mad Tea-Party
 
 There was a table set out under a tree in front of the house, and the March
 Hare and the Hatter were having tea at it: a Dormouse was sitting between them,
@@ -1680,7 +1675,7 @@ know—” (pointing with his tea spoon at the March Hare,)
 “—it was at the great concert given by the Queen of Hearts, and I
 had to sing
 
-‘Twinkle, twinkle, little bat!  
+‘Twinkle, twinkle, little bat!
 How I wonder what you’re at!’
 
 You know the song, perhaps?”
@@ -1690,8 +1685,8 @@ You know the song, perhaps?”
 “It goes on, you know,” the Hatter continued, “in this
 way:—
 
-‘Up above the world you fly,  
-Like a tea-tray in the sky.  
+‘Up above the world you fly,
+Like a tea-tray in the sky.
 Twinkle, twinkle—’”
 
 Here the Dormouse shook itself, and began singing in its sleep
@@ -1870,7 +1865,7 @@ kept a piece of it in her pocket) till she was about a foot high: then she
 walked down the little passage: andthen—she found herself at last
 in the beautiful garden, among the bright flower-beds and the cool fountains.
 
-end chapter## CHAPTER VIII.The Queen’s Croquet-Ground
+end chapter## CHAPTER VIII. The Queen’s Croquet-Ground
 
 A large rose-tree stood near the entrance of the garden: the roses growing on
 it were white, but there were three gardeners at it, busily painting them red.
@@ -2166,7 +2161,7 @@ he had come back with the Duchess, it had entirely disappeared; so the King and
 the executioner ran wildly up and down looking for it, while the rest of the
 party went back to the game.
 
-end chapter## CHAPTER IX.The Mock Turtle’s Story
+end chapter## CHAPTER IX. The Mock Turtle’s Story
 
 “You can’t think how glad I am to see you again, you dear old
 thing!” said the Duchess, as she tucked her arm affectionately into
@@ -2496,7 +2491,7 @@ holiday?”
 “That’s enough about lessons,” the Gryphon interrupted in a
 very decided tone: “tell her something about the games now.”
 
-end chapter## CHAPTER X.The Lobster Quadrille
+end chapter## CHAPTER X. The Lobster Quadrille
 
 The Mock Turtle sighed deeply, and drew the back of one flapper across his
 eyes. He looked at Alice, and tried to speak, but for a minute or two sobs
@@ -2570,25 +2565,25 @@ So they began solemnly dancing round and round Alice, every now and then
 treading on her toes when they passed too close, and waving their forepaws to
 mark the time, while the Mock Turtle sang this, very slowly and sadly:—
 
-“Will you walk a little faster?” said a whiting to a snail.  
-“There’s a porpoise close behind us, and he’s treading on my tail.  
-See how eagerly the lobsters and the turtles all advance!  
-They are waiting on the shingle—will you come and join the dance?  
-Will you, won’t you, will you, won’t you, will you join the dance?  
-Will you, won’t you, will you, won’t you, won’t you join the dance?  
-  
-“You can really have no notion how delightful it will be  
-When they take us up and throw us, with the lobsters, out to sea!”  
-But the snail replied “Too far, too far!” and gave a look askance—  
-Said he thanked the whiting kindly, but he would not join the dance.  
-Would not, could not, would not, could not, would not join the dance.  
-Would not, could not, would not, could not, could not join the dance.  
-  
-“What matters it how far we go?” his scaly friend replied.  
-“There is another shore, you know, upon the other side.  
-The further off from England the nearer is to France—  
-Then turn not pale, beloved snail, but come and join the dance.  
-Will you, won’t you, will you, won’t you, will you join the dance?  
+“Will you walk a little faster?” said a whiting to a snail.
+“There’s a porpoise close behind us, and he’s treading on my tail.
+See how eagerly the lobsters and the turtles all advance!
+They are waiting on the shingle—will you come and join the dance?
+Will you, won’t you, will you, won’t you, will you join the dance?
+Will you, won’t you, will you, won’t you, won’t you join the dance?
+
+“You can really have no notion how delightful it will be
+When they take us up and throw us, with the lobsters, out to sea!”
+But the snail replied “Too far, too far!” and gave a look askance—
+Said he thanked the whiting kindly, but he would not join the dance.
+Would not, could not, would not, could not, would not join the dance.
+Would not, could not, would not, could not, could not join the dance.
+
+“What matters it how far we go?” his scaly friend replied.
+“There is another shore, you know, upon the other side.
+The further off from England the nearer is to France—
+Then turn not pale, beloved snail, but come and join the dance.
+Will you, won’t you, will you, won’t you, will you join the dance?
 Will you, won’t you, will you, won’t you, won’t you join the dance?”
 
 “Thank you, it’s a very interesting dance to watch,” said
@@ -2700,15 +2695,15 @@ got up, and began to repeat it, but her head was so full of the Lobster
 Quadrille, that she hardly knew what she was saying, and the words came very
 queer indeed:—
 
-“’Tis the voice of the Lobster; I heard him declare,  
-“You have baked me too brown, I must sugar my hair.”  
-As a duck with its eyelids, so he with his nose  
-Trims his belt and his buttons, and turns out his toes.”  
-  
-[later editions continued as follows  
-When the sands are all dry, he is gay as a lark,  
-And will talk in contemptuous tones of the Shark,  
-But, when the tide rises and sharks are around,  
+“’Tis the voice of the Lobster; I heard him declare,
+“You have baked me too brown, I must sugar my hair.”
+As a duck with its eyelids, so he with his nose
+Trims his belt and his buttons, and turns out his toes.”
+
+[later editions continued as follows
+When the sands are all dry, he is gay as a lark,
+And will talk in contemptuous tones of the Shark,
+But, when the tide rises and sharks are around,
 His voice has a timid and tremulous sound.]
 
 “That’s different from whatIused to say when I was a
@@ -2736,15 +2731,15 @@ dreadfully puzzled by the whole thing, and longed to change the subject.
 Alice did not dare to disobey, though she felt sure it would all come wrong,
 and she went on in a trembling voice:—
 
-“I passed by his garden, and marked, with one eye,  
-How the Owl and the Panther were sharing a pie—”  
-  
-[later editions continued as follows  
-The Panther took pie-crust, and gravy, and meat,  
-While the Owl had the dish as its share of the treat.  
-When the pie was all finished, the Owl, as a boon,  
-Was kindly permitted to pocket the spoon:  
-While the Panther received knife and fork with a growl,  
+“I passed by his garden, and marked, with one eye,
+How the Owl and the Panther were sharing a pie—”
+
+[later editions continued as follows
+The Panther took pie-crust, and gravy, and meat,
+While the Owl had the dish as its share of the treat.
+When the pie was all finished, the Owl, as a boon,
+Was kindly permitted to pocket the spoon:
+While the Panther received knife and fork with a growl,
 And concluded the banquet—]
 
 “Whatisthe use of repeating all that stuff,” the Mock
@@ -2765,24 +2760,24 @@ will you, old fellow?”
 The Mock Turtle sighed deeply, and began, in a voice sometimes choked with
 sobs, to sing this:—
 
-“Beautiful Soup, so rich and green,  
-Waiting in a hot tureen!  
-Who for such dainties would not stoop?  
-Soup of the evening, beautiful Soup!  
-Soup of the evening, beautiful Soup!  
-Beau—ootiful Soo—oop!  
-Beau—ootiful Soo—oop!  
-Soo—oop of the e—e—evening,  
-Beautiful, beautiful Soup!  
-  
-“Beautiful Soup! Who cares for fish,  
-Game, or any other dish?  
-Who would not give all else for two p  
-ennyworth only of beautiful Soup?  
-Pennyworth only of beautiful Soup?  
-Beau—ootiful Soo—oop!  
-Beau—ootiful Soo—oop!  
-Soo—oop of the e—e—evening,  
+“Beautiful Soup, so rich and green,
+Waiting in a hot tureen!
+Who for such dainties would not stoop?
+Soup of the evening, beautiful Soup!
+Soup of the evening, beautiful Soup!
+Beau—ootiful Soo—oop!
+Beau—ootiful Soo—oop!
+Soo—oop of the e—e—evening,
+Beautiful, beautiful Soup!
+
+“Beautiful Soup! Who cares for fish,
+Game, or any other dish?
+Who would not give all else for two p
+ennyworth only of beautiful Soup?
+Pennyworth only of beautiful Soup?
+Beau—ootiful Soo—oop!
+Beau—ootiful Soo—oop!
+Soo—oop of the e—e—evening,
 Beautiful, beauti—FUL SOUP!”
 
 “Chorus again!” cried the Gryphon, and the Mock Turtle had just
@@ -2796,10 +2791,10 @@ hurried off, without waiting for the end of the song.
 answered “Come on!” and ran the faster, while more and more faintly
 came, carried on the breeze that followed them, the melancholy words:—
 
-“Soo—oop of the e—e—evening,  
+“Soo—oop of the e—e—evening,
 Beautiful, beautiful Soup!”
 
-end chapter## CHAPTER XI.Who Stole the Tarts?
+end chapter## CHAPTER XI. Who Stole the Tarts?
 
 The King and Queen of Hearts were seated on their throne when they arrived,
 with a great crowd assembled about them—all sorts of little birds and
@@ -2861,9 +2856,9 @@ no mark on the slate.
 On this the White Rabbit blew three blasts on the trumpet, and then unrolled
 the parchment scroll, and read as follows:—
 
-“The Queen of Hearts, she made some tarts,  
-All on a summer day:  
-The Knave of Hearts, he stole those tarts,  
+“The Queen of Hearts, she made some tarts,
+All on a summer day:
+The Knave of Hearts, he stole those tarts,
 And took them quite away!”
 
 “Consider your verdict,” the King said to the jury.
@@ -3059,7 +3054,7 @@ haven’t got much evidenceyet,” she said to herself. Imagine
 her surprise, when the White Rabbit read out, at the top of his shrill little
 voice, the name “Alice!”
 
-end chapter## CHAPTER XII.Alice’s Evidence
+end chapter## CHAPTER XII. Alice’s Evidence
 
 “Here!” cried Alice, quite forgetting in the flurry of the moment
 how large she had grown in the last few minutes, and she jumped up in such a
@@ -3119,7 +3114,7 @@ to herself.
 
 At this moment the King, who had been for some time busily writing in his
 note-book, cackled out “Silence!” and read out from his book,
-“Rule Forty-two.All persons more than a mile high to leave the
+“Rule Forty-two. All persons more than a mile high to leave the
 court.”
 
 Everybody looked at Alice.
@@ -3194,34 +3189,34 @@ till you come to the end: then stop.”
 
 These were the verses the White Rabbit read:—
 
-“They told me you had been to her,  
-And mentioned me to him:  
-She gave me a good character,  
-But said I could not swim.  
-  
-He sent them word I had not gone  
-(We know it to be true):  
-If she should push the matter on,  
-What would become of you?  
-  
-I gave her one, they gave him two,  
-You gave us three or more;  
-They all returned from him to you,  
-Though they were mine before.  
-  
-If I or she should chance to be  
-Involved in this affair,  
-He trusts to you to set them free,  
-Exactly as we were.  
-  
-My notion was that you had been  
-(Before she had this fit)  
-An obstacle that came between  
-Him, and ourselves, and it.  
-  
-Don’t let him know she liked them best,  
-For this must ever be  
-A secret, kept from all the rest,  
+“They told me you had been to her,
+And mentioned me to him:
+She gave me a good character,
+But said I could not swim.
+
+He sent them word I had not gone
+(We know it to be true):
+If she should push the matter on,
+What would become of you?
+
+I gave her one, they gave him two,
+You gave us three or more;
+They all returned from him to you,
+Though they were mine before.
+
+If I or she should chance to be
+Involved in this affair,
+He trusts to you to set them free,
+Exactly as we were.
+
+My notion was that you had been
+(Before she had this fit)
+An obstacle that came between
+Him, and ourselves, and it.
+
+Don’t let him know she liked them best,
+For this must ever be
+A secret, kept from all the rest,
 Between yourself and me.”
 
 “That’s the most important piece of evidence we’ve heard
@@ -3230,7 +3225,7 @@ jury—”
 
 “If any one of them can explain it,” said Alice, (she had grown so
 large in the last few minutes that she wasn’t a bit afraid of
-interrupting him,) “I’ll give him sixpence.Idon’t
+interrupting him,) “I’ll give him sixpence. Idon’t
 believe there’s an atom of meaning in it.”
 
 The jury all wrote down on their slates, “Shedoesn’t
@@ -3305,7 +3300,6 @@ sister kissed her, and said, “Itwasa curious dream, dear,
 certainly: but now run in to your tea; it’s getting late.” So Alice
 got up and ran off, thinking while she ran, as well she might, what a wonderful
 dream it had been.
-
 
 ---
 
