@@ -141,7 +141,7 @@ const API = {
     },
 
     async startGutenbergDownload(gutenbergId, bookSlug) {
-        const response = await fetch(`${this.baseURL}/api/gutenberg/download`, {
+        const response = await fetch(`${this.baseURL}/api/jobs/download`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -154,7 +154,7 @@ const API = {
     },
 
     async getDownloadStatus(jobId) {
-        const response = await fetch(`${this.baseURL}/api/gutenberg/downloads/${jobId}`);
+        const response = await fetch(`${this.baseURL}/api/jobs/${jobId}`);
         if (!response.ok) {
             // Include status code in error message so caller can handle 404s specially
             throw new Error(`Failed to get download status (HTTP ${response.status})`);
@@ -163,7 +163,7 @@ const API = {
     },
 
     async getAllDownloads() {
-        const response = await fetch(`${this.baseURL}/api/gutenberg/downloads`);
+        const response = await fetch(`${this.baseURL}/api/jobs?job_type=download`);
         if (!response.ok) throw new Error('Failed to get downloads');
         return response.json();
     },
@@ -687,8 +687,8 @@ function renderVariants() {
     // Add click handlers for variant items
     document.querySelectorAll('.variant-item').forEach(item => {
         item.addEventListener('click', (e) => {
-            // Don't open variant if clicking delete button
-            if (!e.target.classList.contains('delete-variant-btn')) {
+            // Don't open variant if clicking delete button (use closest() for child elements)
+            if (!e.target.closest('.delete-variant-btn')) {
                 const variantId = item.dataset.variantId;
                 openVariant(variantId);
             }
@@ -1117,71 +1117,35 @@ function renderTextParagraphs(paragraphs) {
 function seekToParagraph(paragraphId) {
     if (!state.textSyncData || !ui.audio.duration) return;
 
-    const totalParagraphs = state.textSyncData.paragraphs.length;
-    if (totalParagraphs === 0) return;
+    const paragraphs = state.textSyncData.paragraphs;
+    if (!paragraphs || paragraphs.length === 0) return;
 
-    // Estimate audio position based on paragraph position
-    const progress = paragraphId / totalParagraphs;
-    const estimatedTime = progress * ui.audio.duration;
+    // Calculate character-position-based progress for this paragraph
+    let charsBefore = 0;
+    let totalChars = 0;
+    for (const p of paragraphs) {
+        if (p.id < paragraphId) charsBefore += p.text.length;
+        totalChars += p.text.length;
+    }
 
-    ui.audio.currentTime = estimatedTime;
+    const progress = totalChars > 0 ? charsBefore / totalChars : 0;
+    ui.audio.currentTime = progress * ui.audio.duration;
 
-    // Highlight the paragraph immediately
     updateTextHighlight();
 }
 
 function updateTextHighlight() {
     if (!state.textSyncOpen || !state.textSyncData || !ui.audio.duration) return;
 
-    const totalParagraphs = state.textSyncData.paragraphs.length;
-    if (totalParagraphs === 0) return;
+    const paragraphs = state.textSyncData.paragraphs;
+    if (!paragraphs || paragraphs.length === 0) return;
 
-    let progress;
+    // Each chapter is its own audio file, so currentTime/duration gives
+    // correct chapter-relative progress (0.0 to 1.0)
+    const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
 
-    // NEW: Chunk-based synchronization (most accurate)
-    if (state.chunkManifest && state.chunkManifest.chunks && state.chunkManifest.spoken_text) {
-        // Calculate global audiobook position (across all files)
-        const globalTime = calculateGlobalAudioPosition();
-
-        // Find which chunk we're currently in
-        const currentChunk = findChunkAtTime(globalTime, state.chunkManifest.chunks);
-
-        if (currentChunk) {
-            // Interpolate position within the chunk
-            const chunkProgress = (globalTime - currentChunk.cumulative_duration) / currentChunk.duration;
-            const textPosition = currentChunk.text_start + (chunkProgress * (currentChunk.text_end - currentChunk.text_start));
-
-            // Convert text position to paragraph index
-            progress = textPosition / state.chunkManifest.total_text_length;
-
-            // Clamp to valid range
-            progress = Math.max(0, Math.min(0.999, progress));
-        } else {
-            // Fallback if chunk not found
-            progress = 0;
-        }
-    }
-    // Fallback: Chapter-based sync (if audio timing available)
-    else if (state.textSyncData.audio_start !== undefined && state.textSyncData.audio_duration) {
-        const chapterStart = state.textSyncData.audio_start;
-        const chapterDuration = state.textSyncData.audio_duration;
-        const chapterEnd = chapterStart + chapterDuration;
-        const currentTime = ui.audio.currentTime;
-
-        if (currentTime < chapterStart) {
-            progress = 0;
-        } else if (currentTime >= chapterEnd) {
-            progress = 0.999;
-        } else {
-            progress = (currentTime - chapterStart) / chapterDuration;
-        }
-    }
-    // Last resort: Linear interpolation
-    else {
-        progress = ui.audio.currentTime / ui.audio.duration;
-    }
-
-    const currentParagraphId = Math.floor(progress * totalParagraphs);
+    // Use cumulative character lengths for accurate paragraph mapping
+    const currentParagraphId = findParagraphByProgress(progress, paragraphs);
 
     // Remove previous highlights
     document.querySelectorAll('.text-paragraph').forEach(p => {
@@ -1199,26 +1163,44 @@ function updateTextHighlight() {
     }
 }
 
+// Helper: Map a 0-1 progress value to the correct paragraph using cumulative character lengths
+function findParagraphByProgress(progress, paragraphs) {
+    let totalChars = 0;
+    const starts = [];
+    for (const p of paragraphs) {
+        starts.push(totalChars);
+        totalChars += p.text.length;
+    }
+    if (totalChars === 0) return paragraphs[0].id;
+
+    const targetChar = progress * totalChars;
+    for (let i = starts.length - 1; i >= 0; i--) {
+        if (targetChar >= starts[i]) return paragraphs[i].id;
+    }
+    return paragraphs[0].id;
+}
+
+// Helper: Get current chapter number (1-based) from player state
+function getCurrentChapterNumber() {
+    if (state.currentBook?.chapters && state.currentChapterIndex !== null) {
+        const ch = state.currentBook.chapters[state.currentChapterIndex];
+        return ch ? ch.number : state.currentFileIndex + 1;
+    }
+    return state.currentFileIndex + 1;
+}
+
 // Helper: Calculate global audio position (across all chapter files)
 function calculateGlobalAudioPosition() {
-    if (!state.currentVariant || !state.currentVariant.chapters) {
-        return ui.audio.currentTime;
-    }
-
-    // Sum durations of all previous chapters
-    let cumulativeDuration = 0;
-    for (let i = 0; i < state.currentFileIndex; i++) {
-        const chapter = state.currentVariant.chapters[i];
-        if (chapter && chapter.timestamp !== undefined) {
-            // If next chapter exists, use its timestamp as duration
-            const nextChapter = state.currentVariant.chapters[i + 1];
-            if (nextChapter) {
-                cumulativeDuration += (nextChapter.timestamp - chapter.timestamp);
-            }
+    // Use chunk manifest for accurate global time (chapter timestamps are all 0.0
+    // because each chapter is its own audio file)
+    if (state.chunkManifest && state.chunkManifest.chunks) {
+        const chapterNum = getCurrentChapterNumber();
+        const firstChunkOfChapter = state.chunkManifest.chunks.find(c => c.chapter === chapterNum);
+        if (firstChunkOfChapter) {
+            return firstChunkOfChapter.cumulative_duration + ui.audio.currentTime;
         }
     }
-
-    return cumulativeDuration + ui.audio.currentTime;
+    return ui.audio.currentTime;
 }
 
 // Helper: Find chunk at given global time
@@ -1421,7 +1403,7 @@ async function initGutenberg() {
         const downloads = await API.getAllDownloads();
         if (downloads.jobs && downloads.jobs.length > 0) {
             downloads.jobs.forEach(job => {
-                if (job.status !== 'complete' && job.status !== 'error') {
+                if (job.status !== 'completed' && job.status !== 'failed') {
                     state.gutenberg.activeDownloads[job.job_id] = job;
                 }
             });
@@ -1534,21 +1516,23 @@ async function updateDownloadStatuses() {
             };
 
             // Check if complete or error
-            if (status.status === 'complete') {
+            if (status.status === 'completed') {
                 const book = state.gutenberg.activeDownloads[jobId];
                 console.log(`[Download] Job ${jobId} completed!`);
-                showNotification(`✅ ${book.title || book.book_slug} downloaded! Now you can generate audio.`, 'success');
+                const bookName = book.title || book.config?.book_slug || book.book_slug;
+                showNotification(`✅ ${bookName} downloaded! Now you can generate audio.`, 'success');
                 delete state.gutenberg.activeDownloads[jobId];
 
                 // Refresh library to show newly downloaded book (if it has been processed)
                 setTimeout(async () => {
                     await loadLibrary();
                 }, 2000);
-            } else if (status.status === 'error') {
+            } else if (status.status === 'failed') {
                 const book = state.gutenberg.activeDownloads[jobId];
                 const errorMsg = status.error || 'Unknown error';
+                const bookName = book.title || book.config?.book_slug || book.book_slug;
                 console.error(`[Download] Job ${jobId} failed:`, errorMsg);
-                showNotification(`❌ Download failed: ${book.title || book.book_slug} - ${errorMsg}`, 'error');
+                showNotification(`❌ Download failed: ${bookName} - ${errorMsg}`, 'error');
                 delete state.gutenberg.activeDownloads[jobId];
             }
 
@@ -1594,25 +1578,26 @@ function renderDownloadStatus() {
     ui.downloadStatusList.innerHTML = jobs.map(job => {
         const statusText = {
             'pending': 'Pending...',
-            'downloading': 'Downloading...',
-            'processing': 'Processing...',
-            'complete': 'Complete',
-            'error': 'Error'
+            'running': 'Downloading...',
+            'completed': 'Complete',
+            'failed': 'Error',
+            'cancelled': 'Cancelled'
         }[job.status] || job.status;
 
         const progress = job.progress || 0;
         const statusIcon = {
             'pending': '⏳',
-            'downloading': '📥',
-            'processing': '⚙️',
-            'complete': '✅',
-            'error': '❌'
+            'running': '📥',
+            'completed': '✅',
+            'failed': '❌',
+            'cancelled': '🚫'
         }[job.status] || '📥';
 
+        const bookName = job.title || job.config?.book_slug || job.book_slug;
         return `
             <div class="download-status-item">
                 <div class="download-info">
-                    <strong>${statusIcon} ${escapeHtml(job.title || job.book_slug)}</strong>
+                    <strong>${statusIcon} ${escapeHtml(bookName)}</strong>
                     <span class="status-text">${statusText}</span>
                 </div>
                 <div class="download-progress-bar">
@@ -1626,17 +1611,23 @@ function renderDownloadStatus() {
 
 function showNotification(message, type = 'info') {
     /**
-     * Show temporary notification to user
+     * Show toast notification to user
      */
     console.log(`[Notification] ${message}`);
 
-    // Simple alert for now (could be replaced with toast notification)
-    // Just log to console for non-intrusive feedback
-    if (type === 'error') {
-        console.error(message);
-    } else {
-        console.info(message);
-    }
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Trigger slide-in animation on next frame
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    // Auto-remove after 4 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
 }
 
 // Note: escapeHtml function is already defined in the Text Sync section above
@@ -1983,7 +1974,8 @@ function checkEndOfChapterTimer() {
 
 function showDeleteConfirmation(variant) {
     /**
-     * Show delete confirmation modal for a variant
+     * Show delete confirmation for a variant.
+     * Uses custom modal if available, falls back to window.confirm().
      */
     // Build variant display name
     const typeBadge = variant.type === 'summary' && variant.summary_pct
@@ -1992,32 +1984,53 @@ function showDeleteConfirmation(variant) {
         ? 'Full (Deduped)'
         : 'Full Translation';
 
-    // Populate modal
-    ui.deleteVariantName.textContent = typeBadge;
-    ui.deleteVariantDetails.textContent = `${variant.file_count} file${variant.file_count !== 1 ? 's' : ''} • ${variant.size_mb} MB`;
+    const details = `${variant.file_count} file${variant.file_count !== 1 ? 's' : ''} • ${variant.size_mb} MB`;
 
-    // Store variant info for deletion
-    ui.confirmDeleteBtn.dataset.variantId = variant.variant_id;
+    // Try custom modal first
+    if (ui.deleteModal && ui.deleteBackdrop) {
+        if (ui.deleteVariantName) ui.deleteVariantName.textContent = typeBadge;
+        if (ui.deleteVariantDetails) ui.deleteVariantDetails.textContent = details;
+        if (ui.confirmDeleteBtn) {
+            ui.confirmDeleteBtn.dataset.variantId = variant.variant_id;
+            ui.confirmDeleteBtn.disabled = false;
+            ui.confirmDeleteBtn.textContent = 'Delete';
+        }
 
-    // Show modal
-    ui.deleteBackdrop.style.display = 'block';
-    ui.deleteModal.style.display = 'block';
+        ui.deleteBackdrop.style.display = 'block';
+        ui.deleteModal.style.display = 'block';
+    } else {
+        // Fallback: use native confirm dialog
+        const confirmed = window.confirm(
+            `Delete "${typeBadge}"?\n\n${details}\n\nThis action cannot be undone.`
+        );
+        if (confirmed) {
+            executeDelete(variant.variant_id);
+        }
+    }
 }
 
 function closeDeleteModal() {
     /**
      * Close delete confirmation modal
      */
-    ui.deleteBackdrop.style.display = 'none';
-    ui.deleteModal.style.display = 'none';
-    ui.confirmDeleteBtn.dataset.variantId = '';
+    if (ui.deleteBackdrop) ui.deleteBackdrop.style.display = 'none';
+    if (ui.deleteModal) ui.deleteModal.style.display = 'none';
+    if (ui.confirmDeleteBtn) ui.confirmDeleteBtn.dataset.variantId = '';
 }
 
 async function confirmDelete() {
     /**
-     * Execute variant deletion after confirmation
+     * Handle confirm button click from modal
      */
-    const variantId = ui.confirmDeleteBtn.dataset.variantId;
+    const variantId = ui.confirmDeleteBtn?.dataset?.variantId;
+    if (!variantId) return;
+    await executeDelete(variantId);
+}
+
+async function executeDelete(variantId) {
+    /**
+     * Execute variant deletion
+     */
     if (!variantId || !state.currentBook) {
         console.error('[DELETE] Missing variant ID or current book');
         return;
@@ -2026,8 +2039,10 @@ async function confirmDelete() {
     const bookId = state.currentBook.book_id;
 
     // Disable button and show loading state
-    ui.confirmDeleteBtn.disabled = true;
-    ui.confirmDeleteBtn.textContent = 'Deleting...';
+    if (ui.confirmDeleteBtn) {
+        ui.confirmDeleteBtn.disabled = true;
+        ui.confirmDeleteBtn.textContent = 'Deleting...';
+    }
 
     try {
         console.log(`[DELETE] Deleting variant: ${bookId}/${variantId}`);
@@ -2040,8 +2055,8 @@ async function confirmDelete() {
         // Close modal
         closeDeleteModal();
 
-        // Show success notification (simple console log for now)
-        console.log(`✅ Deleted ${result.deleted_count} file(s)`);
+        // Show success notification
+        showNotification(`Deleted ${result.deleted_count} file(s)`, 'success');
 
         // Reload library to get updated book data
         await loadLibrary();
@@ -2062,11 +2077,13 @@ async function confirmDelete() {
 
     } catch (error) {
         console.error('[DELETE] Error:', error);
-        alert(`Failed to delete audiobook: ${error.message}`);
+        showNotification(`Failed to delete: ${error.message}`, 'error');
 
         // Re-enable button
-        ui.confirmDeleteBtn.disabled = false;
-        ui.confirmDeleteBtn.textContent = 'Delete';
+        if (ui.confirmDeleteBtn) {
+            ui.confirmDeleteBtn.disabled = false;
+            ui.confirmDeleteBtn.textContent = 'Delete';
+        }
     }
 }
 

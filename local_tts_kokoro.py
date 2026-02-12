@@ -488,6 +488,8 @@ class KokoroAudioGenerator:
 
         for i, line in enumerate(lines):
             line_stripped = line.strip()
+            # Strip "end chapter" artifacts from Gutenberg HTML conversion
+            line_stripped = re.sub(r'^end chapter', '', line_stripped, flags=re.IGNORECASE).strip()
 
             # Skip Gutenberg boilerplate regions
             if gutenberg_start >= 0 and i < gutenberg_start:
@@ -520,6 +522,18 @@ class KokoroAudioGenerator:
             if roman_header_match:
                 roman_text = roman_header_match.group(1)
                 # Validate it's a valid Roman numeral (basic check)
+                if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
+                    char_pos = len('\n'.join(lines[:i]))
+                    chapter_num = len(chapters) + 1
+                    chapters.append((chapter_num, char_pos, line_stripped))
+                    continue
+
+            # Detect markdown headers with Roman numeral + title (## I. THE EVE OF THE WAR.)
+            # Common in Gutenberg books that don't use the word "Chapter"
+            roman_title_match = re.match(r'^#+\s+([IVXLCDM]+)\.\s+(.+)', line_stripped)
+            if roman_title_match:
+                roman_text = roman_title_match.group(1)
+                # Validate it's a valid Roman numeral
                 if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
                     char_pos = len('\n'.join(lines[:i]))
                     chapter_num = len(chapters) + 1

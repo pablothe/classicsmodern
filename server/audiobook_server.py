@@ -1641,7 +1641,7 @@ if UNIFIED_QUEUE_AVAILABLE:
         return job
 
     @app.post("/api/jobs/download")
-    async def create_download_job(request: Request):
+    async def create_unified_download_job(request: Request):
         """
         Create a Gutenberg download job.
 

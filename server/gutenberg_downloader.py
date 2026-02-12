@@ -210,6 +210,9 @@ class GutenbergDownloader:
         # Convert to markdown
         markdown = self._convert_element_to_markdown(body)
 
+        # Strip "end chapter" artifacts from HTML chapter div markers
+        markdown = re.sub(r'end chapter', '', markdown, flags=re.IGNORECASE)
+
         # Clean up excessive whitespace
         markdown = re.sub(r'\n{3,}', '\n\n', markdown)
 

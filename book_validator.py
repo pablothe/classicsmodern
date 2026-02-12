@@ -35,6 +35,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, asdict
 from book_preprocessor import ChapterDetector
+from book_processor import BookProcessor
 
 
 # ============================================================================
@@ -139,7 +140,10 @@ def check_file_exists(file_path: Path) -> Tuple[bool, List[str]]:
 
 def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], List[str], Dict]:
     """
-    Validate chapter structure using book_preprocessor logic.
+    Validate chapter structure.
+
+    Uses ChapterDetector first (well-tested, few false positives), then falls back
+    to BookProcessor (14+ patterns) if no chapters are found.
 
     Returns:
         (valid, errors, warnings, metrics)
@@ -155,7 +159,7 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
         'duplicate_chapters': []
     }
 
-    # Use existing ChapterDetector
+    # Use ChapterDetector first (well-tested, few false positives)
     detector = ChapterDetector(text, filename)
 
     # Check TOC
@@ -163,8 +167,24 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
     metrics['has_toc'] = len(toc) > 0
     metrics['toc_count'] = len(toc)
 
-    # Check chapters in content
+    # Try ChapterDetector first
     chapters = detector.detect_chapters_in_content()
+
+    # Fall back to BookProcessor if no chapters found (14+ patterns, broader coverage)
+    if len(chapters) == 0:
+        processor = BookProcessor(verbose=False)
+        cleaned_text, _ = processor.strip_gutenberg(text)
+        bp_chapters = processor.detect_chapters(cleaned_text)
+        chapters = []
+        for ch in bp_chapters:
+            chapters.append({
+                'number': ch.number,
+                'marker': ch.marker,
+                'line': ch.start_line + 1,
+                'char_pos': ch.start_char,
+                'type': ch.detection_type
+            })
+
     metrics['chapter_count'] = len(chapters)
 
     if len(chapters) == 0:
@@ -172,6 +192,7 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
         return False, errors, warnings, metrics
 
     # Validate sequence
+    detector.chapters = chapters
     validation = detector.validate_chapter_sequence()
     metrics['sequential_chapters'] = validation.get('valid', False)
     metrics['missing_chapters'] = validation.get('missing', [])
@@ -533,8 +554,11 @@ def auto_fix_book(file_path: str, backup: bool = True) -> bool:
             print("✅ Removed Gutenberg footer")
 
     # Fix 2: Generate TOC if missing
+    # Use BookProcessor for chapter detection (14+ patterns)
+    processor = BookProcessor(verbose=False)
+    bp_chapters = processor.detect_chapters(text)
+    chapters = [{'number': ch.number, 'marker': ch.marker} for ch in bp_chapters]
     detector = ChapterDetector(text, path.name)
-    chapters = detector.detect_chapters_in_content()
     toc = detector.detect_toc()
 
     if len(chapters) > 0 and len(toc) == 0:

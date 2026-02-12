@@ -64,7 +64,7 @@ class AudiobookMaker:
         generate_cover: bool = False,
         summarize_percentage: Optional[int] = None,
         output_dir: Optional[str] = None,
-        generate_word_timings: bool = False,
+        generate_word_timings: bool = True,
         non_interactive: bool = False
     ):
         """
@@ -81,7 +81,7 @@ class AudiobookMaker:
             generate_cover: Whether to generate cover art (default: False)
             summarize_percentage: Optional summarization target % (e.g., 50)
             output_dir: Custom output directory (default: auto-organized)
-            generate_word_timings: Whether to generate word timings for karaoke (default: False)
+            generate_word_timings: Whether to generate word timings for karaoke (default: True)
             non_interactive: Skip validation prompts (fail fast for automation) (default: False)
         """
         self.input_file = Path(input_file)
@@ -303,12 +303,31 @@ class AudiobookMaker:
                         for fix in validation_report.fixes:
                             print(f"   • {fix}")
 
-                    # In non-interactive mode, fail immediately
+                    # In non-interactive mode, try auto-fix before failing
                     if self.non_interactive:
-                        print("\n❌ Validation failed in non-interactive mode.")
-                        print("   Please fix the issues and try again.")
-                        print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
-                        sys.exit(2)  # Exit code 2 for validation failure
+                        print("\n⚠️  Validation failed. Attempting auto-fix...")
+                        try:
+                            from book_processor import BookProcessor
+                            processor = BookProcessor(verbose=False)
+                            manifest = processor.process(self.input_file, auto_fix=True)
+
+                            if manifest.chapters:
+                                print(f"✅ Auto-fix succeeded: {len(manifest.chapters)} chapters detected")
+                                detection_types = set(ch.detection_type for ch in manifest.chapters)
+                                print(f"   Detection types: {detection_types}")
+                                manifest_path = self.input_file.parent / f"{self.input_file.stem}_manifest.json"
+                                manifest.save(manifest_path)
+                                print(f"   Manifest saved: {manifest_path}")
+                            else:
+                                print("\n❌ Auto-fix failed: still no chapters detected.")
+                                print("   Please fix the issues and try again.")
+                                print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
+                                sys.exit(2)
+                        except Exception as e:
+                            print(f"\n❌ Auto-fix error: {e}")
+                            print("   Please fix the issues and try again.")
+                            print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
+                            sys.exit(2)
 
                     # Interactive mode: ask user
                     print("\n❓ Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
@@ -615,7 +634,14 @@ Output:
     parser.add_argument(
         '--generate-word-timings',
         action='store_true',
-        help='Generate word-level timing data for karaoke sync (requires ffprobe)'
+        default=True,
+        help='Generate word-level timing data for karaoke sync (default: enabled, requires ffprobe)'
+    )
+
+    parser.add_argument(
+        '--no-word-timings',
+        action='store_true',
+        help='Disable word timing generation for karaoke sync'
     )
 
     parser.add_argument(
@@ -644,7 +670,7 @@ Output:
             generate_cover=args.generate_cover,
             summarize_percentage=args.summarize,
             output_dir=args.output_dir,
-            generate_word_timings=args.generate_word_timings,
+            generate_word_timings=not args.no_word_timings,
             non_interactive=args.non_interactive
         )
 

@@ -16,7 +16,7 @@
     <title>Audiobook Player</title>
 
     <!-- Stylesheets & Manifest -->
-    <link rel="stylesheet" href="/static/player.css">
+    <link rel="stylesheet" href="/static/player.css?v=20260211b">
     <link rel="manifest" href="/static/manifest.json">
 </head>
 <body>
@@ -27,6 +27,7 @@
                 <h1>📚 Audiobooks</h1>
                 <div class="server-info">
                     <span id="book-count">Loading...</span>
+                    <a href="/jobs" class="jobs-link">📋 Jobs</a>
                 </div>
             </header>
 
@@ -237,28 +238,7 @@
                     </div>
                 </div>
 
-                <!-- Delete Confirmation Modal -->
-                <div id="delete-backdrop" class="chapters-backdrop" style="display: none;"></div>
-                <div id="delete-modal" class="chapters-modal" style="display: none;">
-                    <div class="chapters-modal-header">
-                        <h4>Delete Audiobook?</h4>
-                        <button id="close-delete-btn" class="close-btn">✕</button>
-                    </div>
-                    <div class="delete-modal-content">
-                        <div id="delete-variant-info" class="delete-info">
-                            <p id="delete-variant-name" class="delete-variant-name"></p>
-                            <p id="delete-variant-details" class="delete-variant-details"></p>
-                        </div>
-                        <div class="delete-warning">
-                            <p>⚠️ This action cannot be undone</p>
-                            <p>All audio files and associated data will be permanently deleted.</p>
-                        </div>
-                        <div class="delete-buttons">
-                            <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
-                            <button id="confirm-delete-btn" class="btn-delete">Delete</button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Delete modal moved to top-level (outside views) so it's visible from variant selection -->
 
                 <!-- Text Sync Panel (Hidden by default) -->
                 <div id="text-sync-backdrop" class="chapters-backdrop" style="display: none;"></div>
@@ -323,6 +303,29 @@
                         <button type="submit" id="chat-submit-btn">Send</button>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal (top-level so it's visible from any view) -->
+    <div id="delete-backdrop" class="chapters-backdrop" style="display: none;"></div>
+    <div id="delete-modal" class="chapters-modal" style="display: none;">
+        <div class="chapters-modal-header">
+            <h4>Delete Audiobook?</h4>
+            <button id="close-delete-btn" class="close-btn">✕</button>
+        </div>
+        <div class="delete-modal-content">
+            <div id="delete-variant-info" class="delete-info">
+                <p id="delete-variant-name" class="delete-variant-name"></p>
+                <p id="delete-variant-details" class="delete-variant-details"></p>
+            </div>
+            <div class="delete-warning">
+                <p>This action cannot be undone.</p>
+                <p>All audio files and associated data will be permanently deleted.</p>
+            </div>
+            <div class="delete-buttons">
+                <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+                <button id="confirm-delete-btn" class="btn-delete">Delete</button>
             </div>
         </div>
     </div>
@@ -554,7 +557,7 @@
     </style>
 
     <script src="/static/karaoke.js?v=20260208"></script>
-    <script src="/static/player.js?v=20260208"></script>
-    <script src="/static/pipeline.js?v=20260208"></script>
+    <script src="/static/player.js?v=20260211b"></script>
+    <script src="/static/pipeline.js?v=20260211b"></script>
 </body>
 </html>

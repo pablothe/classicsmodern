@@ -88,6 +88,10 @@ class BookProcessor:
         # Roman numerals standalone (I., II., III., etc.)
         (r'^(X{0,3})(IX|IV|V?I{0,3})\.\s*$', 'roman_standalone'),
 
+        # Markdown headers with Roman numeral + title (## I. THE EVE OF THE WAR.)
+        # Common in Gutenberg books that don't use the word "Chapter"
+        (r'^#{1,6}\s+([IVXLCDM]+)\.\s+(.+)', 'markdown_roman_title'),
+
         # Markdown headers with chapter keywords
         (r'^#{1,6}\s+(Chapter|CHAPTER|Part|PART|Book|BOOK|Section|SECTION)\s+(\d+|[IVXLCDM]+):?\s*(.*)', 'markdown_chapter'),
 
@@ -357,6 +361,8 @@ class BookProcessor:
                     continue  # Already identified as chapter (except alice_style can have multiple per line)
 
                 line_stripped = line.strip()
+                # Strip "end chapter" artifacts from Gutenberg HTML conversion
+                line_stripped = re.sub(r'^end chapter', '', line_stripped, flags=re.IGNORECASE).strip()
                 if not line_stripped:
                     continue
 
@@ -440,6 +446,12 @@ class BookProcessor:
         if pattern_type == 'alice_style':
             # Title was already extracted in detect_chapters
             return line
+
+        # For markdown_roman_title, extract the title after "## ROMAN. "
+        if pattern_type == 'markdown_roman_title':
+            line = re.sub(r'^#{1,6}\s*', '', line)
+            line = re.sub(r'^[IVXLCDM]+\.\s*', '', line)
+            return line.strip()
 
         # Remove markdown headers
         line = re.sub(r'^#{1,6}\s*', '', line)

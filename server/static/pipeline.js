@@ -433,7 +433,7 @@ class AudiobookPipeline {
         `;
 
         try {
-            const response = await fetch('/api/pipeline/generate', {
+            const response = await fetch('/api/jobs/audiobook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -516,7 +516,7 @@ class AudiobookPipeline {
         if (!this.currentJobId) return;
 
         try {
-            const response = await fetch(`/api/pipeline/jobs/${this.currentJobId}`);
+            const response = await fetch(`/api/jobs/${this.currentJobId}`);
             if (!response.ok) throw new Error('Failed to fetch job status');
 
             const job = await response.json();
@@ -529,18 +529,19 @@ class AudiobookPipeline {
                 progressText.textContent = job.progress + '%';
             }
 
-            // Update status message
+            // Update status message (unified queue uses job.state instead of job.stage_progress)
             const statusMsg = document.getElementById('pipeline-status-message');
             if (statusMsg) {
-                const stageMsg = job.stage_progress?.message || job.current_stage;
+                const stageMsg = job.state?.message || job.state?.stage || '';
                 statusMsg.textContent = stageMsg;
             }
 
             // Update stage info
             const stageInfo = document.getElementById('pipeline-stage-info');
-            if (stageInfo && job.stage_progress) {
-                if (job.stage_progress.current_chunk) {
-                    stageInfo.textContent = `Chunk ${job.stage_progress.current_chunk} / ${job.stage_progress.total_chunks}`;
+            const details = job.state?.details;
+            if (stageInfo && details) {
+                if (details.current_chunk) {
+                    stageInfo.textContent = `Chunk ${details.current_chunk} / ${details.total_chunks}`;
                 } else {
                     stageInfo.textContent = '';
                 }

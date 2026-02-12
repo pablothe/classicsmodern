@@ -104,6 +104,8 @@ class ChapterDetector:
 
         for i, line in enumerate(lines):
             line_stripped = line.strip()
+            # Strip "end chapter" artifacts from Gutenberg HTML conversion
+            line_stripped = re.sub(r'^end chapter', '', line_stripped, flags=re.IGNORECASE).strip()
             char_pos = len('\n'.join(lines[:i]))
 
             # Roman numeral pattern (I., II., III., etc.) - standalone
@@ -115,6 +117,19 @@ class ChapterDetector:
                     'line': i + 1,
                     'char_pos': char_pos,
                     'type': 'roman_standalone'
+                })
+                continue
+
+            # Markdown header with Roman numeral and title (## I. THE EVE OF THE WAR.)
+            # Common in Gutenberg books that don't use the word "Chapter"
+            roman_title_match = re.match(r'^#{1,6}\s+([IVXLCDM]+)\.\s+(.+)', line_stripped)
+            if roman_title_match:
+                chapters.append({
+                    'number': len(chapters) + 1,
+                    'marker': line_stripped,
+                    'line': i + 1,
+                    'char_pos': char_pos,
+                    'type': 'markdown_roman_title'
                 })
                 continue
 
