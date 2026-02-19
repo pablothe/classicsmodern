@@ -17,7 +17,13 @@ import json
 
 
 class ChapterDetector:
-    """Detect and analyze chapter structure in books."""
+    """Detect and analyze chapter structure in books.
+
+    DEPRECATED: For chapter detection, use BookProcessor from book_processor.py instead.
+    BookProcessor has 14+ patterns and is the canonical source of truth for chapter detection.
+    ChapterDetector is retained only for its TOC detection (detect_toc) and sequence
+    validation (validate_chapter_sequence) methods.
+    """
 
     def __init__(self, text: str, filename: str = ""):
         self.text = text

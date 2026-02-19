@@ -142,8 +142,8 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
     """
     Validate chapter structure.
 
-    Uses ChapterDetector first (well-tested, few false positives), then falls back
-    to BookProcessor (14+ patterns) if no chapters are found.
+    Uses BookProcessor as the canonical chapter detection system (14+ patterns).
+    Also checks TOC via ChapterDetector for TOC/content mismatch warnings.
 
     Returns:
         (valid, errors, warnings, metrics)
@@ -159,31 +159,25 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
         'duplicate_chapters': []
     }
 
-    # Use ChapterDetector first (well-tested, few false positives)
+    # Check TOC via ChapterDetector (still useful for TOC detection)
     detector = ChapterDetector(text, filename)
-
-    # Check TOC
     toc = detector.detect_toc()
     metrics['has_toc'] = len(toc) > 0
     metrics['toc_count'] = len(toc)
 
-    # Try ChapterDetector first
-    chapters = detector.detect_chapters_in_content()
-
-    # Fall back to BookProcessor if no chapters found (14+ patterns, broader coverage)
-    if len(chapters) == 0:
-        processor = BookProcessor(verbose=False)
-        cleaned_text, _ = processor.strip_gutenberg(text)
-        bp_chapters = processor.detect_chapters(cleaned_text)
-        chapters = []
-        for ch in bp_chapters:
-            chapters.append({
-                'number': ch.number,
-                'marker': ch.marker,
-                'line': ch.start_line + 1,
-                'char_pos': ch.start_char,
-                'type': ch.detection_type
-            })
+    # Use BookProcessor as single source of truth for chapter detection
+    processor = BookProcessor(verbose=False)
+    cleaned_text, _ = processor.strip_gutenberg(text)
+    bp_chapters = processor.detect_chapters(cleaned_text)
+    chapters = []
+    for ch in bp_chapters:
+        chapters.append({
+            'number': ch.number,
+            'marker': ch.marker,
+            'line': ch.start_line + 1,
+            'char_pos': ch.start_char,
+            'type': ch.detection_type
+        })
 
     metrics['chapter_count'] = len(chapters)
 

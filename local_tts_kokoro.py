@@ -218,19 +218,22 @@ class KokoroAudioGenerator:
 
         return content, title, author
 
-    def clean_text_for_speech(self, text: str, preserve_chapter_markers: bool = False) -> str:
+    def clean_text_for_speech(self, text: str, preserve_chapter_markers: bool = False,
+                              skip_gutenberg: bool = False) -> str:
         """
         Clean markdown text for natural speech synthesis.
 
         Args:
             text: Raw text with possible Markdown
             preserve_chapter_markers: If True, keep Roman numeral chapter markers
+            skip_gutenberg: If True, skip Gutenberg stripping (for pre-cleaned content)
 
         Returns:
             Cleaned text suitable for TTS
         """
-        # Strip Gutenberg boilerplate first
-        text, _, _ = self.strip_gutenberg_boilerplate(text)
+        # Strip Gutenberg boilerplate first (skip if content already cleaned)
+        if not skip_gutenberg:
+            text, _, _ = self.strip_gutenberg_boilerplate(text)
         # Preserve chapter markers FIRST (before cleaning)
         if preserve_chapter_markers:
             # Preserve standalone Roman numerals (e.g., "I.", "II.", "III.")
@@ -367,6 +370,9 @@ class KokoroAudioGenerator:
 
         return chunks
 
+    # Maximum time (seconds) for a single TTS chunk generation
+    TTS_CHUNK_TIMEOUT = 120
+
     def generate_audio_chunk(self, text: str, output_path: Path, retry_count: int = 0) -> Path:
         """
         Generate audio for a single text chunk using Kokoro.
@@ -387,14 +393,27 @@ class KokoroAudioGenerator:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         try:
-            # Generate audio using Kokoro
-            audio_array, sample_rate = self.model.create(
-                text=text,
-                voice=self.voice,
-                speed=1.0,
-                lang=self.language,
-                trim=True
-            )
+            # Generate audio using Kokoro with timeout protection
+            from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+
+            def _tts_generate():
+                return self.model.create(
+                    text=text,
+                    voice=self.voice,
+                    speed=1.0,
+                    lang=self.language,
+                    trim=True
+                )
+
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(_tts_generate)
+                try:
+                    audio_array, sample_rate = future.result(timeout=self.TTS_CHUNK_TIMEOUT)
+                except FuturesTimeoutError:
+                    raise RuntimeError(
+                        f"TTS generation timed out after {self.TTS_CHUNK_TIMEOUT}s "
+                        f"for chunk ({len(text)} chars)"
+                    )
 
             # Save as WAV
             sf.write(str(output_path), audio_array, sample_rate)
@@ -456,15 +475,78 @@ class KokoroAudioGenerator:
                     print(f"✓ Combined: {output_path.name}")
                     return output_path
                 except subprocess.CalledProcessError:
-                    print(f"⚠️  Combine failed, keeping parts")
-                    return part1_path  # Return first part as fallback
+                    # Retry with concat demuxer approach (more robust)
+                    print(f"⚠️  filter_complex failed, retrying with concat demuxer...")
+                    concat_file = output_path.parent / f"_concat_{output_path.stem}.txt"
+                    try:
+                        with open(concat_file, 'w') as f:
+                            f.write(f"file '{part1_path.resolve()}'\n")
+                            f.write(f"file '{part2_path.resolve()}'\n")
+                        retry_cmd = [
+                            'ffmpeg', '-y', '-f', 'concat', '-safe', '0',
+                            '-i', str(concat_file), '-c', 'copy', str(output_path)
+                        ]
+                        subprocess.run(retry_cmd, capture_output=True, check=True)
+                        part1_path.unlink()
+                        part2_path.unlink()
+                        concat_file.unlink(missing_ok=True)
+                        print(f"✓ Combined (concat retry): {output_path.name}")
+                        return output_path
+                    except subprocess.CalledProcessError:
+                        concat_file.unlink(missing_ok=True)
+                        print(f"⚠️  Both combine methods failed — second half lost")
+                        print(f"  Part 1: {part1_path}")
+                        print(f"  Part 2: {part2_path}")
+                        return part1_path
             else:
                 # Max retries reached or other error
                 raise
 
+    def _clean_chapter_text(self, text: str) -> str:
+        """Clean chapter text for speech without Gutenberg stripping (already clean)."""
+        # Remove markdown headers but keep text
+        text = re.sub(r'^(#{1,6})\s+(.+)$', r'\2', text, flags=re.MULTILINE)
+
+        # Remove markdown links but keep text
+        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+
+        # Remove emphasis symbols
+        text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # Bold
+        text = re.sub(r'\*([^*]+)\*', r'\1', text)      # Italic
+        text = re.sub(r'_([^_]+)_', r'\1', text)        # Italic
+
+        # Remove code blocks
+        text = re.sub(r'```[^`]*```', '', text, flags=re.DOTALL)
+        text = re.sub(r'`([^`]+)`', r'\1', text)
+
+        # Remove horizontal rules
+        text = re.sub(r'^[-*_]{3,}$', '', text, flags=re.MULTILINE)
+
+        # Remove image references
+        text = re.sub(r'!\[.*?\]\(.*?\)', '', text)
+
+        # Remove URLs
+        text = re.sub(r'http[s]?://\S+', '', text)
+
+        # Clean excessive whitespace
+        text = re.sub(r'\n{3,}', '\n\n', text)
+        text = re.sub(r'[ \t]+', ' ', text)
+
+        return text.strip()
+
+    def _generate_silence_placeholder(self, output_path: Path, duration: float = 0.5):
+        """Generate a short silence WAV as placeholder for a failed chunk."""
+        import numpy as np
+        sample_rate = 24000
+        silence = np.zeros(int(sample_rate * duration), dtype=np.float32)
+        sf.write(str(output_path), silence, sample_rate)
+
     def detect_chapters(self, text: str, is_cleaned: bool = False) -> list:
         """
         Detect chapter boundaries in text.
+
+        Delegates to BookProcessor for raw text detection (canonical 14-pattern system).
+        For cleaned text (with <<<CHAPTER:MARKER:...>>> tags), uses marker-based detection.
 
         Args:
             text: Text to search for chapters (should have Gutenberg boilerplate stripped)
@@ -473,112 +555,30 @@ class KokoroAudioGenerator:
         Returns:
             List of tuples: (chapter_number, start_position, title)
         """
+        if is_cleaned:
+            return self._detect_markers_in_cleaned_text(text)
+
+        # Delegate to BookProcessor for raw text — single source of truth for chapter detection
+        from book_processor import BookProcessor
+        processor = BookProcessor(verbose=False)
+        cleaned_text, _ = processor.strip_gutenberg(text)
+        bp_chapters = processor.detect_chapters(cleaned_text)
+
+        # Convert BookProcessor Chapter objects to v1 tuple format
+        return [(ch.number, ch.start_char, ch.marker) for ch in bp_chapters]
+
+    def _detect_markers_in_cleaned_text(self, text: str) -> list:
+        """Detect chapter markers in text that has been cleaned for speech."""
         chapters = []
         lines = text.split('\n')
 
-        # Find Gutenberg boundaries to exclude boilerplate from detection
-        gutenberg_start = -1
-        gutenberg_end = -1
-        for i, line in enumerate(lines):
-            if '*** START OF THE PROJECT GUTENBERG EBOOK' in line.upper():
-                gutenberg_start = i
-            if '*** END OF THE PROJECT GUTENBERG EBOOK' in line.upper():
-                gutenberg_end = i
-                break
-
         for i, line in enumerate(lines):
             line_stripped = line.strip()
-            # Strip "end chapter" artifacts from Gutenberg HTML conversion
-            line_stripped = re.sub(r'^end chapter', '', line_stripped, flags=re.IGNORECASE).strip()
-
-            # Skip Gutenberg boilerplate regions
-            if gutenberg_start >= 0 and i < gutenberg_start:
-                continue
-            if gutenberg_end >= 0 and i >= gutenberg_end:
-                continue
-
-            # Skip empty lines and horizontal rules
-            if not line_stripped or re.match(r'^[-*_]{3,}$', line_stripped):
-                continue
-
-            if is_cleaned and line_stripped.startswith('<<<CHAPTER:MARKER:'):
+            if line_stripped.startswith('<<<CHAPTER:MARKER:'):
                 marker = line_stripped.replace('<<<CHAPTER:MARKER:', '').replace('>>>', '')
                 char_pos = len('\n'.join(lines[:i]))
                 chapter_num = len(chapters) + 1
                 chapters.append((chapter_num, char_pos, marker))
-                continue
-
-            # Detect standalone Roman numerals (e.g., "I.", "II.", "III.")
-            roman_match = re.match(r'^(X{0,3})(IX|IV|V?I{0,3})\.$', line_stripped)
-            if roman_match:
-                char_pos = len('\n'.join(lines[:i]))
-                chapter_num = len(chapters) + 1
-                chapters.append((chapter_num, char_pos, line_stripped))
-                continue
-
-            # Detect standalone Roman numerals in markdown headers (e.g., "## I", "## II")
-            # Common in classic literature like The Great Gatsby
-            roman_header_match = re.match(r'^#+\s+([IVXLCDM]+)$', line_stripped)
-            if roman_header_match:
-                roman_text = roman_header_match.group(1)
-                # Validate it's a valid Roman numeral (basic check)
-                if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
-                    char_pos = len('\n'.join(lines[:i]))
-                    chapter_num = len(chapters) + 1
-                    chapters.append((chapter_num, char_pos, line_stripped))
-                    continue
-
-            # Detect markdown headers with Roman numeral + title (## I. THE EVE OF THE WAR.)
-            # Common in Gutenberg books that don't use the word "Chapter"
-            roman_title_match = re.match(r'^#+\s+([IVXLCDM]+)\.\s+(.+)', line_stripped)
-            if roman_title_match:
-                roman_text = roman_title_match.group(1)
-                # Validate it's a valid Roman numeral
-                if re.fullmatch(r'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', roman_text):
-                    char_pos = len('\n'.join(lines[:i]))
-                    chapter_num = len(chapters) + 1
-                    chapters.append((chapter_num, char_pos, line_stripped))
-                    continue
-
-            # Detect markdown chapter headers (e.g., "## Chapter 1: Title" or with anchors "## Chapter 1: Title {#chapter-1}")
-            # First strip any anchor tags from the line for detection
-            line_no_anchor = re.sub(r'\s*\{#[^}]+\}\s*$', '', line_stripped)
-            header_match = re.match(r'^#+\s+(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+)', line_no_anchor)
-            if header_match:
-                char_pos = len('\n'.join(lines[:i]))
-                chapter_num = len(chapters) + 1
-                # Store the cleaned title without anchors
-                chapters.append((chapter_num, char_pos, line_no_anchor))
-                continue
-
-            # Detect plain chapter headers without markdown (after cleaning: "Chapter 1: Title")
-            # Also handle anchors here
-            line_no_anchor_plain = re.sub(r'\s*\{#[^}]+\}\s*$', '', line_stripped)
-            plain_header_match = re.match(r'^(Chapter|CHAPTER|Part|PART)\s+(\d+|[IVXLCDM]+):', line_no_anchor_plain)
-            if plain_header_match:
-                char_pos = len('\n'.join(lines[:i]))
-                chapter_num = len(chapters) + 1
-                chapters.append((chapter_num, char_pos, line_no_anchor_plain))
-                continue
-
-            # Detect numbered list chapters (e.g., "1. The Horror in Clay.")
-            # Stricter validation to avoid TOC and short entries:
-            # - Must have substantial text after number (>15 chars)
-            # - Cannot contain markdown links
-            # - Must end with period (typical chapter title format)
-            numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
-            if numbered_match:
-                chapter_text = numbered_match.group(2).strip()
-                # Exclude TOC entries (markdown links)
-                if re.search(r'\[.*?\]\(#', chapter_text):
-                    continue
-                # Exclude very short entries (likely list items, not chapters)
-                if len(chapter_text) < 15:
-                    continue
-                # Valid chapter - add it
-                char_pos = len('\n'.join(lines[:i]))
-                chapter_num = len(chapters) + 1
-                chapters.append((chapter_num, char_pos, line_stripped))
 
         return chapters
 
@@ -810,111 +810,112 @@ class KokoroAudioGenerator:
         with open(input_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
 
-        # IMPORTANT: Detect chapters from ORIGINAL markdown BEFORE any processing
-        # This ensures chapter structure comes from source text, not derived from audio generation
-        # TOC entries with markdown links will be properly filtered at this stage
+        # IMPORTANT: Detect chapters from ORIGINAL markdown using BookProcessor
+        # This ensures chapter structure comes from source text with full 14-pattern detection
         print("Detecting chapters from source markdown...")
-        chapters = self.detect_chapters(raw_text, is_cleaned=False)
+        from book_processor import BookProcessor
+        processor = BookProcessor(verbose=False)
+        stripped_text, _ = processor.strip_gutenberg(raw_text)
+        chapter_objects = processor.detect_chapters(stripped_text)
+
+        # Also build tuples for backward-compat
+        chapters = [(ch.number, ch.start_char, ch.marker) for ch in chapter_objects]
 
         has_chapters = len(chapters) > 0
         if has_chapters:
             print(f"✓ Found {len(chapters)} chapters")
-            # Show chapter titles for verification
             for ch_num, ch_pos, ch_title in chapters:
                 print(f"   Chapter {ch_num}: {ch_title}")
         else:
             print("ℹ  No chapters detected (will create single file)")
 
         # Optional: Preprocess text for natural speech (markdown → spoken form)
-        preprocessed_text = raw_text
         text_mapping_file = None
 
-        if PREPROCESSOR_AVAILABLE:
-            print("Preprocessing text for natural speech...")
-            preprocessor = AudioTextPreprocessor()
-            preprocess_result = preprocessor.preprocess_for_speech(raw_text)
-            preprocessed_text = preprocess_result.spoken_text
+        # Process per-chapter: clean and chunk each chapter independently
+        # This eliminates the fragile proportional position mapping
+        chunks = []
+        chunk_to_chapter = []
+        clean_text = ""
 
-            if preprocess_result.transformations:
-                print(f"  ✓ Applied {len(preprocess_result.transformations)} transformations")
-                # Prepare output directory for saving mapping
+        if has_chapters:
+            print(f"\nProcessing {len(chapter_objects)} chapters independently...")
+            for ch_obj in chapter_objects:
+                chapter_content = ch_obj.content
+
+                # Preprocess chapter if available
+                if PREPROCESSOR_AVAILABLE:
+                    preprocessor = AudioTextPreprocessor()
+                    preprocess_result = preprocessor.preprocess_for_speech(chapter_content)
+                    chapter_content = preprocess_result.spoken_text
+
+                # Clean chapter text for speech (skip Gutenberg — already stripped)
+                chapter_clean = self._clean_chapter_text(chapter_content)
+
+                if not chapter_clean.strip():
+                    print(f"  Chapter {ch_obj.number}: (empty after cleaning, skipping)")
+                    continue
+
+                # Chunk this chapter
+                chapter_chunks = self.chunk_text(chapter_clean, chunk_size)
+                chunk_count = len(chapter_chunks)
+
+                chunks.extend(chapter_chunks)
+                chunk_to_chapter.extend([ch_obj.number] * chunk_count)
+                clean_text += chapter_clean + "\n\n"
+
+                print(f"  Chapter {ch_obj.number}: {chunk_count} chunks ({len(chapter_clean):,} chars)")
+
+            # Save text mapping if preprocessing was used
+            if PREPROCESSOR_AVAILABLE:
                 temp_output_dir = output_dir if output_dir else input_path.parent / "audio_kokoro"
                 temp_output_dir = Path(temp_output_dir)
-                # Save mapping for word timing alignment later
                 text_mapping_file = temp_output_dir / f"{base_name}_text_mapping.json"
                 text_mapping_file.parent.mkdir(parents=True, exist_ok=True)
-                preprocessor.save_mapping(preprocess_result, text_mapping_file)
-            else:
-                print("  ℹ  No preprocessing needed (text already speech-ready)")
+        else:
+            # No chapters: process entire text as one unit
+            preprocessed_text = raw_text
+            if PREPROCESSOR_AVAILABLE:
+                preprocessor = AudioTextPreprocessor()
+                preprocess_result = preprocessor.preprocess_for_speech(raw_text)
+                preprocessed_text = preprocess_result.spoken_text
 
-        print("Cleaning text for speech...")
-        clean_text = self.clean_text_for_speech(preprocessed_text, preserve_chapter_markers=False)
+                if preprocess_result.transformations:
+                    temp_output_dir = output_dir if output_dir else input_path.parent / "audio_kokoro"
+                    temp_output_dir = Path(temp_output_dir)
+                    text_mapping_file = temp_output_dir / f"{base_name}_text_mapping.json"
+                    text_mapping_file.parent.mkdir(parents=True, exist_ok=True)
+                    preprocessor.save_mapping(preprocess_result, text_mapping_file)
+
+            clean_text = self.clean_text_for_speech(preprocessed_text, preserve_chapter_markers=False)
+            chunks = self.chunk_text(clean_text, chunk_size)
+            chunk_to_chapter = [1] * len(chunks)
 
         word_count = len(clean_text.split())
         char_count = len(clean_text)
 
-        print(f"Text ready: {char_count:,} characters, {word_count:,} words")
-
-        print(f"Chunking text (max {chunk_size} chars per chunk)...")
-        chunks = self.chunk_text(clean_text, chunk_size)
-
-        print(f"Created {len(chunks)} audio chunks")
-
-        # Map chunks to chapters
-        # Challenge: chapters were detected on raw_text, but chunks are from clean_text
-        # Solution: Re-detect chapters in clean_text or use proportional mapping
-        chunk_to_chapter = []
-        if chapters:
-            # Re-detect chapters in the clean text to get accurate positions
-            chapters_in_clean = self.detect_chapters(clean_text, is_cleaned=True)
-
-            if chapters_in_clean and len(chapters_in_clean) == len(chapters):
-                # Successfully detected same number of chapters in clean text
-                chapter_positions_in_clean = [(ch[0], ch[1]) for ch in chapters_in_clean]
-                print(f"✓ Successfully re-detected {len(chapters_in_clean)} chapters in cleaned text")
-            else:
-                # Fallback: Use proportional positions based on raw text
-                print(f"⚠️ Chapter re-detection mismatch (found {len(chapters_in_clean)} vs expected {len(chapters)})")
-                print("  Using proportional mapping as fallback...")
-                chapter_positions_in_clean = []
-                for ch_num, ch_pos_raw, ch_title in chapters:
-                    # Calculate proportional position
-                    ratio = ch_pos_raw / len(raw_text) if len(raw_text) > 0 else 0
-                    pos_in_clean = int(ratio * len(clean_text))
-                    chapter_positions_in_clean.append((ch_num, pos_in_clean))
-
-            # Now map chunks to chapters based on clean text positions
-            current_char_pos = 0
-
-            for i, chunk in enumerate(chunks):
-                # Find which chapter this chunk belongs to
-                chapter_num = 1  # Default to chapter 1
-
-                # Check each chapter boundary
-                for j in range(len(chapter_positions_in_clean) - 1, -1, -1):
-                    if current_char_pos >= chapter_positions_in_clean[j][1]:
-                        chapter_num = chapter_positions_in_clean[j][0]
-                        break
-
-                chunk_to_chapter.append(chapter_num)
-                current_char_pos += len(chunk)
-
-            # Debug output to verify mapping
-            unique_chapters = sorted(set(chunk_to_chapter))
-            print(f"✓ Mapped {len(chunks)} chunks to {len(unique_chapters)} chapters")
-            for ch in unique_chapters:
-                chunk_count = chunk_to_chapter.count(ch)
-                print(f"  Chapter {ch}: {chunk_count} chunks")
-            print()
-        else:
-            chunk_to_chapter = [1] * len(chunks)
-            print()
+        print(f"\nText ready: {char_count:,} characters, {word_count:,} words")
+        print(f"Created {len(chunks)} audio chunks across {len(set(chunk_to_chapter))} chapter(s)")
+        print()
 
         if output_dir is None:
             output_dir = input_path.parent / "audio_kokoro"
 
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Acquire file lock to prevent concurrent generation to same directory
+        import fcntl
+        lock_file_path = output_dir / ".generation.lock"
+        lock_fd = open(lock_file_path, 'w')
+        try:
+            fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            lock_fd.close()
+            raise RuntimeError(
+                f"Another audio generation is already running for {output_dir}.\n"
+                f"Wait for it to finish or remove {lock_file_path}"
+            )
 
         # Create raw directory if post-processing
         if speed != 1.0 or normalize or to_mp3:
@@ -939,20 +940,44 @@ class KokoroAudioGenerator:
         print("="*70)
         print()
 
-        # Generate audio for each chunk
+        # Generate audio for each chunk (with checkpointing for resume)
+        import json as json_module
         raw_audio_files = []
         audio_files = []
+        failed_chunks = []
+        MAX_CHUNK_RETRIES = 3
+        start_chunk = 0
+
+        # Check for existing checkpoint to resume from
+        checkpoint_file = output_dir / ".generation_checkpoint.json"
+        if checkpoint_file.exists():
+            try:
+                with open(checkpoint_file, 'r') as cf:
+                    checkpoint = json_module.load(cf)
+                if (checkpoint.get('input_file') == str(input_path) and
+                        checkpoint.get('voice') == self.voice and
+                        checkpoint.get('total_chunks') == len(chunks)):
+                    start_chunk = checkpoint.get('last_complete_chunk', 0)
+                    raw_audio_files = [Path(f) for f in checkpoint.get('completed_files', []) if Path(f).exists()]
+                    if start_chunk > 0:
+                        print(f"📌 Resuming from chunk {start_chunk + 1}/{len(chunks)} ({start_chunk} already complete)")
+            except (json_module.JSONDecodeError, KeyError):
+                pass  # Corrupt checkpoint, start fresh
 
         import time as time_module
         generation_start = time_module.time()
 
         for i, chunk_text in enumerate(chunks, 1):
-            if i == 1 or i == len(chunks) or i % 10 == 0:
+            if i <= start_chunk:
+                continue  # Skip already-completed chunks
+
+            if i == 1 or i == len(chunks) or i % 10 == 0 or i == start_chunk + 1:
                 elapsed = time_module.time() - generation_start
+                chunks_done = i - start_chunk
                 percentage = (i / len(chunks)) * 100
 
-                if i > 1:
-                    rate = i / elapsed
+                if chunks_done > 1:
+                    rate = chunks_done / elapsed
                     remaining = len(chunks) - i
                     eta_seconds = remaining / rate if rate > 0 else 0
                     eta_str = self._format_eta(eta_seconds)
@@ -965,17 +990,48 @@ class KokoroAudioGenerator:
 
                 print(f"\n  Progress: [{bar}] {i}/{len(chunks)} ({percentage:.1f}%) | ETA: {eta_str}")
 
-            # Generate raw WAV
+            # Generate raw WAV with retry logic
             raw_filename = f"{base_name}_chunk{i:03d}_raw.wav"
             raw_output_path = raw_dir / raw_filename
 
             print(f"[{i}/{len(chunks)}]", end=" ")
-            try:
-                self.generate_audio_chunk(chunk_text, raw_output_path)
+            success = False
+            for attempt in range(MAX_CHUNK_RETRIES):
+                try:
+                    self.generate_audio_chunk(chunk_text, raw_output_path)
+                    raw_audio_files.append(raw_output_path)
+                    success = True
+                    break
+                except Exception as e:
+                    if attempt < MAX_CHUNK_RETRIES - 1:
+                        print(f"\n  ⚠ Retry {attempt + 1}/{MAX_CHUNK_RETRIES} for chunk {i}: {e}")
+                        time_module.sleep(1)
+                    else:
+                        print(f"\n  ✗ SKIPPING chunk {i} after {MAX_CHUNK_RETRIES} attempts: {e}")
+                        failed_chunks.append((i, str(e)))
+
+            if not success:
+                # Generate silence placeholder so chapter boundaries stay correct
+                self._generate_silence_placeholder(raw_output_path, duration=0.5)
                 raw_audio_files.append(raw_output_path)
-            except Exception as e:
-                print(f"✗ ERROR: {e}")
-                raise
+
+            # Save checkpoint every 10 chunks
+            if i % 10 == 0:
+                checkpoint_data = {
+                    'input_file': str(input_path),
+                    'voice': self.voice,
+                    'last_complete_chunk': i,
+                    'completed_files': [str(f) for f in raw_audio_files],
+                    'total_chunks': len(chunks)
+                }
+                with open(checkpoint_file, 'w') as cf:
+                    json_module.dump(checkpoint_data, cf, indent=2)
+
+        # Report any failed chunks
+        if failed_chunks:
+            print(f"\n⚠ WARNING: {len(failed_chunks)} chunk(s) failed and were replaced with silence:")
+            for chunk_num, error in failed_chunks:
+                print(f"   Chunk {chunk_num}: {error}")
 
         # Post-process audio files
         if speed != 1.0 or normalize or to_mp3:
@@ -1144,6 +1200,17 @@ class KokoroAudioGenerator:
                     print("⚠️  generate.py not found, skipping cover art")
             except Exception as e:
                 print(f"⚠️  Cover generation failed: {e}")
+
+        # Clean up checkpoint and lock on successful completion
+        checkpoint_file = output_dir / ".generation_checkpoint.json"
+        if checkpoint_file.exists():
+            checkpoint_file.unlink()
+        try:
+            fcntl.flock(lock_fd, fcntl.LOCK_UN)
+            lock_fd.close()
+            lock_file_path.unlink(missing_ok=True)
+        except Exception:
+            pass
 
         print("\n" + "="*70)
         print("AUDIO GENERATION COMPLETE")

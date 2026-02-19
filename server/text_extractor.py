@@ -184,7 +184,7 @@ def split_into_paragraphs(text: str) -> List[Dict]:
     paragraphs = []
     for i, para in enumerate(raw_paragraphs):
         para = para.strip()
-        if para and len(para) > 10:  # Skip very short fragments
+        if para and len(para) > 1:  # Skip empty fragments but keep short dialogue
             paragraphs.append({
                 'id': i,
                 'text': para

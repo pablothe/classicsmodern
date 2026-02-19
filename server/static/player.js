@@ -30,6 +30,10 @@ const state = {
     textSyncOpen: false,
     textSyncData: null,
     chunkManifest: null,  // NEW: Chunk-based sync data
+    lastHighlightedParaId: null,  // Track to avoid redundant scroll/DOM updates
+    karaokeSync: null,             // KaraokeSync instance
+    karaokeModeEnabled: false,     // Whether karaoke word highlighting is active
+    karaokeAvailable: false,       // Whether word timing data exists for current book
     chatOpen: false,
     chatHistory: [],
     // Unified search state
@@ -274,6 +278,10 @@ const ui = {
     textChapterTitle: document.getElementById('text-chapter-title'),
     textChapterSubtitle: document.getElementById('text-chapter-subtitle'),
     textContent: document.getElementById('text-content'),
+    karaokeToggle: document.getElementById('karaoke-toggle'),
+    karaokeModeCheckbox: document.getElementById('karaoke-mode-checkbox'),
+    karaokeStatusText: document.getElementById('karaoke-status-text'),
+    karaokeStatus: document.getElementById('karaoke-status'),
 
     // AI Chat
     aiAssistantBtn: document.getElementById('ai-assistant-btn'),
@@ -994,6 +1002,7 @@ function detectCurrentChapter() {
                 // If text sync is open, reload the text for the new chapter
                 if (state.textSyncOpen && oldChapterIndex !== null) {
                     loadChapterText(i);
+                    updateKaraokeChapter();
                 }
             }
             return;
@@ -1043,6 +1052,9 @@ async function openTextSyncPanel() {
         }
     }
 
+    // Initialize karaoke sync (loads word timings, shows toggle if available)
+    await initKaraokeSync();
+
     // Load text for current chapter
     if (state.currentChapterIndex !== null && state.currentBook && state.currentVariant) {
         loadChapterText(state.currentChapterIndex);
@@ -1056,9 +1068,15 @@ function closeTextSyncPanel() {
     ui.textSyncBackdrop.style.display = 'none';
     ui.textSyncPanel.style.display = 'none';
     state.textSyncOpen = false;
+
+    // Disable karaoke sync when panel closes to stop timeupdate listener
+    if (state.karaokeSync && state.karaokeModeEnabled) {
+        state.karaokeSync.disable();
+    }
 }
 
 async function loadChapterText(chapterIndex) {
+    state.lastHighlightedParaId = null;  // Reset on chapter change
     try {
         ui.textContent.innerHTML = '<div class="text-loading">Loading text...</div>';
 
@@ -1084,8 +1102,12 @@ async function loadChapterText(chapterIndex) {
         ui.textChapterTitle.textContent = data.title;
         ui.textChapterSubtitle.textContent = `${data.word_count} words • ~${Math.round(data.estimated_duration / 60)} min`;
 
-        // Render paragraphs
-        renderTextParagraphs(data.paragraphs);
+        // Render paragraphs (or karaoke words if enabled)
+        if (state.karaokeModeEnabled && state.karaokeAvailable) {
+            enableKaraokeMode();
+        } else {
+            renderTextParagraphs(data.paragraphs);
+        }
 
     } catch (error) {
         console.error('Failed to load chapter text:', error);
@@ -1136,16 +1158,27 @@ function seekToParagraph(paragraphId) {
 
 function updateTextHighlight() {
     if (!state.textSyncOpen || !state.textSyncData || !ui.audio.duration) return;
+    if (state.karaokeModeEnabled) return;  // Karaoke mode handles its own highlighting
 
     const paragraphs = state.textSyncData.paragraphs;
     if (!paragraphs || paragraphs.length === 0) return;
 
-    // Each chapter is its own audio file, so currentTime/duration gives
-    // correct chapter-relative progress (0.0 to 1.0)
-    const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
+    let currentParagraphId;
 
-    // Use cumulative character lengths for accurate paragraph mapping
-    const currentParagraphId = findParagraphByProgress(progress, paragraphs);
+    // Use chunk manifest for accurate text position mapping when available
+    if (state.chunkManifest && state.chunkManifest.chunks) {
+        currentParagraphId = findParagraphByChunkManifest(
+            ui.audio.currentTime, paragraphs, state.chunkManifest.chunks
+        );
+    } else {
+        // Fallback: linear interpolation using character lengths
+        const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
+        currentParagraphId = findParagraphByProgress(progress, paragraphs);
+    }
+
+    // Skip if paragraph hasn't changed (avoids scroll jitter from ~4x/sec timeupdate)
+    if (currentParagraphId === state.lastHighlightedParaId) return;
+    state.lastHighlightedParaId = currentParagraphId;
 
     // Remove previous highlights
     document.querySelectorAll('.text-paragraph').forEach(p => {
@@ -1163,7 +1196,44 @@ function updateTextHighlight() {
     }
 }
 
-// Helper: Map a 0-1 progress value to the correct paragraph using cumulative character lengths
+// Map audio time to paragraph using chunk manifest for more accurate progress.
+// Instead of assuming linear time→text mapping, this uses actual chunk durations
+// to compute how far through the chapter text we are.
+function findParagraphByChunkManifest(currentTime, paragraphs, chunks) {
+    const chapterNum = getCurrentChapterNumber();
+    const chapterChunks = chunks.filter(c => c.chapter === chapterNum);
+    if (!chapterChunks.length) {
+        const progress = Math.max(0, Math.min(0.999, currentTime / ui.audio.duration));
+        return findParagraphByProgress(progress, paragraphs);
+    }
+
+    // Compute chapter-relative text progress using chunk boundaries
+    const chapterStart = chapterChunks[0].cumulative_duration;
+    const globalTime = chapterStart + currentTime;
+    const chapterTextTotal = chapterChunks.reduce((sum, c) => sum + c.text_length, 0);
+
+    let textConsumed = 0;
+    for (const chunk of chapterChunks) {
+        const chunkEnd = chunk.cumulative_duration + chunk.duration;
+        if (globalTime <= chunkEnd) {
+            // Interpolate within this chunk
+            const chunkProgress = chunk.duration > 0
+                ? Math.max(0, Math.min(1, (globalTime - chunk.cumulative_duration) / chunk.duration))
+                : 0;
+            textConsumed += chunkProgress * chunk.text_length;
+            break;
+        }
+        textConsumed += chunk.text_length;
+    }
+
+    // Convert to 0-1 progress and use the paragraph mapping
+    const progress = chapterTextTotal > 0
+        ? Math.max(0, Math.min(0.999, textConsumed / chapterTextTotal))
+        : 0;
+    return findParagraphByProgress(progress, paragraphs);
+}
+
+// Fallback: Map a 0-1 progress value to the correct paragraph using cumulative character lengths
 function findParagraphByProgress(progress, paragraphs) {
     let totalChars = 0;
     const starts = [];
@@ -1233,6 +1303,80 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+// ============================================================================
+// Karaoke Mode Functions
+// ============================================================================
+
+async function initKaraokeSync() {
+    if (!window.KaraokeSync || !state.currentBook) return;
+
+    // Create KaraokeSync instance if needed
+    if (!state.karaokeSync) {
+        state.karaokeSync = new KaraokeSync(ui.audio);
+    }
+
+    // Try to load word timings for current book
+    const hasTimings = await state.karaokeSync.loadWordTimings(state.currentBook.book_id);
+    state.karaokeAvailable = hasTimings;
+
+    // Show/hide karaoke toggle based on data availability
+    if (ui.karaokeToggle) {
+        ui.karaokeToggle.classList.toggle('hidden', !hasTimings);
+    }
+}
+
+function toggleKaraokeMode() {
+    state.karaokeModeEnabled = ui.karaokeModeCheckbox.checked;
+
+    if (ui.karaokeStatus) {
+        ui.karaokeStatus.classList.toggle('active', state.karaokeModeEnabled);
+        ui.karaokeStatus.classList.toggle('inactive', !state.karaokeModeEnabled);
+    }
+    if (ui.karaokeStatusText) {
+        ui.karaokeStatusText.textContent = state.karaokeModeEnabled ? 'Enabled' : 'Disabled';
+    }
+
+    if (state.karaokeModeEnabled) {
+        enableKaraokeMode();
+    } else {
+        disableKaraokeMode();
+    }
+}
+
+function enableKaraokeMode() {
+    if (!state.karaokeSync || !state.karaokeAvailable) return;
+
+    const chapterNum = getCurrentChapterNumber();
+    if (!state.karaokeSync.setChapter(chapterNum)) return;
+
+    // Render karaoke word spans into the text content area
+    ui.textContent.classList.add('karaoke-mode');
+    state.karaokeSync.renderText(ui.textContent);
+    state.karaokeSync.enable();
+}
+
+function disableKaraokeMode() {
+    if (state.karaokeSync) {
+        state.karaokeSync.disable();
+    }
+    ui.textContent.classList.remove('karaoke-mode');
+
+    // Re-render paragraph view if we have text data
+    if (state.textSyncData && state.textSyncData.paragraphs) {
+        renderTextParagraphs(state.textSyncData.paragraphs);
+        state.lastHighlightedParaId = null;
+    }
+}
+
+function updateKaraokeChapter() {
+    if (!state.karaokeModeEnabled || !state.karaokeSync) return;
+
+    const chapterNum = getCurrentChapterNumber();
+    if (state.karaokeSync.setChapter(chapterNum)) {
+        state.karaokeSync.renderText(ui.textContent);
+    }
 }
 
 // ============================================================================
@@ -2161,6 +2305,11 @@ function setupEventListeners() {
     ui.textSyncBtn.addEventListener('click', toggleTextSync);
     ui.closeTextSyncBtn.addEventListener('click', closeTextSyncPanel);
     ui.textSyncBackdrop.addEventListener('click', closeTextSyncPanel);
+
+    // Karaoke mode toggle
+    if (ui.karaokeModeCheckbox) {
+        ui.karaokeModeCheckbox.addEventListener('change', toggleKaraokeMode);
+    }
 
     // AI Chat modal
     ui.aiAssistantBtn.addEventListener('click', toggleAIChat);

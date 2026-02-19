@@ -16,6 +16,7 @@ class KaraokeSync {
         this.currentWordIndex = 0;
         this.textContainer = null;
         this.isEnabled = false;
+        this.wordSpans = [];  // Direct references for O(1) highlight updates
 
         // Bind event handlers
         this.onTimeUpdate = this.onTimeUpdate.bind(this);
@@ -76,8 +77,9 @@ class KaraokeSync {
 
         this.textContainer = textContainer;
         this.textContainer.innerHTML = '';
+        this.wordSpans = [];
 
-        // Create word spans
+        // Create word spans with direct references for O(1) highlighting
         const words = this.currentChapter.words;
         words.forEach((wordData, index) => {
             const wordSpan = document.createElement('span');
@@ -92,6 +94,7 @@ class KaraokeSync {
             wordSpan.addEventListener('click', this.onWordClick);
 
             this.textContainer.appendChild(wordSpan);
+            this.wordSpans.push(wordSpan);
 
             // Add space after word (except last word)
             if (index < words.length - 1) {
@@ -147,10 +150,12 @@ class KaraokeSync {
     }
 
     /**
-     * Binary search to find word at given time
+     * Binary search to find word at given time.
+     * Handles gaps between words (silence/pauses) by returning the nearest word.
      */
     findWordAtTime(time) {
         const words = this.currentChapter.words;
+        if (!words.length) return 0;
 
         let left = 0;
         let right = words.length - 1;
@@ -168,39 +173,42 @@ class KaraokeSync {
             }
         }
 
-        // If exact match not found, return closest word
-        if (left >= words.length) {
-            return words.length - 1;
-        }
-        if (right < 0) {
-            return 0;
-        }
+        // No exact match - time falls in a gap between words or at boundaries
+        if (left >= words.length) return words.length - 1;
+        if (right < 0) return 0;
 
-        // Return the word whose start time is closest
-        return left;
+        // Compare distance to both neighboring words and return the closer one
+        const distToLeft = Math.abs(words[left].start - time);
+        const distToRight = Math.abs(time - words[right].end);
+        return distToRight <= distToLeft ? right : left;
     }
 
     /**
-     * Highlight a specific word
+     * Highlight a specific word - O(1) by only updating changed spans
      */
     highlightWord(wordIndex) {
-        if (!this.textContainer) return;
+        if (!this.textContainer || !this.wordSpans.length) return;
 
-        const wordSpans = this.textContainer.querySelectorAll('.karaoke-word');
+        const prevIndex = this.currentWordIndex;
 
-        wordSpans.forEach((span, index) => {
-            span.classList.remove('karaoke-current', 'karaoke-past');
+        // Remove current highlight from previous word
+        if (prevIndex >= 0 && prevIndex < this.wordSpans.length) {
+            this.wordSpans[prevIndex].classList.remove('karaoke-current');
+            this.wordSpans[prevIndex].classList.add('karaoke-past');
+        }
 
-            if (index === wordIndex) {
-                span.classList.add('karaoke-current');
-            } else if (index < wordIndex) {
-                span.classList.add('karaoke-past');
+        // Add highlight to new word
+        if (wordIndex >= 0 && wordIndex < this.wordSpans.length) {
+            this.wordSpans[wordIndex].classList.remove('karaoke-past');
+            this.wordSpans[wordIndex].classList.add('karaoke-current');
+            this.scrollToWord(this.wordSpans[wordIndex]);
+        }
+
+        // If jumping backward (seek), clear future words' past class
+        if (wordIndex < prevIndex) {
+            for (let i = wordIndex + 1; i <= prevIndex && i < this.wordSpans.length; i++) {
+                this.wordSpans[i].classList.remove('karaoke-past');
             }
-        });
-
-        // Auto-scroll to keep current word in view
-        if (wordSpans[wordIndex]) {
-            this.scrollToWord(wordSpans[wordIndex]);
         }
     }
 
@@ -273,13 +281,11 @@ class KaraokeSync {
      */
     destroy() {
         this.disable();
-        if (this.textContainer) {
-            const wordSpans = this.textContainer.querySelectorAll('.karaoke-word');
-            wordSpans.forEach(span => {
-                span.removeEventListener('click', this.onWordClick);
-            });
-            this.textContainer = null;
-        }
+        this.wordSpans.forEach(span => {
+            span.removeEventListener('click', this.onWordClick);
+        });
+        this.wordSpans = [];
+        this.textContainer = null;
     }
 }
 

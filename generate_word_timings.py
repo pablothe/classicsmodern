@@ -115,50 +115,49 @@ def extract_chapter_text(source_text: str, chapter_num: int, total_chapters: int
     """
     Extract text for a specific chapter from source markdown.
 
+    Uses text_extractor.detect_chapter_markers() for consistent chapter detection
+    across the entire system (same patterns as the web server text sync API).
+
     Args:
         source_text: Full book text
-        chapter_num: Chapter number to extract
+        chapter_num: Chapter number to extract (1-based)
         total_chapters: Total number of chapters
 
     Returns:
         Tuple of (chapter_text, start_char_position)
     """
-    lines = source_text.split('\n')
-    chapters_found = []
-    chapter_positions = []
+    try:
+        from server.text_extractor import detect_chapter_markers, extract_chapter_text as _extract
+    except ImportError:
+        # Fallback: try importing from project root
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "text_extractor",
+            Path(__file__).parent / "server" / "text_extractor.py"
+        )
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        detect_chapter_markers = mod.detect_chapter_markers
+        _extract = mod.extract_chapter_text
 
-    for i, line in enumerate(lines):
-        line_stripped = line.strip()
+    chapters = detect_chapter_markers(source_text)
 
-        # Detect chapter markers (same patterns as in local_tts_kokoro.py)
-        # Pattern 1: "1. The Horror in Clay"
-        numbered_match = re.match(r'^(\d+)\.\s+(.+)$', line_stripped)
-        if numbered_match and len(numbered_match.group(2)) > 15:
-            chapter_number = int(numbered_match.group(1))
-            char_pos = len('\n'.join(lines[:i]))
-            chapters_found.append(chapter_number)
-            chapter_positions.append(char_pos)
-            continue
-
-        # Pattern 2: "## I" or "## 1"
-        header_match = re.match(r'^#+\s+([IVXLCDM]+|\d+)', line_stripped)
-        if header_match:
-            chapters_found.append(len(chapters_found) + 1)
-            char_pos = len('\n'.join(lines[:i]))
-            chapter_positions.append(char_pos)
-
-    # Extract text for requested chapter
-    if chapter_num <= len(chapters_found):
-        start_pos = chapter_positions[chapter_num - 1]
-        end_pos = chapter_positions[chapter_num] if chapter_num < len(chapters_found) else len(source_text)
-        chapter_text = source_text[start_pos:end_pos]
-        return chapter_text, start_pos
+    if chapters and chapter_num <= len(chapters):
+        # Convert 1-based chapter_num to 0-based index
+        chapter_index = chapter_num - 1
+        chapter_text = _extract(source_text, chapters, chapter_index)
+        start_pos = chapters[chapter_index]['start_pos']
+        if chapter_text:
+            return chapter_text, start_pos
 
     # Fallback: split text evenly
-    chunk_size = len(source_text) // total_chapters
-    start_pos = (chapter_num - 1) * chunk_size
-    end_pos = start_pos + chunk_size if chapter_num < total_chapters else len(source_text)
-    return source_text[start_pos:end_pos], start_pos
+    if total_chapters > 0:
+        chunk_size = len(source_text) // total_chapters
+        start_pos = (chapter_num - 1) * chunk_size
+        end_pos = start_pos + chunk_size if chapter_num < total_chapters else len(source_text)
+        return source_text[start_pos:end_pos], start_pos
+
+    return source_text, 0
 
 
 def generate_word_timings_whisperx(
@@ -408,12 +407,19 @@ def generate_audiobook_word_timings(
         else:
             word_timings = generate_word_timings_fallback(audio_file, chapter_text)
 
-        # Add text position offset to each word
-        current_text_pos = text_start_pos
+        # Add text position by finding each word's actual position in the chapter text
+        search_offset = 0
         for word_data in word_timings:
-            word_data['text_pos'] = current_text_pos
-            # Estimate text position (advance by word length + space)
-            current_text_pos += len(word_data['word']) + 1
+            word = word_data['word']
+            # Search for the word starting from where we last found one
+            pos = chapter_text.find(word, search_offset)
+            if pos >= 0:
+                word_data['text_pos'] = text_start_pos + pos
+                search_offset = pos + len(word)
+            else:
+                # Fallback: estimate position if exact match not found
+                word_data['text_pos'] = text_start_pos + search_offset
+                search_offset += len(word) + 1
 
         # Store in result
         chapter_key = f"chapter_{chapter_num}"

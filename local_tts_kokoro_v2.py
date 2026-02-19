@@ -124,7 +124,9 @@ class ManifestAudioGenerator(KokoroAudioGenerator):
 
         # Process each chapter
         chapter_files = []
+        failed_chapters = []
         total_chunks = 0
+        MAX_CHAPTER_RETRIES = 2
 
         for chapter_num in range(1, len(self.manifest.chapters) + 1):
             chapter = self.manifest.chapters[chapter_num - 1]
@@ -144,17 +146,23 @@ class ManifestAudioGenerator(KokoroAudioGenerator):
             print(f"\n📖 Chapter {chapter_num}/{len(self.manifest.chapters)}: {chapter.marker}")
             print(f"   Words: {chapter.word_count}")
 
-            # Generate audio for this chapter
-            chapter_audio_path = self._generate_chapter_audio(
-                chapter_num=chapter_num,
-                chapter=chapter,
-                output_dir=output_dir,
-                raw_dir=raw_dir,
-                chunk_size=chunk_size,
-                speed=speed,
-                normalize=normalize,
-                to_mp3=to_mp3
-            )
+            # Generate audio for this chapter with retry
+            chapter_audio_path = None
+            for attempt in range(MAX_CHAPTER_RETRIES):
+                chapter_audio_path = self._generate_chapter_audio(
+                    chapter_num=chapter_num,
+                    chapter=chapter,
+                    output_dir=output_dir,
+                    raw_dir=raw_dir,
+                    chunk_size=chunk_size,
+                    speed=speed,
+                    normalize=normalize,
+                    to_mp3=to_mp3
+                )
+                if chapter_audio_path:
+                    break
+                if attempt < MAX_CHAPTER_RETRIES - 1:
+                    print(f"   ⚠ Retrying chapter {chapter_num} (attempt {attempt + 2}/{MAX_CHAPTER_RETRIES})")
 
             if chapter_audio_path:
                 chapter_files.append(chapter_audio_path)
@@ -169,6 +177,16 @@ class ManifestAudioGenerator(KokoroAudioGenerator):
                     speed=speed,
                     chapter_file=str(chapter_audio_path)
                 )
+            else:
+                failed_chapters.append((chapter_num, chapter.marker))
+                print(f"   ✗ FAILED chapter {chapter_num} after {MAX_CHAPTER_RETRIES} attempts")
+
+        # Report failed chapters
+        if failed_chapters:
+            print(f"\n⚠ WARNING: {len(failed_chapters)} chapter(s) failed to generate:")
+            for ch_num, ch_marker in failed_chapters:
+                print(f"   Chapter {ch_num}: {ch_marker}")
+            print(f"   Run the same command to retry these chapters (progress is saved)")
 
         # Create master playlist
         ext = '.mp3' if to_mp3 else '.wav'
@@ -179,9 +197,11 @@ class ManifestAudioGenerator(KokoroAudioGenerator):
                 f.write(f"#EXTINF:-1,Chapter {i}\n")
                 f.write(f"{chapter_file.name}\n")
 
-        print(f"\n✅ AUDIO GENERATION COMPLETE")
+        total_chapters = len(self.manifest.chapters)
+        status = "COMPLETE" if not failed_chapters else f"PARTIAL ({len(chapter_files)}/{total_chapters})"
+        print(f"\n✅ AUDIO GENERATION {status}")
         print(f"📂 Output directory: {output_dir}")
-        print(f"🎵 Chapters generated: {len(chapter_files)}")
+        print(f"🎵 Chapters generated: {len(chapter_files)}/{total_chapters}")
         print(f"📜 Playlist: {playlist_path.name}")
 
         # Update manifest with audio info
@@ -209,11 +229,11 @@ class ManifestAudioGenerator(KokoroAudioGenerator):
                                to_mp3: bool) -> Optional[Path]:
         """Generate audio for a single chapter."""
         try:
-            # Clean text for TTS
-            cleaned_text = self.clean_text_for_speech(chapter.content)
+            # Clean text for TTS (skip Gutenberg — manifest content is already clean)
+            cleaned_text = self.clean_text_for_speech(chapter.content, skip_gutenberg=True)
 
             # Split into chunks
-            chunks = self.split_text_into_chunks(cleaned_text, chunk_size)
+            chunks = self.chunk_text(cleaned_text, chunk_size)
             print(f"   Chunks: {len(chunks)} ({chunk_size} chars each)")
 
             # Generate audio for each chunk

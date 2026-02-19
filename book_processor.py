@@ -357,8 +357,8 @@ class BookProcessor:
             pattern = re.compile(pattern_regex, re.IGNORECASE)
 
             for i, line in enumerate(lines):
-                if i in chapter_lines and pattern_type != 'alice_style':
-                    continue  # Already identified as chapter (except alice_style can have multiple per line)
+                if i in chapter_lines:
+                    continue  # Already identified as chapter by a higher-priority pattern
 
                 line_stripped = line.strip()
                 # Strip "end chapter" artifacts from Gutenberg HTML conversion
@@ -367,6 +367,7 @@ class BookProcessor:
                     continue
 
                 # Special handling for alice_style - can have multiple matches on one line
+                # (e.g., "CHAPTER I.TitleCHAPTER II.Title" all on one line)
                 if pattern_type == 'alice_style':
                     # Use finditer to find all matches on the line
                     for match in pattern.finditer(line_stripped):
@@ -388,6 +389,16 @@ class BookProcessor:
                     # Normal pattern matching
                     match = pattern.match(line_stripped)
                     if match:
+                        # Post-match validation for numbered_list pattern
+                        if pattern_type == 'numbered_list':
+                            chapter_text = match.group(2).strip() if match.lastindex >= 2 else ''
+                            # Exclude TOC entries (markdown links)
+                            if re.search(r'\[.*?\]\(#', chapter_text):
+                                continue
+                            # Exclude short entries (likely list items, not chapters)
+                            if len(chapter_text) < 15:
+                                continue
+
                         chapter_lines.add(i)
 
                         # Calculate character position
@@ -498,6 +509,10 @@ class BookProcessor:
             return chapters  # No fixing needed
 
         # Renumber sequentially based on position
+        # Always print this warning regardless of verbose setting
+        print(f"  ⚠ WARNING: Chapter numbers are non-sequential, renumbering...")
+        print(f"    Original: {sorted(actual_numbers)}")
+        print(f"    Expected: 1 through {len(chapters)}")
         self.log_message("Fixing chapter numbering...")
         for i, chapter in enumerate(chapters):
             if chapter.number != i + 1:

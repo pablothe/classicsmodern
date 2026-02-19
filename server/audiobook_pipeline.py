@@ -610,18 +610,28 @@ class PipelineRunner:
 
         self.job.update(stage_progress={'message': f'Generating audio with voice {voice}...', 'command': ' '.join(cmd)})
 
+        # Build subprocess environment with explicit venv PATH
+        import os
+        sub_env = os.environ.copy()
+        venv_bin = Path(__file__).parent.parent / "venv" / "bin"
+        if venv_bin.exists():
+            sub_env['PATH'] = str(venv_bin) + ':' + sub_env.get('PATH', '')
+            sub_env['VIRTUAL_ENV'] = str(venv_bin.parent)
+
         process = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
-            bufsize=1
+            bufsize=1,
+            env=sub_env
         )
 
         # Capture ALL output for debugging
         all_output = []
 
         # Monitor progress
+        import re as re_module
         for line in iter(process.stdout.readline, ''):
             if self.cancelled:
                 process.kill()
@@ -634,15 +644,17 @@ class PipelineRunner:
             print(f"  [audio] {line.rstrip()}", flush=True)
 
             # Parse progress from make_audiobook.py output
-            # Look for patterns like "[20/100]" or "chunk 45/100" or "Progress: ... 20/100"
-            import re
-            match = re.search(r'(\d+)\s*/\s*(\d+)', line)
-            if match:
-                current = int(match.group(1))
-                total = int(match.group(2))
+            # Match specific formats: "[20/100]" or "Progress: ... 20/100" (not timestamps)
+            progress_match = re_module.search(
+                r'(?:\[|Progress:.*?)(\d+)\s*/\s*(\d+)(?:\]|\s|$)',
+                line
+            )
+            if progress_match:
+                current = int(progress_match.group(1))
+                total = int(progress_match.group(2))
 
-                # Only update progress if it's a reasonable chunk count (not timestamps or other numbers)
-                if 10 <= total <= 10000:  # Reasonable range for audio chunks
+                # Validate: current <= total and reasonable range for audio chunks
+                if 1 <= current <= total and 2 <= total <= 50000:
                     chunk_progress = int((current / total) * 100)
                     # Use dynamic progress range
                     progress_range = end_pct - start_pct
