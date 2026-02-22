@@ -7,13 +7,9 @@ for Karaoke, AI Chat, and Web Player features.
 """
 
 import pytest
-import sys
 from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-from book_validator import (
+from lib.book.validator import (
     validate_book,
     check_chapter_structure,
     check_text_quality,

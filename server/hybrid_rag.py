@@ -10,9 +10,9 @@ Architecture:
 
 from pathlib import Path
 from typing import Dict, List
-from improved_question_classifier import classify_question
-from semantic_retrieval import build_vector_store_for_book, VectorStore
-from llm_chat import BookTools
+from server.question_classifier import classify_question
+from server.semantic_retrieval import build_vector_store_for_book, VectorStore
+from server.llm_chat import BookTools
 
 
 class HybridRAG:

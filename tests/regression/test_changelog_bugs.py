@@ -11,34 +11,27 @@ Prevents regression of historical bugs documented in CHANGELOG.md:
 """
 
 import pytest
-import sys
 import re
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from tests.utils.mock_helpers import MockOllamaClient, create_sample_book
+from tests.utils.test_data_generators import TranslationChunkGenerator, GutenbergDataGenerator
 
-# Import test utilities
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.mock_helpers import MockOllamaClient, create_sample_book
-from utils.test_data_generators import TranslationChunkGenerator, GutenbergDataGenerator
-
-# Import actual modules
 try:
-    from local_reader_deduplicate import find_exact_overlap, deduplicate_chunks
+    from lib.translation.deduplicate import find_exact_overlap, deduplicate_chunks
     DEDUP_AVAILABLE = True
 except ImportError:
     DEDUP_AVAILABLE = False
 
 try:
-    from book_validator import validate_book
+    from lib.book.validator import validate_book
     VALIDATOR_AVAILABLE = True
 except ImportError:
     VALIDATOR_AVAILABLE = False
 
 try:
-    from local_tts_kokoro import KokoroAudioGenerator
+    from lib.audio.kokoro import KokoroAudioGenerator
     KOKORO_AVAILABLE = True
 except ImportError:
     KOKORO_AVAILABLE = False

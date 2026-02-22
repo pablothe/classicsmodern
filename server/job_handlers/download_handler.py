@@ -5,12 +5,8 @@ Download Handler - Gutenberg book download worker
 Wraps GutenbergDownloader for unified job queue.
 """
 
-import sys
 from pathlib import Path
 from typing import Dict, Callable
-
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from server.gutenberg_downloader import GutenbergDownloader
 

@@ -12,17 +12,13 @@ Features:
 
 import re
 import json
-import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 import ollama
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
 # Import hybrid RAG components
 try:
-    from improved_question_classifier import classify_question
+    from server.question_classifier import classify_question
     from server.semantic_retrieval import build_vector_store_for_book
     HYBRID_RAG_AVAILABLE = True
 except ImportError as e:

@@ -6,13 +6,9 @@ Tests the chapter detection functionality used across the codebase.
 """
 
 import pytest
-import sys
 from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-from book_preprocessor import ChapterDetector
+from lib.book.processor import BookProcessor
 
 
 class TestChapterDetector:
@@ -21,9 +17,9 @@ class TestChapterDetector:
     def test_detect_roman_numeral_chapters(self, chapter_patterns):
         """Test detection of Roman numeral chapter format"""
         text = "\n\n".join(chapter_patterns['roman_numerals'])
-        detector = ChapterDetector(text, "test.md")
+        detector = BookProcessor(verbose=False)
 
-        chapters = detector.detect_chapters_in_content()
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 3
         assert chapters[0]['number'] == 1
@@ -34,9 +30,9 @@ class TestChapterDetector:
     def test_detect_numbered_list_chapters(self, chapter_patterns):
         """Test detection of numbered list chapter format"""
         text = "\n\n".join(chapter_patterns['numbered_list'])
-        detector = ChapterDetector(text, "test.md")
+        detector = BookProcessor(verbose=False)
 
-        chapters = detector.detect_chapters_in_content()
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 3
         assert chapters[0]['number'] == 1
@@ -47,9 +43,9 @@ class TestChapterDetector:
     def test_detect_markdown_header_chapters(self, chapter_patterns):
         """Test detection of markdown header chapter format"""
         text = "\n\n".join(chapter_patterns['markdown_headers'])
-        detector = ChapterDetector(text, "test.md")
+        detector = BookProcessor(verbose=False)
 
-        chapters = detector.detect_chapters_in_content()
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 3
         assert chapters[0]['number'] == 1
@@ -59,9 +55,9 @@ class TestChapterDetector:
     def test_detect_mixed_chapter_formats(self, chapter_patterns):
         """Test detection with mixed chapter formats"""
         text = "\n\n".join(chapter_patterns['mixed_formats'])
-        detector = ChapterDetector(text, "test.md")
+        detector = BookProcessor(verbose=False)
 
-        chapters = detector.detect_chapters_in_content()
+        chapters = detector.detect_chapters(text)
 
         # Should detect all three despite different formats
         assert len(chapters) == 3
@@ -81,8 +77,9 @@ More content.
 
 Final content.
 """
-        detector = ChapterDetector(text, "test.md")
-        validation = detector.validate_chapter_sequence()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
+        validation = detector.validate_chapter_sequence(chapters)
 
         assert validation['valid'] is True
         assert len(validation['missing']) == 0
@@ -103,8 +100,9 @@ Skipped chapter 2!
 
 More content.
 """
-        detector = ChapterDetector(text, "test.md")
-        validation = detector.validate_chapter_sequence()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
+        validation = detector.validate_chapter_sequence(chapters)
 
         assert validation['valid'] is False
         assert 2 in validation['missing']
@@ -124,16 +122,17 @@ Content.
 
 Duplicate!
 """
-        detector = ChapterDetector(text, "test.md")
-        validation = detector.validate_chapter_sequence()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
+        validation = detector.validate_chapter_sequence(chapters)
 
         assert validation['valid'] is False
         assert 2 in validation['duplicates']
 
     def test_detect_table_of_contents(self, sample_book_content):
         """Test TOC detection in book"""
-        detector = ChapterDetector(sample_book_content, "test.md")
-        toc = detector.detect_toc()
+        detector = BookProcessor(verbose=False)
+        toc = detector.detect_toc(sample_book_content)
 
         assert len(toc) > 0
         # Should detect markdown link format
@@ -150,17 +149,17 @@ More content here.
 
 The end.
 """
-        detector = ChapterDetector(text, "test.md")
-        chapters = detector.detect_chapters_in_content()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 0
 
     def test_chapter_count_matches_toc(self, sample_book_content):
         """Test that chapter count matches TOC entries"""
-        detector = ChapterDetector(sample_book_content, "test.md")
+        detector = BookProcessor(verbose=False)
 
-        toc = detector.detect_toc()
-        chapters = detector.detect_chapters_in_content()
+        toc = detector.detect_toc(sample_book_content)
+        chapters = detector.detect_chapters(sample_book_content)
 
         # TOC and content should have same number of chapters
         assert len(toc) == len(chapters)
@@ -170,8 +169,8 @@ The end.
         with open(sample_book_clean, 'r') as f:
             text = f.read()
 
-        detector = ChapterDetector(text, "alice_sample.md")
-        chapters = detector.detect_chapters_in_content()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 3
         assert chapters[0]['number'] == 1
@@ -179,7 +178,7 @@ The end.
         assert chapters[2]['number'] == 3
 
         # Validate sequence
-        validation = detector.validate_chapter_sequence()
+        validation = detector.validate_chapter_sequence(chapters)
         assert validation['valid'] is True
 
 
@@ -201,8 +200,8 @@ Content.
 
 Content.
 """
-        detector = ChapterDetector(text, "test.md")
-        chapters = detector.detect_chapters_in_content()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 3
 
@@ -217,8 +216,8 @@ Content.
 
 Content.
 """
-        detector = ChapterDetector(text, "test.md")
-        chapters = detector.detect_chapters_in_content()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) >= 1  # Should detect at least the first one
 
@@ -233,8 +232,8 @@ Content with unicode.
 
 Japanese title.
 """
-        detector = ChapterDetector(text, "test.md")
-        chapters = detector.detect_chapters_in_content()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 2
         assert "Café" in chapters[0]['marker'] or "Caf" in chapters[0]['marker']
@@ -247,8 +246,8 @@ Japanese title.
 
 Content.
 """
-        detector = ChapterDetector(text, "test.md")
-        chapters = detector.detect_chapters_in_content()
+        detector = BookProcessor(verbose=False)
+        chapters = detector.detect_chapters(text)
 
         assert len(chapters) == 1
         assert len(chapters[0]['marker']) > 0

@@ -11,20 +11,13 @@ Tests:
 """
 
 import pytest
-import sys
 import json
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from tests.utils.mock_helpers import MockKokoroTTS, create_sample_book
+from tests.utils.test_data_generators import BookGenerator
 
-# Import test utilities
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.mock_helpers import MockKokoroTTS, create_sample_book
-from utils.test_data_generators import BookGenerator
-
-# Import actual module
 try:
     from make_audiobook import AudiobookMaker
     AUDIOBOOK_MAKER_AVAILABLE = True
@@ -157,7 +150,7 @@ class TestValidation:
     def test_validation_pass_continues_pipeline(self, mock_validate, valid_book_file):
         """Test that passing validation continues to audio generation."""
         # Mock validation to pass
-        from book_validator import ValidationReport
+        from lib.book.validator import ValidationReport
         mock_validate.return_value = ValidationReport(
             valid=True,
             file_path=str(valid_book_file),
@@ -197,7 +190,7 @@ class TestValidation:
     def test_validation_fail_interactive_abort(self, mock_input, mock_validate, invalid_book_file):
         """Test that validation failure in interactive mode can be aborted."""
         # Mock validation to fail
-        from book_validator import ValidationReport
+        from lib.book.validator import ValidationReport
         mock_validate.return_value = ValidationReport(
             valid=False,
             file_path=str(invalid_book_file),
@@ -224,7 +217,7 @@ class TestValidation:
     def test_validation_fail_noninteractive_exit(self, mock_validate, invalid_book_file):
         """Test that validation failure in non-interactive mode exits immediately."""
         # Mock validation to fail
-        from book_validator import ValidationReport
+        from lib.book.validator import ValidationReport
         mock_validate.return_value = ValidationReport(
             valid=False,
             file_path=str(invalid_book_file),

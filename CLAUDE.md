@@ -11,6 +11,24 @@ Technical reference for AI assistants working with this repository.
 - [GUIDE.md](GUIDE.md) - Complete user guide (read this for workflow details)
 - [CHANGELOG.md](CHANGELOG.md) - Test results and version history
 
+## AI Models Used
+
+All models run 100% locally. No cloud APIs, no API keys.
+
+| Model | Purpose | Runtime | Notes |
+|-------|---------|---------|-------|
+| **zongwei/gemma3-translator:4b** | Translation & summarization | Ollama | Primary translation model, ~16-20 words/sec |
+| **zongwei/gemma3-translator:1b** | Translation (lightweight) | Ollama | Faster alternative, lower quality |
+| **llama3.2:3b** | AI chat / Q&A about books | Ollama | Used by web player's chat feature |
+| **Kokoro v1.0** | Text-to-speech (52 voices) | ONNX Runtime | Apache 2.0, ~335MB, auto-downloaded |
+| **Stable Diffusion v1.5** | Cover art generation | PyTorch (MPS/CUDA/CPU) | runwayml/stable-diffusion-v1-5 |
+| **all-MiniLM-L6-v2** | Semantic embeddings (RAG) | sentence-transformers | Used by AI chat for context retrieval |
+| **WhisperX base** | Word-level timing (Karaoke) | PyTorch | Optional, for karaoke text sync |
+
+**Required services:**
+- **Ollama** must be running locally (`ollama serve`) for translation, summarization, and AI chat
+- All other models are loaded directly (no server needed)
+
 ## Environment Setup
 
 **IMPORTANT: This project requires a Python virtual environment (venv) to work correctly.**
@@ -57,7 +75,7 @@ After initial setup, the entire system works offline:
 python3 server/audiobook_server.py
 ```
 
-## Quick Start - ONE COMMAND WORKFLOW ⭐
+## Quick Start - ONE COMMAND WORKFLOW
 
 **For most use cases, use the unified audiobook maker:**
 
@@ -94,39 +112,44 @@ python3 make_audiobook.py INPUT.md --summarize 50 --generate-cover
 # Total: 52 voices (af_*, am_*, bf_*, bm_*)
 ```
 
-**Requirements:**
-```bash
-pip install kokoro-tts kokoro-onnx soundfile
-brew install ffmpeg  # macOS
-```
-
 ---
+
+## CLI Scripts
+
+Six thin CLI wrappers at the project root, each importing from `lib/`:
+
+| Script | Purpose | Example |
+|--------|---------|---------|
+| `make_audiobook.py` | Full pipeline (validate + translate + audio + cover) | `python3 make_audiobook.py book.md --generate-cover` |
+| `translate.py` | Translate a book (Ollama, local) | `python3 translate.py book.md --source-lang Latin --target-lang English` |
+| `audiobook.py` | Generate audiobook (Kokoro TTS) | `python3 audiobook.py translated.md --voice bf_emma` |
+| `summarize.py` | Summarize a book (Ollama, local) | `python3 summarize.py book.md 50` |
+| `cover.py` | Generate cover art (Stable Diffusion) | `python3 cover.py "fantasy scene" --output cover.png` |
+| `validate.py` | Validate book structure | `python3 validate.py book.md --auto-fix` |
 
 ## Advanced Workflows
 
-### Book Validation (RECOMMENDED - for feature readiness)
-
-**New unified validation tool for Karaoke and AI features:**
+### Book Validation
 
 ```bash
 # Validate book for all features
-python3 book_validator.py books/mybook/book.md
+python3 validate.py books/mybook/book.md
 
 # Auto-fix common issues (Gutenberg boilerplate, missing TOC)
-python3 book_validator.py books/mybook/book.md --auto-fix
+python3 validate.py books/mybook/book.md --auto-fix
 
 # Require specific features
-python3 book_validator.py books/mybook/book.md --require karaoke,ai_chat
+python3 validate.py books/mybook/book.md --require karaoke,ai_chat
 
 # JSON output for scripting
-python3 book_validator.py books/mybook/book.md --json
+python3 validate.py books/mybook/book.md --json
 ```
 
 **What it validates:**
-- ✅ **Chapter structure** - TOC, sequential chapters, no gaps
-- ✅ **Text quality** - No Gutenberg boilerplate, minimum length
-- ✅ **Metadata** - Title, author detection
-- ✅ **Feature readiness** - Karaoke, AI chat, web player support
+- Chapter structure - TOC, sequential chapters, no gaps
+- Text quality - No Gutenberg boilerplate, minimum length
+- Metadata - Title, author detection
+- Feature readiness - Karaoke, AI chat, web player support
 
 **Feature requirements:**
 - **Karaoke Mode** - Requires: clean text + chapters
@@ -138,38 +161,11 @@ python3 book_validator.py books/mybook/book.md --json
 - Generate missing table of contents
 - Suggest metadata additions
 
-**Output example:**
-```
-✅ VALID
-Feature support: 3/3 features ready
-  ✅ Karaoke
-  ✅ Ai_Chat
-  ✅ Web_Player
-```
-
-**Integration with processing scripts:**
-- `book_summarizer.py` - Auto-validates output after summarization
-- `local_tts_kokoro.py` - Pre-flight validation before audio generation
-- Both scripts show feature readiness and suggest fixes
-
-**Use cases:**
-1. **Before translation**: Ensure source book is complete
-2. **After summarization**: Validate chapters preserved
-3. **Before audio generation**: Confirm Karaoke/AI support
-4. **CI/CD**: Automated quality gates
-
-**Legacy tool (still available):**
-```bash
-# Old preprocessing tool (basic chapter detection only)
-python3 book_preprocessor.py books/mybook/book.md
-```
-
 ### Text Translation
 
-**NEW: Structured Translator (RECOMMENDED - Preserves Chapter Structure):**
 ```bash
-# Validate and translate in one workflow (guaranteed complete)
-python3 structured_translator.py books/mybook/book.md \
+# Translate a book (structured, chapter-preserving)
+python3 translate.py books/mybook/book.md \
   --source-lang Latin \
   --target-lang "Modern English" \
   --model ollama:zongwei/gemma3-translator:4b
@@ -180,129 +176,49 @@ python3 structured_translator.py books/mybook/book.md \
 # 3. TRANSLATES content ONLY (preserves chapter markers)
 # 4. ASSEMBLES clean output (auto-generates TOC)
 # Result: All chapters present, structure preserved
-
-# Available models (all local via Ollama):
-# - ollama:zongwei/gemma3-translator:4b (recommended, accurate)
 ```
 
-**Why Structured Translator?**
-- ✅ Pre-validates before translation (no wasted time)
-- ✅ Translates chapter-by-chapter (progress tracking)
-- ✅ Preserves structure (markers never corrupted)
-- ✅ Guaranteed completeness (all chapters or fail)
-- ✅ Auto-generates clean TOC from markers
+### Text Summarization
 
----
-
-**For batch/chunks (local Ollama - for large books):**
-```bash
-# Split book into chunks first
-python3 local_reader_smart_splitter.py books/crime_punishment/book.md
-
-# Translate entire directory with automatic deduplication
-python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
-
-# This will:
-# 1. Translate with context awareness (prevents duplicates)
-# 2. Auto-run deduplication as failsafe
-# 3. Create clean files in translated/deduplicated/
-```
-
-### Text Summarization (NEW!)
-
-**Standalone summarization (for already-translated files):**
 ```bash
 # 50% summary (auto uses 2000-word chunks)
-python3 book_summarizer.py books/mybook/translated.md 50
+python3 summarize.py books/mybook/translated.md 50
 
 # 10% summary / 90% compression (auto uses 5000-word chunks)
-python3 book_summarizer.py books/mybook/translated.md 10
+python3 summarize.py books/mybook/translated.md 10
 
 # Custom chunk size (override auto-calculation)
-python3 book_summarizer.py books/mybook/translated.md 30 1500
+python3 summarize.py books/mybook/translated.md 30 1500
 ```
-
-**What it does:**
-- Uses same Ollama LLM as translation (gemma3-translator:4b)
-- Auto-scales chunk size based on compression ratio (more compression = larger chunks for better context)
-- Preserves Markdown structure (headers, lists, etc.)
-- Context-aware (each chunk knows what came before)
-- Output: `*_summarized_[percentage]pct.md`
 
 **Auto-scaling chunk sizes:**
-- 10% target (90% compression) → 5000 words/chunk (~10 pages)
-- 20% target (80% compression) → 4000 words/chunk (~8 pages)
-- 30% target (70% compression) → 3000 words/chunk (~6 pages)
-- 50% target (50% compression) → 2000 words/chunk (~4 pages)
-- 70%+ target (light compression) → 1000 words/chunk (~2 pages)
+- 10% target (90% compression) -> 5000 words/chunk (~10 pages)
+- 20% target (80% compression) -> 4000 words/chunk (~8 pages)
+- 30% target (70% compression) -> 3000 words/chunk (~6 pages)
+- 50% target (50% compression) -> 2000 words/chunk (~4 pages)
+- 70%+ target (light compression) -> 1000 words/chunk (~2 pages)
 
-**Then generate audio:**
-```bash
-python3 make_audiobook.py books/mybook/translated_summarized_50pct.md --voice bf_emma --generate-cover
-```
+### Cover Art Generation
 
-### Cover Art Generation (NEW!)
-
-**Modular design: Two separate scripts for flexibility**
-
-**1. generate.py** - Core image generator (does ONE thing: text → image)
 ```bash
 # Generate cover from any prompt
-python3 generate.py "whimsical Alice in Wonderland scene, fantasy illustration" --output alice.png
+python3 cover.py "whimsical Alice in Wonderland scene, fantasy illustration" --output alice.png
 
 # Custom size and quality
-python3 generate.py "dark Victorian mystery" --output cover.png --width 512 --height 768 --steps 50
-```
-
-**2. book_prompts.py** - Book-specific prompt generator (optional helper)
-```bash
-# Get prompt for known book
-python3 book_prompts.py "Alice in Wonderland"
-# Output: "Book cover art, whimsical dreamlike scene, surreal fantasy forest..."
-
-# Use in pipeline
-python3 generate.py "$(python3 book_prompts.py 'Moby Dick')" --output moby.png
-```
-
-**Integrated workflow (automatic with audiobook generation):**
-```bash
-# Add --generate-cover flag to make_audiobook.py or local_tts_kokoro.py
-python3 make_audiobook.py translated.md --voice bf_emma --generate-cover
-```
-
-**What it does:**
-- **generate.py**: Pure function (prompt → PNG), no hardcoded book logic
-- **book_prompts.py**: Optional catalog of 16+ book styles
-- Modular: Swap out prompt generator, use custom prompts, or add your own
-- Uses Stable Diffusion v1.5 (local, free)
-- Runs on Apple Silicon GPU (MPS), CUDA, or CPU
-- Generates 512x512 PNG images (customizable)
-
-**Requirements:**
-```bash
-pip install diffusers torch transformers accelerate
+python3 cover.py "dark Victorian mystery" --output cover.png --width 512 --height 768 --steps 50
 ```
 
 ### Audio Generation
 
-**IMPORTANT: This project uses Kokoro TTS ONLY. Legacy TTS scripts (Edge, XTTS, Orpheus) are deprecated and archived in `legacy_tts/`.**
-
-**Local TTS - Kokoro (ONLY SUPPORTED SYSTEM):**
 ```bash
 # Use the unified audiobook maker (recommended)
 python3 make_audiobook.py books/mybook/book.md --voice bf_emma --generate-cover
 
-# Or use Kokoro directly
-python3 local_tts_kokoro.py translated.md --voice bf_emma
-
-# British female voice (great for classics)
-python3 local_tts_kokoro.py translated.md --voice bf_emma
-
-# British male voice with cover art
-python3 local_tts_kokoro.py translated.md --voice bm_george --generate-cover
+# Or use audiobook.py directly
+python3 audiobook.py translated.md --voice bf_emma
 
 # Custom speed
-python3 local_tts_kokoro.py translated.md --speed 1.15
+python3 audiobook.py translated.md --speed 1.15
 
 # Top voices:
 # - af_sky (American Female - Sky, DEFAULT)
@@ -313,41 +229,8 @@ python3 local_tts_kokoro.py translated.md --speed 1.15
 # Total: 52 voices available (af_*, am_*, bf_*, bm_*, etc.)
 ```
 
-**Why Kokoro Only?**
-- Apache 2.0 license (commercial-friendly, unlike XTTS-v2)
-- 31× faster than alternatives (6.5s vs 203s per passage for Bark)
-- 100% local inference via ONNX Runtime (no API calls, unlike Edge-TTS)
-- Quality rivals commercial APIs (superior to Edge/XTTS)
-- 52 preset voices (American, British, male/female) - no voice cloning needed
-- Apple Silicon GPU acceleration (MPS) - no NVIDIA GPU required
-- Requires: `pip install kokoro-tts kokoro-onnx soundfile`
-- Models: Auto-downloaded to ~/.cache/kokoro/ (~335MB, one-time)
-
-**Virtual Environment Setup:**
-```bash
-# Create virtual environment with Python 3.11+ (tested with 3.11, 3.13)
-python3 -m venv venv
-source venv/bin/activate  # macOS/Linux
-venv\Scripts\activate     # Windows
-
-# Install dependencies
-pip install kokoro-tts kokoro-onnx soundfile
-pip install -r requirements.txt
-brew install ffmpeg  # macOS
-```
-
-**Legacy TTS Systems (DEPRECATED - See `legacy_tts/README.md`):**
-- ~~Edge-TTS~~ - Requires Microsoft API (not truly local), inferior quality
-- ~~XTTS-v2~~ - Non-commercial license (AGPL), slow, 250-char limit
-- ~~Orpheus~~ - Requires NVIDIA GPU (incompatible with Apple Silicon)
-
-**These scripts are archived in `legacy_tts/` and should NOT be used for new audiobooks.**
-
-**See [GUIDE.md](GUIDE.md) for complete audio generation workflow.**
-
 ### Web Server & Mobile Access
 
-**Starting the Server:**
 ```bash
 # ALWAYS use the startup script (handles venv activation)
 ./start_server.sh
@@ -376,161 +259,129 @@ POST /api/jobs/audiobook           # Generate audiobook
 
 ## Architecture
 
-### Book Manifest System (NEW - February 2026)
-The project now uses a unified manifest system for consistent chapter handling:
+### Project Structure
 
-- **`book_processor.py`** - Single source of truth for book structure
+```
+classicsmodern/
+├── make_audiobook.py          # CLI: Full pipeline
+├── translate.py               # CLI: Translation
+├── audiobook.py               # CLI: Audio generation
+├── summarize.py               # CLI: Summarization
+├── cover.py                   # CLI: Cover art
+├── validate.py                # CLI: Book validation
+├── start_server.sh            # Server startup
+├── requirements.txt
+│
+├── lib/                       # Core library package
+│   ├── config.py              # Configuration (models, paths)
+│   ├── utils.py               # Shared utilities
+│   ├── book/
+│   │   ├── processor.py       # BookProcessor (chapter detection, TOC, Gutenberg stripping)
+│   │   ├── manifest.py        # ManifestManager (checkpoints, resume)
+│   │   ├── validator.py       # Book validation (structure, features)
+│   │   ├── metadata.py        # Metadata extraction
+│   │   ├── catalog.py         # Book catalog for server
+│   │   └── normalizer.py      # Markdown normalization
+│   ├── translation/
+│   │   ├── engine.py          # OllamaTranslator (core translation)
+│   │   ├── structured.py      # Structure-preserving translation
+│   │   ├── splitter.py        # Smart text splitting
+│   │   └── deduplicate.py     # Chunk deduplication
+│   ├── audio/
+│   │   ├── kokoro.py          # KokoroAudioGenerator (TTS)
+│   │   ├── preprocessor.py    # Audio text preprocessing
+│   │   ├── word_timings.py    # Word-level timing (Karaoke)
+│   │   └── chapter_metadata.py # Chapter metadata generation
+│   ├── cover/
+│   │   ├── generator.py       # Stable Diffusion cover generation
+│   │   └── prompts.py         # Book-specific prompt catalog
+│   └── summarize/
+│       └── engine.py          # BookSummarizer (LLM summarization)
+│
+├── server/                    # Web server (FastAPI)
+│   ├── audiobook_server.py    # Main server
+│   ├── pipeline.py            # Audiobook pipeline
+│   ├── job_queue.py           # Background job queue
+│   ├── job_database.py        # SQLite job persistence
+│   ├── job_handlers/          # Job processing handlers
+│   ├── llm_chat.py            # AI chat (Ollama)
+│   ├── hybrid_rag.py          # RAG retrieval
+│   ├── question_classifier.py # Question classification
+│   ├── semantic_retrieval.py  # Embedding search
+│   └── gutenberg_*.py         # Gutenberg download/catalog
+│
+├── templates/                 # HTML templates
+├── books/                     # Book data
+└── tests/                     # Test suite
+```
+
+### Book Manifest System
+
+The project uses a unified manifest system for consistent chapter handling:
+
+- **`lib/book/processor.py`** - Single source of truth for book structure
   - Detects chapters using 14+ patterns (Roman numerals, markdown headers, numbered lists, etc.)
   - Strips Gutenberg boilerplate automatically
   - Generates table of contents when missing
   - Creates JSON manifest with all metadata and checkpoints
-  - Handles edge cases like Alice in Wonderland (all chapters on one line)
 
-- **`book_manifest.json`** - Human-readable structure containing:
+- **`book_manifest.json`** - Per-book structure file:
   ```json
   {
-    "chapters": [...],           // All chapters with content
-    "checkpoints": {              // Per-chapter progress tracking
-      "translation": {...},
-      "audio": {...}
-    },
-    "metadata": {...},            // Title, author, language
-    "toc_markdown": "..."         // Generated table of contents
+    "chapters": [...],
+    "checkpoints": { "translation": {...}, "audio": {...} },
+    "metadata": { "title": "...", "author": "...", "language": "..." },
+    "toc_markdown": "..."
   }
   ```
 
-- **Manifest-Based Pipeline**:
-  - `structured_translator_v2.py` - Uses manifest chapters for translation
-  - `local_tts_kokoro_v2.py` - Uses manifest for audio boundaries
-  - `manifest_utils.py` - Shared utilities for checkpoint management
-  - Perfect chapter alignment across all processes
-  - Resume from exact chapter after interruption
-
-- **Usage**:
-  ```bash
-  # Generate manifest (one time)
-  python3 book_processor.py books/mybook/book.md
-
-  # Use manifest for translation
-  python3 structured_translator_v2.py books/mybook/book_manifest.json --target-lang Spanish
-
-  # Use manifest for audio
-  python3 local_tts_kokoro_v2.py books/mybook/book_manifest.json --voice bf_emma
-  ```
-
-### Web Server & Job Queue System
-- **FastAPI Server**: Full-featured audiobook server with web dashboard (`server/audiobook_server.py`)
-  - REST API for book catalog and metadata
-  - Audio streaming with HTTP range requests
-  - Device-specific playback position tracking
-  - Auto-discovery of books in `books/` directory
-  - CORS enabled for mobile access
-- **Unified Job Queue**: Background job processing system (`server/job_queue.py`)
-  - Download books from Project Gutenberg catalog
-  - Translate books with real-time progress tracking
-  - Generate audiobooks with pipeline integration
-  - SQLite database for job persistence (`jobs.db`)
-  - Web dashboard at `/jobs` for monitoring
-- **AI Chat Integration**: LLM-powered Q&A about book content
-  - Hybrid RAG system for context retrieval
-  - Semantic search with embeddings
-  - Question classification for targeted responses
-
 ### Translation System
-- **Local Model**: Uses zongwei/gemma3-translator:4b via Ollama (100% local, no API keys)
-- **Smart Chunking**: Respects Markdown structure, ~10k words per chunk (updated from ~250 for better context)
-- **Structure Preservation**: Maintains headers, links, tables, and formatting through translation
-- **Context-Aware Translation**: Each chunk receives context from previous chunk to prevent duplicates
+- **Model**: zongwei/gemma3-translator:4b via Ollama (100% local)
+- **Smart Chunking**: Respects Markdown structure, ~10k words per chunk
+- **Structure Preservation**: Maintains headers, links, tables, and formatting
+- **Context-Aware Translation**: Each chunk receives context from previous chunk
 - **Two-Layer Deduplication**:
-  - **Layer 1 (LLM Context)**: Translator receives previous chunk's ending as "reference only" to prevent repeating it
-  - **Layer 2 (Exact Match)**: Automatic failsafe deduplication catches any duplicates that slip through
-  - **Result**: Clean audio with zero repetition at chunk boundaries
-- **Auto-Organization**: Automatically places outputs in appropriate `books/[book_name]/` directories
+  - Layer 1 (LLM Context): Previous chunk ending as "reference only"
+  - Layer 2 (Exact Match): Automatic failsafe catches remaining duplicates
 
-### Summarization System (NEW!)
-- **LLM-Powered**: Uses same Ollama model as translation (gemma3-translator:4b)
-- **Adaptive Chunking**: Auto-scales chunk size based on compression ratio
-  - More aggressive compression → larger chunks (more context needed)
-  - Light compression → smaller chunks (less context needed)
-- **Context-Aware**: Each chunk receives context from previous summary to maintain narrative flow
-- **Structure Preservation**: Maintains Markdown headers, lists, formatting
-- **Compression Range**: 10%-90% (target percentage of original length)
-- **Use Cases**:
-  - Create condensed audiobooks from long classics
-  - Generate executive summaries
-  - Reduce listening time while preserving key themes
-
-### Cover Art Generation System (NEW!)
-- **Model**: Stable Diffusion v1.5 (runwayml/stable-diffusion-v1-5)
-- **Hardware Acceleration**: Apple Silicon GPU (MPS) or fallback to CPU
-- **Output**: 512x512 PNG images
-- **Customization**:
-  - Custom prompts for specific artistic styles
-  - Adjustable guidance scale (7.5 default)
-  - Book-aware prompt generation from content
-- **Use Cases**:
-  - Generate audiobook cover art
-  - Create promotional imagery
-  - Visualize scenes from classic literature
-
-### Audio Generation System
-
-**Local TTS - Kokoro (ONLY SUPPORTED SYSTEM):**
-- **Model**: Kokoro TTS with ONNX Runtime
+### Audio System
+- **Model**: Kokoro v1.0 via ONNX Runtime
 - **Quality**: Superior to Edge-TTS/XTTS, rivals commercial APIs
-- **Performance**: 31× faster than alternatives (6.5s vs 203s per passage)
-- **Features**:
-  - 52 preset voices (American/British, male/female)
-  - Apple Silicon GPU acceleration (MPS)
-  - 100% local inference (no API calls)
-  - Apache 2.0 license (commercial-friendly)
-  - Automatic chapter detection and combining
-  - FFmpeg post-processing (normalization, MP3)
-- **Chapter Detection Architecture** (Fixed Feb 2026):
-  - Detects chapters from raw markdown BEFORE text cleaning
-  - Preserves TOC structure and chapter markers
-  - Sequential file naming (chapter_01.mp3, chapter_02.mp3)
-  - Maps chapter positions accurately to clean text
-- **Usage**: `python3 local_tts_kokoro.py translated.md --voice bf_emma`
+- **Performance**: 31x faster than alternatives
+- **Features**: 52 voices, Apple Silicon GPU (MPS), Apache 2.0 license
+- **Chapter Detection**: Detects from raw markdown before text cleaning
+
+### Summarization System
+- **Model**: zongwei/gemma3-translator:4b via Ollama (same as translation)
+- **Adaptive Chunking**: Auto-scales chunk size based on compression ratio
+- **Context-Aware**: Each chunk receives context from previous summary
+
+### Cover Art System
+- **Model**: Stable Diffusion v1.5 (runwayml/stable-diffusion-v1-5)
+- **Hardware**: Apple Silicon GPU (MPS) or CPU fallback
+- **Output**: 512x512 PNG, customizable
 
 ### File Organization Pattern
 ```
 books/
 ├── [book_name]/
-│   ├── book.md                                 # Original/source text
-│   ├── book_manifest.json                     # NEW: Unified structure (chapters, checkpoints)
-│   ├── metadata.json                           # Legacy metadata (being replaced by manifest)
-│   ├── cover.png                               # Generated cover art
-│   ├── audio_kokoro/                           # PRIMARY audio output (Kokoro TTS)
-│   │   ├── raw/                               # Unprocessed WAV chunks
-│   │   │   └── [book]_chunk001_raw.wav
-│   │   ├── chapter_01.mp3                     # Chapter-based files (processed)
-│   │   ├── chapter_02.mp3
-│   │   ├── audiobook.m3u                      # Master playlist
-│   │   └── metadata.json                      # Audio metadata
-│   ├── chunks/                                 # Split for large books (batch translation)
+│   ├── book.md                    # Original/source text
+│   ├── book_manifest.json         # Unified structure (chapters, checkpoints)
+│   ├── cover.png                  # Generated cover art
+│   ├── audio_kokoro/              # Audio output (Kokoro TTS)
+│   │   ├── raw/                   # Unprocessed WAV chunks
+│   │   ├── chapter_01.mp3         # Chapter-based files (processed)
+│   │   ├── audiobook.m3u          # Master playlist
+│   │   └── metadata.json          # Audio metadata
+│   ├── chunks/                    # Split for large books (batch translation)
 │   │   ├── chunk_001.md
-│   │   ├── chunk_002.md
 │   │   └── translated/
-│   │       ├── chunk_001_[language]_4b.md     # Raw translations
-│   │       └── deduplicated/                  # Clean, no overlaps
-│   │           └── chunk_001_DEDUPED.md       # Use for audio generation
-│   ├── [book]_[language]_[date]_[model].md    # Single-file translations
-│   ├── [book]_summarized_50pct.md             # Summarized versions
-│   └── legacy_audio/                          # Old TTS outputs (deprecated)
-│       ├── audio_xtts/                        # XTTS voice cloning
-│       └── audio_orpheus/                     # Orpheus TTS
+│   │       └── deduplicated/      # Clean, no overlaps
+│   ├── [book]_[language]_[date]_[model].md   # Single-file translations
+│   └── [book]_summarized_50pct.md             # Summarized versions
 ```
 
 ## Technical Details
-
-### Model-Specific Handling
-- **Local (Ollama)**: gemma3-translator:4b, ~16-20 words/sec
-
-### File Naming Conventions
-- Translations: `[book]_[language]_[YYYYMMDD]_[model].md`
-- Audio: `[book]_part[XXX]_[voice]_[timestamp].[format]`
-- Deduplicated: `chunk_XXX_DEDUPED.md`
 
 ### Anti-Duplication System
 **Problem:** 20-word overlap causes duplicate audio
@@ -540,3 +391,8 @@ books/
 2. Layer 2 (Exact Match): Automatic cleanup of any duplicates
 
 **Result:** Zero repetition at boundaries (validated in [CHANGELOG.md](CHANGELOG.md))
+
+### File Naming Conventions
+- Translations: `[book]_[language]_[YYYYMMDD]_[model].md`
+- Audio: `chapter_[XX].mp3`
+- Deduplicated: `chunk_XXX_DEDUPED.md`

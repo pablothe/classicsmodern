@@ -27,14 +27,9 @@ from datetime import datetime
 from typing import Dict, Optional, List
 from enum import Enum
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
 from server.language_detector import detect_language
-from local_reader_translation import OllamaTranslator
-
-# Import structured translator (NEW)
-from structured_translator import (
+from lib.translation.engine import OllamaTranslator
+from lib.translation.structured import (
     BookParser,
     StructureValidator,
     BlockTranslator,
@@ -731,10 +726,10 @@ class PipelineRunner:
         audio_dir = Path(audio_result['output_directory'])
         cover_path = audio_dir / f"{self.job.book_id}_cover.png"
 
-        # Check if generate.py exists
-        generate_script = Path(__file__).parent.parent / "generate.py"
-        if not generate_script.exists():
-            self.job.update(progress=int(end_pct), stage_progress={'message': 'Cover generation skipped (generate.py not found)'})
+        # Check if cover.py exists
+        cover_script = Path(__file__).parent.parent / "cover.py"
+        if not cover_script.exists():
+            self.job.update(progress=int(end_pct), stage_progress={'message': 'Cover generation skipped (cover.py not found)'})
             return
 
         # Generate cover
@@ -742,7 +737,7 @@ class PipelineRunner:
 
         cmd = [
             sys.executable,
-            str(generate_script),
+            str(cover_script),
             prompt,
             '--output', str(cover_path)
         ]

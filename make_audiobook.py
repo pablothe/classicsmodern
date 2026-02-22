@@ -5,22 +5,9 @@ Make Audiobook - Unified One-Command Audiobook Generator
 Single script to transform any book into a complete audiobook with cover art.
 
 Usage:
-    # Basic usage (English book, auto-detect everything)
     python3 make_audiobook.py books/alice_adventures/alices_adventures.md
-
-    # With options
     python3 make_audiobook.py INPUT.md --voice bf_emma --generate-cover
-
-    # With summarization
     python3 make_audiobook.py INPUT.md --summarize 50
-
-Features:
-- Automatic Gutenberg boilerplate stripping
-- Chapter detection (Roman numerals, numbered lists, markdown headers)
-- High-quality audio with Kokoro TTS (52 voices, commercial-friendly)
-- Optional cover art generation
-- Automatic server registration for web playback
-- Resumable (saves progress at each stage)
 """
 
 import sys
@@ -30,27 +17,14 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict
 
-# Import existing components
-try:
-    from local_tts_kokoro import KokoroAudioGenerator
-except ImportError as e:
-    print("❌ ERROR: Could not import KokoroAudioGenerator")
-    print(f"   Import error: {e}")
-    print("\n   Make sure you have installed Kokoro TTS:")
-    print("   pip install kokoro-tts kokoro-onnx soundfile")
-    print("\n   (The Kokoro models in ~/.cache/kokoro/ will be used automatically)")
-    sys.exit(1)
-
-# Import book validator
-try:
-    from book_validator import validate_book
-except ImportError as e:
-    print("⚠️  Warning: book_validator not available")
-    validate_book = None
+from lib.audio.kokoro import KokoroAudioGenerator
+from lib.book.validator import validate_book
+from lib.book.processor import BookProcessor
+from lib.cover.prompts import get_book_prompt
 
 
 class AudiobookMaker:
-    """Unified audiobook creation pipeline"""
+    """Unified audiobook creation pipeline."""
 
     def __init__(
         self,
@@ -67,23 +41,6 @@ class AudiobookMaker:
         generate_word_timings: bool = True,
         non_interactive: bool = False
     ):
-        """
-        Initialize audiobook maker.
-
-        Args:
-            input_file: Path to book markdown file
-            voice: Voice ID (default: bf_emma - British female, great for classics)
-            language: Language code (default: en-us)
-            chunk_size: Characters per audio chunk (default: 800)
-            speed: Playback speed multiplier (default: 1.0)
-            normalize: Whether to normalize loudness (default: True)
-            to_mp3: Whether to convert to MP3 (default: True)
-            generate_cover: Whether to generate cover art (default: False)
-            summarize_percentage: Optional summarization target % (e.g., 50)
-            output_dir: Custom output directory (default: auto-organized)
-            generate_word_timings: Whether to generate word timings for karaoke (default: True)
-            non_interactive: Skip validation prompts (fail fast for automation) (default: False)
-        """
         self.input_file = Path(input_file)
         self.voice = voice
         self.language = language
@@ -100,14 +57,12 @@ class AudiobookMaker:
         if not self.input_file.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
 
-        # Create state file for resumability
         self.state_file = self.input_file.parent / f".audiobook_state_{self.input_file.stem}.json"
 
-        # Initialize or load state
         if self.state_file.exists():
             with open(self.state_file, 'r') as f:
                 self.state = json.load(f)
-            print(f"📌 Resuming previous run from: {self.state.get('stage', 'unknown')}")
+            print(f"Resuming previous run from: {self.state.get('stage', 'unknown')}")
         else:
             self.state = {
                 'started_at': datetime.now().isoformat(),
@@ -119,131 +74,55 @@ class AudiobookMaker:
             self._save_state()
 
     def _save_state(self):
-        """Save current state to disk"""
         with open(self.state_file, 'w') as f:
             json.dump(self.state, f, indent=2)
 
     def _generate_cover_art(self, book_title: str) -> Optional[Path]:
-        """
-        Generate cover art for the audiobook.
-        Checks for existing cover first and only generates if missing.
+        """Generate cover art, checking for existing cover first."""
+        print("\nCover art check...")
 
-        Args:
-            book_title: Title of the book for cover generation
-
-        Returns:
-            Path to cover image (existing or newly generated), or None if failed
-        """
-        print("\n🎨 Cover art check...")
-
-        # Check for existing cover in book directory FIRST
         book_dir_cover = self.input_file.parent / "cover.png"
         if book_dir_cover.exists():
-            print(f"✓ Using existing cover: {book_dir_cover.name}")
+            print(f"  Using existing cover: {book_dir_cover.name}")
             return book_dir_cover
 
-        print("No existing cover found, generating new watercolor cover...")
+        print("  No existing cover found, generating new cover...")
 
         try:
-            # Check if generate.py exists
-            generate_script = Path(__file__).parent / "generate.py"
-            if not generate_script.exists():
-                print("⚠️  generate.py not found, skipping cover art")
-                return None
-
-            # Check if book_prompts.py exists for watercolor prompts
-            book_prompts_script = Path(__file__).parent / "book_prompts.py"
-            if not book_prompts_script.exists():
-                print("⚠️  book_prompts.py not found, using generic prompt")
-                prompt = f"watercolor illustration, Book cover art for '{book_title}', classic literature style, elegant typography, vintage aesthetic, professional book cover"
-            else:
-                # Use watercolor prompt from book_prompts.py
-                try:
-                    from book_prompts import get_book_prompt
-                    prompt = get_book_prompt(str(self.input_file))
-                except ImportError:
-                    prompt = f"watercolor illustration, Book cover art for '{book_title}', classic literature style, elegant typography, vintage aesthetic, professional book cover"
-
-            # Save to book directory (not audio directory)
+            prompt = get_book_prompt(str(self.input_file))
             cover_path = self.input_file.parent / "cover.png"
 
-            # Call generate.py
-            import subprocess
-            cmd = [
-                sys.executable,
-                str(generate_script),
-                prompt,
-                '--output', str(cover_path)
-            ]
+            from lib.cover.generator import generate_image
+            generate_image(
+                prompt=prompt,
+                output_path=str(cover_path),
+                width=512,
+                height=512
+            )
 
-            result = subprocess.run(cmd, capture_output=True, text=True)
-
-            if result.returncode == 0:
-                print(f"✓ Cover art generated: {cover_path.name}")
-                return cover_path
-            else:
-                print(f"⚠️  Cover generation failed: {result.stderr}")
-                return None
+            print(f"  Cover art generated: {cover_path.name}")
+            return cover_path
 
         except Exception as e:
-            print(f"⚠️  Cover generation error: {e}")
+            print(f"  Cover generation error: {e}")
             return None
 
     def _generate_chapter_metadata(self, audio_dir: Path, playlist_path: str) -> bool:
-        """
-        Generate chapter metadata JSON for web player navigation.
-
-        Args:
-            audio_dir: Directory containing audio files
-            playlist_path: Path to the master playlist file
-
-        Returns:
-            True if successful, False otherwise
-        """
+        """Generate chapter metadata JSON for web player navigation."""
         try:
-            # Import the chapter metadata generator
-            import subprocess
-            generate_script = Path(__file__).parent / "generate_chapter_metadata.py"
-
-            if not generate_script.exists():
-                print("⚠️  generate_chapter_metadata.py not found, skipping chapter metadata")
-                return False
-
-            # Run the chapter metadata generator
-            cmd = [
-                sys.executable,
-                str(generate_script),
-                playlist_path
-            ]
-
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-
-            if result.returncode == 0:
-                print(f"✓ Chapter metadata generated")
-                return True
-            else:
-                print(f"⚠️  Chapter metadata generation failed: {result.stderr}")
-                return False
-
+            from lib.audio.chapter_metadata import generate_chapter_metadata
+            generate_chapter_metadata(playlist_path)
+            print("  Chapter metadata generated")
+            return True
         except Exception as e:
-            print(f"⚠️  Chapter metadata generation error: {e}")
+            print(f"  Chapter metadata generation error: {e}")
             return False
 
     def _register_with_server(self, audio_dir: Path, cover_path: Optional[Path]):
-        """
-        Register audiobook with local server for web playback.
-
-        Args:
-            audio_dir: Directory containing audio files
-            cover_path: Optional path to cover image
-        """
-        print("\n📡 Registering with audiobook server...")
+        """Register audiobook with local server for web playback."""
+        print("\nRegistering with audiobook server...")
 
         try:
-            # Check if server is running (optional - we'll just update metadata)
-            # The server auto-discovers books, but we can create metadata to help
-
-            # Create metadata file for server
             metadata = {
                 'title': self.input_file.stem.replace('_', ' ').title(),
                 'audio_dir': str(audio_dir.relative_to(self.input_file.parent.parent)),
@@ -258,118 +137,100 @@ class AudiobookMaker:
             with open(metadata_path, 'w') as f:
                 json.dump(metadata, f, indent=2)
 
-            print(f"✓ Metadata saved: {metadata_path.name}")
+            print(f"  Metadata saved: {metadata_path.name}")
             print(f"  Server will auto-discover on next scan")
 
         except Exception as e:
-            print(f"⚠️  Server registration warning: {e}")
+            print(f"  Server registration warning: {e}")
 
     def make_audiobook(self) -> Dict:
-        """
-        Main workflow: Create complete audiobook with all features.
-
-        Returns:
-            Dictionary with results and paths
-        """
-        print("\n" + "="*70)
+        """Main workflow: Create complete audiobook with all features."""
+        print("\n" + "=" * 70)
         print("AUDIOBOOK MAKER - ONE-COMMAND WORKFLOW")
-        print("="*70)
+        print("=" * 70)
         print(f"Input: {self.input_file}")
         print(f"Voice: {self.voice}")
         print(f"Speed: {self.speed}x")
         print(f"Cover art: {'Yes' if self.generate_cover else 'No'}")
         if self.summarize_percentage:
             print(f"Summarization: {self.summarize_percentage}%")
-        print("="*70)
+        print("=" * 70)
         print()
 
         try:
             # STAGE 0: Pre-Flight Validation
-            if validate_book:
-                print("\n📚 STAGE 0: PRE-FLIGHT VALIDATION")
-                print("-" * 70)
+            print("\nSTAGE 0: PRE-FLIGHT VALIDATION")
+            print("-" * 70)
 
-                validation_report = validate_book(str(self.input_file), verbose=False)
+            validation_report = validate_book(str(self.input_file), verbose=False)
 
-                if not validation_report.valid:
-                    print("⚠️  Book validation found issues:")
-                    for error in validation_report.errors:
-                        print(f"   ❌ {error}")
-                    for warning in validation_report.warnings:
-                        print(f"   ⚠️  {warning}")
+            if not validation_report.valid:
+                print("  Book validation found issues:")
+                for error in validation_report.errors:
+                    print(f"   - {error}")
+                for warning in validation_report.warnings:
+                    print(f"   - {warning}")
 
-                    if validation_report.fixes:
-                        print("\n💡 Suggested fixes:")
-                        for fix in validation_report.fixes:
-                            print(f"   • {fix}")
+                if validation_report.fixes:
+                    print("\n  Suggested fixes:")
+                    for fix in validation_report.fixes:
+                        print(f"   - {fix}")
 
-                    # In non-interactive mode, try auto-fix before failing
-                    if self.non_interactive:
-                        print("\n⚠️  Validation failed. Attempting auto-fix...")
-                        try:
-                            from book_processor import BookProcessor
-                            processor = BookProcessor(verbose=False)
-                            manifest = processor.process(self.input_file, auto_fix=True)
+                if self.non_interactive:
+                    print("\n  Validation failed. Attempting auto-fix...")
+                    try:
+                        processor = BookProcessor(verbose=False)
+                        manifest = processor.process(self.input_file, auto_fix=True)
 
-                            if manifest.chapters:
-                                print(f"✅ Auto-fix succeeded: {len(manifest.chapters)} chapters detected")
-                                detection_types = set(ch.detection_type for ch in manifest.chapters)
-                                print(f"   Detection types: {detection_types}")
-                                manifest_path = self.input_file.parent / f"{self.input_file.stem}_manifest.json"
-                                manifest.save(manifest_path)
-                                print(f"   Manifest saved: {manifest_path}")
-                            else:
-                                print("\n❌ Auto-fix failed: still no chapters detected.")
-                                print("   Please fix the issues and try again.")
-                                print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
-                                sys.exit(2)
-                        except Exception as e:
-                            print(f"\n❌ Auto-fix error: {e}")
-                            print("   Please fix the issues and try again.")
-                            print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
+                        if manifest.chapters:
+                            print(f"  Auto-fix succeeded: {len(manifest.chapters)} chapters detected")
+                            detection_types = set(ch.detection_type for ch in manifest.chapters)
+                            print(f"   Detection types: {detection_types}")
+                            manifest_path = self.input_file.parent / f"{self.input_file.stem}_manifest.json"
+                            manifest.save(manifest_path)
+                            print(f"   Manifest saved: {manifest_path}")
+                        else:
+                            print("\n  Auto-fix failed: still no chapters detected.")
+                            print(f"   Run: python3 validate.py {self.input_file} --auto-fix")
                             sys.exit(2)
+                    except Exception as e:
+                        print(f"\n  Auto-fix error: {e}")
+                        print(f"   Run: python3 validate.py {self.input_file} --auto-fix")
+                        sys.exit(2)
 
-                    # Interactive mode: ask user
-                    print("\n❓ Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
-                    response = input().strip().lower()
-                    if response != 'y':
-                        print("\n❌ Aborted by user.")
-                        print("   Please fix the issues and try again.")
-                        print(f"   Run: python book_validator.py {self.input_file} --auto-fix")
-                        return {'success': False, 'reason': 'validation_failed'}
-                else:
-                    print("✅ Book validation passed!")
-                    feature_count = sum(validation_report.feature_support.values())
-                    print(f"✅ Feature support: {feature_count}/3 features ready")
-
-                    # Show feature details
-                    for feature, supported in validation_report.feature_support.items():
-                        status = "✓" if supported else "✗"
-                        print(f"   {status} {feature.title()}")
-
-                    # Show key metrics
-                    if 'chapter_count' in validation_report.metrics:
-                        print(f"   • Chapters: {validation_report.metrics['chapter_count']}")
-                    if 'has_toc' in validation_report.metrics:
-                        toc_status = "Yes" if validation_report.metrics['has_toc'] else "No"
-                        print(f"   • Table of Contents: {toc_status}")
-
-                print("-" * 70 + "\n")
+                print("\n  Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
+                response = input().strip().lower()
+                if response != 'y':
+                    print("\n  Aborted by user.")
+                    print(f"   Run: python3 validate.py {self.input_file} --auto-fix")
+                    return {'success': False, 'reason': 'validation_failed'}
             else:
-                print("⚠️  Warning: Book validator not available, skipping validation\n")
+                print("  Book validation passed!")
+                feature_count = sum(validation_report.feature_support.values())
+                print(f"  Feature support: {feature_count}/3 features ready")
+
+                for feature, supported in validation_report.feature_support.items():
+                    status = "+" if supported else "-"
+                    print(f"   {status} {feature.title()}")
+
+                if 'chapter_count' in validation_report.metrics:
+                    print(f"   Chapters: {validation_report.metrics['chapter_count']}")
+                if 'has_toc' in validation_report.metrics:
+                    toc_status = "Yes" if validation_report.metrics['has_toc'] else "No"
+                    print(f"   Table of Contents: {toc_status}")
+
+            print("-" * 70 + "\n")
 
             # STAGE 1: Generate Audio
             if not self.state.get('audio_complete'):
-                print("\n📚 STAGE 1: AUDIO GENERATION")
+                print("\nSTAGE 1: AUDIO GENERATION")
                 print("-" * 70)
 
-                # Create audio generator
                 generator = KokoroAudioGenerator(
                     voice=self.voice,
                     language=self.language
                 )
 
-                # Generate audiobook
                 result = generator.generate_audiobook(
                     str(self.input_file),
                     output_dir=self.output_dir,
@@ -377,7 +238,7 @@ class AudiobookMaker:
                     speed=self.speed,
                     normalize=self.normalize,
                     to_mp3=self.to_mp3,
-                    generate_cover=False  # We'll do this separately with better logic
+                    generate_cover=False
                 )
 
                 self.state['audio_complete'] = True
@@ -387,29 +248,27 @@ class AudiobookMaker:
                 self.state['chunks'] = result['chunks']
                 self._save_state()
 
-                print(f"\n✅ Audio generation complete!")
+                print(f"\n  Audio generation complete!")
                 print(f"   Output: {result['output_directory']}")
                 print(f"   Chapters: {result['chapters']}")
                 print(f"   Format: {result['format'].upper()}")
 
-                # Generate chapter metadata for web player
                 if result['chapters'] > 0:
-                    print(f"\n📑 Generating chapter metadata for web player...")
+                    print(f"\n  Generating chapter metadata for web player...")
                     audio_dir = Path(result['output_directory'])
                     self._generate_chapter_metadata(audio_dir, result['playlist'])
 
             else:
-                print("✓ Audio already generated, skipping...\n")
+                print("  Audio already generated, skipping...\n")
 
             audio_dir = Path(self.state['audio_dir'])
 
             # STAGE 2: Generate Cover Art (optional)
             cover_path = None
             if self.generate_cover and not self.state.get('cover_complete'):
-                print("\n📚 STAGE 2: COVER ART GENERATION")
+                print("\nSTAGE 2: COVER ART GENERATION")
                 print("-" * 70)
 
-                # Extract title from file or use filename
                 book_title = self.input_file.stem.replace('_', ' ').title()
                 cover_path = self._generate_cover_art(book_title)
 
@@ -419,51 +278,38 @@ class AudiobookMaker:
                 self._save_state()
 
             elif self.generate_cover:
-                print("✓ Cover art already generated, skipping...\n")
+                print("  Cover art already generated, skipping...\n")
                 cover_path = Path(self.state.get('cover_path')) if self.state.get('cover_path') else None
 
-            # STAGE 2.5: Generate Word Timings (optional, for karaoke sync)
-            if hasattr(self, 'generate_word_timings') and self.generate_word_timings and not self.state.get('word_timings_complete'):
-                print("\n📚 STAGE 2.5: WORD TIMING GENERATION (KARAOKE SYNC)")
+            # STAGE 2.5: Generate Word Timings (for karaoke sync)
+            if self.generate_word_timings and not self.state.get('word_timings_complete'):
+                print("\nSTAGE 2.5: WORD TIMING GENERATION (KARAOKE SYNC)")
                 print("-" * 70)
 
                 try:
-                    # Import word timing generator
-                    import subprocess
-                    generate_script = Path(__file__).parent / "generate_word_timings.py"
-
-                    if not generate_script.exists():
-                        print("⚠️  generate_word_timings.py not found, skipping word timings")
-                    else:
-                        # Run word timing generator
-                        playlist_path = Path(self.state['playlist'])
-                        cmd = [
-                            sys.executable,
-                            str(generate_script),
-                            str(playlist_path),
-                            '--method', 'fallback'  # Use fallback by default (no dependencies)
-                        ]
-
-                        print(f"  Generating word timings for {self.state['chapters']} chapters...")
-                        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
-
-                        if result.returncode == 0:
-                            print("✓ Word timings generated successfully!")
-                            print("  Karaoke sync will be available in web player")
-                            self.state['word_timings_complete'] = True
-                            self._save_state()
-                        else:
-                            print(f"⚠️  Word timing generation failed: {result.stderr}")
-
+                    from lib.audio.word_timings import generate_audiobook_word_timings, save_word_timings
+                    playlist_path = Path(self.state['playlist'])
+                    print(f"  Generating word timings for {self.state['chapters']} chapters...")
+                    word_data = generate_audiobook_word_timings(playlist_path, method='fallback')
+                    # Save to book directory
+                    book_dir = playlist_path.parent
+                    while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio']:
+                        book_dir = book_dir.parent
+                    output_path = book_dir / f"{book_dir.name}_word_timings.json"
+                    save_word_timings(word_data, output_path)
+                    print("  Word timings generated successfully!")
+                    print("  Karaoke sync will be available in web player")
+                    self.state['word_timings_complete'] = True
+                    self._save_state()
                 except Exception as e:
-                    print(f"⚠️  Word timing generation error: {e}")
+                    print(f"  Word timing generation error: {e}")
 
-            elif hasattr(self, 'generate_word_timings') and self.generate_word_timings:
-                print("✓ Word timings already generated, skipping...\n")
+            elif self.generate_word_timings:
+                print("  Word timings already generated, skipping...\n")
 
             # STAGE 3: Register with Server
             if not self.state.get('server_registered'):
-                print("\n📚 STAGE 3: SERVER REGISTRATION")
+                print("\nSTAGE 3: SERVER REGISTRATION")
                 print("-" * 70)
 
                 self._register_with_server(audio_dir, cover_path)
@@ -473,12 +319,12 @@ class AudiobookMaker:
                 self._save_state()
 
             else:
-                print("✓ Already registered with server, skipping...\n")
+                print("  Already registered with server, skipping...\n")
 
             # Final Summary
-            print("\n" + "="*70)
-            print("🎉 AUDIOBOOK COMPLETE!")
-            print("="*70)
+            print("\n" + "=" * 70)
+            print("AUDIOBOOK COMPLETE!")
+            print("=" * 70)
             print(f"Title: {self.input_file.stem.replace('_', ' ').title()}")
             print(f"Audio: {audio_dir}")
             print(f"Playlist: {self.state['playlist']}")
@@ -486,17 +332,16 @@ class AudiobookMaker:
                 print(f"Cover: {cover_path}")
             print(f"Chapters: {self.state['chapters']}")
             print(f"Format: {'MP3' if self.to_mp3 else 'WAV'}")
-            print("="*70)
+            print("=" * 70)
             print()
-            print("💡 To play:")
+            print("To play:")
             print(f"   afplay {self.state['playlist']}")
             print()
-            print("💡 To serve on web:")
-            print(f"   python3 server/audiobook_server.py")
-            print(f"   Then open: http://localhost:8000")
-            print("="*70)
+            print("To serve on web:")
+            print(f"   ./start_server.sh")
+            print(f"   Then open: http://localhost:8080")
+            print("=" * 70)
 
-            # Clean up state file on success
             if self.state_file.exists():
                 self.state_file.unlink()
 
@@ -510,14 +355,14 @@ class AudiobookMaker:
             }
 
         except KeyboardInterrupt:
-            print("\n\n⚠️  Interrupted by user")
+            print("\n\nInterrupted by user")
             print(f"Progress saved to: {self.state_file}")
             print(f"Resume by running the same command again.")
             self._save_state()
             sys.exit(0)
 
         except Exception as e:
-            print(f"\n❌ ERROR: {e}")
+            print(f"\nERROR: {e}")
             print(f"\nState saved to: {self.state_file}")
             print(f"Fix the issue and resume by running the same command.")
             self._save_state()
@@ -525,139 +370,59 @@ class AudiobookMaker:
 
 
 def main():
-    """Main CLI entry point"""
     parser = argparse.ArgumentParser(
         description="One-command audiobook generator with cover art and server integration",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Basic usage (auto-detect everything)
   python3 make_audiobook.py books/alice_adventures/alices_adventures.md
-
-  # British female voice + cover art (recommended for classics)
-  python3 make_audiobook.py books/alice_adventures/alices_adventures.md \\
-      --voice bf_emma --generate-cover
-
-  # American male voice + faster playback
-  python3 make_audiobook.py books/book.md --voice am_adam --speed 1.15
-
-  # With summarization (50% of original length)
-  python3 make_audiobook.py books/war_peace/war_peace.md --summarize 50 --generate-cover
+  python3 make_audiobook.py INPUT.md --voice bf_emma --generate-cover
+  python3 make_audiobook.py INPUT.md --voice am_adam --speed 1.15
+  python3 make_audiobook.py INPUT.md --summarize 50 --generate-cover
 
 Top Voices:
   bf_emma      - British Female (recommended for classics)
-  bf_isabella  - British Female (alternative)
   bm_george    - British Male (classics)
   af_sky       - American Female (default)
   am_adam      - American Male
   am_onyx      - American Male (deep voice)
-
-  Total: 52 voices available (af_*, am_*, bf_*, bm_*, etc.)
-
-Features:
-  ✓ Automatic Gutenberg boilerplate stripping
-  ✓ Chapter detection (Roman numerals, numbered lists, headers)
-  ✓ High-quality Kokoro TTS (31× faster than Bark)
-  ✓ Commercial-friendly (Apache 2.0 license)
-  ✓ Optional cover art generation
-  ✓ Automatic server registration
-  ✓ Resumable (saves progress)
-
-Output:
-  Audio files and playlist in: books/{book_name}/audio_kokoro/
-  Cover art: books/{book_name}/audio_kokoro/{book_name}_cover.png
-  Metadata: books/{book_name}/audio_kokoro/audiobook_metadata.json
+  Total: 52 voices available (af_*, am_*, bf_*, bm_*)
         """
     )
 
-    parser.add_argument(
-        'input_file',
-        help='Path to book markdown file'
-    )
-
-    parser.add_argument(
-        '--voice',
-        default='bf_emma',
-        help='Voice ID (default: bf_emma - British female, great for classics)'
-    )
-
-    parser.add_argument(
-        '--lang',
-        default='en-us',
-        help='Language code (default: en-us)'
-    )
-
-    parser.add_argument(
-        '--chunk-size',
-        type=int,
-        default=800,
-        help='Characters per audio chunk (default: 800)'
-    )
-
-    parser.add_argument(
-        '--speed',
-        type=float,
-        default=1.0,
-        help='Playback speed multiplier (default: 1.0, recommended: 1.1-1.2)'
-    )
-
-    parser.add_argument(
-        '--no-normalize',
-        action='store_true',
-        help='Skip loudness normalization'
-    )
-
-    parser.add_argument(
-        '--no-mp3',
-        action='store_true',
-        help='Keep WAV format (do not convert to MP3)'
-    )
-
-    parser.add_argument(
-        '--generate-cover',
-        action='store_true',
-        help='Generate cover art for audiobook'
-    )
-
-    parser.add_argument(
-        '--summarize',
-        type=int,
-        metavar='PERCENT',
-        help='Summarize to target percentage (10-90, e.g., 50 = 50%% of original)'
-    )
-
-    parser.add_argument(
-        '--output-dir',
-        help='Custom output directory (default: auto-organized into books/{book_name}/audio_kokoro/)'
-    )
-
-    parser.add_argument(
-        '--generate-word-timings',
-        action='store_true',
-        default=True,
-        help='Generate word-level timing data for karaoke sync (default: enabled, requires ffprobe)'
-    )
-
-    parser.add_argument(
-        '--no-word-timings',
-        action='store_true',
-        help='Disable word timing generation for karaoke sync'
-    )
-
-    parser.add_argument(
-        '--non-interactive',
-        action='store_true',
-        help='Skip validation prompts and fail fast (for automation/pipelines)'
-    )
+    parser.add_argument('input_file', help='Path to book markdown file')
+    parser.add_argument('--voice', default='bf_emma',
+                        help='Voice ID (default: bf_emma)')
+    parser.add_argument('--lang', default='en-us',
+                        help='Language code (default: en-us)')
+    parser.add_argument('--chunk-size', type=int, default=800,
+                        help='Characters per audio chunk (default: 800)')
+    parser.add_argument('--speed', type=float, default=1.0,
+                        help='Playback speed multiplier (default: 1.0)')
+    parser.add_argument('--no-normalize', action='store_true',
+                        help='Skip loudness normalization')
+    parser.add_argument('--no-mp3', action='store_true',
+                        help='Keep WAV format (do not convert to MP3)')
+    parser.add_argument('--generate-cover', action='store_true',
+                        help='Generate cover art for audiobook')
+    parser.add_argument('--summarize', type=int, metavar='PERCENT',
+                        help='Summarize to target percentage (10-90)')
+    parser.add_argument('--output-dir',
+                        help='Custom output directory')
+    parser.add_argument('--generate-word-timings', action='store_true',
+                        default=True,
+                        help='Generate word-level timing data for karaoke (default: enabled)')
+    parser.add_argument('--no-word-timings', action='store_true',
+                        help='Disable word timing generation')
+    parser.add_argument('--non-interactive', action='store_true',
+                        help='Skip validation prompts, fail fast (for automation)')
 
     args = parser.parse_args()
 
-    # Validation
     if args.summarize and (args.summarize < 10 or args.summarize > 90):
-        print(f"❌ ERROR: --summarize must be between 10-90 (got {args.summarize})")
+        print(f"ERROR: --summarize must be between 10-90 (got {args.summarize})")
         sys.exit(1)
 
-    # Create audiobook maker
     try:
         maker = AudiobookMaker(
             input_file=args.input_file,
@@ -674,15 +439,14 @@ Output:
             non_interactive=args.non_interactive
         )
 
-        result = maker.make_audiobook()
-
+        maker.make_audiobook()
         sys.exit(0)
 
     except KeyboardInterrupt:
         sys.exit(130)
 
     except Exception as e:
-        print(f"\n❌ Fatal error: {e}")
+        print(f"\nFatal error: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

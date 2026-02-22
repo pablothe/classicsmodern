@@ -364,8 +364,7 @@ class GutenbergDownloader:
         """
         try:
             # Import normalizer (lazy import to avoid circular dependencies)
-            sys.path.insert(0, str(Path(__file__).parent.parent))
-            from markdown_normalizer import normalize_markdown
+            from lib.book.normalizer import normalize_markdown
             return normalize_markdown(markdown, verbose=False)
         except ImportError as e:
             print(f"⚠️  Warning: Could not import markdown_normalizer: {e}")

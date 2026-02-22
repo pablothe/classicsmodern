@@ -7,15 +7,11 @@ text at chunk boundaries.
 """
 
 import pytest
-import sys
 from pathlib import Path
 import tempfile
 import shutil
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-from local_reader_deduplicate import deduplicate_files, find_duplicate_text
+from lib.translation.deduplicate import deduplicate_files, find_duplicate_text
 
 
 class TestDuplicationDetection:

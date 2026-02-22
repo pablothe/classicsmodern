@@ -5,12 +5,16 @@ Pytest Configuration and Shared Fixtures
 This module provides common fixtures and configuration for all tests.
 """
 
+import sys
 import pytest
 import tempfile
 import shutil
 from pathlib import Path
 from typing import Dict, Generator
 import json
+
+# Add project root to sys.path so lib.* imports work
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 
 # ============================================================================

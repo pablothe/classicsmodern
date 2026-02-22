@@ -12,21 +12,14 @@ Tests:
 """
 
 import pytest
-import sys
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from tests.utils.mock_helpers import MockOllamaClient, create_sample_book
+from tests.utils.test_data_generators import BookGenerator
 
-# Import test utilities
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.mock_helpers import MockOllamaClient, create_sample_book
-from utils.test_data_generators import BookGenerator
-
-# Import actual module
 try:
-    from book_summarizer import BookSummarizer
+    from lib.summarize.engine import BookSummarizer
     SUMMARIZER_AVAILABLE = True
 except ImportError:
     SUMMARIZER_AVAILABLE = False
@@ -107,7 +100,7 @@ class TestChunkSizeAutoScaling:
 class TestRecursiveSummarization:
     """Test recursive (2-pass) summarization for aggressive compression."""
 
-    @patch('book_summarizer.OllamaTranslator')
+    @patch('lib.summarize.engine.OllamaTranslator')
     def test_single_pass_for_moderate_compression(self, mock_translator_class, sample_book_500_words):
         """Test that 30%+ target uses single-pass summarization."""
         # Mock the translator
@@ -147,7 +140,7 @@ class TestRecursiveSummarization:
 class TestContextAwarePrompts:
     """Test that summarization uses context from previous chunks."""
 
-    @patch('book_summarizer.OllamaTranslator')
+    @patch('lib.summarize.engine.OllamaTranslator')
     def test_first_chunk_no_context(self, mock_translator_class):
         """Test that first chunk doesn't receive previous context."""
         mock_translator = Mock()
@@ -159,7 +152,7 @@ class TestContextAwarePrompts:
         summarizer.translator = mock_translator
 
         # Mock chunk
-        from local_reader_translation import TranslationChunk
+        from lib.translation.engine import TranslationChunk
         chunk = TranslationChunk(
             index=1,
             content="This is the first chunk to summarize.",
@@ -183,7 +176,7 @@ class TestContextAwarePrompts:
             # Should NOT call _get_last_sentences for first chunk
             assert not mock_translator._get_last_sentences.called
 
-    @patch('book_summarizer.OllamaTranslator')
+    @patch('lib.summarize.engine.OllamaTranslator')
     def test_subsequent_chunks_receive_context(self, mock_translator_class):
         """Test that subsequent chunks receive context from previous."""
         mock_translator = Mock()
@@ -195,7 +188,7 @@ class TestContextAwarePrompts:
         summarizer.translator = mock_translator
 
         # Mock chunk
-        from local_reader_translation import TranslationChunk
+        from lib.translation.engine import TranslationChunk
         chunk = TranslationChunk(
             index=2,
             content="This is the second chunk.",
@@ -289,7 +282,7 @@ class TestErrorHandling:
             summarizer = BookSummarizer(target_percentage=pct)
             assert 10 <= summarizer.target_percentage <= 90
 
-    @patch('book_summarizer.OllamaTranslator')
+    @patch('lib.summarize.engine.OllamaTranslator')
     def test_empty_summary_retry(self, mock_translator_class):
         """Test that empty summaries trigger retry."""
         mock_translator = Mock()
@@ -299,7 +292,7 @@ class TestErrorHandling:
         summarizer = BookSummarizer()
         summarizer.translator = mock_translator
 
-        from local_reader_translation import TranslationChunk
+        from lib.translation.engine import TranslationChunk
         chunk = TranslationChunk(index=1, content="test", start_pos=0, end_pos=10)
 
         # Mock requests to return empty first, then valid
@@ -332,7 +325,7 @@ class TestMarkdownPreservation:
         """Test that summarization prompt mentions preserving Markdown."""
         summarizer = BookSummarizer()
 
-        from local_reader_translation import TranslationChunk
+        from lib.translation.engine import TranslationChunk
         chunk = TranslationChunk(
             index=1,
             content="## Header\n\nContent with **bold** text.",
@@ -395,12 +388,12 @@ class TestMetadataGeneration:
 class TestOutputValidation:
     """Test that summarized output is validated."""
 
-    @patch('book_summarizer.validate_book')
+    @patch('lib.summarize.engine.validate_book')
     def test_output_validation_called(self, mock_validate):
         """Test that book validator is called on output."""
         # The main() function calls validate_book on output
         # We verify this integration exists
-        from book_summarizer import validate_book
+        from lib.summarize.engine import validate_book
         assert validate_book is not None
 
 

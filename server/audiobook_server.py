@@ -19,7 +19,6 @@ Example:
 import json
 import os
 import re
-import sys
 import subprocess
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -33,8 +32,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 # Import book catalog and text extractor
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from book_catalog import get_book_info
+from lib.book.catalog import get_book_info
 from server.text_extractor import find_source_text, get_chapter_text_data, get_book_chapters_list
 
 # Import Gutenberg modules

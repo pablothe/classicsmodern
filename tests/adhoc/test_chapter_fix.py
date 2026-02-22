@@ -5,9 +5,8 @@ Test script to verify chapter detection fix for Call of Cthulhu
 
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent))
 
-from local_tts_kokoro import KokoroAudioGenerator
+from lib.audio.kokoro import KokoroAudioGenerator
 
 def test_chapter_detection():
     """Test chapter detection with markdown headers containing anchors"""

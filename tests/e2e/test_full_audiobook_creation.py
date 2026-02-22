@@ -6,11 +6,7 @@ Tests complete user scenarios from start to finish.
 """
 
 import pytest
-import sys
 from pathlib import Path
-
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 
 @pytest.mark.e2e
@@ -66,7 +62,7 @@ class TestKaraokeMode:
     def test_karaoke_text_sync(self, temp_dir, sample_book_clean):
         """Test text synchronization with audio playback"""
         # Verify book has required features
-        from book_validator import validate_book
+        from lib.book.validator import validate_book
 
         report = validate_book(sample_book_clean)
         assert report.feature_support['karaoke'] is True
@@ -84,7 +80,7 @@ class TestAIChatAssistant:
     def test_ask_question_about_book(self, temp_dir, sample_book_clean):
         """Test asking questions about book content"""
         # Verify book has required features
-        from book_validator import validate_book
+        from lib.book.validator import validate_book
 
         report = validate_book(sample_book_clean)
         assert report.feature_support['ai_chat'] is True

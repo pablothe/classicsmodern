@@ -6,15 +6,11 @@ Handles translation-only jobs (for already-downloaded books).
 Uses structured_translator.py to preserve chapter structure.
 """
 
-import sys
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Callable
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-from structured_translator import (
+from lib.translation.structured import (
     BookParser,
     StructureValidator,
     BlockTranslator,

@@ -6,13 +6,9 @@ Tests the full translation workflow: Split → Translate → Deduplicate
 """
 
 import pytest
-import sys
 import json
 from pathlib import Path
 from unittest.mock import Mock, patch
-
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 
 @pytest.mark.integration
@@ -140,7 +136,7 @@ class TestDeduplicationIntegration:
         chunk2_path.write_text(f"{overlap_text} second chunk continues")
 
         # Run deduplication
-        from local_reader_deduplicate import deduplicate_files
+        from lib.translation.deduplicate import deduplicate_files
 
         output_dir = temp_dir / "deduplicated"
         result = deduplicate_files(

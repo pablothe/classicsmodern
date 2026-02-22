@@ -12,21 +12,14 @@ Uses mocks to test:
 """
 
 import pytest
-import sys
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from tests.utils.mock_helpers import MockKokoroTTS, create_sample_book, create_book_with_gutenberg_boilerplate
+from tests.utils.test_data_generators import BookGenerator, GutenbergDataGenerator
 
-# Import test utilities
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.mock_helpers import MockKokoroTTS, create_sample_book, create_book_with_gutenberg_boilerplate
-from utils.test_data_generators import BookGenerator, GutenbergDataGenerator
-
-# Import actual module
 try:
-    from local_tts_kokoro import KokoroAudioGenerator
+    from lib.audio.kokoro import KokoroAudioGenerator
     KOKORO_AVAILABLE = True
 except ImportError:
     KOKORO_AVAILABLE = False

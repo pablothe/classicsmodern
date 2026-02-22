@@ -3,8 +3,8 @@
 Test the translation bug fix with a small sample
 """
 
-from local_reader_translation import OllamaTranslator
-from local_reader_config import get_config
+from lib.translation.engine import OllamaTranslator
+from lib.config import get_config
 
 # Test text (small Russian sample)
 test_text = """# Преступление_и_наказание_cleaned - Part 1

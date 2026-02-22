@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
-from book_processor import BookProcessor, BookManifest
+from lib.book.processor import BookProcessor, BookManifest
 
 
 def test_all_books(books_dir: Path = Path("books"), verbose: bool = False) -> Dict:

@@ -58,7 +58,7 @@ def test_preprocessing(input_file: Path) -> dict:
     # Step 2: Try audio_text_preprocessor if available
     preprocessed_text = raw_text
     try:
-        from audio_text_preprocessor import AudioTextPreprocessor
+        from lib.audio.preprocessor import AudioTextPreprocessor
         print(f"\n🔧 Running audio_text_preprocessor...")
 
         preprocessor = AudioTextPreprocessor()
