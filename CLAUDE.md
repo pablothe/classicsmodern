@@ -4,7 +4,7 @@ Technical reference for AI assistants working with this repository.
 
 ## Project Overview
 
-**Modern Classics** translates classic literature and generates audiobooks using local and cloud AI.
+**Modern Classics** translates classic literature and generates audiobooks using 100% local AI. No cloud services, no API keys, no external calls.
 
 **Documentation:**
 - [README.md](README.md) - Project overview and quick start
@@ -33,15 +33,20 @@ pip install kokoro-tts kokoro-onnx soundfile
 brew install ffmpeg  # macOS
 # or apt-get install ffmpeg  # Linux
 
-# 6. Set up environment variables (optional, for translation)
-# Create .env file with:
-OPENAI_API_KEY=your_api_key_here
 ```
 
 **Why venv is required:**
 - The audiobook server runs inside venv and uses `venv/bin/python3` for subprocess calls
 - Kokoro TTS dependencies (`kokoro-onnx`, `soundfile`) must be installed in venv
 - Without venv, audio generation will fail with "kokoro-onnx library not installed"
+
+**Offline operation:**
+After initial setup, the entire system works offline:
+- **Translation**: Ollama runs locally (no API calls)
+- **TTS**: Kokoro runs locally via ONNX Runtime (no API calls)
+- **Cover Art**: Stable Diffusion runs locally (no API calls)
+- **Web Server**: Serves on local network only
+- The only feature requiring internet is **Gutenberg downloads** (optional)
 
 **Server startup (ALWAYS use start_server.sh):**
 ```bash
@@ -176,16 +181,8 @@ python3 structured_translator.py books/mybook/book.md \
 # 4. ASSEMBLES clean output (auto-generates TOC)
 # Result: All chapters present, structure preserved
 
-# With OpenAI (faster, costs money):
-python3 structured_translator.py books/mybook/book.md \
-  --source-lang Latin \
-  --target-lang "Modern English" \
-  --model openai:o3-mini-high
-
-# Available models:
-# - ollama:zongwei/gemma3-translator:4b (free, local, accurate)
-# - openai:o3-mini-high (paid, cloud, fast)
-# - openai:gpt-4o-mini (paid, cloud, cheap)
+# Available models (all local via Ollama):
+# - ollama:zongwei/gemma3-translator:4b (recommended, accurate)
 ```
 
 **Why Structured Translator?**
@@ -197,22 +194,7 @@ python3 structured_translator.py books/mybook/book.md \
 
 ---
 
-**Legacy: For single files (cloud-based OpenAI):**
-```bash
-# List available AI models
-python translator.py --list-models
-
-# Translate with default model (o3-mini-high recommended)
-python translator.py books/alice_adventures/alices_adventures.md
-
-# Specify model and languages
-python translator.py input.md --model o3-mini-high --source-lang German --target-lang "Modern English"
-
-# Custom output directory
-python translator.py input.md --output-dir custom_output/
-```
-
-**For batch/chunks (local Ollama - RECOMMENDED for large books):**
+**For batch/chunks (local Ollama - for large books):**
 ```bash
 # Split book into chunks first
 python3 local_reader_smart_splitter.py books/crime_punishment/book.md
@@ -256,7 +238,7 @@ python3 book_summarizer.py books/mybook/translated.md 30 1500
 
 **Then generate audio:**
 ```bash
-python3 local_tts_xtts.py books/mybook/translated_summarized_50pct.md voice_ref.wav en
+python3 make_audiobook.py books/mybook/translated_summarized_50pct.md --voice bf_emma --generate-cover
 ```
 
 ### Cover Art Generation (NEW!)
@@ -284,8 +266,8 @@ python3 generate.py "$(python3 book_prompts.py 'Moby Dick')" --output moby.png
 
 **Integrated workflow (automatic with audiobook generation):**
 ```bash
-# Add --generate-cover flag to local_tts_xtts.py
-python3 local_tts_xtts.py translated.md voice.wav en --generate-cover
+# Add --generate-cover flag to make_audiobook.py or local_tts_kokoro.py
+python3 make_audiobook.py translated.md --voice bf_emma --generate-cover
 ```
 
 **What it does:**
@@ -370,8 +352,8 @@ brew install ffmpeg  # macOS
 # ALWAYS use the startup script (handles venv activation)
 ./start_server.sh
 
-# Server runs on http://localhost:8080
-# Access from phone: http://[your-mac-ip]:8080
+# Server runs on http://localhost:8000
+# Access from phone: http://[your-mac-ip]:8000
 ```
 
 **Web Interface Features:**
@@ -455,7 +437,7 @@ The project now uses a unified manifest system for consistent chapter handling:
   - Question classification for targeted responses
 
 ### Translation System
-- **Multi-Model Support**: Supports o1-mini, o1-preview, o3-mini, o3-mini-high, gpt-4o-mini (cloud), and zongwei/gemma3-translator:4b (local via Ollama)
+- **Local Model**: Uses zongwei/gemma3-translator:4b via Ollama (100% local, no API keys)
 - **Smart Chunking**: Respects Markdown structure, ~10k words per chunk (updated from ~250 for better context)
 - **Structure Preservation**: Maintains headers, links, tables, and formatting through translation
 - **Context-Aware Translation**: Each chunk receives context from previous chunk to prevent duplicates
@@ -511,11 +493,6 @@ The project now uses a unified manifest system for consistent chapter handling:
   - Maps chapter positions accurately to clean text
 - **Usage**: `python3 local_tts_kokoro.py translated.md --voice bf_emma`
 
-**Cloud TTS (OpenAI - Optional):**
-- ~$15/book, 6 voices, faster generation
-- Smart chunking, playlist generation
-- Used via `local_reader_audio.py` for legacy workflows
-
 ### File Organization Pattern
 ```
 books/
@@ -548,9 +525,6 @@ books/
 ## Technical Details
 
 ### Model-Specific Handling
-- **O1 models**: No system messages, use combined prompts
-- **O3 models**: Support temperature and system messages
-- **GPT models**: Standard chat completion
 - **Local (Ollama)**: gemma3-translator:4b, ~16-20 words/sec
 
 ### File Naming Conventions

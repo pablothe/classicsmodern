@@ -57,7 +57,7 @@ class TranslationConfig:
     """Translation configuration"""
     source_lang: Optional[str] = None  # DEPRECATED: LLM auto-detects source
     target_lang: str = "Modern English"
-    translator_type: str = "ollama"    # "ollama" or "openai"
+    translator_type: str = "ollama"
     model_name: str = "zongwei/gemma3-translator:4b"
     translate_metadata: bool = True
     preserve_markers: bool = True
@@ -284,25 +284,15 @@ class BlockTranslator:
             return None
 
     def _create_translator(self):
-        """Create appropriate translator based on config"""
-        if self.config.translator_type == "ollama":
-            from local_reader_translation import OllamaTranslator
-            from local_reader_config import get_config
+        """Create Ollama translator"""
+        from local_reader_translation import OllamaTranslator
+        from local_reader_config import get_config
 
-            ollama_config = get_config()
-            return OllamaTranslator(
-                model_name=self.config.model_name,
-                ollama_host=ollama_config.models.ollama_host
-            )
-
-        elif self.config.translator_type == "openai":
-            # Use existing OpenAI translator
-            from translator import setup_openai_client
-            client = setup_openai_client()
-            return OpenAITranslatorWrapper(client, self.config.model_name)
-
-        else:
-            raise ValueError(f"Unknown translator type: {self.config.translator_type}")
+        ollama_config = get_config()
+        return OllamaTranslator(
+            model_name=self.config.model_name,
+            ollama_host=ollama_config.models.ollama_host
+        )
 
     def translate_structure(self, structure: BookStructure) -> BookStructure:
         """
@@ -405,43 +395,12 @@ class BlockTranslator:
         if not text.strip():
             return text
 
-        if isinstance(self.translator, OpenAITranslatorWrapper):
-            return self.translator.translate(
-                text,
-                self.config.source_lang,
-                self.config.target_lang
-            )
-        else:
-            # Ollama translator (uses translate_document method)
-            result = self.translator.translate_document(
-                text,
-                self.config.source_lang,
-                self.config.target_lang
-            )
-            return result.translated_text
-
-
-class OpenAITranslatorWrapper:
-    """Wrapper for OpenAI translator"""
-
-    def __init__(self, client, model_name):
-        self.client = client
-        self.model_name = model_name
-
-    def translate(self, text: str, source_lang: Optional[str], target_lang: str) -> str:
-        """Translate text using OpenAI"""
-        if source_lang:
-            prompt = f"Translate from {source_lang} to {target_lang}:\n\n{text}"
-        else:
-            prompt = f"Translate to {target_lang}:\n\n{text}"
-
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
+        result = self.translator.translate_document(
+            text,
+            self.config.source_lang,
+            self.config.target_lang
         )
-
-        return response.choices[0].message.content.strip()
+        return result.translated_text
 
 
 # ============================================================================
@@ -602,7 +561,7 @@ def main():
     parser.add_argument(
         '--model',
         default='ollama:gemma3-translator:4b',
-        help='Translation model (format: "ollama:model_name" or "openai:model_name")'
+        help='Translation model (format: "ollama:model_name")'
     )
     parser.add_argument(
         '--no-translate-metadata',
@@ -621,8 +580,9 @@ def main():
     if ':' in args.model:
         translator_type, model_name = args.model.split(':', 1)
     else:
-        print(f"❌ Error: Invalid model format. Use 'ollama:model_name' or 'openai:model_name'")
-        sys.exit(1)
+        # Default to ollama if no prefix
+        translator_type = "ollama"
+        model_name = args.model
 
     # Create config
     config = TranslationConfig(

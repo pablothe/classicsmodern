@@ -26,7 +26,7 @@ Fast, isolated tests for individual components:
 - `test_deduplication.py` - Two-layer anti-duplication system
 - `test_book_validation.py` - Book quality checks & feature readiness
 - `test_chapter_detection.py` - Chapter detection algorithms
-- `test_audio_generation.py` - Audio generation (Kokoro, XTTS, Edge)
+- `test_audio_generation.py` - Audio generation (Kokoro TTS)
 - `test_summarization.py` - Summarization system
 
 ### Integration Tests (`integration/`)
@@ -67,9 +67,7 @@ Performance regression tests:
 
 ### ✅ Audio Generation
 - Kokoro TTS (52 voices, commercial-friendly)
-- XTTS-v2 (voice cloning, 16 languages)
-- Edge-TTS (Microsoft voices)
-- OpenAI Cloud TTS (6 voices)
+- OpenAI Cloud TTS (6 voices, optional)
 - Chapter-based audio
 - Post-processing (speed, normalize, MP3)
 - Audio combining & compression
@@ -168,7 +166,7 @@ pytest --durations=10
 
 ## Documentation
 
-For complete testing guide, see [TESTING.md](../TESTING.md)
+For project documentation, see [CLAUDE.md](../CLAUDE.md)
 
 ## Regression Prevention
 

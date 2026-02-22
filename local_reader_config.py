@@ -19,9 +19,8 @@ class ModelConfig:
     translation_model_4b: str = "zongwei/gemma3-translator:4b"
     default_translation_model: str = "zongwei/gemma3-translator:4b"
 
-    # TTS models (to be configured later)
-    tts_model_local: str = "orpheus-3b"  # Placeholder
-    tts_model_temporary: str = "openai-whisper"  # Temporary fallback
+    # TTS models
+    tts_model_local: str = "kokoro"
 
     # Ollama configuration
     ollama_host: str = "http://localhost:11434"
@@ -64,11 +63,11 @@ class CompressionConfig:
 @dataclass
 class AudioConfig:
     """Configuration for audio generation"""
-    # OpenAI voices (temporary)
-    openai_voices: List[str] = field(default_factory=lambda: [
-        "alloy", "echo", "fable", "onyx", "nova", "shimmer"
+    # Kokoro TTS voices (100% local)
+    kokoro_voices: List[str] = field(default_factory=lambda: [
+        "af_sky", "bf_emma", "bm_george", "am_adam", "am_onyx"
     ])
-    default_voice: str = "fable"
+    default_voice: str = "bf_emma"
 
     # Audio format settings
     default_format: str = "wav"
@@ -141,9 +140,6 @@ class AppConfig:
     storage: StorageConfig = field(default_factory=StorageConfig)
     web: WebConfig = field(default_factory=WebConfig)
 
-    # External API keys (optional)
-    openai_api_key: str = os.environ.get("OPENAI_API_KEY", "")
-
     def __post_init__(self):
         """Initialize directories after config is created"""
         self.storage.ensure_directories()
@@ -167,7 +163,7 @@ class AppConfig:
                 "default_words_per_minute": self.compression.default_words_per_minute,
             },
             "audio": {
-                "openai_voices": self.audio.openai_voices,
+                "kokoro_voices": self.audio.kokoro_voices,
                 "default_voice": self.audio.default_voice,
                 "supported_formats": self.audio.supported_formats,
             },

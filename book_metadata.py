@@ -51,7 +51,7 @@ class AudioMetadata:
     """Metadata for audio generation"""
     voice_reference: str
     language: str
-    model: str  # e.g., "xtts-v2", "openai-tts"
+    model: str  # e.g., "kokoro"
     timestamp: str
     source_file: str
     audio_chunks: int

@@ -60,4 +60,4 @@ When adding new ad-hoc tests:
 2. Add docstrings explaining purpose
 3. If they prove valuable, migrate to proper test suite
 
-See [../TESTING.md](../TESTING.md) for full testing guidelines.
+See [../CLAUDE.md](../CLAUDE.md) for project documentation.

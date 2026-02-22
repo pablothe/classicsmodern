@@ -302,33 +302,6 @@ def mock_ollama(monkeypatch):
         pass  # Ollama not installed, tests will skip
 
 
-@pytest.fixture
-def mock_openai(monkeypatch):
-    """Mock OpenAI API calls for cloud translation tests."""
-    class MockOpenAIResponse:
-        def __init__(self, content):
-            self.choices = [type('obj', (object,), {
-                'message': type('obj', (object,), {
-                    'content': content
-                })()
-            })()]
-
-    def mock_create(*args, **kwargs):
-        messages = kwargs.get('messages', [])
-        content = messages[-1].get('content', '') if messages else ''
-
-        # Simple mock translation
-        mock_translation = f"TRANSLATED: {content}"
-        return MockOpenAIResponse(mock_translation)
-
-    # Patch OpenAI client
-    try:
-        from openai import OpenAI
-        monkeypatch.setattr(OpenAI, 'chat.completions.create', mock_create)
-    except ImportError:
-        pass  # OpenAI not installed
-
-
 # ============================================================================
 # Pytest Configuration
 # ============================================================================

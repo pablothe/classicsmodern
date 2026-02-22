@@ -3,19 +3,12 @@
 Language Detector for Book Pipeline
 
 Detects the language of source text files to determine if translation is needed.
-Uses a combination of OpenAI API and pattern matching for accurate detection.
+Uses script detection and pattern matching for accurate detection (100% local).
 """
 
 import re
 from pathlib import Path
 from typing import Dict, Optional, Tuple
-import os
-
-try:
-    from openai import OpenAI
-    OPENAI_AVAILABLE = True
-except ImportError:
-    OPENAI_AVAILABLE = False
 
 
 class LanguageDetector:
@@ -49,9 +42,6 @@ class LanguageDetector:
 
     def __init__(self):
         """Initialize language detector"""
-        self.client = None
-        if OPENAI_AVAILABLE and os.getenv('OPENAI_API_KEY'):
-            self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
     def _detect_from_filename(self, filepath: Path) -> Optional[str]:
         """
@@ -102,52 +92,6 @@ class LanguageDetector:
 
         return None
 
-    def _detect_with_openai(self, text_sample: str) -> Optional[Tuple[str, float]]:
-        """
-        Detect language using OpenAI API.
-
-        Args:
-            text_sample: Sample of text to analyze
-
-        Returns:
-            Tuple of (language_name, confidence) or None
-        """
-        if not self.client:
-            return None
-
-        try:
-            response = self.client.chat.completions.create(
-                model='gpt-4o-mini',
-                messages=[
-                    {
-                        'role': 'system',
-                        'content': 'You are a language detection expert. Respond with ONLY the language name (e.g., "English", "Russian", "Spanish") and confidence as a percentage (e.g., "95%"). Format: "LANGUAGE (CONFIDENCE)"'
-                    },
-                    {
-                        'role': 'user',
-                        'content': f'Detect the language of this text:\n\n{text_sample[:1000]}'
-                    }
-                ],
-                temperature=0.1,
-                max_tokens=50
-            )
-
-            result = response.choices[0].message.content.strip()
-
-            # Parse result: "Russian (98%)"
-            match = re.match(r'([A-Za-z]+)\s*\((\d+)%\)', result)
-            if match:
-                language = match.group(1)
-                confidence = float(match.group(2)) / 100
-                return (language, confidence)
-
-            # Fallback: Just return the language name
-            return (result.split()[0], 0.9)
-
-        except Exception as e:
-            print(f"⚠️  OpenAI language detection failed: {e}")
-            return None
-
     def detect_language(self, filepath: Path) -> Dict:
         """
         Detect the language of a book file using multiple methods.
@@ -161,7 +105,7 @@ class LanguageDetector:
                 'language': 'Russian',
                 'code': 'ru',
                 'confidence': 0.95,
-                'method': 'openai|script|filename|english_default',
+                'method': 'script|filename|english_default',
                 'needs_translation': True
             }
         """
@@ -191,19 +135,7 @@ class LanguageDetector:
                 'needs_translation': script_lang.lower() != 'english'
             }
 
-        # Method 2: OpenAI API detection
-        openai_result = self._detect_with_openai(text_sample)
-        if openai_result:
-            language, confidence = openai_result
-            return {
-                'language': language,
-                'code': self._get_language_code(language),
-                'confidence': confidence,
-                'method': 'openai',
-                'needs_translation': language.lower() != 'english'
-            }
-
-        # Method 3: Filename pattern matching
+        # Method 2: Filename pattern matching
         filename_lang = self._detect_from_filename(filepath)
         if filename_lang:
             return {

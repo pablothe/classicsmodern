@@ -118,9 +118,8 @@ pip install -r tests/requirements-test.txt --upgrade
 
 ## 📚 More Info
 
-- Full guide: [TESTING.md](../TESTING.md)
 - Test README: [README.md](README.md)
-- Summary: [TEST_SUITE_SUMMARY.md](../TEST_SUITE_SUMMARY.md)
+- Project guide: [CLAUDE.md](../CLAUDE.md)
 
 ## 🚀 Quick Examples
 
@@ -146,4 +145,4 @@ pytest tests/unit/ --cov=. --cov-report=html
 
 ---
 
-**Need Help?** See [TESTING.md](../TESTING.md) for complete documentation.
+**Need Help?** See [CLAUDE.md](../CLAUDE.md) for complete project documentation.

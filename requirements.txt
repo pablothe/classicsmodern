@@ -1,30 +1,15 @@
 ### requirements.txt ###
 
 # Core dependencies
-openai
 python-dotenv
 requests
 beautifulsoup4
 
-# Local TTS (Kokoro) - RECOMMENDED for Apple Silicon
-# FREE, Apache 2.0, 52 voices, 31x faster than Bark, 100% local
-# Requires models in ~/.cache/kokoro/ (auto-download instructions in local_tts_kokoro.py)
+# Local TTS (Kokoro) - 100% local, Apache 2.0, 52 voices
+# Models auto-download to ~/.cache/kokoro/ (~335MB, one-time)
 kokoro-tts>=2.3.0
 kokoro-onnx>=0.3.9
 soundfile>=0.13.1
-
-# Local TTS (Edge-TTS) - Alternative (cloud-based API calls to Microsoft)
-# FREE, high quality, 400+ voices, but NOT truly local
-edge-tts
-
-# Local TTS (XTTS-v2) - Voice cloning (non-commercial license)
-# Uncomment to use local_tts_xtts.py for voice cloning (NOT for commercial use)
-# TTS==0.27.3
-
-# Local TTS (Orpheus) - NOT for Apple Silicon (requires NVIDIA GPU)
-# Uncomment to use local_tts_orpheus.py for human-like speech (Linux/Windows only)
-# orpheus-speech
-# vllm==0.7.3
 
 # Note: Also requires FFmpeg for audio post-processing
 # macOS: brew install ffmpeg
@@ -35,5 +20,5 @@ flask
 uvicorn  # For FastAPI server
 fastapi  # API server
 
-# AI Assistant (Optional)
-ollama>=0.1.0  # For local LLM chat with tool-calling
+# AI Assistant (Local LLM via Ollama)
+ollama>=0.1.0

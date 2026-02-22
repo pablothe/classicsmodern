@@ -6,7 +6,7 @@ This directory contains deprecated documentation and scripts archived during the
 
 The Modern Classics project standardized on:
 - **Kokoro TTS** as the ONLY supported TTS system
-- **Unified translator** (`translator.py`) instead of per-model scripts
+- **Structured translator** (`structured_translator.py`) with Ollama (100% local)
 - **Consolidated documentation** to reduce redundancy
 
 Files here are preserved for historical reference but should **NOT be used** for new work.
@@ -54,7 +54,18 @@ Files here are preserved for historical reference but should **NOT be used** for
 - `translator_o3_mini_high.py`
 - `claude_translator.py`
 - etc.
-- Reason: Replaced by unified `translator.py --model <name>`
+- Reason: Replaced by `structured_translator.py` with local Ollama
+
+### openai_scripts/
+**OpenAI-dependent scripts archived February 22, 2026**
+- `audio_generation.py` - OpenAI TTS via gpt-4o-audio-preview
+- `audio_translator.py` - OpenAI-powered translation
+- `local_reader_audio.py` - OpenAI TTS via tts-1
+- `o3call.py` - OpenAI o3 API wrapper
+- `simplify_further.py` - Text simplification via GPT-4o-mini
+- `translator.py` - OpenAI translator (all cloud models)
+- `generate_audiobook.sh` - Shell wrapper for OpenAI TTS
+- Reason: Project is 100% local, no cloud APIs
 
 ### utility_scripts/
 **Potentially deprecated utility scripts**
@@ -73,20 +84,29 @@ Files here are preserved for historical reference but should **NOT be used** for
 - **By:** Audit and cleanup process
 - **Reason:** 47% of files were redundant or deprecated
 
+### docs_archived_feb22/
+**Documentation archived February 22, 2026**
+- FEATURES.md - Obsolete planning docs (AI Chat and Karaoke are now implemented)
+- AUDIOBOOK_SERVER.md - Outdated server architecture (info now in CLAUDE.md)
+- CLEANUP_SUMMARY_2026.md - One-time cleanup artifact
+- QUICK_REFERENCE.md - Redundant with updated README
+- TESTING.md - Referenced non-existent CI/CD pipeline
+- GUTENBERG_SETUP.md - Info folded into GUIDE.md
+- JOB_QUEUE_README.md - Info folded into CLAUDE.md
+- AUDIO_TEXT_SYNC.md - Info folded into CLAUDE.md
+
 ## Current Documentation
 
 **Use these instead:**
 - [README.md](../README.md) - Project overview
 - [GUIDE.md](../GUIDE.md) - Complete workflow guide
 - [CLAUDE.md](../CLAUDE.md) - Technical reference
-- [FEATURES.md](../FEATURES.md) - Feature roadmap
-- [TESTING.md](../TESTING.md) - Testing guide
 - [CHANGELOG.md](../CHANGELOG.md) - Version history
 
 ## Current Tools
 
 **Translation:**
-- `translator.py` - Unified translator (all models)
+- `structured_translator.py` - Structured translator (Ollama, 100% local)
 - `structured_translator_v2.py` - Manifest-based translator
 - `local_reader_batch_translator.py` - Batch translation
 

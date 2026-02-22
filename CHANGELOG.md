@@ -4,6 +4,15 @@ Version history, bug fixes, and validation results for Modern Classics.
 
 ---
 
+### Remove Cloud Dependencies (Feb 22, 2026)
+
+- Archived 7 OpenAI-dependent scripts to `legacy_archive_2026/openai_scripts/`
+- Stripped OpenAI code paths from `structured_translator.py`, `structured_translator_v2.py`
+- Removed OpenAI detection from `server/language_detector.py` (local detection remains)
+- Cleaned `local_reader_config.py` (removed OpenAI fields, updated to Kokoro voices)
+- Removed `openai` and `edge-tts` from `requirements.txt`
+- System now works 100% offline after initial setup (pip install + model download)
+
 ## February 2026 Updates
 
 ### Audio-Text Synchronization Fix (Feb 9, 2026)

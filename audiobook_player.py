@@ -68,7 +68,7 @@ class AudiobookLibrary:
         if audio_xtts_dir.exists():
             chapters.extend(self._scan_xtts_audio(audio_xtts_dir, book_path))
 
-        # Look for legacy OpenAI audio in chunks/translated/deduplicated/audio/
+        # Look for legacy audio in chunks/translated/deduplicated/audio/
         audio_legacy_dir = book_path / "chunks" / "translated" / "deduplicated" / "audio"
         if audio_legacy_dir.exists():
             chapters.extend(self._scan_legacy_audio(audio_legacy_dir, book_path))
@@ -133,7 +133,7 @@ class AudiobookLibrary:
         return chapters
 
     def _scan_legacy_audio(self, audio_dir: Path, book_path: Path):
-        """Scan legacy OpenAI audio directory for chapters"""
+        """Scan legacy audio directory for chapters"""
         chapters = []
 
         # Group by playlist files
@@ -148,7 +148,7 @@ class AudiobookLibrary:
                     "name": self._format_chapter_name(m3u.stem),
                     "tracks": tracks,
                     "playlist": str(playlist_path),
-                    "type": "openai"
+                    "type": "legacy"
                 })
 
         return chapters

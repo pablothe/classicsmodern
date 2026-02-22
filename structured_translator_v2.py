@@ -55,7 +55,7 @@ class ManifestTranslator:
             target_lang: Target language for translation
             source_lang: Source language (optional, auto-detect if None)
             model_name: Model to use for translation
-            translator_type: 'ollama' or 'openai'
+            translator_type: 'ollama'
             translate_metadata: Whether to translate title/metadata
             verbose: Print progress messages
         """
@@ -72,20 +72,12 @@ class ManifestTranslator:
         self.translator = self._create_translator()
 
     def _create_translator(self):
-        """Create appropriate translator based on type."""
-        if self.translator_type == "ollama":
-            ollama_config = get_config()
-            return OllamaTranslator(
-                model_name=self.model_name,
-                ollama_host=ollama_config.models.ollama_host
-            )
-        elif self.translator_type == "openai":
-            # Import OpenAI translator if needed
-            from translator import setup_openai_client
-            client = setup_openai_client()
-            return OpenAITranslatorWrapper(client, self.model_name)
-        else:
-            raise ValueError(f"Unknown translator type: {self.translator_type}")
+        """Create Ollama translator."""
+        ollama_config = get_config()
+        return OllamaTranslator(
+            model_name=self.model_name,
+            ollama_host=ollama_config.models.ollama_host
+        )
 
     def translate(self) -> Path:
         """
@@ -278,34 +270,6 @@ class ManifestTranslator:
         return output_path
 
 
-class OpenAITranslatorWrapper:
-    """Wrapper for OpenAI translator to match Ollama interface."""
-
-    def __init__(self, client, model_name):
-        self.client = client
-        self.model_name = model_name
-
-    def translate_document(self, text: str, source_lang: Optional[str], target_lang: str):
-        """Translate text using OpenAI."""
-        if source_lang:
-            prompt = f"Translate from {source_lang} to {target_lang}:\n\n{text}"
-        else:
-            prompt = f"Translate to {target_lang}:\n\n{text}"
-
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
-        )
-
-        # Return object with translated_text attribute to match Ollama
-        class Result:
-            def __init__(self, text):
-                self.translated_text = text
-
-        return Result(response.choices[0].message.content.strip())
-
-
 def main():
     """Command-line interface."""
     parser = argparse.ArgumentParser(
@@ -339,9 +303,9 @@ def main():
 
     parser.add_argument(
         '--translator',
-        choices=['ollama', 'openai'],
+        choices=['ollama'],
         default='ollama',
-        help='Translator backend to use'
+        help='Translator backend (Ollama, 100%% local)'
     )
 
     parser.add_argument(
