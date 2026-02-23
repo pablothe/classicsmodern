@@ -278,6 +278,202 @@ def generate_word_timings_whisper_cpp(
             temp_path.unlink()
 
 
+def find_chunk_manifest(playlist_path: Path) -> Optional[Path]:
+    """Find chunk manifest JSON in the same directory as the playlist"""
+    audio_dir = playlist_path.parent
+    manifests = list(audio_dir.glob("*_chunk_manifest.json"))
+    return manifests[0] if manifests else None
+
+
+def generate_word_timings_from_chunks(
+    chunk_manifest_path: Path,
+    playlist_path: Path
+) -> Dict:
+    """
+    Generate word timings from the chunk manifest created during TTS generation.
+
+    Since we know exactly which text chunks were sent to Kokoro and the duration
+    of each chunk's audio, we can build accurate word timings by distributing
+    words uniformly within each chunk's time window. This is much more accurate
+    than distributing uniformly across an entire chapter.
+
+    Args:
+        chunk_manifest_path: Path to *_chunk_manifest.json
+        playlist_path: Path to the chapter-level M3U playlist (for audio_file names)
+
+    Returns:
+        Dictionary with word timing data per chapter (same format as karaoke.js expects)
+    """
+    print(f"  Using chunk manifest method (per-chunk timing)...")
+
+    # Load chunk manifest
+    with open(chunk_manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+
+    # Load clean text (saved alongside manifest during generation)
+    clean_text_path = chunk_manifest_path.parent / chunk_manifest_path.name.replace(
+        '_chunk_manifest.json', '_clean_text.txt'
+    )
+    if clean_text_path.exists():
+        with open(clean_text_path, 'r', encoding='utf-8') as f:
+            clean_text = f.read()
+        print(f"  Loaded clean text: {len(clean_text):,} characters")
+    else:
+        # Fallback: try to read source markdown from the book directory
+        book_dir = chunk_manifest_path.parent
+        while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio']:
+            book_dir = book_dir.parent
+        md_files = list(book_dir.glob("*.md"))
+        if md_files:
+            with open(md_files[0], 'r', encoding='utf-8') as f:
+                clean_text = f.read()
+            print(f"  Note: Using source markdown as text reference (clean_text.txt not found)")
+            print(f"  For best accuracy, regenerate the audiobook to create clean_text.txt")
+        else:
+            print(f"  Warning: No text source found, using truncated text_preview from manifest")
+            clean_text = None
+
+    # Parse the chapter-level playlist to get chapter audio filenames
+    chapter_audio_files = parse_m3u_playlist(playlist_path)
+    chapter_file_map = {}  # chapter_sequential_index -> (file_index, audio_filename)
+    for i, audio_file in enumerate(chapter_audio_files):
+        chapter_num = detect_chapter_from_filename(audio_file.name)
+        if chapter_num:
+            chapter_file_map[chapter_num] = (i, audio_file.name)
+
+    # Group chunks by chapter
+    chunks_by_chapter = {}
+    for chunk in manifest['chunks']:
+        ch = chunk['chapter']
+        if ch not in chunks_by_chapter:
+            chunks_by_chapter[ch] = []
+        chunks_by_chapter[ch].append(chunk)
+
+    # Build word timings per chapter
+    word_timings_data = {}
+    unique_chapters = sorted(chunks_by_chapter.keys())
+
+    for seq_idx, chapter_num in enumerate(unique_chapters, 1):
+        chapter_chunks = chunks_by_chapter[chapter_num]
+
+        # Find this chapter's start time (cumulative_duration of first chunk)
+        chapter_start_time = chapter_chunks[0]['cumulative_duration']
+
+        # Get chapter audio file info from playlist
+        if seq_idx in chapter_file_map:
+            file_index, audio_filename = chapter_file_map[seq_idx]
+        else:
+            # Fallback: use sequential index
+            file_index = seq_idx - 1
+            audio_filename = f"chapter_{seq_idx:02d}.mp3"
+
+        all_words = []
+        chapter_duration = 0.0
+        has_clean_text = (clean_text is not None and
+                         clean_text_path.exists() and
+                         chapter_chunks[-1]['text_end'] <= len(clean_text))
+
+        if has_clean_text:
+            # ACCURATE MODE: Use exact chunk text from clean_text.txt
+            for chunk in chapter_chunks:
+                chunk_start_in_chapter = chunk['cumulative_duration'] - chapter_start_time
+                chunk_duration = chunk['duration']
+                chapter_duration = chunk_start_in_chapter + chunk_duration
+
+                chunk_text = clean_text[chunk['text_start']:chunk['text_end']]
+                words = chunk_text.split()
+                if not words:
+                    continue
+
+                time_per_word = chunk_duration / len(words)
+
+                for word_idx, word in enumerate(words):
+                    start_time = chunk_start_in_chapter + (word_idx * time_per_word)
+                    end_time = chunk_start_in_chapter + ((word_idx + 1) * time_per_word)
+
+                    char_offset = len(' '.join(words[:word_idx])) + (1 if word_idx > 0 else 0)
+                    text_pos = chunk['text_start'] + char_offset
+
+                    all_words.append({
+                        "word": word,
+                        "start": round(start_time, 3),
+                        "end": round(end_time, 3),
+                        "text_pos": text_pos
+                    })
+        else:
+            # FALLBACK MODE: No clean text file — distribute chapter words
+            # proportionally across chunks by duration (still much better than
+            # uniform across entire chapter)
+            chapter_text = clean_text or ""
+
+            # Try to extract just this chapter's text from the source markdown
+            if clean_text and not clean_text_path.exists():
+                # clean_text is actually the source markdown (loaded as fallback)
+                try:
+                    ch_text, _ = extract_chapter_text(clean_text, seq_idx, len(unique_chapters))
+                    chapter_text = ch_text
+                except Exception:
+                    pass
+
+            # Clean markdown from chapter text for word splitting
+            chapter_text_clean = re.sub(r'^#{1,6}\s+', '', chapter_text, flags=re.MULTILINE)
+            chapter_text_clean = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', chapter_text_clean)
+            chapter_text_clean = re.sub(r'\*\*([^*]+)\*\*', r'\1', chapter_text_clean)
+            chapter_text_clean = re.sub(r'\*([^*]+)\*', r'\1', chapter_text_clean)
+            chapter_words = chapter_text_clean.split()
+
+            if chapter_words:
+                # Calculate total chapter duration from chunks
+                for chunk in chapter_chunks:
+                    chunk_start_in_chapter = chunk['cumulative_duration'] - chapter_start_time
+                    chapter_duration = chunk_start_in_chapter + chunk['duration']
+
+                # Distribute words across chunks proportionally by duration
+                total_chapter_duration = sum(c['duration'] for c in chapter_chunks)
+                word_cursor = 0
+
+                for chunk in chapter_chunks:
+                    chunk_start_in_chapter = chunk['cumulative_duration'] - chapter_start_time
+                    chunk_duration = chunk['duration']
+
+                    # Number of words for this chunk, proportional to its duration
+                    if total_chapter_duration > 0:
+                        word_share = chunk_duration / total_chapter_duration
+                    else:
+                        word_share = 1.0 / len(chapter_chunks)
+                    n_words = max(1, round(len(chapter_words) * word_share))
+                    chunk_words = chapter_words[word_cursor:word_cursor + n_words]
+                    word_cursor += n_words
+
+                    if not chunk_words:
+                        continue
+
+                    time_per_word = chunk_duration / len(chunk_words)
+                    for word_idx, word in enumerate(chunk_words):
+                        start_time = chunk_start_in_chapter + (word_idx * time_per_word)
+                        end_time = chunk_start_in_chapter + ((word_idx + 1) * time_per_word)
+                        all_words.append({
+                            "word": word,
+                            "start": round(start_time, 3),
+                            "end": round(end_time, 3),
+                            "text_pos": 0
+                        })
+
+        chapter_key = f"chapter_{seq_idx}"
+        word_timings_data[chapter_key] = {
+            "file_index": file_index,
+            "audio_file": audio_filename,
+            "chapter_number": seq_idx,
+            "word_count": len(all_words),
+            "duration": round(chapter_duration, 3),
+            "words": all_words
+        }
+
+        print(f"  Chapter {seq_idx}: {len(all_words)} words, {chapter_duration:.1f}s")
+
+    return word_timings_data
+
+
 def generate_word_timings_fallback(
     audio_path: Path,
     text: str
@@ -340,12 +536,34 @@ def generate_audiobook_word_timings(
     Args:
         playlist_path: Path to M3U playlist
         source_text_path: Optional path to source text (auto-detected if None)
-        method: Alignment method ("whisperx", "whisper_cpp", "fallback", "auto")
+        method: Alignment method ("chunk_manifest", "whisperx", "whisper_cpp", "fallback", "auto")
 
     Returns:
         Dictionary with word timing data per chapter
     """
-    # Auto-detect source text if not provided
+    # Determine alignment method (early, so chunk_manifest can short-circuit)
+    chunk_manifest_path = find_chunk_manifest(playlist_path)
+
+    if method == "auto":
+        if chunk_manifest_path:
+            method = "chunk_manifest"
+        elif check_whisperx_available():
+            method = "whisperx"
+        elif check_whisper_cpp_available():
+            method = "whisper_cpp"
+        else:
+            method = "fallback"
+
+    # chunk_manifest method: uses chunk-level data directly, no source text needed
+    if method == "chunk_manifest":
+        if not chunk_manifest_path:
+            print("⚠️  No chunk manifest found, falling back to uniform distribution")
+            method = "fallback"
+        else:
+            print(f"✓ Using chunk manifest: {chunk_manifest_path.name}")
+            return generate_word_timings_from_chunks(chunk_manifest_path, playlist_path)
+
+    # Other methods need source text
     if not source_text_path:
         book_dir = playlist_path.parent
         while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio']:
@@ -371,16 +589,6 @@ def generate_audiobook_word_timings(
         sys.exit(1)
 
     print(f"✓ Found {len(audio_files)} audio files")
-
-    # Determine alignment method
-    if method == "auto":
-        if check_whisperx_available():
-            method = "whisperx"
-        elif check_whisper_cpp_available():
-            method = "whisper_cpp"
-        else:
-            method = "fallback"
-
     print(f"✓ Using alignment method: {method}")
 
     # Generate word timings for each audio file
@@ -487,9 +695,9 @@ Methods:
 
     parser.add_argument(
         '--method',
-        choices=['whisperx', 'whisper_cpp', 'fallback', 'auto'],
+        choices=['chunk_manifest', 'whisperx', 'whisper_cpp', 'fallback', 'auto'],
         default='auto',
-        help='Word alignment method (default: auto)'
+        help='Word alignment method (default: auto, prefers chunk_manifest)'
     )
 
     parser.add_argument(

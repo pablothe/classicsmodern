@@ -291,7 +291,7 @@ class AudiobookMaker:
                     from lib.audio.word_timings import generate_audiobook_word_timings, save_word_timings
                     playlist_path = Path(self.state['playlist'])
                     print(f"  Generating word timings for {self.state['chapters']} chapters...")
-                    word_data = generate_audiobook_word_timings(playlist_path, method='fallback')
+                    word_data = generate_audiobook_word_timings(playlist_path, method='auto')
                     # Save to book directory
                     book_dir = playlist_path.parent
                     while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio']:

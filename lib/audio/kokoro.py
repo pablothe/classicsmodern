@@ -768,6 +768,11 @@ class KokoroAudioGenerator:
         with open(manifest_path, 'w', encoding='utf-8') as f:
             json.dump(manifest, f, indent=2, ensure_ascii=False)
 
+        # Save the clean text for word timing generation (karaoke)
+        clean_text_path = output_dir / f"{base_name}_clean_text.txt"
+        with open(clean_text_path, 'w', encoding='utf-8') as f:
+            f.write(clean_text)
+
         return manifest
 
     def generate_audiobook(
