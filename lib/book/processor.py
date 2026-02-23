@@ -427,6 +427,16 @@ class BookProcessor:
         # Sort chapters by position
         chapters.sort(key=lambda x: x['line_num'])
 
+        # Deduplicate: if multiple patterns detect the same chapter location
+        # (e.g., "## Chapter 1." on line 215 and "CHAPITRE I." on line 216),
+        # keep only the first detection
+        if len(chapters) > 1:
+            deduped = [chapters[0]]
+            for ch in chapters[1:]:
+                if ch['line_num'] - deduped[-1]['line_num'] > 3:
+                    deduped.append(ch)
+            chapters = deduped
+
         # Fallback: if no patterns matched, try using ## headers as chapters
         if not chapters:
             chapters = self._detect_header_chapters(lines)
