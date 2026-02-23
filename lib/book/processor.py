@@ -381,6 +381,12 @@ class BookProcessor:
                         chapter_num = match.group(3)  # Roman numeral or number
                         chapter_title = match.group(4).strip() if match.group(4) else ""
 
+                        # Filter out TOC/link artifacts (e.g., "[## Chapter 1.](#chapter-1)")
+                        if len(chapter_title) < 2 or '](' in chapter_title:
+                            continue
+                        if '](#' in match.group(0):
+                            continue
+
                         chapters.append({
                             'line_num': i,
                             'char_pos': char_pos,

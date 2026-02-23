@@ -391,6 +391,10 @@ def discover_books() -> List[Dict]:
         if re.search(r'_\d{8}_\d{6}\.m3u$', playlist_path.name):
             continue
 
+        # Skip chunks playlists — intermediate build artifacts, not playable variants
+        if playlist_path.name.endswith('_chunks.m3u'):
+            continue
+
         # Get book directory (top-level folder in books/)
         try:
             rel_path = playlist_path.relative_to(BOOKS_DIR)

@@ -249,6 +249,10 @@ class KokoroAudioGenerator:
                 flags=re.MULTILINE
             )
 
+        # Remove markdown links FIRST (before headers), so [## Chapter 1](#...)
+        # becomes ## Chapter 1, which the header regex can then clean
+        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+
         # Remove markdown headers but keep text
         if preserve_chapter_markers:
             def replace_header(match):
@@ -265,9 +269,8 @@ class KokoroAudioGenerator:
             text = re.sub(r'^(#{1,6})\s+(.+)$', replace_header, text, flags=re.MULTILINE)
         else:
             text = re.sub(r'^(#{1,6})\s+(.+)$', r'\2', text, flags=re.MULTILINE)
-
-        # Remove markdown links but keep text
-        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+        # Also strip any ## markers mid-line (from TOC link cleanup above)
+        text = re.sub(r'#{1,6}\s+', '', text)
 
         # Remove emphasis symbols
         text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # Bold
@@ -501,11 +504,14 @@ class KokoroAudioGenerator:
 
     def _clean_chapter_text(self, text: str) -> str:
         """Clean chapter text for speech without Gutenberg stripping (already clean)."""
+        # Remove markdown links FIRST (before headers), so [## Chapter 1](#...)
+        # becomes ## Chapter 1, which the header regex can then clean
+        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+
         # Remove markdown headers but keep text
         text = re.sub(r'^(#{1,6})\s+(.+)$', r'\2', text, flags=re.MULTILINE)
-
-        # Remove markdown links but keep text
-        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+        # Also strip any ## markers mid-line (from TOC link cleanup above)
+        text = re.sub(r'#{1,6}\s+', '', text)
 
         # Remove emphasis symbols
         text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # Bold
