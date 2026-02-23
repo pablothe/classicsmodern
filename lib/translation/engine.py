@@ -265,8 +265,10 @@ class OllamaTranslator:
             if re.search(pattern, translated, re.IGNORECASE | re.MULTILINE):
                 return False
 
-        # Check if the translation is suspiciously short (less than 20% of original)
-        if len(translated) < len(original_chunk) * 0.2 and len(original_chunk) > 50:
+        # Check if the translation is suspiciously short (less than 10% of original)
+        # Note: cross-language translations (e.g., French→English) can legitimately
+        # produce shorter text, so we use a generous threshold
+        if len(translated) < len(original_chunk) * 0.1 and len(original_chunk) > 50:
             return False
 
         # Check for excessive repetition (same line repeated 5+ times)
@@ -362,8 +364,9 @@ Translate to {target_lang}:
                         continue
                     else:
                         print(f"❌ ERROR: Chunk {chunk.index} produced invalid translation after {max_retries} attempts")
-                        print(f"   Returning original text to prevent corruption")
-                        return chunk.content
+                        print(f"   Marking as untranslated to prevent silent language mixing")
+                        logger.warning(f"Chunk {chunk.index} could not be translated after {max_retries} validation failures")
+                        return f"[UNTRANSLATED]\n{chunk.content}\n[/UNTRANSLATED]"
 
                 return translated
 
@@ -379,11 +382,11 @@ Translate to {target_lang}:
                     time.sleep(2)
                     continue
                 else:
-                    logger.error(f"[{chunk_id}] FAILED after {max_retries} timeout attempts - returning original text")
+                    logger.error(f"[{chunk_id}] FAILED after {max_retries} timeout attempts")
                     print(f"❌ Translation failed after {max_retries} timeout attempts")
                     print(f"   Consider: 1) Checking Ollama status, 2) Reducing chunk size, 3) Using faster model")
-                    # Return original text if translation fails
-                    return chunk.content
+                    logger.warning(f"Chunk {chunk.index} could not be translated after {max_retries} timeout attempts")
+                    return f"[UNTRANSLATED]\n{chunk.content}\n[/UNTRANSLATED]"
 
             except Exception as e:
                 request_duration = time.time() - request_start
@@ -395,13 +398,14 @@ Translate to {target_lang}:
                     time.sleep(2)  # Longer pause on API errors
                     continue
                 else:
-                    logger.error(f"[{chunk_id}] FAILED after {max_retries} attempts - returning original text")
+                    logger.error(f"[{chunk_id}] FAILED after {max_retries} attempts")
                     print(f"❌ Translation failed after {max_retries} attempts")
-                    # Return original text if translation fails
-                    return chunk.content
+                    logger.warning(f"Chunk {chunk.index} could not be translated after {max_retries} error attempts")
+                    return f"[UNTRANSLATED]\n{chunk.content}\n[/UNTRANSLATED]"
 
         # Should never reach here, but just in case
-        return chunk.content
+        logger.warning(f"Chunk {chunk.index} fell through all retry logic")
+        return f"[UNTRANSLATED]\n{chunk.content}\n[/UNTRANSLATED]"
 
     def translate_document_with_context(
         self,
@@ -441,6 +445,7 @@ Translate to {target_lang}:
 
         # Translate each chunk with context
         translated_chunks = []
+        untranslated_count = 0
 
         # Use previous document's context for first chunk (if available)
         if previous_context:
@@ -462,11 +467,21 @@ Translate to {target_lang}:
             )
             translated_chunks.append(translated)
 
-            # Update context for next chunk
-            previous_translation = translated
+            # Track untranslated chunks
+            if '[UNTRANSLATED]' in translated:
+                untranslated_count += 1
+            else:
+                # Only use successfully translated chunks as context
+                previous_translation = translated
 
             # Progress indicator
             print(f"  Chunk {i+1}/{total_chunks} completed")
+
+        # Report untranslated chunks
+        if untranslated_count > 0:
+            print(f"\n⚠️  {untranslated_count}/{total_chunks} chunks could not be translated")
+            print(f"   Search for [UNTRANSLATED] markers in the output to find them")
+            logger.warning(f"{untranslated_count}/{total_chunks} chunks were not translated")
 
         # Combine chunks
         translated_text = '\n\n'.join(translated_chunks)
@@ -520,6 +535,7 @@ Translate to {target_lang}:
         # Translate each chunk with context from previous chunk
         translated_chunks = []
         previous_translation = None
+        untranslated_count = 0
 
         for i, chunk in enumerate(chunks):
             if progress_callback:
@@ -534,11 +550,21 @@ Translate to {target_lang}:
             )
             translated_chunks.append(translated)
 
-            # Update context for next chunk
-            previous_translation = translated
+            # Track untranslated chunks
+            if '[UNTRANSLATED]' in translated:
+                untranslated_count += 1
+            else:
+                # Only use successfully translated chunks as context
+                previous_translation = translated
 
             # Progress indicator
             print(f"  Chunk {i+1}/{total_chunks} completed")
+
+        # Report untranslated chunks
+        if untranslated_count > 0:
+            print(f"\n⚠️  {untranslated_count}/{total_chunks} chunks could not be translated")
+            print(f"   Search for [UNTRANSLATED] markers in the output to find them")
+            logger.warning(f"{untranslated_count}/{total_chunks} chunks were not translated")
 
         # Combine chunks
         translated_text = '\n\n'.join(translated_chunks)

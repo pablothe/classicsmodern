@@ -163,7 +163,8 @@ def extract_chapter_text(source_text: str, chapter_num: int, total_chapters: int
 def generate_word_timings_whisperx(
     audio_path: Path,
     text: str,
-    device: str = "cpu"
+    device: str = "cpu",
+    language: str = "en"
 ) -> List[Dict]:
     """
     Generate word timings using WhisperX (recommended method).
@@ -172,6 +173,7 @@ def generate_word_timings_whisperx(
         audio_path: Path to audio file
         text: Expected text content
         device: Device to run on ("cpu", "cuda", "mps")
+        language: Language code for alignment model (default: "en")
 
     Returns:
         List of word timing dictionaries
@@ -181,7 +183,7 @@ def generate_word_timings_whisperx(
     except ImportError:
         raise ImportError("WhisperX not installed. Install with: pip install whisperx")
 
-    print(f"  Using WhisperX for alignment...")
+    print(f"  Using WhisperX for alignment (language: {language})...")
 
     # Load audio
     audio = whisperx.load_audio(str(audio_path))
@@ -193,7 +195,7 @@ def generate_word_timings_whisperx(
     result = model.transcribe(audio, batch_size=16)
 
     # Align with reference text
-    model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
+    model_a, metadata = whisperx.load_align_model(language_code=language, device=device)
     result = whisperx.align(
         result["segments"],
         model_a,

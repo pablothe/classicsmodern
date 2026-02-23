@@ -195,11 +195,33 @@ class AudioTextPreprocessor:
         # No transformation needed
         return line, len(line), len(line)
 
+    def _strip_untranslated_blocks(self, text: str) -> str:
+        """
+        Strip [UNTRANSLATED]...[/UNTRANSLATED] blocks before TTS.
+
+        These markers are inserted by the translation engine when a chunk
+        could not be translated after all retries. Without this, Kokoro
+        would literally synthesize "bracket untranslated bracket" as audio.
+        """
+        pattern = re.compile(
+            r'\[UNTRANSLATED\]\s*.*?\s*\[/UNTRANSLATED\]',
+            re.DOTALL
+        )
+        matches = list(pattern.finditer(text))
+        if matches:
+            print(f"  ⚠️  Stripping {len(matches)} untranslated block(s) from audio input")
+            text = pattern.sub(
+                'Note: a section could not be translated and has been skipped.',
+                text
+            )
+        return text
+
     def preprocess_for_speech(self, text: str) -> PreprocessingResult:
         """
         Preprocess text for natural speech synthesis.
 
         Transformations:
+        - Strip [UNTRANSLATED] blocks (from failed translation chunks)
         - Markdown headers → Spoken chapter announcements
         - Roman numerals → Arabic numbers
         - Remove visual formatting (bold, italic)
@@ -212,6 +234,9 @@ class AudioTextPreprocessor:
             PreprocessingResult with spoken text and position mappings
         """
         self.transformations = []
+
+        # Strip untranslated blocks before any other processing
+        text = self._strip_untranslated_blocks(text)
 
         original_to_spoken = {}
         spoken_to_original = {}

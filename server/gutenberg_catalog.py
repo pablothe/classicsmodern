@@ -121,11 +121,14 @@ class GutenbergCatalog:
                     # Get download count from next sibling text
                     downloads = self._extract_downloads(item)
 
+                    # Detect language from book's metadata page
+                    language = self._fetch_book_language(gutenberg_id)
+
                     book = {
                         'gutenberg_id': gutenberg_id,
                         'title': title,
                         'author': author,
-                        'language': 'en',  # Will be updated if we fetch individual pages
+                        'language': language,
                         'year': None,
                         'downloads': downloads,
                         'url': f"https://www.gutenberg.org/ebooks/{gutenberg_id}"
@@ -161,6 +164,55 @@ class GutenbergCatalog:
             import traceback
             traceback.print_exc()
             return []
+
+    def _fetch_book_language(self, gutenberg_id: int) -> str:
+        """
+        Fetch book language from Gutenberg metadata page.
+
+        Scrapes https://www.gutenberg.org/ebooks/{id} for the Language field
+        in the bibrec metadata table.
+
+        Args:
+            gutenberg_id: Gutenberg book ID
+
+        Returns:
+            Language string (e.g., 'English', 'French'), or 'en' as fallback
+        """
+        try:
+            url = f"https://www.gutenberg.org/ebooks/{gutenberg_id}"
+            response = requests.get(url, timeout=10)
+            if response.status_code != 200:
+                return 'en'
+
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # Gutenberg uses a table with <th>Language</th><td>French</td>
+            th_tags = soup.find_all('th')
+            for th in th_tags:
+                if th.get_text(strip=True).lower() == 'language':
+                    td = th.find_next_sibling('td')
+                    if td:
+                        lang = td.get_text(strip=True)
+                        # Normalize to ISO-like codes
+                        lang_map = {
+                            'english': 'en', 'french': 'fr', 'german': 'de',
+                            'spanish': 'es', 'italian': 'it', 'portuguese': 'pt',
+                            'dutch': 'nl', 'russian': 'ru', 'chinese': 'zh',
+                            'japanese': 'ja', 'latin': 'la', 'greek': 'el',
+                            'finnish': 'fi', 'hungarian': 'hu', 'danish': 'da',
+                            'swedish': 'sv', 'norwegian': 'no', 'polish': 'pl',
+                            'czech': 'cs', 'catalan': 'ca', 'esperanto': 'eo',
+                            'tagalog': 'tl',
+                        }
+                        return lang_map.get(lang.lower(), lang.lower())
+
+            # Respect rate limiting
+            time.sleep(DELAY_BETWEEN_REQUESTS)
+
+        except Exception:
+            pass
+
+        return 'en'
 
     def _parse_title_author(self, text: str) -> tuple:
         """
@@ -260,6 +312,39 @@ class GutenbergCatalog:
                 return book
         return None
 
+    def enrich_languages(self) -> int:
+        """
+        Enrich existing catalog entries with actual language data from Gutenberg.
+
+        Fetches language metadata for books that are still marked as 'en' (default).
+
+        Returns:
+            Number of books updated
+        """
+        books = self.catalog.get("books", [])
+        updated = 0
+
+        print(f"\n🌐 Enriching language data for {len(books)} books...")
+
+        for i, book in enumerate(books):
+            gutenberg_id = book['gutenberg_id']
+            lang = self._fetch_book_language(gutenberg_id)
+
+            if lang != book.get('language', 'en'):
+                book['language'] = lang
+                updated += 1
+                print(f"  [{i+1:3d}] {book['title'][:40]} → {lang}")
+
+            if i % 50 == 0 and i > 0:
+                print(f"  Progress: {i}/{len(books)} ({updated} updated)")
+
+        if updated > 0:
+            self.catalog['updated_at'] = datetime.now().isoformat()
+            self._save_catalog()
+
+        print(f"\n✓ Updated {updated} books with correct language")
+        return updated
+
     def get_stats(self) -> Dict:
         """
         Get catalog statistics.
@@ -344,6 +429,12 @@ Examples:
     )
 
     parser.add_argument(
+        '--enrich-languages',
+        action='store_true',
+        help='Update catalog entries with actual language data from Gutenberg'
+    )
+
+    parser.add_argument(
         '--stats',
         action='store_true',
         help='Show catalog statistics'
@@ -357,6 +448,11 @@ Examples:
     # Build/refresh
     if args.build or args.refresh:
         catalog.build_catalog()
+        return
+
+    # Enrich languages
+    if args.enrich_languages:
+        catalog.enrich_languages()
         return
 
     # Statistics

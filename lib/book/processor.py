@@ -92,29 +92,32 @@ class BookProcessor:
         # Common in Gutenberg books that don't use the word "Chapter"
         (r'^#{1,6}\s+([IVXLCDM]+)\.\s+(.+)', 'markdown_roman_title'),
 
-        # Markdown headers with chapter keywords
-        (r'^#{1,6}\s+(Chapter|CHAPTER|Part|PART|Book|BOOK|Section|SECTION)\s+(\d+|[IVXLCDM]+):?\s*(.*)', 'markdown_chapter'),
+        # Markdown headers with chapter keywords (multilingual)
+        (r'^#{1,6}\s+(Chapter|CHAPTER|Chapitre|CHAPITRE|Kapitel|KAPITEL|Capítulo|CAPÍTULO|Capitolo|CAPITOLO|Глава|Part|PART|Partie|PARTIE|Teil|TEIL|Parte|PARTE|Часть|Book|BOOK|Livre|LIVRE|Buch|BUCH|Libro|LIBRO|Книга|Section|SECTION|Caput|Liber)\s+(\d+|[IVXLCDM]+):?\s*(.*)', 'markdown_chapter'),
 
         # Alice in Wonderland style - chapters without line breaks (## CHAPTER I.Title)
-        (r'(#{1,6}\s*)?(CHAPTER|Chapter)\s+([IVXLCDM]+|[0-9]+)\.([^#\n]+)', 'alice_style'),
+        (r'(#{1,6}\s*)?(CHAPTER|Chapter|CHAPITRE|Chapitre)\s+([IVXLCDM]+|[0-9]+)\.([^#\n]+)', 'alice_style'),
 
         # Numbered lists (1. Title or 1. Chapter 1)
         (r'^(\d+)\.\s+(.+)', 'numbered_list'),
 
-        # Chapter with word numbers (Chapter One, Part Two, etc.)
-        (r'^(Chapter|Part|Book|Section)\s+(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve)', 'word_number'),
+        # Chapter with word numbers (multilingual: Chapter One, Chapitre Premier, etc.)
+        (r'^(Chapter|Part|Book|Section|Chapitre|Partie|Livre|Kapitel|Teil|Buch|Capítulo|Parte|Libro)\s+(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve|Premier|Première|Deuxième|Troisième)', 'word_number'),
 
         # Ordinal chapters (First Chapter, Second Part, etc.)
         (r'^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\s+(Chapter|Part|Book)', 'ordinal'),
 
-        # Act/Scene for plays (Act I, Scene 1)
-        (r'^(Act|ACT|Scene|SCENE)\s+([IVXLCDM]+|\d+)', 'act_scene'),
+        # Act/Scene for plays (multilingual)
+        (r'^(Act|ACT|Scene|SCENE|Acte|ACTE|Scène|SCÈNE|Akt|AKT|Szene|Acto|ACTO|Escena|Atto|ATTO|Scena)\s+([IVXLCDM]+|\d+)', 'act_scene'),
 
-        # Epistolary formats (Letter I, Entry 1, Day 1)
-        (r'^(Letter|Entry|Day|Night|Journal|Diary)\s+(\d+|[IVXLCDM]+)', 'epistolary'),
+        # Epistolary formats (Letter I, Entry 1, Day 1, Lettre I, Brief I)
+        (r'^(Letter|Entry|Day|Night|Journal|Diary|Lettre|Brief|Carta|Lettera)\s+(\d+|[IVXLCDM]+)', 'epistolary'),
 
-        # Special sections
-        (r'^(Prologue|Epilogue|Introduction|Preface|Foreword|Interlude|Conclusion|Appendix)', 'special_section'),
+        # Special sections (multilingual)
+        (r'^(Prologue|Epilogue|Introduction|Preface|Foreword|Interlude|Conclusion|Appendix|Préface|Épilogue|Avant-propos|Einleitung|Nachwort|Vorwort|Prólogo|Epílogo|Introducción|Conclusión|Prefazione|Epilogo|Introduzione)', 'special_section'),
+
+        # Non-English chapter headers without markdown prefix (bare text lines)
+        (r'^(CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*(.*)', 'multilingual_chapter'),
 
         # Academic sections (Section 1.2.3)
         (r'^Section\s+\d+(\.\d+)*', 'academic_section'),
@@ -524,14 +527,22 @@ class BookProcessor:
         # Remove leading numbers and dots
         line = re.sub(r'^\d+\.\s*', '', line)
 
+        # For multilingual_chapter, extract title after keyword + number
+        if pattern_type == 'multilingual_chapter':
+            line = re.sub(
+                r'^(CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*',
+                '', line, flags=re.IGNORECASE
+            )
+            return line.strip() if line.strip() else match.group(0)
+
         # For some patterns, use the full line as title
         if pattern_type in ['winnie_pooh_style', 'special_section']:
             return line.strip()
 
-        # For chapter patterns, try to extract just the title part
-        if 'Chapter' in line or 'Part' in line:
-            # Remove "Chapter X:" or "Part X:" prefix
-            line = re.sub(r'^(Chapter|Part|Book|Section)\s+([IVXLCDM]+|\d+):?\s*', '', line, flags=re.IGNORECASE)
+        # For chapter patterns, try to extract just the title part (multilingual)
+        chapter_kw_pattern = r'^(Chapter|Part|Book|Section|Chapitre|Partie|Livre|Kapitel|Teil|Buch|Capítulo|Parte|Libro|Capitolo|Глава)\s+([IVXLCDM]+|\d+):?\s*'
+        if re.match(chapter_kw_pattern, line, re.IGNORECASE):
+            line = re.sub(chapter_kw_pattern, '', line, flags=re.IGNORECASE)
 
         # Clean up any remaining formatting
         title = line.strip()

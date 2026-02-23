@@ -111,7 +111,7 @@ class AudiobookMaker:
         """Generate chapter metadata JSON for web player navigation."""
         try:
             from lib.audio.chapter_metadata import generate_chapter_metadata
-            generate_chapter_metadata(playlist_path)
+            generate_chapter_metadata(Path(playlist_path))
             print("  Chapter metadata generated")
             return True
         except Exception as e:
@@ -198,12 +198,13 @@ class AudiobookMaker:
                         print(f"   Run: python3 validate.py {self.input_file} --auto-fix")
                         sys.exit(2)
 
-                print("\n  Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
-                response = input().strip().lower()
-                if response != 'y':
-                    print("\n  Aborted by user.")
-                    print(f"   Run: python3 validate.py {self.input_file} --auto-fix")
-                    return {'success': False, 'reason': 'validation_failed'}
+                if not self.non_interactive:
+                    print("\n  Continue anyway? This may result in poor audiobook quality. (y/N): ", end="")
+                    response = input().strip().lower()
+                    if response != 'y':
+                        print("\n  Aborted by user.")
+                        print(f"   Run: python3 validate.py {self.input_file} --auto-fix")
+                        return {'success': False, 'reason': 'validation_failed'}
             else:
                 print("  Book validation passed!")
                 feature_count = sum(validation_report.feature_support.values())

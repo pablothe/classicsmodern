@@ -145,6 +145,43 @@ class GutenbergDownloader:
                 'error': str(e)
             }
 
+    def _decode_response(self, response) -> str:
+        """
+        Properly decode HTTP response content, handling Gutenberg's encoding quirks.
+
+        Gutenberg pages often have incorrect encoding headers, causing mojibake
+        (e.g., Ã© instead of é). This method tries multiple strategies.
+        """
+        # Strategy 1: Try UTF-8 on raw bytes (most reliable for Gutenberg)
+        try:
+            text = response.content.decode('utf-8')
+            # Quick sanity check: mojibake typically has Ã followed by another char
+            if 'Ã©' not in text and 'Ã¨' not in text and 'Ã¢' not in text:
+                return text
+        except UnicodeDecodeError:
+            pass
+
+        # Strategy 2: Check HTML meta charset
+        try:
+            # Peek at raw bytes for charset declaration
+            raw_head = response.content[:2000].decode('ascii', errors='ignore')
+            charset_match = re.search(r'charset[="\s]+([^\s";>]+)', raw_head, re.IGNORECASE)
+            if charset_match:
+                charset = charset_match.group(1).strip('"\'')
+                return response.content.decode(charset)
+        except (UnicodeDecodeError, LookupError):
+            pass
+
+        # Strategy 3: Try latin-1 (never fails, but may not be correct)
+        try:
+            text = response.content.decode('latin-1')
+            return text
+        except UnicodeDecodeError:
+            pass
+
+        # Strategy 4: Fall back to requests' auto-detection
+        return response.text
+
     def _fetch_html(self, gutenberg_id: int) -> str:
         """
         Fetch book HTML from Gutenberg.
@@ -155,38 +192,174 @@ class GutenbergDownloader:
         Returns:
             HTML content as string
         """
-        # Try HTML format first (better formatting)
-        urls = [
+        # Try HTML format first (better formatting, has TOC for chapter extraction)
+        html_urls = [
             f"https://www.gutenberg.org/files/{gutenberg_id}/{gutenberg_id}-h/{gutenberg_id}-h.htm",
             f"https://www.gutenberg.org/cache/epub/{gutenberg_id}/pg{gutenberg_id}.html",
             f"https://www.gutenberg.org/files/{gutenberg_id}/{gutenberg_id}-h.htm"
         ]
 
-        for url in urls:
+        for url in html_urls:
             try:
                 print(f"  Trying: {url}")
                 response = requests.get(url, timeout=30)
                 if response.status_code == 200:
-                    print(f"  ✓ Success!")
-                    return response.text
+                    content = self._decode_response(response)
+                    print(f"  ✓ Success (HTML)!")
+                    return content
             except requests.RequestException:
                 continue
 
-        # Fallback to plain text (convert to minimal HTML)
-        txt_url = f"https://www.gutenberg.org/files/{gutenberg_id}/{gutenberg_id}-0.txt"
-        try:
-            print(f"  Trying TXT fallback: {txt_url}")
-            response = requests.get(txt_url, timeout=30)
-            if response.status_code == 200:
-                # Wrap in minimal HTML
-                text = response.text
-                html = f"<html><body><pre>{text}</pre></body></html>"
-                print(f"  ✓ Success (TXT format)!")
-                return html
-        except requests.RequestException:
-            pass
+        # Fallback to plain text
+        txt_urls = [
+            f"https://www.gutenberg.org/files/{gutenberg_id}/{gutenberg_id}-0.txt",
+            f"https://www.gutenberg.org/cache/epub/{gutenberg_id}/pg{gutenberg_id}.txt",
+        ]
+        for txt_url in txt_urls:
+            try:
+                print(f"  Trying TXT: {txt_url}")
+                response = requests.get(txt_url, timeout=30)
+                if response.status_code == 200:
+                    text = self._decode_response(response)
+                    html = f"<html><body><pre>{text}</pre></body></html>"
+                    print(f"  ✓ Success (TXT format)!")
+                    return html
+            except requests.RequestException:
+                continue
 
         raise ValueError(f"Could not download book #{gutenberg_id} from any URL")
+
+    @staticmethod
+    def _roman_to_int(roman: str) -> int:
+        """Convert Roman numeral string to integer."""
+        roman = roman.upper().rstrip('.')
+        values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        total = 0
+        prev = 0
+        for char in reversed(roman):
+            value = values.get(char, 0)
+            if value < prev:
+                total -= value
+            else:
+                total += value
+            prev = value
+        return total
+
+    def _extract_toc_from_html(self, soup) -> list:
+        """
+        Extract table of contents from Gutenberg HTML.
+
+        Gutenberg books often have a TOC section with internal anchor links like:
+            <a href="#chap01">CHAPITRE I. Comment Candide...</a>
+            <a href="#link2H_4_0002">Chapter I</a>
+
+        Returns:
+            List of dicts with 'anchor', 'title', 'number' keys
+        """
+        toc_entries = []
+
+        # Find internal links that point to anchors within the document
+        internal_links = soup.find_all('a', href=re.compile(r'^#'))
+
+        # Multilingual chapter keyword pattern
+        chapter_kw = re.compile(
+            r'(chapter|chapitre|kapitel|capítulo|capitolo|глава|'
+            r'part|partie|teil|parte|часть|'
+            r'book|livre|buch|libro|книга|'
+            r'act|scene|acte|akt|'
+            r'prologue|epilogue|préface|introduction|conclusion)',
+            re.IGNORECASE
+        )
+
+        chapter_links = []
+        for link in internal_links:
+            href = link.get('href', '')[1:]  # Remove leading #
+            text = link.get_text(strip=True)
+            if not text or not href:
+                continue
+
+            is_chapter = bool(chapter_kw.search(text))
+            # Also accept standalone Roman numerals (e.g., "I.", "XIV.")
+            if not is_chapter:
+                is_chapter = bool(re.match(r'^[IVXLCDM]+\.?\s', text))
+
+            if is_chapter:
+                chapter_links.append({'anchor': href, 'title': text})
+
+        # Need at least 3 chapter links to consider it a real TOC
+        if len(chapter_links) < 3:
+            return []
+
+        for i, entry in enumerate(chapter_links):
+            title = entry['title']
+            # Try to extract chapter number (Roman or Arabic)
+            num_match = re.search(r'\b([IVXLCDM]+)\b', title)
+            number = i + 1
+            if num_match:
+                try:
+                    number = self._roman_to_int(num_match.group(1))
+                except Exception:
+                    pass
+            else:
+                digit_match = re.search(r'\b(\d+)\b', title)
+                if digit_match:
+                    try:
+                        number = int(digit_match.group(1))
+                    except Exception:
+                        pass
+
+            toc_entries.append({
+                'anchor': entry['anchor'],
+                'title': title,
+                'number': number
+            })
+
+        return toc_entries
+
+    def _normalize_chapter_title(self, original_title: str, chapter_number: int) -> str:
+        """
+        Convert a multilingual chapter title to standardized markdown format.
+
+        Examples:
+            "CHAPITRE I. Comment Candide fut élevé" → "Chapter 1. Comment Candide fut élevé"
+            "Chapter XIV" → "Chapter 14"
+        """
+        title = original_title
+        # Remove chapter keyword in any language
+        title = re.sub(
+            r'^(CHAPITRE|Chapitre|CHAPTER|Chapter|KAPITEL|Kapitel|'
+            r'CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+',
+            '', title, flags=re.IGNORECASE
+        )
+        # Remove leading Roman numeral or number with optional dot
+        title = re.sub(r'^([IVXLCDM]+|\d+)\.?\s*', '', title)
+        # Clean up extra punctuation
+        title = title.strip().strip('.').strip()
+
+        if title:
+            return f"Chapter {chapter_number}. {title}"
+        else:
+            return f"Chapter {chapter_number}"
+
+    def _inject_chapter_headers(self, soup, toc_entries: list):
+        """
+        Inject <h2> chapter headers into HTML at anchor target positions.
+
+        For each TOC entry, find the matching anchor target (by name or id attribute)
+        and insert a standardized chapter header element after it.
+        """
+        anchor_map = {entry['anchor']: entry for entry in toc_entries}
+
+        for anchor_id, entry in anchor_map.items():
+            # Find elements with matching name or id attribute
+            targets = soup.find_all(attrs={'name': anchor_id})
+            targets += soup.find_all(attrs={'id': anchor_id})
+
+            for target in targets:
+                title = self._normalize_chapter_title(entry['title'], entry['number'])
+                h2 = soup.new_tag('h2')
+                h2.string = title
+                target.insert_after(h2)
 
     def _html_to_markdown(self, html: str) -> str:
         """
@@ -203,6 +376,12 @@ class GutenbergDownloader:
         # Remove unwanted elements
         for tag in soup(['script', 'style', 'nav', 'header', 'footer']):
             tag.decompose()
+
+        # Extract TOC and inject chapter headers before conversion
+        toc_entries = self._extract_toc_from_html(soup)
+        if toc_entries:
+            print(f"  Found {len(toc_entries)} chapters in HTML TOC")
+            self._inject_chapter_headers(soup, toc_entries)
 
         # Get body content
         body = soup.body if soup.body else soup
