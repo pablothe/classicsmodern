@@ -679,9 +679,10 @@ async function showVariants(bookId) {
                 ${!hasActiveJob ? `<button class="generate-cover-btn" onclick="generateCoverForBook('${book.book_id}')">Generate Cover</button>` : ''}`;
         }
 
-        // Show/hide "Generate New Version" button (hide if job is active)
+        // Show/hide "Generate New Version" button (hide only if job is running/pending)
         const generateBtn = document.getElementById('generate-new-version-btn');
-        const hasActiveJob = jobsActivity.jobsByBook[book.book_id];
+        const activeJob = jobsActivity.jobsByBook[book.book_id];
+        const hasActiveJob = activeJob && activeJob.status !== 'failed';
         if (book.has_source_text && !hasActiveJob) {
             generateBtn.style.display = 'block';
             generateBtn.onclick = () => {
@@ -2661,6 +2662,7 @@ const jobsActivity = {
             this.jobsByBook = {};
             for (const job of allJobs) {
                 if (job.status === 'completed' || job.status === 'cancelled') continue;
+                if (this.dismissedJobs.has(job.job_id)) continue;
                 const bookId = job.config?.book_id || job.config?.book_slug;
                 if (!bookId) continue;
                 const existing = this.jobsByBook[bookId];
