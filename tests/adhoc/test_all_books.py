@@ -45,7 +45,6 @@ def test_all_books(books_dir: Path = Path("books"), verbose: bool = False) -> Di
         ('war_worlds', 'Book + Chapter structure'),
         ('winnie_pooh', '"In Which..." style chapters'),
         ('zarathustra', 'Philosophical parts/sections'),
-        ('test_audiobook', 'Test file (may be simple)')
     ]
 
     results = {}
