@@ -191,12 +191,13 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
     metrics['missing_chapters'] = validation.get('missing', [])
     metrics['duplicate_chapters'] = validation.get('duplicates', [])
 
-    # Errors vs warnings
+    # Chapter sequence issues are warnings, not errors — audio generation
+    # only needs chapter boundaries, not perfect sequential numbering
     if not validation.get('valid', False):
         if validation.get('missing', []):
-            errors.append(f"Missing chapters: {validation['missing']}")
+            warnings.append(f"Non-sequential chapter numbering (missing: {len(validation['missing'])} numbers)")
         if validation.get('duplicates', []):
-            errors.append(f"Duplicate chapters: {validation['duplicates']}")
+            warnings.append(f"Duplicate chapter numbers: {validation['duplicates'][:10]}")
 
     # TOC/content mismatch
     if toc and chapters and len(toc) != len(chapters):
