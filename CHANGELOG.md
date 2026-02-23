@@ -2,6 +2,11 @@
 
 Version history, bug fixes, and validation results for Modern Classics.
 
+> **Note:** Entries before Feb 2026 reference scripts (`local_reader_batch_translator.py`,
+> `local_reader_deduplicate.py`, `local_tts_xtts.py`, `check_translation_progress.py`, etc.)
+> that have since been consolidated into the `lib/` package. See CLAUDE.md for current
+> project structure. Audio generation now uses Kokoro TTS (not XTTS-v2).
+
 ---
 
 ### Remove Cloud Dependencies (Feb 22, 2026)
@@ -449,8 +454,7 @@ Do not write about what you're doing - just translate."
 
 **3. Translation Quality Varies**
 - Local 4b model good but not perfect for complex literary text
-- Workaround: Use cloud models for critical passages
-- Future: Support for GPT-4, Claude API
+- Workaround: Use larger local models (e.g., gemma3-translator:12b) for critical passages
 
 ### Resolved Issues
 
@@ -632,4 +636,4 @@ python3 check_translation_progress.py books/crime_punishment/chunks/
 
 ---
 
-**Last Updated:** January 5, 2026
+**Last Updated:** February 22, 2026

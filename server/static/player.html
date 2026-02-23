@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <!-- Dark mode flash prevention -->
+    <script>
+    if (localStorage.getItem('audiobook_dark_mode') === 'dark')
+        document.documentElement.classList.add('dark-mode');
+    </script>
+
     <!-- iOS PWA Support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Audiobooks">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='75'%3E🎧%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23000'/%3E%3C/svg%3E">
 
     <!-- Theme & Title -->
-    <meta name="theme-color" content="#007aff">
+    <meta name="theme-color" content="#000000">
     <meta name="description" content="Local audiobook streaming player with lock screen controls">
     <title>Audiobook Player</title>
 
     <!-- Stylesheets & Manifest -->
-    <link rel="stylesheet" href="/static/player.css?v=20260211b">
+    <link rel="stylesheet" href="/static/player.css?v=20260222">
     <link rel="manifest" href="/static/manifest.json">
 </head>
 <body>
@@ -24,10 +30,10 @@
         <!-- Book Library View -->
         <div id="library-view" class="view active">
             <header>
-                <h1>📚 Audiobooks</h1>
+                <h1>Audiobooks</h1>
                 <div class="server-info">
                     <span id="book-count">Loading...</span>
-                    <a href="/jobs" class="jobs-link">📋 Jobs</a>
+                    <button id="dark-mode-toggle" class="dark-mode-toggle">☾</button>
                 </div>
             </header>
 
@@ -36,6 +42,7 @@
                 <div class="search-tabs">
                     <button id="tab-library" class="search-tab active">Library</button>
                     <button id="tab-store" class="search-tab" style="display: none;">Store</button>
+                    <button id="tab-queue" class="search-tab">Queue <span id="tab-queue-count" class="tab-count-badge" style="display: none;">0</span></button>
                 </div>
                 <input
                     type="text"
@@ -50,7 +57,7 @@
                 <!-- Library Section -->
                 <div id="library-section" class="results-section">
                     <div class="section-header">
-                        <h3>📖 Your Library</h3>
+                        <h3>Your Library</h3>
                         <span id="library-count" class="count-badge">0</span>
                     </div>
                     <div id="book-list" class="book-list">
@@ -61,7 +68,7 @@
                 <!-- Store Section -->
                 <div id="store-section" class="results-section" style="display: none;">
                     <div class="section-header">
-                        <h3>🏪 Available in Store</h3>
+                        <h3>Available in Store</h3>
                         <span id="store-count" class="count-badge">0</span>
                     </div>
                     <div id="store-book-list" class="book-list gutenberg-grid">
@@ -72,6 +79,17 @@
                         <button id="prev-page-btn" class="pagination-btn" disabled>← Previous</button>
                         <span id="page-info" class="page-info">Page 1 of 1</span>
                         <button id="next-page-btn" class="pagination-btn" disabled>Next →</button>
+                    </div>
+                </div>
+
+                <!-- Queue Section -->
+                <div id="queue-section" class="results-section" style="display: none;">
+                    <div class="section-header">
+                        <h3>Queue</h3>
+                        <span id="queue-count" class="count-badge">0</span>
+                    </div>
+                    <div id="queue-job-list" class="queue-job-list">
+                        <!-- Job items rendered by JS -->
                     </div>
                 </div>
             </div>
@@ -95,8 +113,11 @@
 
                 <!-- Generate New Version Button -->
                 <button id="generate-new-version-btn" class="generate-new-version-btn" style="display: none;">
-                    🎬 Generate New Version
+                    + Generate New Version
                 </button>
+
+                <!-- Active job status for this book -->
+                <div id="book-job-status" class="book-job-status" style="display: none;"></div>
 
                 <div id="variant-list" class="variant-list"></div>
             </div>
@@ -105,7 +126,7 @@
         <!-- Download Status Panel (appears when downloads active) -->
         <div id="download-status-panel" class="download-status-panel" style="display: none;">
             <div class="download-status-header">
-                <h4>📥 Active Downloads</h4>
+                <h4>Active Downloads</h4>
                 <button id="close-download-status-btn" class="close-btn">✕</button>
             </div>
             <div id="download-status-list" class="download-status-list">
@@ -122,7 +143,7 @@
             <div class="player-container">
                 <!-- Cover/Info Area -->
                 <div class="book-info">
-                    <div class="book-cover">🎧</div>
+                    <div class="book-cover"></div>
                     <h3 id="player-book-title">Book Title</h3>
                     <p id="player-narrator" class="narrator-info"></p>
                     <p id="current-chapter-name" class="current-chapter-name"></p>
@@ -150,17 +171,17 @@
 
                 <!-- Main Controls -->
                 <div class="controls">
-                    <button id="prev-file-btn" class="control-btn secondary" title="Previous file">⏮</button>
+                    <button id="prev-file-btn" class="control-btn secondary" title="Previous file">◁</button>
                     <button id="rewind-btn" class="control-btn skip-btn" title="Rewind 30s">
                         <span class="skip-icon">↶</span>
                         <span class="skip-label">30</span>
                     </button>
-                    <button id="play-pause-btn" class="control-btn primary" title="Play/Pause">▶️</button>
+                    <button id="play-pause-btn" class="control-btn primary" title="Play/Pause">▶</button>
                     <button id="forward-btn" class="control-btn skip-btn" title="Forward 30s">
                         <span class="skip-icon">↷</span>
                         <span class="skip-label">30</span>
                     </button>
-                    <button id="next-file-btn" class="control-btn secondary" title="Next file">⏭</button>
+                    <button id="next-file-btn" class="control-btn secondary" title="Next file">▷</button>
                 </div>
 
                 <!-- Secondary Controls (Audible Style) -->
@@ -170,19 +191,19 @@
                         <span class="action-label">Narration Speed</span>
                     </button>
                     <button id="chapters-btn" class="secondary-action-btn" style="display: none;">
-                        <span class="action-icon">📑</span>
+                        <span class="action-icon">≡</span>
                         <span class="action-label">Chapters</span>
                     </button>
                     <button id="sleep-timer-btn" class="secondary-action-btn">
-                        <span class="action-icon">⏱️</span>
+                        <span class="action-icon">Timer</span>
                         <span class="action-label">Sleep Timer</span>
                     </button>
                     <button id="text-sync-btn" class="secondary-action-btn" style="display: none;">
-                        <span class="action-icon">📖</span>
+                        <span class="action-icon">Aa</span>
                         <span class="action-label">Text Sync</span>
                     </button>
                     <button id="ai-assistant-btn" class="secondary-action-btn" style="display: none;">
-                        <span class="action-icon">🤖</span>
+                        <span class="action-icon">AI</span>
                         <span class="action-label">AI Assistant</span>
                     </button>
                 </div>
@@ -254,7 +275,7 @@
                     <!-- Karaoke Mode Toggle -->
                     <div class="karaoke-toggle hidden" id="karaoke-toggle">
                         <input type="checkbox" id="karaoke-mode-checkbox">
-                        <label for="karaoke-mode-checkbox">🎤 Karaoke Mode (Word Highlighting)</label>
+                        <label for="karaoke-mode-checkbox">Sync — Karaoke Mode (Word Highlighting)</label>
                         <span id="karaoke-status" class="karaoke-status inactive">
                             <span id="karaoke-status-text">Disabled</span>
                         </span>
@@ -281,7 +302,7 @@
                     </div>
 
                     <div id="chat-tools-status" class="chat-tools-status" style="display: none;">
-                        <span class="spinner">⏳</span>
+                        <span class="spinner"></span>
                         <span id="tools-status-text">Loading...</span>
                     </div>
 
@@ -355,11 +376,10 @@
             right: 0;
             height: 60%;
             background: var(--surface-color);
-            border-top: 2px solid var(--primary-color);
+            border-top: 2px solid var(--accent-color);
             display: flex;
             flex-direction: column;
             z-index: 999;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
         }
 
         .chat-header {
@@ -394,18 +414,6 @@
             margin-bottom: 15px;
             display: flex;
             flex-direction: column;
-            animation: slideIn 0.2s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .chat-message-user {
@@ -419,25 +427,27 @@
         .message-bubble {
             max-width: 80%;
             padding: 12px 16px;
-            border-radius: 18px;
+            border-radius: 2px;
             font-size: 15px;
             line-height: 1.4;
             word-wrap: break-word;
         }
 
         .chat-message-user .message-bubble {
-            background: #007aff;
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-color);
         }
 
         .chat-message-assistant .message-bubble {
-            background: var(--border-color);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
         }
 
         .chat-message-error .message-bubble {
-            background: #ff3b30;
-            color: white;
+            background: var(--bg-secondary);
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
         }
 
         .message-tools {
@@ -459,7 +469,13 @@
         }
 
         .spinner {
-            animation: rotate 1s linear infinite;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--text-primary);
+            border-radius: 50%;
+            animation: rotate 0.6s linear infinite;
         }
 
         @keyframes rotate {
@@ -478,10 +494,10 @@
 
         .suggestion-btn {
             padding: 8px 14px;
-            border: 1px solid var(--primary-color);
+            border: 1px solid var(--border-color);
             background: var(--surface-color);
-            color: var(--primary-color);
-            border-radius: 16px;
+            color: var(--text-primary);
+            border-radius: 2px;
             font-size: 13px;
             white-space: nowrap;
             cursor: pointer;
@@ -489,8 +505,8 @@
         }
 
         .suggestion-btn:hover {
-            background: var(--primary-color);
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-color);
         }
 
         .chat-form {
@@ -507,35 +523,33 @@
             border: 1px solid var(--border-color);
             background: var(--surface-color);
             color: var(--text-primary);
-            border-radius: 24px;
+            border-radius: 2px;
             font-size: 15px;
             outline: none;
         }
 
         .chat-form input:focus {
-            border-color: var(--primary-color);
-            overflow-x: auto;
-            white-space: nowrap;
+            border-color: var(--accent-color);
         }
 
         .chat-form button {
             padding: 12px 24px;
-            background: var(--primary-color);
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-color);
             border: none;
-            border-radius: 24px;
+            border-radius: 2px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: opacity 0.2s;
         }
 
         .chat-form button:hover {
-            background: var(--primary-hover);
+            opacity: 0.8;
         }
 
         .chat-form button:disabled {
-            background: var(--text-secondary);
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
@@ -556,8 +570,8 @@
         }
     </style>
 
-    <script src="/static/karaoke.js?v=20260208"></script>
-    <script src="/static/player.js?v=20260211b"></script>
-    <script src="/static/pipeline.js?v=20260211b"></script>
+    <script src="/static/karaoke.js?v=20260222"></script>
+    <script src="/static/player.js?v=20260222"></script>
+    <script src="/static/pipeline.js?v=20260222"></script>
 </body>
 </html>

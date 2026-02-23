@@ -38,7 +38,7 @@ const state = {
     chatHistory: [],
     // Unified search state
     searchQuery: '',
-    searchTab: 'library', // 'library', 'store'
+    searchTab: 'library', // 'library', 'store', 'queue'
     // Gutenberg search state
     gutenberg: {
         catalog: [],
@@ -153,6 +153,10 @@ const API = {
                 book_slug: bookSlug
             })
         });
+        if (response.status === 409) {
+            const data = await response.json();
+            throw new Error(data.message || 'A job is already running for this book');
+        }
         if (!response.ok) throw new Error('Failed to start download');
         return response.json();
     },
@@ -185,6 +189,23 @@ const API = {
 };
 
 // ============================================================================
+// Dark Mode
+// ============================================================================
+
+function initDarkMode() {
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (!toggle) return;
+    const isDark = document.documentElement.classList.contains('dark-mode');
+    toggle.textContent = isDark ? '\u2600' : '\u263E';
+    toggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark-mode');
+        const dark = document.documentElement.classList.contains('dark-mode');
+        localStorage.setItem('audiobook_dark_mode', dark ? 'dark' : 'light');
+        toggle.textContent = dark ? '\u2600' : '\u263E';
+    });
+}
+
+// ============================================================================
 // Device ID Management
 // ============================================================================
 
@@ -215,10 +236,15 @@ const ui = {
     unifiedSearchInput: document.getElementById('unified-search-input'),
     tabLibrary: document.getElementById('tab-library'),
     tabStore: document.getElementById('tab-store'),
+    tabQueue: document.getElementById('tab-queue'),
+    tabQueueCount: document.getElementById('tab-queue-count'),
     librarySection: document.getElementById('library-section'),
     storeSection: document.getElementById('store-section'),
+    queueSection: document.getElementById('queue-section'),
     libraryCount: document.getElementById('library-count'),
     storeCount: document.getElementById('store-count'),
+    queueCount: document.getElementById('queue-count'),
+    queueJobList: document.getElementById('queue-job-list'),
     storeBookList: document.getElementById('store-book-list'),
     storePagination: document.getElementById('store-pagination'),
     prevPageBtn: document.getElementById('prev-page-btn'),
@@ -365,60 +391,64 @@ function renderUnifiedSearch() {
     if (tab === 'library') {
         ui.librarySection.style.display = 'block';
         ui.storeSection.style.display = 'none';
+        ui.queueSection.style.display = 'none';
         renderLibraryBooks(filteredLibraryBooks);
     } else if (tab === 'store') {
         ui.librarySection.style.display = 'none';
         ui.storeSection.style.display = state.gutenberg.available ? 'block' : 'none';
+        ui.queueSection.style.display = 'none';
         if (state.gutenberg.available) {
             renderStoreBooks(filteredStoreBooks);
         }
+    } else if (tab === 'queue') {
+        ui.librarySection.style.display = 'none';
+        ui.storeSection.style.display = 'none';
+        ui.queueSection.style.display = 'block';
+        jobsActivity.poll();
     }
 }
 
 function renderLibraryBooks(books) {
     if (books.length === 0) {
         if (state.searchQuery) {
-            ui.bookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">No books found</div><div class="empty-state-message">Try adjusting your search</div></div>';
+            ui.bookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon"></div><div class="empty-state-title">No books found</div><div class="empty-state-message">Try adjusting your search</div></div>';
         } else if (state.books.length === 0) {
-            ui.bookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">Your library is empty</div><div class="empty-state-message">Browse the Store to get started!</div></div>';
+            ui.bookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon"></div><div class="empty-state-title">Your library is empty</div><div class="empty-state-message">Browse the Store to get started!</div></div>';
         }
         return;
     }
 
-    // Generate different gradient colors for each book
-    const gradients = [
-        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-        'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-        'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-        'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-        'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-        'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-        'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-        'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
-        'linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%)'
-    ];
-
     ui.bookList.innerHTML = books.map((book, index) => {
-        const gradient = gradients[index % gradients.length];
         const hasCover = book.has_cover && book.cover_image;
         const coverURL = hasCover ? `${API.baseURL}/api/books/${book.book_id}/cover` : null;
         const hasAudio = book.has_audio;
         const hasSourceText = book.has_source_text;
+        const hasActiveJob = jobsActivity.jobsByBook[book.book_id];
 
         return `
             <div class="book-item" data-book-id="${book.book_id}">
-                <div class="book-cover-card" style="background: ${gradient}">
+                <div class="book-cover-card">
                     ${hasCover ? `
                         <img src="${coverURL}" alt="${book.title} cover" class="book-cover-image" />
+                    ` : book.cover_generating ? `
+                        <div class="book-cover-generating">
+                            <div class="cover-shimmer"></div>
+                            <div class="cover-generating-label">Generating cover...</div>
+                        </div>
                     ` : `
                         <div class="book-cover-content">
-                            <div class="book-cover-icon">📚</div>
+                            <div class="book-cover-icon"></div>
                         </div>
                     `}
-                    ${!hasAudio && hasSourceText ? `
+                    <div class="book-status-overlay" data-status-book="${book.book_id}" style="display:none"></div>
+                    ${!hasCover && !book.cover_generating && !hasActiveJob ? `
+                        <div class="generate-cover-badge" onclick="event.stopPropagation(); generateCoverForBook('${book.book_id}')">
+                            + Generate Cover
+                        </div>
+                    ` : ''}
+                    ${!hasAudio && hasSourceText && !hasActiveJob ? `
                         <div class="generate-audio-badge" onclick="event.stopPropagation(); pipeline.openGenerationModal('${book.book_id}')">
-                            🎬 Generate Audiobook
+                            + Generate Audiobook
                         </div>
                     ` : ''}
                 </div>
@@ -431,7 +461,7 @@ function renderLibraryBooks(books) {
                     ` : ''}
                     <div class="book-meta">
                         ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
-                        ${hasAudio ? `<span>📋 ${book.variant_count}</span>` : '<span>🎙️ No audio</span>'}
+                        ${hasAudio ? `<span>${book.variant_count} version${book.variant_count !== 1 ? 's' : ''}</span>` : '<span>No audio</span>'}
                     </div>
                 </div>
             </div>
@@ -447,12 +477,41 @@ function renderLibraryBooks(books) {
     });
 }
 
+async function generateCoverForBook(bookId) {
+    try {
+        const response = await fetch(`${API.baseURL}/api/jobs/cover`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ book_id: bookId })
+        });
+
+        if (response.status === 409) {
+            const data = await response.json();
+            alert(data.message || 'A job is already running for this book');
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Cover generation job created:', data.job_id);
+
+        // Force a refresh so the job status shows on the card
+        loadLibrary();
+    } catch (err) {
+        console.error('Failed to create cover job:', err);
+        alert('Failed to start cover generation: ' + err.message);
+    }
+}
+
 function renderStoreBooks(books) {
     if (books.length === 0) {
         if (state.searchQuery) {
-            ui.storeBookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">No books found in store</div><div class="empty-state-message">Try adjusting your search</div></div>';
+            ui.storeBookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon"></div><div class="empty-state-title">No books found in store</div><div class="empty-state-message">Try adjusting your search</div></div>';
         } else {
-            ui.storeBookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🏪</div><div class="empty-state-title">Store catalog empty</div></div>';
+            ui.storeBookList.innerHTML = '<div class="empty-state"><div class="empty-state-icon"></div><div class="empty-state-title">Store catalog empty</div></div>';
         }
         ui.storePagination.style.display = 'none';
         return;
@@ -483,13 +542,13 @@ function renderStoreBooks(books) {
         return `
             <div class="store-book-card">
                 <div class="store-book-header">
-                    <div class="store-book-icon">📚</div>
+                    <div class="store-book-icon"></div>
                     <div class="store-book-info">
                         <div class="store-book-title">${escapeHtml(book.title)}</div>
                         <div class="store-book-author">${escapeHtml(book.author)}</div>
                         <div class="store-book-meta">
-                            ${book.year ? `<span>📅 ${book.year}</span>` : ''}
-                            <span>🌐 ${book.language.toUpperCase()}</span>
+                            ${book.year ? `<span>${book.year}</span>` : ''}
+                            <span>${book.language.toUpperCase()}</span>
                             <span>↓ ${book.downloads || 0}</span>
                         </div>
                     </div>
@@ -500,7 +559,7 @@ function renderStoreBooks(books) {
                     data-book-slug="${slug}"
                     data-book-title="${escapeHtml(book.title)}"
                 >
-                    📥 Download
+                    Download
                 </button>
             </div>
         `;
@@ -557,13 +616,17 @@ function handleUnifiedSearch() {
 
 function switchTab(tab) {
     /**
-     * Switch between Library and Store tabs
+     * Switch between Library, Store, and Queue tabs
      */
     state.searchTab = tab;
 
     // Update tab active states
     ui.tabLibrary.classList.toggle('active', tab === 'library');
     ui.tabStore.classList.toggle('active', tab === 'store');
+    ui.tabQueue.classList.toggle('active', tab === 'queue');
+
+    // Show/hide search input (not useful for Queue)
+    ui.unifiedSearchInput.style.display = (tab === 'queue') ? 'none' : '';
 
     // Reset store pagination when switching to store tab
     if (tab === 'store') {
@@ -605,13 +668,21 @@ async function showVariants(bookId) {
         if (book.has_cover && book.cover_image) {
             const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
             variantCoverContainer.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" class="variant-cover-image" />`;
+        } else if (book.cover_generating) {
+            variantCoverContainer.innerHTML = `<div class="variant-cover-generating">
+                <div class="cover-shimmer"></div>
+                <div class="cover-generating-label">Generating cover...</div>
+            </div>`;
         } else {
-            variantCoverContainer.innerHTML = '<div class="variant-cover-placeholder">📚</div>';
+            const hasActiveJob = jobsActivity.jobsByBook[book.book_id];
+            variantCoverContainer.innerHTML = `<div class="variant-cover-placeholder"></div>
+                ${!hasActiveJob ? `<button class="generate-cover-btn" onclick="generateCoverForBook('${book.book_id}')">Generate Cover</button>` : ''}`;
         }
 
-        // Show/hide "Generate New Version" button based on source text availability
+        // Show/hide "Generate New Version" button (hide if job is active)
         const generateBtn = document.getElementById('generate-new-version-btn');
-        if (book.has_source_text) {
+        const hasActiveJob = jobsActivity.jobsByBook[book.book_id];
+        if (book.has_source_text && !hasActiveJob) {
             generateBtn.style.display = 'block';
             generateBtn.onclick = () => {
                 if (typeof pipeline !== 'undefined' && pipeline.openGenerationModal) {
@@ -625,8 +696,9 @@ async function showVariants(bookId) {
             generateBtn.style.display = 'none';
         }
 
-        // Render variants
+        // Render variants and job status
         renderVariants();
+        updateBookJobStatus(book.book_id);
 
         // Show variant view
         ui.libraryView.classList.remove('active');
@@ -636,6 +708,48 @@ async function showVariants(bookId) {
     } catch (error) {
         console.error('Failed to load variants:', error);
         alert('Failed to load book versions');
+    }
+}
+
+function updateBookJobStatus(bookId) {
+    const container = document.getElementById('book-job-status');
+    if (!container) return;
+
+    const job = jobsActivity.jobsByBook[bookId];
+    if (!job) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = '';
+    const icon = jobsActivity.getIcon(job);
+    const typeLabel = { download: 'Downloading', translate: 'Translating', audiobook: 'Generating Audio' };
+    const label = typeLabel[job.job_type] || 'Processing';
+
+    if (job.status === 'running') {
+        const pct = job.progress || 0;
+        const msg = job.state?.message || 'Processing...';
+        const eta = job.eta_seconds ? `~${Math.ceil(job.eta_seconds / 60)} min remaining` : '';
+        container.innerHTML = `
+            <div class="book-job-card running">
+                <div class="book-job-header">${icon} ${label}</div>
+                <div class="book-job-detail">${jobsActivity.escapeHtml(msg)}${eta ? ' &middot; ' + eta : ''}</div>
+                <div class="book-job-bar"><div class="book-job-fill" style="width:${pct}%"></div></div>
+                <div class="book-job-pct">${pct}%</div>
+            </div>`;
+    } else if (job.status === 'pending') {
+        container.innerHTML = `
+            <div class="book-job-card pending">
+                <div class="book-job-header">${label} — Queued</div>
+                <div class="book-job-detail">Waiting for other jobs to finish...</div>
+            </div>`;
+    } else if (job.status === 'failed') {
+        const err = job.error || 'Unknown error';
+        container.innerHTML = `
+            <div class="book-job-card failed">
+                <div class="book-job-header">${label} — Failed</div>
+                <div class="book-job-detail">${jobsActivity.escapeHtml(err)}</div>
+            </div>`;
     }
 }
 
@@ -681,12 +795,12 @@ function renderVariants() {
                             <span class="variant-badge ${variant.type}">${variant.type}</span>
                             ${variant.is_combined ? '<span class="variant-badge combined">Single File</span>' : ''}
                         </div>
-                        <button class="delete-variant-btn" data-variant-id="${variant.variant_id}" title="Delete this audiobook">🗑️</button>
+                        <button class="delete-variant-btn" data-variant-id="${variant.variant_id}" title="Delete this audiobook">×</button>
                     </div>
                 </div>
                 <div class="variant-meta">
-                    <span>📁 ${variant.file_count} file${variant.file_count !== 1 ? 's' : ''}</span>
-                    <span>💾 ${variant.size_mb} MB</span>
+                    <span>${variant.file_count} file${variant.file_count !== 1 ? 's' : ''}</span>
+                    <span>${variant.size_mb} MB</span>
                 </div>
             </div>
         `;
@@ -807,9 +921,9 @@ function renderPlayer() {
     const bookCoverDiv = document.querySelector('.book-cover');
     if (book.has_cover && book.cover_image) {
         const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
-        bookCoverDiv.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />`;
+        bookCoverDiv.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" style="width: 100%; height: 100%; object-fit: cover; border-radius: 2px;" />`;
     } else {
-        bookCoverDiv.textContent = '🎧';
+        bookCoverDiv.textContent = '';
     }
 
     // Always show secondary controls (speed, timer, and optionally chapters)
@@ -1088,8 +1202,8 @@ async function loadChapterText(chapterIndex) {
             const error = await response.json();
             ui.textContent.innerHTML = `
                 <div class="text-error">
-                    <p>⚠️ ${error.detail || 'Text not available for this chapter'}</p>
-                    <p style="font-size: 14px; color: #666;">Make sure the source markdown file exists in the book directory.</p>
+                    <p>${error.detail || 'Text not available for this chapter'}</p>
+                    <p style="font-size: 14px; color: var(--text-secondary);">Make sure the source markdown file exists in the book directory.</p>
                 </div>
             `;
             return;
@@ -1113,8 +1227,8 @@ async function loadChapterText(chapterIndex) {
         console.error('Failed to load chapter text:', error);
         ui.textContent.innerHTML = `
             <div class="text-error">
-                <p>⚠️ Failed to load text</p>
-                <p style="font-size: 14px; color: #666;">${error.message}</p>
+                <p>Failed to load text</p>
+                <p style="font-size: 14px; color: var(--text-secondary);">${error.message}</p>
             </div>
         `;
     }
@@ -1587,7 +1701,7 @@ async function startDownload(gutenbergId, bookSlug, bookTitle) {
         };
 
         // Show notification
-        showNotification(`📥 Downloading ${bookTitle}...`);
+        showNotification(`Downloading ${bookTitle}...`);
 
         // Start polling
         startDownloadPolling();
@@ -1597,7 +1711,7 @@ async function startDownload(gutenbergId, bookSlug, bookTitle) {
 
     } catch (error) {
         console.error('[Download] Error:', error);
-        showNotification(`❌ Failed to start download: ${error.message}`, 'error');
+        showNotification(`Failed to start download: ${error.message}`, 'error');
     }
 }
 
@@ -1664,7 +1778,7 @@ async function updateDownloadStatuses() {
                 const book = state.gutenberg.activeDownloads[jobId];
                 console.log(`[Download] Job ${jobId} completed!`);
                 const bookName = book.title || book.config?.book_slug || book.book_slug;
-                showNotification(`✅ ${bookName} downloaded! Now you can generate audio.`, 'success');
+                showNotification(`${bookName} downloaded. Now you can generate audio.`, 'success');
                 delete state.gutenberg.activeDownloads[jobId];
 
                 // Refresh library to show newly downloaded book (if it has been processed)
@@ -1676,7 +1790,7 @@ async function updateDownloadStatuses() {
                 const errorMsg = status.error || 'Unknown error';
                 const bookName = book.title || book.config?.book_slug || book.book_slug;
                 console.error(`[Download] Job ${jobId} failed:`, errorMsg);
-                showNotification(`❌ Download failed: ${bookName} - ${errorMsg}`, 'error');
+                showNotification(`Download failed: ${bookName} - ${errorMsg}`, 'error');
                 delete state.gutenberg.activeDownloads[jobId];
             }
 
@@ -1730,12 +1844,12 @@ function renderDownloadStatus() {
 
         const progress = job.progress || 0;
         const statusIcon = {
-            'pending': '⏳',
-            'running': '📥',
-            'completed': '✅',
-            'failed': '❌',
-            'cancelled': '🚫'
-        }[job.status] || '📥';
+            'pending': '...',
+            'running': '→',
+            'completed': '✓',
+            'failed': '×',
+            'cancelled': '—'
+        }[job.status] || '→';
 
         const bookName = job.title || job.config?.book_slug || job.book_slug;
         return `
@@ -2326,6 +2440,7 @@ function setupEventListeners() {
     ui.unifiedSearchInput.addEventListener('input', handleUnifiedSearch);
     ui.tabLibrary.addEventListener('click', () => switchTab('library'));
     ui.tabStore.addEventListener('click', () => switchTab('store'));
+    ui.tabQueue.addEventListener('click', () => switchTab('queue'));
 
     // Store pagination
     ui.prevPageBtn.addEventListener('click', () => {
@@ -2390,14 +2505,14 @@ function setupEventListeners() {
     // Audio events
     ui.audio.addEventListener('play', () => {
         state.isPlaying = true;
-        ui.playPauseBtn.textContent = '⏸️';
+        ui.playPauseBtn.textContent = '‖';
         startAutoSave();
         updateMediaSession();
     });
 
     ui.audio.addEventListener('pause', () => {
         state.isPlaying = false;
-        ui.playPauseBtn.textContent = '▶️';
+        ui.playPauseBtn.textContent = '▶';
         savePlaybackState();
         stopAutoSave();
     });
@@ -2508,10 +2623,201 @@ function setupEventListeners() {
 }
 
 // ============================================================================
+// Jobs Queue (Tab)
+// ============================================================================
+
+const jobsActivity = {
+    list: null,
+    countBadge: null,
+    tabCountBadge: null,
+    pollInterval: null,
+    dismissedJobs: new Set(),
+    jobsByBook: {},  // book_id → most relevant job
+
+    init() {
+        this.list = ui.queueJobList;
+        this.countBadge = ui.queueCount;
+        this.tabCountBadge = ui.tabQueueCount;
+
+        // Start polling
+        this.poll();
+        this.pollInterval = setInterval(() => this.poll(), 5000);
+    },
+
+    // Priority for picking which job to show per book (higher = more important)
+    jobPriority(job) {
+        const p = { running: 4, pending: 3, failed: 2, completed: 1 };
+        return p[job.status] || 0;
+    },
+
+    async poll() {
+        try {
+            const response = await fetch('/api/jobs');
+            if (!response.ok) return;
+            const data = await response.json();
+
+            const allJobs = data.jobs || [];
+
+            // Build book_id → job lookup (prefer running > pending > failed)
+            this.jobsByBook = {};
+            for (const job of allJobs) {
+                if (job.status === 'completed' || job.status === 'cancelled') continue;
+                const bookId = job.config?.book_id || job.config?.book_slug;
+                if (!bookId) continue;
+                const existing = this.jobsByBook[bookId];
+                if (!existing || this.jobPriority(job) > this.jobPriority(existing)) {
+                    this.jobsByBook[bookId] = job;
+                }
+            }
+
+            // Update per-book status badges on cards
+            this.updateBookBadges();
+
+            // Update variant view if a book detail page is open
+            if (state.currentBook) {
+                updateBookJobStatus(state.currentBook.book_id);
+            }
+
+            // Filter for queue panel
+            const jobs = allJobs.filter(job => {
+                if (this.dismissedJobs.has(job.job_id)) return false;
+                if (job.status === 'running' || job.status === 'pending') return true;
+                if (job.status === 'failed') return true;
+                if (job.status === 'completed' && job.completed_at) {
+                    const age = Date.now() - new Date(job.completed_at).getTime();
+                    return age < 30000;
+                }
+                return false;
+            });
+
+            this.render(jobs);
+        } catch (e) {
+            // Silently ignore polling errors
+        }
+    },
+
+    updateBookBadges() {
+        document.querySelectorAll('[data-status-book]').forEach(el => {
+            const bookId = el.dataset.statusBook;
+            const job = this.jobsByBook[bookId];
+            if (!job) {
+                el.innerHTML = '';
+                el.style.display = 'none';
+                return;
+            }
+            el.style.display = '';
+            if (job.status === 'running') {
+                const pct = job.progress || 0;
+                const icon = this.getIcon(job);
+                const msg = job.state?.message || 'Processing...';
+                el.innerHTML = `
+                    <div class="book-status-badge running">
+                        <div class="book-status-info">${icon} ${pct}%</div>
+                        <div class="book-status-msg">${this.escapeHtml(msg)}</div>
+                        <div class="book-status-bar"><div class="book-status-fill" style="width:${pct}%"></div></div>
+                    </div>`;
+            } else if (job.status === 'pending') {
+                el.innerHTML = `<div class="book-status-badge pending"><div class="book-status-info">Queued</div></div>`;
+            } else if (job.status === 'failed') {
+                const err = (job.error || 'Failed').substring(0, 50);
+                el.innerHTML = `
+                    <div class="book-status-badge failed">
+                        <div class="book-status-info">Failed</div>
+                        <div class="book-status-msg">${this.escapeHtml(err)}</div>
+                    </div>`;
+            }
+        });
+    },
+
+    render(jobs) {
+        // Update tab badge (running + pending only, visible on all tabs)
+        const activeCount = jobs.filter(j => j.status === 'running' || j.status === 'pending').length;
+        if (this.tabCountBadge) {
+            this.tabCountBadge.textContent = activeCount;
+            this.tabCountBadge.style.display = activeCount > 0 ? 'inline' : 'none';
+        }
+
+        // Update section count badge
+        if (this.countBadge) {
+            this.countBadge.textContent = jobs.length;
+        }
+
+        if (!this.list) return;
+
+        // Show empty state when no jobs
+        if (jobs.length === 0) {
+            this.list.innerHTML = '<div class="empty-state"><div class="empty-state-icon"></div><div class="empty-state-title">No active jobs</div><div class="empty-state-message">Translation and audio generation jobs will appear here</div></div>';
+            return;
+        }
+
+        this.list.innerHTML = jobs.map(job => {
+            const icon = this.getIcon(job);
+            const name = job.config?.book_id || job.config?.book_slug || 'Unknown';
+            const progress = job.progress || 0;
+            const status = this.getStatusText(job);
+            const statusClass = job.status;
+            const showProgress = job.status === 'running';
+            const showDismiss = job.status === 'failed' || job.status === 'completed';
+
+            return `
+                <div class="job-activity-item">
+                    <span class="job-activity-icon">${icon}</span>
+                    <div class="job-activity-info">
+                        <div class="job-activity-name">${this.escapeHtml(name)}</div>
+                        <div class="job-activity-status">${this.escapeHtml(status)}</div>
+                        ${showProgress ? `
+                            <div class="job-activity-progress">
+                                <div class="job-activity-progress-fill ${statusClass}" style="width: ${progress}%"></div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${showDismiss ? `<button class="job-activity-dismiss" onclick="jobsActivity.dismiss('${job.job_id}')" title="Dismiss">✕</button>` : ''}
+                </div>
+            `;
+        }).join('');
+    },
+
+    getIcon(job) {
+        if (job.status === 'failed') return '×';
+        if (job.status === 'completed') return '✓';
+        const typeIcons = { audiobook: '+', translate: 'T', download: '↓' };
+        return typeIcons[job.job_type] || '·';
+    },
+
+    getStatusText(job) {
+        if (job.status === 'failed') {
+            const error = job.error || 'Unknown error';
+            return error.length > 80 ? error.substring(0, 80) + '...' : error;
+        }
+        if (job.status === 'completed') return 'Done';
+        if (job.status === 'pending') return 'Waiting...';
+
+        const msg = job.state?.message || job.state?.stage || 'Processing...';
+        const pct = job.progress ? `${job.progress}%` : '';
+        const eta = job.eta_seconds ? ` · ~${Math.ceil(job.eta_seconds / 60)} min` : '';
+        return `${pct} ${msg}${eta}`.trim();
+    },
+
+    dismiss(jobId) {
+        this.dismissedJobs.add(jobId);
+        this.poll();
+    },
+
+    escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+};
+
+// ============================================================================
 // Initialization
 // ============================================================================
 
 async function init() {
+    // Initialize dark mode toggle
+    initDarkMode();
+
     // Get or create device ID
     state.deviceId = getOrCreateDeviceId();
     console.log('Device ID:', state.deviceId);
@@ -2524,6 +2830,9 @@ async function init() {
 
     // Initialize Gutenberg browser (if available)
     await initGutenberg();
+
+    // Initialize jobs activity panel
+    jobsActivity.init();
 
     console.log('Audiobook player initialized');
 }

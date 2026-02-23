@@ -33,6 +33,7 @@ class JobType(str, Enum):
     DOWNLOAD = "download"
     TRANSLATE = "translate"
     AUDIOBOOK = "audiobook"
+    COVER = "cover"
 
 
 class JobStatus(str, Enum):
@@ -79,7 +80,8 @@ class UnifiedJobQueue:
         self.type_limits = {
             JobType.DOWNLOAD: 3,     # Max 3 concurrent downloads
             JobType.TRANSLATE: 1,    # Max 1 translation (CPU intensive)
-            JobType.AUDIOBOOK: 2     # Max 2 audiobook generations
+            JobType.AUDIOBOOK: 2,    # Max 2 audiobook generations
+            JobType.COVER: 1         # Max 1 cover generation (GPU intensive)
         }
 
         # Per-type semaphores

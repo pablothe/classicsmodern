@@ -145,9 +145,9 @@ function createJobCard(job) {
             </div>
             ${progressHTML}
             <div class="job-meta">
-                <span>📅 Created: ${createdAt}</span>
-                ${eta ? `<span>⏱️ ETA: ${eta}</span>` : ''}
-                ${job.error ? `<span style="color: var(--danger-color)">❌ ${job.error.substring(0, 50)}...</span>` : ''}
+                <span>Created: ${createdAt}</span>
+                ${eta ? `<span>ETA: ${eta}</span>` : ''}
+                ${job.error ? `<span style="font-weight: 700">× ${job.error.substring(0, 50)}...</span>` : ''}
             </div>
         </div>
     `;
@@ -193,10 +193,10 @@ function getJobDescription(job) {
 // Get type icon
 function getTypeIcon(type) {
     switch (type) {
-        case 'download': return '📥';
-        case 'translate': return '🌐';
-        case 'audiobook': return '🎧';
-        default: return '📋';
+        case 'download': return '↓';
+        case 'translate': return 'T';
+        case 'audiobook': return '+';
+        default: return '·';
     }
 }
 
@@ -288,7 +288,7 @@ async function showJobDetails(jobId) {
             ${job.error ? `
                 <div class="detail-row">
                     <div class="detail-label">Error</div>
-                    <div class="detail-value" style="color: var(--danger-color)">
+                    <div class="detail-value" style="font-weight: 700">
                         <div class="detail-code">${job.error}</div>
                     </div>
                 </div>

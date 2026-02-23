@@ -17,6 +17,7 @@ Features:
 """
 
 import json
+import re
 import threading
 import time
 import uuid
@@ -453,7 +454,7 @@ class PipelineRunner:
 
     def _run_summarization(self, input_file: Path) -> Path:
         """
-        Run summarization using book_summarizer.py.
+        Run summarization using summarize.py.
 
         Args:
             input_file: File to summarize
@@ -471,10 +472,10 @@ class PipelineRunner:
 
         target_pct = self.job.config.get('summarize', 50)
 
-        # Run book_summarizer.py
+        # Run summarize.py
         cmd = [
             sys.executable,
-            str(Path(__file__).parent.parent / "book_summarizer.py"),
+            str(Path(__file__).parent.parent / "summarize.py"),
             str(input_file),
             str(target_pct)
         ]
@@ -785,6 +786,18 @@ class PipelineRunner:
             json.dump(metadata, f, indent=2)
 
         self.job.output_files['metadata'] = str(metadata_path)
+
+        # Generate chapter metadata for web player navigation
+        try:
+            playlist_files = list(audio_dir.glob("*.m3u"))
+            playlist_files = [p for p in playlist_files if not re.search(r'_\d{8}_\d{6}\.m3u$', p.name)]
+            if playlist_files:
+                from lib.audio.chapter_metadata import generate_chapter_metadata
+                generate_chapter_metadata(playlist_files[0])
+                self.job.update(stage_progress={'message': 'Chapter metadata generated'})
+        except Exception as e:
+            self.job.update(stage_progress={'message': f'Chapter metadata skipped: {e}'})
+
         self.job.update(progress=100)
 
 

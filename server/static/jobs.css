@@ -1,15 +1,23 @@
 /* Jobs Dashboard Styles */
 
 :root {
-    --primary-color: #2563eb;
-    --success-color: #16a34a;
-    --warning-color: #ea580c;
-    --danger-color: #dc2626;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-600: #4b5563;
-    --gray-800: #1f2937;
+    --bg-color: #ffffff;
+    --bg-secondary: #f7f7f7;
+    --surface-color: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --border-color: #d0d0d0;
+    --accent-color: #000000;
+}
+
+.dark-mode {
+    --bg-color: #000000;
+    --bg-secondary: #111111;
+    --surface-color: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
+    --border-color: #333333;
+    --accent-color: #ffffff;
 }
 
 * {
@@ -19,9 +27,9 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: var(--gray-100);
-    color: var(--gray-800);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
@@ -33,10 +41,10 @@ body {
 
 /* Header */
 header {
-    background: white;
+    background: var(--surface-color);
     padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
     margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
@@ -46,51 +54,83 @@ header {
 header h1 {
     font-size: 28px;
     font-weight: 700;
+    color: var(--text-primary);
 }
 
 .header-actions {
     display: flex;
     gap: 12px;
+    align-items: center;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    transition: background 0.15s, color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dark-mode-toggle:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
 }
 
 /* Buttons */
 .btn {
     padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: opacity 0.2s;
     text-decoration: none;
     display: inline-block;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .btn-primary {
-    background: var(--primary-color);
-    color: white;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
 }
 
 .btn-primary:hover {
-    background: #1d4ed8;
+    opacity: 0.8;
 }
 
 .btn-secondary {
-    background: var(--gray-200);
-    color: var(--gray-800);
+    background: var(--surface-color);
+    color: var(--text-primary);
 }
 
 .btn-secondary:hover {
-    background: var(--gray-300);
+    opacity: 0.7;
 }
 
 .btn-danger {
-    background: var(--danger-color);
-    color: white;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    font-weight: 700;
 }
 
 .btn-danger:hover {
-    background: #b91c1c;
+    background: var(--accent-color);
+    color: var(--bg-color);
 }
 
 /* Statistics */
@@ -102,31 +142,31 @@ header h1 {
 }
 
 .stat-card {
-    background: white;
+    background: var(--surface-color);
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
     text-align: center;
 }
 
 .stat-label {
     font-size: 14px;
-    color: var(--gray-600);
+    color: var(--text-secondary);
     margin-bottom: 8px;
 }
 
 .stat-value {
     font-size: 32px;
     font-weight: 700;
-    color: var(--gray-800);
+    color: var(--text-primary);
 }
 
 /* Filters */
 .filters-section {
-    background: white;
+    background: var(--surface-color);
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
     margin-bottom: 24px;
     display: flex;
     gap: 24px;
@@ -140,23 +180,26 @@ header h1 {
 
 .filter-group label {
     font-weight: 600;
-    color: var(--gray-600);
+    color: var(--text-secondary);
 }
 
 .filter-select {
     padding: 8px 16px;
-    border: 1px solid var(--gray-300);
-    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
     font-size: 14px;
     min-width: 150px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* Jobs List */
 .jobs-section {
-    background: white;
+    background: var(--surface-color);
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
 }
 
 .jobs-list {
@@ -166,16 +209,15 @@ header h1 {
 }
 
 .job-card {
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
     padding: 16px;
-    transition: all 0.2s;
+    transition: border-color 0.2s;
     cursor: pointer;
 }
 
 .job-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+    border-color: var(--text-primary);
 }
 
 .job-header {
@@ -191,69 +233,68 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 8px;
+    color: var(--text-primary);
 }
 
 .job-type-badge {
     padding: 4px 12px;
-    border-radius: 12px;
+    border-radius: 2px;
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
 }
 
-.job-type-download {
-    background: #dbeafe;
-    color: #1e40af;
-}
-
-.job-type-translate {
-    background: #fef3c7;
-    color: #92400e;
-}
-
+.job-type-download,
+.job-type-translate,
 .job-type-audiobook {
-    background: #dcfce7;
-    color: #166534;
+    background: var(--surface-color);
+    color: var(--text-primary);
 }
 
 .job-status {
     padding: 6px 14px;
-    border-radius: 16px;
+    border-radius: 2px;
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
+    border: 1px solid var(--border-color);
 }
 
 .status-pending {
-    background: var(--gray-200);
-    color: var(--gray-600);
+    background: var(--surface-color);
+    color: var(--text-secondary);
 }
 
 .status-running {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-weight: 700;
 }
 
 .status-completed {
-    background: #dcfce7;
-    color: #16a34a;
+    background: var(--surface-color);
+    color: var(--text-primary);
 }
 
 .status-failed {
-    background: #fee2e2;
-    color: #dc2626;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    text-decoration: line-through;
 }
 
 .status-cancelled {
-    background: #f3f4f6;
-    color: #6b7280;
+    background: var(--surface-color);
+    color: var(--text-secondary);
 }
 
 .job-info {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    color: var(--gray-600);
+    color: var(--text-secondary);
     font-size: 14px;
 }
 
@@ -262,18 +303,19 @@ header h1 {
 }
 
 .progress-bar-container {
-    background: var(--gray-200);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-radius: 2px;
     height: 24px;
     overflow: hidden;
     position: relative;
+    border: 1px solid var(--border-color);
 }
 
 .progress-bar {
-    background: var(--primary-color);
+    background: var(--accent-color);
     height: 100%;
     transition: width 0.3s ease;
-    border-radius: 8px;
+    border-radius: 2px;
 }
 
 .progress-text {
@@ -283,8 +325,7 @@ header h1 {
     transform: translate(-50%, -50%);
     font-size: 12px;
     font-weight: 600;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    color: var(--bg-color);
 }
 
 .job-meta {
@@ -292,14 +333,14 @@ header h1 {
     gap: 16px;
     margin-top: 8px;
     font-size: 12px;
-    color: var(--gray-600);
+    color: var(--text-secondary);
 }
 
 /* Empty State */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: var(--gray-600);
+    color: var(--text-secondary);
 }
 
 .empty-state p {
@@ -309,7 +350,7 @@ header h1 {
 
 .empty-state-hint {
     font-size: 14px;
-    color: var(--gray-500);
+    color: var(--text-secondary);
 }
 
 /* Modal */
@@ -327,8 +368,9 @@ header h1 {
 }
 
 .modal-content {
-    background: white;
-    border-radius: 12px;
+    background: var(--surface-color);
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
     max-width: 600px;
     width: 90%;
     max-height: 80vh;
@@ -339,7 +381,7 @@ header h1 {
 
 .modal-header {
     padding: 24px;
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -347,6 +389,7 @@ header h1 {
 
 .modal-header h2 {
     font-size: 20px;
+    color: var(--text-primary);
 }
 
 .modal-close {
@@ -354,7 +397,7 @@ header h1 {
     border: none;
     font-size: 28px;
     cursor: pointer;
-    color: var(--gray-600);
+    color: var(--text-secondary);
     padding: 0;
     width: 32px;
     height: 32px;
@@ -362,7 +405,7 @@ header h1 {
 }
 
 .modal-close:hover {
-    color: var(--gray-800);
+    color: var(--text-primary);
 }
 
 .modal-body {
@@ -373,7 +416,7 @@ header h1 {
 
 .modal-footer {
     padding: 16px 24px;
-    border-top: 1px solid var(--gray-200);
+    border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: flex-end;
     gap: 12px;
@@ -385,21 +428,22 @@ header h1 {
 
 .detail-label {
     font-weight: 600;
-    color: var(--gray-600);
+    color: var(--text-secondary);
     margin-bottom: 4px;
 }
 
 .detail-value {
-    color: var(--gray-800);
+    color: var(--text-primary);
 }
 
 .detail-code {
-    background: var(--gray-100);
+    background: var(--bg-secondary);
     padding: 12px;
-    border-radius: 6px;
+    border-radius: 2px;
     font-family: monospace;
     font-size: 12px;
     overflow-x: auto;
+    color: var(--text-primary);
 }
 
 /* Toast Notifications */
@@ -414,36 +458,26 @@ header h1 {
 }
 
 .toast {
-    background: white;
+    background: var(--surface-color);
+    color: var(--text-primary);
     padding: 16px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
     min-width: 300px;
     max-width: 400px;
-    animation: slideIn 0.3s ease;
 }
 
 .toast-success {
-    border-left: 4px solid var(--success-color);
+    border-left: 4px solid var(--text-primary);
 }
 
 .toast-error {
-    border-left: 4px solid var(--danger-color);
+    border-left: 4px solid var(--text-primary);
+    font-weight: 700;
 }
 
 .toast-info {
-    border-left: 4px solid var(--primary-color);
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(400px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+    border-left: 4px solid var(--text-secondary);
 }
 
 /* Responsive */

@@ -218,12 +218,13 @@ class GutenbergDownloader:
 
         return markdown.strip()
 
-    def _convert_element_to_markdown(self, element) -> str:
+    def _convert_element_to_markdown(self, element, depth=0) -> str:
         """
         Recursively convert HTML element to Markdown.
 
         Args:
             element: BeautifulSoup element
+            depth: Current recursion depth (safety limit: 100)
 
         Returns:
             Markdown string
@@ -232,21 +233,25 @@ class GutenbergDownloader:
             text = str(element).strip()
             return text if text else ""
 
+        # Safety net: prevent stack overflow on deeply nested HTML
+        if depth > 100:
+            return element.get_text(strip=True) if hasattr(element, 'get_text') else str(element).strip()
+
         md = ""
 
-        # Headers
+        # Headers (leading \n ensures they always start on their own line)
         if element.name == 'h1':
-            md += f"# {element.get_text(strip=True)}\n\n"
+            md += f"\n# {element.get_text(strip=True)}\n\n"
         elif element.name == 'h2':
-            md += f"## {element.get_text(strip=True)}\n\n"
+            md += f"\n## {element.get_text(strip=True)}\n\n"
         elif element.name == 'h3':
-            md += f"### {element.get_text(strip=True)}\n\n"
+            md += f"\n### {element.get_text(strip=True)}\n\n"
         elif element.name == 'h4':
-            md += f"#### {element.get_text(strip=True)}\n\n"
+            md += f"\n#### {element.get_text(strip=True)}\n\n"
 
         # Paragraphs
         elif element.name == 'p':
-            text = ''.join(self._convert_element_to_markdown(child) for child in element.children)
+            text = ''.join(self._convert_element_to_markdown(child, depth + 1) for child in element.children)
             if text:
                 md += text + "\n\n"
 
@@ -263,15 +268,15 @@ class GutenbergDownloader:
             is_ordered = (element.name == 'ol')
             for i, li in enumerate(element.find_all('li', recursive=False), start=1):
                 if is_ordered:
-                    md += f"{i}. {self._convert_element_to_markdown(li).strip()}\n"
+                    md += f"{i}. {self._convert_element_to_markdown(li, depth + 1).strip()}\n"
                 else:
-                    md += f"- {self._convert_element_to_markdown(li).strip()}\n"
+                    md += f"- {self._convert_element_to_markdown(li, depth + 1).strip()}\n"
             md += "\n"
 
         # Links
         elif element.name == 'a':
             href = element.get('href', '#')
-            text = ''.join(self._convert_element_to_markdown(child) for child in element.children).strip()
+            text = ''.join(self._convert_element_to_markdown(child, depth + 1) for child in element.children).strip()
             md += f"[{text}]({href})"
 
         # Emphasis
@@ -284,7 +289,7 @@ class GutenbergDownloader:
 
         # Blockquotes
         elif element.name == 'blockquote':
-            text = self._convert_element_to_markdown(element).strip()
+            text = ''.join(self._convert_element_to_markdown(child, depth + 1) for child in element.children).strip()
             lines = text.split('\n')
             md += '\n'.join(f"> {line}" for line in lines) + "\n\n"
 
@@ -296,7 +301,7 @@ class GutenbergDownloader:
         # Default: process children
         else:
             for child in element.children:
-                md += self._convert_element_to_markdown(child)
+                md += self._convert_element_to_markdown(child, depth + 1)
 
         return md
 
@@ -373,7 +378,7 @@ class GutenbergDownloader:
 
     def _validate_book(self, file_path: Path) -> Dict:
         """
-        Validate book structure using book_validator.py.
+        Validate book structure using validate.py.
 
         Args:
             file_path: Path to markdown file
@@ -381,7 +386,7 @@ class GutenbergDownloader:
         Returns:
             Validation results dictionary
         """
-        validator_script = file_path.parent.parent.parent / "book_validator.py"
+        validator_script = file_path.parent.parent.parent / "validate.py"
 
         if not validator_script.exists():
             # Basic validation without external script

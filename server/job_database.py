@@ -214,6 +214,40 @@ class JobDatabase:
             conn.commit()
             return cursor.rowcount > 0
 
+    def has_active_job_for_book(self, book_identifier: str) -> Optional[Dict]:
+        """
+        Check if there's a pending/running job for a given book.
+
+        Searches both config.book_id and config.book_slug since download
+        jobs use book_slug while translate/audiobook jobs use book_id.
+
+        Args:
+            book_identifier: Book ID or slug to check
+
+        Returns:
+            Dict with job info if active job exists, None otherwise
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute('''
+                SELECT job_id, job_type, status, progress
+                FROM jobs
+                WHERE status IN ('pending', 'running')
+                AND (
+                    json_extract(config, '$.book_id') = ?
+                    OR json_extract(config, '$.book_slug') = ?
+                )
+                LIMIT 1
+            ''', [book_identifier, book_identifier])
+            row = cursor.fetchone()
+            if row:
+                return {
+                    'job_id': row[0],
+                    'job_type': row[1],
+                    'status': row[2],
+                    'progress': row[3]
+                }
+            return None
+
     def cleanup_old_jobs(self, max_age_hours: int = 24, keep_status: List[str] = None) -> int:
         """
         Delete old completed/failed jobs.

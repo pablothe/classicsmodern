@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
     <title>Jobs Queue - Audiobook Server</title>
+    <script>
+    if (localStorage.getItem('audiobook_dark_mode') === 'dark')
+        document.documentElement.classList.add('dark-mode');
+    </script>
     <link rel="stylesheet" href="/static/jobs.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📋 Jobs Queue</h1>
+            <h1>Jobs Queue</h1>
             <div class="header-actions">
-                <button id="refresh-btn" class="btn btn-primary">🔄 Refresh</button>
-                <button id="cleanup-btn" class="btn btn-secondary">🗑️ Cleanup Old Jobs</button>
+                <button id="refresh-btn" class="btn btn-primary">Refresh</button>
+                <button id="cleanup-btn" class="btn btn-secondary">Clear Old Jobs</button>
                 <a href="/" class="btn btn-secondary">← Back to Player</a>
+                <button id="dark-mode-toggle" class="dark-mode-toggle" onclick="(function(){document.documentElement.classList.toggle('dark-mode');var d=document.documentElement.classList.contains('dark-mode');localStorage.setItem('audiobook_dark_mode',d?'dark':'light');document.getElementById('dark-mode-toggle').textContent=d?'☀':'☾'})()">☾</button>
             </div>
         </header>
 
@@ -99,6 +105,13 @@
     <!-- Toast Notifications -->
     <div id="toast-container" class="toast-container"></div>
 
+    <script>
+    // Sync dark mode toggle icon
+    (function() {
+        var toggle = document.getElementById('dark-mode-toggle');
+        if (toggle) toggle.textContent = document.documentElement.classList.contains('dark-mode') ? '☀' : '☾';
+    })();
+    </script>
     <script src="/static/jobs.js"></script>
 </body>
 </html>

@@ -322,10 +322,31 @@ def pytest_configure(config):
         "markers", "requires_gpu: marks tests that require GPU acceleration"
     )
     config.addinivalue_line(
+        "markers", "requires_network: marks tests that require internet access"
+    )
+    config.addinivalue_line(
+        "markers", "requires_kokoro: marks tests that require Kokoro TTS models"
+    )
+    config.addinivalue_line(
+        "markers", "requires_ffmpeg: marks tests that require ffmpeg installed"
+    )
+    config.addinivalue_line(
+        "markers", "requires_diffusion: marks tests that require Stable Diffusion"
+    )
+    config.addinivalue_line(
         "markers", "integration: marks integration tests"
     )
     config.addinivalue_line(
         "markers", "e2e: marks end-to-end tests"
+    )
+    config.addinivalue_line(
+        "markers", "smoke: smoke tests that exercise real workflows"
+    )
+    config.addinivalue_line(
+        "markers", "regression: marks regression tests for historical bugs"
+    )
+    config.addinivalue_line(
+        "markers", "timeout: set test timeout in seconds (requires pytest-timeout)"
     )
 
 

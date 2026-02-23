@@ -339,7 +339,7 @@ class AudiobookMaker:
             print()
             print("To serve on web:")
             print(f"   ./start_server.sh")
-            print(f"   Then open: http://localhost:8080")
+            print(f"   Then open: http://localhost:8000")
             print("=" * 70)
 
             if self.state_file.exists():

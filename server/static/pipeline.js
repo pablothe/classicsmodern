@@ -160,12 +160,12 @@ class AudiobookPipeline {
                         <div class="form-group">
                             <label>Translation Model:</label>
                             <select id="translation-model" class="form-select">
-                                <option value="zongwei/gemma3-translator:4b" selected>Gemma3 Translator 4B (Local) ⭐</option>
+                                <option value="zongwei/gemma3-translator:4b" selected>Gemma3 Translator 4B (Local)</option>
                             </select>
                         </div>
                     </div>
                 ` : `
-                    <p>✅ No translation needed - book is already in English</p>
+                    <p>No translation needed — book is already in English</p>
                 `}
 
                 <div class="step-buttons">
@@ -286,7 +286,7 @@ class AudiobookPipeline {
                     <label>Voice:</label>
                     <select id="voice-select" class="form-select">
                         <optgroup label="British (Recommended for Classics)">
-                            <option value="bf_emma" selected>British Female - Emma ⭐</option>
+                            <option value="bf_emma" selected>British Female - Emma</option>
                             <option value="bm_george">British Male - George</option>
                             <option value="bf_isabella">British Female - Isabella</option>
                         </optgroup>
@@ -393,13 +393,13 @@ class AudiobookPipeline {
                 </div>
 
                 <div class="estimated-time">
-                    ⏱️ Estimated time: ${this.estimateTime()} hours
+                    Estimated time: ${this.estimateTime()} hours
                     <p class="help-text">You can close this window - generation runs in background</p>
                 </div>
 
                 <div class="step-buttons">
                     <button onclick="pipeline.proceedToAudioSettings()" class="btn-secondary">← Back</button>
-                    <button onclick="pipeline.startGeneration()" class="btn-primary btn-large">🎬 Start Generation</button>
+                    <button onclick="pipeline.startGeneration()" class="btn-primary btn-large">Start Generation</button>
                 </div>
             </div>
         `;
@@ -441,6 +441,10 @@ class AudiobookPipeline {
                 body: JSON.stringify(this.formData)
             });
 
+            if (response.status === 409) {
+                const data = await response.json();
+                throw new Error(data.message || 'A job is already running for this book');
+            }
             if (!response.ok) {
                 const error = await response.json();
                 throw new Error(error.detail || 'Failed to start generation');
@@ -474,7 +478,7 @@ class AudiobookPipeline {
             newPanel.className = 'pipeline-progress-panel';
             newPanel.innerHTML = `
                 <div class="progress-header">
-                    <h4>📥 Audiobook Generation</h4>
+                    <h4>Audiobook Generation</h4>
                     <button onclick="pipeline.closeProgressPanel()" class="close-btn">✕</button>
                 </div>
                 <div class="progress-content">
@@ -550,7 +554,7 @@ class AudiobookPipeline {
             // Update ETA
             const etaInfo = document.getElementById('pipeline-eta');
             if (etaInfo && job.eta_seconds) {
-                etaInfo.textContent = `⏱️ ${this.formatETA(job.eta_seconds)} remaining`;
+                etaInfo.textContent = `${this.formatETA(job.eta_seconds)} remaining`;
             }
 
             // Check if completed
@@ -584,7 +588,7 @@ class AudiobookPipeline {
 
         const statusMsg = document.getElementById('pipeline-status-message');
         if (statusMsg) {
-            statusMsg.innerHTML = '✅ <strong>Audiobook Ready!</strong>';
+            statusMsg.innerHTML = '<strong>Audiobook Ready</strong>';
         }
 
         // Refresh book list
@@ -595,7 +599,7 @@ class AudiobookPipeline {
         }
 
         // Show notification
-        this.showNotification('Audiobook generation completed! 🎉', 'success');
+        this.showNotification('Audiobook generation completed.', 'success');
     }
 
     /**
@@ -606,7 +610,7 @@ class AudiobookPipeline {
 
         const statusMsg = document.getElementById('pipeline-status-message');
         if (statusMsg) {
-            statusMsg.innerHTML = `❌ <strong>Generation Failed:</strong> ${job.error || 'Unknown error'}`;
+            statusMsg.innerHTML = `<strong>Generation Failed:</strong> ${job.error || 'Unknown error'}`;
         }
 
         this.showNotification('Audiobook generation failed', 'error');

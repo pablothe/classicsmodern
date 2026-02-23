@@ -168,7 +168,7 @@ class BookTools:
         """
         if self.chapters:
             # Use metadata if available
-            return [{'number': ch['number'], 'title': ch['title']} for ch in self.chapters]
+            return [{'number': ch.get('number', i + 1), 'title': ch.get('title', f'Chapter {i + 1}')} for i, ch in enumerate(self.chapters)]
         else:
             # Fallback to detected boundaries
             boundaries = self._detect_chapter_boundaries()

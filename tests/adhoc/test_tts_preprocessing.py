@@ -77,10 +77,10 @@ def test_preprocessing(input_file: Path) -> dict:
         results['warnings'].append("audio_text_preprocessor not available")
         print(f"  ⚠️  audio_text_preprocessor not available")
 
-    # Step 3: Simulate clean_text_for_speech from local_tts_kokoro
+    # Step 3: Simulate clean_text_for_speech from lib.audio.kokoro
     print(f"\n🧹 Simulating clean_text_for_speech...")
 
-    # This simulates the cleaning that happens in local_tts_kokoro.py
+    # This simulates the cleaning that happens in lib/audio/kokoro.py
     cleaned_text = preprocessed_text
 
     # Remove markdown headers but keep text

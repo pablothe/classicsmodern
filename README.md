@@ -19,7 +19,7 @@ All models run locally. No cloud APIs, no API keys required.
 
 | Model | Purpose | Runtime |
 |-------|---------|---------|
-| **gemma3-translator:4b** | Translation & summarization | Ollama |
+| **zongwei/gemma3-translator:4b** | Translation & summarization | Ollama |
 | **llama3.2:3b** | AI chat about books | Ollama |
 | **Kokoro v1.0** | Text-to-speech (52 voices) | ONNX Runtime |
 | **Stable Diffusion v1.5** | Cover art generation | PyTorch |

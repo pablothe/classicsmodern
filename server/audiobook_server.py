@@ -59,7 +59,7 @@ except ImportError:
 # Import unified job queue
 try:
     from server.job_queue import init_queue, get_queue, JobType, JobStatus
-    from server.job_handlers import download_handler, pipeline_handler, translate_handler
+    from server.job_handlers import cover_handler, download_handler, pipeline_handler, translate_handler
     UNIFIED_QUEUE_AVAILABLE = True
 except ImportError as e:
     UNIFIED_QUEUE_AVAILABLE = False
@@ -90,6 +90,12 @@ app.add_middleware(
 
 # Mount static files for web player
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+@app.get("/jobs")
+async def jobs_page():
+    """Serve the jobs dashboard page."""
+    return FileResponse(STATIC_DIR / "jobs.html")
 
 
 # ============================================================================
@@ -318,6 +324,24 @@ def discover_books() -> List[Dict]:
                 except (json.JSONDecodeError, IOError):
                     pass
 
+        # FALLBACK: Extract chapters from chunk manifest
+        if not has_chapters:
+            chunk_manifests = list(book_dir.rglob("*_chunk_manifest.json"))
+            if chunk_manifests:
+                try:
+                    with open(chunk_manifests[0], 'r') as f:
+                        manifest = json.load(f)
+                    chapter_nums = set()
+                    for chunk in manifest.get('chunks', []):
+                        ch = chunk.get('chapter')
+                        if ch is not None:
+                            chapter_nums.add(ch)
+                    if chapter_nums:
+                        chapters = [{'title': f'Chapter {n}', 'number': n, 'index': n - 1} for n in sorted(chapter_nums)]
+                        has_chapters = True
+                except (json.JSONDecodeError, IOError):
+                    pass
+
         # Find cover image (check multiple locations)
         cover_path = None
         cover_locations = [
@@ -348,6 +372,7 @@ def discover_books() -> List[Dict]:
             'has_chapters': chapters is not None,
             'cover_image': cover_path,
             'has_cover': cover_path is not None,
+            'cover_generating': (book_dir / ".cover_generating").exists(),
             'has_audio': False,  # Will be set to True if variants found
             'has_source_text': has_source_text,
             'source_text_path': str(source_text_path.relative_to(book_dir)) if source_text_path else None,
@@ -672,7 +697,7 @@ async def get_chapter_text(book_id: str, chapter_num: int):
         }
 
     # Get total audio chapters count to help detect single-file books
-    total_audio_chapters = len(book.get('chapters', []))
+    total_audio_chapters = len(book.get('chapters') or [])
 
     # Get chapter text data
     chapter_data = get_chapter_text_data(book_dir, chapter_num, audio_chapter_timing, total_audio_chapters)
@@ -1619,6 +1644,36 @@ if UNIFIED_QUEUE_AVAILABLE:
             'total': len(jobs)
         }
 
+    @app.get("/api/jobs/stats")
+    async def get_job_stats():
+        """
+        Get job queue statistics.
+
+        Returns:
+            Statistics about jobs and queue
+        """
+        queue = get_queue()
+        return queue.get_stats()
+
+    @app.post("/api/jobs/cleanup")
+    async def cleanup_jobs(max_age_hours: int = 24):
+        """
+        Cleanup old completed/failed jobs.
+
+        Query Parameters:
+            max_age_hours: Maximum age in hours (default: 24)
+
+        Returns:
+            Number of jobs cleaned
+        """
+        queue = get_queue()
+        cleaned = queue.cleanup_old_jobs(max_age_hours)
+
+        return {
+            'cleaned': cleaned,
+            'max_age_hours': max_age_hours
+        }
+
     @app.get("/api/jobs/{job_id}")
     async def get_job_details(job_id: str):
         """
@@ -1667,6 +1722,19 @@ if UNIFIED_QUEUE_AVAILABLE:
             )
 
         queue = get_queue()
+
+        # Prevent duplicate jobs for the same book
+        existing = queue.db.has_active_job_for_book(book_slug)
+        if existing:
+            return JSONResponse(
+                status_code=409,
+                content={
+                    'error': 'duplicate_job',
+                    'message': f'A {existing["job_type"]} job is already {existing["status"]} for this book',
+                    'existing_job_id': existing['job_id']
+                }
+            )
+
         job_id = queue.create_job(
             job_type=JobType.DOWNLOAD,
             config={
@@ -1713,6 +1781,19 @@ if UNIFIED_QUEUE_AVAILABLE:
             )
 
         queue = get_queue()
+
+        # Prevent duplicate jobs for the same book
+        existing = queue.db.has_active_job_for_book(book_id)
+        if existing:
+            return JSONResponse(
+                status_code=409,
+                content={
+                    'error': 'duplicate_job',
+                    'message': f'A {existing["job_type"]} job is already {existing["status"]} for this book',
+                    'existing_job_id': existing['job_id']
+                }
+            )
+
         job_id = queue.create_job(
             job_type=JobType.TRANSLATE,
             config={
@@ -1764,6 +1845,19 @@ if UNIFIED_QUEUE_AVAILABLE:
             )
 
         queue = get_queue()
+
+        # Prevent duplicate jobs for the same book
+        existing = queue.db.has_active_job_for_book(book_id)
+        if existing:
+            return JSONResponse(
+                status_code=409,
+                content={
+                    'error': 'duplicate_job',
+                    'message': f'A {existing["job_type"]} job is already {existing["status"]} for this book',
+                    'existing_job_id': existing['job_id']
+                }
+            )
+
         job_id = queue.create_job(
             job_type=JobType.AUDIOBOOK,
             config={
@@ -1785,6 +1879,64 @@ if UNIFIED_QUEUE_AVAILABLE:
             'status': 'pending',
             'estimated_duration': '2-4 hours',
             'message': f'Audiobook pipeline job created for {book_id}'
+        }
+
+    @app.post("/api/jobs/cover")
+    async def create_cover_job(request: Request):
+        """
+        Create a cover art generation job.
+
+        Request Body:
+        {
+            "book_id": "the_strange_case_of_dr_jekyll_and_mr_hyde"
+        }
+
+        Returns:
+            Job ID and status
+        """
+        try:
+            data = await request.json()
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON")
+
+        book_id = data.get('book_id')
+
+        if not book_id:
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required field: book_id"
+            )
+
+        # Verify book exists
+        book_dir = BOOKS_DIR / book_id
+        if not book_dir.exists():
+            raise HTTPException(status_code=404, detail=f"Book not found: {book_id}")
+
+        queue = get_queue()
+
+        # Prevent duplicate jobs for the same book
+        existing = queue.db.has_active_job_for_book(book_id)
+        if existing:
+            return JSONResponse(
+                status_code=409,
+                content={
+                    'error': 'duplicate_job',
+                    'message': f'A {existing["job_type"]} job is already {existing["status"]} for this book',
+                    'existing_job_id': existing['job_id']
+                }
+            )
+
+        job_id = queue.create_job(
+            job_type=JobType.COVER,
+            config={
+                'book_id': book_id
+            }
+        )
+
+        return {
+            'job_id': job_id,
+            'status': 'pending',
+            'message': f'Cover generation job created for {book_id}'
         }
 
     @app.delete("/api/jobs/{job_id}")
@@ -1811,37 +1963,6 @@ if UNIFIED_QUEUE_AVAILABLE:
             'status': 'cancelled',
             'job_id': job_id
         }
-
-    @app.get("/api/jobs/stats")
-    async def get_job_stats():
-        """
-        Get job queue statistics.
-
-        Returns:
-            Statistics about jobs and queue
-        """
-        queue = get_queue()
-        return queue.get_stats()
-
-    @app.post("/api/jobs/cleanup")
-    async def cleanup_jobs(max_age_hours: int = 24):
-        """
-        Cleanup old completed/failed jobs.
-
-        Query Parameters:
-            max_age_hours: Maximum age in hours (default: 24)
-
-        Returns:
-            Number of jobs cleaned
-        """
-        queue = get_queue()
-        cleaned = queue.cleanup_old_jobs(max_age_hours)
-
-        return {
-            'cleaned': cleaned,
-            'max_age_hours': max_age_hours
-        }
-
 
 @app.get("/api/health")
 async def health_check():
@@ -1896,6 +2017,7 @@ def main():
             queue.register_handler(JobType.DOWNLOAD, download_handler)
             queue.register_handler(JobType.TRANSLATE, translate_handler)
             queue.register_handler(JobType.AUDIOBOOK, pipeline_handler)
+            queue.register_handler(JobType.COVER, cover_handler)
 
             print(f"✓ Job queue initialized (database: {JOB_DB_PATH})")
 
@@ -1939,7 +2061,13 @@ def main():
         print("✗ AI Assistant: Not installed (optional feature)")
 
     print("=" * 60)
-    print("\nPress CTRL+C to stop\n")
+
+    # Run book health check (auto-recovers what it can)
+    from server.book_health import run_health_check, start_periodic_health_check
+    run_health_check()
+    start_periodic_health_check()
+
+    print("Press CTRL+C to stop\n")
 
     # Run server
     uvicorn.run(

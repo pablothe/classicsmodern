@@ -104,9 +104,9 @@ python3 make_audiobook.py INPUT.md --voice am_adam --speed 1.15
 python3 make_audiobook.py INPUT.md --summarize 50 --generate-cover
 
 # Available voices:
-# - bf_emma (British Female - classics)
+# - bf_emma (British Female - default for make_audiobook.py)
 # - bm_george (British Male - classics)
-# - af_sky (American Female - default)
+# - af_sky (American Female - default for audiobook.py)
 # - am_adam (American Male)
 # - am_onyx (American Male - deep)
 # Total: 52 voices (af_*, am_*, bf_*, bm_*)
@@ -116,7 +116,7 @@ python3 make_audiobook.py INPUT.md --summarize 50 --generate-cover
 
 ## CLI Scripts
 
-Six thin CLI wrappers at the project root, each importing from `lib/`:
+Seven thin CLI wrappers at the project root, each importing from `lib/`:
 
 | Script | Purpose | Example |
 |--------|---------|---------|
@@ -126,6 +126,7 @@ Six thin CLI wrappers at the project root, each importing from `lib/`:
 | `summarize.py` | Summarize a book (Ollama, local) | `python3 summarize.py book.md 50` |
 | `cover.py` | Generate cover art (Stable Diffusion) | `python3 cover.py "fantasy scene" --output cover.png` |
 | `validate.py` | Validate book structure | `python3 validate.py book.md --auto-fix` |
+| `epub_to_md.py` | Convert EPUB to Markdown | `python3 epub_to_md.py book.epub` |
 
 ## Advanced Workflows
 
@@ -143,6 +144,9 @@ python3 validate.py books/mybook/book.md --require karaoke,ai_chat
 
 # JSON output for scripting
 python3 validate.py books/mybook/book.md --json
+
+# Validate all books recursively
+python3 validate.py books/ --recursive --verbose
 ```
 
 **What it validates:**
@@ -206,6 +210,9 @@ python3 cover.py "whimsical Alice in Wonderland scene, fantasy illustration" --o
 
 # Custom size and quality
 python3 cover.py "dark Victorian mystery" --output cover.png --width 512 --height 768 --steps 50
+
+# Auto-generate prompt from book name
+python3 cover.py --book alice_adventures --output cover.png
 ```
 
 ### Audio Generation
@@ -214,6 +221,15 @@ python3 cover.py "dark Victorian mystery" --output cover.png --width 512 --heigh
 # Use the unified audiobook maker (recommended)
 python3 make_audiobook.py books/mybook/book.md --voice bf_emma --generate-cover
 
+# Additional make_audiobook.py options:
+# --lang en-us          Language code (default: en-us)
+# --chunk-size 800      Audio chunk size (default: 800)
+# --no-normalize        Skip text normalization
+# --no-mp3              Keep WAV format (skip MP3 conversion)
+# --output-dir DIR      Custom output directory
+# --no-word-timings     Skip karaoke timing generation
+# --non-interactive     No prompts (for scripting)
+
 # Or use audiobook.py directly
 python3 audiobook.py translated.md --voice bf_emma
 
@@ -221,8 +237,8 @@ python3 audiobook.py translated.md --voice bf_emma
 python3 audiobook.py translated.md --speed 1.15
 
 # Top voices:
-# - af_sky (American Female - Sky, DEFAULT)
-# - bf_emma (British Female - Emma, classics)
+# - bf_emma (British Female - default for make_audiobook.py)
+# - af_sky (American Female - default for audiobook.py)
 # - bm_george (British Male - George, classics)
 # - am_adam (American Male - Adam)
 # - am_onyx (American Male - Onyx, deep)
@@ -248,13 +264,53 @@ python3 audiobook.py translated.md --speed 1.15
 
 **API Endpoints:**
 ```
-GET  /api/books                    # List all books
-GET  /api/books/{book_id}          # Get book details
-GET  /api/books/{book_id}/audio    # Stream audio
-POST /api/playback/{book_id}       # Save playback position
+# Books
+GET  /api/books                                              # List all books
+GET  /api/books/{book_id}                                    # Get book details
+GET  /api/books/{book_id}/variants/{variant_id}/audio/{idx}  # Stream audio
+GET  /api/books/{book_id}/cover                              # Get cover image
+GET  /api/books/{book_id}/text                               # Get all chapter text
+GET  /api/books/{book_id}/text/{chapter_num}                 # Get chapter text
+GET  /api/books/{book_id}/chunk-manifest                     # Chapter metadata
+GET  /api/books/{book_id}/word-timings                       # Karaoke sync data
+GET  /api/books/{book_id}/word-timings/{chapter}             # Per-chapter timings
+DELETE /api/books/{book_id}/variants/{variant_id}            # Delete variant
+
+# Playback
+GET  /api/playback/{book_id}/{variant_id}                    # Get playback position
+POST /api/playback/{book_id}/{variant_id}                    # Save playback position
+
+# Jobs
+GET  /api/jobs                     # List jobs
+GET  /api/jobs/stats               # Job statistics
+GET  /api/jobs/{job_id}            # Job details
 POST /api/jobs/download            # Download from Gutenberg
 POST /api/jobs/translate           # Start translation job
 POST /api/jobs/audiobook           # Generate audiobook
+POST /api/jobs/cover               # Generate cover art
+POST /api/jobs/cleanup             # Clean up old jobs
+DELETE /api/jobs/{job_id}          # Delete a job
+
+# Pipeline (alternative audiobook generation)
+POST /api/pipeline/generate                                  # Start generation
+GET  /api/pipeline/jobs                                      # List pipeline jobs
+GET  /api/pipeline/jobs/{job_id}                             # Job status
+DELETE /api/pipeline/jobs/{job_id}                           # Cancel job
+POST /api/pipeline/cleanup                                   # Cleanup
+GET  /api/pipeline/detect-language/{book_id}/{file_name}     # Detect language
+GET  /api/pipeline/source-files/{book_id}                    # List source files
+
+# Gutenberg
+GET  /api/gutenberg/catalog        # Browse catalog
+GET  /api/gutenberg/search         # Search books
+POST /api/gutenberg/download       # Download a book
+GET  /api/gutenberg/downloads      # List downloads
+GET  /api/gutenberg/downloads/{id} # Download status
+GET  /api/gutenberg/stats          # Catalog stats
+
+# Other
+POST /api/ask                      # AI chat about books
+GET  /api/health                   # Health check
 ```
 
 ## Architecture
@@ -269,6 +325,7 @@ classicsmodern/
 ├── summarize.py               # CLI: Summarization
 ├── cover.py                   # CLI: Cover art
 ├── validate.py                # CLI: Book validation
+├── epub_to_md.py              # CLI: EPUB to Markdown conversion
 ├── start_server.sh            # Server startup
 ├── requirements.txt
 │
@@ -299,16 +356,30 @@ classicsmodern/
 │       └── engine.py          # BookSummarizer (LLM summarization)
 │
 ├── server/                    # Web server (FastAPI)
-│   ├── audiobook_server.py    # Main server
-│   ├── pipeline.py            # Audiobook pipeline
+│   ├── audiobook_server.py    # Main server + API routes
+│   ├── audiobook_pipeline.py  # Audiobook pipeline
+│   ├── book_health.py         # Book health checks
 │   ├── job_queue.py           # Background job queue
 │   ├── job_database.py        # SQLite job persistence
 │   ├── job_handlers/          # Job processing handlers
+│   │   ├── translate_handler.py
+│   │   ├── download_handler.py
+│   │   ├── pipeline_handler.py
+│   │   └── cover_handler.py
+│   ├── language_detector.py   # Language detection
+│   ├── text_extractor.py      # Text extraction
 │   ├── llm_chat.py            # AI chat (Ollama)
 │   ├── hybrid_rag.py          # RAG retrieval
 │   ├── question_classifier.py # Question classification
 │   ├── semantic_retrieval.py  # Embedding search
-│   └── gutenberg_*.py         # Gutenberg download/catalog
+│   ├── gutenberg_downloader.py # Gutenberg download
+│   ├── gutenberg_catalog.py   # Gutenberg catalog
+│   └── static/                # Web UI assets
+│       ├── player.html/css/js # Audio player
+│       ├── jobs.html/css/js   # Job dashboard
+│       ├── pipeline.js        # Pipeline UI
+│       ├── karaoke.js         # Karaoke mode
+│       └── manifest.json      # PWA manifest
 │
 ├── templates/                 # HTML templates
 ├── books/                     # Book data

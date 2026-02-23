@@ -29,12 +29,27 @@
             margin-bottom: 60px;
             padding-bottom: 20px;
             border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         h1 {
             font-size: 2rem;
             font-weight: 300;
             letter-spacing: -0.5px;
+        }
+
+        .header-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .header-links a:hover {
+            color: #fff;
         }
 
         .layout {
@@ -309,6 +324,9 @@
     <div class="container">
         <header>
             <h1>Audiobooks</h1>
+            <div class="header-links">
+                <a href="/jobs">Jobs</a>
+            </div>
         </header>
 
         <div class="layout">

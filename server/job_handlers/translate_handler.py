@@ -3,7 +3,7 @@
 Translate Handler - Standalone translation worker
 
 Handles translation-only jobs (for already-downloaded books).
-Uses structured_translator.py to preserve chapter structure.
+Uses lib.translation.structured to preserve chapter structure.
 """
 
 from pathlib import Path

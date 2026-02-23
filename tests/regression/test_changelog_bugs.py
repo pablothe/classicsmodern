@@ -242,7 +242,7 @@ class TestMissingChapterDetection:
     """
     Bug: Books with missing chapter numbers (I, III, IV - missing II) not detected.
 
-    Fix: Chapter sequence validation in book_validator.py.
+    Fix: Chapter sequence validation in lib/book/validator.py.
     """
 
     def test_detect_missing_chapter_in_sequence(self):
@@ -337,7 +337,7 @@ class TestGutenbergBoilerplate:
     """
     Bug: Gutenberg boilerplate appears in generated audiobook text.
 
-    Fix: Automatic stripping in local_tts_kokoro.py.
+    Fix: Automatic stripping in lib/audio/kokoro.py.
     """
 
     def test_gutenberg_boilerplate_removed(self):

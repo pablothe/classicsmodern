@@ -22,13 +22,13 @@ Always validate books before processing. This catches structural issues early an
 
 ```bash
 # Validate a book
-python3 book_validator.py books/mybook/book.md
+python3 validate.py books/mybook/book.md
 
 # Auto-fix common issues (Gutenberg boilerplate, missing TOC)
-python3 book_validator.py books/mybook/book.md --auto-fix
+python3 validate.py books/mybook/book.md --auto-fix
 
 # Check readiness for specific features
-python3 book_validator.py books/mybook/book.md --require karaoke,ai_chat
+python3 validate.py books/mybook/book.md --require karaoke,ai_chat
 ```
 
 **What it checks:**
@@ -56,7 +56,7 @@ python3 book_validator.py books/mybook/book.md --require karaoke,ai_chat
 Preserves chapter structure through translation. Best for most books.
 
 ```bash
-python3 structured_translator.py books/mybook/book.md \
+python3 translate.py books/mybook/book.md \
   --source-lang Latin \
   --target-lang "Modern English" \
   --model ollama:zongwei/gemma3-translator:4b
@@ -67,33 +67,6 @@ How it works:
 2. Parses into blocks (metadata, TOC, chapters)
 3. Translates content only (preserves chapter markers)
 4. Assembles clean output with auto-generated TOC
-
-### Option 2: Batch Translator (large books)
-
-For very large books, split into chunks and translate in parallel.
-
-```bash
-# 1. Split into chunks
-python3 local_reader_smart_splitter.py books/crime_punishment/book.md
-
-# 2. Translate with automatic deduplication
-python3 local_reader_batch_translator.py books/crime_punishment/chunks/ Russian "Modern English"
-
-# 3. Use deduplicated output for audio
-python3 make_audiobook.py books/crime_punishment/chunks/translated/deduplicated/chunk_001_DEDUPED.md
-```
-
-### Option 3: Manifest-Based Translator (v2)
-
-Uses the book manifest system for perfect chapter alignment and resumability.
-
-```bash
-# Generate manifest first
-python3 book_processor.py books/mybook/book.md
-
-# Translate using manifest
-python3 structured_translator_v2.py books/mybook/book_manifest.json --target-lang Spanish
-```
 
 ### Anti-Duplication System
 
@@ -122,21 +95,13 @@ For more control over the audio generation step:
 
 ```bash
 # Basic
-python3 local_tts_kokoro.py translated.md --voice bf_emma
+python3 audiobook.py translated.md --voice bf_emma
 
 # With cover art
-python3 local_tts_kokoro.py translated.md --voice bf_emma --generate-cover
+python3 audiobook.py translated.md --voice bf_emma --generate-cover
 
 # Custom speed
-python3 local_tts_kokoro.py translated.md --voice bf_emma --speed 1.15
-```
-
-### Manifest-Based TTS (v2)
-
-For perfect chapter alignment using the manifest system:
-
-```bash
-python3 local_tts_kokoro_v2.py books/mybook/book_manifest.json --voice bf_emma
+python3 audiobook.py translated.md --voice bf_emma --speed 1.15
 ```
 
 ### Voice Options
@@ -170,10 +135,10 @@ Create condensed versions of long books before generating audio.
 
 ```bash
 # 50% summary (auto-sizes chunks)
-python3 book_summarizer.py books/mybook/translated.md 50
+python3 summarize.py books/mybook/translated.md 50
 
 # 10% summary (90% compression, larger chunks for context)
-python3 book_summarizer.py books/mybook/translated.md 10
+python3 summarize.py books/mybook/translated.md 10
 
 # Then generate audio from summary
 python3 make_audiobook.py books/mybook/translated_summarized_50pct.md --generate-cover
@@ -196,10 +161,7 @@ Cover art is generated with Stable Diffusion v1.5 (local, free).
 python3 make_audiobook.py book.md --generate-cover
 
 # Standalone generation
-python3 generate.py "whimsical Alice in Wonderland scene, fantasy illustration" --output cover.png
-
-# Using book prompt catalog
-python3 generate.py "$(python3 book_prompts.py 'Moby Dick')" --output moby.png
+python3 cover.py "whimsical Alice in Wonderland scene, fantasy illustration" --output cover.png
 ```
 
 ---
