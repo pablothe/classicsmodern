@@ -5,6 +5,8 @@ Download Handler - Gutenberg book download worker
 Wraps GutenbergDownloader for unified job queue.
 """
 
+import json
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, Callable
 
@@ -19,6 +21,7 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
         job: Job data dictionary with:
             - config.gutenberg_id: Gutenberg book ID
             - config.book_slug: Book directory name
+            - config.language: ISO 639-1 language code (optional)
         progress_callback: Function to report progress
             Signature: progress_callback(progress: int, state: Dict)
 
@@ -34,6 +37,7 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
     config = job['config']
     gutenberg_id = config['gutenberg_id']
     book_slug = config['book_slug']
+    language = config.get('language')  # ISO 639-1 code from Gutenberg catalog
 
     # Create downloader
     downloader = GutenbergDownloader()
@@ -63,6 +67,17 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
 
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(cleaned)
+
+        # Save Gutenberg metadata (language source of truth)
+        if language:
+            gutenberg_meta = {
+                'gutenberg_id': gutenberg_id,
+                'language': language,
+                'downloaded_at': datetime.now().isoformat()
+            }
+            meta_path = book_dir / "gutenberg_metadata.json"
+            with open(meta_path, 'w', encoding='utf-8') as f:
+                json.dump(gutenberg_meta, f, indent=2)
 
         progress_callback(80, {'message': 'File saved', 'stage': 'save'})
 

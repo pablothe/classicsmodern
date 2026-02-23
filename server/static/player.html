@@ -33,6 +33,7 @@
                 <h1>Audiobooks</h1>
                 <div class="server-info">
                     <span id="book-count">Loading...</span>
+                    <button id="settings-btn" class="settings-btn" title="Settings">&#9881;</button>
                     <button id="dark-mode-toggle" class="dark-mode-toggle">☾</button>
                 </div>
             </header>
@@ -361,6 +362,20 @@
             </div>
             <div id="pipeline-modal-content" class="pipeline-modal-content">
                 <!-- Dynamic content rendered by pipeline.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="pipeline-modal" style="display: none;">
+        <div class="pipeline-modal-backdrop" onclick="closeSettings()"></div>
+        <div class="pipeline-modal-container">
+            <div class="pipeline-modal-header">
+                <h3>Settings</h3>
+                <button onclick="closeSettings()" class="close-btn">&#10005;</button>
+            </div>
+            <div id="settings-modal-content" class="pipeline-modal-content">
+                <!-- Rendered by JS -->
             </div>
         </div>
     </div>

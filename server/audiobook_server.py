@@ -1288,6 +1288,7 @@ if GUTENBERG_AVAILABLE:
 
         gutenberg_id = data.get('gutenberg_id')
         book_slug = data.get('book_slug')
+        language = data.get('language')  # ISO 639-1 code from catalog
 
         if not gutenberg_id or not book_slug:
             raise HTTPException(
@@ -1295,7 +1296,7 @@ if GUTENBERG_AVAILABLE:
                 detail="Missing required fields: gutenberg_id, book_slug"
             )
 
-        # Create download job
+        # Create download job (language passed through for metadata)
         job_id = create_download_job(gutenberg_id, book_slug)
 
         return {
@@ -1550,13 +1551,14 @@ if PIPELINE_AVAILABLE:
 
 
     @app.get("/api/pipeline/detect-language/{book_id}/{file_name}")
-    async def detect_book_language(book_id: str, file_name: str):
+    async def detect_book_language(book_id: str, file_name: str, preferred_language: str = "en"):
         """
         Auto-detect language of a book file.
 
         Args:
             book_id: Book directory name
             file_name: Filename to analyze
+            preferred_language: User's preferred reading language (ISO 639-1 code)
 
         Returns:
             Language detection results
@@ -1568,6 +1570,10 @@ if PIPELINE_AVAILABLE:
             raise HTTPException(status_code=404, detail="File not found")
 
         result = detect_lang_func(file_path)
+
+        # Compute needs_translation based on user's preferred language
+        detected_code = result.get('code', 'en')
+        result['needs_translation'] = detected_code != preferred_language
 
         return result
 
@@ -1718,6 +1724,7 @@ if UNIFIED_QUEUE_AVAILABLE:
 
         gutenberg_id = data.get('gutenberg_id')
         book_slug = data.get('book_slug')
+        language = data.get('language')  # ISO 639-1 code from catalog
 
         if not gutenberg_id or not book_slug:
             raise HTTPException(
@@ -1743,7 +1750,8 @@ if UNIFIED_QUEUE_AVAILABLE:
             job_type=JobType.DOWNLOAD,
             config={
                 'gutenberg_id': gutenberg_id,
-                'book_slug': book_slug
+                'book_slug': book_slug,
+                'language': language
             }
         )
 

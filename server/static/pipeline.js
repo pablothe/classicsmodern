@@ -100,9 +100,10 @@ class AudiobookPipeline {
             </div>
         `;
 
-        // Detect language
+        // Detect language (pass user's preferred language for smart needs_translation)
         try {
-            const response = await fetch(`/api/pipeline/detect-language/${this.currentBookId}/${encodeURIComponent(filename)}`);
+            const preferredLang = state.settings?.preferredLanguage || 'en';
+            const response = await fetch(`/api/pipeline/detect-language/${this.currentBookId}/${encodeURIComponent(filename)}?preferred_language=${preferredLang}`);
             if (!response.ok) throw new Error('Language detection failed');
 
             const result = await response.json();
@@ -126,58 +127,81 @@ class AudiobookPipeline {
         const needsTranslation = langResult.needs_translation;
         const detectedLang = langResult.language;
         const confidence = (langResult.confidence * 100).toFixed(0);
+        const detectionMethod = langResult.method || 'unknown';
+
+        // Use user's preferred target language
+        const defaultTarget = state.settings?.targetTranslationLanguage || 'Modern English';
+
+        // Build target language options with user preference as default
+        const targetLanguages = ['Modern English', 'Simplified English', 'Spanish', 'French', 'German'];
+        const targetOptions = targetLanguages.map(lang =>
+            `<option value="${lang}" ${lang === defaultTarget ? 'selected' : ''}>${lang}</option>`
+        ).join('');
+
+        // Show confidence source for transparency
+        const confidenceLabel = detectionMethod === 'gutenberg_metadata'
+            ? `${detectedLang} (from Gutenberg catalog)`
+            : `${detectedLang} (${confidence}% confident)`;
+
+        const translationFields = `
+            <div id="translation-options"${needsTranslation ? '' : ' style="display: none;"'}>
+                <div class="form-group">
+                    <label>Source Language:</label>
+                    <input type="text" id="source-language" value="${detectedLang}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label>Target Language:</label>
+                    <select id="target-language" class="form-select">
+                        ${targetOptions}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Translation Model:</label>
+                    <select id="translation-model" class="form-select">
+                        <option value="zongwei/gemma3-translator:4b" selected>Gemma3 Translator 4B (Local)</option>
+                    </select>
+                </div>
+            </div>
+        `;
 
         content.innerHTML = `
             <div class="pipeline-step">
                 <h3>Step 2: Translation</h3>
 
                 <div class="detection-result ${needsTranslation ? 'needs-translation' : 'no-translation'}">
-                    <strong>Detected Language:</strong> ${detectedLang} (${confidence}% confident)
+                    <strong>Detected Language:</strong> ${confidenceLabel}
                 </div>
 
                 ${needsTranslation ? `
                     <div class="form-group">
                         <label>
                             <input type="checkbox" id="enable-translation" checked onchange="pipeline.toggleTranslation()">
-                            Translate to English
+                            Translate this book
                         </label>
                     </div>
-
-                    <div id="translation-options">
-                        <div class="form-group">
-                            <label>Source Language:</label>
-                            <input type="text" id="source-language" value="${detectedLang}" class="form-input">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Target Language:</label>
-                            <select id="target-language" class="form-select">
-                                <option value="Modern English" selected>Modern English</option>
-                                <option value="Simplified English">Simplified English</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Translation Model:</label>
-                            <select id="translation-model" class="form-select">
-                                <option value="zongwei/gemma3-translator:4b" selected>Gemma3 Translator 4B (Local)</option>
-                            </select>
-                        </div>
-                    </div>
+                    ${translationFields}
                 ` : `
-                    <p>No translation needed — book is already in English</p>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enable-translation" onchange="pipeline.toggleTranslation()">
+                            Translate anyway (e.g., Old English to Modern English)
+                        </label>
+                    </div>
+                    ${translationFields}
                 `}
 
                 <div class="step-buttons">
-                    <button onclick="pipeline.goBack()" class="btn-secondary">← Back</button>
-                    <button onclick="pipeline.proceedToSummarization()" class="btn-primary">Next →</button>
+                    <button onclick="pipeline.goBack()" class="btn-secondary">&larr; Back</button>
+                    <button onclick="pipeline.proceedToSummarization()" class="btn-primary">Next &rarr;</button>
                 </div>
             </div>
         `;
 
         this.formData.translate = needsTranslation;
         this.formData.source_language = detectedLang;
-        this.formData.target_language = 'Modern English';
+        this.formData.target_language = defaultTarget;
         this.formData.translation_model = 'zongwei/gemma3-translator:4b';
     }
 

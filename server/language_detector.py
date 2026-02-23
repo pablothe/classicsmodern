@@ -3,9 +3,10 @@
 Language Detector for Book Pipeline
 
 Detects the language of source text files to determine if translation is needed.
-Uses script detection and pattern matching for accurate detection (100% local).
+Uses Gutenberg metadata (if available), script detection, and pattern matching (100% local).
 """
 
+import json
 import re
 from pathlib import Path
 from typing import Dict, Optional, Tuple
@@ -42,6 +43,40 @@ class LanguageDetector:
 
     def __init__(self):
         """Initialize language detector"""
+
+    def _detect_from_gutenberg_metadata(self, filepath: Path) -> Optional[Dict]:
+        """
+        Check for gutenberg_metadata.json in the same directory.
+        This is the most reliable source since it comes from Gutenberg's own catalog.
+
+        Args:
+            filepath: Path to file
+
+        Returns:
+            Full detection result dict, or None if no metadata found
+        """
+        meta_path = filepath.parent / "gutenberg_metadata.json"
+        if not meta_path.exists():
+            return None
+
+        try:
+            with open(meta_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+            code = data.get('language')
+            if not code:
+                return None
+
+            language_name = self.LANGUAGE_CODES.get(code, code.title())
+            return {
+                'language': language_name,
+                'code': code,
+                'confidence': 1.0,
+                'method': 'gutenberg_metadata',
+                'needs_translation': code != 'en'
+            }
+        except (json.JSONDecodeError, IOError):
+            return None
 
     def _detect_from_filename(self, filepath: Path) -> Optional[str]:
         """
@@ -109,6 +144,11 @@ class LanguageDetector:
                 'needs_translation': True
             }
         """
+        # Method 0: Gutenberg metadata (highest priority, 100% reliable)
+        gutenberg_result = self._detect_from_gutenberg_metadata(filepath)
+        if gutenberg_result:
+            return gutenberg_result
+
         # Read file sample
         try:
             with open(filepath, 'r', encoding='utf-8') as f:

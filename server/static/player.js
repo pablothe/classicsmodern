@@ -48,6 +48,11 @@ const state = {
         activeDownloads: {},
         pollInterval: null,
         available: false
+    },
+    // User preferences
+    settings: {
+        preferredLanguage: 'en',
+        targetTranslationLanguage: 'Modern English'
     }
 };
 
@@ -144,13 +149,14 @@ const API = {
         return response.json();
     },
 
-    async startGutenbergDownload(gutenbergId, bookSlug) {
+    async startGutenbergDownload(gutenbergId, bookSlug, language) {
         const response = await fetch(`${this.baseURL}/api/jobs/download`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 gutenberg_id: gutenbergId,
-                book_slug: bookSlug
+                book_slug: bookSlug,
+                language: language
             })
         });
         if (response.status === 409) {
@@ -216,6 +222,102 @@ function getOrCreateDeviceId() {
         localStorage.setItem('audiobook_device_id', deviceId);
     }
     return deviceId;
+}
+
+// ============================================================================
+// User Settings
+// ============================================================================
+
+const SETTINGS_KEY = 'audiobook_settings';
+
+const LANGUAGE_NAMES = {
+    'en': 'English', 'fr': 'French', 'de': 'German',
+    'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese',
+    'nl': 'Dutch', 'ru': 'Russian', 'zh': 'Chinese',
+    'ja': 'Japanese', 'la': 'Latin', 'el': 'Greek',
+    'fi': 'Finnish', 'hu': 'Hungarian', 'da': 'Danish',
+    'sv': 'Swedish', 'no': 'Norwegian', 'pl': 'Polish',
+    'cs': 'Czech', 'ca': 'Catalan', 'eo': 'Esperanto'
+};
+
+function loadSettings() {
+    try {
+        const saved = localStorage.getItem(SETTINGS_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            state.settings = { ...state.settings, ...parsed };
+        }
+    } catch (e) {
+        console.warn('Failed to load settings:', e);
+    }
+}
+
+function saveSettings() {
+    try {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(state.settings));
+    } catch (e) {
+        console.warn('Failed to save settings:', e);
+    }
+}
+
+function openSettings() {
+    const modal = document.getElementById('settings-modal');
+    const content = document.getElementById('settings-modal-content');
+
+    const currentLang = state.settings.preferredLanguage;
+    const currentTarget = state.settings.targetTranslationLanguage;
+
+    const langOptions = Object.entries(LANGUAGE_NAMES)
+        .map(([code, name]) =>
+            `<option value="${code}" ${code === currentLang ? 'selected' : ''}>${name} (${code.toUpperCase()})</option>`
+        ).join('');
+
+    const targetOptions = ['Modern English', 'Simplified English', 'Spanish', 'French', 'German']
+        .map(lang =>
+            `<option value="${lang}" ${lang === currentTarget ? 'selected' : ''}>${lang}</option>`
+        ).join('');
+
+    content.innerHTML = `
+        <div class="pipeline-step settings-form">
+            <div class="form-group">
+                <label>Preferred Reading Language</label>
+                <select id="setting-preferred-lang" class="form-select">
+                    ${langOptions}
+                </select>
+                <p class="help-text">Books in this language won't require translation. Used to pre-fill pipeline options.</p>
+            </div>
+
+            <div class="form-group">
+                <label>Default Translation Target</label>
+                <select id="setting-target-lang" class="form-select">
+                    ${targetOptions}
+                </select>
+                <p class="help-text">Default target language when translating books.</p>
+            </div>
+
+            <div class="step-buttons">
+                <button onclick="closeSettings()" class="btn-secondary">Cancel</button>
+                <button onclick="applySettings()" class="btn-primary">Save</button>
+            </div>
+        </div>
+    `;
+
+    modal.style.display = 'block';
+}
+
+function applySettings() {
+    state.settings.preferredLanguage = document.getElementById('setting-preferred-lang').value;
+    state.settings.targetTranslationLanguage = document.getElementById('setting-target-lang').value;
+    saveSettings();
+    closeSettings();
+    // Re-render store to update language indicators
+    if (state.searchTab === 'store') {
+        renderStoreBooks(state.gutenberg.filteredBooks.length > 0 ? state.gutenberg.filteredBooks : state.gutenberg.catalog);
+    }
+}
+
+function closeSettings() {
+    document.getElementById('settings-modal').style.display = 'none';
 }
 
 // ============================================================================
@@ -532,12 +634,20 @@ function renderStoreBooks(books) {
     const pageBooks = books.slice(startIndex, endIndex);
 
     // Render books for current page
+    const userPrefLang = state.settings?.preferredLanguage || 'en';
+
     ui.storeBookList.innerHTML = pageBooks.map(book => {
         const slug = book.title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '_')
             .replace(/^_+|_+$/g, '')
             .substring(0, 50);
+
+        const isPreferredLang = book.language === userPrefLang;
+        const langClass = isPreferredLang ? 'lang-match' : 'lang-needs-translation';
+        const langLabel = isPreferredLang
+            ? book.language.toUpperCase()
+            : `${book.language.toUpperCase()} · needs translation`;
 
         return `
             <div class="store-book-card">
@@ -548,8 +658,8 @@ function renderStoreBooks(books) {
                         <div class="store-book-author">${escapeHtml(book.author)}</div>
                         <div class="store-book-meta">
                             ${book.year ? `<span>${book.year}</span>` : ''}
-                            <span>${book.language.toUpperCase()}</span>
-                            <span>↓ ${book.downloads || 0}</span>
+                            <span class="${langClass}">${langLabel}</span>
+                            <span>&#8595; ${book.downloads || 0}</span>
                         </div>
                     </div>
                 </div>
@@ -558,6 +668,7 @@ function renderStoreBooks(books) {
                     data-gutenberg-id="${book.gutenberg_id}"
                     data-book-slug="${slug}"
                     data-book-title="${escapeHtml(book.title)}"
+                    data-language="${book.language}"
                 >
                     Download
                 </button>
@@ -572,7 +683,8 @@ function renderStoreBooks(books) {
             const gutenbergId = parseInt(btn.dataset.gutenbergId);
             const bookSlug = btn.dataset.bookSlug;
             const bookTitle = btn.dataset.bookTitle;
-            startDownload(gutenbergId, bookSlug, bookTitle);
+            const language = btn.dataset.language;
+            startDownload(gutenbergId, bookSlug, bookTitle, language);
         });
     });
 
@@ -1679,15 +1791,15 @@ async function initGutenberg() {
 }
 
 
-async function startDownload(gutenbergId, bookSlug, bookTitle) {
+async function startDownload(gutenbergId, bookSlug, bookTitle, language) {
     /**
      * Start downloading a book from Gutenberg
      */
     try {
-        console.log(`[Download] Starting: ${bookTitle} (ID: ${gutenbergId})`);
+        console.log(`[Download] Starting: ${bookTitle} (ID: ${gutenbergId}, lang: ${language})`);
 
-        // Start download
-        const response = await API.startGutenbergDownload(gutenbergId, bookSlug);
+        // Start download (pass language from Gutenberg catalog for metadata)
+        const response = await API.startGutenbergDownload(gutenbergId, bookSlug, language);
         const jobId = response.job_id;
 
         // Add to active downloads
@@ -2814,8 +2926,14 @@ const jobsActivity = {
 // ============================================================================
 
 async function init() {
+    // Load user settings
+    loadSettings();
+
     // Initialize dark mode toggle
     initDarkMode();
+
+    // Settings button
+    document.getElementById('settings-btn')?.addEventListener('click', openSettings);
 
     // Get or create device ID
     state.deviceId = getOrCreateDeviceId();
