@@ -441,14 +441,9 @@ function renderLibraryBooks(books) {
                         </div>
                     `}
                     <div class="book-status-overlay" data-status-book="${book.book_id}" style="display:none"></div>
-                    ${!hasCover && !book.cover_generating && !hasActiveJob ? `
+                    ${!book.cover_generating && !hasActiveJob ? `
                         <div class="generate-cover-badge" onclick="event.stopPropagation(); generateCoverForBook('${book.book_id}')">
-                            + Generate Cover
-                        </div>
-                    ` : ''}
-                    ${!hasAudio && hasSourceText && !hasActiveJob ? `
-                        <div class="generate-audio-badge" onclick="event.stopPropagation(); pipeline.openGenerationModal('${book.book_id}')">
-                            + Generate Audiobook
+                            ${hasCover ? '↻ Replace Cover' : '+ Generate Cover'}
                         </div>
                     ` : ''}
                 </div>
@@ -463,6 +458,11 @@ function renderLibraryBooks(books) {
                         ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
                         ${hasAudio ? `<span>${book.variant_count} version${book.variant_count !== 1 ? 's' : ''}</span>` : '<span>No audio</span>'}
                     </div>
+                    ${hasSourceText && !hasActiveJob ? `
+                        <div class="generate-audio-btn" onclick="event.stopPropagation(); pipeline.openGenerationModal('${book.book_id}')">
+                            + Generate Audiobook
+                        </div>
+                    ` : ''}
                 </div>
             </div>
         `;

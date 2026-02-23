@@ -2596,31 +2596,29 @@ header h2 {
 }
 
 /* Generate Audiobook Badge */
-.generate-audio-badge {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 16px;
+/* Generate Audiobook Button (below book info in library grid) */
+.generate-audio-btn {
+    margin-top: 8px;
+    padding: 6px 12px;
     background: var(--text-primary);
     color: var(--bg-color);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: opacity 0.15s;
-    white-space: nowrap;
-    z-index: 10;
+    text-align: center;
+    border-radius: 4px;
 }
 
-.generate-audio-badge:hover {
+.generate-audio-btn:hover {
     opacity: 0.8;
 }
 
-.generate-audio-badge:active {
+.generate-audio-btn:active {
     opacity: 0.6;
 }
 
-/* Generate Cover Badge (library grid) */
+/* Generate/Replace Cover Badge (library grid, overlaid on cover) */
 .generate-cover-badge {
     position: absolute;
     top: 12px;
@@ -2637,12 +2635,21 @@ header h2 {
     z-index: 10;
 }
 
+/* Hide replace badge by default on cards with covers, show on hover */
+.book-cover-card:has(.book-cover-image) .generate-cover-badge {
+    opacity: 0;
+}
+
+.book-cover-card:has(.book-cover-image):hover .generate-cover-badge {
+    opacity: 1;
+}
+
 .generate-cover-badge:hover {
-    opacity: 0.8;
+    opacity: 0.8 !important;
 }
 
 .generate-cover-badge:active {
-    opacity: 0.6;
+    opacity: 0.6 !important;
 }
 
 /* Generate Cover Button (variant view) */
