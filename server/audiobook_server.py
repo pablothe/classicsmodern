@@ -302,7 +302,7 @@ def discover_books() -> List[Dict]:
                     if 'chapters' in metadata:
                         chapters = metadata['chapters']
                         has_chapters = True
-                    if 'title' in metadata:
+                    if 'title' in metadata and not catalog_info:
                         title = metadata['title']
                     if 'author' in metadata and not author:
                         author = metadata['author']
@@ -317,7 +317,7 @@ def discover_books() -> List[Dict]:
                     with open(chapter_json[0], 'r') as f:
                         chapter_data = json.load(f)
                         chapters = chapter_data.get('chapters', [])
-                        if 'title' in chapter_data:
+                        if 'title' in chapter_data and not catalog_info:
                             title = chapter_data['title']
                         if 'author' in chapter_data and not author:
                             author = chapter_data['author']

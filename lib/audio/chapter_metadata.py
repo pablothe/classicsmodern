@@ -272,11 +272,28 @@ def generate_chapter_metadata(
             "timestamp": 0.0
         })
 
-    # Auto-detect title from playlist name if not provided
-    if not title:
-        # Remove timestamp and extension
-        title = re.sub(r'_audiobook_\d{8}_\d{6}$', '', playlist_path.stem)
-        title = re.sub(r'_', ' ', title).title()
+    # Auto-detect title and author if not provided
+    if not title or not author:
+        # Resolve book directory from playlist path
+        book_dir = playlist_path.parent
+        while book_dir.name in ['audio_xtts', 'audio_kokoro', 'audio_edge', 'audio', 'deduplicated', 'translated', 'chunks']:
+            book_dir = book_dir.parent
+
+        # Check book catalog first (most authoritative)
+        try:
+            from lib.book.catalog import get_book_info
+            catalog_info = get_book_info(book_dir.name)
+            if catalog_info:
+                if not title:
+                    title = catalog_info.get('title')
+                if not author:
+                    author = catalog_info.get('author')
+        except ImportError:
+            pass
+
+        # Fallback: derive title from book directory name (not playlist name)
+        if not title:
+            title = book_dir.name.replace('_', ' ').title()
 
     metadata = {
         "title": title,

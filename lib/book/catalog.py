@@ -97,6 +97,12 @@ BOOK_CATALOG = {
         'year': 1926,
         'original_language': 'English'
     },
+    'the_strange_case_of_dr_jekyll_and_mr_hyde': {
+        'title': 'The Strange Case of Dr Jekyll and Mr Hyde',
+        'author': 'Robert Louis Stevenson',
+        'year': 1886,
+        'original_language': 'English'
+    },
     'war_peace': {
         'title': 'War and Peace',
         'author': 'Leo Tolstoy',

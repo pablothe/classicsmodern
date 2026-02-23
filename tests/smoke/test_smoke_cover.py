@@ -19,6 +19,11 @@ pytestmark = [
 class TestSmokeCoverArt:
     """Smoke: Generate cover art with real Stable Diffusion."""
 
+    def test_generate_image_importable(self):
+        """Verify generate_image convenience function exists (used by cover.py and make_audiobook.py)."""
+        from lib.cover.generator import generate_image
+        assert callable(generate_image)
+
     @pytest.mark.timeout(600)
     def test_generate_cover_image(self, tmp_path):
         """Generate a single cover image and verify it's a valid PNG."""

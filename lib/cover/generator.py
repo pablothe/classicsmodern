@@ -110,6 +110,25 @@ class CoverArtGenerator:
         return output_path
 
 
+def generate_image(
+    prompt: str,
+    output_path: str,
+    width: int = 512,
+    height: int = 512,
+    num_inference_steps: int = 30,
+    guidance_scale: float = 7.5
+) -> Path:
+    """Convenience function wrapping CoverArtGenerator for CLI scripts."""
+    generator = CoverArtGenerator()
+    return generator.generate_cover(
+        prompt=prompt,
+        output_path=output_path,
+        width=width,
+        height=height,
+        num_inference_steps=num_inference_steps,
+        guidance_scale=guidance_scale,
+    )
+
 
 def main():
     """Command-line interface for cover art generation"""
