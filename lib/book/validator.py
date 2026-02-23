@@ -167,8 +167,9 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
     metrics['has_toc'] = len(toc) > 0
     metrics['toc_count'] = len(toc)
 
-    # Detect chapters
-    bp_chapters = processor.detect_chapters(cleaned_text)
+    # Detect chapters (pass book_dir for Gutenberg metadata lookup)
+    book_dir = Path(filename).parent if filename else None
+    bp_chapters = processor.detect_chapters(cleaned_text, book_dir=book_dir)
     chapters = []
     for ch in bp_chapters:
         chapters.append({
@@ -549,7 +550,7 @@ def auto_fix_book(file_path: str, backup: bool = True) -> bool:
 
     # Fix 2: Generate TOC if missing
     processor = BookProcessor(verbose=False)
-    bp_chapters = processor.detect_chapters(text)
+    bp_chapters = processor.detect_chapters(text, book_dir=Path(file_path).parent)
     chapters = [{'number': ch.number, 'marker': ch.marker} for ch in bp_chapters]
     toc = processor.detect_toc(text)
 

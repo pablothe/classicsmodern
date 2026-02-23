@@ -83,53 +83,20 @@ class BookManifest:
 class BookProcessor:
     """Main processor for book structure extraction and cleaning."""
 
-    # Comprehensive chapter detection patterns (order matters - most specific first)
-    CHAPTER_PATTERNS = [
-        # Roman numerals standalone (I., II., III., etc.)
-        (r'^(X{0,3})(IX|IV|V?I{0,3})\.\s*$', 'roman_standalone'),
-
-        # Markdown headers with Roman numeral + title (## I. THE EVE OF THE WAR.)
-        # Common in Gutenberg books that don't use the word "Chapter"
-        (r'^#{1,6}\s+([IVXLCDM]+)\.\s+(.+)', 'markdown_roman_title'),
-
-        # Markdown headers with chapter keywords (multilingual)
-        (r'^#{1,6}\s+(Chapter|CHAPTER|Chapitre|CHAPITRE|Kapitel|KAPITEL|Capítulo|CAPÍTULO|Capitolo|CAPITOLO|Глава|Part|PART|Partie|PARTIE|Teil|TEIL|Parte|PARTE|Часть|Book|BOOK|Livre|LIVRE|Buch|BUCH|Libro|LIBRO|Книга|Section|SECTION|Caput|Liber)\s+(\d+|[IVXLCDM]+):?\s*(.*)', 'markdown_chapter'),
-
-        # Alice in Wonderland style - chapters without line breaks (## CHAPTER I.Title)
-        (r'(#{1,6}\s*)?(CHAPTER|Chapter|CHAPITRE|Chapitre)\s+([IVXLCDM]+|[0-9]+)\.([^#\n]+)', 'alice_style'),
-
-        # Numbered lists (1. Title or 1. Chapter 1)
-        (r'^(\d+)\.\s+(.+)', 'numbered_list'),
-
-        # Chapter with word numbers (multilingual: Chapter One, Chapitre Premier, etc.)
-        (r'^(Chapter|Part|Book|Section|Chapitre|Partie|Livre|Kapitel|Teil|Buch|Capítulo|Parte|Libro)\s+(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve|Premier|Première|Deuxième|Troisième)', 'word_number'),
-
-        # Ordinal chapters (First Chapter, Second Part, etc.)
-        (r'^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\s+(Chapter|Part|Book)', 'ordinal'),
+    # Minimal fallback patterns for unstructured text (Priority 3)
+    # Used only when no gutenberg_chapters.json or ## headers are found
+    FALLBACK_PATTERNS = [
+        # Chapter keyword + number (multilingual)
+        (r'^(CHAPTER|Chapter|CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*(.*)', 'chapter_keyword'),
 
         # Act/Scene for plays (multilingual)
         (r'^(Act|ACT|Scene|SCENE|Acte|ACTE|Scène|SCÈNE|Akt|AKT|Szene|Acto|ACTO|Escena|Atto|ATTO|Scena)\s+([IVXLCDM]+|\d+)', 'act_scene'),
 
-        # Epistolary formats (Letter I, Entry 1, Day 1, Lettre I, Brief I)
+        # Epistolary formats (Letter I, Entry 1, Day 1, etc.)
         (r'^(Letter|Entry|Day|Night|Journal|Diary|Lettre|Brief|Carta|Lettera)\s+(\d+|[IVXLCDM]+)', 'epistolary'),
 
         # Special sections (multilingual)
         (r'^(Prologue|Epilogue|Introduction|Preface|Foreword|Interlude|Conclusion|Appendix|Préface|Épilogue|Avant-propos|Einleitung|Nachwort|Vorwort|Prólogo|Epílogo|Introducción|Conclusión|Prefazione|Epilogo|Introduzione)', 'special_section'),
-
-        # Non-English chapter headers without markdown prefix (bare text lines)
-        (r'^(CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*(.*)', 'multilingual_chapter'),
-
-        # Academic sections (Section 1.2.3)
-        (r'^Section\s+\d+(\.\d+)*', 'academic_section'),
-
-        # Story/Tale format (Story I: Title, Tale 1)
-        (r'^(Story|Tale|Adventure|Case)\s+([IVXLCDM]+|\d+):?\s*(.*)', 'story_format'),
-
-        # Winnie the Pooh style ("In Which...")
-        (r'^In\s+Which\s+[A-Z]', 'winnie_pooh_style'),
-
-        # Volume + Chapter (Vol. I, Chapter 1)
-        (r'^(Vol\.|Volume)\s+([IVXLCDM]+|\d+),?\s+(Chapter|Part)\s+(\d+|[IVXLCDM]+)', 'volume_chapter'),
     ]
 
     # Gutenberg markers to detect and remove
@@ -185,8 +152,8 @@ class BookProcessor:
         metadata = self.extract_metadata(cleaned_text)
         self.log_message(f"Metadata: {metadata.get('title', 'Unknown')} by {metadata.get('author', 'Unknown')}")
 
-        # Step 3: Detect chapters
-        chapters = self.detect_chapters(cleaned_text)
+        # Step 3: Detect chapters (pass book_dir for Gutenberg metadata lookup)
+        chapters = self.detect_chapters(cleaned_text, book_dir=book_file.parent)
         self.log_message(f"Detected {len(chapters)} chapters")
 
         if chapters:
@@ -342,111 +309,48 @@ class BookProcessor:
 
         return 'Unknown'
 
-    def detect_chapters(self, text: str) -> List[Chapter]:
+    def detect_chapters(self, text: str, book_dir: Optional[Path] = None) -> List[Chapter]:
         """
-        Detect all chapters using multiple patterns.
+        Detect all chapters using a 3-step priority chain.
+
+        Priority 1: Gutenberg metadata (gutenberg_chapters.json)
+        Priority 2: Markdown ## headers
+        Priority 3: Minimal regex fallback
+
+        Args:
+            text: Book text content
+            book_dir: Optional path to book directory (enables Priority 1)
 
         Returns:
             List of Chapter objects
         """
-        chapters = []
         lines = text.split('\n')
+        chapter_dicts = []
 
-        # Track which lines have been identified as chapters
-        chapter_lines = set()
+        # PRIORITY 1: Gutenberg metadata (source of truth from HTML TOC)
+        if book_dir:
+            chapter_dicts = self._detect_from_gutenberg_json(text, lines, book_dir)
+            if chapter_dicts:
+                self.log_message(f"Priority 1: Found {len(chapter_dicts)} chapters from gutenberg_chapters.json")
 
-        # Try each pattern
-        for pattern_regex, pattern_type in self.CHAPTER_PATTERNS:
-            pattern = re.compile(pattern_regex, re.IGNORECASE)
+        # PRIORITY 2: Markdown ## headers (Gutenberg downloads + any structured markdown)
+        if not chapter_dicts:
+            chapter_dicts = self._detect_header_chapters(lines)
+            if chapter_dicts:
+                self.log_message(f"Priority 2: Found {len(chapter_dicts)} chapters from ## headers")
 
-            for i, line in enumerate(lines):
-                if i in chapter_lines:
-                    continue  # Already identified as chapter by a higher-priority pattern
+        # PRIORITY 3: Minimal regex fallback (bare "Chapter I" lines, acts, prologues)
+        if not chapter_dicts:
+            chapter_dicts = self._detect_fallback_regex(lines)
+            if chapter_dicts:
+                self.log_message(f"Priority 3: Found {len(chapter_dicts)} chapters via regex fallback")
 
-                line_stripped = line.strip()
-                # Strip "end chapter" artifacts from Gutenberg HTML conversion
-                line_stripped = re.sub(r'^end chapter', '', line_stripped, flags=re.IGNORECASE).strip()
-                if not line_stripped:
-                    continue
-
-                # Special handling for alice_style - can have multiple matches on one line
-                # (e.g., "CHAPTER I.TitleCHAPTER II.Title" all on one line)
-                if pattern_type == 'alice_style':
-                    # Use finditer to find all matches on the line
-                    for match in pattern.finditer(line_stripped):
-                        # Calculate character position for this specific match
-                        char_pos = len('\n'.join(lines[:i])) + match.start()
-
-                        # Extract components
-                        chapter_num = match.group(3)  # Roman numeral or number
-                        chapter_title = match.group(4).strip() if match.group(4) else ""
-
-                        # Filter out TOC/link artifacts (e.g., "[## Chapter 1.](#chapter-1)")
-                        if len(chapter_title) < 2 or '](' in chapter_title:
-                            continue
-                        if '](#' in match.group(0):
-                            continue
-
-                        chapters.append({
-                            'line_num': i,
-                            'char_pos': char_pos,
-                            'marker': match.group(0),
-                            'title': chapter_title,
-                            'detection_type': pattern_type
-                        })
-                else:
-                    # Normal pattern matching
-                    match = pattern.match(line_stripped)
-                    if match:
-                        # Post-match validation for numbered_list pattern
-                        if pattern_type == 'numbered_list':
-                            chapter_text = match.group(2).strip() if match.lastindex >= 2 else ''
-                            # Exclude TOC entries (markdown links)
-                            if re.search(r'\[.*?\]\(#', chapter_text):
-                                continue
-                            # Exclude short entries (likely list items, not chapters)
-                            if len(chapter_text) < 15:
-                                continue
-
-                        chapter_lines.add(i)
-
-                        # Calculate character position
-                        char_pos = len('\n'.join(lines[:i]))
-
-                        # Extract title from the match
-                        title = self.extract_chapter_title(line_stripped, match, pattern_type)
-
-                        chapters.append({
-                            'line_num': i,
-                            'char_pos': char_pos,
-                            'marker': line_stripped,
-                            'title': title,
-                            'detection_type': pattern_type
-                        })
-
-        # Sort chapters by position
-        chapters.sort(key=lambda x: x['line_num'])
-
-        # Deduplicate: if multiple patterns detect the same chapter location
-        # (e.g., "## Chapter 1." on line 215 and "CHAPITRE I." on line 216),
-        # keep only the first detection
-        if len(chapters) > 1:
-            deduped = [chapters[0]]
-            for ch in chapters[1:]:
-                if ch['line_num'] - deduped[-1]['line_num'] > 3:
-                    deduped.append(ch)
-            chapters = deduped
-
-        # Fallback: if no patterns matched, try using ## headers as chapters
-        if not chapters:
-            chapters = self._detect_header_chapters(lines)
-
-        # Last resort: treat entire text as single chapter
-        if not chapters:
+        # LAST RESORT: Single chapter for whole text
+        if not chapter_dicts:
             word_count = len(text.split())
             if word_count >= 100:
                 self.log_message(f"No chapter markers found — treating entire text as single chapter ({word_count:,} words)")
-                chapters = [{
+                chapter_dicts = [{
                     'line_num': 0,
                     'char_pos': 0,
                     'marker': '',
@@ -454,21 +358,205 @@ class BookProcessor:
                     'detection_type': 'single_chapter_fallback'
                 }]
 
-        # Convert to Chapter objects with content
+        return self._dicts_to_chapters(chapter_dicts, lines, text)
+
+    def _detect_from_gutenberg_json(self, text: str, lines: list, book_dir: Path) -> list:
+        """
+        Priority 1: Load chapter boundaries from gutenberg_chapters.json.
+
+        The JSON contains chapter titles (from HTML TOC). We match each title
+        against ## headers in the text to find exact line positions.
+
+        Returns:
+            List of chapter dicts, or empty list if file not found or matching fails.
+        """
+        json_path = Path(book_dir) / "gutenberg_chapters.json"
+        if not json_path.exists():
+            return []
+
+        try:
+            with open(json_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, IOError):
+            return []
+
+        gutenberg_chapters = data.get('chapters', [])
+        if not gutenberg_chapters:
+            return []
+
+        # Find all ## headers in the text
+        header_candidates = []
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            if stripped.startswith('## '):
+                header_candidates.append((i, stripped))
+
+        if len(header_candidates) < len(gutenberg_chapters) * 0.5:
+            # Not enough ## headers to match — fall through to Priority 2
+            return []
+
+        # Match gutenberg chapters to ## headers by title similarity
+        matched = []
+        used_headers = set()
+        for gc in gutenberg_chapters:
+            title = gc['title']
+            for idx, (line_num, header_text) in enumerate(header_candidates):
+                if idx in used_headers:
+                    continue
+                header_title = header_text[3:].strip()  # Remove "## "
+                if self._titles_match(title, header_title):
+                    matched.append({
+                        'line_num': line_num,
+                        'char_pos': len('\n'.join(lines[:line_num])),
+                        'marker': header_text,
+                        'title': header_title,
+                        'detection_type': 'gutenberg_json'
+                    })
+                    used_headers.add(idx)
+                    break
+
+        # Require at least 50% match rate
+        if len(matched) < len(gutenberg_chapters) * 0.5:
+            return []
+
+        return matched
+
+    @staticmethod
+    def _titles_match(gutenberg_title: str, header_title: str) -> bool:
+        """Check if a Gutenberg TOC title matches a ## header title."""
+        def normalize(s):
+            s = s.lower().strip()
+            s = re.sub(r'[^\w\s]', '', s)
+            s = re.sub(r'\s+', ' ', s)
+            return s
+
+        gt = normalize(gutenberg_title)
+        ht = normalize(header_title)
+
+        # Exact match after normalization
+        if gt == ht:
+            return True
+
+        # One contains the other (handles "Chapter 1" vs "Chapter 1. Title")
+        if gt in ht or ht in gt:
+            return True
+
+        # Match by chapter number
+        gt_num = re.search(r'\b(\d+)\b', gt)
+        ht_num = re.search(r'\b(\d+)\b', ht)
+        if gt_num and ht_num and gt_num.group(1) == ht_num.group(1):
+            if 'chapter' in gt and 'chapter' in ht:
+                return True
+
+        return False
+
+    def _detect_header_chapters(self, lines: list) -> list:
+        """
+        Priority 2: Detect chapters from ## markdown headers.
+
+        Filters out metadata headers (Contents, Copyright, etc.).
+        Returns chapter dicts if 2+ real content headers found.
+        """
+        SKIP_HEADERS = {
+            'contents', 'table of contents', 'copyright', 'dedication',
+            'acknowledgements', 'acknowledgments', 'about the author',
+            'colophon', 'note', 'notes', 'bibliography', 'index',
+        }
+
+        candidates = []
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            # Strip "end chapter" artifacts from Gutenberg HTML conversion
+            stripped = re.sub(r'^end chapter', '', stripped, flags=re.IGNORECASE).strip()
+            match = re.match(r'^##\s+(.+)', stripped)
+            if not match:
+                # Handle mid-line ## headers (e.g., TOC text followed by ## Chapter I.)
+                mid_match = re.search(r'(?<![#\[])##\s+([A-Z])', stripped)
+                if mid_match:
+                    # Extract from the ## onwards
+                    rest = stripped[mid_match.start():]
+                    match = re.match(r'^##\s+(.+)', rest)
+                    if match:
+                        stripped = rest
+                if not match:
+                    continue
+            title = match.group(1).strip()
+            if title.lower() in SKIP_HEADERS:
+                continue
+            if title.lower().startswith('by '):
+                continue
+            # Filter TOC link artifacts like "[Chapter 1](#chapter-1)"
+            if re.match(r'^\[.*\]\(#', title):
+                continue
+            candidates.append({
+                'line_num': i,
+                'char_pos': len('\n'.join(lines[:i])),
+                'marker': stripped,
+                'title': title,
+                'detection_type': 'markdown_header'
+            })
+
+        if candidates:
+            return candidates
+        return []
+
+    def _detect_fallback_regex(self, lines: list) -> list:
+        """
+        Priority 3: Minimal regex fallback for unstructured text.
+
+        Uses a small set of patterns for books without ## headers.
+        """
+        chapters = []
+        chapter_lines = set()
+
+        for pattern_regex, pattern_type in self.FALLBACK_PATTERNS:
+            pattern = re.compile(pattern_regex, re.IGNORECASE)
+            for i, line in enumerate(lines):
+                if i in chapter_lines:
+                    continue
+                line_stripped = line.strip()
+                if not line_stripped:
+                    continue
+                match = pattern.match(line_stripped)
+                if match:
+                    chapter_lines.add(i)
+                    title = self.extract_chapter_title(line_stripped, match, pattern_type)
+                    chapters.append({
+                        'line_num': i,
+                        'char_pos': len('\n'.join(lines[:i])),
+                        'marker': line_stripped,
+                        'title': title,
+                        'detection_type': pattern_type
+                    })
+
+        # Sort and deduplicate (remove detections within 3 lines of each other)
+        chapters.sort(key=lambda x: x['line_num'])
+        if len(chapters) > 1:
+            deduped = [chapters[0]]
+            for ch in chapters[1:]:
+                if ch['line_num'] - deduped[-1]['line_num'] > 3:
+                    deduped.append(ch)
+            chapters = deduped
+
+        return chapters
+
+    def _dicts_to_chapters(self, chapter_dicts: list, lines: list, text: str) -> List[Chapter]:
+        """
+        Convert a list of chapter dicts to Chapter objects with content.
+
+        Each dict must have: line_num, char_pos, marker, title, detection_type.
+        """
         chapter_objects = []
-        for i, ch_info in enumerate(chapters):
-            # Determine content boundaries
+        for i, ch_info in enumerate(chapter_dicts):
             start_line = ch_info['line_num']
-            if i + 1 < len(chapters):
-                end_line = chapters[i + 1]['line_num']
+            if i + 1 < len(chapter_dicts):
+                end_line = chapter_dicts[i + 1]['line_num']
             else:
                 end_line = len(lines)
 
-            # Extract content (excluding the marker line itself)
             content_lines = lines[start_line + 1:end_line]
             content = '\n'.join(content_lines).strip()
 
-            # Calculate positions
             start_char = ch_info['char_pos']
             end_char = start_char + len('\n'.join(lines[start_line:end_line]))
 
@@ -487,87 +575,19 @@ class BookProcessor:
 
         return chapter_objects
 
-    def _detect_header_chapters(self, lines: list) -> list:
-        """
-        Fallback chapter detection: use ## headers as chapters.
-
-        Only called when no other pattern matched. Filters out
-        metadata headers (Contents, author, etc.).
-        """
-        SKIP_HEADERS = {
-            'contents', 'table of contents', 'copyright', 'dedication',
-            'acknowledgements', 'acknowledgments', 'about the author',
-            'colophon', 'note', 'notes', 'bibliography', 'index',
-        }
-
-        candidates = []
-        for i, line in enumerate(lines):
-            stripped = line.strip()
-            match = re.match(r'^##\s+(.+)', stripped)
-            if not match:
-                continue
-            title = match.group(1).strip()
-            if title.lower() in SKIP_HEADERS:
-                continue
-            if title.lower().startswith('by '):
-                continue
-            candidates.append({
-                'line_num': i,
-                'char_pos': len('\n'.join(lines[:i])),
-                'marker': stripped,
-                'title': title,
-                'detection_type': 'markdown_header_fallback'
-            })
-
-        if len(candidates) >= 2:
-            self.log_message(f"Fallback: using {len(candidates)} markdown headers as chapters")
-            return candidates
-        return []
-
     def extract_chapter_title(self, line: str, match: re.Match, pattern_type: str) -> str:
         """Extract a clean chapter title from the matched line."""
-        # Special handling for alice_style which already extracted the title
-        if pattern_type == 'alice_style':
-            # Title was already extracted in detect_chapters
-            return line
-
-        # For markdown_roman_title, extract the title after "## ROMAN. "
-        if pattern_type == 'markdown_roman_title':
-            line = re.sub(r'^#{1,6}\s*', '', line)
-            line = re.sub(r'^[IVXLCDM]+\.\s*', '', line)
+        # For act_scene, epistolary, special_section: use the full line
+        if pattern_type in ('act_scene', 'epistolary', 'special_section'):
             return line.strip()
 
-        # Remove markdown headers
-        line = re.sub(r'^#{1,6}\s*', '', line)
-
-        # Remove leading numbers and dots
-        line = re.sub(r'^\d+\.\s*', '', line)
-
-        # For multilingual_chapter, extract title after keyword + number
-        if pattern_type == 'multilingual_chapter':
-            line = re.sub(
-                r'^(CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*',
-                '', line, flags=re.IGNORECASE
-            )
-            return line.strip() if line.strip() else match.group(0)
-
-        # For some patterns, use the full line as title
-        if pattern_type in ['winnie_pooh_style', 'special_section']:
-            return line.strip()
-
-        # For chapter patterns, try to extract just the title part (multilingual)
-        chapter_kw_pattern = r'^(Chapter|Part|Book|Section|Chapitre|Partie|Livre|Kapitel|Teil|Buch|Capítulo|Parte|Libro|Capitolo|Глава)\s+([IVXLCDM]+|\d+):?\s*'
-        if re.match(chapter_kw_pattern, line, re.IGNORECASE):
-            line = re.sub(chapter_kw_pattern, '', line, flags=re.IGNORECASE)
-
-        # Clean up any remaining formatting
-        title = line.strip()
-
-        # If we end up with empty title, use the marker
-        if not title:
-            title = match.group(0)
-
-        return title
+        # For chapter_keyword: strip the keyword + number prefix to get the title
+        cleaned = re.sub(
+            r'^(CHAPTER|Chapter|CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*',
+            '', line, flags=re.IGNORECASE
+        )
+        title = cleaned.strip()
+        return title if title else match.group(0)
 
     def fix_chapter_sequence(self, chapters: List[Chapter]) -> List[Chapter]:
         """
@@ -730,7 +750,7 @@ class BookProcessor:
 
         chapter_numbers = []
         for ch in chapters:
-            marker = ch.get('marker', '')
+            marker = ch.marker if hasattr(ch, 'marker') else ch.get('marker', '')
 
             # Try Roman numeral
             roman_match = re.match(r'^(X{0,3})(IX|IV|V?I{0,3})\.$', marker)

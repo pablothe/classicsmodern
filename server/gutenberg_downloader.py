@@ -89,7 +89,7 @@ class GutenbergDownloader:
 
             # Convert to Markdown
             print("🔄 Converting to Markdown...")
-            markdown = self._html_to_markdown(html_content)
+            markdown, toc_entries = self._html_to_markdown(html_content)
 
             if job_id:
                 download_jobs[job_id]['progress'] = 60
@@ -108,6 +108,25 @@ class GutenbergDownloader:
                 f.write(normalized)
 
             print(f"✓ Saved: {output_file}")
+
+            # Save Gutenberg chapter metadata for downstream chapter detection
+            if toc_entries:
+                chapters_data = {
+                    "source": "gutenberg_html_toc",
+                    "chapter_count": len(toc_entries),
+                    "chapters": [
+                        {
+                            "number": entry["number"],
+                            "title": self._normalize_chapter_title(entry["title"], entry["number"]),
+                            "original_title": entry["title"]
+                        }
+                        for entry in toc_entries
+                    ]
+                }
+                gutenberg_json = book_dir / "gutenberg_chapters.json"
+                with open(gutenberg_json, 'w', encoding='utf-8') as f:
+                    json.dump(chapters_data, f, indent=2, ensure_ascii=False)
+                print(f"✓ Saved {len(toc_entries)} chapters to gutenberg_chapters.json")
 
             if job_id:
                 download_jobs[job_id]['progress'] = 80
@@ -361,7 +380,7 @@ class GutenbergDownloader:
                 h2.string = title
                 target.insert_after(h2)
 
-    def _html_to_markdown(self, html: str) -> str:
+    def _html_to_markdown(self, html: str) -> tuple:
         """
         Convert HTML to Markdown.
 
@@ -369,7 +388,7 @@ class GutenbergDownloader:
             html: HTML content
 
         Returns:
-            Markdown content
+            Tuple of (markdown_content, toc_entries)
         """
         soup = BeautifulSoup(html, 'html.parser')
 
@@ -395,7 +414,7 @@ class GutenbergDownloader:
         # Clean up excessive whitespace
         markdown = re.sub(r'\n{3,}', '\n\n', markdown)
 
-        return markdown.strip()
+        return markdown.strip(), toc_entries
 
     def _convert_element_to_markdown(self, element, depth=0) -> str:
         """

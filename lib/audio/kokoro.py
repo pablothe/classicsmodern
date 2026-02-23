@@ -824,7 +824,7 @@ class KokoroAudioGenerator:
         from lib.book.processor import BookProcessor
         processor = BookProcessor(verbose=False)
         stripped_text, _ = processor.strip_gutenberg(raw_text)
-        chapter_objects = processor.detect_chapters(stripped_text)
+        chapter_objects = processor.detect_chapters(stripped_text, book_dir=input_path.parent)
 
         # Also build tuples for backward-compat
         chapters = [(ch.number, ch.start_char, ch.marker) for ch in chapter_objects]

@@ -222,21 +222,11 @@ def chapter_patterns() -> Dict:
             "## CHAPTER II. The Pool of Tears",
             "## CHAPTER III. A Caucus-Race"
         ],
-        'numbered_list': [
-            "1. The Horror in Clay",
-            "2. The Tale of Inspector Legrasse",
-            "3. The Madness from the Sea"
-        ],
         'markdown_headers': [
-            "# Chapter 1: The Beginning",
-            "# Chapter 2: The Middle",
-            "# Chapter 3: The End"
+            "## Chapter 1: The Beginning",
+            "## Chapter 2: The Middle",
+            "## Chapter 3: The End"
         ],
-        'mixed_formats': [
-            "## CHAPTER I. Introduction",
-            "# Chapter 2: Development",
-            "3. The Conclusion"
-        ]
     }
 
 
