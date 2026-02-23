@@ -9,18 +9,7 @@ Requirements:
     pip install diffusers torch transformers accelerate
 """
 
-import argparse
-import sys
 from pathlib import Path
-
-try:
-    from diffusers import StableDiffusionPipeline
-    import torch
-except ImportError:
-    print("❌ ERROR: Required libraries not installed")
-    print("\nPlease install dependencies:")
-    print("  pip install diffusers torch transformers accelerate")
-    sys.exit(1)
 
 
 class CoverArtGenerator:
@@ -36,6 +25,14 @@ class CoverArtGenerator:
             model_id: HuggingFace model ID
             device: Device to run on ("mps", "cuda", "cpu", or "auto")
         """
+        try:
+            from diffusers import StableDiffusionPipeline
+            import torch
+        except ImportError:
+            raise ImportError(
+                "Cover generation requires: pip install diffusers torch transformers accelerate"
+            )
+
         self.model_id = model_id
 
         # Auto-detect device
@@ -132,6 +129,8 @@ def generate_image(
 
 def main():
     """Command-line interface for cover art generation"""
+    import argparse
+    import sys
 
     parser = argparse.ArgumentParser(
         description="Generate AI cover art for audiobooks using Stable Diffusion"
@@ -223,4 +222,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

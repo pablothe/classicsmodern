@@ -73,7 +73,9 @@ def cover_handler(job: Dict, progress_callback: Callable) -> Dict:
         )
 
         if result.returncode != 0:
-            error_msg = result.stderr.strip() if result.stderr else 'Unknown error'
+            error_msg = result.stderr.strip() if result.stderr else (
+                result.stdout.strip() if result.stdout else 'Unknown error'
+            )
             raise Exception(f"Cover generation failed: {error_msg}")
 
     except subprocess.TimeoutExpired:

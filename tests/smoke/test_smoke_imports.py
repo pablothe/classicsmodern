@@ -48,9 +48,8 @@ class TestSmokeImports:
         from lib.audio.kokoro import KokoroAudioGenerator
         assert KokoroAudioGenerator is not None
 
-    @pytest.mark.requires_diffusion
     def test_cover_cli_imports(self):
-        """cover.py imports generate_image (requires diffusers+torch)."""
+        """cover.py imports generate_image (lazy import, no diffusers needed)."""
         from lib.cover.generator import generate_image
         assert callable(generate_image)
 

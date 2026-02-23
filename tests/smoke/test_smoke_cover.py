@@ -9,20 +9,22 @@ This is the heaviest test — requires ~1GB model download on first run.
 import pytest
 from pathlib import Path
 
-pytestmark = [
-    pytest.mark.smoke,
-    pytest.mark.requires_diffusion,
-    pytest.mark.slow,
-]
+pytestmark = pytest.mark.smoke
 
 
-class TestSmokeCoverArt:
-    """Smoke: Generate cover art with real Stable Diffusion."""
+class TestSmokeCoverImport:
+    """Verify cover generation module is importable (no heavy deps needed)."""
 
     def test_generate_image_importable(self):
         """Verify generate_image convenience function exists (used by cover.py and make_audiobook.py)."""
         from lib.cover.generator import generate_image
         assert callable(generate_image)
+
+
+@pytest.mark.requires_diffusion
+@pytest.mark.slow
+class TestSmokeCoverArt:
+    """Smoke: Generate cover art with real Stable Diffusion."""
 
     @pytest.mark.timeout(600)
     def test_generate_cover_image(self, tmp_path):

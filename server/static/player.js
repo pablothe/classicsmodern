@@ -744,11 +744,10 @@ function updateBookJobStatus(bookId) {
                 <div class="book-job-detail">Waiting for other jobs to finish...</div>
             </div>`;
     } else if (job.status === 'failed') {
-        const err = job.error || 'Unknown error';
         container.innerHTML = `
             <div class="book-job-card failed">
                 <div class="book-job-header">${label} — Failed</div>
-                <div class="book-job-detail">${jobsActivity.escapeHtml(err)}</div>
+                <div class="book-job-detail">Generation did not complete. Check the Jobs panel for details.</div>
             </div>`;
     }
 }
@@ -2719,11 +2718,9 @@ const jobsActivity = {
             } else if (job.status === 'pending') {
                 el.innerHTML = `<div class="book-status-badge pending"><div class="book-status-info">Queued</div></div>`;
             } else if (job.status === 'failed') {
-                const err = (job.error || 'Failed').substring(0, 50);
                 el.innerHTML = `
                     <div class="book-status-badge failed">
                         <div class="book-status-info">Failed</div>
-                        <div class="book-status-msg">${this.escapeHtml(err)}</div>
                     </div>`;
             }
         });
