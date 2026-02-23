@@ -178,6 +178,8 @@ books/*/*_original_*.md
 books/*/audio_kokoro/
 books/*/audio_edge/
 books/*/*_chapter_data.json
+books/*/source.md
+books/*/*_word_timings.json
 
 # Book migration backups
 books/*/.old_structure_backup/
