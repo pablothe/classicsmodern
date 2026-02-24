@@ -221,7 +221,8 @@ def ask_with_hybrid_rag(
     question: str,
     current_chapter: int,
     tools: BookTools,
-    model: str = "llama3.2:3b"
+    model: str = "llama3.2:3b",
+    user_language: str = "English"
 ) -> Dict:
     """
     Hybrid RAG implementation - uses semantic search or full section retrieval.
@@ -334,6 +335,8 @@ def ask_with_hybrid_rag(
 
     system_prompt = f"""You are a knowledgeable AI assistant for audiobook listeners. The user is currently listening to Chapter {current_chapter}.
 
+**IMPORTANT: Always respond in {user_language}, regardless of the language of the source text.**
+
 {chapters_info}**Context Retrieved:**
 The following text was retrieved to answer your question using {method}.
 
@@ -395,7 +398,8 @@ def ask_with_tools(
     current_chapter: int,
     tools: BookTools,
     model: str = "llama3.2:3b",
-    use_hybrid_rag: bool = True
+    use_hybrid_rag: bool = True,
+    user_language: str = "English"
 ) -> Dict:
     """
     Main LLM query handler with tool-calling loop.
@@ -427,7 +431,7 @@ def ask_with_tools(
     """
     # Use hybrid RAG if enabled and available
     if use_hybrid_rag and HYBRID_RAG_AVAILABLE:
-        return ask_with_hybrid_rag(question, current_chapter, tools, model)
+        return ask_with_hybrid_rag(question, current_chapter, tools, model, user_language=user_language)
 
     # Fallback: Build system prompt with tool definitions
     chapter_list = tools.list_chapters()
@@ -438,6 +442,8 @@ def ask_with_tools(
         chapters_info = "**Note:** This book has no explicit chapters.\n\n"
 
     system_prompt = f"""You are a knowledgeable AI assistant for audiobook listeners. The user is currently listening to Chapter {current_chapter} of this book.
+
+**IMPORTANT: Always respond in {user_language}, regardless of the language of the source text.**
 
 {chapters_info}**Available Tools:**
 You can call the following tools to retrieve book content:

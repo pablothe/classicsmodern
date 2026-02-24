@@ -1149,6 +1149,7 @@ if AI_ASSISTANT_AVAILABLE:
         variant_id = data.get('variant_id')
         current_chapter = data.get('current_chapter', 0)
         question = data.get('question')
+        user_language = data.get('user_language', 'English')
 
         if not book_id or not question:
             raise HTTPException(status_code=400, detail="Missing required fields: book_id, question")
@@ -1183,7 +1184,8 @@ if AI_ASSISTANT_AVAILABLE:
                 question=question,
                 current_chapter=current_chapter,
                 tools=tools,
-                model="llama3.2:3b"
+                model="llama3.2:3b",
+                user_language=user_language
             )
 
             # Extract chapter numbers from tools_used
