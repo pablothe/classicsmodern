@@ -16,8 +16,10 @@ Features:
 - Persistent state across restarts
 """
 
+import logging
 import threading
 import time
+import traceback
 import uuid
 from datetime import datetime
 from enum import Enum
@@ -26,6 +28,8 @@ from typing import Dict, List, Optional, Callable
 from queue import PriorityQueue
 
 from server.job_database import JobDatabase
+
+logger = logging.getLogger(__name__)
 
 
 class JobType(str, Enum):
@@ -370,7 +374,10 @@ class UnifiedJobQueue:
                                 'completed_at': datetime.now().isoformat(),
                                 'error': str(e)
                             })
-                            print(f"❌ Job {job_id} failed: {e}")
+                            logger.error("Job %s (type=%s, book=%s) failed: %s\n%s",
+                                         job_id, job.get('job_type', '?'),
+                                         job.get('config', {}).get('book_id', '?'),
+                                         e, traceback.format_exc())
 
                     finally:
                         # Remove from running jobs

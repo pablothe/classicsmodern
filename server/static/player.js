@@ -856,12 +856,6 @@ function updateBookJobStatus(bookId) {
                 <div class="book-job-header">${label} — Queued</div>
                 <div class="book-job-detail">Waiting for other jobs to finish...</div>
             </div>`;
-    } else if (job.status === 'failed') {
-        container.innerHTML = `
-            <div class="book-job-card failed">
-                <div class="book-job-header">${label} — Failed</div>
-                <div class="book-job-detail">Generation did not complete. Check the Jobs panel for details.</div>
-            </div>`;
     }
 }
 
@@ -1673,7 +1667,8 @@ async function sendChatMessage(question) {
                 book_id: state.currentBook.book_id,
                 variant_id: state.currentVariant.variant_id,
                 current_chapter: state.currentChapterIndex || 0,
-                question: question
+                question: question,
+                user_language: LANGUAGE_NAMES[state.settings.preferredLanguage] || 'English'
             })
         });
 
@@ -2758,7 +2753,7 @@ const jobsActivity = {
 
     // Priority for picking which job to show per book (higher = more important)
     jobPriority(job) {
-        const p = { running: 4, pending: 3, failed: 2, completed: 1 };
+        const p = { running: 4, pending: 3, completed: 1 };
         return p[job.status] || 0;
     },
 
@@ -2773,7 +2768,7 @@ const jobsActivity = {
             // Build book_id → job lookup (prefer running > pending > failed)
             this.jobsByBook = {};
             for (const job of allJobs) {
-                if (job.status === 'completed' || job.status === 'cancelled') continue;
+                if (job.status === 'completed' || job.status === 'cancelled' || job.status === 'failed') continue;
                 if (this.dismissedJobs.has(job.job_id)) continue;
                 const bookId = job.config?.book_id || job.config?.book_slug;
                 if (!bookId) continue;
@@ -2795,7 +2790,6 @@ const jobsActivity = {
             const jobs = allJobs.filter(job => {
                 if (this.dismissedJobs.has(job.job_id)) return false;
                 if (job.status === 'running' || job.status === 'pending') return true;
-                if (job.status === 'failed') return true;
                 if (job.status === 'completed' && job.completed_at) {
                     const age = Date.now() - new Date(job.completed_at).getTime();
                     return age < 30000;
@@ -2831,11 +2825,10 @@ const jobsActivity = {
                     </div>`;
             } else if (job.status === 'pending') {
                 el.innerHTML = `<div class="book-status-badge pending"><div class="book-status-info">Queued</div></div>`;
-            } else if (job.status === 'failed') {
-                el.innerHTML = `
-                    <div class="book-status-badge failed">
-                        <div class="book-status-info">Failed</div>
-                    </div>`;
+            } else {
+                el.innerHTML = '';
+                el.style.display = 'none';
+                return;
             }
         });
     },
