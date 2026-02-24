@@ -9,6 +9,7 @@ Functions:
 - Detect chapter boundaries
 """
 
+import json
 import re
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
@@ -64,6 +65,171 @@ def find_source_text(book_dir: Path) -> Optional[Path]:
             return min(main_files, key=lambda p: len(p.name))
 
     return None
+
+
+def _normalize_language_name(raw: str) -> str:
+    """Normalize language key/filename fragment to display name.
+
+    Examples: 'modern_english' -> 'Modern English', 'Spanish' -> 'Spanish'
+    """
+    return raw.replace('_', ' ').strip().title()
+
+
+def discover_text_tracks(book_dir: Path, book_language: Optional[str] = None) -> List[Dict]:
+    """
+    Discover all available text language tracks for a book.
+
+    Combines three discovery sources (deduplicated by resolved file path):
+    1. Original source file from find_source_text()
+    2. metadata.json translations dict
+    3. Filename pattern scan for *_{Language}_{timestamp}.md and translations/*.md
+
+    Args:
+        book_dir: Path to book directory
+        book_language: Original language of the book (e.g., 'French', 'Latin')
+
+    Returns:
+        List of track dicts with track_id, language, label, file_path, is_original
+    """
+    if not book_dir.exists():
+        return []
+
+    tracks = []
+    seen_paths = set()  # Deduplicate by resolved file path
+
+    # Try to detect original language from Gutenberg metadata or metadata.json
+    original_language = book_language
+    # Check metadata.json language field
+    metadata_file = book_dir / 'metadata.json'
+    if not original_language and metadata_file.exists():
+        try:
+            with open(metadata_file, 'r', encoding='utf-8') as f:
+                meta = json.load(f)
+            if meta.get('language'):
+                original_language = meta['language']
+        except (json.JSONDecodeError, IOError):
+            pass
+    # Gutenberg metadata is most authoritative
+    gutenberg_meta = book_dir / 'gutenberg_metadata.json'
+    if gutenberg_meta.exists():
+        try:
+            with open(gutenberg_meta, 'r', encoding='utf-8') as f:
+                gdata = json.load(f)
+            lang_code = gdata.get('language', '')
+            GUTENBERG_LANG_MAP = {
+                'en': 'English', 'fr': 'French', 'de': 'German', 'es': 'Spanish',
+                'it': 'Italian', 'pt': 'Portuguese', 'la': 'Latin', 'el': 'Greek',
+                'ru': 'Russian', 'nl': 'Dutch', 'zh': 'Chinese', 'ja': 'Japanese',
+                'fi': 'Finnish', 'hu': 'Hungarian', 'da': 'Danish', 'sv': 'Swedish',
+                'no': 'Norwegian', 'pl': 'Polish', 'cs': 'Czech', 'ca': 'Catalan',
+                'eo': 'Esperanto',
+            }
+            if lang_code in GUTENBERG_LANG_MAP:
+                original_language = GUTENBERG_LANG_MAP[lang_code]
+        except (json.JSONDecodeError, IOError):
+            pass
+
+    # --- Source 1: Original source text ---
+    source_path = find_source_text(book_dir)
+    if source_path and source_path.exists():
+        lang = original_language or 'Original'
+        tracks.append({
+            'track_id': 'original',
+            'language': lang,
+            'label': f'{lang} (Original)' if original_language else 'Original',
+            'file_path': str(source_path.relative_to(book_dir)),
+            'is_original': True,
+        })
+        seen_paths.add(source_path.resolve())
+
+    # --- Source 2: metadata.json translations dict ---
+    metadata_file = book_dir / 'metadata.json'
+    if metadata_file.exists():
+        try:
+            with open(metadata_file, 'r', encoding='utf-8') as f:
+                metadata = json.load(f)
+            for lang_key, rel_path in metadata.get('translations', {}).items():
+                full_path = book_dir / rel_path
+                if full_path.exists() and full_path.resolve() not in seen_paths:
+                    language = _normalize_language_name(lang_key)
+                    tracks.append({
+                        'track_id': lang_key,
+                        'language': language,
+                        'label': language,
+                        'file_path': rel_path,
+                        'is_original': False,
+                    })
+                    seen_paths.add(full_path.resolve())
+        except (json.JSONDecodeError, IOError):
+            pass
+
+    # --- Source 3: Filename pattern scan ---
+    # Pattern: {name}_{Language}_{YYYYMMDD}_{HHMMSS}.md (e.g., source_Modern_English_20260223_124443.md)
+    lang_timestamp_pattern = re.compile(
+        r'^.+?_([A-Z][a-z]+(?:_[A-Z][a-z]+)*)_(\d{8}_\d{6})\.md$'
+    )
+
+    skip_suffixes = ('.bak', '.backup')
+    skip_substrings = ('manifest', 'checkpoint', 'chapter_data', 'state')
+
+    # Scan book root directory
+    for md_file in sorted(book_dir.glob('*.md')):
+        if md_file.resolve() in seen_paths:
+            continue
+        name = md_file.name
+        # Skip non-translation files
+        if any(name.endswith(s) for s in skip_suffixes):
+            continue
+        if any(s in name.lower() for s in skip_substrings):
+            continue
+
+        match = lang_timestamp_pattern.match(name)
+        if match:
+            language = _normalize_language_name(match.group(1))
+            timestamp = match.group(2)
+            track_id = f"{language.lower().replace(' ', '_')}_{timestamp}"
+            tracks.append({
+                'track_id': track_id,
+                'language': language,
+                'label': language,
+                'file_path': name,
+                'is_original': False,
+            })
+            seen_paths.add(md_file.resolve())
+
+    # Scan translations/ subdirectory
+    translations_dir = book_dir / 'translations'
+    if translations_dir.is_dir():
+        for md_file in sorted(translations_dir.glob('*.md')):
+            if md_file.resolve() in seen_paths:
+                continue
+            lang_key = md_file.stem
+            language = _normalize_language_name(lang_key)
+            rel_path = f'translations/{md_file.name}'
+            tracks.append({
+                'track_id': lang_key,
+                'language': language,
+                'label': language,
+                'file_path': rel_path,
+                'is_original': False,
+            })
+            seen_paths.add(md_file.resolve())
+
+    # Deduplicate non-original tracks by language (keep latest per language)
+    # The original track is always kept regardless
+    original_tracks = [t for t in tracks if t.get('is_original')]
+    non_original_tracks = [t for t in tracks if not t.get('is_original')]
+
+    language_groups: Dict[str, List[Dict]] = {}
+    for track in non_original_tracks:
+        lang = track['language'].lower()
+        language_groups.setdefault(lang, []).append(track)
+
+    deduped = list(original_tracks)
+    for lang, group in language_groups.items():
+        deduped.append(group[-1])  # Keep the latest by sorted order
+
+    return deduped
 
 
 def detect_chapter_markers(text: str) -> List[Dict]:
@@ -193,7 +359,7 @@ def split_into_paragraphs(text: str) -> List[Dict]:
     return paragraphs
 
 
-def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timing: Optional[Dict] = None, total_audio_chapters: int = None) -> Optional[Dict]:
+def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timing: Optional[Dict] = None, total_audio_chapters: int = None, source_path: Optional[Path] = None) -> Optional[Dict]:
     """
     Get chapter text data for text sync API.
 
@@ -202,12 +368,14 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
         chapter_index: Zero-based chapter index
         audio_chapter_timing: Optional dict with 'timestamp' and 'duration' from audio chapter metadata
         total_audio_chapters: Total number of chapters in audio metadata (helps detect single-file books)
+        source_path: Optional explicit source file path (overrides find_source_text)
 
     Returns:
         Dictionary with chapter data, or None if not found
     """
-    # Find source text
-    source_path = find_source_text(book_dir)
+    # Find source text (use explicit path if provided)
+    if not source_path:
+        source_path = find_source_text(book_dir)
     if not source_path:
         return None
 

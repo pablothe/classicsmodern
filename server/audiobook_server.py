@@ -33,7 +33,7 @@ import uvicorn
 
 # Import book catalog and text extractor
 from lib.book.catalog import get_book_info
-from server.text_extractor import find_source_text, get_chapter_text_data, get_book_chapters_list
+from server.text_extractor import find_source_text, get_chapter_text_data, get_book_chapters_list, discover_text_tracks
 
 # Import Gutenberg modules
 try:
@@ -361,6 +361,9 @@ def discover_books() -> List[Dict]:
         source_text_path = find_source_text(book_dir)
         has_source_text = source_text_path is not None
 
+        # Discover available text language tracks
+        text_tracks = discover_text_tracks(book_dir, language)
+
         # Create book entry (with empty variants initially)
         books_by_id[book_id] = {
             'book_id': book_id,
@@ -376,6 +379,7 @@ def discover_books() -> List[Dict]:
             'has_audio': False,  # Will be set to True if variants found
             'has_source_text': has_source_text,
             'source_text_path': str(source_text_path.relative_to(book_dir)) if source_text_path else None,
+            'text_tracks': text_tracks,
             'variants': []
         }
 
@@ -652,13 +656,14 @@ async def get_book_cover(book_id: str):
 
 
 @app.get("/api/books/{book_id}/text/{chapter_num}")
-async def get_chapter_text(book_id: str, chapter_num: int):
+async def get_chapter_text(book_id: str, chapter_num: int, track_id: Optional[str] = None):
     """
     Get text content for a specific chapter (for text sync feature).
 
     Args:
         book_id: Book identifier
         chapter_num: Zero-based chapter index
+        track_id: Optional text track ID to select a specific language
 
     Returns:
         Chapter text with paragraphs for karaoke-style sync
@@ -668,6 +673,16 @@ async def get_chapter_text(book_id: str, chapter_num: int):
         raise HTTPException(status_code=404, detail="Book not found")
 
     book_dir = BOOKS_DIR / book_id
+
+    # Resolve text track to a source file path
+    explicit_source = None
+    if track_id:
+        text_tracks = book.get('text_tracks', [])
+        track = next((t for t in text_tracks if t['track_id'] == track_id), None)
+        if track:
+            explicit_source = book_dir / track['file_path']
+            if not explicit_source.exists():
+                explicit_source = None
 
     # Load audio chapter timing data if available
     audio_chapter_timing = None
@@ -704,7 +719,7 @@ async def get_chapter_text(book_id: str, chapter_num: int):
     total_audio_chapters = len(book.get('chapters') or [])
 
     # Get chapter text data
-    chapter_data = get_chapter_text_data(book_dir, chapter_num, audio_chapter_timing, total_audio_chapters)
+    chapter_data = get_chapter_text_data(book_dir, chapter_num, audio_chapter_timing, total_audio_chapters, source_path=explicit_source)
     if not chapter_data:
         raise HTTPException(
             status_code=404,

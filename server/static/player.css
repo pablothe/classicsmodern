@@ -1345,6 +1345,124 @@ header h2 {
     color: var(--text-secondary);
 }
 
+/* ============================================================================
+   Track Selectors (Netflix-style language/audio pickers)
+   ============================================================================ */
+
+.track-selector {
+    position: relative;
+    margin-left: auto;
+    margin-right: 0.75rem;
+}
+
+.audio-track-selector {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.track-selector-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    border-radius: 4px;
+}
+
+.track-selector-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--text-secondary);
+}
+
+.track-selector-arrow {
+    font-size: 0.625rem;
+    transition: transform 0.15s;
+}
+
+.track-selector-arrow.open {
+    transform: rotate(180deg);
+}
+
+.track-selector-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 200px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    z-index: 300;
+    max-height: 280px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: trackDropdownIn 0.1s ease-out;
+}
+
+@keyframes trackDropdownIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.track-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 0.875rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    transition: background 0.1s;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.track-option:last-child {
+    border-bottom: none;
+}
+
+.track-option:hover {
+    background: var(--bg-secondary);
+}
+
+.track-option.active {
+    background: var(--bg-secondary);
+    font-weight: 600;
+}
+
+.track-option-name {
+    flex: 1;
+}
+
+.track-option-badge {
+    font-size: 0.6875rem;
+    padding: 0.125rem 0.375rem;
+    background: var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 3px;
+    margin-left: 0.5rem;
+}
+
+.track-option-badge.original {
+    color: var(--text-primary);
+}
+
+.track-option-check {
+    color: var(--text-primary);
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.audio-track-icon {
+    font-size: 0.875rem;
+}
+
 .text-content {
     flex: 1;
     overflow-y: auto;

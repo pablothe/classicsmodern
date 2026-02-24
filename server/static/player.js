@@ -53,7 +53,11 @@ const state = {
     settings: {
         preferredLanguage: 'en',
         targetTranslationLanguage: 'Modern English'
-    }
+    },
+    // Language track selection (Netflix-style)
+    textTracks: [],                  // Available text tracks for current book
+    currentTextTrack: null,          // Currently selected text track object
+    textLanguageMatchesAudio: true   // Whether text lang matches audio lang (for karaoke)
 };
 
 // ============================================================================
@@ -410,6 +414,18 @@ const ui = {
     karaokeModeCheckbox: document.getElementById('karaoke-mode-checkbox'),
     karaokeStatusText: document.getElementById('karaoke-status-text'),
     karaokeStatus: document.getElementById('karaoke-status'),
+
+    // Text Language Selector
+    textLanguageSelector: document.getElementById('text-language-selector'),
+    textLangBtn: document.getElementById('text-lang-btn'),
+    textLangCurrent: document.getElementById('text-lang-current'),
+    textLangDropdown: document.getElementById('text-lang-dropdown'),
+
+    // Audio Track Selector
+    audioTrackSelector: document.getElementById('audio-track-selector'),
+    audioTrackBtn: document.getElementById('audio-track-btn'),
+    audioTrackCurrent: document.getElementById('audio-track-current'),
+    audioTrackDropdown: document.getElementById('audio-track-dropdown'),
 
     // AI Chat
     aiAssistantBtn: document.getElementById('ai-assistant-btn'),
@@ -969,6 +985,10 @@ async function openVariant(variantId) {
         state.currentVariant = variant;
         state.currentFileIndex = 0;
 
+        // Set up text tracks from book data
+        state.textTracks = book.text_tracks || [];
+        autoSelectTextTrack();
+
         // Load saved position
         const savedPosition = await API.getPlaybackPosition(book.book_id, variantId);
         if (savedPosition) {
@@ -1060,6 +1080,9 @@ function renderPlayer() {
     } else {
         ui.aiAssistantBtn.style.display = 'none';
     }
+
+    // Render audio track selector (Netflix-style in-player variant switching)
+    renderAudioTrackSelector();
 
     // Update navigation buttons
     updateNavigationButtons();
@@ -1275,6 +1298,9 @@ async function openTextSyncPanel() {
     // Initialize karaoke sync (loads word timings, shows toggle if available)
     await initKaraokeSync();
 
+    // Render text language selector
+    renderTextLanguageSelector();
+
     // Load text for current chapter
     if (state.currentChapterIndex !== null && state.currentBook && state.currentVariant) {
         loadChapterText(state.currentChapterIndex);
@@ -1300,8 +1326,11 @@ async function loadChapterText(chapterIndex) {
     try {
         ui.textContent.innerHTML = '<div class="text-loading">Loading text...</div>';
 
+        const trackParam = state.currentTextTrack
+            ? `?track_id=${encodeURIComponent(state.currentTextTrack.track_id)}`
+            : '';
         const response = await fetch(
-            `${API.baseURL}/api/books/${state.currentBook.book_id}/text/${chapterIndex}`
+            `${API.baseURL}/api/books/${state.currentBook.book_id}/text/${chapterIndex}${trackParam}`
         );
 
         if (!response.ok) {
@@ -1523,6 +1552,254 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+// ============================================================================
+// Language Track Selection (Netflix-style)
+// ============================================================================
+
+function autoSelectTextTrack() {
+    if (!state.textTracks || state.textTracks.length === 0) {
+        state.currentTextTrack = null;
+        state.textLanguageMatchesAudio = true;
+        return;
+    }
+
+    // Determine the audio language
+    const audioLang = (state.currentVariant?.target_lang || state.currentBook?.language || '').toLowerCase();
+
+    // Try to match audio language to a text track
+    const matchingTrack = state.textTracks.find(t =>
+        t.language.toLowerCase() === audioLang ||
+        audioLang.includes(t.language.toLowerCase()) ||
+        t.language.toLowerCase().includes(audioLang)
+    );
+
+    if (matchingTrack) {
+        state.currentTextTrack = matchingTrack;
+        state.textLanguageMatchesAudio = true;
+    } else {
+        // Default to the first track (usually original)
+        state.currentTextTrack = state.textTracks.find(t => t.is_default) || state.textTracks[0];
+        state.textLanguageMatchesAudio = false;
+    }
+}
+
+function renderTextLanguageSelector() {
+    if (!ui.textLanguageSelector) return;
+
+    if (!state.textTracks || state.textTracks.length <= 1) {
+        ui.textLanguageSelector.style.display = 'none';
+        return;
+    }
+
+    ui.textLanguageSelector.style.display = 'block';
+
+    if (state.currentTextTrack && ui.textLangCurrent) {
+        ui.textLangCurrent.textContent = state.currentTextTrack.language;
+    }
+
+    renderTrackDropdown(ui.textLangDropdown, state.textTracks, state.currentTextTrack, (trackId) => {
+        selectTextTrack(trackId);
+        closeDropdown(ui.textLangDropdown, ui.textLangBtn);
+    });
+}
+
+function selectTextTrack(trackId) {
+    const track = state.textTracks.find(t => t.track_id === trackId);
+    if (!track) return;
+
+    state.currentTextTrack = track;
+
+    // Check if text language matches audio language
+    const audioLang = (state.currentVariant?.target_lang || state.currentBook?.language || '').toLowerCase();
+    const textLang = track.language.toLowerCase();
+    state.textLanguageMatchesAudio =
+        textLang === audioLang ||
+        textLang.includes(audioLang) ||
+        audioLang.includes(textLang);
+
+    // Update karaoke availability
+    updateKaraokeForLanguageMatch();
+
+    // Reload text for current chapter
+    const chapterIndex = state.currentChapterIndex !== null ? state.currentChapterIndex : 0;
+    loadChapterText(chapterIndex);
+
+    // Update selector display
+    if (ui.textLangCurrent) {
+        ui.textLangCurrent.textContent = track.language;
+    }
+    renderTextLanguageSelector();
+}
+
+function updateKaraokeForLanguageMatch() {
+    if (state.textLanguageMatchesAudio && state.karaokeAvailable) {
+        // Karaoke can work - show toggle
+        if (ui.karaokeToggle) {
+            ui.karaokeToggle.classList.remove('hidden');
+        }
+    } else if (!state.textLanguageMatchesAudio) {
+        // Text language differs from audio - disable karaoke
+        if (state.karaokeModeEnabled) {
+            disableKaraokeMode();
+            if (ui.karaokeModeCheckbox) {
+                ui.karaokeModeCheckbox.checked = false;
+            }
+            state.karaokeModeEnabled = false;
+        }
+        if (ui.karaokeToggle) {
+            ui.karaokeToggle.classList.add('hidden');
+        }
+    }
+}
+
+function renderAudioTrackSelector() {
+    if (!ui.audioTrackSelector) return;
+
+    const book = state.currentBook;
+    if (!book || !book.variants || book.variants.length <= 1) {
+        ui.audioTrackSelector.style.display = 'none';
+        return;
+    }
+
+    ui.audioTrackSelector.style.display = 'block';
+
+    // Display current variant language
+    const currentLang = state.currentVariant?.target_lang || state.currentVariant?.source_lang || 'Audio';
+    const currentType = state.currentVariant?.type === 'summary'
+        ? ` (${state.currentVariant.summary_pct}%)`
+        : '';
+    if (ui.audioTrackCurrent) {
+        ui.audioTrackCurrent.textContent = currentLang + currentType;
+    }
+
+    // Build track list from variants
+    const audioTracks = book.variants.map(v => {
+        const lang = v.target_lang || v.source_lang || 'Audio';
+        const suffix = v.type === 'summary' ? ` (${v.summary_pct}%)` : '';
+        return {
+            track_id: v.variant_id,
+            language: lang + suffix,
+            label: lang + suffix,
+            is_original: false,
+        };
+    });
+
+    renderTrackDropdown(ui.audioTrackDropdown, audioTracks, { track_id: state.currentVariant?.variant_id }, (variantId) => {
+        selectAudioTrack(variantId);
+        closeDropdown(ui.audioTrackDropdown, ui.audioTrackBtn);
+    });
+}
+
+async function selectAudioTrack(variantId) {
+    if (!state.currentBook || variantId === state.currentVariant?.variant_id) return;
+
+    const variant = state.currentBook.variants.find(v => v.variant_id === variantId);
+    if (!variant) return;
+
+    // Save current position before switching
+    await savePlaybackState();
+
+    // Remember current chapter for resuming at similar position
+    const wasPlaying = state.isPlaying;
+    const currentChapter = state.currentChapterIndex;
+
+    // Pause current audio
+    ui.audio.pause();
+    state.isPlaying = false;
+
+    // Switch variant
+    state.currentVariant = variant;
+    state.currentFileIndex = 0;
+
+    // Auto-select matching text track for new audio language
+    autoSelectTextTrack();
+
+    // Try to load saved position for this variant
+    const savedPosition = await API.getPlaybackPosition(state.currentBook.book_id, variantId);
+    if (savedPosition) {
+        const savedFileIndex = savedPosition.file_index || 0;
+        if (savedFileIndex >= 0 && savedFileIndex < variant.audio_files.length) {
+            state.currentFileIndex = savedFileIndex;
+        }
+    } else if (currentChapter !== null && currentChapter < variant.audio_files.length) {
+        // Fall back to same chapter index
+        state.currentFileIndex = currentChapter;
+    }
+
+    // Re-render player and load new audio
+    renderPlayer();
+    loadAudioFile();
+
+    if (savedPosition) {
+        ui.audio.playbackRate = savedPosition.speed || 1.0;
+        ui.speedSlider.value = savedPosition.speed || 1.0;
+        updateSpeedDisplay();
+        ui.audio.addEventListener('loadedmetadata', () => {
+            ui.audio.currentTime = savedPosition.position || 0;
+            if (wasPlaying) ui.audio.play();
+        }, { once: true });
+    } else if (wasPlaying) {
+        ui.audio.addEventListener('loadedmetadata', () => {
+            ui.audio.play();
+        }, { once: true });
+    }
+
+    // Refresh text sync panel if open
+    if (state.textSyncOpen) {
+        renderTextLanguageSelector();
+        const chapterIndex = state.currentChapterIndex !== null ? state.currentChapterIndex : 0;
+        loadChapterText(chapterIndex);
+        await initKaraokeSync();
+        updateKaraokeForLanguageMatch();
+    }
+}
+
+// --- Shared dropdown helpers ---
+
+function renderTrackDropdown(dropdownEl, tracks, activeTtrack, onSelect) {
+    if (!dropdownEl) return;
+
+    dropdownEl.innerHTML = tracks.map(track => {
+        const isActive = activeTtrack?.track_id === track.track_id;
+        const badges = [];
+        if (track.is_original) badges.push('<span class="track-option-badge original">Original</span>');
+
+        return `
+            <div class="track-option ${isActive ? 'active' : ''}"
+                 data-track-id="${track.track_id}">
+                <span class="track-option-name">${track.language}</span>
+                ${badges.join('')}
+                ${isActive ? '<span class="track-option-check">&#10003;</span>' : ''}
+            </div>
+        `;
+    }).join('');
+
+    dropdownEl.querySelectorAll('.track-option').forEach(option => {
+        option.addEventListener('click', () => {
+            onSelect(option.dataset.trackId);
+        });
+    });
+}
+
+function toggleDropdown(dropdownEl, btnEl) {
+    const isOpen = dropdownEl.style.display === 'block';
+    if (isOpen) {
+        closeDropdown(dropdownEl, btnEl);
+    } else {
+        dropdownEl.style.display = 'block';
+        const arrow = btnEl.querySelector('.track-selector-arrow');
+        if (arrow) arrow.classList.add('open');
+    }
+}
+
+function closeDropdown(dropdownEl, btnEl) {
+    if (dropdownEl) dropdownEl.style.display = 'none';
+    if (btnEl) {
+        const arrow = btnEl.querySelector('.track-selector-arrow');
+        if (arrow) arrow.classList.remove('open');
+    }
 }
 
 // ============================================================================
@@ -2531,6 +2808,32 @@ function setupEventListeners() {
     if (ui.karaokeModeCheckbox) {
         ui.karaokeModeCheckbox.addEventListener('change', toggleKaraokeMode);
     }
+
+    // Text language selector
+    if (ui.textLangBtn) {
+        ui.textLangBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(ui.textLangDropdown, ui.textLangBtn);
+        });
+    }
+
+    // Audio track selector
+    if (ui.audioTrackBtn) {
+        ui.audioTrackBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(ui.audioTrackDropdown, ui.audioTrackBtn);
+        });
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (ui.textLanguageSelector && !ui.textLanguageSelector.contains(e.target)) {
+            closeDropdown(ui.textLangDropdown, ui.textLangBtn);
+        }
+        if (ui.audioTrackSelector && !ui.audioTrackSelector.contains(e.target)) {
+            closeDropdown(ui.audioTrackDropdown, ui.audioTrackBtn);
+        }
+    });
 
     // AI Chat modal
     ui.aiAssistantBtn.addEventListener('click', toggleAIChat);

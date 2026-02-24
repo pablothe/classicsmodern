@@ -207,6 +207,15 @@
                         <span class="action-icon">AI</span>
                         <span class="action-label">AI Assistant</span>
                     </button>
+                    <!-- Audio Track Selector (Netflix-style) -->
+                    <div id="audio-track-selector" class="track-selector audio-track-selector" style="display: none;">
+                        <button id="audio-track-btn" class="track-selector-btn">
+                            <span class="audio-track-icon">&#9835;</span>
+                            <span id="audio-track-current">Audio</span>
+                            <span class="track-selector-arrow">&#9662;</span>
+                        </button>
+                        <div id="audio-track-dropdown" class="track-selector-dropdown" style="display: none;"></div>
+                    </div>
                 </div>
 
                 <!-- Speed Control Modal (Hidden by default) -->
@@ -269,6 +278,14 @@
                         <div class="text-sync-title">
                             <h4 id="text-chapter-title">Chapter Title</h4>
                             <p id="text-chapter-subtitle"></p>
+                        </div>
+                        <!-- Text Language Selector -->
+                        <div id="text-language-selector" class="track-selector" style="display: none;">
+                            <button id="text-lang-btn" class="track-selector-btn">
+                                <span id="text-lang-current">English</span>
+                                <span class="track-selector-arrow">&#9662;</span>
+                            </button>
+                            <div id="text-lang-dropdown" class="track-selector-dropdown" style="display: none;"></div>
                         </div>
                         <button id="close-text-sync-btn" class="close-btn">✕</button>
                     </div>
