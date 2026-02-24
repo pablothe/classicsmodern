@@ -180,12 +180,14 @@ books/*/audio_edge/
 books/*/*_chapter_data.json
 books/*/source.md
 books/*/*_word_timings.json
+books/*/source_*_manifest.json
 
 # Book migration backups
 books/*/.old_structure_backup/
 books/*/.old_duplicates/
 
-# Test/debug scripts (ad-hoc development)
+# Test/debug scripts and results (ad-hoc development)
+tests/adhoc/*.json
 test_sample.txt
 test_chunking_simple.py
 test_hybrid_rag_demo.py
