@@ -276,7 +276,7 @@ python3 audiobook.py translated.md --speed 1.15
 # Books
 GET  /api/books                                              # List all books
 GET  /api/books/{book_id}                                    # Get book details
-GET  /api/books/{book_id}/variants/{variant_id}/audio/{idx}  # Stream audio
+GET  /api/books/{book_id}/variants/{variant_id}/audio/{file_index}  # Stream audio
 GET  /api/books/{book_id}/cover                              # Get cover image
 GET  /api/books/{book_id}/text                               # Get all chapter text
 GET  /api/books/{book_id}/text/{chapter_num}                 # Get chapter text
@@ -290,6 +290,12 @@ DELETE /api/books/{book_id}/variants/{variant_id}            # Delete variant
 GET  /api/playback/{book_id}/{variant_id}                    # Get playback position
 POST /api/playback/{book_id}/{variant_id}                    # Save playback position
 GET  /api/playback/all                                       # All positions (library progress)
+
+# Users
+GET  /api/users                                              # List all users
+POST /api/users                                              # Create new user
+GET  /api/users/{user_id}                                    # Get user details
+DELETE /api/users/{user_id}                                  # Delete user
 
 # Jobs
 GET  /api/jobs                     # List jobs
@@ -316,7 +322,7 @@ GET  /api/gutenberg/catalog        # Browse catalog
 GET  /api/gutenberg/search         # Search books
 POST /api/gutenberg/download       # Download a book
 GET  /api/gutenberg/downloads      # List downloads
-GET  /api/gutenberg/downloads/{id} # Download status
+GET  /api/gutenberg/downloads/{job_id} # Download status
 GET  /api/gutenberg/stats          # Catalog stats
 
 # Other
@@ -385,6 +391,7 @@ classicsmodern/
 │   ├── semantic_retrieval.py  # Embedding search
 │   ├── gutenberg_downloader.py # Gutenberg download
 │   ├── gutenberg_catalog.py   # Gutenberg catalog
+│   ├── users_db.py            # Multi-user profile database
 │   └── static/                # Web UI assets
 │       ├── player.html/css/js # Audio player + library
 │       ├── reader.js          # Fullscreen e-reader

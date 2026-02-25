@@ -108,7 +108,7 @@ For non-English books:
 # Translate with local AI (Ollama)
 python3 translate.py books/mybook/book.md \
   --source-lang Latin --target-lang "Modern English" \
-  --model ollama:zongwei/gemma3-translator:4b
+  --model zongwei/gemma3-translator:4b
 
 # Then generate audiobook from translation
 python3 make_audiobook.py books/mybook/translated.md --generate-cover

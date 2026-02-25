@@ -6,6 +6,10 @@ Version history, bug fixes, and validation results for Modern Classics.
 > `local_reader_deduplicate.py`, `local_tts_xtts.py`, `check_translation_progress.py`, etc.)
 > that have since been consolidated into the `lib/` package. See CLAUDE.md for current
 > project structure. Audio generation now uses Kokoro TTS (not XTTS-v2).
+>
+> **Deprecation:** `book_manifest.json` v2.x is deprecated. Manifest v3.0 adds a paragraph
+> registry with stable IDs, character offsets, and content hashes for precise audio sync.
+> Run `python3 validate.py books/ --recursive --migrate-paragraphs` to upgrade existing manifests.
 
 ---
 

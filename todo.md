@@ -112,16 +112,16 @@ Updated Feb 25, 2026. Cross-referenced against uncommitted changes + git history
 > **Independent** — no dependencies, but best done last
 > Can run in parallel with Phase 6
 
-- [ ] Fix port 8080 -> 8000 in make_audiobook.py
-- [ ] CLAUDE.md: Add missing server files + static directory to project structure
-- [ ] CLAUDE.md: Expand API endpoints from 7 to full 32+ set
-- [ ] CLAUDE.md: Document undocumented CLI flags
-- [ ] CLAUDE.md: Clarify default voice difference (make_audiobook=bf_emma, audiobook=af_sky)
-- [ ] CLAUDE.md: Document paragraph timing API + manifest v3.0
-- [ ] README.md: Add `zongwei/` namespace prefix to model names
-- [ ] CHANGELOG.md: Add deprecation notice for pre-v3 file references
+- [x] Fix port 8080 -> 8000 in make_audiobook.py (already fixed)
+- [x] CLAUDE.md: Add missing server files (`users_db.py`) to project structure
+- [x] CLAUDE.md: Add user API endpoints + fix parameter names (`{idx}`→`{file_index}`, `{id}`→`{job_id}`)
+- [x] CLAUDE.md: Document undocumented CLI flags (audited — all flags already documented)
+- [x] CLAUDE.md: Clarify default voice difference (already documented correctly)
+- [x] CLAUDE.md: Document paragraph timing API + manifest v3.0 (already documented)
+- [x] README.md: Fix `ollama:` prefix on model name
+- [x] CHANGELOG.md: Add deprecation notice for pre-v3 manifest format
 
-**Files:** `make_audiobook.py`, `CLAUDE.md`, `README.md`, `CHANGELOG.md`
+**Files:** `CLAUDE.md`, `README.md`, `CHANGELOG.md`
 
 ---
 
