@@ -203,6 +203,10 @@
                         <span class="action-icon">Aa</span>
                         <span class="action-label">Text Sync</span>
                     </button>
+                    <button id="reader-btn" class="secondary-action-btn" style="display: none;">
+                        <span class="action-icon">&#9776;</span>
+                        <span class="action-label">Read</span>
+                    </button>
                     <button id="ai-assistant-btn" class="secondary-action-btn" style="display: none;">
                         <span class="action-icon">AI</span>
                         <span class="action-label">AI Assistant</span>
@@ -301,6 +305,66 @@
 
                     <div id="text-content" class="text-content">
                         <div class="text-loading">Loading text...</div>
+                    </div>
+                </div>
+
+                <!-- Reader Overlay (fullscreen reading mode) -->
+                <div id="reader-overlay" class="reader-overlay hidden">
+                    <!-- Toolbar -->
+                    <div class="reader-toolbar">
+                        <button id="reader-close-btn" class="reader-toolbar-btn" title="Close reader">&times;</button>
+                        <span id="reader-chapter-title" class="reader-toolbar-title">Chapter</span>
+                        <div class="reader-toolbar-actions">
+                            <button id="reader-chapter-nav-btn" class="reader-toolbar-btn" title="Jump to chapter">&#9776;</button>
+                            <button id="reader-settings-btn" class="reader-toolbar-btn" title="Reading settings">Aa</button>
+                        </div>
+                    </div>
+
+                    <!-- Settings Panel -->
+                    <div id="reader-settings" class="reader-settings-panel hidden">
+                        <div class="reader-setting-row">
+                            <span class="reader-setting-label">Font Size</span>
+                            <div class="reader-setting-control">
+                                <button class="reader-font-size-btn" data-delta="-2">A&minus;</button>
+                                <span id="reader-font-size-display">18</span>
+                                <button class="reader-font-size-btn" data-delta="2">A+</button>
+                            </div>
+                        </div>
+                        <div class="reader-setting-row">
+                            <span class="reader-setting-label">Font</span>
+                            <select id="reader-font-select" class="reader-select">
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino</option>
+                                <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
+                                <option value="system-ui, sans-serif">System</option>
+                                <option value="'Courier New', Courier, monospace">Courier</option>
+                            </select>
+                        </div>
+                        <div class="reader-setting-row">
+                            <span class="reader-setting-label">Line Height</span>
+                            <input type="range" id="reader-line-height" min="1.4" max="2.6" step="0.2" value="1.8">
+                        </div>
+                        <div class="reader-setting-row">
+                            <span class="reader-setting-label">Theme</span>
+                            <div class="reader-theme-buttons">
+                                <button class="reader-theme-btn" data-theme="light" title="Light">Light</button>
+                                <button class="reader-theme-btn" data-theme="sepia" title="Sepia">Sepia</button>
+                                <button class="reader-theme-btn" data-theme="dark" title="Dark">Dark</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chapter Navigation Dropdown -->
+                    <div id="reader-chapter-nav" class="reader-chapter-nav hidden"></div>
+
+                    <!-- Main Content Area (scrollable) -->
+                    <div id="reader-content" class="reader-content"></div>
+
+                    <!-- Mini Player (bottom bar) -->
+                    <div id="reader-mini-player" class="reader-mini-player">
+                        <button id="reader-play-pause" class="reader-mini-play-btn">&#9654;</button>
+                        <span id="reader-now-playing" class="reader-now-playing">Not playing</span>
                     </div>
                 </div>
 
@@ -603,7 +667,8 @@
     </style>
 
     <script src="/static/karaoke.js?v=20260222"></script>
-    <script src="/static/player.js?v=20260222"></script>
+    <script src="/static/reader.js?v=20260224"></script>
+    <script src="/static/player.js?v=20260224"></script>
     <script src="/static/pipeline.js?v=20260222"></script>
 </body>
 </html>

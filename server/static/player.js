@@ -429,6 +429,7 @@ const ui = {
 
     // AI Chat
     aiAssistantBtn: document.getElementById('ai-assistant-btn'),
+    readerBtn: document.getElementById('reader-btn'),
     aiChatBackdrop: document.getElementById('ai-chat-backdrop'),
     aiChatPanel: document.getElementById('ai-chat-panel'),
     closeChatBtn: document.getElementById('close-chat-btn'),
@@ -1079,6 +1080,13 @@ function renderPlayer() {
         ui.aiAssistantBtn.style.display = 'block';
     } else {
         ui.aiAssistantBtn.style.display = 'none';
+    }
+
+    // Show/hide reader button based on source text availability
+    if (book.has_source_text) {
+        ui.readerBtn.style.display = 'block';
+    } else {
+        ui.readerBtn.style.display = 'none';
     }
 
     // Render audio track selector (Netflix-style in-player variant switching)
@@ -2904,6 +2912,12 @@ function setupEventListeners() {
         });
     });
 
+    // Reader button
+    ui.readerBtn.addEventListener('click', openReader);
+
+    // Reader seek events (paragraph click in reader -> audio seek)
+    document.addEventListener('reader-seek', handleReaderSeek);
+
     // Keyboard shortcut: Cmd/Ctrl + K to open AI chat
     document.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k' && ui.playerView.classList.contains('active')) {
@@ -2932,6 +2946,7 @@ function setupEventListeners() {
         detectCurrentChapter();
         checkEndOfChapterTimer();
         updateTextHighlight();
+        updateReaderHighlight();
 
         // Update Media Session position periodically (every 5 seconds)
         if ('mediaSession' in navigator && ui.audio.currentTime % 5 < 0.5) {
@@ -3030,6 +3045,83 @@ function setupEventListeners() {
         // Clean up timers
         cancelSleepTimer();
     });
+}
+
+// ============================================================================
+// Reader Integration
+// ============================================================================
+
+function openReader() {
+    if (!state.currentBook || !window.bookReader) return;
+    const chapterCount = state.currentBook.chapters?.length || 0;
+    const startChapter = state.currentChapterIndex || 0;
+    const trackId = state.currentTextTrack?.track_id || null;
+    window.bookReader.open(
+        state.currentBook.book_id,
+        startChapter,
+        chapterCount,
+        trackId
+    );
+}
+
+function handleReaderSeek(e) {
+    const { chapterIndex, paraId } = e.detail;
+    if (!state.currentBook || !state.currentVariant) return;
+
+    const chapters = state.currentBook.chapters;
+    if (!chapters || chapterIndex >= chapters.length) return;
+
+    // Switch audio chapter if needed
+    if (state.currentChapterIndex !== chapterIndex) {
+        jumpToChapter(chapterIndex);
+        // After chapter loads, seek to paragraph position
+        ui.audio.addEventListener('loadedmetadata', () => {
+            seekReaderParagraph(chapterIndex, paraId);
+            ui.audio.play();
+        }, { once: true });
+    } else {
+        seekReaderParagraph(chapterIndex, paraId);
+        if (ui.audio.paused) ui.audio.play();
+    }
+}
+
+function seekReaderParagraph(chapterIndex, paraId) {
+    const chapterData = window.bookReader?.chapterData[chapterIndex];
+    if (!chapterData || !chapterData.paragraphs) return;
+
+    const paragraphs = chapterData.paragraphs;
+    let charsBefore = 0;
+    let totalChars = 0;
+
+    for (const p of paragraphs) {
+        if (p.id < paraId) charsBefore += p.text.length;
+        totalChars += p.text.length;
+    }
+
+    if (totalChars > 0 && ui.audio.duration) {
+        const progress = charsBefore / totalChars;
+        ui.audio.currentTime = progress * ui.audio.duration;
+    }
+}
+
+function updateReaderHighlight() {
+    if (!window.bookReader?.isOpen) return;
+    if (!ui.audio.duration || state.currentChapterIndex === null) return;
+
+    const chapterData = window.bookReader.chapterData[state.currentChapterIndex];
+    if (!chapterData || !chapterData.paragraphs) return;
+
+    const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
+    const paraId = findParagraphByProgress(progress, chapterData.paragraphs);
+
+    window.bookReader.highlightCurrentParagraph(state.currentChapterIndex, paraId);
+
+    // Update mini player info
+    const chapter = state.currentBook.chapters?.[state.currentChapterIndex];
+    if (chapter) {
+        const title = chapter.title || `Chapter ${chapter.number || state.currentChapterIndex + 1}`;
+        window.bookReader.updateMiniPlayerInfo(title);
+    }
 }
 
 // ============================================================================
@@ -3246,6 +3338,9 @@ async function init() {
 
     // Initialize jobs activity panel
     jobsActivity.init();
+
+    // Initialize reader
+    window.bookReader = new BookReader();
 
     console.log('Audiobook player initialized');
 }
