@@ -34,6 +34,10 @@ import uvicorn
 # Import book catalog and text extractor
 from lib.book.catalog import get_book_info
 from server.text_extractor import find_source_text, get_chapter_text_data, get_book_chapters_list, discover_text_tracks
+from server.users_db import (
+    get_all_users, get_user, create_user, update_user, delete_user,
+    ensure_initialized as ensure_users_initialized
+)
 
 # Import Gutenberg modules
 try:
@@ -1062,31 +1066,99 @@ async def get_paragraph_timings(book_id: str):
         )
 
 
+# ============================================================================
+# User Profile API
+# ============================================================================
+
+@app.get("/api/users")
+async def list_users():
+    """List all user profiles (public fields only)."""
+    return {"users": get_all_users()}
+
+
+@app.post("/api/users", status_code=201)
+async def create_user_endpoint(request: Request):
+    """Create a new user profile."""
+    try:
+        data = await request.json()
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+    name = data.get("name", "").strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="Name is required")
+    avatar_emoji = data.get("avatar_emoji", "👤")
+    user = create_user(name, avatar_emoji)
+    return user
+
+
+@app.get("/api/users/{user_id}")
+async def get_user_endpoint(user_id: str):
+    """Get user profile with full settings."""
+    user = get_user(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+
+@app.patch("/api/users/{user_id}")
+async def update_user_endpoint(user_id: str, request: Request):
+    """Update user profile (name, avatar, settings)."""
+    try:
+        data = await request.json()
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+    user = update_user(user_id, data)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+
+@app.delete("/api/users/{user_id}")
+async def delete_user_endpoint(user_id: str):
+    """Delete user profile and their playback data."""
+    db = load_playback_db()
+    try:
+        result = delete_user(user_id, db)
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+    if not result:
+        raise HTTPException(status_code=404, detail="User not found")
+    save_playback_db(db)
+    return {"status": "deleted", **result}
+
+
+# ============================================================================
+# Playback API
+# ============================================================================
+
+def _resolve_playback_key(
+    user_id: Optional[str] = None,
+    device_id: Optional[str] = None
+) -> str:
+    """Resolve the playback DB key from headers. X-User-ID takes priority."""
+    if user_id:
+        return user_id
+    if device_id:
+        return device_id
+    return None
+
+
 @app.get("/api/playback/{book_id}/{variant_id}")
 async def get_playback_position(
     book_id: str,
     variant_id: str,
+    user_id: Optional[str] = Header(None, alias="X-User-ID"),
     device_id: Optional[str] = Header(None, alias="X-Device-ID")
 ):
-    """
-    Get saved playback position for a book variant.
-
-    Args:
-        book_id: Book identifier
-        variant_id: Variant identifier
-        device_id: Device identifier (from header)
-
-    Returns:
-        Playback state (position, speed, timestamp)
-    """
-    if not device_id:
-        print(f"[PLAYBACK] Missing device ID for {book_id}/{variant_id}")
-        raise HTTPException(status_code=400, detail="X-Device-ID header required")
+    """Get saved playback position. X-User-ID takes priority over X-Device-ID."""
+    key = _resolve_playback_key(user_id, device_id)
+    if not key:
+        raise HTTPException(status_code=400, detail="X-User-ID or X-Device-ID header required")
 
     db = load_playback_db()
-    device_data = db.get(device_id, {})
+    user_data = db.get(key, {})
     playback_key = f"{book_id}:{variant_id}"
-    playback = device_data.get(playback_key, {
+    playback = user_data.get(playback_key, {
         'position': 0.0,
         'speed': 1.0,
         'file_index': 0,
@@ -1094,21 +1166,21 @@ async def get_playback_position(
         'last_updated': None
     })
 
-    print(f"[PLAYBACK GET] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={playback['position']:.1f}s, file={playback['file_index']}, word={playback.get('word_index', 0)}")
-
+    print(f"[PLAYBACK GET] key={key[:16]}..., book={book_id}, pos={playback['position']:.1f}s")
     return playback
 
 
 @app.get("/api/playback/all")
 async def get_all_playback_positions(
+    user_id: Optional[str] = Header(None, alias="X-User-ID"),
     device_id: Optional[str] = Header(None, alias="X-Device-ID")
 ):
-    """Return all playback positions for a device (for library progress bars)."""
-    if not device_id:
+    """Return all playback positions for a user/device (for library progress bars)."""
+    key = _resolve_playback_key(user_id, device_id)
+    if not key:
         return {"positions": {}}
     db = load_playback_db()
-    device_data = db.get(device_id, {})
-    return {"positions": device_data}
+    return {"positions": db.get(key, {})}
 
 
 @app.post("/api/playback/{book_id}/{variant_id}")
@@ -1116,29 +1188,17 @@ async def save_playback_position(
     book_id: str,
     variant_id: str,
     request: Request,
+    user_id: Optional[str] = Header(None, alias="X-User-ID"),
     device_id: Optional[str] = Header(None, alias="X-Device-ID")
 ):
-    """
-    Save playback position for a book variant.
+    """Save playback position. X-User-ID takes priority over X-Device-ID."""
+    key = _resolve_playback_key(user_id, device_id)
+    if not key:
+        raise HTTPException(status_code=400, detail="X-User-ID or X-Device-ID header required")
 
-    Args:
-        book_id: Book identifier
-        variant_id: Variant identifier
-        device_id: Device identifier (from header)
-        Body: JSON with position, speed, file_index
-
-    Returns:
-        Success status
-    """
-    if not device_id:
-        print(f"[PLAYBACK] Missing device ID for SAVE {book_id}/{variant_id}")
-        raise HTTPException(status_code=400, detail="X-Device-ID header required")
-
-    # Parse request body
     try:
         data = await request.json()
     except json.JSONDecodeError:
-        print(f"[PLAYBACK] Invalid JSON in request body")
         raise HTTPException(status_code=400, detail="Invalid JSON")
 
     position = data.get('position', 0.0)
@@ -1146,18 +1206,14 @@ async def save_playback_position(
     file_index = data.get('file_index', 0)
     word_index = data.get('word_index', 0)
 
-    print(f"[PLAYBACK SAVE] device={device_id[:12]}..., book={book_id}, variant={variant_id[:40]}..., pos={position:.1f}s, speed={speed}x, file={file_index}, word={word_index}")
+    print(f"[PLAYBACK SAVE] key={key[:16]}..., book={book_id}, pos={position:.1f}s, speed={speed}x")
 
-    # Load database
     db = load_playback_db()
+    if key not in db:
+        db[key] = {}
 
-    # Create device entry if needed
-    if device_id not in db:
-        db[device_id] = {}
-
-    # Save playback state (using combined key for book:variant)
     playback_key = f"{book_id}:{variant_id}"
-    db[device_id][playback_key] = {
+    db[key][playback_key] = {
         'position': position,
         'speed': speed,
         'file_index': file_index,
@@ -1165,7 +1221,6 @@ async def save_playback_position(
         'last_updated': datetime.utcnow().isoformat() + 'Z'
     }
 
-    # Save to disk
     save_playback_db(db)
 
     return {
@@ -2218,6 +2273,14 @@ def main():
         except Exception as e:
             print(f"❌ Failed to initialize job queue: {e}")
             UNIFIED_QUEUE_AVAILABLE = False
+
+    # Initialize user profiles
+    playback_db = load_playback_db()
+    if ensure_users_initialized(playback_db):
+        save_playback_db(playback_db)
+        print("✓ User profiles initialized (Guest profile created)")
+    else:
+        print(f"✓ User profiles: {len(get_all_users())} profiles")
 
     # Print startup info
     print("\n" + "=" * 60)

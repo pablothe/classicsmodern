@@ -336,9 +336,19 @@ class BookReader {
 
     savePreferences() {
         localStorage.setItem('reader_prefs', JSON.stringify(this.prefs));
+        // Sync to user profile on server
+        const userId = window._appState?.currentUserId;
+        if (userId) {
+            fetch(`/api/users/${userId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ settings: { reader_prefs: this.prefs } })
+            }).catch(() => {}); // silent — localStorage is the fallback
+        }
     }
 
     loadPreferences() {
+        // Start with localStorage (immediate, sync)
         const saved = localStorage.getItem('reader_prefs');
         if (saved) {
             try {
@@ -348,6 +358,21 @@ class BookReader {
             } catch (e) {
                 // Use defaults
             }
+        }
+        // Overlay server prefs if user is logged in (async)
+        const userId = window._appState?.currentUserId;
+        if (userId) {
+            fetch(`/api/users/${userId}`)
+                .then(r => r.ok ? r.json() : null)
+                .then(user => {
+                    if (user?.settings?.reader_prefs) {
+                        Object.assign(this.prefs, user.settings.reader_prefs);
+                        this.audioSyncEnabled = !!this.prefs.audioSync;
+                        localStorage.setItem('reader_prefs', JSON.stringify(this.prefs));
+                        if (this.isOpen) this.applyPreferences();
+                    }
+                })
+                .catch(() => {}); // silent — use localStorage values
         }
     }
 

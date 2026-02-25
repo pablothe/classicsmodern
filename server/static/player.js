@@ -59,7 +59,10 @@ const state = {
     // Library sort & filter
     sortBy: 'title-asc',
     languageFilter: null,            // null = show all, string = filter by language
-    playbackProgress: {}             // { bookId: percentage } for progress bars
+    playbackProgress: {},            // { bookId: percentage } for progress bars
+    // User profiles
+    currentUserId: null,             // Active user profile ID (or null for device mode)
+    users: []                        // [{ user_id, name, avatar_emoji }]
 };
 
 // ============================================================================
@@ -86,11 +89,57 @@ const API = {
         return `${this.baseURL}/api/books/${bookId}/variants/${variantId}/audio/${fileIndex}`;
     },
 
+    _playbackHeaders() {
+        const h = { 'X-Device-ID': state.deviceId };
+        if (state.currentUserId) h['X-User-ID'] = state.currentUserId;
+        return h;
+    },
+
+    // User profile API
+    async getUsers() {
+        const r = await fetch(`${this.baseURL}/api/users`);
+        if (!r.ok) return [];
+        const data = await r.json();
+        return data.users || [];
+    },
+
+    async getUser(userId) {
+        const r = await fetch(`${this.baseURL}/api/users/${userId}`);
+        if (!r.ok) return null;
+        return r.json();
+    },
+
+    async createUser(name, emoji) {
+        const r = await fetch(`${this.baseURL}/api/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, avatar_emoji: emoji })
+        });
+        if (!r.ok) return null;
+        return r.json();
+    },
+
+    async updateUser(userId, updates) {
+        const r = await fetch(`${this.baseURL}/api/users/${userId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updates)
+        });
+        if (!r.ok) return null;
+        return r.json();
+    },
+
+    async deleteUser(userId) {
+        const r = await fetch(`${this.baseURL}/api/users/${userId}`, { method: 'DELETE' });
+        return r.ok;
+    },
+
+    // Playback API (uses X-User-ID when available)
     async getAllPlaybackPositions() {
         try {
             const response = await fetch(
                 `${this.baseURL}/api/playback/all`,
-                { headers: { 'X-Device-ID': state.deviceId } }
+                { headers: this._playbackHeaders() }
             );
             if (!response.ok) return {};
             const data = await response.json();
@@ -101,11 +150,7 @@ const API = {
     async getPlaybackPosition(bookId, variantId) {
         const response = await fetch(
             `${this.baseURL}/api/playback/${bookId}/${variantId}`,
-            {
-                headers: {
-                    'X-Device-ID': state.deviceId
-                }
-            }
+            { headers: this._playbackHeaders() }
         );
         if (!response.ok) return null;
         return response.json();
@@ -126,7 +171,7 @@ const API = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Device-ID': state.deviceId
+                    ...this._playbackHeaders()
                 },
                 body: JSON.stringify(body)
             }
@@ -229,7 +274,22 @@ function initDarkMode() {
         const dark = document.documentElement.classList.contains('dark-mode');
         localStorage.setItem('audiobook_dark_mode', dark ? 'dark' : 'light');
         toggle.textContent = dark ? '\u2600' : '\u263E';
+        // Sync to user profile
+        if (state.currentUserId) {
+            API.updateUser(state.currentUserId, { settings: { dark_mode: dark ? 'dark' : 'light' } });
+        }
     });
+}
+
+function applyDarkMode(mode) {
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (mode === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+    } else {
+        document.documentElement.classList.remove('dark-mode');
+    }
+    localStorage.setItem('audiobook_dark_mode', mode);
+    if (toggle) toggle.textContent = mode === 'dark' ? '\u2600' : '\u263E';
 }
 
 // ============================================================================
@@ -276,6 +336,15 @@ function loadSettings() {
 function saveSettings() {
     try {
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(state.settings));
+        // Sync to user profile
+        if (state.currentUserId) {
+            API.updateUser(state.currentUserId, {
+                settings: {
+                    preferred_language: state.settings.preferredLanguage,
+                    target_translation_language: state.settings.targetTranslationLanguage
+                }
+            });
+        }
     } catch (e) {
         console.warn('Failed to save settings:', e);
     }
@@ -3307,11 +3376,165 @@ const jobsActivity = {
 };
 
 // ============================================================================
+// User Profiles
+// ============================================================================
+
+const AVATAR_EMOJIS = [
+    '🧭', '📚', '🎧', '⭐', '🌟', '📖', '🎭', '🎨', '🎵', '🚀',
+    '🌙', '☀️', '🎯', '💡', '🔥', '🌊', '🏔️', '🌸', '🦋', '🐉'
+];
+
+function openProfilePicker() {
+    const modal = document.getElementById('profile-picker-modal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    renderProfilePicker();
+}
+
+function closeProfilePicker() {
+    const modal = document.getElementById('profile-picker-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function renderProfilePicker() {
+    const content = document.getElementById('profile-picker-content');
+    if (!content) return;
+
+    let html = '<div class="profile-grid">';
+
+    // Existing user profiles
+    for (const user of state.users) {
+        const active = user.user_id === state.currentUserId ? ' active' : '';
+        html += `
+            <button class="profile-button${active}" onclick="selectUser('${user.user_id}')">
+                <span class="profile-avatar">${user.avatar_emoji}</span>
+                <span class="profile-name">${user.name}</span>
+            </button>`;
+    }
+
+    // Add profile button
+    html += `
+        <button class="profile-button add-profile-btn" onclick="openAddProfileForm()">
+            <span class="profile-avatar">+</span>
+            <span class="profile-name">Add Profile</span>
+        </button>`;
+
+    html += '</div>';
+
+    // Add profile form (hidden by default)
+    html += `
+        <div id="add-profile-form" class="add-profile-form" style="display: none;">
+            <input type="text" id="new-profile-name" class="form-input" placeholder="Name" maxlength="20" />
+            <div class="emoji-grid" id="emoji-grid"></div>
+            <div class="form-buttons">
+                <button class="btn-secondary" onclick="renderProfilePicker()">Cancel</button>
+                <button class="btn-primary" onclick="submitAddProfile()">Create</button>
+            </div>
+        </div>`;
+
+    content.innerHTML = html;
+}
+
+function openAddProfileForm() {
+    const form = document.getElementById('add-profile-form');
+    if (!form) { renderProfilePicker(); return; }
+    form.style.display = 'block';
+
+    // Hide the profile grid
+    const grid = form.parentElement.querySelector('.profile-grid');
+    if (grid) grid.style.display = 'none';
+
+    // Populate emoji grid
+    const emojiGrid = document.getElementById('emoji-grid');
+    if (emojiGrid) {
+        emojiGrid.innerHTML = AVATAR_EMOJIS.map((e, i) =>
+            `<button class="emoji-option${i === 0 ? ' selected' : ''}" data-emoji="${e}" onclick="selectEmoji(this)">${e}</button>`
+        ).join('');
+    }
+
+    // Focus name input
+    document.getElementById('new-profile-name')?.focus();
+}
+
+function selectEmoji(btn) {
+    document.querySelectorAll('.emoji-option.selected').forEach(el => el.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+
+async function submitAddProfile() {
+    const nameInput = document.getElementById('new-profile-name');
+    const name = nameInput?.value?.trim();
+    if (!name) { nameInput?.focus(); return; }
+
+    const selectedEmoji = document.querySelector('.emoji-option.selected');
+    const emoji = selectedEmoji?.dataset?.emoji || '👤';
+
+    const user = await API.createUser(name, emoji);
+    if (user) {
+        state.users = await API.getUsers();
+        await selectUser(user.user_id);
+    }
+}
+
+async function selectUser(userId) {
+    state.currentUserId = userId;
+    localStorage.setItem('audiobook_last_user', userId);
+
+    // Update header avatar
+    const avatarEl = document.getElementById('user-avatar');
+    const user = state.users.find(u => u.user_id === userId);
+    if (avatarEl && user) avatarEl.textContent = user.avatar_emoji;
+
+    // Fetch full user settings from server
+    const fullUser = await API.getUser(userId);
+    if (fullUser?.settings) {
+        // Apply dark mode
+        applyDarkMode(fullUser.settings.dark_mode || 'light');
+        // Apply language preferences
+        if (fullUser.settings.preferred_language) {
+            state.settings.preferredLanguage = fullUser.settings.preferred_language;
+        }
+        if (fullUser.settings.target_translation_language) {
+            state.settings.targetTranslationLanguage = fullUser.settings.target_translation_language;
+        }
+        saveSettings();
+    }
+
+    closeProfilePicker();
+
+    // Reload library with this user's playback positions
+    await loadLibrary();
+}
+
+async function initProfiles() {
+    // Fetch user list from server
+    state.users = await API.getUsers();
+
+    if (state.users.length === 0) {
+        // Server should auto-create Guest, but just in case
+        console.warn('No user profiles found');
+        return;
+    }
+
+    // Check if we have a remembered user
+    const lastUserId = localStorage.getItem('audiobook_last_user');
+    const remembered = lastUserId && state.users.find(u => u.user_id === lastUserId);
+
+    // Always show picker on load (Netflix-style)
+    openProfilePicker();
+
+    // If only one user, auto-select after a brief moment
+    if (state.users.length === 1) {
+        await selectUser(state.users[0].user_id);
+    }
+}
+
+// ============================================================================
 // Initialization
 // ============================================================================
 
 async function init() {
-    // Load user settings
+    // Load user settings from localStorage (fallback)
     loadSettings();
 
     // Initialize dark mode toggle
@@ -3320,6 +3543,9 @@ async function init() {
     // Settings button
     document.getElementById('settings-btn')?.addEventListener('click', openSettings);
 
+    // Profile button
+    document.getElementById('profile-btn')?.addEventListener('click', openProfilePicker);
+
     // Get or create device ID
     state.deviceId = getOrCreateDeviceId();
     console.log('Device ID:', state.deviceId);
@@ -3327,8 +3553,8 @@ async function init() {
     // Setup event listeners
     setupEventListeners();
 
-    // Load library
-    await loadLibrary();
+    // Initialize user profiles — shows picker, loads library on selection
+    await initProfiles();
 
     // Initialize Gutenberg browser (if available)
     await initGutenberg();

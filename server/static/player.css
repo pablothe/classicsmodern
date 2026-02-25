@@ -3546,3 +3546,176 @@ header h2 {
 body.has-now-playing .view {
     padding-bottom: 4.5rem;
 }
+
+/* ============================================================================
+   Profile Picker
+   ============================================================================ */
+
+.user-profile-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.user-profile-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.profile-picker-container {
+    max-width: 480px;
+}
+
+.profile-picker-content {
+    padding: 24px !important;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.profile-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 12px;
+    border: 2px solid var(--border-color);
+    background: var(--surface-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.875rem;
+}
+
+.profile-button:hover {
+    border-color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.profile-button .profile-avatar {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.profile-button .profile-name {
+    text-align: center;
+    word-break: break-word;
+    font-weight: 500;
+}
+
+.profile-button.add-profile-btn {
+    border-style: dashed;
+    opacity: 0.6;
+}
+
+.profile-button.add-profile-btn:hover {
+    opacity: 1;
+}
+
+/* Add Profile Form */
+.add-profile-form {
+    grid-column: 1 / -1;
+}
+
+.add-profile-form .form-group {
+    margin-bottom: 16px;
+}
+
+.add-profile-form label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.add-profile-form input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-profile-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--text-primary);
+}
+
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.emoji-option {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: all 0.15s;
+    line-height: 1;
+}
+
+.emoji-option:hover {
+    border-color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.emoji-option.selected {
+    border-color: var(--text-primary);
+    background: var(--text-primary);
+}
+
+.form-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.form-buttons button {
+    padding: 8px 20px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.form-buttons .btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    border-color: var(--text-primary);
+}
+
+.form-buttons button:hover {
+    opacity: 0.8;
+}
