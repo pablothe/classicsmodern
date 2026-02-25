@@ -95,7 +95,7 @@ python3 make_audiobook.py books/{book_name}/book.md
 ```
 
 **Files Modified:**
-- `local_tts_kokoro.py` - Added chunk manifest generation
+- `lib/audio/kokoro.py` (was `local_tts_kokoro.py`) - Added chunk manifest generation
 - `server/audiobook_server.py` - Added `/chunk-manifest` endpoint
 - `server/static/player.js` - Rewrote synchronization logic
 - `docs/AUDIO_TEXT_SYNC.md` - Complete technical documentation

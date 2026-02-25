@@ -17,6 +17,7 @@ Features:
 """
 
 import json
+import os
 import re
 import threading
 import time
@@ -45,6 +46,27 @@ BOOKS_DIR = Path(__file__).parent.parent / "books"
 JOBS_DIR = Path(__file__).parent / "pipeline_jobs"
 MAX_CONCURRENT_JOBS = 2
 POLL_INTERVAL = 2.0  # seconds
+
+# Retry configuration for audio generation subprocess
+AUDIO_MAX_RETRIES = 3
+AUDIO_RETRY_DELAYS = [5, 15, 30]  # seconds between retries
+
+# Error patterns indicating permanent (non-retryable) failures
+PERMANENT_ERROR_PATTERNS = [
+    "Input file not found",
+    "FileNotFoundError",
+    "book_manifest.json not found",
+    "Missing dependencies",
+    "No handler registered",
+    "make_audiobook.py not found",
+    "Python interpreter check failed",
+    "kokoro-onnx library not installed",
+    "Auto-fix failed",
+    "summarize must be between",
+]
+
+# Exit codes that indicate permanent failure
+PERMANENT_EXIT_CODES = {2}  # validation/auto-fix failure
 
 
 class JobStatus(str, Enum):
@@ -292,6 +314,91 @@ class PipelineRunner:
 
         return progress_map
 
+    def _is_permanent_failure(self, exit_code: int, output_lines: list) -> bool:
+        """Determine if a subprocess failure is permanent (non-retryable)."""
+        if exit_code in PERMANENT_EXIT_CODES:
+            return True
+        # Check last 50 lines for permanent error patterns
+        tail = "\n".join(output_lines[-50:])
+        for pattern in PERMANENT_ERROR_PATTERNS:
+            if pattern in tail:
+                return True
+        return False
+
+    def _build_error_message(self, return_code: int, all_output: list, cmd: list) -> str:
+        """Build detailed error message from subprocess output."""
+        error_lines = all_output[-30:] if len(all_output) > 30 else all_output
+
+        actual_error = None
+        for line in reversed(all_output):
+            if 'ERROR' in line or 'Error' in line or 'error' in line:
+                actual_error = line.strip()
+                break
+
+        error_msg = f"Audio generation failed with exit code {return_code}\n\n"
+        if actual_error:
+            error_msg += f"Error: {actual_error}\n\n"
+        error_msg += f"Command: {' '.join(cmd)}\n\n"
+        if error_lines:
+            error_msg += "Output (last 30 lines):\n"
+            error_msg += "\n".join(error_lines)
+        else:
+            error_msg += "No output captured (process may have crashed immediately)\n"
+        error_msg += "\n\nTroubleshooting:\n"
+        error_msg += "  - Check that venv is activated: source venv/bin/activate\n"
+        error_msg += "  - Verify kokoro-onnx is installed: pip list | grep kokoro\n"
+        error_msg += "  - Try running manually: " + ' '.join(cmd)
+        return error_msg
+
+    def _execute_audio_subprocess(self, cmd, sub_env, voice, start_pct, end_pct):
+        """Execute make_audiobook.py subprocess with progress monitoring.
+
+        Returns:
+            Tuple of (return_code, all_output_lines)
+        """
+        process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+            env=sub_env
+        )
+
+        all_output = []
+
+        for line in iter(process.stdout.readline, ''):
+            if self.cancelled:
+                process.kill()
+                raise Exception("Job cancelled by user")
+
+            all_output.append(line.rstrip())
+            print(f"  [audio] {line.rstrip()}", flush=True)
+
+            progress_match = re.search(
+                r'(?:\[|Progress:.*?)(\d+)\s*/\s*(\d+)(?:\]|\s|$)',
+                line
+            )
+            if progress_match:
+                current = int(progress_match.group(1))
+                total = int(progress_match.group(2))
+                if 1 <= current <= total and 2 <= total <= 50000:
+                    chunk_progress = int((current / total) * 100)
+                    progress_range = end_pct - start_pct
+                    overall_progress = int(start_pct + (chunk_progress * progress_range / 100))
+                    self.job.update(
+                        progress=overall_progress,
+                        stage_progress={
+                            'message': f'Generating audio chunk {current}/{total}...',
+                            'current_chunk': current,
+                            'total_chunks': total,
+                            'voice': voice
+                        }
+                    )
+
+        process.wait()
+        return process.returncode, all_output
+
     def run(self):
         """Execute the pipeline"""
         try:
@@ -533,12 +640,9 @@ class PipelineRunner:
     def _run_audio_generation(self, input_file: Path) -> Dict:
         """
         Run audio generation using make_audiobook.py.
-
-        Args:
-            input_file: File to convert to audio
-
-        Returns:
-            Audio generation results
+        Retries up to AUDIO_MAX_RETRIES times for transient failures.
+        Kokoro's chunk-level checkpointing means retries resume from
+        where the previous attempt left off (not from scratch).
         """
         start_pct, end_pct = self.progress_map.get('audio_generation', (0, 89))
 
@@ -551,7 +655,7 @@ class PipelineRunner:
         voice = self.job.config.get('voice', 'bf_emma')
         speed = self.job.config.get('speed', 1.0)
 
-        # Pre-flight checks
+        # Pre-flight checks (permanent failures, no retry)
         if not input_file.exists():
             raise Exception(f"Input file not found: {input_file}")
 
@@ -559,25 +663,17 @@ class PipelineRunner:
         if not make_audiobook_script.exists():
             raise Exception(f"make_audiobook.py not found at: {make_audiobook_script}")
 
-        # Use venv Python explicitly (server requires venv for kokoro-onnx)
-        # The server is started via start_server.sh which activates venv, so we use that Python
         venv_python = Path(__file__).parent.parent / "venv" / "bin" / "python3"
-
-        # Fallback to sys.executable if venv not found (development mode)
         python_exec = str(venv_python) if venv_python.exists() else sys.executable
 
-        # Verify Python interpreter and dependencies
         try:
             result = subprocess.run(
                 [python_exec, '--version'],
-                capture_output=True,
-                text=True,
-                timeout=5
+                capture_output=True, text=True, timeout=5
             )
             if result.returncode != 0:
                 raise Exception(f"Python interpreter check failed: {python_exec}")
 
-            # Check kokoro-onnx is installed
             check_cmd = [python_exec, '-c', 'import kokoro_onnx; import soundfile']
             result = subprocess.run(check_cmd, capture_output=True, text=True, timeout=5)
             if result.returncode != 0:
@@ -593,110 +689,67 @@ class PipelineRunner:
         except Exception as e:
             raise Exception(f"Python interpreter verification failed: {e}")
 
-        # Run make_audiobook.py with non-interactive flag
+        # Build command
         cmd = [
             python_exec,
             str(make_audiobook_script),
             str(input_file),
             '--voice', voice,
             '--speed', str(speed),
-            '--non-interactive'     # Skip validation prompts
-            # Note: Omit --generate-cover (we handle cover separately in _run_cover_generation)
+            '--non-interactive'
         ]
 
         self.job.update(stage_progress={'message': f'Generating audio with voice {voice}...', 'command': ' '.join(cmd)})
 
         # Build subprocess environment with explicit venv PATH
-        import os
         sub_env = os.environ.copy()
         venv_bin = Path(__file__).parent.parent / "venv" / "bin"
         if venv_bin.exists():
             sub_env['PATH'] = str(venv_bin) + ':' + sub_env.get('PATH', '')
             sub_env['VIRTUAL_ENV'] = str(venv_bin.parent)
 
-        process = subprocess.Popen(
-            cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            bufsize=1,
-            env=sub_env
-        )
+        # Subprocess execution with retry for transient failures
+        last_error_msg = None
 
-        # Capture ALL output for debugging
-        all_output = []
+        for attempt in range(1, AUDIO_MAX_RETRIES + 1):
+            if attempt > 1:
+                delay = AUDIO_RETRY_DELAYS[min(attempt - 2, len(AUDIO_RETRY_DELAYS) - 1)]
+                self.job.update(stage_progress={
+                    'message': f'Retrying audio generation (attempt {attempt}/{AUDIO_MAX_RETRIES}) in {delay}s...',
+                    'retry_attempt': attempt,
+                    'max_retries': AUDIO_MAX_RETRIES,
+                    'voice': voice
+                })
+                print(f"  [audio] Retry {attempt}/{AUDIO_MAX_RETRIES} in {delay}s "
+                      f"(checkpoint will resume from last good chunk)...", flush=True)
 
-        # Monitor progress
-        import re as re_module
-        for line in iter(process.stdout.readline, ''):
-            if self.cancelled:
-                process.kill()
-                raise Exception("Job cancelled by user")
+                for _ in range(delay):
+                    if self.cancelled:
+                        raise Exception("Job cancelled by user")
+                    time.sleep(1)
 
-            # Store all output for error reporting
-            all_output.append(line.rstrip())
-
-            # Echo subprocess output to server logs (real-time visibility)
-            print(f"  [audio] {line.rstrip()}", flush=True)
-
-            # Parse progress from make_audiobook.py output
-            # Match specific formats: "[20/100]" or "Progress: ... 20/100" (not timestamps)
-            progress_match = re_module.search(
-                r'(?:\[|Progress:.*?)(\d+)\s*/\s*(\d+)(?:\]|\s|$)',
-                line
+            return_code, all_output = self._execute_audio_subprocess(
+                cmd, sub_env, voice, start_pct, end_pct
             )
-            if progress_match:
-                current = int(progress_match.group(1))
-                total = int(progress_match.group(2))
 
-                # Validate: current <= total and reasonable range for audio chunks
-                if 1 <= current <= total and 2 <= total <= 50000:
-                    chunk_progress = int((current / total) * 100)
-                    # Use dynamic progress range
-                    progress_range = end_pct - start_pct
-                    overall_progress = int(start_pct + (chunk_progress * progress_range / 100))
-                    self.job.update(
-                        progress=overall_progress,
-                        stage_progress={
-                            'message': f'Generating audio chunk {current}/{total}...',
-                            'current_chunk': current,
-                            'total_chunks': total,
-                            'voice': voice
-                        }
-                    )
+            if return_code == 0:
+                break
 
-        process.wait()
+            # Permanent failure — don't retry
+            if self._is_permanent_failure(return_code, all_output):
+                print(f"  [audio] Permanent failure (exit code {return_code}), not retrying", flush=True)
+                raise Exception(self._build_error_message(return_code, all_output, cmd))
 
-        if process.returncode != 0:
-            # Build detailed error message with command and output
-            error_lines = all_output[-30:] if len(all_output) > 30 else all_output  # Last 30 lines
+            # Transient failure
+            last_error_msg = self._build_error_message(return_code, all_output, cmd)
+            print(f"  [audio] Transient failure (exit code {return_code}), "
+                  f"attempt {attempt}/{AUDIO_MAX_RETRIES}", flush=True)
 
-            # Extract actual error message if available
-            actual_error = None
-            for line in reversed(all_output):
-                if 'ERROR' in line or 'Error' in line or 'error' in line:
-                    actual_error = line.strip()
-                    break
-
-            error_msg = f"Audio generation failed with exit code {process.returncode}\n\n"
-
-            if actual_error:
-                error_msg += f"Error: {actual_error}\n\n"
-
-            error_msg += f"Command: {' '.join(cmd)}\n\n"
-
-            if error_lines:
-                error_msg += "Output (last 30 lines):\n"
-                error_msg += "\n".join(error_lines)
-            else:
-                error_msg += "No output captured (process may have crashed immediately)\n"
-
-            error_msg += "\n\n💡 Troubleshooting:\n"
-            error_msg += "  - Check that venv is activated: source venv/bin/activate\n"
-            error_msg += "  - Verify kokoro-onnx is installed: pip list | grep kokoro\n"
-            error_msg += "  - Try running manually: " + ' '.join(cmd)
-
-            raise Exception(error_msg)
+            if attempt == AUDIO_MAX_RETRIES:
+                raise Exception(
+                    f"Audio generation failed after {AUDIO_MAX_RETRIES} attempts.\n\n"
+                    f"Last error:\n{last_error_msg}"
+                )
 
         # Find audio output directory
         audio_dir = input_file.parent / "audio_kokoro"

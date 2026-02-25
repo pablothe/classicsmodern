@@ -1,6 +1,6 @@
 # Modern Classics — Project Todo
 
-Audited Feb 24, 2026. Cross-referenced 30 plan files against git history.
+Updated Feb 25, 2026. Cross-referenced against uncommitted changes + git history.
 
 ---
 
@@ -25,106 +25,75 @@ Audited Feb 24, 2026. Cross-referenced 30 plan files against git history.
 - [x] Audiobook pipeline audit + commit (`639bb25`)
 - [x] Chapter detection audit + commit (`639bb25`)
 - [x] Cover generation as job type with progress tracking (`48a05df`)
-- [x] Text sync: fix 5-bug chain (paragraph mapping, seek, global position) (implemented)
+- [x] Text sync: fix 5-bug chain (paragraph mapping, seek, global position)
 - [x] Netflix-style language track selection — text + audio language switching
 
----
+### Phase 1: Full-Featured Reader Mode (uncommitted)
+- [x] Fullscreen reader overlay with continuous scroll across chapters
+- [x] Font size, font family, line height, theme (light/sepia/dark) controls
+- [x] Floating mini audio player at bottom of reader
+- [x] Lazy chapter loading via IntersectionObserver
+- [x] Scroll position + preference persistence in localStorage
+- [x] Karaoke integration in reader (paragraph-level sync; word-level not in reader)
 
-## In Progress
+### Phase 2: Bug Fixes (uncommitted)
+- [x] `book_health.py`: Save auto-recovered chapter metadata to disk
+- [x] `audiobook_server.py`: Add `number` field to chunk manifest fallback chapters
+- [x] `llm_chat.py`: Defensive `.get()` for chapter fields
+- [x] `player.js`: Truncate error messages in variant view (80 char max)
+- [x] `player.js`: Only badge running/pending jobs on library cards
+- [x] `player.js`: Fix delete button with `e.target.closest()`
+- [x] `audiobook_server.py`: Import alias to avoid `create_download_job` shadowing
 
-### Phase 1: Full-Featured Reader Mode
-> Plan: `zesty-swimming-corbato` — reader.js in progress
+### Phase 3: Text Sync Quality (uncommitted — paragraph ID refactor)
+- [x] Wire up KaraokeSync class in player.js
+- [x] Fix scroll jitter: only update DOM + scroll when paragraph changes
+- [x] Unify chapter detection between text_extractor.py and word_timings.py
+- [x] Use chunk manifest data for paragraph sync instead of linear interpolation
+- [x] Optimize highlightWord() from O(n) to O(1) via direct array refs
+- [x] Fix source-text vs spoken-text mismatch in paragraph sync
+- [x] Fix text_pos drift in word_timings.py
+- [x] Lower paragraph filter threshold from 10 to 2 chars
+- [x] Fix binary search gap handling in findWordAtTime
+- [x] Karaoke toggle uses CSS class instead of inline display:none
 
-- [ ] Fullscreen reader overlay with continuous scroll across chapters
-- [ ] Font size, font family, line height, theme (light/sepia/dark) controls
-- [ ] Floating mini audio player at bottom of reader
-- [ ] Lazy chapter loading via IntersectionObserver
-- [ ] Scroll position + preference persistence in localStorage
-- [ ] Karaoke integration in reader
+### Phase 4: Queue Tab UI (uncommitted)
+- [x] Add "Queue" tab alongside "Library" and "Store" with active-job count badge
+- [x] Move jobs-activity panel content into Queue tab section
+- [x] Remove "Jobs" header link (Queue tab replaces it)
+- [x] Hide search input when Queue tab active
+- [x] Refactor `jobsActivity` object to render in new tab section
+- [x] Show empty state when no jobs
 
-**Files:** `server/static/reader.js` (new), `player.html`, `player.css`, `player.js`
+### Phase 5: Pipeline Reliability (uncommitted)
+- [x] Single chunk failure handling: retry 3x then skip with silence placeholder
+- [x] ffmpeg combine failure: retry with concat demuxer before falling back
+- [x] Pipeline-level retry: retry subprocess up to 3x for transient failures
+- [x] Chunk-level checkpointing (save every 10 chunks, resume on restart)
+- [x] Chapter sequence renumber warnings (visible, not verbose-only)
+- [x] Subprocess environment: explicitly set venv PATH
+- [x] Progress regex: use more specific matching
+- [x] Concurrent generation: file lock on output directory
+- [x] TTS chunk timeout (120s per chunk)
+- [x] Error classification: permanent vs transient failures
 
----
-
-## Backlog (dependency-ordered)
-
-### Phase 2: Bug Fixes
-
-**2a. Dr Jekyll & Hyde bug cascade** — `polymorphic-greeting-puppy`
-- [ ] `book_health.py`: Save auto-recovered chapter metadata to disk (currently discarded)
-- [ ] `audiobook_server.py`: Add `number` field to chunk manifest fallback chapters
-- [ ] `llm_chat.py`: Defensive `.get()` for chapter fields (prevents KeyError)
-- [ ] Fix `source.md` malformed TOC line, then regenerate audiobook
-
-**2b. Error message cleanup** — `toasty-coalescing-engelbart`
-- [ ] `player.js`: Replace full error dumps in variant view with brief "Check Jobs panel" message
-- [ ] `player.js`: Remove truncated error text from library card badges
-
-**2c. Job Queue remaining fixes** — `wise-toasting-moth` (toast notifications already done)
-- [ ] `player.js`: Fix delete button (use `e.target.closest()` instead of `e.target.classList`)
-- [ ] `audiobook_server.py`: Rename `create_download_job` endpoint function to avoid shadowing import
-
----
-
-### Phase 3: Text Sync Quality
-> Plan: `lucky-watching-feigenbaum` — 10 bugs across 5 files
->
-> Depends on: Reader mode (Phase 1) benefits from these fixes
-
-- [ ] Wire up KaraokeSync class in player.js (currently dead code, toggle hidden)
-- [ ] Fix scroll jitter: only update DOM + scroll when paragraph changes
-- [ ] Unify chapter detection between text_extractor.py and generate_word_timings.py
-- [ ] Use chunk manifest data for paragraph sync instead of linear interpolation
-- [ ] Optimize highlightWord() from O(n) to O(1)
-- [ ] Fix source-text vs spoken-text mismatch in paragraph sync
-- [ ] Fix text_pos drift in generate_word_timings.py
-- [ ] Lower paragraph filter threshold from 10 to 2 chars
-- [ ] Fix binary search gap handling in findWordAtTime
-- [ ] Remove inline `display: none` from karaoke toggle (use CSS class instead)
-
-**Files:** `player.js`, `player.html`, `karaoke.js`, `text_extractor.py`, `generate_word_timings.py`
-
----
-
-### Phase 4: UI Improvements
-
-**Queue Tab** — `bright-noodling-seal`
-> Depends on: Phase 2c (job queue fixes)
-
-- [ ] Add "Queue" tab alongside "Library" and "Store" with active-job count badge
-- [ ] Move floating jobs-activity panel content into Queue tab section
-- [ ] Remove "Jobs" header link (Queue tab replaces it)
-- [ ] Hide search input when Queue tab active
-- [ ] Refactor `jobsActivity` object to render in new tab section
-- [ ] Show empty state when no jobs
-
-**Files:** `player.html`, `player.js`, `player.css`
+### Paragraph ID Architecture (uncommitted — cross-cutting)
+- [x] Manifest v3.0 with paragraph extraction (`lib/book/processor.py`)
+- [x] Paragraph-by-paragraph translation (`lib/translation/structured.py`)
+- [x] Paragraph boundary tracking in audio chunks (`lib/audio/kokoro.py`)
+- [x] Word-to-paragraph mapping in timings (`lib/audio/word_timings.py`)
+- [x] Paragraph timing API endpoint (`server/audiobook_server.py`)
+- [x] Manifest-aware paragraph IDs in text extraction (`server/text_extractor.py`)
+- [x] Paragraph timing UI in player.js + reader.js
+- [x] Batch migration tool (`validate.py --migrate-paragraphs`)
 
 ---
 
-### Phase 5: Pipeline Reliability
-> Plan: `toasty-prancing-cocoa` — 14 bugs identified
->
-> **Note:** Many file references are outdated (pre-refactor into lib/). Needs re-audit against current codebase.
+## Backlog
 
-- [ ] Re-audit: map old file references to current lib/ paths
-- [ ] Single chunk failure handling: retry 3x then skip with silence placeholder
-- [ ] ffmpeg combine failure: retry with concat demuxer before falling back
-- [ ] Chapter-level retry for failed chapters
-- [ ] Chunk-level checkpointing (save every 10 chunks, resume on restart)
-- [ ] Chapter sequence renumber warnings (visible, not verbose-only)
-- [ ] Subprocess environment: explicitly set venv PATH
-- [ ] Progress regex: use more specific matching
-- [ ] Concurrent generation: file lock on output directory
-- [ ] TTS chunk timeout (120s per chunk)
-
-**Files:** `lib/audio/kokoro.py`, `lib/book/processor.py`, `lib/book/validator.py`, `server/audiobook_pipeline.py`
-
----
-
-### Phase 6: Features
-
-**Multi-User Profiles** — `wondrous-hugging-moonbeam`
+### Phase 6: Multi-User Profiles
+> Plan: `wondrous-hugging-moonbeam`
+> **Independent** — no dependencies on other phases
 
 - [ ] Server: users_db.json data model + CRUD API endpoints (`/api/users`)
 - [ ] Server: Modify playback endpoints to accept `X-User-ID` header
@@ -134,24 +103,37 @@ Audited Feb 24, 2026. Cross-referenced 30 plan files against git history.
 - [ ] Per-user settings: language prefs + dark mode stored server-side
 - [ ] Migration: copy device playback data to first user profile
 
-**Files:** `audiobook_server.py`, `player.html`, `player.js`, `player.css`
+**Files:** `server/audiobook_server.py`, `server/static/player.html`, `server/static/player.js`, `server/static/player.css`
 
 ---
 
-### Phase 7: Polish
+### Phase 7: Documentation Polish
+> Plan: `wiggly-wobbling-zebra`
+> **Independent** — no dependencies, but best done last
+> Can run in parallel with Phase 6
 
-**Documentation Update** — `wiggly-wobbling-zebra`
-> Do last — after all changes settle
-
-- [ ] Fix port 8080 → 8000 in make_audiobook.py
+- [ ] Fix port 8080 -> 8000 in make_audiobook.py
 - [ ] CLAUDE.md: Add missing server files + static directory to project structure
 - [ ] CLAUDE.md: Expand API endpoints from 7 to full 32+ set
 - [ ] CLAUDE.md: Document undocumented CLI flags
 - [ ] CLAUDE.md: Clarify default voice difference (make_audiobook=bf_emma, audiobook=af_sky)
+- [ ] CLAUDE.md: Document paragraph timing API + manifest v3.0
 - [ ] README.md: Add `zongwei/` namespace prefix to model names
 - [ ] CHANGELOG.md: Add deprecation notice for pre-v3 file references
 
 **Files:** `make_audiobook.py`, `CLAUDE.md`, `README.md`, `CHANGELOG.md`
+
+---
+
+### Word-Level Karaoke in Reader (optional enhancement)
+> Low priority — paragraph-level sync already works well
+> **Independent** — only touches reader.js + karaoke.js
+
+- [ ] Render word timing spans inside reader paragraphs
+- [ ] Highlight words during playback (reuse KaraokeSync from karaoke.js)
+- [ ] Auto-scroll to current word within active paragraph
+
+**Files:** `server/static/reader.js`, `server/static/karaoke.js`
 
 ---
 

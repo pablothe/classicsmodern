@@ -147,6 +147,9 @@ python3 validate.py books/mybook/book.md --json
 
 # Validate all books recursively
 python3 validate.py books/ --recursive --verbose
+
+# Migrate older manifests to v3.0 (adds paragraph registry)
+python3 validate.py books/ --recursive --migrate-paragraphs
 ```
 
 **What it validates:**
@@ -172,7 +175,7 @@ python3 validate.py books/ --recursive --verbose
 python3 translate.py books/mybook/book.md \
   --source-lang Latin \
   --target-lang "Modern English" \
-  --model ollama:zongwei/gemma3-translator:4b
+  --model zongwei/gemma3-translator:4b
 
 # What it does:
 # 1. PRE-VALIDATES source (fails fast if incomplete)
@@ -233,6 +236,12 @@ python3 make_audiobook.py books/mybook/book.md --voice bf_emma --generate-cover
 # Or use audiobook.py directly
 python3 audiobook.py translated.md --voice bf_emma
 
+# audiobook.py options:
+# --voice VOICE         Voice ID (default: af_sky)
+# --speed SPEED         Playback speed multiplier (default: 1.0)
+# --language LANG       Language code (default: en-us)
+# --output-dir DIR      Output directory (default: auto)
+
 # Custom speed
 python3 audiobook.py translated.md --speed 1.15
 
@@ -274,11 +283,13 @@ GET  /api/books/{book_id}/text/{chapter_num}                 # Get chapter text
 GET  /api/books/{book_id}/chunk-manifest                     # Chapter metadata
 GET  /api/books/{book_id}/word-timings                       # Karaoke sync data
 GET  /api/books/{book_id}/word-timings/{chapter}             # Per-chapter timings
+GET  /api/books/{book_id}/paragraph-timings                  # Paragraph timing data
 DELETE /api/books/{book_id}/variants/{variant_id}            # Delete variant
 
 # Playback
 GET  /api/playback/{book_id}/{variant_id}                    # Get playback position
 POST /api/playback/{book_id}/{variant_id}                    # Save playback position
+GET  /api/playback/all                                       # All positions (library progress)
 
 # Jobs
 GET  /api/jobs                     # List jobs
@@ -375,7 +386,8 @@ classicsmodern/
 │   ├── gutenberg_downloader.py # Gutenberg download
 │   ├── gutenberg_catalog.py   # Gutenberg catalog
 │   └── static/                # Web UI assets
-│       ├── player.html/css/js # Audio player
+│       ├── player.html/css/js # Audio player + library
+│       ├── reader.js          # Fullscreen e-reader
 │       ├── jobs.html/css/js   # Job dashboard
 │       ├── pipeline.js        # Pipeline UI
 │       ├── karaoke.js         # Karaoke mode
@@ -396,15 +408,17 @@ The project uses a unified manifest system for consistent chapter handling:
   - Generates table of contents when missing
   - Creates JSON manifest with all metadata and checkpoints
 
-- **`book_manifest.json`** - Per-book structure file:
+- **`book_manifest.json`** - Per-book structure file (v3.0):
   ```json
   {
+    "version": "3.0",
     "chapters": [...],
     "checkpoints": { "translation": {...}, "audio": {...} },
     "metadata": { "title": "...", "author": "...", "language": "..." },
     "toc_markdown": "..."
   }
   ```
+  v3.0 adds a paragraph registry per chapter with stable IDs (`ch01_p001`, etc.), character offsets, word counts, and content hashes. These flow through translation, audio generation, and word timings to enable paragraph-level audio sync.
 
 ### Translation System
 - **Model**: zongwei/gemma3-translator:4b via Ollama (100% local)
