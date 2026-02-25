@@ -27,6 +27,12 @@ const state = {
         updateIntervalId: null
     },
     currentChapterIndex: null,
+    // Separate "playing" state — tracks what audio is actually loaded,
+    // independent of which book the reader is showing
+    playingBook: null,
+    playingVariant: null,
+    playingChapterIndex: null,
+    playingFileIndex: 0,
     chunkManifest: null,  // Chunk-based sync data for reader highlighting
     paragraphTimings: null,  // Paragraph-level audio timing data for direct sync
     karaokeSync: null,             // KaraokeSync instance
@@ -1115,6 +1121,10 @@ async function openVariant(variantId) {
         state.currentVariant = variant;
         state.currentFileIndex = 0;
 
+        // Track what's playing
+        state.playingBook = book;
+        state.playingVariant = variant;
+
         // Set up text tracks from book data
         state.textTracks = book.text_tracks || [];
         autoSelectTextTrack();
@@ -1225,7 +1235,7 @@ function updateNavigationButtons() {
 }
 
 function loadAudioFile() {
-    const book = state.currentBook;
+    const book = state.playingBook || state.currentBook;
     const variant = state.currentVariant;
     const audioURL = API.getAudioURL(book.book_id, variant.variant_id, state.currentFileIndex);
 
@@ -1238,6 +1248,7 @@ function loadAudioFile() {
 
     ui.audio.src = audioURL;
     ui.audio.load();
+    state.playingFileIndex = state.currentFileIndex;
 
     updateNavigationButtons();
     updateMediaSession();
@@ -1356,9 +1367,11 @@ function updateChapterHighlight() {
 
 function detectCurrentChapter() {
     // Auto-detect which chapter we're in based on current file and time
-    if (!state.currentBook || !state.currentBook.chapters) return;
+    // Use playingBook (the book whose audio is loaded) not currentBook (reader)
+    const book = state.playingBook || state.currentBook;
+    if (!book?.chapters) return;
 
-    const chapters = state.currentBook.chapters;
+    const chapters = book.chapters;
     const currentFile = state.currentFileIndex;
     const currentTime = ui.audio.currentTime;
 
@@ -1367,8 +1380,8 @@ function detectCurrentChapter() {
         const chapter = chapters[i];
         if (chapter.file_index === currentFile && chapter.timestamp <= currentTime) {
             if (state.currentChapterIndex !== i) {
-                const oldChapterIndex = state.currentChapterIndex;
                 state.currentChapterIndex = i;
+                state.playingChapterIndex = i;
                 updateChapterHighlight();
                 updateCurrentChapterDisplay();
             }
@@ -2230,10 +2243,9 @@ function closeSleepTimerModal() {
 
 function updateMediaSession() {
     if (!('mediaSession' in navigator)) return;
-    if (!state.currentBook || !state.currentVariant) return;
-
-    const book = state.currentBook;
-    const variant = state.currentVariant;
+    const book = state.playingBook || state.currentBook;
+    const variant = state.playingVariant || state.currentVariant;
+    if (!book || !variant) return;
     const currentFile = variant.audio_files[state.currentFileIndex];
 
     // Set metadata
@@ -2297,7 +2309,7 @@ function updateMediaSession() {
 function startAutoSave() {
     // Save position every 5 seconds
     state.saveInterval = setInterval(() => {
-        if (state.currentBook && state.currentVariant && !ui.audio.paused) {
+        if (state.playingBook && state.playingVariant && !ui.audio.paused) {
             savePlaybackState();
         }
     }, 5000);
@@ -2311,7 +2323,10 @@ function stopAutoSave() {
 }
 
 async function savePlaybackState() {
-    if (!state.currentBook || !state.currentVariant) return;
+    // Save against the playing book, not the currently-browsed book
+    const book = state.playingBook || state.currentBook;
+    const variant = state.playingVariant || state.currentVariant;
+    if (!book || !variant) return;
 
     // Find current para_id from paragraph timings if available
     let currentParaId = null;
@@ -2326,8 +2341,8 @@ async function savePlaybackState() {
     }
 
     const success = await API.savePlaybackPosition(
-        state.currentBook.book_id,
-        state.currentVariant.variant_id,
+        book.book_id,
+        variant.variant_id,
         ui.audio.currentTime,
         ui.audio.playbackRate,
         state.currentFileIndex,
@@ -2944,18 +2959,25 @@ async function openBook(bookId) {
     const book = state.books.find(b => b.book_id === bookId);
     if (!book || !window.bookReader) return;
 
+    // Check if audio from a different book is currently playing
+    const audioIsPlaying = state.playingBook && ui.audio.src && !ui.audio.paused;
+    const isDifferentBook = state.playingBook && state.playingBook.book_id !== bookId;
+
     state.currentBook = book;
     state.textTracks = book.text_tracks || [];
-    state.chunkManifest = null;
-    state.paragraphTimings = null;
     autoSelectTextTrack();
 
-    // If book has audio, auto-load first variant
-    if (book.has_audio && book.variants.length > 0) {
-        await loadVariantAudio(book, book.variants[0]);
-    } else {
-        state.currentVariant = null;
+    // Only load audio if nothing is playing or same book clicked
+    if (!audioIsPlaying || !isDifferentBook) {
+        state.chunkManifest = null;
+        state.paragraphTimings = null;
+        if (book.has_audio && book.variants.length > 0) {
+            await loadVariantAudio(book, book.variants[0]);
+        } else {
+            state.currentVariant = null;
+        }
     }
+    // If different book while audio plays: keep audio running, just open reader
 
     // Discover chapter count and open reader
     try {
@@ -2972,6 +2994,10 @@ async function openBook(bookId) {
 async function loadVariantAudio(book, variant) {
     state.currentVariant = variant;
     state.currentFileIndex = 0;
+
+    // Snapshot what's playing
+    state.playingBook = book;
+    state.playingVariant = variant;
 
     // Load chunk manifest and paragraph timings for accurate sync
     if (!state.chunkManifest) {
@@ -3019,9 +3045,21 @@ async function loadVariantAudio(book, variant) {
     }
 }
 
-function handleReaderSeek(e) {
+async function handleReaderSeek(e) {
     const { chapterIndex, paraId } = e.detail;
-    if (!state.currentBook || !state.currentVariant) return;
+    if (!state.currentBook) return;
+
+    // If reader is showing a different book than what's playing, switch audio
+    if (state.playingBook && state.playingBook.book_id !== state.currentBook.book_id) {
+        if (state.currentBook.has_audio && state.currentBook.variants?.length > 0) {
+            state.chunkManifest = null;
+            state.paragraphTimings = null;
+            await loadVariantAudio(state.currentBook, state.currentBook.variants[0]);
+        } else {
+            return; // No audio for this book
+        }
+    }
+    if (!state.currentVariant) return;
 
     const chapters = state.currentBook.chapters;
     if (!chapters || chapterIndex >= chapters.length) return;
@@ -3077,34 +3115,43 @@ function updateReaderHighlight() {
     if (!window.bookReader?.isOpen) return;
     if (!ui.audio.duration || state.currentChapterIndex === null) return;
 
-    const chapterData = window.bookReader.chapterData[state.currentChapterIndex];
-    if (!chapterData || !chapterData.paragraphs) return;
+    const playingBookId = state.playingBook?.book_id;
 
-    let paraId;
-    const chapterKey = `chapter_${state.currentChapterIndex + 1}`;
-    const timings = state.paragraphTimings?.[chapterKey]?.paragraphs;
+    // Only sync reader highlighting when reader shows the same book as audio
+    if (window.bookReader.bookId === playingBookId) {
+        const chapterData = window.bookReader.chapterData[state.currentChapterIndex];
+        if (chapterData?.paragraphs) {
+            let paraId;
+            const chapterKey = `chapter_${state.currentChapterIndex + 1}`;
+            const timings = state.paragraphTimings?.[chapterKey]?.paragraphs;
 
-    if (timings && timings.length > 0) {
-        // Direct lookup from paragraph timing data (most accurate)
-        const t = ui.audio.currentTime;
-        const match = timings.find(p => t >= p.audio_start && t <= p.audio_end);
-        paraId = match ? match.para_id : (t < timings[0].audio_start ? timings[0].para_id : timings[timings.length - 1].para_id);
-    } else if (state.chunkManifest?.chunks) {
-        paraId = findParagraphByChunkManifest(
-            ui.audio.currentTime, chapterData.paragraphs, state.chunkManifest.chunks
-        );
-    } else {
-        const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
-        paraId = findParagraphByProgress(progress, chapterData.paragraphs);
+            if (timings && timings.length > 0) {
+                const t = ui.audio.currentTime;
+                const match = timings.find(p => t >= p.audio_start && t <= p.audio_end);
+                paraId = match ? match.para_id : (t < timings[0].audio_start ? timings[0].para_id : timings[timings.length - 1].para_id);
+            } else if (state.chunkManifest?.chunks) {
+                paraId = findParagraphByChunkManifest(
+                    ui.audio.currentTime, chapterData.paragraphs, state.chunkManifest.chunks
+                );
+            } else {
+                const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
+                paraId = findParagraphByProgress(progress, chapterData.paragraphs);
+            }
+
+            window.bookReader.highlightCurrentParagraph(state.currentChapterIndex, paraId);
+        }
     }
 
-    window.bookReader.highlightCurrentParagraph(state.currentChapterIndex, paraId);
-
-    // Update mini player info
-    const chapter = state.currentBook.chapters?.[state.currentChapterIndex];
-    if (chapter) {
-        const title = chapter.title || `Chapter ${chapter.number || state.currentChapterIndex + 1}`;
-        window.bookReader.updateMiniPlayerInfo(title);
+    // Update reader mini player info — show what's actually playing
+    if (state.playingBook) {
+        const chapter = state.playingBook.chapters?.[state.playingChapterIndex];
+        const chapterName = chapter?.title || `Chapter ${(state.playingChapterIndex || 0) + 1}`;
+        if (window.bookReader.bookId !== playingBookId) {
+            // Reading a different book — show playing book's title
+            window.bookReader.updateMiniPlayerInfo(`\u266A ${state.playingBook.title} \u2014 ${chapterName}`);
+        } else {
+            window.bookReader.updateMiniPlayerInfo(chapterName);
+        }
     }
 }
 
@@ -3117,24 +3164,25 @@ function updateNowPlayingBar() {
 
     const hasAudio = ui.audio.src && !ui.audio.src.endsWith('/');
     const playerActive = ui.playerView.classList.contains('active');
-    const readerOpen = window.bookReader?.isOpen;
 
-    // Show when audio is loaded and we're NOT in player view or reader
-    const shouldShow = hasAudio && state.currentVariant && !playerActive && !readerOpen;
+    // Show when audio is loaded and we're NOT in the player view
+    // Visible in library AND reader (so you always see what's playing)
+    const shouldShow = hasAudio && state.playingVariant && !playerActive;
 
     if (shouldShow) {
         ui.nowPlayingBar.classList.remove('hidden');
         document.body.classList.add('has-now-playing');
 
-        // Update book title and chapter
-        if (state.currentBook) {
-            ui.npTitle.textContent = state.currentBook.title || 'Unknown Book';
+        // Use playingBook (the book whose audio is loaded)
+        const book = state.playingBook;
+        if (book) {
+            ui.npTitle.textContent = book.title || 'Unknown Book';
         }
-        const chapter = state.currentBook?.chapters?.[state.currentChapterIndex];
+        const chapter = book?.chapters?.[state.playingChapterIndex];
         if (chapter) {
-            ui.npChapter.textContent = chapter.title || `Chapter ${chapter.number || (state.currentChapterIndex + 1)}`;
-        } else if (state.currentChapterIndex !== null) {
-            ui.npChapter.textContent = `Chapter ${state.currentChapterIndex + 1}`;
+            ui.npChapter.textContent = chapter.title || `Chapter ${chapter.number || (state.playingChapterIndex + 1)}`;
+        } else if (state.playingChapterIndex !== null) {
+            ui.npChapter.textContent = `Chapter ${state.playingChapterIndex + 1}`;
         }
 
         // Update progress
@@ -3155,8 +3203,13 @@ function initNowPlayingBar() {
     const tapTarget = document.getElementById('np-tap-target');
     if (tapTarget) {
         tapTarget.addEventListener('click', () => {
-            if (state.currentBook && state.currentVariant) {
-                openVariant(state.currentVariant.variant_id);
+            if (state.playingBook && state.playingVariant) {
+                // If reader is open showing a different book, switch to playing book
+                if (window.bookReader?.isOpen && window.bookReader.bookId !== state.playingBook.book_id) {
+                    openBook(state.playingBook.book_id);
+                } else {
+                    openVariant(state.currentVariant.variant_id);
+                }
             }
         });
     }
