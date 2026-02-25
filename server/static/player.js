@@ -27,10 +27,7 @@ const state = {
         updateIntervalId: null
     },
     currentChapterIndex: null,
-    textSyncOpen: false,
-    textSyncData: null,
-    chunkManifest: null,  // NEW: Chunk-based sync data
-    lastHighlightedParaId: null,  // Track to avoid redundant scroll/DOM updates
+    chunkManifest: null,  // Chunk-based sync data for reader highlighting
     karaokeSync: null,             // KaraokeSync instance
     karaokeModeEnabled: false,     // Whether karaoke word highlighting is active
     karaokeAvailable: false,       // Whether word timing data exists for current book
@@ -57,7 +54,11 @@ const state = {
     // Language track selection (Netflix-style)
     textTracks: [],                  // Available text tracks for current book
     currentTextTrack: null,          // Currently selected text track object
-    textLanguageMatchesAudio: true   // Whether text lang matches audio lang (for karaoke)
+    textLanguageMatchesAudio: true,  // Whether text lang matches audio lang (for karaoke)
+    // Library sort & filter
+    sortBy: 'title-asc',
+    languageFilter: null,            // null = show all, string = filter by language
+    playbackProgress: {}             // { bookId: percentage } for progress bars
 };
 
 // ============================================================================
@@ -82,6 +83,18 @@ const API = {
 
     getAudioURL(bookId, variantId, fileIndex) {
         return `${this.baseURL}/api/books/${bookId}/variants/${variantId}/audio/${fileIndex}`;
+    },
+
+    async getAllPlaybackPositions() {
+        try {
+            const response = await fetch(
+                `${this.baseURL}/api/playback/all`,
+                { headers: { 'X-Device-ID': state.deviceId } }
+            );
+            if (!response.ok) return {};
+            const data = await response.json();
+            return data.positions || {};
+        } catch { return {}; }
     },
 
     async getPlaybackPosition(bookId, variantId) {
@@ -337,6 +350,7 @@ const ui = {
     // Library
     bookList: document.getElementById('book-list'),
     bookCount: document.getElementById('book-count'),
+    sortSelect: document.getElementById('sort-select'),
 
     // Unified Search
     unifiedSearchInput: document.getElementById('unified-search-input'),
@@ -402,25 +416,6 @@ const ui = {
     chaptersList: document.getElementById('chapters-list'),
     currentChapterName: document.getElementById('current-chapter-name'),
 
-    // Text Sync
-    textSyncBtn: document.getElementById('text-sync-btn'),
-    textSyncBackdrop: document.getElementById('text-sync-backdrop'),
-    textSyncPanel: document.getElementById('text-sync-panel'),
-    closeTextSyncBtn: document.getElementById('close-text-sync-btn'),
-    textChapterTitle: document.getElementById('text-chapter-title'),
-    textChapterSubtitle: document.getElementById('text-chapter-subtitle'),
-    textContent: document.getElementById('text-content'),
-    karaokeToggle: document.getElementById('karaoke-toggle'),
-    karaokeModeCheckbox: document.getElementById('karaoke-mode-checkbox'),
-    karaokeStatusText: document.getElementById('karaoke-status-text'),
-    karaokeStatus: document.getElementById('karaoke-status'),
-
-    // Text Language Selector
-    textLanguageSelector: document.getElementById('text-language-selector'),
-    textLangBtn: document.getElementById('text-lang-btn'),
-    textLangCurrent: document.getElementById('text-lang-current'),
-    textLangDropdown: document.getElementById('text-lang-dropdown'),
-
     // Audio Track Selector
     audioTrackSelector: document.getElementById('audio-track-selector'),
     audioTrackBtn: document.getElementById('audio-track-btn'),
@@ -464,11 +459,65 @@ const ui = {
 async function loadLibrary() {
     try {
         state.books = await API.getBooks();
+
+        // Fetch playback progress for all books
+        const positions = await API.getAllPlaybackPositions();
+        state.playbackProgress = {};
+        for (const book of state.books) {
+            if (!book.has_audio || !book.variants.length) continue;
+            const variant = book.variants[0];
+            const key = `${book.book_id}:${variant.variant_id}`;
+            const pos = positions[key];
+            if (pos && variant.file_count > 0) {
+                state.playbackProgress[book.book_id] = Math.round(((pos.file_index || 0) / variant.file_count) * 100);
+            }
+        }
+
+        renderLanguageFilters();
         renderUnifiedSearch();
     } catch (error) {
         console.error('Failed to load library:', error);
         ui.bookList.innerHTML = '<div class="error">Failed to load books. Please check server connection.</div>';
     }
+}
+
+function sortBooks(books, sortBy) {
+    const sorted = [...books];
+    switch (sortBy) {
+        case 'title-asc':
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        case 'title-desc':
+            sorted.sort((a, b) => b.title.localeCompare(a.title));
+            break;
+        case 'author-asc':
+            sorted.sort((a, b) => (a.author || '').localeCompare(b.author || ''));
+            break;
+        case 'year-desc':
+            sorted.sort((a, b) => (b.year || 0) - (a.year || 0));
+            break;
+        case 'year-asc':
+            sorted.sort((a, b) => (a.year || 9999) - (b.year || 9999));
+            break;
+    }
+    return sorted;
+}
+
+function renderLanguageFilters() {
+    const container = document.getElementById('language-filters');
+    if (!container) return;
+    const languages = [...new Set(state.books.map(b => b.language).filter(Boolean))].sort();
+    container.innerHTML = languages.map(lang =>
+        `<button class="filter-chip${state.languageFilter === lang ? ' active' : ''}" data-lang="${lang}">${lang}</button>`
+    ).join('');
+    container.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const lang = chip.dataset.lang;
+            state.languageFilter = state.languageFilter === lang ? null : lang;
+            renderLanguageFilters();
+            renderUnifiedSearch();
+        });
+    });
 }
 
 function renderUnifiedSearch() {
@@ -478,15 +527,21 @@ function renderUnifiedSearch() {
     const query = state.searchQuery.toLowerCase().trim();
     const tab = state.searchTab;
 
-    // Filter library books
+    // Filter library books (search + language filter)
     let filteredLibraryBooks = state.books;
     if (query) {
-        filteredLibraryBooks = state.books.filter(book => {
+        filteredLibraryBooks = filteredLibraryBooks.filter(book => {
             const titleMatch = book.title.toLowerCase().includes(query);
             const authorMatch = book.author && book.author.toLowerCase().includes(query);
             return titleMatch || authorMatch;
         });
     }
+    if (state.languageFilter) {
+        filteredLibraryBooks = filteredLibraryBooks.filter(book => book.language === state.languageFilter);
+    }
+
+    // Sort library books
+    filteredLibraryBooks = sortBooks(filteredLibraryBooks, state.sortBy);
 
     // Filter store books
     let filteredStoreBooks = state.gutenberg.catalog;
@@ -565,23 +620,19 @@ function renderLibraryBooks(books) {
                             ${hasCover ? '↻ Replace Cover' : '+ Generate Cover'}
                         </div>
                     ` : ''}
+                    ${state.playbackProgress[book.book_id] > 0 ? `
+                        <div class="book-progress-bar" style="width: ${state.playbackProgress[book.book_id]}%"></div>
+                    ` : ''}
                 </div>
                 <div class="book-info-bottom">
                     <h3 class="book-title">${book.title}</h3>
-                    ${book.author || book.year ? `
-                        <p class="book-author">
-                            ${book.author || 'Unknown Author'}${book.year ? ` (${book.year})` : ''}
-                        </p>
-                    ` : ''}
+                    <p class="book-author">
+                        ${book.author || ''}${book.year ? ` (${book.year})` : ''}
+                    </p>
                     <div class="book-meta">
                         ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
                         ${hasAudio ? `<span>${book.variant_count} version${book.variant_count !== 1 ? 's' : ''}</span>` : '<span>No audio</span>'}
                     </div>
-                    ${hasSourceText && !hasActiveJob ? `
-                        <div class="generate-audio-btn" onclick="event.stopPropagation(); pipeline.openGenerationModal('${book.book_id}')">
-                            + Generate Audiobook
-                        </div>
-                    ` : ''}
                 </div>
             </div>
         `;
@@ -590,8 +641,7 @@ function renderLibraryBooks(books) {
     // Add click handlers
     document.querySelectorAll('.book-item').forEach(item => {
         item.addEventListener('click', () => {
-            const bookId = item.dataset.bookId;
-            showVariants(bookId);
+            openBook(item.dataset.bookId);
         });
     });
 }
@@ -1066,14 +1116,6 @@ function renderPlayer() {
         ui.currentChapterName.style.display = 'none';
     }
 
-    // Show/hide text sync button based on source text availability
-    // Note: source text is a book-level property, not variant-level
-    if (book.has_source_text) {
-        ui.textSyncBtn.style.display = 'block';
-    } else {
-        ui.textSyncBtn.style.display = 'none';
-    }
-
     // Show/hide AI assistant button based on source text availability
     // Note: source text is a book-level property, not variant-level
     if (book.has_source_text) {
@@ -1249,12 +1291,6 @@ function detectCurrentChapter() {
                 state.currentChapterIndex = i;
                 updateChapterHighlight();
                 updateCurrentChapterDisplay();
-
-                // If text sync is open, reload the text for the new chapter
-                if (state.textSyncOpen && oldChapterIndex !== null) {
-                    loadChapterText(i);
-                    updateKaraokeChapter();
-                }
             }
             return;
         }
@@ -1278,180 +1314,6 @@ function updateCurrentChapterDisplay() {
 // ============================================================================
 // Text Sync Functions
 // ============================================================================
-
-async function toggleTextSync() {
-    state.textSyncOpen = !state.textSyncOpen;
-
-    if (state.textSyncOpen) {
-        openTextSyncPanel();
-    } else {
-        closeTextSyncPanel();
-    }
-}
-
-async function openTextSyncPanel() {
-    ui.textSyncBackdrop.style.display = 'block';
-    ui.textSyncPanel.style.display = 'block';
-
-    // Load chunk manifest for precise synchronization
-    if (!state.chunkManifest && state.currentBook) {
-        try {
-            state.chunkManifest = await API.getChunkManifest(state.currentBook.book_id);
-            console.log('✓ Loaded chunk manifest:', state.chunkManifest.total_chunks, 'chunks');
-        } catch (error) {
-            console.warn('⚠️  Chunk manifest not available, falling back to chapter-based sync');
-        }
-    }
-
-    // Initialize karaoke sync (loads word timings, shows toggle if available)
-    await initKaraokeSync();
-
-    // Render text language selector
-    renderTextLanguageSelector();
-
-    // Load text for current chapter
-    if (state.currentChapterIndex !== null && state.currentBook && state.currentVariant) {
-        loadChapterText(state.currentChapterIndex);
-    } else {
-        // No chapter detected, try loading first chapter
-        loadChapterText(0);
-    }
-}
-
-function closeTextSyncPanel() {
-    ui.textSyncBackdrop.style.display = 'none';
-    ui.textSyncPanel.style.display = 'none';
-    state.textSyncOpen = false;
-
-    // Disable karaoke sync when panel closes to stop timeupdate listener
-    if (state.karaokeSync && state.karaokeModeEnabled) {
-        state.karaokeSync.disable();
-    }
-}
-
-async function loadChapterText(chapterIndex) {
-    state.lastHighlightedParaId = null;  // Reset on chapter change
-    try {
-        ui.textContent.innerHTML = '<div class="text-loading">Loading text...</div>';
-
-        const trackParam = state.currentTextTrack
-            ? `?track_id=${encodeURIComponent(state.currentTextTrack.track_id)}`
-            : '';
-        const response = await fetch(
-            `${API.baseURL}/api/books/${state.currentBook.book_id}/text/${chapterIndex}${trackParam}`
-        );
-
-        if (!response.ok) {
-            const error = await response.json();
-            ui.textContent.innerHTML = `
-                <div class="text-error">
-                    <p>${error.detail || 'Text not available for this chapter'}</p>
-                    <p style="font-size: 14px; color: var(--text-secondary);">Make sure the source markdown file exists in the book directory.</p>
-                </div>
-            `;
-            return;
-        }
-
-        const data = await response.json();
-        state.textSyncData = data;
-
-        // Update header
-        ui.textChapterTitle.textContent = data.title;
-        ui.textChapterSubtitle.textContent = `${data.word_count} words • ~${Math.round(data.estimated_duration / 60)} min`;
-
-        // Render paragraphs (or karaoke words if enabled)
-        if (state.karaokeModeEnabled && state.karaokeAvailable) {
-            enableKaraokeMode();
-        } else {
-            renderTextParagraphs(data.paragraphs);
-        }
-
-    } catch (error) {
-        console.error('Failed to load chapter text:', error);
-        ui.textContent.innerHTML = `
-            <div class="text-error">
-                <p>Failed to load text</p>
-                <p style="font-size: 14px; color: var(--text-secondary);">${error.message}</p>
-            </div>
-        `;
-    }
-}
-
-function renderTextParagraphs(paragraphs) {
-    ui.textContent.innerHTML = paragraphs.map(para => `
-        <p class="text-paragraph" data-para-id="${para.id}">
-            ${escapeHtml(para.text)}
-        </p>
-    `).join('');
-
-    // Add click handlers for seeking
-    document.querySelectorAll('.text-paragraph').forEach(para => {
-        para.addEventListener('click', () => {
-            const paraId = parseInt(para.dataset.paraId);
-            seekToParagraph(paraId);
-        });
-    });
-}
-
-function seekToParagraph(paragraphId) {
-    if (!state.textSyncData || !ui.audio.duration) return;
-
-    const paragraphs = state.textSyncData.paragraphs;
-    if (!paragraphs || paragraphs.length === 0) return;
-
-    // Calculate character-position-based progress for this paragraph
-    let charsBefore = 0;
-    let totalChars = 0;
-    for (const p of paragraphs) {
-        if (p.id < paragraphId) charsBefore += p.text.length;
-        totalChars += p.text.length;
-    }
-
-    const progress = totalChars > 0 ? charsBefore / totalChars : 0;
-    ui.audio.currentTime = progress * ui.audio.duration;
-
-    updateTextHighlight();
-}
-
-function updateTextHighlight() {
-    if (!state.textSyncOpen || !state.textSyncData || !ui.audio.duration) return;
-    if (state.karaokeModeEnabled) return;  // Karaoke mode handles its own highlighting
-
-    const paragraphs = state.textSyncData.paragraphs;
-    if (!paragraphs || paragraphs.length === 0) return;
-
-    let currentParagraphId;
-
-    // Use chunk manifest for accurate text position mapping when available
-    if (state.chunkManifest && state.chunkManifest.chunks) {
-        currentParagraphId = findParagraphByChunkManifest(
-            ui.audio.currentTime, paragraphs, state.chunkManifest.chunks
-        );
-    } else {
-        // Fallback: linear interpolation using character lengths
-        const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
-        currentParagraphId = findParagraphByProgress(progress, paragraphs);
-    }
-
-    // Skip if paragraph hasn't changed (avoids scroll jitter from ~4x/sec timeupdate)
-    if (currentParagraphId === state.lastHighlightedParaId) return;
-    state.lastHighlightedParaId = currentParagraphId;
-
-    // Remove previous highlights
-    document.querySelectorAll('.text-paragraph').forEach(p => {
-        p.classList.remove('active');
-    });
-
-    // Highlight current paragraph
-    const currentPara = document.querySelector(`.text-paragraph[data-para-id="${currentParagraphId}"]`);
-    if (currentPara) {
-        currentPara.classList.add('active');
-        currentPara.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
-    }
-}
 
 // Map audio time to paragraph using chunk manifest for more accurate progress.
 // Instead of assuming linear time→text mapping, this uses actual chunk durations
@@ -1593,26 +1455,6 @@ function autoSelectTextTrack() {
     }
 }
 
-function renderTextLanguageSelector() {
-    if (!ui.textLanguageSelector) return;
-
-    if (!state.textTracks || state.textTracks.length <= 1) {
-        ui.textLanguageSelector.style.display = 'none';
-        return;
-    }
-
-    ui.textLanguageSelector.style.display = 'block';
-
-    if (state.currentTextTrack && ui.textLangCurrent) {
-        ui.textLangCurrent.textContent = state.currentTextTrack.language;
-    }
-
-    renderTrackDropdown(ui.textLangDropdown, state.textTracks, state.currentTextTrack, (trackId) => {
-        selectTextTrack(trackId);
-        closeDropdown(ui.textLangDropdown, ui.textLangBtn);
-    });
-}
-
 function selectTextTrack(trackId) {
     const track = state.textTracks.find(t => t.track_id === trackId);
     if (!track) return;
@@ -1626,40 +1468,6 @@ function selectTextTrack(trackId) {
         textLang === audioLang ||
         textLang.includes(audioLang) ||
         audioLang.includes(textLang);
-
-    // Update karaoke availability
-    updateKaraokeForLanguageMatch();
-
-    // Reload text for current chapter
-    const chapterIndex = state.currentChapterIndex !== null ? state.currentChapterIndex : 0;
-    loadChapterText(chapterIndex);
-
-    // Update selector display
-    if (ui.textLangCurrent) {
-        ui.textLangCurrent.textContent = track.language;
-    }
-    renderTextLanguageSelector();
-}
-
-function updateKaraokeForLanguageMatch() {
-    if (state.textLanguageMatchesAudio && state.karaokeAvailable) {
-        // Karaoke can work - show toggle
-        if (ui.karaokeToggle) {
-            ui.karaokeToggle.classList.remove('hidden');
-        }
-    } else if (!state.textLanguageMatchesAudio) {
-        // Text language differs from audio - disable karaoke
-        if (state.karaokeModeEnabled) {
-            disableKaraokeMode();
-            if (ui.karaokeModeCheckbox) {
-                ui.karaokeModeCheckbox.checked = false;
-            }
-            state.karaokeModeEnabled = false;
-        }
-        if (ui.karaokeToggle) {
-            ui.karaokeToggle.classList.add('hidden');
-        }
-    }
 }
 
 function renderAudioTrackSelector() {
@@ -1754,14 +1562,6 @@ async function selectAudioTrack(variantId) {
         }, { once: true });
     }
 
-    // Refresh text sync panel if open
-    if (state.textSyncOpen) {
-        renderTextLanguageSelector();
-        const chapterIndex = state.currentChapterIndex !== null ? state.currentChapterIndex : 0;
-        loadChapterText(chapterIndex);
-        await initKaraokeSync();
-        updateKaraokeForLanguageMatch();
-    }
 }
 
 // --- Shared dropdown helpers ---
@@ -1825,23 +1625,10 @@ async function initKaraokeSync() {
     // Try to load word timings for current book
     const hasTimings = await state.karaokeSync.loadWordTimings(state.currentBook.book_id);
     state.karaokeAvailable = hasTimings;
-
-    // Show/hide karaoke toggle based on data availability
-    if (ui.karaokeToggle) {
-        ui.karaokeToggle.classList.toggle('hidden', !hasTimings);
-    }
 }
 
-function toggleKaraokeMode() {
-    state.karaokeModeEnabled = ui.karaokeModeCheckbox.checked;
-
-    if (ui.karaokeStatus) {
-        ui.karaokeStatus.classList.toggle('active', state.karaokeModeEnabled);
-        ui.karaokeStatus.classList.toggle('inactive', !state.karaokeModeEnabled);
-    }
-    if (ui.karaokeStatusText) {
-        ui.karaokeStatusText.textContent = state.karaokeModeEnabled ? 'Enabled' : 'Disabled';
-    }
+function toggleKaraokeMode(enabled) {
+    state.karaokeModeEnabled = enabled;
 
     if (state.karaokeModeEnabled) {
         enableKaraokeMode();
@@ -1856,9 +1643,6 @@ function enableKaraokeMode() {
     const chapterNum = getCurrentChapterNumber();
     if (!state.karaokeSync.setChapter(chapterNum)) return;
 
-    // Render karaoke word spans into the text content area
-    ui.textContent.classList.add('karaoke-mode');
-    state.karaokeSync.renderText(ui.textContent);
     state.karaokeSync.enable();
 }
 
@@ -1866,22 +1650,13 @@ function disableKaraokeMode() {
     if (state.karaokeSync) {
         state.karaokeSync.disable();
     }
-    ui.textContent.classList.remove('karaoke-mode');
-
-    // Re-render paragraph view if we have text data
-    if (state.textSyncData && state.textSyncData.paragraphs) {
-        renderTextParagraphs(state.textSyncData.paragraphs);
-        state.lastHighlightedParaId = null;
-    }
 }
 
 function updateKaraokeChapter() {
     if (!state.karaokeModeEnabled || !state.karaokeSync) return;
 
     const chapterNum = getCurrentChapterNumber();
-    if (state.karaokeSync.setChapter(chapterNum)) {
-        state.karaokeSync.renderText(ui.textContent);
-    }
+    state.karaokeSync.setChapter(chapterNum);
 }
 
 // ============================================================================
@@ -1899,11 +1674,6 @@ async function toggleAIChat() {
 }
 
 function openAIChatPanel() {
-    // Close text sync if open (mutually exclusive)
-    if (state.textSyncOpen) {
-        closeTextSyncPanel();
-    }
-
     ui.aiChatBackdrop.style.display = 'block';
     ui.aiChatPanel.style.display = 'flex';
 
@@ -2807,24 +2577,6 @@ function setupEventListeners() {
     ui.closeChaptersBtn.addEventListener('click', closeChaptersModal);
     ui.chaptersBackdrop.addEventListener('click', closeChaptersModal);
 
-    // Text sync modal
-    ui.textSyncBtn.addEventListener('click', toggleTextSync);
-    ui.closeTextSyncBtn.addEventListener('click', closeTextSyncPanel);
-    ui.textSyncBackdrop.addEventListener('click', closeTextSyncPanel);
-
-    // Karaoke mode toggle
-    if (ui.karaokeModeCheckbox) {
-        ui.karaokeModeCheckbox.addEventListener('change', toggleKaraokeMode);
-    }
-
-    // Text language selector
-    if (ui.textLangBtn) {
-        ui.textLangBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleDropdown(ui.textLangDropdown, ui.textLangBtn);
-        });
-    }
-
     // Audio track selector
     if (ui.audioTrackBtn) {
         ui.audioTrackBtn.addEventListener('click', (e) => {
@@ -2835,9 +2587,6 @@ function setupEventListeners() {
 
     // Close dropdowns when clicking outside
     document.addEventListener('click', (e) => {
-        if (ui.textLanguageSelector && !ui.textLanguageSelector.contains(e.target)) {
-            closeDropdown(ui.textLangDropdown, ui.textLangBtn);
-        }
         if (ui.audioTrackSelector && !ui.audioTrackSelector.contains(e.target)) {
             closeDropdown(ui.audioTrackDropdown, ui.audioTrackBtn);
         }
@@ -2859,6 +2608,14 @@ function setupEventListeners() {
     ui.tabLibrary.addEventListener('click', () => switchTab('library'));
     ui.tabStore.addEventListener('click', () => switchTab('store'));
     ui.tabQueue.addEventListener('click', () => switchTab('queue'));
+
+    // Sort dropdown
+    if (ui.sortSelect) {
+        ui.sortSelect.addEventListener('change', () => {
+            state.sortBy = ui.sortSelect.value;
+            renderUnifiedSearch();
+        });
+    }
 
     // Store pagination
     ui.prevPageBtn.addEventListener('click', () => {
@@ -2945,8 +2702,12 @@ function setupEventListeners() {
         updateProgress();
         detectCurrentChapter();
         checkEndOfChapterTimer();
-        updateTextHighlight();
         updateReaderHighlight();
+
+        // Update reader mini player progress
+        if (window.bookReader?.isOpen) {
+            window.bookReader.updateMiniPlayerProgress(ui.audio.currentTime, ui.audio.duration);
+        }
 
         // Update Media Session position periodically (every 5 seconds)
         if ('mediaSession' in navigator && ui.audio.currentTime % 5 < 0.5) {
@@ -3051,9 +2812,17 @@ function setupEventListeners() {
 // Reader Integration
 // ============================================================================
 
-function openReader() {
+async function openReader() {
     if (!state.currentBook || !window.bookReader) return;
-    const chapterCount = state.currentBook.chapters?.length || 0;
+
+    // Load chunk manifest for accurate audio-text sync
+    if (!state.chunkManifest && state.currentBook) {
+        try {
+            state.chunkManifest = await API.getChunkManifest(state.currentBook.book_id);
+        } catch (e) { /* linear fallback */ }
+    }
+
+    const chapterCount = state.currentBook.chapters?.length || 1;
     const startChapter = state.currentChapterIndex || 0;
     const trackId = state.currentTextTrack?.track_id || null;
     window.bookReader.open(
@@ -3062,6 +2831,74 @@ function openReader() {
         chapterCount,
         trackId
     );
+}
+
+async function openBook(bookId) {
+    const book = state.books.find(b => b.book_id === bookId);
+    if (!book || !window.bookReader) return;
+
+    state.currentBook = book;
+    state.textTracks = book.text_tracks || [];
+    autoSelectTextTrack();
+
+    // If book has audio, auto-load first variant
+    if (book.has_audio && book.variants.length > 0) {
+        await loadVariantAudio(book, book.variants[0]);
+    } else {
+        state.currentVariant = null;
+    }
+
+    // Discover chapter count and open reader
+    try {
+        const response = await fetch(`${API.baseURL}/api/books/${bookId}/text`);
+        const data = await response.json();
+        const chapterCount = data.total_chapters || 1;
+        const trackId = state.currentTextTrack?.track_id || null;
+        window.bookReader.open(bookId, 0, chapterCount, trackId);
+    } catch (err) {
+        console.error('[openBook] Failed to load chapters:', err);
+    }
+}
+
+async function loadVariantAudio(book, variant) {
+    state.currentVariant = variant;
+    state.currentFileIndex = 0;
+
+    // Load chunk manifest for accurate sync
+    if (!state.chunkManifest) {
+        try { state.chunkManifest = await API.getChunkManifest(book.book_id); }
+        catch (e) { /* linear fallback */ }
+    }
+
+    // Restore saved playback position
+    const saved = await API.getPlaybackPosition(book.book_id, variant.variant_id);
+    if (saved) {
+        const idx = saved.file_index || 0;
+        if (idx >= 0 && idx < variant.audio_files.length) {
+            state.currentFileIndex = idx;
+        }
+        ui.audio.playbackRate = saved.speed || 1.0;
+    }
+
+    // Load audio file
+    loadAudioFile();
+
+    // Seek to saved position after metadata loads
+    if (saved?.position) {
+        ui.audio.addEventListener('loadedmetadata', () => {
+            ui.audio.currentTime = saved.position;
+        }, { once: true });
+    }
+
+    // Detect chapter index from file index
+    if (book.chapters) {
+        for (let i = 0; i < book.chapters.length; i++) {
+            if (book.chapters[i].file_index === state.currentFileIndex) {
+                state.currentChapterIndex = i;
+                break;
+            }
+        }
+    }
 }
 
 function handleReaderSeek(e) {
@@ -3111,8 +2948,16 @@ function updateReaderHighlight() {
     const chapterData = window.bookReader.chapterData[state.currentChapterIndex];
     if (!chapterData || !chapterData.paragraphs) return;
 
-    const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
-    const paraId = findParagraphByProgress(progress, chapterData.paragraphs);
+    // Use chunk manifest for accurate sync, fall back to linear interpolation
+    let paraId;
+    if (state.chunkManifest?.chunks) {
+        paraId = findParagraphByChunkManifest(
+            ui.audio.currentTime, chapterData.paragraphs, state.chunkManifest.chunks
+        );
+    } else {
+        const progress = Math.max(0, Math.min(0.999, ui.audio.currentTime / ui.audio.duration));
+        paraId = findParagraphByProgress(progress, chapterData.paragraphs);
+    }
 
     window.bookReader.highlightCurrentParagraph(state.currentChapterIndex, paraId);
 
@@ -3341,6 +3186,7 @@ async function init() {
 
     // Initialize reader
     window.bookReader = new BookReader();
+    window._appState = state;
 
     console.log('Audiobook player initialized');
 }

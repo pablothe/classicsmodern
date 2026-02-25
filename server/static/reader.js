@@ -21,13 +21,16 @@ class BookReader {
         this.observer = null;
         this.scrollSaveTimeout = null;
         this.trackId = null;
+        this.hasAudio = false;
+        this.audioSyncEnabled = false;
 
         // Default preferences
         this.prefs = {
             fontSize: 18,
             fontFamily: 'Georgia, serif',
             lineHeight: 1.8,
-            theme: 'light'
+            theme: 'light',
+            audioSync: false
         };
 
         this.loadPreferences();
@@ -78,6 +81,20 @@ class BookReader {
 
         // Try to restore scroll position
         this.restoreScrollPosition();
+
+        // Detect whether audio is active
+        const audio = document.getElementById('audio-player');
+        this.hasAudio = !!(audio && audio.src && !audio.src.endsWith('/'));
+
+        // Show/hide sync button
+        const syncBtn = document.getElementById('reader-audio-sync-btn');
+        if (syncBtn) {
+            syncBtn.style.display = this.hasAudio ? '' : 'none';
+            syncBtn.classList.toggle('active', this.audioSyncEnabled && this.hasAudio);
+        }
+
+        // Show translation banner if text not in preferred language
+        this.checkTranslationBanner();
 
         // Update mini player state
         this.updateMiniPlayer();
@@ -142,7 +159,7 @@ class BookReader {
             </div>
             <div class="reader-chapter-text">
                 ${data.paragraphs.map(p => `
-                    <p class="reader-paragraph" data-chapter="${index}" data-para-id="${p.id}">${this.escapeHtml(p.text)}</p>
+                    <p class="reader-paragraph" data-chapter="${index}" data-para-id="${p.id}">${this.renderMarkdown(p.text)}</p>
                 `).join('')}
             </div>
         `;
@@ -326,10 +343,62 @@ class BookReader {
             try {
                 const parsed = JSON.parse(saved);
                 Object.assign(this.prefs, parsed);
+                this.audioSyncEnabled = !!this.prefs.audioSync;
             } catch (e) {
                 // Use defaults
             }
         }
+    }
+
+    toggleAudioSync() {
+        this.audioSyncEnabled = !this.audioSyncEnabled;
+        this.prefs.audioSync = this.audioSyncEnabled;
+        this.savePreferences();
+
+        const syncBtn = document.getElementById('reader-audio-sync-btn');
+        if (syncBtn) {
+            syncBtn.classList.toggle('active', this.audioSyncEnabled);
+        }
+    }
+
+    checkTranslationBanner() {
+        const banner = document.getElementById('reader-translate-banner');
+        const textEl = document.getElementById('reader-translate-text');
+        if (!banner || !textEl) return;
+
+        // Check if user dismissed this banner for this book
+        const dismissKey = `translate_banner_dismissed_${this.bookId}`;
+        if (localStorage.getItem(dismissKey)) {
+            banner.style.display = 'none';
+            return;
+        }
+
+        // Get preferred language from app state (exposed as global)
+        const prefLangCode = window._appState?.settings?.preferredLanguage || 'en';
+        const LANG_NAMES = {
+            'en': 'English', 'fr': 'French', 'de': 'German', 'es': 'Spanish',
+            'it': 'Italian', 'pt': 'Portuguese', 'la': 'Latin', 'el': 'Greek',
+            'nl': 'Dutch', 'ru': 'Russian', 'zh': 'Chinese', 'ja': 'Japanese'
+        };
+        const prefLangName = LANG_NAMES[prefLangCode] || 'English';
+
+        // Get available text tracks from app state
+        const textTracks = window._appState?.textTracks || [];
+        const availableLangs = textTracks.map(t => t.language);
+
+        // Check if preferred language is among available tracks
+        const hasPreferred = availableLangs.some(lang =>
+            lang.toLowerCase() === prefLangName.toLowerCase() ||
+            lang.toLowerCase().includes(prefLangName.toLowerCase())
+        );
+
+        if (hasPreferred || availableLangs.length === 0) {
+            banner.style.display = 'none';
+            return;
+        }
+
+        textEl.textContent = `Available in ${availableLangs.join(', ')}. Translate to ${prefLangName}?`;
+        banner.style.display = 'flex';
     }
 
     // ========================================================================
@@ -398,11 +467,23 @@ class BookReader {
     }
 
     updateMiniPlayer() {
+        const controls = document.getElementById('reader-player-controls');
+        const noAudio = document.getElementById('reader-no-audio');
+
+        if (!this.hasAudio) {
+            if (controls) controls.style.display = 'none';
+            if (noAudio) noAudio.style.display = 'flex';
+            return;
+        }
+
+        if (controls) controls.style.display = '';
+        if (noAudio) noAudio.style.display = 'none';
+
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('reader-play-pause');
-        if (!audio || !playBtn) return;
-
-        playBtn.textContent = audio.paused ? '\u25B6' : '\u275A\u275A';
+        if (playBtn) {
+            playBtn.textContent = (audio && !audio.paused) ? '\u23F8' : '\u25B6';
+        }
     }
 
     updateMiniPlayerInfo(chapterName) {
@@ -412,8 +493,27 @@ class BookReader {
         }
     }
 
+    updateMiniPlayerProgress(currentTime, duration) {
+        if (!this.isOpen || !this.hasAudio) return;
+        const fill = document.getElementById('reader-progress-fill');
+        const timeDisplay = document.getElementById('reader-time-display');
+        if (fill && duration > 0) {
+            fill.style.width = `${(currentTime / duration) * 100}%`;
+        }
+        if (timeDisplay && duration > 0) {
+            timeDisplay.textContent = `${this.formatTime(currentTime)} / ${this.formatTime(duration)}`;
+        }
+    }
+
+    formatTime(seconds) {
+        if (!seconds || !isFinite(seconds)) return '0:00';
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
     highlightCurrentParagraph(chapterIndex, paraId) {
-        if (!this.isOpen) return;
+        if (!this.isOpen || !this.audioSyncEnabled) return;
 
         // Remove previous highlight
         document.querySelectorAll('.reader-paragraph.reader-active').forEach(p => {
@@ -426,6 +526,7 @@ class BookReader {
         );
         if (para) {
             para.classList.add('reader-active');
+            para.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
@@ -458,6 +559,7 @@ class BookReader {
         };
 
         this._onPlayPause = () => {
+            if (!this.hasAudio) return;
             const audio = document.getElementById('audio-player');
             if (audio) {
                 if (audio.paused) audio.play();
@@ -467,13 +569,84 @@ class BookReader {
 
         this._onAudioStateChange = () => this.updateMiniPlayer();
 
+        this._onRewind = () => {
+            const audio = document.getElementById('audio-player');
+            if (audio) audio.currentTime = Math.max(0, audio.currentTime - 30);
+        };
+
+        this._onForward = () => {
+            const audio = document.getElementById('audio-player');
+            if (audio) audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30);
+        };
+
+        this._onProgressSeek = (e) => {
+            const bar = document.getElementById('reader-progress-bar');
+            const audio = document.getElementById('audio-player');
+            if (!bar || !audio || !audio.duration) return;
+            const rect = bar.getBoundingClientRect();
+            const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            audio.currentTime = pct * audio.duration;
+        };
+
+        this._onGenerate = () => {
+            if (typeof pipeline !== 'undefined' && pipeline.openGenerationModal && this.bookId) {
+                pipeline.openGenerationModal(this.bookId);
+            }
+        };
+
+        this._onTranslate = () => {
+            if (typeof pipeline !== 'undefined' && pipeline.openGenerationModal && this.bookId) {
+                pipeline.openGenerationModal(this.bookId);
+            }
+        };
+
+        this._onDismissTranslate = () => {
+            const banner = document.getElementById('reader-translate-banner');
+            if (banner) banner.style.display = 'none';
+            localStorage.setItem(`translate_banner_dismissed_${this.bookId}`, '1');
+        };
+
+        this._onMoreMenu = () => {
+            const menu = document.getElementById('reader-more-menu');
+            if (menu) menu.classList.toggle('hidden');
+            // Show "Full Player" only when audio is loaded
+            const goPlayer = document.getElementById('reader-go-player');
+            if (goPlayer) goPlayer.style.display = this.hasAudio ? 'block' : 'none';
+        };
+
+        this._onGoPlayer = () => {
+            document.getElementById('reader-more-menu')?.classList.add('hidden');
+            this.close();
+            // Navigate to full player view
+            if (window._appState?.currentVariant && typeof renderPlayer === 'function') {
+                renderPlayer();
+                document.getElementById('library-view')?.classList.remove('active');
+                document.getElementById('variant-view')?.classList.remove('active');
+                document.getElementById('player-view')?.classList.add('active');
+            }
+        };
+
+        this._onGoVariants = () => {
+            document.getElementById('reader-more-menu')?.classList.add('hidden');
+            this.close();
+            // Navigate to variant view
+            if (this.bookId && typeof showVariants === 'function') {
+                showVariants(this.bookId);
+            }
+        };
+
+        this._onSyncToggle = () => this.toggleAudioSync();
+
         this._onKeydown = (e) => {
             if (!this.isOpen) return;
             if (e.key === 'Escape') {
-                // Close settings first if open, otherwise close reader
+                // Close dropdowns first, then close reader
                 const settings = document.getElementById('reader-settings');
                 const chapterNav = document.getElementById('reader-chapter-nav');
-                if (settings && !settings.classList.contains('hidden')) {
+                const moreMenu = document.getElementById('reader-more-menu');
+                if (moreMenu && !moreMenu.classList.contains('hidden')) {
+                    moreMenu.classList.add('hidden');
+                } else if (settings && !settings.classList.contains('hidden')) {
                     settings.classList.add('hidden');
                 } else if (chapterNav && !chapterNav.classList.contains('hidden')) {
                     chapterNav.classList.add('hidden');
@@ -488,6 +661,16 @@ class BookReader {
         document.getElementById('reader-chapter-nav-btn')?.addEventListener('click', this._onChapterNav);
         document.getElementById('reader-content')?.addEventListener('scroll', this._onScroll);
         document.getElementById('reader-play-pause')?.addEventListener('click', this._onPlayPause);
+        document.getElementById('reader-rewind')?.addEventListener('click', this._onRewind);
+        document.getElementById('reader-forward')?.addEventListener('click', this._onForward);
+        document.getElementById('reader-progress-bar')?.addEventListener('click', this._onProgressSeek);
+        document.getElementById('reader-generate-btn')?.addEventListener('click', this._onGenerate);
+        document.getElementById('reader-translate-btn')?.addEventListener('click', this._onTranslate);
+        document.getElementById('reader-translate-dismiss')?.addEventListener('click', this._onDismissTranslate);
+        document.getElementById('reader-more-btn')?.addEventListener('click', this._onMoreMenu);
+        document.getElementById('reader-go-player')?.addEventListener('click', this._onGoPlayer);
+        document.getElementById('reader-go-variants')?.addEventListener('click', this._onGoVariants);
+        document.getElementById('reader-audio-sync-btn')?.addEventListener('click', this._onSyncToggle);
 
         document.querySelectorAll('.reader-font-size-btn').forEach(btn => {
             btn.addEventListener('click', this._onFontSizeChange);
@@ -515,6 +698,16 @@ class BookReader {
         document.getElementById('reader-chapter-nav-btn')?.removeEventListener('click', this._onChapterNav);
         document.getElementById('reader-content')?.removeEventListener('scroll', this._onScroll);
         document.getElementById('reader-play-pause')?.removeEventListener('click', this._onPlayPause);
+        document.getElementById('reader-rewind')?.removeEventListener('click', this._onRewind);
+        document.getElementById('reader-forward')?.removeEventListener('click', this._onForward);
+        document.getElementById('reader-progress-bar')?.removeEventListener('click', this._onProgressSeek);
+        document.getElementById('reader-generate-btn')?.removeEventListener('click', this._onGenerate);
+        document.getElementById('reader-translate-btn')?.removeEventListener('click', this._onTranslate);
+        document.getElementById('reader-translate-dismiss')?.removeEventListener('click', this._onDismissTranslate);
+        document.getElementById('reader-more-btn')?.removeEventListener('click', this._onMoreMenu);
+        document.getElementById('reader-go-player')?.removeEventListener('click', this._onGoPlayer);
+        document.getElementById('reader-go-variants')?.removeEventListener('click', this._onGoVariants);
+        document.getElementById('reader-audio-sync-btn')?.removeEventListener('click', this._onSyncToggle);
 
         document.querySelectorAll('.reader-font-size-btn').forEach(btn => {
             btn.removeEventListener('click', this._onFontSizeChange);
@@ -544,6 +737,23 @@ class BookReader {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    renderMarkdown(text) {
+        let html = this.escapeHtml(text);
+        // Headings: ## Heading → <strong>Heading</strong> (rendered inline within <p>)
+        html = html.replace(/^#{1,6}\s+(.+)$/gm, '<strong>$1</strong>');
+        // Bold: **text** or __text__
+        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+        // Italic: *text* or _text_
+        html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+        html = html.replace(/(?<!\w)_(.+?)_(?!\w)/g, '<em>$1</em>');
+        // Links: [text](url) → text (strip link, keep label)
+        html = html.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+        // Horizontal rules
+        html = html.replace(/^---+$/gm, '');
+        return html;
     }
 }
 

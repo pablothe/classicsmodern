@@ -952,6 +952,18 @@ async def get_playback_position(
     return playback
 
 
+@app.get("/api/playback/all")
+async def get_all_playback_positions(
+    device_id: Optional[str] = Header(None, alias="X-Device-ID")
+):
+    """Return all playback positions for a device (for library progress bars)."""
+    if not device_id:
+        return {"positions": {}}
+    db = load_playback_db()
+    device_data = db.get(device_id, {})
+    return {"positions": device_data}
+
+
 @app.post("/api/playback/{book_id}/{variant_id}")
 async def save_playback_position(
     book_id: str,
