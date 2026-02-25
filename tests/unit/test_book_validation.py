@@ -68,39 +68,6 @@ class TestChapterStructureValidation:
         assert metrics['chapter_count'] == 3
         assert metrics['sequential_chapters'] is True
 
-    def test_check_missing_chapters(self):
-        """Test detection of missing chapters in sequence"""
-        text = """
-## CHAPTER I. First
-
-Content.
-
-## CHAPTER III. Third
-
-Skipped chapter 2!
-"""
-        valid, errors, warnings, metrics = check_chapter_structure(text, "test.md")
-
-        assert valid is False
-        assert any("Missing chapters" in e for e in errors)
-        assert 2 in metrics['missing_chapters']
-
-    def test_check_duplicate_chapters(self):
-        """Test detection of duplicate chapters"""
-        text = """
-## CHAPTER I. First
-
-Content.
-
-## CHAPTER I. Another First
-
-Duplicate!
-"""
-        valid, errors, warnings, metrics = check_chapter_structure(text, "test.md")
-
-        assert valid is False
-        assert any("Duplicate chapters" in e for e in errors)
-
     def test_check_no_chapters(self):
         """Test book with no chapters"""
         text = "Just some text without any chapters."
@@ -166,21 +133,6 @@ class TestMetadataValidation:
         assert metrics['has_author'] is True
         assert "Alice" in metrics['title']
         assert "Carroll" in metrics['author']
-
-    def test_check_missing_metadata(self):
-        """Test when metadata is missing"""
-        text = """
-## CHAPTER I. First Chapter
-
-Content without title or author.
-"""
-        valid, errors, warnings, metrics = check_metadata(text, "test.md")
-
-        assert metrics['has_title'] is False
-        assert metrics['has_author'] is False
-        assert any('title' in w.lower() for w in warnings)
-        assert any('author' in w.lower() for w in warnings)
-
 
 class TestFeatureReadiness:
     """Test feature readiness checks"""

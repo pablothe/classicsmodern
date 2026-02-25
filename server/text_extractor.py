@@ -334,17 +334,88 @@ def extract_chapter_text(text: str, chapters: List[Dict], chapter_index: int) ->
     return text[start_pos:end_pos]
 
 
-def split_into_paragraphs(text: str) -> List[Dict]:
+def _load_manifest_paragraphs(book_dir: Path, chapter_index: int) -> Optional[List[Dict]]:
+    """
+    Load paragraph registry from book manifest for a specific chapter.
+    If the manifest exists but has no paragraphs, lazily generates them
+    from chapter content and saves back to the manifest.
+
+    Args:
+        book_dir: Path to book directory
+        chapter_index: Zero-based chapter index
+
+    Returns:
+        List of paragraph dicts from manifest, or None if not available
+    """
+    manifest_path = book_dir / 'book_manifest.json'
+    if not manifest_path.exists():
+        return None
+
+    try:
+        with open(manifest_path, 'r', encoding='utf-8') as f:
+            manifest = json.load(f)
+
+        chapters = manifest.get('chapters', [])
+        if chapter_index < len(chapters):
+            paras = chapters[chapter_index].get('paragraphs', [])
+            if paras:
+                return paras
+
+            # Lazy migration: generate paragraphs from chapter content
+            chapter = chapters[chapter_index]
+            content = chapter.get('content', '')
+            if not content:
+                return None
+
+            from lib.book.processor import BookProcessor
+            chapter_num = chapter.get('number', chapter_index + 1)
+            generated = BookProcessor._extract_paragraphs(content, chapter_num)
+            if generated:
+                chapters[chapter_index]['paragraphs'] = generated
+                manifest['version'] = '3.0'
+                try:
+                    with open(manifest_path, 'w', encoding='utf-8') as f:
+                        json.dump(manifest, f, indent=2, ensure_ascii=False)
+                except IOError:
+                    pass  # Non-critical: continue with generated data even if save fails
+                return generated
+
+    except (json.JSONDecodeError, IOError, KeyError):
+        pass
+
+    return None
+
+
+def split_into_paragraphs(text: str, manifest_paragraphs: Optional[List[Dict]] = None) -> List[Dict]:
     """
     Split text into paragraphs for text sync.
 
+    When manifest_paragraphs is provided (from BookProcessor), uses stable
+    para_id values that flow through the entire pipeline (translation, TTS,
+    word timings, playback position). Falls back to sequential IDs otherwise.
+
     Args:
         text: Chapter text
+        manifest_paragraphs: Optional paragraph registry from book manifest
+                             (list of dicts with para_id, char_start, char_end)
 
     Returns:
-        List of paragraph dicts with id and text
+        List of paragraph dicts with id, para_id, and text
     """
-    # Split by double newlines (standard paragraph separator)
+    if manifest_paragraphs:
+        # Use manifest paragraph data for stable IDs
+        paragraphs = []
+        for mp in manifest_paragraphs:
+            para_text = text[mp['char_start']:mp['char_end']].strip()
+            if para_text and len(para_text) > 1:
+                paragraphs.append({
+                    'id': mp['index'],
+                    'para_id': mp['para_id'],
+                    'text': para_text
+                })
+        return paragraphs
+
+    # Fallback: split by double newlines with sequential IDs
     raw_paragraphs = re.split(r'\n\s*\n', text)
 
     paragraphs = []
@@ -440,7 +511,10 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
         return None
 
     chapter = chapters[chapter_index]
-    paragraphs = split_into_paragraphs(chapter_text)
+
+    # Try to load manifest paragraph data for stable IDs
+    manifest_paragraphs = _load_manifest_paragraphs(book_dir, chapter_index)
+    paragraphs = split_into_paragraphs(chapter_text, manifest_paragraphs)
 
     result = {
         'chapter_num': chapter['number'],

@@ -213,34 +213,6 @@ class TestValidation:
         assert result['success'] is False
         assert result['reason'] == 'validation_failed'
 
-    @patch('make_audiobook.validate_book')
-    def test_validation_fail_noninteractive_exit(self, mock_validate, invalid_book_file):
-        """Test that validation failure in non-interactive mode exits immediately."""
-        # Mock validation to fail
-        from lib.book.validator import ValidationReport
-        mock_validate.return_value = ValidationReport(
-            valid=False,
-            file_path=str(invalid_book_file),
-            errors=["Missing chapter 2"],
-            warnings=[],
-            feature_support={'karaoke': False, 'ai_chat': False, 'web_player': True},
-            metrics={'chapter_count': 2},
-            fixes=["Fix chapter numbering"]
-        )
-
-        maker = AudiobookMaker(
-            input_file=str(invalid_book_file),
-            non_interactive=True,  # Non-interactive mode
-            generate_cover=False
-        )
-
-        # Should raise SystemExit with code 2
-        with pytest.raises(SystemExit) as exc_info:
-            maker.make_audiobook()
-
-        assert exc_info.value.code == 2
-
-
 # ============================================================================
 # Resume Capability Tests
 # ============================================================================

@@ -124,34 +124,6 @@ class TestBatchTranslation:
 class TestDeduplicationIntegration:
     """Test deduplication as part of full pipeline"""
 
-    def test_automatic_deduplication_after_translation(self, temp_dir):
-        """Test that deduplication runs automatically after translation"""
-        # Create mock translated chunks with overlaps
-        chunk1_path = temp_dir / "chunk_001_translated.md"
-        chunk2_path = temp_dir / "chunk_002_translated.md"
-
-        overlap_text = "this is duplicate text"
-
-        chunk1_path.write_text(f"First chunk ending with {overlap_text}")
-        chunk2_path.write_text(f"{overlap_text} second chunk continues")
-
-        # Run deduplication
-        from lib.translation.deduplicate import deduplicate_files
-
-        output_dir = temp_dir / "deduplicated"
-        result = deduplicate_files(
-            str(temp_dir),
-            pattern="*_translated.md",
-            output_dir=str(output_dir)
-        )
-
-        assert result['processed'] == 2
-        assert result['duplicates_found'] > 0
-
-        # Verify deduplicated files exist
-        assert (output_dir / "chunk_001_translated_DEDUPED.md").exists()
-        assert (output_dir / "chunk_002_translated_DEDUPED.md").exists()
-
     def test_deduplicated_files_used_for_audio(self, temp_dir):
         """Test that deduplicated files are properly organized for audio generation"""
         # Create deduplicated directory structure

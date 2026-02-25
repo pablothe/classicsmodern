@@ -10,6 +10,7 @@ This is the single source of truth for book structure. It:
 5. Creates a manifest for downstream processes
 """
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -36,6 +37,7 @@ class Chapter:
         'translation': None,
         'audio': None
     })
+    paragraphs: List[Dict] = field(default_factory=list)  # Paragraph registry for position tracking
 
 
 @dataclass
@@ -173,9 +175,13 @@ class BookProcessor:
         if toc_markdown:
             self.log_message("Generated table of contents")
 
-        # Step 6: Create manifest
+        # Step 6: Extract paragraphs for each chapter
+        for chapter in chapters:
+            chapter.paragraphs = self._extract_paragraphs(chapter.content, chapter.number)
+
+        # Step 7: Create manifest
         manifest = BookManifest(
-            version="2.0",
+            version="3.0",
             metadata=metadata,
             processing={
                 'gutenberg_stripped': gutenberg_stripped,
@@ -539,6 +545,66 @@ class BookProcessor:
             chapters = deduped
 
         return chapters
+
+    @staticmethod
+    def _extract_paragraphs(chapter_content: str, chapter_number: int) -> List[Dict]:
+        """
+        Extract paragraphs from chapter content and assign stable IDs.
+
+        Each paragraph gets a deterministic ID (e.g., ch01_p001) and character
+        offsets within the chapter content. These IDs flow through the entire
+        pipeline: translation, TTS, word timings, and frontend sync.
+
+        Args:
+            chapter_content: The raw text content of the chapter
+            chapter_number: The chapter number (for ID generation)
+
+        Returns:
+            List of paragraph dicts with para_id, index, char_start, char_end,
+            word_count, and content_hash
+        """
+        if not chapter_content or not chapter_content.strip():
+            return []
+
+        # Split on double newlines (standard paragraph boundary in markdown)
+        raw_parts = re.split(r'\n\s*\n', chapter_content)
+
+        paragraphs = []
+        search_start = 0
+
+        for raw in raw_parts:
+            stripped = raw.strip()
+            if not stripped or len(stripped) <= 1:
+                continue
+
+            # Find the actual position of this paragraph text in the chapter content
+            actual_start = chapter_content.find(stripped, search_start)
+            if actual_start == -1:
+                # Fallback: search from beginning (shouldn't happen with ordered iteration)
+                actual_start = chapter_content.find(stripped)
+            if actual_start == -1:
+                continue
+
+            actual_end = actual_start + len(stripped)
+            para_index = len(paragraphs)
+            para_id = f"ch{chapter_number:02d}_p{para_index + 1:03d}"
+
+            # Content hash for fuzzy matching after translation
+            content_hash = hashlib.sha256(stripped[:200].encode('utf-8')).hexdigest()[:16]
+
+            paragraphs.append({
+                'para_id': para_id,
+                'index': para_index,
+                'char_start': actual_start,
+                'char_end': actual_end,
+                'word_count': len(stripped.split()),
+                'content_hash': content_hash,
+            })
+
+            # Advance search position to avoid matching the same text twice
+            search_start = actual_end
+
+        return paragraphs
 
     def _dicts_to_chapters(self, chapter_dicts: list, lines: list, text: str) -> List[Chapter]:
         """

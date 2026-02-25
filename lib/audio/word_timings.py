@@ -285,6 +285,81 @@ def find_chunk_manifest(playlist_path: Path) -> Optional[Path]:
     return manifests[0] if manifests else None
 
 
+def _find_para_id_for_offset(chunk_paras: list, char_offset: int) -> Optional[str]:
+    """
+    Look up which paragraph a character offset belongs to within a chunk.
+
+    Args:
+        chunk_paras: List of paragraph annotations from chunk manifest,
+                     each with para_id, char_start_in_chunk, char_end_in_chunk
+        char_offset: Character offset within the chunk
+
+    Returns:
+        para_id string or None if no paragraph data available
+    """
+    if not chunk_paras:
+        return None
+    for para in chunk_paras:
+        if para['char_start_in_chunk'] <= char_offset < para['char_end_in_chunk']:
+            return para['para_id']
+    # If offset is past all paragraphs, return last one
+    if chunk_paras:
+        return chunk_paras[-1]['para_id']
+    return None
+
+
+def _build_paragraph_timings(words: list) -> list:
+    """
+    Build paragraph-level timing summaries from word-level para_id assignments.
+
+    Groups consecutive words by para_id and computes audio start/end for each
+    paragraph. This is the data structure the frontend uses for sync.
+
+    Args:
+        words: List of word dicts with 'para_id', 'start', 'end' fields
+
+    Returns:
+        List of paragraph timing dicts with para_id, audio_start, audio_end,
+        word_start_idx, word_end_idx
+    """
+    if not words:
+        return []
+
+    paragraphs = []
+    current_para_id = None
+    para_start_time = 0.0
+    para_start_idx = 0
+
+    for i, word in enumerate(words):
+        word_para = word.get('para_id')
+        if word_para != current_para_id:
+            # Close previous paragraph
+            if current_para_id is not None:
+                paragraphs.append({
+                    "para_id": current_para_id,
+                    "audio_start": round(para_start_time, 3),
+                    "audio_end": round(words[i - 1]['end'], 3),
+                    "word_start_idx": para_start_idx,
+                    "word_end_idx": i - 1
+                })
+            # Start new paragraph
+            current_para_id = word_para
+            para_start_time = word['start']
+            para_start_idx = i
+
+    # Close last paragraph
+    if current_para_id is not None and words:
+        paragraphs.append({
+            "para_id": current_para_id,
+            "audio_start": round(para_start_time, 3),
+            "audio_end": round(words[-1]['end'], 3),
+            "word_start_idx": para_start_idx,
+            "word_end_idx": len(words) - 1
+        })
+
+    return paragraphs
+
+
 def generate_word_timings_from_chunks(
     chunk_manifest_path: Path,
     playlist_path: Path
@@ -386,6 +461,7 @@ def generate_word_timings_from_chunks(
                     continue
 
                 time_per_word = chunk_duration / len(words)
+                chunk_paras = chunk.get('paragraphs', [])
 
                 for word_idx, word in enumerate(words):
                     start_time = chunk_start_in_chapter + (word_idx * time_per_word)
@@ -394,11 +470,15 @@ def generate_word_timings_from_chunks(
                     char_offset = len(' '.join(words[:word_idx])) + (1 if word_idx > 0 else 0)
                     text_pos = chunk['text_start'] + char_offset
 
+                    # Look up paragraph ID from chunk's paragraph annotations
+                    para_id = _find_para_id_for_offset(chunk_paras, char_offset)
+
                     all_words.append({
                         "word": word,
                         "start": round(start_time, 3),
                         "end": round(end_time, 3),
-                        "text_pos": text_pos
+                        "text_pos": text_pos,
+                        "para_id": para_id
                     })
         else:
             # FALLBACK MODE: No clean text file — distribute chapter words
@@ -448,16 +528,29 @@ def generate_word_timings_from_chunks(
                     if not chunk_words:
                         continue
 
+                    chunk_paras = chunk.get('paragraphs', [])
                     time_per_word = chunk_duration / len(chunk_words)
                     for word_idx, word in enumerate(chunk_words):
                         start_time = chunk_start_in_chapter + (word_idx * time_per_word)
                         end_time = chunk_start_in_chapter + ((word_idx + 1) * time_per_word)
+
+                        # Estimate char_offset for text_pos (fix: was always 0)
+                        char_offset = len(' '.join(chunk_words[:word_idx])) + (1 if word_idx > 0 else 0)
+                        text_pos = chunk.get('text_start', 0) + char_offset
+
+                        # Look up paragraph ID from chunk's paragraph annotations
+                        para_id = _find_para_id_for_offset(chunk_paras, char_offset)
+
                         all_words.append({
                             "word": word,
                             "start": round(start_time, 3),
                             "end": round(end_time, 3),
-                            "text_pos": 0
+                            "text_pos": text_pos,
+                            "para_id": para_id
                         })
+
+        # Build paragraph timing summaries from word-level para_id assignments
+        paragraph_timings = _build_paragraph_timings(all_words)
 
         chapter_key = f"chapter_{seq_idx}"
         word_timings_data[chapter_key] = {
@@ -466,7 +559,8 @@ def generate_word_timings_from_chunks(
             "chapter_number": seq_idx,
             "word_count": len(all_words),
             "duration": round(chapter_duration, 3),
-            "words": all_words
+            "words": all_words,
+            "paragraphs": paragraph_timings
         }
 
         print(f"  Chapter {seq_idx}: {len(all_words)} words, {chapter_duration:.1f}s")

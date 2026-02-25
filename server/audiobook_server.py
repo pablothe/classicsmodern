@@ -915,6 +915,153 @@ async def get_chapter_word_timings(book_id: str, chapter: int):
         )
 
 
+def _approximate_paragraph_timings(book_dir: Path, all_timings: dict) -> dict:
+    """
+    Approximate paragraph timings for books that were generated before
+    paragraph tracking was added. Uses chapter duration and word counts
+    from word timings to estimate paragraph boundaries.
+
+    Args:
+        book_dir: Path to book directory
+        all_timings: Word timings data
+
+    Returns:
+        Dict mapping chapter keys to paragraph timing objects
+    """
+    from server.text_extractor import _load_manifest_paragraphs
+
+    result = {}
+    for chapter_key, chapter_data in all_timings.items():
+        if not chapter_key.startswith('chapter_'):
+            continue
+
+        # Extract chapter index from key (e.g., "chapter_1" -> 0)
+        try:
+            chapter_idx = int(chapter_key.split('_')[1]) - 1
+        except (IndexError, ValueError):
+            continue
+
+        # Get manifest paragraphs (may trigger lazy generation)
+        manifest_paras = _load_manifest_paragraphs(book_dir, chapter_idx)
+        if not manifest_paras:
+            continue
+
+        words = chapter_data.get('words', [])
+        if not words:
+            continue
+
+        # Get chapter audio duration from word timings
+        chapter_duration = max(w.get('end', 0) for w in words) if words else 0
+        if chapter_duration <= 0:
+            continue
+
+        # Compute total word count and per-paragraph word counts
+        total_words = len(words)
+        para_word_counts = [p.get('word_count', 1) for p in manifest_paras]
+        total_para_words = sum(para_word_counts)
+
+        if total_para_words <= 0:
+            continue
+
+        # Approximate: distribute audio time proportionally by word count
+        paragraphs = []
+        current_time = 0.0
+        current_word_idx = 0
+        for mp in manifest_paras:
+            wc = mp.get('word_count', 1)
+            proportion = wc / total_para_words
+            duration = proportion * chapter_duration
+            word_count_for_para = round(proportion * total_words)
+
+            paragraphs.append({
+                'para_id': mp['para_id'],
+                'audio_start': round(current_time, 3),
+                'audio_end': round(current_time + duration, 3),
+                'word_start_idx': current_word_idx,
+                'word_end_idx': min(current_word_idx + word_count_for_para - 1, total_words - 1),
+            })
+
+            current_time += duration
+            current_word_idx += word_count_for_para
+
+        if paragraphs:
+            # Ensure last paragraph extends to actual end
+            paragraphs[-1]['audio_end'] = round(chapter_duration, 3)
+            paragraphs[-1]['word_end_idx'] = total_words - 1
+            result[chapter_key] = {'paragraphs': paragraphs}
+
+    return result
+
+
+@app.get("/api/books/{book_id}/paragraph-timings")
+async def get_paragraph_timings(book_id: str):
+    """
+    Get paragraph-level audio timing data for all chapters.
+
+    Returns paragraph timing summaries extracted from word timings data.
+    Each paragraph has audio_start/audio_end timestamps for direct sync.
+    This is the primary endpoint the frontend uses for reader text highlighting.
+
+    Args:
+        book_id: Book identifier
+
+    Returns:
+        Dict mapping chapter keys to lists of paragraph timing objects
+    """
+    book_dir = BOOKS_DIR / book_id
+
+    # Look for word timing JSON file (paragraph timings are embedded in it)
+    word_timings_path = book_dir / f"{book_id}_word_timings.json"
+
+    if not word_timings_path.exists():
+        # Try to find word timings in audio subdirectories
+        for audio_dir in ['audio_kokoro', 'audio_xtts', 'audio_edge']:
+            alt_path = book_dir / audio_dir
+            if alt_path.exists():
+                timing_files = list(alt_path.glob("*_word_timings.json"))
+                if timing_files:
+                    word_timings_path = timing_files[0]
+                    break
+
+    if not word_timings_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="Word timing data not found. Paragraph timings require word timings."
+        )
+
+    try:
+        with open(word_timings_path, 'r', encoding='utf-8') as f:
+            all_timings = json.load(f)
+
+        # Extract paragraph timings from each chapter
+        paragraph_data = {}
+        for chapter_key, chapter_data in all_timings.items():
+            if not chapter_key.startswith('chapter_'):
+                continue
+            paras = chapter_data.get('paragraphs', [])
+            if paras:
+                paragraph_data[chapter_key] = {
+                    'paragraphs': paras
+                }
+
+        # If no paragraph timings in word data, try to approximate from
+        # chunk manifest + manifest paragraphs (lazy migration for old books)
+        if not paragraph_data:
+            paragraph_data = _approximate_paragraph_timings(book_dir, all_timings)
+
+        return {
+            'book_id': book_id,
+            'has_paragraph_timings': bool(paragraph_data),
+            'chapters': paragraph_data
+        }
+
+    except (json.JSONDecodeError, IOError) as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error loading paragraph timings: {str(e)}"
+        )
+
+
 @app.get("/api/playback/{book_id}/{variant_id}")
 async def get_playback_position(
     book_id: str,

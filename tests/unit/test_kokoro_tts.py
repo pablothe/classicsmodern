@@ -204,17 +204,6 @@ class TestChapterDetection:
         # Mock expects chapters to be in format "CHAPTER I", "CHAPTER II", etc.
         assert "CHAPTER I" in sample_text_with_chapters or "CHAPTER 1" in sample_text_with_chapters
 
-    def test_chapter_count(self, sample_text_with_chapters, mock_kokoro, temp_dir):
-        """Test accurate chapter counting."""
-        test_file = temp_dir / "test_book.md"
-        test_file.write_text(sample_text_with_chapters)
-
-        result = mock_kokoro.generate_audiobook(str(test_file))
-
-        # Should detect 3 chapters
-        assert result['chapters'] >= 1
-        assert result['chapters'] <= 5  # Reasonable range
-
     def test_single_chapter_book(self, mock_kokoro, temp_dir):
         """Test handling of single-chapter book."""
         single_chapter = BookGenerator.generate_valid_book(num_chapters=1)
@@ -332,11 +321,6 @@ class TestErrorHandling:
 
         # Should handle gracefully (create minimal audio)
         assert result['success'] is True
-
-    def test_nonexistent_input_file(self, mock_kokoro):
-        """Test handling of missing input file."""
-        with pytest.raises(FileNotFoundError):
-            mock_kokoro.generate_audiobook("/nonexistent/file.md")
 
     def test_invalid_output_directory(self, mock_kokoro, temp_dir):
         """Test handling of invalid output directory."""

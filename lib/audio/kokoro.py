@@ -699,7 +699,8 @@ class KokoroAudioGenerator:
         chunk_to_chapter: List[int],
         clean_text: str,
         base_name: str,
-        output_dir: Path
+        output_dir: Path,
+        paragraph_boundaries: Optional[list] = None
     ) -> dict:
         """
         Generate chunk manifest for text synchronization.
@@ -711,6 +712,7 @@ class KokoroAudioGenerator:
             clean_text: Full cleaned text (spoken version)
             base_name: Base filename for output
             output_dir: Output directory
+            paragraph_boundaries: Optional list of (para_id, global_clean_start, global_clean_end)
 
         Returns:
             Chunk manifest dictionary
@@ -718,7 +720,7 @@ class KokoroAudioGenerator:
         import json
 
         manifest = {
-            "version": "1.0",
+            "version": "2.0",
             "created_at": datetime.now().isoformat(),
             "total_chunks": len(chunks),
             "total_text_length": len(clean_text),
@@ -761,6 +763,19 @@ class KokoroAudioGenerator:
                 "chapter": chapter_num,
                 "cumulative_duration": round(cumulative_duration, 3)
             }
+
+            # Annotate with paragraph boundaries (which paragraphs overlap this chunk)
+            if paragraph_boundaries:
+                chunk_paras = []
+                for para_id, para_start, para_end in paragraph_boundaries:
+                    # Check if paragraph overlaps this chunk's text range
+                    if para_start < text_end and para_end > text_start:
+                        chunk_paras.append({
+                            "para_id": para_id,
+                            "char_start_in_chunk": max(0, para_start - text_start),
+                            "char_end_in_chunk": min(text_end - text_start, para_end - text_start)
+                        })
+                chunk_info["paragraphs"] = chunk_paras
 
             manifest["chunks"].append(chunk_info)
 
@@ -845,6 +860,8 @@ class KokoroAudioGenerator:
         chunks = []
         chunk_to_chapter = []
         clean_text = ""
+        # Paragraph boundary map: list of (para_id, global_clean_start, global_clean_end)
+        paragraph_boundaries = []
 
         if has_chapters:
             print(f"\nProcessing {len(chapter_objects)} chapters independently...")
@@ -864,6 +881,23 @@ class KokoroAudioGenerator:
                     print(f"  Chapter {ch_obj.number}: (empty after cleaning, skipping)")
                     continue
 
+                # Build paragraph boundary map from cleaned text
+                # Match clean paragraphs to BookProcessor paragraph IDs by index
+                global_offset = len(clean_text)
+                clean_paras = [p.strip() for p in re.split(r'\n\s*\n', chapter_clean) if p.strip()]
+                source_para_ids = [p['para_id'] for p in ch_obj.paragraphs] if ch_obj.paragraphs else []
+
+                search_pos = 0
+                for pidx, clean_para in enumerate(clean_paras):
+                    para_start = chapter_clean.find(clean_para, search_pos)
+                    if para_start == -1:
+                        continue
+                    para_end = para_start + len(clean_para)
+                    # Use source para_id if available, otherwise generate one
+                    para_id = source_para_ids[pidx] if pidx < len(source_para_ids) else f"ch{ch_obj.number:02d}_p{pidx + 1:03d}"
+                    paragraph_boundaries.append((para_id, global_offset + para_start, global_offset + para_end))
+                    search_pos = para_end
+
                 # Chunk this chapter
                 chapter_chunks = self.chunk_text(chapter_clean, chunk_size)
                 chunk_count = len(chapter_chunks)
@@ -872,7 +906,7 @@ class KokoroAudioGenerator:
                 chunk_to_chapter.extend([ch_obj.number] * chunk_count)
                 clean_text += chapter_clean + "\n\n"
 
-                print(f"  Chapter {ch_obj.number}: {chunk_count} chunks ({len(chapter_clean):,} chars)")
+                print(f"  Chapter {ch_obj.number}: {chunk_count} chunks ({len(chapter_clean):,} chars, {len(clean_paras)} paragraphs)")
 
             # Save text mapping if preprocessing was used
             if PREPROCESSOR_AVAILABLE:
@@ -1077,7 +1111,8 @@ class KokoroAudioGenerator:
             chunk_to_chapter=chunk_to_chapter,
             clean_text=clean_text,
             base_name=base_name,
-            output_dir=output_dir
+            output_dir=output_dir,
+            paragraph_boundaries=paragraph_boundaries
         )
         print(f"✓ Chunk manifest saved: {base_name}_chunk_manifest.json")
 

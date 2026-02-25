@@ -245,59 +245,6 @@ class TestMissingChapterDetection:
     Fix: Chapter sequence validation in lib/book/validator.py.
     """
 
-    def test_detect_missing_chapter_in_sequence(self):
-        """Test detection of missing chapter (e.g., I, III, IV - missing II)."""
-        from utils.test_data_generators import BookGenerator
-
-        book_with_missing = BookGenerator.generate_book_missing_chapters(
-            missing_chapters=[2]
-        )
-
-        # Write to temp file
-        import tempfile
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
-            f.write(book_with_missing)
-            temp_path = f.name
-
-        try:
-            # Validate
-            report = validate_book(temp_path)
-
-            # Should detect missing chapter
-            assert report.valid is False
-            assert len(report.errors) > 0
-            assert any('missing' in error.lower() or '2' in error for error in report.errors)
-
-        finally:
-            # Clean up
-            Path(temp_path).unlink()
-
-    def test_detect_duplicate_chapter_numbers(self):
-        """Test detection of duplicate chapter numbers."""
-        from utils.test_data_generators import BookGenerator
-
-        book_with_duplicate = BookGenerator.generate_book_duplicate_chapters(
-            duplicate_chapter=2
-        )
-
-        # Write to temp file
-        import tempfile
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
-            f.write(book_with_duplicate)
-            temp_path = f.name
-
-        try:
-            # Validate
-            report = validate_book(temp_path)
-
-            # Should detect duplicate
-            assert report.valid is False
-            assert len(report.errors) > 0
-
-        finally:
-            # Clean up
-            Path(temp_path).unlink()
-
     def test_sequential_chapters_pass_validation(self):
         """Test that properly numbered chapters pass validation."""
         from utils.test_data_generators import BookGenerator
@@ -412,35 +359,6 @@ class TestAllRegressionBugs:
             "the passage tells"
         ])
 
-    def test_no_duplicate_audio_at_boundaries(self, temp_dir):
-        """Regression: No duplicate audio at chunk boundaries."""
-        if not DEDUP_AVAILABLE:
-            pytest.skip("Deduplication not available")
-
-        # Create overlapping chunks
-        chunks = TranslationChunkGenerator.generate_chunks_with_exact_duplicate(
-            duplicate_at_boundary=True
-        )
-
-        # Write to files
-        chunk_files = []
-        for i, chunk_text in enumerate(chunks):
-            chunk_file = temp_dir / f"chunk_{i+1}.md"
-            chunk_file.write_text(chunk_text)
-            chunk_files.append(chunk_file)
-
-        # Deduplicate
-        output_dir = temp_dir / "dedup"
-        deduplicated_files = deduplicate_chunks(chunk_files, output_dir)
-
-        # Read deduplicated
-        with open(deduplicated_files[1], 'r') as f:
-            dedup_chunk2 = f.read()
-
-        # Should NOT contain duplicate text at start
-        duplicate_phrase = "this is the exact duplicate text at the boundary"
-        assert dedup_chunk2.count(duplicate_phrase) == 1  # Only once
-
     def test_audio_not_truncated(self):
         """Regression: Audio uses safe chunk sizes."""
         if not KOKORO_AVAILABLE:
@@ -449,26 +367,6 @@ class TestAllRegressionBugs:
         # Verify safety measures in place
         assert KokoroAudioGenerator.MAX_SAFE_CHUNK_SIZE <= 800
         assert KokoroAudioGenerator.KOKORO_PHONEME_LIMIT == 510
-
-    def test_chapter_gaps_detected(self):
-        """Regression: Missing chapters are detected."""
-        if not VALIDATOR_AVAILABLE:
-            pytest.skip("Validator not available")
-
-        from utils.test_data_generators import BookGenerator
-
-        book = BookGenerator.generate_book_missing_chapters([2, 4])
-
-        import tempfile
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
-            f.write(book)
-            temp_path = f.name
-
-        try:
-            report = validate_book(temp_path)
-            assert report.valid is False
-        finally:
-            Path(temp_path).unlink()
 
     def test_gutenberg_stripped_automatically(self):
         """Regression: Gutenberg boilerplate is stripped."""

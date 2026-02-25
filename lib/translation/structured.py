@@ -16,6 +16,7 @@ Usage:
     Source language is auto-detected by the LLM (no --source-lang needed!)
 """
 
+import re
 import sys
 import argparse
 from pathlib import Path
@@ -283,7 +284,11 @@ class BlockTranslator:
 
     def translate_structure(self, structure: BookStructure) -> BookStructure:
         """
-        Translate all content blocks in structure with checkpoint/resume support.
+        Translate all content blocks paragraph-by-paragraph with checkpoint/resume.
+
+        Each paragraph is translated individually with context from the previous
+        translated paragraph. This guarantees 1:1 source-to-translated paragraph
+        mapping, which is critical for audio sync and position tracking.
 
         Args:
             structure: Parsed book structure
@@ -291,7 +296,7 @@ class BlockTranslator:
         Returns:
             New BookStructure with translated content
         """
-        print(f"\n🌐 Translating {len(structure.chapters)} chapters...")
+        print(f"\n🌐 Translating {len(structure.chapters)} chapters (paragraph-by-paragraph)...")
         if self.config.source_lang:
             print(f"   Source: {self.config.source_lang} (explicit)")
         else:
@@ -335,10 +340,12 @@ class BlockTranslator:
             try:
                 # CRITICAL: Only content is translated, marker is preserved
                 word_count = len(chapter.content.split())
-                print(f"    → Sending to Ollama ({word_count} words)...")
-                translated_content = self._translate_text(chapter.content)
+                translated_content = self._translate_chapter_by_paragraphs(
+                    chapter.content, chapter.number, word_count,
+                    len(structure.chapters)
+                )
                 translated_word_count = len(translated_content.split())
-                print(f"    ✓ Received translation ({translated_word_count} words)")
+                print(f"    ✓ Chapter {chapter.number} complete ({translated_word_count} words)")
 
                 translated_chapters.append(Chapter(
                     number=chapter.number,
@@ -376,6 +383,75 @@ class BlockTranslator:
             chapters=translated_chapters,
             original_file=structure.original_file
         )
+
+    def _translate_chapter_by_paragraphs(
+        self, content: str, chapter_number: int, word_count: int, total_chapters: int
+    ) -> str:
+        """
+        Translate chapter content paragraph-by-paragraph with sliding context.
+
+        Each paragraph is sent individually with the previous translated paragraph
+        as context. This guarantees 1:1 paragraph mapping between source and
+        translated text, which is essential for audio sync.
+
+        Args:
+            content: Chapter content text
+            chapter_number: Chapter number for progress display
+            word_count: Total word count for display
+            total_chapters: Total chapters for display
+
+        Returns:
+            Translated content with paragraph structure preserved
+        """
+        # Split into paragraphs (same logic as BookProcessor._extract_paragraphs)
+        raw_parts = re.split(r'\n\s*\n', content)
+        paragraphs = [p.strip() for p in raw_parts if p.strip()]
+
+        if not paragraphs:
+            return content
+
+        # For single-paragraph chapters or very short content, use direct translation
+        if len(paragraphs) == 1:
+            print(f"    → Sending to Ollama ({word_count} words, 1 paragraph)...")
+            return self._translate_text(content)
+
+        print(f"    → Translating {len(paragraphs)} paragraphs ({word_count} words)...")
+
+        translated_paragraphs = []
+        previous_translated = None
+
+        for j, para in enumerate(paragraphs):
+            if not para:
+                continue
+
+            # Translate with context from previous paragraph
+            if previous_translated:
+                translated = self._translate_text_with_context(para, previous_translated)
+            else:
+                translated = self._translate_text(para)
+
+            translated_paragraphs.append(translated)
+            previous_translated = translated
+
+            # Progress for long chapters (every 5 paragraphs)
+            if (j + 1) % 5 == 0 or j + 1 == len(paragraphs):
+                print(f"      [{j + 1}/{len(paragraphs)}] paragraphs")
+
+        # Reassemble with double newlines (preserves paragraph structure)
+        return '\n\n'.join(translated_paragraphs)
+
+    def _translate_text_with_context(self, text: str, previous_translation: str) -> str:
+        """Translate a single text block with context from previous translation."""
+        if not text.strip():
+            return text
+
+        result = self.translator.translate_document_with_context(
+            text,
+            self.config.source_lang,
+            self.config.target_lang,
+            previous_context=previous_translation
+        )
+        return result.translated_text
 
     def _translate_text(self, text: str) -> str:
         """Translate a single text block"""
