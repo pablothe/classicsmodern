@@ -115,6 +115,7 @@ class BookReader {
         }
 
         this.unbindEvents();
+        document.dispatchEvent(new CustomEvent('reader-closed'));
     }
 
     // ========================================================================
@@ -159,7 +160,7 @@ class BookReader {
             </div>
             <div class="reader-chapter-text">
                 ${data.paragraphs.map(p => `
-                    <p class="reader-paragraph" data-chapter="${index}" data-para-id="${p.id}">${this.renderMarkdown(p.text)}</p>
+                    <p class="reader-paragraph" data-chapter="${index}" data-para-id="${p.para_id || p.id}">${this.renderMarkdown(p.text)}</p>
                 `).join('')}
             </div>
         `;
@@ -168,7 +169,7 @@ class BookReader {
         section.querySelectorAll('.reader-paragraph').forEach(para => {
             para.addEventListener('click', () => {
                 const chapterIdx = parseInt(para.dataset.chapter);
-                const paraId = parseInt(para.dataset.paraId);
+                const paraId = para.dataset.paraId;
                 this.onParagraphClick(chapterIdx, paraId);
             });
         });

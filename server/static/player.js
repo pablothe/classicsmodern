@@ -28,6 +28,7 @@ const state = {
     },
     currentChapterIndex: null,
     chunkManifest: null,  // Chunk-based sync data for reader highlighting
+    paragraphTimings: null,  // Paragraph-level audio timing data for direct sync
     karaokeSync: null,             // KaraokeSync instance
     karaokeModeEnabled: false,     // Whether karaoke word highlighting is active
     karaokeAvailable: false,       // Whether word timing data exists for current book
@@ -110,7 +111,15 @@ const API = {
         return response.json();
     },
 
-    async savePlaybackPosition(bookId, variantId, position, speed, fileIndex, wordIndex = 0) {
+    async savePlaybackPosition(bookId, variantId, position, speed, fileIndex, wordIndex = 0, paraId = null) {
+        const body = {
+            position,
+            speed,
+            file_index: fileIndex,
+            word_index: wordIndex
+        };
+        if (paraId) body.para_id = paraId;
+
         const response = await fetch(
             `${this.baseURL}/api/playback/${bookId}/${variantId}`,
             {
@@ -119,12 +128,7 @@ const API = {
                     'Content-Type': 'application/json',
                     'X-Device-ID': state.deviceId
                 },
-                body: JSON.stringify({
-                    position,
-                    speed,
-                    file_index: fileIndex,
-                    word_index: wordIndex
-                })
+                body: JSON.stringify(body)
             }
         );
         return response.ok;
@@ -449,7 +453,14 @@ const ui = {
     deleteVariantName: document.getElementById('delete-variant-name'),
     deleteVariantDetails: document.getElementById('delete-variant-details'),
     cancelDeleteBtn: document.getElementById('cancel-delete-btn'),
-    confirmDeleteBtn: document.getElementById('confirm-delete-btn')
+    confirmDeleteBtn: document.getElementById('confirm-delete-btn'),
+
+    // Now Playing Mini Bar
+    nowPlayingBar: document.getElementById('now-playing-bar'),
+    npTitle: document.getElementById('np-title'),
+    npChapter: document.getElementById('np-chapter'),
+    npPlayPause: document.getElementById('np-play-pause'),
+    npProgressFill: document.getElementById('np-progress-fill')
 };
 
 // ============================================================================
@@ -820,11 +831,7 @@ function showLibrary() {
     ui.libraryView.classList.add('active');
     ui.variantView.classList.remove('active');
     ui.playerView.classList.remove('active');
-
-    // Pause playback when returning to library
-    if (state.isPlaying) {
-        ui.audio.pause();
-    }
+    updateNowPlayingBar();
 }
 
 // ============================================================================
@@ -837,6 +844,8 @@ async function showVariants(bookId) {
         if (!book) return;
 
         state.currentBook = book;
+        state.chunkManifest = null;
+        state.paragraphTimings = null;
 
         // Update header
         ui.variantTitle.textContent = book.title;
@@ -884,6 +893,7 @@ async function showVariants(bookId) {
         ui.libraryView.classList.remove('active');
         ui.variantView.classList.add('active');
         ui.playerView.classList.remove('active');
+        updateNowPlayingBar();
 
     } catch (error) {
         console.error('Failed to load variants:', error);
@@ -1072,6 +1082,7 @@ async function openVariant(variantId) {
         ui.libraryView.classList.remove('active');
         ui.variantView.classList.remove('active');
         ui.playerView.classList.add('active');
+        updateNowPlayingBar();
 
     } catch (error) {
         console.error('Failed to open variant:', error);
@@ -2233,12 +2244,26 @@ function stopAutoSave() {
 async function savePlaybackState() {
     if (!state.currentBook || !state.currentVariant) return;
 
+    // Find current para_id from paragraph timings if available
+    let currentParaId = null;
+    if (state.paragraphTimings && state.currentChapterIndex !== null) {
+        const chapterKey = `chapter_${state.currentChapterIndex + 1}`;
+        const timings = state.paragraphTimings[chapterKey]?.paragraphs;
+        if (timings) {
+            const t = ui.audio.currentTime;
+            const match = timings.find(p => t >= p.audio_start && t <= p.audio_end);
+            if (match) currentParaId = match.para_id;
+        }
+    }
+
     const success = await API.savePlaybackPosition(
         state.currentBook.book_id,
         state.currentVariant.variant_id,
         ui.audio.currentTime,
         ui.audio.playbackRate,
-        state.currentFileIndex
+        state.currentFileIndex,
+        0, // wordIndex
+        currentParaId
     );
 
     if (!success) {
@@ -2689,6 +2714,7 @@ function setupEventListeners() {
         ui.playPauseBtn.textContent = '‖';
         startAutoSave();
         updateMediaSession();
+        updateNowPlayingBar();
     });
 
     ui.audio.addEventListener('pause', () => {
@@ -2696,6 +2722,7 @@ function setupEventListeners() {
         ui.playPauseBtn.textContent = '▶';
         savePlaybackState();
         stopAutoSave();
+        updateNowPlayingBar();
     });
 
     ui.audio.addEventListener('timeupdate', () => {
@@ -2703,6 +2730,7 @@ function setupEventListeners() {
         detectCurrentChapter();
         checkEndOfChapterTimer();
         updateReaderHighlight();
+        updateNowPlayingBar();
 
         // Update reader mini player progress
         if (window.bookReader?.isOpen) {
@@ -2815,11 +2843,20 @@ function setupEventListeners() {
 async function openReader() {
     if (!state.currentBook || !window.bookReader) return;
 
-    // Load chunk manifest for accurate audio-text sync
+    // Load chunk manifest and paragraph timings for accurate audio-text sync
     if (!state.chunkManifest && state.currentBook) {
         try {
             state.chunkManifest = await API.getChunkManifest(state.currentBook.book_id);
         } catch (e) { /* linear fallback */ }
+    }
+    if (!state.paragraphTimings && state.currentBook) {
+        try {
+            const resp = await fetch(`${API.baseURL}/api/books/${state.currentBook.book_id}/paragraph-timings`);
+            if (resp.ok) {
+                const data = await resp.json();
+                state.paragraphTimings = data.has_paragraph_timings ? data.chapters : null;
+            }
+        } catch (e) { /* fallback to chunk manifest sync */ }
     }
 
     const chapterCount = state.currentBook.chapters?.length || 1;
@@ -2831,6 +2868,7 @@ async function openReader() {
         chapterCount,
         trackId
     );
+    updateNowPlayingBar();
 }
 
 async function openBook(bookId) {
@@ -2839,6 +2877,8 @@ async function openBook(bookId) {
 
     state.currentBook = book;
     state.textTracks = book.text_tracks || [];
+    state.chunkManifest = null;
+    state.paragraphTimings = null;
     autoSelectTextTrack();
 
     // If book has audio, auto-load first variant
@@ -2864,10 +2904,19 @@ async function loadVariantAudio(book, variant) {
     state.currentVariant = variant;
     state.currentFileIndex = 0;
 
-    // Load chunk manifest for accurate sync
+    // Load chunk manifest and paragraph timings for accurate sync
     if (!state.chunkManifest) {
         try { state.chunkManifest = await API.getChunkManifest(book.book_id); }
         catch (e) { /* linear fallback */ }
+    }
+    if (!state.paragraphTimings) {
+        try {
+            const resp = await fetch(`${API.baseURL}/api/books/${book.book_id}/paragraph-timings`);
+            if (resp.ok) {
+                const data = await resp.json();
+                state.paragraphTimings = data.has_paragraph_timings ? data.chapters : null;
+            }
+        } catch (e) { /* fallback to chunk manifest sync */ }
     }
 
     // Restore saved playback position
@@ -2923,6 +2972,18 @@ function handleReaderSeek(e) {
 }
 
 function seekReaderParagraph(chapterIndex, paraId) {
+    // Try paragraph timings first for exact audio position
+    const chapterKey = `chapter_${chapterIndex + 1}`;
+    const timings = state.paragraphTimings?.[chapterKey]?.paragraphs;
+    if (timings) {
+        const match = timings.find(p => p.para_id === paraId || p.para_id === String(paraId));
+        if (match) {
+            ui.audio.currentTime = match.audio_start;
+            return;
+        }
+    }
+
+    // Fallback: character proportion estimation
     const chapterData = window.bookReader?.chapterData[chapterIndex];
     if (!chapterData || !chapterData.paragraphs) return;
 
@@ -2930,9 +2991,11 @@ function seekReaderParagraph(chapterIndex, paraId) {
     let charsBefore = 0;
     let totalChars = 0;
 
+    totalChars = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
     for (const p of paragraphs) {
-        if (p.id < paraId) charsBefore += p.text.length;
-        totalChars += p.text.length;
+        const pid = p.para_id || p.id;
+        if (pid === paraId || pid === String(paraId)) break;
+        charsBefore += p.text.length;
     }
 
     if (totalChars > 0 && ui.audio.duration) {
@@ -2948,9 +3011,16 @@ function updateReaderHighlight() {
     const chapterData = window.bookReader.chapterData[state.currentChapterIndex];
     if (!chapterData || !chapterData.paragraphs) return;
 
-    // Use chunk manifest for accurate sync, fall back to linear interpolation
     let paraId;
-    if (state.chunkManifest?.chunks) {
+    const chapterKey = `chapter_${state.currentChapterIndex + 1}`;
+    const timings = state.paragraphTimings?.[chapterKey]?.paragraphs;
+
+    if (timings && timings.length > 0) {
+        // Direct lookup from paragraph timing data (most accurate)
+        const t = ui.audio.currentTime;
+        const match = timings.find(p => t >= p.audio_start && t <= p.audio_end);
+        paraId = match ? match.para_id : (t < timings[0].audio_start ? timings[0].para_id : timings[timings.length - 1].para_id);
+    } else if (state.chunkManifest?.chunks) {
         paraId = findParagraphByChunkManifest(
             ui.audio.currentTime, chapterData.paragraphs, state.chunkManifest.chunks
         );
@@ -2967,6 +3037,88 @@ function updateReaderHighlight() {
         const title = chapter.title || `Chapter ${chapter.number || state.currentChapterIndex + 1}`;
         window.bookReader.updateMiniPlayerInfo(title);
     }
+}
+
+// ============================================================================
+// Now Playing Mini Bar
+// ============================================================================
+
+function updateNowPlayingBar() {
+    if (!ui.nowPlayingBar) return;
+
+    const hasAudio = ui.audio.src && !ui.audio.src.endsWith('/');
+    const playerActive = ui.playerView.classList.contains('active');
+    const readerOpen = window.bookReader?.isOpen;
+
+    // Show when audio is loaded and we're NOT in player view or reader
+    const shouldShow = hasAudio && state.currentVariant && !playerActive && !readerOpen;
+
+    if (shouldShow) {
+        ui.nowPlayingBar.classList.remove('hidden');
+        document.body.classList.add('has-now-playing');
+
+        // Update book title and chapter
+        if (state.currentBook) {
+            ui.npTitle.textContent = state.currentBook.title || 'Unknown Book';
+        }
+        const chapter = state.currentBook?.chapters?.[state.currentChapterIndex];
+        if (chapter) {
+            ui.npChapter.textContent = chapter.title || `Chapter ${chapter.number || (state.currentChapterIndex + 1)}`;
+        } else if (state.currentChapterIndex !== null) {
+            ui.npChapter.textContent = `Chapter ${state.currentChapterIndex + 1}`;
+        }
+
+        // Update progress
+        if (ui.audio.duration > 0) {
+            const pct = (ui.audio.currentTime / ui.audio.duration) * 100;
+            ui.npProgressFill.style.width = `${pct}%`;
+        }
+
+        // Update play/pause icon
+        ui.npPlayPause.innerHTML = state.isPlaying ? '&#9646;&#9646;' : '&#9654;';
+    } else {
+        ui.nowPlayingBar.classList.add('hidden');
+        document.body.classList.remove('has-now-playing');
+    }
+}
+
+function initNowPlayingBar() {
+    const tapTarget = document.getElementById('np-tap-target');
+    if (tapTarget) {
+        tapTarget.addEventListener('click', () => {
+            if (state.currentBook && state.currentVariant) {
+                openVariant(state.currentVariant.variant_id);
+            }
+        });
+    }
+
+    const npPlayPause = document.getElementById('np-play-pause');
+    if (npPlayPause) {
+        npPlayPause.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (ui.audio.paused) ui.audio.play();
+            else ui.audio.pause();
+        });
+    }
+
+    const npRewind = document.getElementById('np-rewind');
+    if (npRewind) {
+        npRewind.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ui.audio.currentTime = Math.max(0, ui.audio.currentTime - 30);
+        });
+    }
+
+    const npForward = document.getElementById('np-forward');
+    if (npForward) {
+        npForward.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ui.audio.currentTime = Math.min(ui.audio.duration || 0, ui.audio.currentTime + 30);
+        });
+    }
+
+    // Show bar again when reader closes
+    document.addEventListener('reader-closed', () => updateNowPlayingBar());
 }
 
 // ============================================================================
@@ -3187,6 +3339,9 @@ async function init() {
     // Initialize reader
     window.bookReader = new BookReader();
     window._appState = state;
+
+    // Initialize now playing bar
+    initNowPlayingBar();
 
     console.log('Audiobook player initialized');
 }

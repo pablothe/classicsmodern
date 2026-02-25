@@ -321,6 +321,24 @@
     <!-- Audio element (top-level so it works from any view) -->
     <audio id="audio-player" preload="metadata"></audio>
 
+    <!-- Now Playing Mini Bar (visible across all views when audio is playing) -->
+    <div id="now-playing-bar" class="now-playing-bar hidden">
+        <div class="now-playing-progress">
+            <div class="now-playing-progress-fill" id="np-progress-fill"></div>
+        </div>
+        <div class="now-playing-content">
+            <div class="now-playing-info" id="np-tap-target">
+                <span class="now-playing-title" id="np-title"></span>
+                <span class="now-playing-chapter" id="np-chapter"></span>
+            </div>
+            <div class="now-playing-controls">
+                <button id="np-rewind" class="np-btn" title="Back 30s">&#8630;</button>
+                <button id="np-play-pause" class="np-btn np-play-btn" title="Play/Pause">&#9654;</button>
+                <button id="np-forward" class="np-btn" title="Forward 30s">&#8631;</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Reader Overlay (top-level so it's visible from any view) -->
     <div id="reader-overlay" class="reader-overlay hidden">
         <!-- Toolbar -->
