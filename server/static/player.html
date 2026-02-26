@@ -417,20 +417,33 @@
     <!-- Audio element (top-level so it works from any view) -->
     <audio id="audio-player" preload="metadata"></audio>
 
-    <!-- Now Playing Mini Bar (visible across all views when audio is playing) -->
+    <!-- Now Playing Mini Bar (YouTube Music style, visible across all views when audio is playing) -->
     <div id="now-playing-bar" class="now-playing-bar hidden">
-        <div class="now-playing-progress">
-            <div class="now-playing-progress-fill" id="np-progress-fill"></div>
+        <!-- Interactive progress scrubber across the top -->
+        <div class="np-progress-track" id="np-progress-track">
+            <div class="np-progress-fill" id="np-progress-fill"></div>
+            <div class="np-progress-scrubber" id="np-progress-scrubber"></div>
         </div>
         <div class="now-playing-content">
-            <div class="now-playing-info" id="np-tap-target">
-                <span class="now-playing-title" id="np-title"></span>
-                <span class="now-playing-chapter" id="np-chapter"></span>
-            </div>
-            <div class="now-playing-controls">
-                <button id="np-rewind" class="np-btn" title="Back 30s"><span class="skip-icon">&#8630;</span></button>
+            <!-- LEFT: Transport controls + time -->
+            <div class="np-transport">
+                <button id="np-prev-chapter" class="np-btn np-skip-btn" title="Previous chapter">&#9198;</button>
                 <button id="np-play-pause" class="np-btn np-play-btn" title="Play/Pause">&#9654;</button>
-                <button id="np-forward" class="np-btn" title="Forward 30s"><span class="skip-icon">&#8631;</span></button>
+                <button id="np-next-chapter" class="np-btn np-skip-btn" title="Next chapter">&#9197;</button>
+                <span class="np-time" id="np-time">0:00 / 0:00</span>
+            </div>
+            <!-- CENTER: Cover art + info (tap to open player) -->
+            <div class="np-meta" id="np-tap-target">
+                <img id="np-cover" class="np-cover" src="" alt="" />
+                <div class="np-info">
+                    <span class="np-title" id="np-title"></span>
+                    <span class="np-subtitle" id="np-chapter"></span>
+                </div>
+            </div>
+            <!-- RIGHT: 30s skip buttons -->
+            <div class="np-actions">
+                <button id="np-rewind" class="np-btn" title="Back 30s"><span class="skip-icon">&#8630;</span><span class="np-skip-label">30</span></button>
+                <button id="np-forward" class="np-btn" title="Forward 30s"><span class="skip-icon">&#8631;</span><span class="np-skip-label">30</span></button>
             </div>
         </div>
     </div>

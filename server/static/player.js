@@ -571,7 +571,15 @@ const ui = {
     npTitle: document.getElementById('np-title'),
     npChapter: document.getElementById('np-chapter'),
     npPlayPause: document.getElementById('np-play-pause'),
-    npProgressFill: document.getElementById('np-progress-fill')
+    npProgressFill: document.getElementById('np-progress-fill'),
+    npProgressTrack: document.getElementById('np-progress-track'),
+    npProgressScrubber: document.getElementById('np-progress-scrubber'),
+    npCover: document.getElementById('np-cover'),
+    npTime: document.getElementById('np-time'),
+    npPrevChapter: document.getElementById('np-prev-chapter'),
+    npNextChapter: document.getElementById('np-next-chapter'),
+    npRewind: document.getElementById('np-rewind'),
+    npForward: document.getElementById('np-forward')
 };
 
 // ============================================================================
@@ -3610,38 +3618,105 @@ function updateNowPlayingBar() {
         ui.nowPlayingBar.classList.remove('hidden');
         document.body.classList.add('has-now-playing');
 
-        // Use playingBook (the book whose audio is loaded)
         const book = state.playingBook;
         if (book) {
+            // Title
             ui.npTitle.textContent = book.title || 'Unknown Book';
+
+            // Cover art
+            if (ui.npCover) {
+                const hasCover = book.has_cover && book.cover_image;
+                if (hasCover) {
+                    const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
+                    if (ui.npCover.src !== coverURL) {
+                        ui.npCover.src = coverURL;
+                        ui.npCover.alt = book.title || '';
+                    }
+                    ui.npCover.style.display = '';
+                } else {
+                    ui.npCover.src = '';
+                    ui.npCover.style.display = 'none';
+                }
+            }
         }
+
+        // Chapter subtitle: "Author · Chapter Title"
         const chapter = book?.chapters?.[state.playingChapterIndex];
         if (chapter) {
-            ui.npChapter.textContent = chapter.title || `Chapter ${chapter.number || (state.playingChapterIndex + 1)}`;
+            const chapterTitle = chapter.title || `Chapter ${chapter.number || (state.playingChapterIndex + 1)}`;
+            const author = book?.author || '';
+            ui.npChapter.textContent = author ? `${author} \u2022 ${chapterTitle}` : chapterTitle;
         } else if (state.playingChapterIndex !== null) {
             ui.npChapter.textContent = `Chapter ${state.playingChapterIndex + 1}`;
         }
 
-        // Update progress
+        // Progress bar + scrubber position
         if (ui.audio.duration > 0) {
             const pct = (ui.audio.currentTime / ui.audio.duration) * 100;
             ui.npProgressFill.style.width = `${pct}%`;
+            if (ui.npProgressScrubber) {
+                ui.npProgressScrubber.style.left = `${pct}%`;
+            }
         }
 
-        // Update play/pause icon
+        // Time display
+        if (ui.npTime) {
+            ui.npTime.textContent = `${formatTime(ui.audio.currentTime)} / ${formatTime(ui.audio.duration)}`;
+        }
+
+        // Play/pause icon
         ui.npPlayPause.innerHTML = state.isPlaying ? '&#9646;&#9646;' : '&#9654;';
+
+        // Chapter nav button states
+        updateNpChapterButtons();
     } else {
         ui.nowPlayingBar.classList.add('hidden');
         document.body.classList.remove('has-now-playing');
     }
 }
 
+function updateNpChapterButtons() {
+    const book = state.playingBook;
+    if (!book?.chapters || !ui.npPrevChapter || !ui.npNextChapter) return;
+    const idx = state.playingChapterIndex;
+    ui.npPrevChapter.disabled = !(idx !== null && idx > 0);
+    ui.npNextChapter.disabled = !(idx !== null && idx < book.chapters.length - 1);
+}
+
+// Navigate to previous/next chapter from mini bar
+function npJumpToChapter(direction) {
+    const book = state.playingBook;
+    if (!book?.chapters) return;
+    const targetIndex = (state.playingChapterIndex || 0) + direction;
+    if (targetIndex < 0 || targetIndex >= book.chapters.length) return;
+
+    const chapter = book.chapters[targetIndex];
+    if (chapter.file_index === undefined) return;
+
+    // Update file index and load the audio
+    state.currentFileIndex = chapter.file_index;
+    state.playingBook = book;
+    loadAudioFile();
+
+    // Seek to chapter timestamp once loaded
+    ui.audio.addEventListener('loadedmetadata', () => {
+        if (chapter.timestamp !== undefined) {
+            ui.audio.currentTime = chapter.timestamp;
+        }
+        if (state.isPlaying || !ui.audio.paused) {
+            ui.audio.play();
+        }
+    }, { once: true });
+
+    state.playingChapterIndex = targetIndex;
+}
+
 function initNowPlayingBar() {
+    // Tap meta area to open full player
     const tapTarget = document.getElementById('np-tap-target');
     if (tapTarget) {
         tapTarget.addEventListener('click', () => {
             if (state.playingBook && state.playingVariant) {
-                // If reader is open showing a different book, switch to playing book
                 if (window.bookReader?.isOpen && window.bookReader.bookId !== state.playingBook.book_id) {
                     openBook(state.playingBook.book_id);
                 } else {
@@ -3651,37 +3726,113 @@ function initNowPlayingBar() {
         });
     }
 
-    const npPlayPause = document.getElementById('np-play-pause');
-    if (npPlayPause) {
-        npPlayPause.addEventListener('click', (e) => {
+    // Play / Pause
+    if (ui.npPlayPause) {
+        ui.npPlayPause.addEventListener('click', (e) => {
             e.stopPropagation();
             if (ui.audio.paused) ui.audio.play();
             else ui.audio.pause();
         });
     }
 
-    const npRewind = document.getElementById('np-rewind');
-    if (npRewind) {
-        npRewind.addEventListener('click', (e) => {
+    // Previous chapter
+    if (ui.npPrevChapter) {
+        ui.npPrevChapter.addEventListener('click', (e) => {
+            e.stopPropagation();
+            npJumpToChapter(-1);
+        });
+    }
+
+    // Next chapter
+    if (ui.npNextChapter) {
+        ui.npNextChapter.addEventListener('click', (e) => {
+            e.stopPropagation();
+            npJumpToChapter(1);
+        });
+    }
+
+    // 30s Rewind
+    if (ui.npRewind) {
+        ui.npRewind.addEventListener('click', (e) => {
             e.stopPropagation();
             ui.audio.currentTime = Math.max(0, ui.audio.currentTime - 30);
         });
     }
 
-    const npForward = document.getElementById('np-forward');
-    if (npForward) {
-        npForward.addEventListener('click', (e) => {
+    // 30s Forward
+    if (ui.npForward) {
+        ui.npForward.addEventListener('click', (e) => {
             e.stopPropagation();
             ui.audio.currentTime = Math.min(ui.audio.duration || 0, ui.audio.currentTime + 30);
         });
     }
 
+    // Interactive progress scrubber
+    initNpProgressScrubber();
+
     // Show bar again when reader closes
     document.addEventListener('reader-closed', () => {
         updateNowPlayingBar();
-        // Return to Listen tab when reader closes
         switchPlayerTab('listen');
     });
+}
+
+// Interactive progress bar: click-to-seek + drag-to-seek
+function initNpProgressScrubber() {
+    const track = ui.npProgressTrack;
+    if (!track) return;
+
+    let isDragging = false;
+
+    function seekFromEvent(e) {
+        const rect = track.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        if (ui.audio.duration) {
+            ui.audio.currentTime = pct * ui.audio.duration;
+        }
+        ui.npProgressFill.style.width = `${pct * 100}%`;
+        if (ui.npProgressScrubber) {
+            ui.npProgressScrubber.style.left = `${pct * 100}%`;
+        }
+    }
+
+    track.addEventListener('click', (e) => {
+        e.stopPropagation();
+        seekFromEvent(e);
+    });
+
+    track.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        track.classList.add('dragging');
+        seekFromEvent(e);
+        e.preventDefault();
+    });
+
+    track.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        track.classList.add('dragging');
+        seekFromEvent(e);
+    }, { passive: true });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        seekFromEvent(e);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        seekFromEvent(e);
+    }, { passive: true });
+
+    function endDrag() {
+        if (isDragging) {
+            isDragging = false;
+            track.classList.remove('dragging');
+        }
+    }
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
 }
 
 // ============================================================================
