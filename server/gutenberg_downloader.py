@@ -411,10 +411,44 @@ class GutenbergDownloader:
         # Strip "end chapter" artifacts from HTML chapter div markers
         markdown = re.sub(r'end chapter', '', markdown, flags=re.IGNORECASE)
 
+        # Promote italic chapter lines to ## headers (when no TOC was found)
+        if not toc_entries:
+            markdown = self._promote_italic_chapter_lines(markdown)
+
         # Clean up excessive whitespace
         markdown = re.sub(r'\n{3,}', '\n\n', markdown)
 
         return markdown.strip(), toc_entries
+
+    def _promote_italic_chapter_lines(self, markdown: str) -> str:
+        """
+        Convert standalone italic chapter lines to ## markdown headers.
+
+        When Gutenberg HTML has no TOC, chapter titles in <em> tags become
+        italic lines like *1. The Horror in Clay.* — promote these to ##
+        headers for proper chapter detection.
+
+        Only promotes when 2+ matching lines are found to avoid false positives.
+        """
+        pattern = re.compile(
+            r'^\*(?:(?:CHAPTER|Chapter|CHAPITRE|Chapitre)\s+)?'
+            r'([IVXLCDM]+|\d+)\.\s+'
+            r'(.+?)\*$',
+            re.MULTILINE | re.IGNORECASE
+        )
+
+        matches = list(pattern.finditer(markdown))
+        if len(matches) < 2:
+            return markdown
+
+        def replacer(match):
+            number_str = match.group(1)
+            title = match.group(2).rstrip('.')
+            return f'## {number_str}. {title}'
+
+        result = pattern.sub(replacer, markdown)
+        print(f"  Promoted {len(matches)} italic chapter lines to ## headers")
+        return result
 
     def _convert_element_to_markdown(self, element, depth=0) -> str:
         """

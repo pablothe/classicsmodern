@@ -31,7 +31,7 @@ between the ring of bodies and the ring of fire."[](#)[[1]](#Footnote_1_1)
 
 ---
 
-## I. The Horror in Clay
+*1. The Horror in Clay.*
 
 The most merciful thing in the world, I think, is the inability of the
 human mind to correlate all its contents. We live on a placid island
@@ -310,7 +310,7 @@ mentioned by the professor.
 
 ---
 
-## II. The Tale of Inspector Legrasse
+*2. The Tale of Inspector Legrasse.*
 
 The older matters which had made the sculptor's dream and bas-relief so
 significant to my uncle formed the subject of the second half of his
@@ -787,7 +787,7 @@ he did remains to be seen, for I have learned much now.
 
 ---
 
-## III. The Madness from the Sea
+*3. The Madness from the Sea.*
 
 If heaven ever wishes to grant me a boon, it will be a total effacing
 of the results of a mere chance which fixed my eye on a certain stray

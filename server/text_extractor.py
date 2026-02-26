@@ -164,6 +164,7 @@ def detect_chapter_markers(text: str) -> List[Dict]:
         r'^#+\s*Chapter\s+(\d+)[.:]?\s*(.*?)(?:\s*\{.*?\})?$',  # ## Chapter 1: Title {#anchor} or ## Chapter 1 Title
         r'^#+\s+([IVXLCDM]+)\s*$',  # ## I or ## IX (standalone Roman numerals, e.g., Great Gatsby)
         r'^CHAPTER\s+([IVXLCDM]+|[\d]+)[.:]\s*(.*?)$',  # CHAPTER I. Title (no markdown)
+        r'^\*([IVXLCDM]+|\d+)\.\s+(.*?)\*$',  # *1. Title.* or *I. Title.* (Gutenberg italic chapters)
     ]
 
     current_pos = 0

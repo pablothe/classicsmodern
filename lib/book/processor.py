@@ -88,6 +88,9 @@ class BookProcessor:
     # Minimal fallback patterns for unstructured text (Priority 3)
     # Used only when no gutenberg_chapters.json or ## headers are found
     FALLBACK_PATTERNS = [
+        # Italic chapter titles from Gutenberg (e.g., *1. The Horror in Clay.* or *I. Title.*)
+        (r'^\*(?:(?:CHAPTER|Chapter|CHAPITRE|Chapitre)\s+)?([IVXLCDM]+|\d+)\.\s+(.+?)\*$', 'italic_chapter'),
+
         # Chapter keyword + number (multilingual)
         (r'^(CHAPTER|Chapter|CHAPITRE|Chapitre|KAPITEL|Kapitel|CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+([IVXLCDM]+|\d+)\.?\s*(.*)', 'chapter_keyword'),
 
@@ -95,7 +98,7 @@ class BookProcessor:
         (r'^(Act|ACT|Scene|SCENE|Acte|ACTE|Scène|SCÈNE|Akt|AKT|Szene|Acto|ACTO|Escena|Atto|ATTO|Scena)\s+([IVXLCDM]+|\d+)', 'act_scene'),
 
         # Epistolary formats (Letter I, Entry 1, Day 1, etc.)
-        (r'^(Letter|Entry|Day|Night|Journal|Diary|Lettre|Brief|Carta|Lettera)\s+(\d+|[IVXLCDM]+)', 'epistolary'),
+        (r'^(Letter|Entry|Day|Night|Journal|Diary|Lettre|Brief|Carta|Lettera)\s+(\d+|[IVXLCDM]+)\b', 'epistolary'),
 
         # Special sections (multilingual)
         (r'^(Prologue|Epilogue|Introduction|Preface|Foreword|Interlude|Conclusion|Appendix|Préface|Épilogue|Avant-propos|Einleitung|Nachwort|Vorwort|Prólogo|Epílogo|Introducción|Conclusión|Prefazione|Epilogo|Introduzione)', 'special_section'),
@@ -643,6 +646,11 @@ class BookProcessor:
 
     def extract_chapter_title(self, line: str, match: re.Match, pattern_type: str) -> str:
         """Extract a clean chapter title from the matched line."""
+        # For italic chapters: extract the title after the number
+        if pattern_type == 'italic_chapter':
+            title = match.group(2).strip().rstrip('.*')
+            return title if title else match.group(0)
+
         # For act_scene, epistolary, special_section: use the full line
         if pattern_type in ('act_scene', 'epistolary', 'special_section'):
             return line.strip()
