@@ -424,9 +424,19 @@ def discover_books() -> List[Dict]:
 
     # STAGE 2: Find all M3U playlists and add as variants
     for playlist_path in BOOKS_DIR.rglob("*.m3u"):
+        stem = playlist_path.stem
+
         # Skip chunks playlists — intermediate build artifacts, not playable variants
-        if playlist_path.name.endswith('_chunks.m3u'):
+        if stem.endswith('_chunks') or '_chunks_' in stem:
             continue
+
+        # Skip timestamped backup playlists when a primary exists.
+        # The audio generator always keeps the primary up to date.
+        variant_info = extract_variant_info(stem)
+        if variant_info['timestamp']:
+            primary_name = re.sub(r'_\d{8}_\d{6}$', '', stem) + '.m3u'
+            if (playlist_path.parent / primary_name).exists():
+                continue
 
         # Get book directory (top-level folder in books/)
         try:
@@ -443,10 +453,6 @@ def discover_books() -> List[Dict]:
         audio_files = parse_m3u_playlist(playlist_path)
         if not audio_files:
             continue
-
-        # Get playlist info
-        playlist_name = playlist_path.stem
-        variant_info = extract_variant_info(playlist_name)
 
         # Calculate size
         total_size = sum(
