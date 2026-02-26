@@ -1,39 +1,13 @@
-## The Project Gutenberg eBook ofPride and Prejudice
-
-This ebook is for the use of anyone anywhere in the United States and
-most other parts of the world at no cost and with almost no restrictions
-whatsoever. You may copy it, give it away or re-use it under the terms
-of the Project Gutenberg License included with this ebook or online
-at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
-you will have to check the laws of the country where you are located
-before using this eBook. Title: Pride and Prejudice
-
-Author: Jane Austen
-
-Release date: June 1, 1998 [eBook #1342]
-Most recently updated: October 29, 2024
-
-Language: English
-
-Credits: Chuck Greif and the Online Distributed Proofreading Team at http://www.pgdp.net (This file was produced from images available at The Internet Archive)
-
-*** START OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***
 ---
 
 [PREFACE.](#PREFACE)
 [List of Illustrations.](#LIST_OF_ILLUSTRATIONS)
 [Chapter: I.,](#Chapter_I)[II.,](#CHAPTER_II)[III.,](#CHAPTER_III)[IV.,](#CHAPTER_IV)[V.,](#CHAPTER_V)[VI.,](#CHAPTER_VI)[VII.,](#CHAPTER_VII)[VIII.,](#CHAPTER_VIII)[IX.,](#CHAPTER_IX)[X.,](#CHAPTER_X)[XI.,](#CHAPTER_XI)[XII.,](#CHAPTER_XII)[XIII.,](#CHAPTER_XIII)[XIV.,](#CHAPTER_XIV)[XV.,](#CHAPTER_XV)[XVI.,](#CHAPTER_XVI)[XVII.,](#CHAPTER_XVII)[XVIII.,](#CHAPTER_XVIII)[XIX.,](#CHAPTER_XIX)[XX.,](#CHAPTER_XX)[XXI.,](#CHAPTER_XXI)[XXII.,](#CHAPTER_XXII)[XXIII.,](#CHAPTER_XXIII)[XXIV.,](#CHAPTER_XXIV)[XXV.,](#CHAPTER_XXV)[XXVI.,](#CHAPTER_XXVI)[XXVII.,](#CHAPTER_XXVII)[XXVIII.,](#CHAPTER_XXVIII)[XXIX.,](#CHAPTER_XXIX)[XXX.,](#CHAPTER_XXX)[XXXI.,](#CHAPTER_XXXI)[XXXII.,](#CHAPTER_XXXII)[XXXIII.,](#CHAPTER_XXXIII)[XXXIV.,](#CHAPTER_XXXIV)[XXXV.,](#CHAPTER_XXXV)[XXXVI.,](#CHAPTER_XXXVI)[XXXVII.,](#CHAPTER_XXXVII)[XXXVIII.,](#CHAPTER_XXXVIII)[XXXIX.,](#CHAPTER_XXXIX)[XL.,](#CHAPTER_XL)[XLI.,](#CHAPTER_XLI)[XLII.,](#CHAPTER_XLII)[XLIII.,](#CHAPTER_XLIII)[XLIV.,](#CHAPTER_XLIV)[XLV.,](#CHAPTER_XLV)[XLVI.,](#CHAPTER_XLVI)[XLVII.,](#CHAPTER_XLVII)[XLVIII.,](#CHAPTER_XLVIII)[XLIX.,](#CHAPTER_XLIX)[L.,](#CHAPTER_L)[LI.,](#CHAPTER_LI)[LII.,](#CHAPTER_LII)[LIII.,](#CHAPTER_LIII)[LIV.,](#CHAPTER_LIV)[LV.,](#CHAPTER_LV)[LVI.,](#CHAPTER_LVI)[LVII.,](#CHAPTER_LVII)[LVIII.,](#CHAPTER_LVIII)[LIX.,](#CHAPTER_LIX)[LX.,](#CHAPTER_LX)[LXI.](#CHAPTER_LXI)
 
-[](images/cover.jpg)[{iv}](#)[{v}](#)# PRIDE.andPREJUDICE
+[](images/cover.jpg)[{iv}](#)[{v}](#)
+# PRIDE.andPREJUDICE
 
-by
-Jane Austen,
-
-with a Preface by
-George Saintsbury
-and
-Illustrations by
-Hugh Thomson
+*byJane Austen,with a Preface byGeorge SaintsburyandIllustrations byHugh Thomson*
 
 Ruskin
 House.156. Charing
@@ -41,9 +15,78 @@ Cross Road. London
 George Allen. CHISWICK PRESS:—CHARLES WHITTINGHAM AND CO.
 TOOKS COURT, CHANCERY LANE, LONDON.
 
-[{vii}](#)## {ix}
+[{vii}](#)
+## {ix}
 
-Walt Whitmanhas somewhere a fine and just distinction between “loving
+## Table of Contents
+
+1. [{ix}](#chapter-1)
+2. [{xxv}](#chapter-2)
+3. [Chapter 1: .](#chapter-3)
+4. [Chapter 1: hope Mr. Bingley will like it. CHAPTER II.](#chapter-4)
+5. [He rode a black horse. CHAPTER III.](#chapter-5)
+6. [Chapter 4: .](#chapter-6)
+7. [Chapter 5: .](#chapter-7)
+8. [Chapter 6: .](#chapter-8)
+9. [A note for Miss Bennet. CHAPTER VII.](#chapter-9)
+10. [Covering a screen. CHAPTER VIII.](#chapter-10)
+11. [Mrs Bennet and her two youngest girls. CHAPTER IX.](#chapter-11)
+12. [Chapter 10: .](#chapter-12)
+13. [Piling up the fire. CHAPTER XI.](#chapter-13)
+14. [Chapter 12: .](#chapter-14)
+15. [Chapter 13](#chapter-15)
+16. [Chapter 14](#chapter-16)
+17. [Chapter 15: .](#chapter-17)
+18. [Chapter 16: .](#chapter-18)
+19. [delighted to see their dear friend again. CHAPTER XVII.](#chapter-19)
+20. [Chapter 18: .](#chapter-20)
+21. [“to assure you in the most animated language.”CHAPTER XIX.](#chapter-21)
+22. [Chapter 20: .](#chapter-22)
+23. [Chapter 21: .](#chapter-23)
+24. [Chapter 22: .](#chapter-24)
+25. [“Protested he must be entirely mistaken.”CHAPTER XXIII.](#chapter-25)
+26. [Chapter 24: .](#chapter-26)
+27. [Chapter 25: .](#chapter-27)
+28. [“Will you come and see me.”CHAPTER XXVI.](#chapter-28)
+29. [“On the Stairs.”CHAPTERXXVII.](#chapter-29)
+30. [“At the door.”CHAPTERXXVIII.](#chapter-30)
+31. [“Lady Catherine, said she, you have given me a treasure.”CHAPTER XXIX.](#chapter-31)
+32. [Chapter 30: .](#chapter-32)
+33. [Chapter 31: .](#chapter-33)
+34. [Chapter 32: .](#chapter-34)
+35. [“On looking up.”CHAPTER XXXIII.](#chapter-35)
+36. [Chapter 34: .](#chapter-36)
+37. [“Hearing herself called.”CHAPTER XXXV.](#chapter-37)
+38. [Chapter XXXVI: .](#chapter-38)
+39. [“His parting obeisance.”CHAPTER XXXVII.](#chapter-39)
+40. [“The elevation of his feelings.”CHAPTER XXXVIII.](#chapter-40)
+41. [“How nicely we are crammed  in.”CHAPTER XXXIX.](#chapter-41)
+42. [Chapter 40: .](#chapter-42)
+43. [“When Colonel Miller’s regiment went.”CHAPTER XLI.](#chapter-43)
+44. [“The arrival of the Gardiners.”CHAPTER XLII.](#chapter-44)
+45. [“Conjecturing as to the date.”CHAPTER XLIII.](#chapter-45)
+46. [Chapter XLIV: .](#chapter-46)
+47. [“Engaged by the river.”CHAPTER XLV.](#chapter-47)
+48. [Chapter XLVI: .](#chapter-48)
+49. [“The first pleasing earnest of their welcome.”CHAPTER XLVII.](#chapter-49)
+50. [“The Post.”CHAPTER XLVIII.](#chapter-50)
+51. [Chapter XLIX: .](#chapter-51)
+52. [“The spiteful old ladies.”CHAPTER L.](#chapter-52)
+53. [“With an affectionate smile.”CHAPTER LI.](#chapter-53)
+54. [“I am sure she did not listen.”CHAPTER LII.](#chapter-54)
+55. [“Mr. Darcy with him.”CHAPTER LIII.](#chapter-55)
+56. [“Jane happened to look round.”CHAPTER LIV.](#chapter-56)
+57. [“Lizzy, my dear, I want to speak to you.”CHAPTER LV.](#chapter-57)
+58. [Chapter LVI: .](#chapter-58)
+59. [“But now it comes out.”CHAPTER LVII.](#chapter-59)
+60. [“The efforts of his aunt.”CHAPTER LVIII.](#chapter-60)
+61. [“Unable to utter a syllable.”CHAPTER LIX.](#chapter-61)
+62. [“The obsequious civility.”CHAPTER LX.](#chapter-62)
+63. [Chapter LXI: .](#chapter-63)
+
+---
+
+*Walt Whitmanhas somewhere a fine and just distinction between “loving
 by allowance” and “loving with personal love.” This distinction applies
 to books as well as to men and women; and in the case of the not very
 numerous authors who are the objects of the personal affection, it
@@ -53,56 +96,56 @@ allowance” by convention, and because it is felt to be the right and
 proper thing to love them. And in the sect—fairly large and yet
 unusually choice—of Austenians or Janites, there would probably be
 found partisans of the claim to primacy of almost every one of the
-novels. To some the delightful freshness and humour ofNorthanger
-Abbey,its completeness, finish, andentrain,obscure the undoubted
+novels. To some the delightful freshness and humour of*Northanger
+Abbey,*its completeness, finish, and*entrain,*obscure the undoubted
 critical facts that its scale is small, and its scheme, after all, that
 of burlesque or parody, a kind in which the first rank is reached with
-difficulty. Persuasion,relatively faint in tone, and not enthralling
+difficulty.*Persuasion,*relatively faint in tone, and not enthralling
 in interest, has devotees who exalt above all the others its exquisite
-delicacy and keeping. The catastrophe ofMansfield Parkis admittedly
-theatrical, the hero and heroine are insipid, and the author has almost[{x}](#)wickedly destroyed all romantic interest by expressly admitting that
+delicacy and keeping. The catastrophe of*Mansfield Park*is admittedly
+theatrical, the hero and heroine are insipid, and the author has almost{x}wickedly destroyed all romantic interest by expressly admitting that
 Edmund only took Fanny because Mary shocked him, and that Fanny might
 very likely have taken Crawford if he had been a little more assiduous;
 yet the matchless rehearsal-scenes and the characters of Mrs. Norris and
-others have secured, I believe, a considerable party for it. Sense and
-Sensibilityhas perhaps the fewest out-and-out admirers; but it does
-not want them.
+others have secured, I believe, a considerable party for it.*Sense and
+Sensibility*has perhaps the fewest out-and-out admirers; but it does
+not want them.*
 
-I suppose, however, that the majority of at least competent votes
-would, all things considered, be divided betweenEmmaand the present
+*I suppose, however, that the majority of at least competent votes
+would, all things considered, be divided between*Emma*and the present
 book; and perhaps the vulgar verdict (if indeed a fondness for Miss
 Austen be not of itself a patent of exemption from any possible charge
-of vulgarity) would go forEmma. It is the larger, the more varied, the
+of vulgarity) would go for*Emma.*It is the larger, the more varied, the
 more popular; the author had by the time of its composition seen rather
 more of the world, and had improved her general, though not her most
 peculiar and characteristic dialogue; such figures as Miss Bates, as the
 Eltons, cannot but unite the suffrages of everybody. On the other hand,
-I, for my part, declare forPride and Prejudiceunhesitatingly. It
+I, for my part, declare for*Pride and Prejudice*unhesitatingly. It
 seems to me the most perfect, the most characteristic, the most
 eminently quintessential of its author’s works; and for this contention
 in such narrow space as is permitted to me, I propose here to show
-cause.
+cause.*
 
-In the first place, the book (it may be barely necessary to remind the
+*In the first place, the book (it may be barely necessary to remind the
 reader) was in its first shape written very early, somewhere about 1796,
 when Miss Austen was barely twenty-one; though it was revised and
 finished at Chawton some fifteen years later, and was not published till
-1813, only four years before her death. I do not know whether, in[{xi}](#)this
+1813, only four years before her death. I do not know whether, in{xi}this
 combination of the fresh and vigorous projection of youth, and the
 critical revision of middle life, there may be traced the distinct
 superiority in point of construction, which, as it seems to me, it
 possesses over all the others. The plot, though not elaborate, is almost
 regular enough for Fielding; hardly a character, hardly an incident
 could be retrenched without loss to the story. The elopement of Lydia
-and Wickham is not, like that of Crawford and Mrs. Rushworth, acoup de
-théâtre;it connects itself in the strictest way with the course of the
+and Wickham is not, like that of Crawford and Mrs. Rushworth, a*coup de
+théâtre;*it connects itself in the strictest way with the course of the
 story earlier, and brings about the denouement with complete propriety.
 All the minor passages—the loves of Jane and Bingley, the advent of Mr.
 Collins, the visit to Hunsford, the Derbyshire tour—fit in after the
 same unostentatious, but masterly fashion. There is no attempt at the
 hide-and-seek, in-and-out business, which in the transactions between
 Frank Churchill and Jane Fairfax contributes no doubt a good deal to the
-intrigue ofEmma,but contributes it in a fashion which I do not think
+intrigue of*Emma,*but contributes it in a fashion which I do not think
 the best feature of that otherwise admirable book. Although Miss Austen
 always liked something of the misunderstanding kind, which afforded her
 opportunities for the display of the peculiar and incomparable talent to
@@ -111,15 +154,15 @@ natural occasions provided by the false account of Darcy’s conduct given
 by Wickham, and by the awkwardness (arising with equal naturalness) from
 the gradual transformation of Elizabeth’s own feelings from positive
 aversion to actual love. I do not know whether the all-grasping hand of
-the playwright has ever been laid uponPride and Prejudice;and I dare
-say that,[{xii}](#)if it were, the situations would prove not startling or
+the playwright has ever been laid upon*Pride and Prejudice;*and I dare
+say that,{xii}if it were, the situations would prove not startling or
 garish enough for the footlights, the character-scheme too subtle and
 delicate for pit and gallery. But if the attempt were made, it would
 certainly not be hampered by any of those loosenesses of construction,
 which, sometimes disguised by the conveniences of which the novelist can
-avail himself, appear at once on the stage.
+avail himself, appear at once on the stage.*
 
-I think, however, though the thought will doubtless seem heretical to
+*I think, however, though the thought will doubtless seem heretical to
 more than one school of critics, that construction is not the highest
 merit, the choicest gift, of the novelist. It sets off his other gifts
 and graces most advantageously to the critical eye; and the want of it
@@ -130,16 +173,16 @@ displayed consummate command of dialogue—perhaps the rarest of all
 faculties—would be an infinitely better thing than a faultless plot
 acted and told by puppets with pebbles in their mouths. And despite the
 ability which Miss Austen has shown in working out the story, I for one
-should putPride and Prejudicefar lower if it did not contain what
+should put*Pride and Prejudice*far lower if it did not contain what
 seem to me the very masterpieces of Miss Austen’s humour and of her
 faculty of character-creation—masterpieces who may indeed admit John
 Thorpe, the Eltons, Mrs. Norris, and one or two others to their company,
 but who, in one instance certainly, and perhaps in others, are still
-superior to them.
+superior to them.*
 
-The characteristics of Miss Austen’s humour are so subtle and delicate
+*The characteristics of Miss Austen’s humour are so subtle and delicate
 that they are, perhaps, at all times easier to apprehend than to
-express, and at any particular[{xiii}](#)time likely to be differently
+express, and at any particular{xiii}time likely to be differently
 apprehended by different persons. To me this humour seems to possess a
 greater affinity, on the whole, to that of Addison than to any other of
 the numerous species of this great British genus. The differences of
@@ -161,11 +204,11 @@ roasting and cutting up a fool. A man in the early eighteenth century,
 of course, could push this taste further than a lady in the early
 nineteenth; and no doubt Miss Austen’s principles, as well as her heart,
 would have shrunk from such things as the letter from the unfortunate
-husband in theSpectator,who describes, with all the gusto and all the
+husband in the*Spectator,*who describes, with all the gusto and all the
 innocence in the world, how his wife and his friend induce him to play
-at blind-man’s-buff. But anotherSpectatorletter—that of the damsel
-of fourteen who[{xiv}](#)wishes to marry Mr. Shapely, and assures her selected
-Mentor that “he admires yourSpectatorsmightily”—might have been
+at blind-man’s-buff. But another*Spectator*letter—that of the damsel
+of fourteen who{xiv}wishes to marry Mr. Shapely, and assures her selected
+Mentor that “he admires your*Spectators*mightily”—might have been
 written by a rather more ladylike and intelligent Lydia Bennet in the
 days of Lydia’s great-grandmother; while, on the other hand, some (I
 think unreasonably) have found “cynicism” in touches of Miss Austen’s
@@ -184,12 +227,12 @@ have been one in the further sense that, like her own Mr. Bennet, she
 took an epicurean delight in dissecting, in displaying, in setting at
 work her fools and her mean persons. I think she did take this delight,
 and I do not think at all the worse of her for it as a woman, while she
-was immensely the better for it as an artist.
+was immensely the better for it as an artist.*
 
-In respect of her art generally, Mr. Goldwin Smith has truly observed
+*In respect of her art generally, Mr. Goldwin Smith has truly observed
 that “metaphor has been exhausted in depicting the perfection of it,
 combined with the narrowness of her field;” and he has justly added that
-we need not go beyond her own comparison to the art of a miniature[{xv}](#)painter. To make this latter observation quite exact we must not use the
+we need not go beyond her own comparison to the art of a miniature{xv}painter. To make this latter observation quite exact we must not use the
 term miniature in its restricted sense, and must think rather of Memling
 at one end of the history of painting and Meissonier at the other, than
 of Cosway or any of his kind. And I am not so certain that I should
@@ -214,9 +257,9 @@ subject to all those fantastic limits and restrictions against which
 Mary Wollstonecraft protested with better general sense than particular
 taste or judgment. Miss Austen, too, drew back when the white frost
 touched her shoes; but I think she would have made a pretty good journey
-even in a black one.[{xvi}](#)
+even in a black one.*[{xvi}](#)
 
-For if her knowledge was not very extended, she knew two things which
+*For if her knowledge was not very extended, she knew two things which
 only genius knows. The one was humanity, and the other was art. On the
 first head she could not make a mistake; her men, though limited, are
 true, and her women are, in the old sense, “absolute.” As to art, if she
@@ -229,18 +272,18 @@ shape a real impression out of the rest. But with Miss Austen the
 myriad, trivial, unforced strokes build up the picture like magic.
 Nothing is false; nothing is superfluous. When (to take the present book
 only) Mr. Collins changed his mind from Jane to Elizabeth “while Mrs.
-Bennet was stirring the fire” (and we knowhowMrs. Bennet would have
-stirred the fire), when Mr. Darcy “brought his coffee-cup backhimself,”the touch in each case is like that of Swift—“taller by the
+Bennet was stirring the fire” (and we know*how*Mrs. Bennet would have
+stirred the fire), when Mr. Darcy “brought his coffee-cup back*himself,”*the touch in each case is like that of Swift—“taller by the
 breadth of my nail”—which impressed the half-reluctant Thackeray with
 just and outspoken admiration. Indeed, fantastic as it may seem, I
 should put Miss Austen as near to Swift in some ways, as I have put her
-to Addison in others.
+to Addison in others.*
 
-This Swiftian quality appears in the present novel as it appears
+*This Swiftian quality appears in the present novel as it appears
 nowhere else in the character of the immortal, the ineffable Mr.
-Collins. Mr. Collins is reallygreat;far greater than anything Addison
+Collins. Mr. Collins is really*great;*far greater than anything Addison
 ever did, almost great enough for Fielding or for Swift himself. It has
-been said that no one ever was like him. But in the first[{xvii}](#)place,hewas like him; he is there—alive, imperishable, more real than hundreds
+been said that no one ever was like him. But in the first{xvii}place,*he*was like him; he is there—alive, imperishable, more real than hundreds
 of prime ministers and archbishops, of “metals, semi-metals, and
 distinguished philosophers.” In the second place, it is rash, I think,
 to conclude that an actual Mr. Collins was impossible or non-existent at
@@ -257,16 +300,16 @@ its formal pettiness, its grovelling respect for rank, its materialism,
 its selfishness, receives exhibition. I will not admit that one speech
 or one action of this inestimable man is incapable of being reconciled
 with reality, and I should not wonder if many of these words and actions
-are historically true.
+are historically true.*
 
-But the greatness of Mr. Collins could not have been so satisfactorily
+*But the greatness of Mr. Collins could not have been so satisfactorily
 exhibited if his creatress had not adjusted so artfully to him the
 figures of Mr. Bennet and of Lady Catherine de Bourgh. The latter, like
 Mr. Collins himself, has been charged with exaggeration. There is,
 perhaps, a very faint shade of colour for the charge; but it seems to me
 very faint indeed. Even now I do not think that it would be impossible
 to find persons, especially female persons, not necessarily of noble
-birth, as overbearing, as[{xviii}](#)self-centred, as neglectful of good manners,
+birth, as overbearing, as{xviii}self-centred, as neglectful of good manners,
 as Lady Catherine. A hundred years ago, an earl’s daughter, the Lady
 Powerful (if not exactly Bountiful) of an out-of-the-way country parish,
 rich, long out of marital authority, and so forth, had opportunities of
@@ -286,17 +329,17 @@ or when putting Mr. Collins through his paces; but the general sense of
 the world has probably been right in preferring to the first rank his
 consolation to the former when she maunders over the entail, “My dear,
 do not give way to such gloomy thoughts. Let us hope for better things.
-Let us flatter ourselves thatImay be the survivor;” and his inquiry
+Let us flatter ourselves that*I*may be the survivor;” and his inquiry
 to his colossal cousin as to the compliments which Mr. Collins has just
 related as made by himself to Lady Catherine, “May I ask whether these
-pleasing attentions proceed from the impulse of the moment,[{xix}](#)or are the
+pleasing attentions proceed from the impulse of the moment,{xix}or are the
 result of previous study?” These are the things which give Miss Austen’s
 readers the pleasant shocks, the delightful thrills, which are felt by
 the readers of Swift, of Fielding, and we may here add, of Thackeray, as
 they are felt by the readers of no other English author of fiction
-outside of these four.
+outside of these four.*
 
-The goodness of the minor characters inPride and Prejudicehas been
+*The goodness of the minor characters in*Pride and Prejudice*has been
 already alluded to, and it makes a detailed dwelling on their beauties
 difficult in any space, and impossible in this. Mrs. Bennet we have
 glanced at, and it is not easy to say whether she is more exquisitely
@@ -315,12 +358,12 @@ perhaps poor Mary was rather the scapegoat of the sins of blue stockings
 in that Fordyce-belectured generation. It is at any rate difficult not
 to extend to her a share of the respect and affection (affection and
 respect of a peculiar kind; doubtless), with which one regards Mr.
-Collins, when she draws the moral of Lydia’s fall. I[{xx}](#)sometimes wish
+Collins, when she draws the moral of Lydia’s fall. I{xx}sometimes wish
 that the exigencies of the story had permitted Miss Austen to unite
 these personages, and thus at once achieve a notable mating and soothe
-poor Mrs. Bennet’s anguish over the entail.
+poor Mrs. Bennet’s anguish over the entail.*
 
-The Bingleys and the Gardiners and the Lucases, Miss Darcy and Miss de
+*The Bingleys and the Gardiners and the Lucases, Miss Darcy and Miss de
 Bourgh, Jane, Wickham, and the rest, must pass without special comment,
 further than the remark that Charlotte Lucas (her egregious papa, though
 delightful, is just a little on the thither side of the line between
@@ -330,9 +373,9 @@ dealing with young men appears) is a not much less notable sketch in
 drab of another. Only genius could have made Charlotte what she is, yet
 not disagreeable; Wickham what he is, without investing him either with
 a cheap Don Juanish attractiveness or a disgusting rascality. But the
-hero and the heroine are not tints to be dismissed.
+hero and the heroine are not tints to be dismissed.*
 
-Darcy has always seemed to me by far the best and most interesting of
+*Darcy has always seemed to me by far the best and most interesting of
 Miss Austen’s heroes; the only possible competitor being Henry Tilney,
 whose part is so slight and simple that it hardly enters into
 comparison. It has sometimes, I believe, been urged that his pride is
@@ -340,9 +383,9 @@ unnatural at first in its expression and later in its yielding, while
 his falling in love at all is not extremely probable. Here again I
 cannot go with the objectors. Darcy’s own account of the way in which
 his pride had been pampered, is perfectly rational and sufficient; and
-nothing could be, psychologically speaking, acausa veriorfor its
+nothing could be, psychologically speaking, a*causa verior*for its
 sudden restoration to healthy conditions than the shock of Elizabeth’s
-scornful refusal acting on a nature[{xxi}](#)ex hypothesigenerous. Nothing in
+scornful refusal acting on a nature*[{xxi}](#)ex hypothesi*generous. Nothing in
 even our author is finer and more delicately touched than the change of
 his demeanour at the sudden meeting in the grounds of Pemberley. Had he
 been a bad prig or a bad coxcomb, he might have been still smarting
@@ -353,11 +396,11 @@ injured in disposition, and thoroughly in love. As for his being in
 love, Elizabeth has given as just an exposition of the causes of that
 phenomenon as Darcy has of the conditions of his unregenerate state,
 only she has of course not counted in what was due to her own personal
-charm.
+charm.*
 
-The secret of that charm many men and not a few women, from Miss Austen
+*The secret of that charm many men and not a few women, from Miss Austen
 herself downwards, have felt, and like most charms it is a thing rather
-to be felt than to be explained. Elizabeth of course belongs to theallegroorallegradivision of the army of Venus. Miss Austen was
+to be felt than to be explained. Elizabeth of course belongs to the*allegro*or*allegra*division of the army of Venus. Miss Austen was
 always provokingly chary of description in regard to her beauties; and
 except the fine eyes, and a hint or two that she had at any rate
 sometimes a bright complexion, and was not very tall, we hear nothing
@@ -368,7 +411,7 @@ secondly in her being entirely destitute of ill-nature for all her
 propensity to tease and the sharpness of her tongue. Elizabeth can give
 at least as good as she gets when she is attacked; but she never
 “scratches,” and she never attacks first. Some of the merest
-obsoletenesses of phrase and[{xxii}](#)manner give one or two of her early
+obsoletenesses of phrase and{xxii}manner give one or two of her early
 speeches a slight pertness, but that is nothing, and when she comes to
 serious business, as in the great proposal scene with Darcy (which is,
 as it should be, the climax of the interest of the book), and in the
@@ -381,19 +424,19 @@ kind, expressed no doubt less stiltedly but more coarsely, might have
 been heard in more than one ball-room during this very year from persons
 who ought to have been no worse bred than Darcy.) And she lets the
 injury done to Jane and the contempt shown to the rest of her family
-aggravate this resentment in the healthiest way in the world.
+aggravate this resentment in the healthiest way in the world.*
 
-Still, all this does not explain her charm, which, taking beauty as a
+*Still, all this does not explain her charm, which, taking beauty as a
 common form of all heroines, may perhaps consist in the addition to her
 playfulness, her wit, her affectionate and natural disposition, of a
 certain fearlessness very uncommon in heroines of her type and age.
 Nearly all of them would have been in speechless awe of the magnificent
 Darcy; nearly all of them would have palpitated and fluttered at the
 idea of proposals, even naughty ones, from the fascinating Wickham.
-Elizabeth, with nothing offensive, nothingviraginous,nothing of the
+Elizabeth, with nothing offensive, nothing*viraginous,*nothing of the
 “New Woman” about her, has by nature what the best modern (not “new”)
 women have by education and experience, a perfect freedom from the idea
-that all men may bully her if they choose, and that most will[{xxiii}](#)away with
+that all men may bully her if they choose, and that most will{xxiii}away with
 her if they can. Though not in the least “impudent and mannish grown,”
 she has no mere sensibility, no nasty niceness about her. The form of
 passion common and likely to seem natural in Miss Austen’s day was so
@@ -404,9 +447,9 @@ married Darcy just as willingly without Pemberley as with it, and
 anybody who can read between lines will not find the lovers’
 conversations in the final chapters so frigid as they might have looked
 to the Della Cruscans of their own day, and perhaps do look to the Della
-Cruscans of this.
+Cruscans of this.*
 
-And, after all, what is the good of seeking for the reason of
+*And, after all, what is the good of seeking for the reason of
 charm?—it is there. There were better sense in the sad mechanic
 exercise of determining the reason of its absence where it is not. In
 the novels of the last hundred years there are vast numbers of young
@@ -417,9 +460,9 @@ Bennet, Diana Vernon, Argemone Lavington, Beatrix Esmond, and Barbara
 Grant. I should have been most in love with Beatrix and Argemone; I
 should, I think, for mere occasional companionship, have preferred Diana
 and Barbara. But to live with and to marry, I do not know that any one
-of the four can come into competition with Elizabeth.
+of the four can come into competition with Elizabeth.*
 
-George Saintsbury.
+*George Saintsbury.*
 [{xxiv}](#)
 
 ## {xxv}
@@ -448,11 +491,11 @@ Mr. Bennet made no answer.
 
 “Do not you want to know who has taken it?” cried his wife, impatiently.
 
-“Youwant to tell me, and I have no objection to hearing it.”
+“*You*want to tell me, and I have no objection to hearing it.”
 
 “He came down to see the place”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 This was invitation enough.
 
@@ -479,7 +522,7 @@ must know that I am thinking of his marrying one of them.”
 
 “Is that his design in settling here?”
 
-“Design? Nonsense, how can you talk so! But it is very likely that hemayfall in love with one of them, and therefore you must visit him as
+“Design? Nonsense, how can you talk so! But it is very likely that he*may*fall in love with one of them, and therefore you must visit him as
 soon as he comes.”
 
 “I see no occasion for that. You and the girls may go—or you may send
@@ -487,7 +530,7 @@ them by themselves, which perhaps will be still better; for as you are
 as handsome as any of them, Mr. Bingley might like you the best of the
 party.”
 
-“My dear, you flatter me. I certainlyhavehad my share of beauty, but
+“My dear, you flatter me. I certainly*have*had my share of beauty, but
 I do not pretend to be anything extraordinary now. When a woman has five
 grown-up daughters, she ought to give over thinking of her own beauty.”
 
@@ -500,7 +543,7 @@ the neighbourhood.”
 
 “But consider your daughters. Only think what an establishment it would
 be for one of them. Sir William and Lady Lucas are determined to go,
-merely on that account; for in general, you know, they visit no new[{4}](#)comers. Indeed you must go, for it will be impossible forusto visit
+merely on that account; for in general, you know, they visit no new[{4}](#)comers. Indeed you must go, for it will be impossible for*us*to visit
 him, if you do not.”
 
 “You are over scrupulous, surely. I dare say Mr. Bingley will be very
@@ -510,7 +553,7 @@ I must throw in a good word for my little Lizzy.”
 
 “I desire you will do no such thing. Lizzy is not a bit better than the
 others: and I am sure she is not half so handsome as Jane, nor half so
-good-humoured as Lydia. But you are always givingherthe preference.”
+good-humoured as Lydia. But you are always giving*her*the preference.”
 
 “They have none of them much to recommend them,” replied he: “they are
 all silly and ignorant like other girls; but Lizzy has something more of
@@ -536,7 +579,7 @@ all.”
 
 Mr. Bennet was so odd a mixture of quick parts, sarcastic humour,
 reserve, and caprice, that the experience of three-and-twenty years had
-been insufficient to[{5}](#)make his wife understand his character. Hermind
+been insufficient to[{5}](#)make his wife understand his character.*Her*mind
 was less difficult to develope. She was a woman of mean understanding,
 little information, and uncertain temper. When she was discontented, she
 fancied herself nervous. The business of her life was to get her
@@ -544,7 +587,7 @@ daughters married: its solace was visiting and news.
 
 Mr.& Mrs. Bennet
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 [{6}](#)
 
@@ -559,7 +602,7 @@ suddenly addressed her with,—
 
 “I hope Mr. Bingley will like it, Lizzy.”
 
-“We are not in a way to knowwhatMr. Bingley likes,” said her mother,
+“We are not in a way to know*what*Mr. Bingley likes,” said her mother,
 resentfully, “since we are not to visit.[{7}](#)”
 
 “But you forget, mamma,” said Elizabeth, “that we shall meet him at the
@@ -591,14 +634,14 @@ the day before; so, it will be impossible for her to introduce him, for
 she will not know him herself.”
 
 “Then, my dear, you may have the advantage of your friend, and introduce
-Mr. Bingley toher.”
+Mr. Bingley to*her*.”
 
 “Impossible, Mr. Bennet, impossible, when I am not acquainted with him
 myself; how can you be so teasing?”
 
 “I honour your circumspection. A fortnight’s acquaintance is certainly
 very little. One cannot know what a man really is by the end of a
-fortnight. But ifwedo not venture, somebody else will; and after
+fortnight. But if*we*do not venture, somebody else will; and after
 all, Mrs. Long and her nieces must stand their chance; and, therefore,[{8}](#)as she will think it an act of kindness, if you decline the office, I
 will take it on myself.”
 
@@ -607,7 +650,7 @@ nonsense!”
 
 “What can be the meaning of that emphatic exclamation?” cried he. “Do
 you consider the forms of introduction, and the stress that is laid on
-them, as nonsense? I cannot quite agree with youthere. What say you,
+them, as nonsense? I cannot quite agree with you*there*. What say you,
 Mary? For you are a young lady of deep reflection, I know, and read
 great books, and make extracts.”
 
@@ -618,7 +661,7 @@ Bingley.”
 
 “I am sick of Mr. Bingley,” cried his wife.
 
-“I am sorry to hearthat; but why did you not tell me so before? If I
+“I am sorry to hear*that*; but why did you not tell me so before? If I
 had known as much this morning, I certainly would not have called on
 him. It is very unlucky; but as I have actually paid the visit, we
 cannot escape the acquaintance now.”
@@ -641,10 +684,10 @@ as he spoke, he left the room, fatigued with the raptures of his wife.[{9}](#)
 shut. “I do not know how you will ever make him amends for his kindness;
 or me either, for that matter. At our time of life, it is not so
 pleasant, I can tell you, to be making new acquaintances every day; but
-for your sakes we would do anything. Lydia, my love, though youarethe youngest, I dare say Mr. Bingley will dance with you at the next
+for your sakes we would do anything. Lydia, my love, though you*are*the youngest, I dare say Mr. Bingley will dance with you at the next
 ball.”
 
-“Oh,” said Lydia, stoutly, “I am not afraid; for though Iamthe
+“Oh,” said Lydia, stoutly, “I am not afraid; for though I*am*the
 youngest, I’m the tallest.”
 
 The rest of the evening was spent in conjecturing how soon he would
@@ -691,7 +734,7 @@ little by starting the idea of his[{12}](#)
 
 “When the Party entered”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 being gone to London only to get a large party for the ball; and a
 report soon followed that Mr. Bingley was to bring twelve ladies and
@@ -753,7 +796,7 @@ kingdom! Upon my honour, I never met with so many pleasant girls in my
 life as I have this evening; and there are several of them, you see,
 uncommonly pretty.”
 
-“Youare dancing with the only handsome girl in the room,” said Mr.
+“*You*are dancing with the only handsome girl in the room,” said Mr.
 Darcy, looking at the eldest Miss Bennet.
 
 “Oh, she is the most beautiful creature I ever beheld![{15}](#)But there is one
@@ -762,11 +805,11 @@ dare say very agreeable. Do let me ask my partner to introduce you.”
 
 “She is tolerable”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 “Which do you mean?” and turning round, he looked for a moment at
 Elizabeth, till, catching her eye, he withdrew his own, and coldly said,
-“She is tolerable: but not handsome enough to temptme; and I am in no
+“She is tolerable: but not handsome enough to tempt*me*; and I am in no
 humour at present to give consequence to young ladies who are slighted
 by other men. You had better return to your[{16}](#)partner and enjoy her
 smiles, for you are wasting your time with me.”
@@ -797,7 +840,7 @@ had a very different story to hear.
 delightful evening, a most excellent ball. I wish you had been there.
 Jane was so admired, nothing could be like it. Everybody said how well
 she looked; and Mr. Bingley thought her quite beautiful, and danced with
-her twice. Only think ofthat, my dear: he[{17}](#)actually danced with her
+her twice. Only think of*that*, my dear: he[{17}](#)actually danced with her
 twice; and she was the only creature in the room that he asked a second
 time. First of all, he asked Miss Lucas. I was so vexed to see him stand
 up with her; but, however, he did not admire her at all; indeed, nobody
@@ -805,9 +848,9 @@ can, you know; and he seemed quite struck with Jane as she was going
 down the dance. So he inquired who she was, and got introduced, and
 asked her for the two next. Then, the two third he danced with Miss
 King, and the two fourth with Maria Lucas, and the two fifth with Jane
-again, and the two sixth with Lizzy, and theBoulanger——”
+again, and the two sixth with Lizzy, and the*Boulanger*——”
 
-“If he had had any compassion forme,” cried her husband impatiently,
+“If he had had any compassion for*me*,” cried her husband impatiently,
 “he would not have danced half so much! For God’s sake, say no more of
 his partners. O that he had sprained his ancle in the first dance!”
 
@@ -822,7 +865,7 @@ of the subject, and related, with much bitterness of spirit, and some
 exaggeration, the shocking rudeness of Mr. Darcy.
 
 “But I can assure you,” she added, “that Lizzy does not lose much by not
-suitinghisfancy; for he is a most disagreeable, horrid man, not at
+suiting*his*fancy; for he is a most disagreeable, horrid man, not at
 all worth pleasing. So high and so conceited, that there was no enduring
 him! He walked here, and he walked there, fancying himself so very
 great! Not handsome enough to dance with! I wish you had been there, my
@@ -844,8 +887,8 @@ likewise to be if he possibly can. His character is thereby complete.”
 “I was very much flattered by his asking me to dance a second time. I
 did not expect such a compliment.”
 
-“Did not you? Idid for you. But that is one great difference between
-us. Compliments always takeyouby surprise, andmenever. What
+“Did not you?*I*did for you. But that is one great difference between
+us. Compliments always take*you*by surprise, and*me*never. What
 could be more natural than his asking you again? He could not help
 seeing that you[{19}](#)were about five times as pretty as every other woman in
 the room. No thanks to his gallantry for that. Well, he certainly is
@@ -861,7 +904,7 @@ in your eyes. I never heard you speak ill of a human being in my life.”
 “I would wish not to be hasty in censuring anyone; but I always speak
 what I think.”
 
-“I know you do: and it isthatwhich makes the wonder. Withyourgood sense, to be so honestly blind to the follies and nonsense of
+“I know you do: and it is*that*which makes the wonder. With*your*good sense, to be so honestly blind to the follies and nonsense of
 others! Affectation of candour is common enough; one meets with it
 everywhere. But to be candid without ostentation or design,—to take the
 good of everybody’s character and make it still better, and say nothing
@@ -964,28 +1007,28 @@ That the Miss Lucases and the Miss Bennets should meet to talk over a
 ball was absolutely necessary; and the morning after the assembly
 brought the former to Longbourn to hear and to communicate.
 
-“Youbegan the evening well, Charlotte,” said Mrs. Bennet, with civil
-self-command, to Miss Lucas. “Youwere Mr. Bingley’s first choice.”
+“*You*began the evening well, Charlotte,” said Mrs. Bennet, with civil
+self-command, to Miss Lucas. “*You*were Mr. Bingley’s first choice.”
 
 “Yes; but he seemed to like his second better.”
 
 “Oh, you mean Jane, I suppose, because he danced with her twice. To be
-sure thatdidseem as if he admired her—indeed, I rather believe hedid—I heard something about it—but I hardly know what—something
+sure that*did*seem as if he admired her—indeed, I rather believe he*did*—I heard something about it—but I hardly know what—something
 about Mr. Robinson.”
 
 “Perhaps you mean what I overheard between him and Mr. Robinson: did not
 I mention it to you? Mr. Robinson’s asking him how he liked our Meryton
 assemblies, and whether he did not think there were a great many pretty
-women in the room, andwhichhe thought the prettiest? and his
+women in the room, and*which*he thought the prettiest? and his
 answering immediately to the last question, ‘Oh, the eldest Miss Bennet,
 beyond a doubt: there cannot be two opinions on that point.’”
 
 “Upon my word! Well, that was very decided, indeed—that does seem as
 if—but, however, it may all come to nothing, you know.”
 
-“Myoverhearings were more to the purpose thanyours, Eliza,” said
+“*My*overhearings were more to the purpose than*yours*, Eliza,” said
 Charlotte. “Mr. Darcy is not so well worth listening to as his friend,
-is he? Poor Eliza! to be only justtolerable.”
+is he? Poor Eliza! to be only just*tolerable*.”
 
 “I beg you will not put it into Lizzy’s head to be[{24}](#)vexed by his
 ill-treatment, for he is such a disagreeable man that it would be quite
@@ -994,7 +1037,7 @@ sat close to her for half an hour without once opening his lips.”
 
 “Without once opening his lips”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 “Are you quite sure, ma’am? Is not there a little mistake?” said Jane.
 “I certainly saw Mr. Darcy speaking to her.”
@@ -1004,7 +1047,7 @@ could not help answering her; but she said he seemed very angry at being
 spoke to.”
 
 “Miss Bingley told me,” said Jane, “that he never speaks much unless
-among his intimate acquaintance. Withthemhe is remarkably
+among his intimate acquaintance. With*them*he is remarkably
 agreeable.”
 
 “I do not believe a word of it, my dear. If he had been so very
@@ -1016,17 +1059,17 @@ to the ball in a hack chaise.”
 “I do not mind his not talking to Mrs. Long,” said Miss Lucas, “but I
 wish he had danced with Eliza.”
 
-“Another time, Lizzy,” said her mother, “I would not dance withhim,
+“Another time, Lizzy,” said her mother, “I would not dance with*him*,
 if I were you.”
 
-“I believe, ma’am, I may safely promise youneverto dance with him.”
+“I believe, ma’am, I may safely promise you*never*to dance with him.”
 
-“His pride,” said Miss Lucas, “does not offendmeso much as pride
+“His pride,” said Miss Lucas, “does not offend*me*so much as pride
 often does, because there is an excuse for it. One cannot wonder that so
 very fine a young man, with family, fortune, everything in his favour,
-should think highly of himself. If I may so express it, he has arightto be proud.”
+should think highly of himself. If I may so express it, he has a*right*to be proud.”
 
-“That is very true,” replied Elizabeth, “and I could easily forgivehispride, if he had not mortifiedmine.”
+“That is very true,” replied Elizabeth, “and I could easily forgive*his*pride, if he had not mortified*mine*.”
 
 “Pride,” observed Mary, who piqued herself upon the solidity of her
 reflections, “is a very common failing, I believe. By all that I have
@@ -1057,14 +1100,14 @@ HE ladies of Longbourn soon waited on those of Netherfield. The visit
 was returned in due form. Miss Bennet’s pleasing manners grew on the
 good-will of Mrs. Hurst and Miss Bingley; and though the mother was
 found to be intolerable, and the younger sisters not worth speaking to,
-a wish of being better acquainted withthemwas expressed towards the
+a wish of being better acquainted with*them*was expressed towards the
 two eldest. By Jane this attention was received with the greatest
 pleasure; but Elizabeth still saw superciliousness in their treatment of
 everybody, hardly excepting even her sister, and could not like them;
 though their kindness to Jane, such as it was, had a value, as arising,
 in all probability, from the influence of their brother’s admiration. It
-was generally evident, whenever they met, that hedidadmire her; and
-toherit was equally evident that Jane was yielding to the preference
+was generally evident, whenever they met, that he*did*admire her; and
+to*her*it was equally evident that Jane was yielding to the preference
 which she had begun to entertain for him from the first, and was in a
 way to be very much in love; but she considered with pleasure that it
 was not likely to be discovered by the world in general, since Jane
@@ -1079,12 +1122,12 @@ so very guarded. If a woman conceals her affection with the same skill
 from the object of it, she may lose the opportunity of fixing him; and
 it will then be but poor consolation to believe the world equally in the
 dark. There is so much of gratitude or vanity in almost every
-attachment, that it is not safe to leave any to itself. We can allbeginfreely—a slight preference is natural enough; but there are
+attachment, that it is not safe to leave any to itself. We can all*begin*freely—a slight preference is natural enough; but there are
 very few of us who have heart enough to be really in love without
-encouragement. In nine cases out of ten, a woman had better showmoreaffection than she feels. Bingley likes your sister undoubtedly; but he
+encouragement. In nine cases out of ten, a woman had better show*more*affection than she feels. Bingley likes your sister undoubtedly; but he
 may never do more than like her, if she does not help him on.”
 
-“But she does help him on, as much as her nature will allow. IfIcan
+“But she does help him on, as much as her nature will allow. If*I*can
 perceive her regard for him, he must be a simpleton indeed not to
 discover it too.”
 
@@ -1111,7 +1154,7 @@ dances with him at Meryton; she saw him one morning at his own house,
 and has since dined in company with him four times. This is not quite
 enough to make her understand his character.”
 
-“Not as you represent it. Had she merelydinedwith him, she might
+“Not as you represent it. Had she merely*dined*with him, she might
 only have discovered whether he had a good appetite; but you must
 remember that four evenings have been also spent together—and four
 evenings may do a great deal.”
@@ -1165,8 +1208,8 @@ conversation with Colonel Forster?”
 what he is about. He has a very[{31}](#)satirical eye, and if I do not begin by
 being impertinent myself, I shall soon grow afraid of him.”
 
-“The entreaties of several” [Copyright 1894 by George
-Allen.]
+“The entreaties of several” [*Copyright 1894 by George
+Allen.*]
 
 On his approaching them soon afterwards, though without seeming to have
 any intention of speaking, Miss Lucas defied her friend to mention such
@@ -1182,7 +1225,7 @@ energetic.[{32}](#)”
 
 “You are severe on us.”
 
-“It will beherturn soon to be teased,” said Miss Lucas. “I am going
+“It will be*her*turn soon to be teased,” said Miss Lucas. “I am going
 to open the instrument, Eliza, and you know what follows.”
 
 “You are a very strange creature by way of a friend!—always wanting me
@@ -1406,14 +1449,14 @@ Jane, make haste and tell us; make haste, my love.”
 
 “If you are not so compassionate as to dine to-day with Louisa and
 me, we shall be in danger of hating each other for the rest of our
-lives; for a whole day’stête-à-têtebetween two women can never
+lives; for a whole day’s*tête-à-tête*between two women can never
 end without a quarrel. Come as soon as you can on the receipt of
 this. My brother and the gentlemen are to dine with the officers.
 Yours ever,
 
 “Caroline Bingley.”
 
-“With the officers!” cried Lydia: “I wonder my aunt did not tell us ofthat.”
+“With the officers!” cried Lydia: “I wonder my aunt did not tell us of*that*.”
 
 “Dining out,” said Mrs. Bennet; “that is very unlucky.”
 
@@ -1591,7 +1634,7 @@ walker. I shall never forget her appearance this morning. She really
 looked almost wild.”
 
 “She did indeed, Louisa. I could hardly keep my countenance. Very
-nonsensical to come at all! Why mustshebe scampering about the
+nonsensical to come at all! Why must*she*be scampering about the
 country, because her sister had a cold? Her hair so untidy, so blowzy![{47}](#)”
 
 “Yes, and her petticoat; I hope you saw her petticoat, six inches deep
@@ -1603,8 +1646,8 @@ all lost upon me. I thought Miss Elizabeth Bennet looked remarkably well
 when she came into the room this morning. Her dirty petticoat quite
 escaped my notice.”
 
-“Youobserved it, Mr. Darcy, I am sure,” said Miss Bingley; “and I am
-inclined to think that you would not wish to seeyour sistermake such
+“*You*observed it, Mr. Darcy, I am sure,” said Miss Bingley; “and I am
+inclined to think that you would not wish to see*your sister*make such
 an exhibition.”
 
 “Certainly not.”
@@ -1636,7 +1679,7 @@ Meryton?[{48}](#)”
 
 “That is capital,” added her sister; and they both laughed heartily.
 
-“If they had uncles enough to fillallCheapside,” cried Bingley, “it
+“If they had uncles enough to fill*all*Cheapside,” cried Bingley, “it
 would not make them one jot less agreeable.”
 
 “But it must very materially lessen their chance of marrying men of any
@@ -1663,7 +1706,7 @@ below, with a book. Mr. Hurst looked at her with astonishment.
 reader, and has no pleasure in anything else.”
 
 “I deserve neither such praise nor such censure,” cried[{49}](#)Elizabeth; “I
-amnota great reader, and I have pleasure in many things.”
+am*not*a great reader, and I have pleasure in many things.”
 
 “In nursing your sister I am sure you have pleasure,” said Bingley; “and
 I hope it will soon be increased by seeing her quite well.”
@@ -1693,7 +1736,7 @@ books.”
 these.”
 
 “Neglect! I am sure you neglect nothing that can add to the beauties of
-that noble place. Charles, when you buildyourhouse, I wish it may be
+that noble place. Charles, when you build*your*house, I wish it may be
 half as delightful as Pemberley.”
 
 “I wish it may.”
@@ -1760,13 +1803,13 @@ will be but half deserved.”
 something more substantial in the improvement of her mind by extensive
 reading.”
 
-“I am no longer surprised at your knowingonlysix accomplished women.
-I rather wonder now at your knowingany.”
+“I am no longer surprised at your knowing*only*six accomplished women.
+I rather wonder now at your knowing*any*.”
 
 “Are you so severe upon your own sex as to doubt the possibility of all
 this?”
 
-“Inever saw such a woman. Inever saw such capacity, and taste, and
+“*I*never saw such a woman.*I*never saw such capacity, and taste, and
 application, and elegance, as you describe, united.”
 
 Mrs. Hurst and Miss Bingley both cried out against the injustice of her
@@ -1781,7 +1824,7 @@ sex by undervaluing their own; and with many men, I daresay, it
 succeeds; but, in my opinion, it is a paltry device, a very mean art.”
 
 “Undoubtedly,” replied Darcy, to whom this remark was chiefly addressed,
-“there is meanness inallthe arts which ladies sometimes condescend
+“there is meanness in*all*the arts which ladies sometimes condescend
 to employ for captivation. Whatever bears affinity to cunning is
 despicable.”
 
@@ -1841,7 +1884,7 @@ Mrs. Bennet was profuse in her acknowledgments.
 know what would become of her, for she is very ill indeed, and suffers a
 vast deal, though with the greatest patience in the world, which is
 always[{55}](#)the way with her, for she has, without exception, the sweetest
-temper I ever met with. I often tell my other girls they are nothing toher. You have a sweet room here, Mr. Bingley, and a charming prospect
+temper I ever met with. I often tell my other girls they are nothing to*her*. You have a sweet room here, Mr. Bingley, and a charming prospect
 over that gravel walk. I do not know a place in the country that is
 equal to Netherfield. You will not think of quitting it in a hurry, I
 hope, though you have but a short lease.”
@@ -1868,7 +1911,7 @@ the wild manner that you are suffered to do at home.”
 “I did not know before,” continued Bingley, immediately, “that you were
 a studier of character. It must be an amusing study.”
 
-“Yes; but intricate characters are themostamusing. They have at
+“Yes; but intricate characters are the*most*amusing. They have at
 least that advantage.”
 
 “The country,” said Darcy, “can in general supply but few subjects for
@@ -1879,7 +1922,7 @@ unvarying society.[{56}](#)”
 observed in them for ever.”
 
 “Yes, indeed,” cried Mrs. Bennet, offended by his manner of mentioning a
-country neighbourhood. “I assure you there is quite as much ofthatgoing on in the country as in town.”
+country neighbourhood. “I assure you there is quite as much of*that*going on in the country as in town.”
 
 Everybody was surprised; and Darcy, after looking at her for a moment,
 turned silently away. Mrs. Bennet, who fancied she had gained a complete
@@ -1910,21 +1953,21 @@ Nothing but concern for Elizabeth could enable Bingley to keep his
 countenance. His sister was less delicate, and directed her eye towards
 Mr. Darcy with a[{57}](#)very expressive smile. Elizabeth, for the sake of
 saying something that might turn her mother’s thoughts, now asked her if
-Charlotte Lucas had been at Longbourn sincehercoming away.
+Charlotte Lucas had been at Longbourn since*her*coming away.
 
 “Yes, she called yesterday with her father. What an agreeable man Sir
 William is, Mr. Bingley—is not he? so much the man of fashion! so
-genteel and so easy! He has always something to say to everybody. Thatis my idea of good breeding; and those persons who fancy themselves very
+genteel and so easy! He has always something to say to everybody.*That*is my idea of good breeding; and those persons who fancy themselves very
 important and never open their mouths quite mistake the matter.”
 
 “Did Charlotte dine with you?”
 
 “No, she would go home. I fancy she was wanted about the mince-pies. For
-my part, Mr. Bingley,Ialways keep servants that can do their own
-work;mydaughters are brought up differently. But everybody is to
+my part, Mr. Bingley,*I*always keep servants that can do their own
+work;*my*daughters are brought up differently. But everybody is to
 judge for themselves, and the Lucases are a very good sort of girls, I
-assure you. It is a pity they are not handsome! Not thatIthink
-Charlotte soveryplain; but then she is our particular friend.”
+assure you. It is a pity they are not handsome! Not that*I*think
+Charlotte so*very*plain; but then she is our particular friend.”
 
 “She seems a very pleasant young woman,” said Bingley.
 
@@ -1942,7 +1985,7 @@ wrote some verses on her, and very pretty they were.[{58}](#)”
 been many a one, I fancy, overcome in the same way. I wonder who first
 discovered the efficacy of poetry in driving away love!”
 
-“I have been used to consider poetry as thefoodof love,” said Darcy.
+“I have been used to consider poetry as the*food*of love,” said Darcy.
 
 “Of a fine, stout, healthy love it may. Everything nourishes what is
 strong already. But if it be only a slight, thin sort of inclination, I
@@ -1979,15 +2022,15 @@ the ball. But you would not wish to be dancing while she is ill?”
 
 Lydia declared herself satisfied. “Oh yes—it would be much better to
 wait till Jane was well; and by that time, most likely, Captain Carter
-would be at Meryton again. And when you have givenyourball,” she
+would be at Meryton again. And when you have given*your*ball,” she
 added, “I shall insist on their giving one also. I shall tell Colonel
 Forster it will be quite a shame if he does not.”
 
 Mrs. Bennet and her daughters then departed, and Elizabeth returned
 instantly to Jane, leaving her own and her relations’ behaviour to the
 remarks of the two ladies and Mr. Darcy; the latter of whom, however,
-could not be prevailed on to join in their censure ofher, in spite of
-all Miss Bingley’s witticisms onfine eyes.[{60}](#)
+could not be prevailed on to join in their censure of*her*, in spite of
+all Miss Bingley’s witticisms on*fine eyes*.[{60}](#)
 
 ## Chapter 10: .
 
@@ -2051,7 +2094,7 @@ to determine.”
 ease cannot write ill.”
 
 “That will not do for a compliment to Darcy, Caroline,” cried her
-brother, “because he doesnotwrite with ease.[{62}](#)He studies too much
+brother, “because he does*not*write with ease.[{62}](#)He studies too much
 for words of four syllables. Do not you, Darcy?”
 
 “My style of writing is very different from yours.”
@@ -2068,7 +2111,7 @@ means my letters sometimes convey no ideas at all to my correspondents.”
 humility. It is often only carelessness of opinion, and sometimes an
 indirect boast.”
 
-“And which of the two do you callmylittle recent piece of modesty?”
+“And which of the two do you call*my*little recent piece of modesty?”
 
 “The indirect boast; for you are really proud of your defects in
 writing, because you consider them as proceeding from a rapidity of
@@ -2119,7 +2162,7 @@ that the friend who is supposed to desire his return to the house,[{64}](#)and
 the delay of his plan, has merely desired it, asked it without offering
 one argument in favour of its propriety.”
 
-“To yield readily—easily—to thepersuasionof a friend is no merit
+“To yield readily—easily—to the*persuasion*of a friend is no merit
 with you.”
 
 “To yield without conviction is no compliment to the understanding of
@@ -2227,7 +2270,7 @@ which your lady possesses.”
 
 “No, no; stay where you are”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 “Have you anything else to propose for my domestic felicity?[{68}](#)”
 
@@ -2304,7 +2347,7 @@ rings, joined now and then in her brother’s conversation with Miss
 Bennet.
 
 Miss Bingley’s attention was quite as much engaged in watching Mr.
-Darcy’s progress throughhisbook, as in reading her own; and she was
+Darcy’s progress through*his*book, as in reading her own; and she was
 perpetually either making some inquiry, or looking at his page. She
 could not win him, however, to any conversation; he merely answered her
 question and read on. At length, quite exhausted by the attempt to be
@@ -2383,15 +2426,15 @@ abominable. How shall we punish him for such a speech?”
 can all plague and punish one another. Tease him—laugh at him. Intimate
 as you are, you must know how it is to be done.”
 
-“But upon my honour I donot. I do assure you that my intimacy has not
-yet taught methat. Tease calmness of temper and presence of mind! No,
+“But upon my honour I do*not*. I do assure you that my intimacy has not
+yet taught me*that*. Tease calmness of temper and presence of mind! No,
 no; I feel he may defy us there. And as to laughter, we will not expose
 ourselves, if you please, by attempting to laugh without a subject. Mr.
 Darcy may hug himself.”
 
 “Mr. Darcy is not to be laughed at!” cried Elizabeth. “That is an
 uncommon advantage, and uncommon I hope it will continue, for it would
-be a great loss tometo have many such acquaintance. I dearly love a
+be a great loss to*me*to have many such acquaintance. I dearly love a
 laugh.”
 
 “Miss Bingley,” said he, “has given me credit for more than can be. The
@@ -2400,8 +2443,8 @@ be rendered ridiculous by a person whose first object in life is a
 joke.”
 
 “Certainly,” replied Elizabeth, “there are such people, but I hope I am
-not one ofthem. I hope I never ridicule what is wise or good. Follies
-and nonsense, whims and inconsistencies,dodivert me, I own, and I
+not one of*them*. I hope I never ridicule what is wise or good. Follies
+and nonsense, whims and inconsistencies,*do*divert me, I own, and I
 laugh at them whenever I can. But these, I suppose, are precisely what
 you are without.”
 
@@ -2431,13 +2474,13 @@ feelings are not puffed about with every attempt to move them. My temper
 would perhaps be called resentful. My good opinion once lost is lost for
 ever.”
 
-“Thatis a failing, indeed!” cried Elizabeth. “Implacable resentmentisa shade in a character. But you have chosen your fault well. I
-really cannotlaughat it. You are safe from me.”
+“*That*is a failing, indeed!” cried Elizabeth. “Implacable resentment*is*a shade in a character. But you have chosen your fault well. I
+really cannot*laugh*at it. You are safe from me.”
 
 “There is, I believe, in every disposition a tendency to some particular
 evil, a natural defect, which not even the best education can overcome.”
 
-“Andyourdefect is a propensity to hate everybody.”
+“And*your*defect is a propensity to hate everybody.”
 
 “And yours,” he replied, with a smile, “is wilfully to misunderstand
 them.”
@@ -2481,9 +2524,9 @@ she felt herself to be right.
 
 To Mr. Darcy it was welcome intelligence: Elizabeth had been at
 Netherfield long enough. She attracted him more than he liked; and Miss
-Bingley was uncivil toherand more teasing than usual to himself. He
+Bingley was uncivil to*her*and more teasing than usual to himself. He
 wisely resolved to be particularly careful that no sign of admiration
-shouldnowescape him—nothing that could elevate her with the hope of
+should*now*escape him—nothing that could elevate her with the hope of
 influencing his felicity; sensible that, if such an idea had been
 suggested, his behaviour during the last day must have material weight
 in confirming or crushing it. Steady to his purpose, he scarcely spoke
@@ -2523,7 +2566,7 @@ breakfast the next morning, “that you have ordered a good dinner to-day,
 because I have reason to expect an addition to our family party.”
 
 “Who do you mean, my dear? I know of nobody that is coming, I am sure,
-unless Charlotte Lucas should happen to call in; and I hopemydinners
+unless Charlotte Lucas should happen to call in; and I hope*my*dinners
 are good enough for her. I do not believe she often sees such at home.”
 
 “The person of whom I speak is a gentleman and a stranger.”
@@ -2535,7 +2578,7 @@ But—good Lord! how unlucky! there is not a bit of fish to be got
 to-day. Lydia, my love, ring the bell. I must speak to Hill this
 moment.”
 
-“It isnotMr. Bingley,” said her husband; “it is a person whom I
+“It is*not*Mr. Bingley,” said her husband; “it is a person whom I
 never saw in the whole course of my life.”
 
 This roused a general astonishment; and he had the[{79}](#)pleasure of being
@@ -2573,7 +2616,7 @@ did before him?”
 “Why, indeed, he does seem to have had some filial scruples on that
 head, as you will hear.[{80}](#)”
 
-“Hunsford, near Westerham, Kent,15th October.
+“Hunsford, near Westerham, Kent,*15th October*.
 
 “Dear Sir,
 
@@ -2673,7 +2716,7 @@ oddly.”
 “You allude, perhaps, to the entail of this estate.”
 
 “Ah, sir, I do indeed. It is a grievous affair to my poor girls, you
-must confess. Not that I mean to find fault withyou, for such things,
+must confess. Not that I mean to find fault with*you*, for such things,
 I know, are all chance in this world. There is no knowing how estates
 will go when once they come to be entailed.”
 
@@ -2714,7 +2757,7 @@ approve of both the discourses which he had already had the honour of
 preaching before her. She had also asked him twice to dine at Rosings,
 and had sent for him only the Saturday before, to make up her pool of
 quadrille in the evening. Lady Catherine was reckoned proud by many
-people, he knew, buthehad never seen anything but affability in her.
+people, he knew, but*he*had never seen anything but affability in her.
 She had always spoken to him as she would to any other gentleman; she
 made not the smallest objection to his joining in the society of the
 neighbourhood, nor to his leaving his parish occasionally[{85}](#)for a week or
@@ -2848,15 +2891,15 @@ part.
 
 His plan did not vary on seeing them. Miss Bennet’s lovely face
 confirmed his views, and established all his strictest notions of what
-was due to seniority; and for the first eveningshewas his settled
+was due to seniority; and for the first evening*she*was his settled
 choice. The next morning, however, made an alteration; for in a quarter
-of an hour’stête-à-têtewith Mrs. Bennet before breakfast, a
+of an hour’s*tête-à-tête*with Mrs. Bennet before breakfast, a
 conversation beginning with his parsonage-house, and leading naturally
 to the avowal of his hopes, that a mistress for it might be found at
 Longbourn, produced from her, amid very complaisant smiles and general
 encouragement, a caution against the very Jane he had fixed on. “As to
-heryoungerdaughters, she could not take upon her to say—she could
-not positively answer—but she did notknowof any prepossession;—hereldestdaughter she must just mention—she felt it incumbent on her to
+her*younger*daughters, she could not take upon her to say—she could
+not positively answer—but she did not*know*of any prepossession;—her*eldest*daughter she must just mention—she felt it incumbent on her to
 hint, was likely to be very soon engaged.”
 
 Mr. Collins had only to change from Jane to Elizabeth—and it was soon
@@ -2885,7 +2928,7 @@ go.
 
 In pompous nothings on his side, and civil assents on that of his
 cousins, their time passed till they entered Meryton. The attention of
-the younger ones was then no longer to be gained byhim. Their eyes
+the younger ones was then no longer to be gained by*him*. Their eyes
 were immediately wandering up the street in quest of the officers, and
 nothing less than a very smart bonnet, indeed, or a really new muslin in
 a shop window, could recall them.
@@ -3015,12 +3058,12 @@ of him since, with the smallest degree of[{97}](#)unreasonable admiration. The
 officers of the ——shire were in general a very creditable,
 gentlemanlike set and the best of them were of the present party; but
 Mr, Wickham was as far beyond them all in person, countenance, air, and
-walk, astheywere superior to the broad-faced stuffy uncle Philips,
+walk, as*they*were superior to the broad-faced stuffy uncle Philips,
 breathing port wine, who followed them into the room.
 
 “The officers of the ——shire”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 Mr. Wickham was the happy man towards whom almost every female eye was
 turned, and Elizabeth was[{98}](#)the happy woman by whom he finally seated
@@ -3077,25 +3120,25 @@ yesterday. Are you much acquainted with Mr. Darcy?”
 four days in the same house with him, and I think him very
 disagreeable.”
 
-“I have no right to givemyopinion,” said Wickham, “as to his being
+“I have no right to give*my*opinion,” said Wickham, “as to his being
 agreeable or otherwise. I am not qualified to form one. I have known him
-too long and too well to be a fair judge. It is impossible formeto
+too long and too well to be a fair judge. It is impossible for*me*to
 be impartial. But I believe your opinion of him would in general
 astonish—and, perhaps, you would not express it quite so strongly
 anywhere else. Here you are in your own family.”
 
-“Upon my word I say no moreherethan I might say in any house in the
+“Upon my word I say no more*here*than I might say in any house in the
 neighbourhood, except Netherfield. He is not at all liked in
 Hertfordshire. Everybody is[{100}](#)disgusted with his pride. You will not find
 him more favourably spoken of by anyone.”
 
 “I cannot pretend to be sorry,” said Wickham, after a short
 interruption, “that he or that any man should not be estimated beyond
-their deserts; but withhimI believe it does not often happen. The
+their deserts; but with*him*I believe it does not often happen. The
 world is blinded by his fortune and consequence, or frightened by his
 high and imposing manners, and sees him only as he chooses to be seen.”
 
-“I should take him, even onmyslight acquaintance, to be an
+“I should take him, even on*my*slight acquaintance, to be an
 ill-tempered man.”
 
 Wickham only shook his head.
@@ -3103,13 +3146,13 @@ Wickham only shook his head.
 “I wonder,” said he, at the next opportunity of speaking, “whether he is
 likely to be in this country much longer.”
 
-“I do not at all know; but Iheardnothing of his going away when I
+“I do not at all know; but I*heard*nothing of his going away when I
 was at Netherfield. I hope your plans in favour of the ——shire will
 not be affected by his being in the neighbourhood.”
 
-“Oh no—it is not formeto be driven away by Mr. Darcy. Ifhewishes to avoid seeingmehe must go. We are not on friendly terms,
+“Oh no—it is not for*me*to be driven away by Mr. Darcy. If*he*wishes to avoid seeing*me*he must go. We are not on friendly terms,
 and it always gives me pain to meet him, but I have no reason for
-avoidinghimbut what I might proclaim to all the world—a sense of
+avoiding*him*but what I might proclaim to all the world—a sense of
 very great ill-usage, and most painful regrets at his being what he is.
 His father, Miss Bennet, the late Mr. Darcy, was one of the best men
 that ever breathed, and the truest friend I ever had; and I can never be
@@ -3133,9 +3176,9 @@ most respectable, agreeable corps; and my friend Denny tempted me
 further by his account of their present quarters, and the very great
 attentions and excellent acquaintance Meryton had procured them.
 Society, I own, is necessary to me. I have been a disappointed man, and
-my spirits will not bear solitude. Imusthave employment and society.
+my spirits will not bear solitude. I*must*have employment and society.
 A military life is not what I was intended for, but circumstances have
-now made it eligible. The churchoughtto have been my profession—I
+now made it eligible. The church*ought*to have been my profession—I
 was brought up for the church; and I should at this time have been in
 possession of a most valuable living, had it pleased the gentleman we
 were speaking of just now.”
@@ -3148,7 +3191,7 @@ I cannot do justice to his kindness. He meant to provide for me amply,
 and thought he had done it; but when the living fell, it was given
 elsewhere.”
 
-“Good heavens!” cried Elizabeth; “but how couldthatbe? How could his
+“Good heavens!” cried Elizabeth; “but how could*that*be? How could his
 will be disregarded? Why did not you seek legal redress?[{102}](#)”
 
 “There was just such an informality in the terms of the bequest as to
@@ -3160,14 +3203,14 @@ Certain it is that the living became vacant two years ago, exactly as I
 was of an age to hold it, and that it was given to another man; and no
 less certain is it, that I cannot accuse myself of having really done
 anything to deserve to lose it. I have a warm unguarded temper, and I
-may perhaps have sometimes spoken my opinionofhim, andtohim, too
+may perhaps have sometimes spoken my opinion*of*him, and*to*him, too
 freely. I can recall nothing worse. But the fact is, that we are very
 different sort of men, and that he hates me.”
 
 “This is quite shocking! He deserves to be publicly disgraced.”
 
-“Some time or other hewillbe—but it shall not be byme. Till I
-can forget his father, I can never defy or exposehim.”
+“Some time or other he*will*be—but it shall not be by*me*. Till I
+can forget his father, I can never defy or expose*him*.”
 
 Elizabeth honoured him for such feelings, and thought him handsomer than
 ever as he expressed them.
@@ -3188,16 +3231,16 @@ despising his fellow-creatures in general, but did not suspect him of
 descending to such malicious revenge, such injustice, such inhumanity as
 this!”
 
-After a few minutes’ reflection, however, she continued, “Idoremember his boasting one day, at Netherfield, of the implacability of
+After a few minutes’ reflection, however, she continued, “I*do*remember his boasting one day, at Netherfield, of the implacability of
 his resentments, of his having an unforgiving temper. His disposition
 must be dreadful.”
 
-“I will not trust myself on the subject,” replied Wickham; “Ican
+“I will not trust myself on the subject,” replied Wickham; “*I*can
 hardly be just to him.”
 
 Elizabeth was again deep in thought, and after a time exclaimed, “To
 treat in such a manner the godson, the friend, the favourite of his
-father!” She could have added, “A young man, too, likeyou, whose very
+father!” She could have added, “A young man, too, like*you*, whose very
 countenance may vouch for your being amiable.” But she contented herself
 with—“And one, too, who had probably been his own companion from
 childhood, connected together, as I think you said, in the closest
@@ -3205,7 +3248,7 @@ manner.”
 
 “We were born in the same parish, within the same park; the greatest
 part of our youth was passed together: inmates of the same house,
-sharing the same amusements, objects of the same parental care. Myfather began life in the profession which your uncle, Mr. Philips,
+sharing the same amusements, objects of the same parental care.*My*father began life in the profession which your uncle, Mr. Philips,
 appears to do so much credit to; but he gave up everything to be of use
 to the late Mr. Darcy, and devoted all his time to the care of the
 Pemberley property. He was most highly esteemed by Mr. Darcy, a most
@@ -3213,14 +3256,14 @@ intimate, confidential friend. Mr. Darcy often acknowledged himself to
 be under the greatest obligations to my father’s active superintendence;
 and when, immediately before my father’s death, Mr. Darcy gave him a
 voluntary promise[{104}](#)of providing for me, I am convinced that he felt it
-to be as much a debt of gratitude tohimas of affection to myself.”
+to be as much a debt of gratitude to*him*as of affection to myself.”
 
 “How strange!” cried Elizabeth. “How abominable! I wonder that the very
 pride of this Mr. Darcy has not made him just to you. If from no better
 motive, that he should not have been too proud to be dishonest,—for
 dishonesty I must call it.”
 
-“Itiswonderful,” replied Wickham; “for almost all his actions may be
+“It*is*wonderful,” replied Wickham; “for almost all his actions may be
 traced to pride; and pride has often been his best friend. It has
 connected him nearer with virtue than any other feeling. But we are none
 of us consistent; and in his behaviour to me there were stronger
@@ -3230,11 +3273,11 @@ impulses even than pride.”
 
 “Yes; it has often led him to be liberal and generous; to give his money
 freely, to display hospitality, to assist his tenants, and relieve the
-poor. Family pride, andfilialpride, for he is very proud of what his
+poor. Family pride, and*filial*pride, for he is very proud of what his
 father was, have done this. Not to appear to disgrace his family, to
 degenerate from the popular qualities, or lose the influence of the
-Pemberley House, is a powerful motive. He has alsobrotherlypride,
-which, withsomebrotherly affection, makes him a very kind and
+Pemberley House, is a powerful motive. He has also*brotherly*pride,
+which, with*some*brotherly affection, makes him a very kind and
 careful guardian of his sister; and you will hear him generally cried up
 as the most attentive and best of brothers.”
 
@@ -3361,7 +3404,7 @@ without actual blame on either side.”
 
 “Very true, indeed; and now, my dear Jane, what have you got to say in
 behalf of the interested people who have probably been concerned in the
-business? Do clearthem, too, or we shall be obliged to think ill of
+business? Do clear*them*, too, or we shall be obliged to think ill of
 somebody.”
 
 “Laugh as much as you choose, but you will not laugh me out of my
@@ -3383,7 +3426,7 @@ think.”
 “I beg your pardon;—one knows exactly what to think.”
 
 But Jane could think with certainty on only one point,—that Mr.
-Bingley, if hehad beenimposed on,[{110}](#)would have much to suffer when
+Bingley, if he*had been*imposed on,[{110}](#)would have much to suffer when
 the affair became public.
 
 The two young ladies were summoned from the shrubbery, where this
@@ -3445,7 +3488,7 @@ for it, however. Mr. Wickham’s happiness and her own was perforce
 delayed a little longer, and Mr. Collins’s proposal accepted with as
 good a grace as she could. She was not the better pleased with his
 gallantry, from the idea it suggested of something more. It now first
-struck her, thatshewas selected from among her sisters as worthy of
+struck her, that*she*was selected from among her sisters as worthy of
 being the mistress of Hunsford Parsonage, and of assisting to form a
 quadrille table at Rosings, in the absence of more eligible visitors.
 The idea soon reached to conviction, as she observed his increasing
@@ -3453,7 +3496,7 @@ civilities towards herself, and heard his frequent attempt at a
 compliment on her wit and vivacity; and though more astonished than
 gratified herself by this effect of her charms, it was not long before
 her mother gave her to understand that the probability of their marriage
-was exceedingly agreeable toher. Elizabeth, however, did not choose
+was exceedingly agreeable to*her*. Elizabeth, however, did not choose
 to take the hint, being well aware that a serious dispute must be the
 consequence of any reply. Mr. Collins might never make the offer, and,
 till he did, it was useless to quarrel about him.
@@ -3524,7 +3567,7 @@ mind: Charlotte tried to console her.
 
 “I dare say you will find him very agreeable.”
 
-“Heaven forbid! Thatwould be the greatest misfortune of all! To find
+“Heaven forbid!*That*would be the greatest misfortune of all! To find
 a man agreeable whom one is determined to hate! Do not wish me such an
 evil.”
 
@@ -3542,20 +3585,20 @@ would be the greater punishment to her partner to oblige him to talk,[{116}](#)s
 silent. After a pause of some minutes, she addressed him a second time,
 with—
 
-“It isyourturn to say something now, Mr. Darcy. Italked about the
-dance, andyouought to make some kind of remark on the size of the
+“It is*your*turn to say something now, Mr. Darcy.*I*talked about the
+dance, and*you*ought to make some kind of remark on the size of the
 room, or the number of couples.”
 
 He smiled, and assured her that whatever she wished him to say should be
 said.
 
 “Very well; that reply will do for the present. Perhaps, by-and-by, I
-may observe that private balls are much pleasanter than public ones; butnowwe may be silent.”
+may observe that private balls are much pleasanter than public ones; but*now*we may be silent.”
 
 “Do you talk by rule, then, while you are dancing?”
 
 “Sometimes. One must speak a little, you know. It would look odd to be
-entirely silent for half an hour together; and yet, for the advantage ofsome, conversation ought to be so arranged as that they may have the
+entirely silent for half an hour together; and yet, for the advantage of*some*, conversation ought to be so arranged as that they may have the
 trouble of saying as little as possible.”
 
 “Are you consulting your own feelings in the present case, or do you
@@ -3565,10 +3608,10 @@ imagine that you are gratifying mine?”
 similarity in the turn of our minds. We are each of an unsocial,
 taciturn disposition, unwilling to speak, unless we expect to say
 something that will amaze the whole room, and be handed down to
-posterity with all theéclatof a proverb.”
+posterity with all the*éclat*of a proverb.”
 
 “This is no very striking resemblance of your own character, I am sure,”
-said he. “How near it may be tomine, I cannot pretend to say. Youthink it a faithful portrait, undoubtedly.”
+said he. “How near it may be to*mine*, I cannot pretend to say.*You*think it a faithful portrait, undoubtedly.”
 
 “I must not decide on my own performance.”
 
@@ -3578,12 +3621,12 @@ walk to Meryton. She answered in the affirmative; and, unable to resist
 the temptation, added, “When you met us there the other day, we had just
 been forming a new acquaintance.”
 
-The effect was immediate. A deeper shade ofhauteuroverspread his
+The effect was immediate. A deeper shade of*hauteur*overspread his
 features, but he said not a word; and Elizabeth, though blaming herself
 for her own weakness, could not go on. At length Darcy spoke, and in a
 constrained manner said,—
 
-“Mr. Wickham is blessed with such happy manners as may insure hismakingfriends; whether he may be equally capable ofretainingthem,
+“Mr. Wickham is blessed with such happy manners as may insure his*making*friends; whether he may be equally capable of*retaining*them,
 is less certain.”
 
 “He has been so unlucky as to lose your friendship,” replied Elizabeth,
@@ -3609,7 +3652,7 @@ that young lady, whose bright eyes are also upbraiding me.[{118}](#)”
 “Such very superior dancing is not
 often seen.”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 The latter part of this address was scarcely heard by Darcy; but Sir
 William’s allusion to his friend seemed to strike him forcibly, and his
@@ -3636,15 +3679,15 @@ no want of subject. We may compare our different opinions.”
 “No—I cannot talk of books in a ball-room; my head is always full of
 something else.”
 
-“Thepresentalways occupies you in such scenes—does it?” said he,
+“The*present*always occupies you in such scenes—does it?” said he,
 with a look of doubt.
 
 “Yes, always,” she replied, without knowing what she said; for her
 thoughts had wandered far from the subject, as soon afterwards appeared
 by her suddenly exclaiming, “I remember hearing you once say, Mr. Darcy,
 that you hardly ever forgave;—that your resentment, once created, was
-unappeasable. You are very cautious, I suppose, as to itsbeing
-created?”
+unappeasable. You are very cautious, I suppose, as to its*being
+created*?”
 
 “I am,” said he, with a firm voice.
 
@@ -3657,7 +3700,7 @@ to be secure of judging properly at first.”
 
 “May I ask to what these questions tend?”
 
-“Merely to the illustration ofyourcharacter,” said she, endeavouring
+“Merely to the illustration of*your*character,” said she, endeavouring
 to shake off her gravity. “I am trying to make it out.”
 
 “And what is your success?[{120}](#)”
@@ -3703,7 +3746,7 @@ descent, one could not expect much better.”
 
 “His guilt and his descent appear, by your account, to be the same,”
 said Elizabeth, angrily; “for I have heard you accuse him of nothing
-worse than of being the son of Mr. Darcy’s steward, and ofthat, I can
+worse than of being the son of Mr. Darcy’s steward, and of*that*, I can
 assure you, he informed me himself.”
 
 “I beg your pardon,” replied Miss Bingley, turning away with a sneer.
@@ -3745,7 +3788,7 @@ perfectly satisfied. But what does he say of the living?”
 
 “He does not exactly recollect the circumstances, though he has heard
 them from Mr. Darcy more than once, but he believes that it was left to
-himconditionallyonly.”
+him*conditionally*only.”
 
 “I have not a doubt of Mr. Bingley’s sincerity,” said Elizabeth warmly,
 “but you must excuse my not being convinced by assurances only. Mr.
@@ -3778,7 +3821,7 @@ ignorance of the connection must plead my apology.”
 “You are not going to introduce yourself to Mr. Darcy?”
 
 “Indeed I am. I shall entreat his pardon for not having done it earlier.
-I believe him to be Lady Catherine’snephew. It will be in my power to
+I believe him to be Lady Catherine’s*nephew*. It will be in my power to
 assure him that her Ladyship was quite well yesterday se’nnight.”
 
 Elizabeth tried hard to dissuade him from such a scheme; assuring him
@@ -3863,7 +3906,7 @@ mother only scolded her for being nonsensical.
 
 “What is Mr. Darcy to me, pray, that I should be afraid of him? I am
 sure we owe him no such particular civility as to be obliged to say
-nothinghemay not like to hear.”
+nothing*he*may not like to hear.”
 
 “For heaven’s sake, madam, speak lower. What advantage can it be to you
 to offend Mr. Darcy? You will never recommend yourself to his friend by
@@ -3995,7 +4038,7 @@ see her daughter settled at Netherfield in the course of three or four
 months. Of having another daughter married to Mr. Collins she thought
 with equal certainty, and with considerable, though not equal, pleasure.
 Elizabeth was the least dear to her of all her children; and though the
-man and the match were quite good enough forher, the worth of each
+man and the match were quite good enough for*her*, the worth of each
 was eclipsed by Mr. Bingley and Netherfield.[{132}](#)
 
 ## “to assure you in the most animated language.”CHAPTER XIX.
@@ -4027,7 +4070,7 @@ going away myself.”
 
 “No, no, nonsense, Lizzy. I desire you will stay where you are.” And
 upon Elizabeth’s seeming really, with vexed and embarrassed looks, about
-to escape, she added, “Lizzy, Iinsistupon your staying and hearing
+to escape, she added, “Lizzy, I*insist*upon your staying and hearing
 Mr. Collins.”
 
 Elizabeth would not oppose such an injunction; and a moment’s
@@ -4039,7 +4082,7 @@ soon as they were gone, Mr. Collins began,—
 
 “Believe me, my dear Miss Elizabeth, that your modesty, so far from
 doing you any disservice, rather adds to your other perfections. You
-would have been less amiable in my eyes had therenotbeen this little
+would have been less amiable in my eyes had there*not*been this little
 unwillingness; but allow me to assure you that I have your respected
 mother’s permission for this address.[{134}](#)You can hardly doubt the purport
 of my discourse, however your natural delicacy may lead you to
@@ -4066,7 +4109,7 @@ too!) on this subject; and it was but the very Saturday night before I
 left Hunsford,—between our pools at quadrille, while Mrs. Jenkinson was
 arranging Miss De Bourgh’s footstool,—that she said, ‘Mr. Collins, you
 must marry. A clergyman like you must marry. Choose properly, choose a
-gentlewoman formysake, and for yourown; let her be an active,
+gentlewoman for*my*sake, and for your*own*; let her be an active,
 useful sort of person, not brought up high, but able to make a small
 income go a good way. This is my advice. Find such a woman as soon as
 you can, bring her to Hunsford, and[{135}](#)I will visit her.’ Allow me, by the
@@ -4114,8 +4157,8 @@ just said, and shall hope to lead you to the altar ere long.”
 extraordinary one after my declaration. I do assure you that I am not
 one of those young ladies (if such young ladies there are) who are so
 daring as to risk their happiness on the chance of being asked a second
-time. I am perfectly serious in my refusal. You could not makemehappy, and I am convinced that I am the last woman in the world who
-would makeyouso. Nay, were your friend Lady Catherine to know me, I
+time. I am perfectly serious in my refusal. You could not make*me*happy, and I am convinced that I am the last woman in the world who
+would make*you*so. Nay, were your friend Lady Catherine to know me, I
 am persuaded she would find me in every respect ill qualified for the
 situation.”
 
@@ -4207,7 +4250,7 @@ and could not help saying so.
 “But depend upon it, Mr. Collins,” she added, “that Lizzy shall be
 brought to reason. I will speak to her about it myself directly. She is
 a very headstrong, foolish girl, and does not know her own interest; but
-I willmakeher know it.”
+I will*make*her know it.”
 
 “Pardon me for interrupting you, madam,” cried Mr. Collins; “but if she
 is really headstrong and foolish, I know not whether she would
@@ -4228,7 +4271,7 @@ husband, called out, as she entered the library,—
 “Oh, Mr. Bennet, you are wanted immediately; we are all in an uproar.
 You must come and make Lizzy marry Mr. Collins, for she vows she will
 not have him; and if you do not make haste he will change his mind and
-not haveher.[{141}](#)”
+not have*her*.[{141}](#)”
 
 Mr. Bennet raised his eyes from his book as she entered, and fixed them
 on her face with a calm unconcern, which was not in the least altered by
@@ -4267,15 +4310,15 @@ accepting it. Is it not so, Mrs. Bennet?”
 
 “An unhappy alternative is before you, Elizabeth. From this day you must
 be a stranger to one of your parents. Your mother will never see you
-again if you donotmarry Mr. Collins, and I will never see you again
-if youdo.[{142}](#)”
+again if you do*not*marry Mr. Collins, and I will never see you again
+if you*do*.[{142}](#)”
 
 Elizabeth could not but smile at such a conclusion of such a beginning;
 but Mrs. Bennet, who had persuaded herself that her husband regarded the
 affair as she wished, was excessively disappointed.
 
 “What do you mean, Mr. Bennet, by talking in this way? You promised me
-toinsistupon her marrying him.”
+to*insist*upon her marrying him.”
 
 “My dear,” replied her husband, “I have two small favours to request.
 First, that you will allow me the free use of my understanding on the
@@ -4320,7 +4363,7 @@ may be, and caring no more for us than if we were at York, provided she
 can have her own way. But I tell you what, Miss Lizzy, if you take it
 into your head to go on refusing every offer of marriage in this way,
 you will never get a husband at all—and I am sure I do not know who is
-to maintain you when your father is dead. Ishall not be able to keep
+to maintain you when your father is dead.*I*shall not be able to keep
 you—and so I warn you. I have done with you from this very day. I told
 you in the library, you know, that I should never speak to you again,
 and you will find me as good as my word. I have no pleasure in talking
@@ -4365,14 +4408,14 @@ My conduct may, I fear, be objectionable in having accepted my
 dismission from your daughter’s lips instead of your own; but we are all
 liable to error. I have certainly meant well through the whole affair.
 My object has been to secure an amiable companion for myself, with due
-consideration for the advantage of all your family; and if mymannerhas been at all reprehensible, I here beg leave to apologize.[{146}](#)”
+consideration for the advantage of all your family; and if my*manner*has been at all reprehensible, I here beg leave to apologize.[{146}](#)”
 
 ## Chapter 21: .
 
 HE discussion of Mr. Collins’s offer was now nearly at an end, and
 Elizabeth had only to suffer from the uncomfortable feelings necessarily
 attending it, and occasionally from some peevish allusion of her mother.
-As for the gentleman himself,hisfeelings were chiefly expressed, not
+As for the gentleman himself,*his*feelings were chiefly expressed, not
 by embarrassment or dejection, or[{147}](#)by trying to avoid her, but by
 stiffness of manner and resentful silence. He scarcely ever spoke to
 her; and the assiduous attentions which he had been so sensible of
@@ -4391,7 +4434,7 @@ were returned, and to lament over his absence from the Netherfield ball.
 He joined them on their entering the town, and attended them to their
 aunt’s, where his regret and vexation and the concern of everybody were
 well talked over. To Elizabeth, however, he voluntarily acknowledged
-that the necessity of his absencehadbeen self-imposed.
+that the necessity of his absence*had*been self-imposed.
 
 “I found,” said he, “as the time drew near, that I had better not meet
 Mr. Darcy;—that to be in the same room, the same party with him for so
@@ -4408,7 +4451,7 @@ occasion of introducing him to her father and mother.
 
 “Walked back with them”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 Soon after their return, a letter was delivered to Miss Bennet; it came
 from Netherfield, and was opened immediately. The envelope contained a
@@ -4469,12 +4512,12 @@ whom we shall deprive you.’
 “It is evident by this,” added Jane, “that he comes back no more this
 winter.”
 
-“It is only evident that Miss Bingley does not mean heshould.”
+“It is only evident that Miss Bingley does not mean he*should*.”
 
 “Why will you think so? It must be his own doing; he is his own master.
-But you do not knowall. Iwillread you the passage which
-particularly hurts me. I will have no reserves fromyou. ‘Mr. Darcy is
-impatient to see his sister; and to confess the truth,weare scarcely
+But you do not know*all*. I*will*read you the passage which
+particularly hurts me. I will have no reserves from*you*. ‘Mr. Darcy is
+impatient to see his sister; and to confess the truth,*we*are scarcely
 less eager to meet her again. I really do not think Georgiana Darcy has
 her equal for beauty, elegance, and accomplishments; and the affection
 she inspires in Louisa and myself is heightened into something still
@@ -4488,7 +4531,7 @@ partiality is not misleading me, I think, when I call Charles most
 capable of engaging any woman’s heart. With all these circumstances to
 favour an attachment, and nothing to prevent it, am I wrong, my dearest
 Jane, in indulging the hope of an event which will secure the happiness
-of so many?’ What think you ofthissentence, my dear Lizzy?” said
+of so many?’ What think you of*this*sentence, my dear Lizzy?” said
 Jane, as she finished it. “Is it not clear enough? Does it not expressly
 declare that Caroline neither expects nor wishes me to be her sister;
 that she is perfectly convinced of her brother’s indifference; and that
@@ -4513,12 +4556,12 @@ is not such a simpleton. Could she have seen half as much love in Mr.
 Darcy for herself, she would have ordered her wedding clothes. But the
 case is this:—we are not rich enough or grand enough for them; and she
 is[{152}](#)the more anxious to get Miss Darcy for her brother, from the notion
-that when there has beenoneinter-marriage, she may have less trouble
+that when there has been*one*inter-marriage, she may have less trouble
 in achieving a second; in which there is certainly some ingenuity, and I
 dare say it would succeed if Miss de Bourgh were out of the way. But, my
 dearest Jane, you cannot seriously imagine that, because Miss Bingley
 tells you her brother greatly admires Miss Darcy, he is in the smallest
-degree less sensible ofyourmerit than when he took leave of you on
+degree less sensible of*your*merit than when he took leave of you on
 Tuesday; or that it will be in her power to persuade him that, instead
 of being in love with you, he is very much in love with her friend.”
 
@@ -4623,14 +4666,14 @@ interest than the matter had ever[{156}](#)
 
 “So much love and eloquence”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 excited before, how many years longer Mr. Bennet was likely to live; and
 Sir William gave it as his decided opinion, that whenever Mr. Collins
 should be in possession of the Longbourn estate, it would be highly
 expedient that both he and his wife should make their appearance at St.
 James’s. The whole family in short were properly overjoyed on the
-occasion. The younger girls formed[{157}](#)hopes ofcoming outa year or two
+occasion. The younger girls formed[{157}](#)hopes of*coming out*a year or two
 sooner than they might otherwise have done; and the boys were relieved
 from their apprehension of Charlotte’s dying an old maid. Charlotte
 herself was tolerably composed. She had gained her point, and had time
@@ -4682,7 +4725,7 @@ material a step without her Ladyship’s concurrence.”
 “You cannot be too much on your guard. Risk anything rather than her
 displeasure; and if you find it likely to be raised by your coming to us
 again, which I should think exceedingly probable, stay quietly at home,
-and be satisfied thatweshall take no offence.”
+and be satisfied that*we*shall take no offence.”
 
 “Believe me, my dear sir, my gratitude is warmly excited by such
 affectionate attention; and, depend upon it, you will speedily receive
@@ -4866,7 +4909,7 @@ and of his overpowering friend, assisted by the attractions of Miss
 Darcy and the amusements of London, might be too much, she feared, for
 the strength of his attachment.
 
-As for Jane,heranxiety under this suspense was, of course, more
+As for Jane,*her*anxiety under this suspense was, of course, more
 painful than Elizabeth’s: but whatever she felt she was desirous of
 concealing; and between herself and Elizabeth, therefore, the subject
 was never alluded to. But as no such delicacy restrained her mother, an
@@ -4884,7 +4927,7 @@ from a great deal of his company. The chief of every day was spent by
 him at Lucas Lodge, and he sometimes returned to Longbourn only in time
 to make an apology for his absence before the family went to bed.
 
-“Whenever she spoke in a low voice”
+“*Whenever she spoke in a low voice*”
 
 Mrs. Bennet was really in a most pitiable state. The very mention of
 anything concerning the match threw her into an agony of ill-humour, and
@@ -4897,11 +4940,11 @@ and her daughters out of the house as soon as Mr. Bennet was dead. She
 complained bitterly of all this to her husband.
 
 “Indeed, Mr. Bennet,” said she, “it is very hard to think that Charlotte
-Lucas should ever be mistress of this house, thatIshould be forced
-to make way forher, and live to see her take my place in it!”
+Lucas should ever be mistress of this house, that*I*should be forced
+to make way for*her*, and live to see her take my place in it!”
 
 “My dear, do not give way to such gloomy thoughts. Let us hope for
-better things. Let us flatter ourselves thatImay be the survivor.”
+better things. Let us flatter ourselves that*I*may be the survivor.”
 
 This was not very consoling to Mrs. Bennet; and, therefore, instead of
 making any answer, she went on as before.
@@ -4919,7 +4962,7 @@ insensibility.”
 “I never can be thankful, Mr. Bennet, for anything about the entail. How
 anyone could have the conscience to entail away an estate from one’s own
 daughters I cannot understand; and all for the sake of Mr. Collins, too!
-Why shouldhehave it more than anybody else?”
+Why should*he*have it more than anybody else?”
 
 “I leave it to yourself to determine,” said Mr. Bennet.[{168}](#)
 
@@ -4978,7 +5021,7 @@ nothing.
 “You doubt me,” cried Jane, slightly colouring; “indeed, you have no
 reason. He may live in my memory as the most amiable man of my
 acquaintance but that is all. I have nothing either to hope or fear, and
-nothing to reproach him with. Thank God I have notthatpain. A little
+nothing to reproach him with. Thank God I have not*that*pain. A little
 time, therefore—I shall certainly try to get the better——”
 
 With a stronger voice she soon added, “I have this comfort immediately,
@@ -4993,9 +5036,9 @@ deserve.”
 Miss Bennet eagerly disclaimed all extraordinary merit, and threw back
 the praise on her sister’s warm affection.
 
-“Nay,” said Elizabeth, “this is not fair. Youwish to think all the
-world respectable, and are hurt if I speak ill of anybody. Ionly want
-to thinkyouperfect, and you set yourself against it. Do not be
+“Nay,” said Elizabeth, “this is not fair.*You*wish to think all the
+world respectable, and are hurt if I speak ill of anybody.*I*only want
+to think*you*perfect, and you set yourself against it. Do not be
 afraid of my running into any excess, of my encroaching on your
 privilege of universal good-will. You need not. There are few people
 whom I really love, and still fewer of whom I think well. The more I see
@@ -5029,8 +5072,8 @@ danger security for happiness.”
 “I must think your language too strong in speaking of both,” replied
 Jane; “and I hope you will be convinced of it, by seeing them happy
 together. But enough of this. You alluded to something else. You
-mentionedtwoinstances. I cannot misunderstand you, but I entreat
-you, dear Lizzy, not to pain me by thinkingthat person[{172}](#)to blame, and
+mentioned*two*instances. I cannot misunderstand you, but I entreat
+you, dear Lizzy, not to pain me by thinking*that person*[{172}](#)to blame, and
 saying your opinion of him is sunk. We must not be so ready to fancy
 ourselves intentionally injured. We must not expect a lively young man
 to be always so guarded and circumspect. It is very often nothing but
@@ -5184,10 +5227,10 @@ forgets her, that these sort of inconstancies are very frequent.”
 
 “Offended two or three young ladies”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 “An excellent consolation in its way,” said Elizabeth; “but it will not
-do forus. We do not suffer by accident.[{178}](#)It does not often happen
+do for*us*. We do not suffer by accident.[{178}](#)It does not often happen
 that the interference of friends will persuade a young man of
 independent fortune to think no more of a girl whom he was violently in
 love with only a few days before.”
@@ -5195,7 +5238,7 @@ love with only a few days before.”
 “But that expression of ‘violently in love’ is so hackneyed, so
 doubtful, so indefinite, that it gives me very little idea. It is as
 often applied to feelings which arise only from a half hour’s
-acquaintance, as to a real, strong attachment. Pray, howviolent wasMr. Bingley’s love?”
+acquaintance, as to a real, strong attachment. Pray, how*violent was*Mr. Bingley’s love?”
 
 “I never saw a more promising inclination; he was growing quite
 inattentive to other people, and wholly engrossed by her. Every time
@@ -5206,7 +5249,7 @@ finer symptoms? Is not general incivility the very essence of love?”
 
 “Oh, yes! of that kind of love which I suppose him to have felt. Poor
 Jane! I am sorry for her, because, with her disposition, she may not get
-over it immediately. It had better have happened toyou, Lizzy; you
+over it immediately. It had better have happened to*you*, Lizzy; you
 would have laughed yourself out of it sooner. But do you think she would
 be prevailed on to go back with us? Change of scene might be of
 service—and perhaps a little relief from home may be as useful as
@@ -5221,16 +5264,16 @@ town, all our connections are so different, and, as you well know, we go
 out so little, that it is very improbable they should meet at all,
 unless he really comes to see her.[{179}](#)”
 
-“Andthatis quite impossible; for he is now in the custody of his
+“And*that*is quite impossible; for he is now in the custody of his
 friend, and Mr. Darcy would no more suffer him to call on Jane in such a
 part of London! My dear aunt, how could you think of it? Mr. Darcy may,
-perhaps, haveheardof such a place as Gracechurch Street, but he
+perhaps, have*heard*of such a place as Gracechurch Street, but he
 would hardly think a month’s ablution enough to cleanse him from its
 impurities, were he once to enter it; and, depend upon it, Mr. Bingley
 never stirs without him.”
 
 “So much the better. I hope they will not meet at all. But does not Jane
-correspond with his sister? Shewill not be able to help calling.”
+correspond with his sister?*She*will not be able to help calling.”
 
 “She will drop the acquaintance entirely.”
 
@@ -5294,10 +5337,10 @@ honestly telling her what she thought, she thus went on:—
 are warned against it; and, therefore, I am not afraid of speaking
 openly. Seriously, I would have you be on your guard. Do not involve
 yourself, or endeavour to involve him, in an affection which the want of
-fortune would make so very imprudent. I have nothing to say againsthim: he is a most interesting young man; and if he had the fortune he
+fortune would make so very imprudent. I have nothing to say against*him*: he is a most interesting young man; and if he had the fortune he
 ought to have, I should think you could not do better. But as it is—you
 must not let your fancy run away with you. You[{182}](#)have sense, and we all
-expect you to use it. Your father would depend onyourresolution and
+expect you to use it. Your father would depend on*your*resolution and
 good conduct, I am sure. You must not disappoint your father.”
 
 “My dear aunt, this is being serious indeed.”
@@ -5314,7 +5357,7 @@ can prevent it.”
 Mr. Wickham; no, I certainly am not. But he is, beyond all comparison,
 the most agreeable man I ever saw—and if he becomes really attached to
 me—I believe it will be better that he should not. I see the imprudence
-of it. Oh,thatabominable Mr. Darcy! My father’s opinion of me does
+of it. Oh,*that*abominable Mr. Darcy! My father’s opinion of me does
 me the greatest honour; and I should be miserable to forfeit it. My
 father, however, is partial to Mr. Wickham. In short, my dear aunt, I
 should be very sorry to be the means of making any of you unhappy; but
@@ -5328,10 +5371,10 @@ first object. When I am in company with him, I will not be wishing. In
 short, I will do my best.”
 
 “Perhaps it will be as well if you discourage his coming here so very
-often. At least you should notremindyour mother of inviting him.”
+often. At least you should not*remind*your mother of inviting him.”
 
 “As I did the other day,” said Elizabeth, with a con[{183}](#)scious smile; “very
-true, it will be wise in me to refrain fromthat. But do not imagine
+true, it will be wise in me to refrain from*that*. But do not imagine
 that he is always here so often. It is on your account that he has been
 so frequently invited this week. You know my mother’s ideas as to the
 necessity of constant company for her friends. But really, and upon my
@@ -5347,7 +5390,7 @@ by the Gardiners and Jane; but, as he took up his abode with the
 Lucases, his arrival was no great inconvenience to Mrs. Bennet. His
 marriage was now fast approaching; and she was at length so far resigned
 as to think it inevitable, and even repeatedly to say, in an ill-natured
-tone, that she “wishedthey might be happy.” Thursday was to be the
+tone, that she “*wished*they might be happy.” Thursday was to be the
 wedding-day, and on Wednesday Miss Lucas paid her farewell visit; and
 when she rose to take leave, Elizabeth, ashamed of her mother’s
 ungracious and reluctant good wishes, and sincerely affected herself,
@@ -5356,7 +5399,7 @@ Charlotte said,—
 
 “I shall depend on hearing from you very often, Eliza.”
 
-“Thatyou certainly shall.”
+“*That*you certainly shall.”
 
 “And I have another favour to ask. Will you come and see me?”
 
@@ -5447,7 +5490,7 @@ she did; I can safely say, that every advance to intimacy began on
 her side. But I pity her, because she must feel that she has been
 acting wrong, and because I am very sure that anxiety for her
 brother is the cause of it. I need not explain myself farther; and
-thoughweknow this anxiety to be quite needless, yet if she
+though*we*know this anxiety to be quite needless, yet if she
 feels it, it will easily account for her behaviour to me; and so
 deservedly dear as he is to his sister, whatever anxiety she may
 feel on his behalf is natural and amiable. I cannot but wonder,
@@ -5486,7 +5529,7 @@ herself. His apparent partiality had subsided, his attentions were over,
 he was the admirer of some one else. Elizabeth was[{188}](#)watchful enough to
 see it all, but she could see it and write of it without material pain.
 Her heart had been but slightly touched, and her vanity was satisfied
-with believing thatshewould have been his only choice, had fortune
+with believing that*she*would have been his only choice, had fortune
 permitted it. The sudden acquisition of ten thousand pounds was the most
 remarkable charm of the young lady to whom he was now rendering himself
 agreeable; but Elizabeth, less clear-sighted perhaps in this case than
@@ -5501,7 +5544,7 @@ circumstances, she thus went on:—“I am now convinced, my dear aunt,
 that I have never been much in love; for had I really experienced that
 pure and elevating passion, I should at present detest his very name,
 and wish him all manner of evil. But my feelings are not only cordial
-towardshim, they are even impartial towards Miss King. I cannot find
+towards*him*, they are even impartial towards Miss King. I cannot find
 out that I hate her at all, or that I am in the least unwilling to think
 her a very good sort of girl. There can be no love in all this. My
 watchfulness has been effectual; and though I should certainly be a more
@@ -5601,7 +5644,7 @@ what to think.”
 “But he paid her not the smallest attention till her grandfather’s death
 made her mistress of this fortune?”
 
-“No—why should he? If it were not allowable for him to gainmyaffections, because I had no money, what occasion could there be for
+“No—why should he? If it were not allowable for him to gain*my*affections, because I had no money, what occasion could there be for
 making love to a girl whom he did not care about, and who was equally
 poor?”
 
@@ -5609,16 +5652,16 @@ poor?”
 soon after this event.”
 
 “A man in distressed circumstances has not time for all those elegant
-decorums which other people may observe. Ifshedoes not object to it,
-why shouldwe?”
+decorums which other people may observe. If*she*does not object to it,
+why should*we*?”
 
-“Hernot objecting does not justifyhim. It only shows her being
+“*Her*not objecting does not justify*him*. It only shows her being
 deficient in something herself—sense or feeling.[{193}](#)”
 
-“Well,” cried Elizabeth, “have it as you choose. Heshall be
-mercenary, andsheshall be foolish.”
+“Well,” cried Elizabeth, “have it as you choose.*He*shall be
+mercenary, and*she*shall be foolish.”
 
-“No, Lizzy, that is what I donotchoose. I should be sorry, you know,
+“No, Lizzy, that is what I do*not*choose. I should be sorry, you know,
 to think ill of a young man who has lived so long in Derbyshire.”
 
 “Oh, if that is all, I have a very poor opinion of young men who live in
@@ -5642,12 +5685,12 @@ acceptance of the invitation was most ready and grateful. “My dear, dear
 aunt,” she rapturously cried, “what delight! what felicity! You give me
 fresh life and vigour. Adieu to disappointment and spleen. What are men
 to rocks and mountains? Oh, what hours of transport we shall spend! And
-when wedoreturn, it shall not be like other travellers, without
-being able to give one accurate idea of anything. Wewillknow where
-we have gone—wewillrecollect what we have seen. Lakes, mountains,
+when we*do*return, it shall not be like other travellers, without
+being able to give one accurate idea of anything. We*will*know where
+we have gone—we*will*recollect what we have seen. Lakes, mountains,
 and rivers, shall not be jumbled together in our imaginations; nor, when
 we attempt to describe any particular scene, will we begin quarrelling
-about its relative situation. Letourfirst effusions be less
+about its relative situation. Let*our*first effusions be less
 insupportable than those of the generality of travellers.[{194}](#)”
 
 ## “At the door.”CHAPTERXXVIII.
@@ -5733,7 +5776,7 @@ service is over. I have scarcely any hesitation in saying that she will
 include you and my sister Maria in every invitation with which she
 honours us during your stay here. Her behaviour to my dear Charlotte is
 charming. We dine at Rosings twice every week, and are never allowed to
-walk home. Her Ladyship’s carriage is regularly ordered for us. Ishouldsay, one of her Ladyship’s carriages, for she has several.”
+walk home. Her Ladyship’s carriage is regularly ordered for us. I*should*say, one of her Ladyship’s carriages, for she has several.”
 
 “Lady Catherine is a very respectable, sensible woman, indeed,” added
 Charlotte, “and a most attentive neighbour.”
@@ -6012,12 +6055,12 @@ younger sisters out, Miss Bennet?”
 younger ones out before the elder are married! Your younger sisters must
 be very young?”
 
-“Yes, my youngest is not sixteen. Perhapssheis full young to be much
+“Yes, my youngest is not sixteen. Perhaps*she*is full young to be much
 in company. But really, ma’am, I think it would be very hard upon
 younger sisters that they should not have their share of society and
 amusement, because the elder may not have the means or inclination to
 marry early. The last born has as good a right to the pleasures of youth
-as the first. And to be kept back onsucha motive! I think it would
+as the first. And to be kept back on*such*a motive! I think it would
 not be very likely to promote sisterly affection or delicacy of mind.”
 
 “Upon my word,” said her Ladyship, “you give your opinion very decidedly
@@ -6148,7 +6191,7 @@ in order to have[{213}](#)
 
 “The gentlemen accompanied him.”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 the earliest assurance of it; and, after making his bow as the carriage
 turned into the park, hurried home with the great intelligence. On the
@@ -6219,7 +6262,7 @@ talked so agreeably of Kent and Hertfordshire, of travelling and staying
 at home, of new books and music, that Elizabeth had never been half so
 well entertained in that room before; and they conversed with so much
 spirit and flow as to draw the attention of Lady Catherine herself, as
-well as of Mr. Darcy. Hiseyes had been soon and repeatedly turned
+well as of Mr. Darcy.*His*eyes had been soon and repeatedly turned
 towards them with a look of curiosity; and that her Ladyship, after a
 while, shared the feeling, was more openly acknowledged, for she did not
 scruple to call out,—
@@ -6269,7 +6312,7 @@ countenance. Elizabeth saw what he was doing, and at the first
 convenient pause turned to him with an arch smile, and said,—
 
 “You mean to frighten me, Mr. Darcy, by coming in all this state to hear
-me. But I will not be alarmed, though your sisterdoesplay so well.
+me. But I will not be alarmed, though your sister*does*play so well.
 There is a stubbornness about me that never can bear to be frightened at
 the will of others. My courage always rises with every attempt to
 intimidate me.”
@@ -6329,7 +6372,7 @@ concerns, as I often see done.”
 masterly manner which I see so many women’s do. They have not the same
 force or rapidity, and do not produce the same expression. But then I
 have[{220}](#)always supposed it to be my own fault—because I would not take
-the trouble of practising. It is not that I do not believemyfingers
+the trouble of practising. It is not that I do not believe*my*fingers
 as capable as any other woman’s of superior execution.”
 
 Darcy smiled and said, “You are perfectly right. You have employed your
@@ -6350,7 +6393,7 @@ Elizabeth looked at Darcy, to see how cordially he assented to his
 cousin’s praise: but neither at that moment nor at any other could she
 discern any symptom of love; and from the whole of his behaviour to Miss
 De Bourgh she derived this comfort for Miss Bingley, that he might have
-been just as likely to marryher, had she been his relation.
+been just as likely to marry*her*, had she been his relation.
 
 Lady Catherine continued her remarks on Elizabeth’s performance, mixing
 with them many instructions on execution and taste. Elizabeth received
@@ -6376,7 +6419,7 @@ be within.
 They then sat down, and when her inquiries after Rosings were made,
 seemed in danger of sinking into total silence. It was absolutely
 necessary, therefore, to think of something; and in this emergency
-recollectingwhenshe had seen him last in Hertfordshire, and feeling
+recollecting*when*she had seen him last in Hertfordshire, and feeling
 curious to know what he would say on the subject of their hasty
 departure, she observed,—
 
@@ -6436,8 +6479,8 @@ distance of her own family and friends.”
 “And what is fifty miles of good road? Little more than half a day’s
 journey. Yes, I call it a very easy distance.”
 
-“I should never have considered the distance as one of[{224}](#)theadvantagesof the match,” cried Elizabeth. “I should never have said Mrs. Collins
-was settlednearher family.”
+“I should never have considered the distance as one of[{224}](#)the*advantages*of the match,” cried Elizabeth. “I should never have said Mrs. Collins
+was settled*near*her family.”
 
 “It is a proof of your own attachment to Hertfordshire. Anything beyond
 the very neighbourhood of Longbourn, I suppose, would appear far.”
@@ -6450,12 +6493,12 @@ Netherfield, and she blushed as she answered,—
 family. The far and the near must be relative, and depend on many
 varying circumstances. Where there is fortune to make the expense of
 travelling unimportant, distance becomes no evil. But that is not the
-casehere. Mr. and Mrs. Collins have a comfortable income, but not
+case*here*. Mr. and Mrs. Collins have a comfortable income, but not
 such a one as will allow of frequent journeys—and I am persuaded my
-friend would not call herselfnearher family under less thanhalfthe present distance.”
+friend would not call herself*near*her family under less than*half*the present distance.”
 
-Mr. Darcy drew his chair a little towards her, and said, “Youcannot
-have a right to such very strong local attachment. Youcannot have
+Mr. Darcy drew his chair a little towards her, and said, “*You*cannot
+have a right to such very strong local attachment.*You*cannot have
 been always at Longbourn.”
 
 Elizabeth looked surprised. The gentleman experienced some change of
@@ -6466,13 +6509,13 @@ glancing over it, said, in a colder voice,—
 
 A short dialogue on the subject of the country ensued, on either side
 calm and concise—and soon put an end to by the entrance of Charlotte
-and her sister, just returned from their walk. Thetête-à-têtesurprised them. Mr.[{225}](#)Darcy related the mistake which had occasioned his
+and her sister, just returned from their walk. The*tête-à-tête*surprised them. Mr.[{225}](#)Darcy related the mistake which had occasioned his
 intruding on Miss Bennet, and, after sitting a few minutes longer,
 without saying much to anybody, went away.
 
 “Accompanied by their aunt”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 [{226}](#)
 
@@ -6546,7 +6589,7 @@ encounter that he was asking some odd unconnected questions—about her
 pleasure in being at Hunsford, her love of solitary walks, and her
 opinion of Mr. and Mrs. Collins’s happiness; and that in speaking of
 Rosings, and her not perfectly understanding the house, he seemed to
-expect that whenever she came into Kent again she would be stayingtheretoo. His words seemed to imply it. Could he have Colonel
+expect that whenever she came into Kent again she would be staying*there*too. His words seemed to imply it. Could he have Colonel
 Fitzwilliam in his thoughts? She supposed, if he meant anything, he must
 mean an allusion to what might arise in that quarter. It distressed her
 a little, and she was quite glad to find herself at the gate in the
@@ -6640,7 +6683,7 @@ man—he is a great friend of Darcy’s.”
 “Oh yes,” said Elizabeth drily—“Mr. Darcy is uncommonly kind to Mr.
 Bingley, and takes a prodigious deal of care of him.”
 
-“Care of him! Yes, I really believe Darcydoestake care of him in
+“Care of him! Yes, I really believe Darcy*does*take care of him in
 those points where he most wants care.[{232}](#)From something that he told me
 in our journey hither, I have reason to think Bingley very much indebted
 to him. But I ought to beg his pardon, for I have no right to suppose
@@ -6699,11 +6742,11 @@ matters till they reached the Parsonage. There, shut into her own room,
 as soon as their visitor left them, she could think without interruption
 of all that she had heard. It was not to be supposed that any other
 people could be meant than those with whom she was connected. There
-could not exist in the worldtwomen over whom Mr. Darcy could have
+could not exist in the world*two*men over whom Mr. Darcy could have
 such boundless influence. That he had been concerned in the measures
 taken to separate Mr. Bingley and Jane, she had never doubted; but she
 had always attributed to Miss Bingley the principal design and
-arrangement of them. If his own vanity, however, did not mislead him,hewas the cause—his pride and caprice were the cause—of all that
+arrangement of them. If his own vanity, however, did not mislead him,*he*was the cause—his pride and caprice were the cause—of all that
 Jane had suffered, and still continued to suffer. He had ruined for a
 while every hope of happiness for the most affectionate, generous heart
 in the world; and no one could say how lasting an evil he might have
@@ -6721,7 +6764,7 @@ anything be urged against my father, who, though with some
 peculiarities, has abilities which Mr. Darcy himself need not disdain,
 and respectability which he will probably never reach.” When she thought
 of her mother, indeed, her confidence gave way a little; but she would
-not allow that any objectionstherehad material weight with Mr.
+not allow that any objections*there*had material weight with Mr.
 Darcy, whose pride, she was convinced, would receive a deeper wound from
 the want of importance in his friend’s connections than from their want
 of sense; and she was quite decided, at last, that he had been partly
@@ -6800,7 +6843,7 @@ representing to her the strength of that attachment which in spite of
 all his endeavours he had found impossible to conquer; and with
 expressing his hope that it would now be rewarded by her acceptance of
 his hand. As he said this she could easily see that he had no doubt of a
-favourable answer. Hespokeof apprehension and anxiety, but his
+favourable answer. He*spoke*of apprehension and anxiety, but his
 countenance expressed real security. Such a circumstance[{238}](#)could only
 exasperate farther; and when he ceased the colour rose into her cheeks
 and she said,—
@@ -6808,7 +6851,7 @@ and she said,—
 “In such cases as this, it is, I believe, the established mode to
 express a sense of obligation for the sentiments avowed, however
 unequally they may be returned. It is natural that obligation should be
-felt, and if I couldfeelgratitude, I would now thank you. But I
+felt, and if I could*feel*gratitude, I would now thank you. But I
 cannot—I have never desired your good opinion, and you have certainly
 bestowed it most unwillingly. I am sorry to have occasioned pain to
 anyone. It has been most unconsciously done, however, and I hope will be
@@ -6825,13 +6868,13 @@ himself to have attained it. The pause was to Elizabeth’s feelings
 dreadful. At length, in a voice of forced calmness, he said,—
 
 “And this is all the reply which I am to have the honour of expecting! I
-might, perhaps, wish to be informed why, with so littleendeavourat
+might, perhaps, wish to be informed why, with so little*endeavour*at
 civility, I am thus rejected. But it is of small importance.”
 
 “I might as well inquire,” replied she, “why, with so evident a design
 of offending and insulting me, you chose to tell me that you liked me
 against your will, against your reason, and even against your character?
-Was not this some excuse for incivility, if Iwasuncivil? But I have
+Was not this some excuse for incivility, if I*was*uncivil? But I have
 other provocations. You know I have.[{239}](#)Had not my own feelings decided
 against you, had they been indifferent, or had they even been
 favourable, do you think that any consideration would tempt me to accept
@@ -6843,7 +6886,7 @@ was short, and he listened without attempting to interrupt her while she
 continued,—
 
 “I have every reason in the world to think ill of you. No motive can
-excuse the unjust and ungenerous part you actedthere. You dare not,
+excuse the unjust and ungenerous part you acted*there*. You dare not,
 you cannot deny that you have been the principal, if not the only means
 of dividing them from each other, of exposing one to the censure of the
 world for caprice and instability, the other to its derision for
@@ -6858,7 +6901,7 @@ He even looked at her with a smile of affected incredulity.
 
 With assumed tranquillity he then replied, “I have no wish of denying
 that I did everything in my power to separate my friend from your
-sister, or that I rejoice in my success. TowardshimI have been
+sister, or that I rejoice in my success. Towards*him*I have been
 kinder than towards myself.”
 
 Elizabeth disdained the appearance of noticing this civil reflection,
@@ -7036,8 +7079,8 @@ in him. Your sister I also watched. Her look and manners were open,
 cheerful, and engaging as ever, but without any symptom of peculiar
 regard; and I remained convinced, from the evening’s scrutiny, that
 though she received his attentions with pleasure, she did not invite
-them by any participation of sentiment. Ifyouhave not been mistaken
-here,Imust have been in an error. Your superior knowledge of your
+them by any participation of sentiment. If*you*have not been mistaken
+here,*I*must have been in an error. Your superior knowledge of your
 sister must make the latter probable. If it be so, if I have been misled
 by such error to inflict pain on her, your resentment has not been
 unreasonable. But I shall not scruple to assert, that the serenity of
@@ -7101,7 +7144,7 @@ governed me may to you very naturally appear insufficient, I have not
 yet learnt to condemn them.—With respect to that other, more weighty
 accusation, of having injured Mr. Wickham, I can only refute it by
 laying before you the whole of his connection with my family. Of what he
-hasparticularlyaccused me I am ignorant; but of the truth of what I
+has*particularly*accused me I am ignorant; but of the truth of what I
 shall relate I can summon more than one witness of undoubted veracity.[{249}](#)Mr. Wickham is the son of a very respectable man, who had for many years
 the management of all the Pemberley estates, and whose good conduct in
 the discharge of his trust naturally inclined my father to be of service
@@ -7199,7 +7242,7 @@ related, I can appeal more particularly to the testimony of Colonel
 Fitzwilliam, who, from our near relationship and constant intimacy, and
 still more as one of the executors of my father’s will, has been
 unavoidably acquainted with every particular of these transactions. If
-your abhorrence ofmeshould makemyassertions valueless, you
+your abhorrence of*me*should make*my*assertions valueless, you
 cannot be prevented by the same cause from confiding in my cousin; and
 that there may be the possibility of consulting him, I shall endeavour
 to find some opportunity of putting this letter in your hands in the
@@ -7276,7 +7319,7 @@ nothing had been known in Hertfordshire but what he told[{256}](#)
 
 “Meeting accidentally in Town”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 himself. As to his real character, had information been in her power,
 she had never felt a wish of inquiring. His countenance, voice, and
@@ -7305,11 +7348,11 @@ well assured of his cousin’s corroboration.
 
 She perfectly remembered everything that had passed in conversation
 between Wickham and herself in their first evening at Mr. Philips’s.
-Many of his expressions were still fresh in her memory. She wasnowstruck with the impropriety of such communications to a stranger, and
+Many of his expressions were still fresh in her memory. She was*now*struck with the impropriety of such communications to a stranger, and
 wondered it had escaped her before. She saw the indelicacy of putting
 himself forward as he had done, and the inconsistency of his professions
 with his conduct. She remembered that he had boasted of having no fear
-of seeing Mr. Darcy—that Mr. Darcy might leave the country, but thatheshould stand his ground; yet he had avoided the Netherfield ball
+of seeing Mr. Darcy—that Mr. Darcy might leave the country, but that*he*should stand his ground; yet he had avoided the Netherfield ball
 the very next week. She remembered, also, that till the Netherfield
 family had quitted the country, he had told his story to no one but
 herself; but that after their removal, it had been everywhere discussed;
@@ -7357,7 +7400,7 @@ prepossession and ignorance, and driven reason away where either were
 concerned. Till this moment, I never knew myself.”
 
 From herself to Jane, from Jane to Bingley, her thoughts were in a line
-which soon brought to her recollection that Mr. Darcy’s explanationtherehad appeared very insufficient; and she read it again. Widely
+which soon brought to her recollection that Mr. Darcy’s explanation*there*had appeared very insufficient; and she read it again. Widely
 different was the effect of a second perusal. How could she deny that
 credit to his assertions, in one instance, which she had been obliged to
 give in the other? He declared himself to have been totally unsuspicious
@@ -7396,7 +7439,7 @@ She was immediately told, that the two gentlemen from Rosings had each
 called during her absence; Mr. Darcy, only for a few minutes, to take
 leave, but that Colonel Fitzwilliam had been sitting with them at least
 an hour, hoping for her return, and almost resolving to walk after her
-till she could be found. Elizabeth could but justaffectconcern in
+till she could be found. Elizabeth could but just*affect*concern in
 missing him; she really rejoiced at it. Colonel Fitzwilliam was no
 longer an object. She could think only of her letter.[{261}](#)
 
@@ -7452,11 +7495,11 @@ spare you for another fortnight.”
 
 “Dawson”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 “Oh, your father, of course, may spare you, if your mother can.
 Daughters are never of so much consequence to a father. And if you will
-stay anothermonthcomplete, it will be in my power to take one of you
+stay another*month*complete, it will be in my power to take one of you
 as far as London, for I am going there early in June,[{264}](#)for a week; and
 as Dawson does not object to the barouche-box, there will be very good
 room for one of you—and, indeed, if the weather should happen to be
@@ -7478,7 +7521,7 @@ Darcy of Pemberley, and Lady Anne, could not have appeared with
 propriety in a different manner. I am excessively attentive to all those
 things. You must send John with the young ladies, Mrs. Collins. I am
 glad it occurred to me to mention it; for it would really be
-discreditable toyouto let them go alone.”
+discreditable to*you*to let them go alone.”
 
 “My uncle is to send a servant for us.”
 
@@ -7567,7 +7610,7 @@ your time unpleasantly.”
 
 Elizabeth was eager with her thanks and assurances of happiness. She had
 spent six weeks with great enjoyment; and the pleasure of being with
-Charlotte, and the kind attention she had received, must makeherfeel
+Charlotte, and the kind attention she had received, must make*her*feel
 the obliged. Mr. Collins was gratified; and with a more smiling
 solemnity replied,—
 
@@ -7697,7 +7740,7 @@ and I dare say would hardly cost anything at all. Mamma would like to
 go, too, of all things! Only think what a miserable summer else we shall
 have!”
 
-“Yes,” thought Elizabeth; “thatwould be a delightful scheme, indeed,
+“Yes,” thought Elizabeth; “*that*would be a delightful scheme, indeed,
 and completely do for us at once. Good Heaven! Brighton and a whole
 campful of soldiers, to us, who have been overset already by one poor
 regiment of militia, and the monthly balls of Meryton![{274}](#)”
@@ -7724,12 +7767,12 @@ imprudent as to fortune.”
 
 “But I hope there is no strong attachment on either side,” said Jane.
 
-“I am sure there is not onhis. I will answer for it, he never cared
-three straws about her. Whocouldabout such a nasty little freckled
+“I am sure there is not on*his*. I will answer for it, he never cared
+three straws about her. Who*could*about such a nasty little freckled
 thing?”
 
 Elizabeth was shocked to think that, however incapable of such
-coarseness ofexpressionherself, the coarseness of thesentimentwas little other than her own breast had formerly harboured and fancied
+coarseness of*expression*herself, the coarseness of the*sentiment*was little other than her own breast had formerly harboured and fancied
 liberal!
 
 As soon as all had ate, and the elder ones paid, the carriage was
@@ -7747,11 +7790,11 @@ before you came back. Jane will be quite an old maid soon, I declare.
 She is almost three-and-twenty! Lord! how ashamed I should be of not
 being married before three-and-twenty! My aunt Philips wants you so to
 get husbands you can’t think. She says Lizzy had better have taken Mr.
-Collins; butIdo not think there would have been any fun in it. Lord!
-how I should like to be married before any of you! and then I wouldchaperonyou about to all the balls. Dear me! we had such a good piece
+Collins; but*I*do not think there would have been any fun in it. Lord!
+how I should like to be married before any of you! and then I would*chaperon*you about to all the balls. Dear me! we had such a good piece
 of fun the other day at Colonel Forster’s! Kitty and me were to spend
 the day there, and Mrs. Forster promised to have a little dance in the
-evening; (by-the-bye, Mrs. Forster and me aresuchfriends!) and so
+evening; (by-the-bye, Mrs. Forster and me are*such*friends!) and so
 she asked the two Harringtons to come: but Harriet was ill, and so Pen
 was forced to come by herself; and then, what do you think we did? We
 dressed up Chamberlayne in woman’s clothes, on purpose to pass for a
@@ -7760,7 +7803,7 @@ Forster, and Kitty and me, except my aunt, for we were forced to borrow
 one of her gowns; and you cannot imagine how well he looked! When Denny,
 and Wickham, and Pratt, and two or three more of the men came in, they
 did not know him in the least. Lord! how I laughed! and so did Mrs.
-Forster. I thought I should have died. Andthatmade the men[{276}](#)suspect
+Forster. I thought I should have died. And*that*made the men[{276}](#)suspect
 something, and then they soon found out what was the matter.”
 
 With such kind of histories of their parties and good jokes did Lydia,
@@ -7797,7 +7840,7 @@ loud, that anybody might have heard us ten miles off!”
 
 To this, Mary very gravely replied, “Far be it from me, my dear sister,
 to depreciate such pleasures. They would doubtless be congenial with the
-generality of female minds. But I confess they would have no charms forme. I should infinitely prefer a book.”
+generality of female minds. But I confess they would have no charms for*me*. I should infinitely prefer a book.”
 
 But of this answer Lydia heard not a word. She seldom listened to
 anybody for more than half a minute, and never attended to Mary at all.
@@ -7807,7 +7850,7 @@ Meryton, and see how everybody went on; but Elizabeth steadily opposed
 the scheme. It should not be said, that the Miss Bennets could not be at
 home half a day before they were in pursuit of the officers. There was
 another reason, too, for her opposition. She dreaded seeing Wickham
-again, and was resolved to avoid it as long as possible. The comfort toher, of the regiment’s approaching removal, was indeed beyond
+again, and was resolved to avoid it as long as possible. The comfort to*her*, of the regiment’s approaching removal, was indeed beyond
 expression. In a fortnight they were to go, and once gone, she hoped
 there could be nothing more to plague her on his account.
 
@@ -7847,7 +7890,7 @@ You do not blame me, however, for refusing him?”
 
 “No—I do not know that you were wrong in saying what you did.”
 
-“But youwillknow it, when I have told you what happened the very
+“But you*will*know it, when I have told you what happened the very
 next day.”
 
 She then spoke of the letter, repeating the whole of its contents as far
@@ -7888,7 +7931,7 @@ countenance! such an openness and gentleness in his manner.”
 two young men. One has got all the goodness, and the other all the
 appearance of it.”
 
-“I never thought Mr. Darcy so deficient in theappearanceof it as you
+“I never thought Mr. Darcy so deficient in the*appearance*of it as you
 used to do.”
 
 “And yet I meant to be uncommonly clever in taking so decided a dislike
@@ -7906,7 +7949,7 @@ felt, no Jane to comfort me, and say that I had not been so very weak,
 and[{281}](#)vain, and nonsensical, as I knew I had! Oh, how I wanted you!”
 
 “How unfortunate that you should have used such very strong expressions
-in speaking of Wickham to Mr. Darcy, for now theydoappear wholly
+in speaking of Wickham to Mr. Darcy, for now they*do*appear wholly
 undeserved.”
 
 “Certainly. But the misfortune of speaking with bitterness is a most
@@ -7960,7 +8003,7 @@ feelings of her friends, were requisite to check the indulgence of those
 regrets which must have been injurious to her own health and their
 tranquillity.
 
-“Well, Lizzy,” said Mrs. Bennet, one day, “what is your opinionnowof
+“Well, Lizzy,” said Mrs. Bennet, one day, “what is your opinion*now*of
 this sad business of Jane’s? For my part, I am determined never to speak
 of it again to anybody. I told my sister Philips so the other day. But I
 cannot find out that Jane saw anything of him in[{283}](#)London. Well, he is a
@@ -7988,12 +8031,12 @@ made no answer.
 Collinses live very comfortable, do they? Well, well, I only hope it
 will last. And what sort of table do they keep? Charlotte is an
 excellent manager, I dare say. If she is half as sharp as her mother,
-she is saving enough. There is nothing extravagant intheirhousekeeping, I dare say.”
+she is saving enough. There is nothing extravagant in*their*housekeeping, I dare say.”
 
 “No, nothing at all.”
 
-“A great deal of good management, depend upon it. Yes, yes. Theywill
-take care not to outrun their income. Theywill never be distressed
+“A great deal of good management, depend upon it. Yes, yes.*They*will
+take care not to outrun their income.*They*will never be distressed
 for money. Well, much good may it do them! And so, I suppose, they often
 talk of having Longbourn when your father is dead. They look upon it
 quite as their own, I dare say, whenever that happens.”
@@ -8002,7 +8045,7 @@ quite as their own, I dare say, whenever that happens.”
 
 “No; it would have been strange if they had. But I make no doubt they
 often talk of it between themselves. Well, if they can be easy with an
-estate that is not lawfully their own, so much the better. Ishould be
+estate that is not lawfully their own, so much the better.*I*should be
 ashamed of having one that was only entailed on me.[{285}](#)”
 
 ## “When Colonel Miller’s regiment went.”CHAPTER XLI.
@@ -8026,7 +8069,7 @@ she had herself endured on a similar occasion five-and-twenty years ago.
 “I am sure,” said she, “I cried for two days together when Colonel
 Miller’s regiment went away. I thought I should have broke my heart.”
 
-“I am sure I shall breakmine,” said Lydia.
+“I am sure I shall break*mine*,” said Lydia.
 
 “If one could but go to Brighton!” observed Mrs. Bennet.
 
@@ -8034,7 +8077,7 @@ Miller’s regiment went away. I thought I should have broke my heart.”
 
 “A little sea-bathing would set me up for ever.”
 
-“And my aunt Philips is sure it would domea great deal of good,”
+“And my aunt Philips is sure it would do*me*a great deal of good,”
 added Kitty.
 
 Such were the kind of lamentations resounding perpetually through
@@ -8048,7 +8091,7 @@ received an invitation from Mrs. Forster, the wife of the colonel of the
 regiment, to accompany her to Brighton. This invaluable friend was a
 very young woman, and very lately married. A resemblance in good-humour
 and good spirits had recommended her and Lydia to each other, and out of
-theirthreemonths’ acquaintance they had been intimatetwo.[{287}](#)
+their*three*months’ acquaintance they had been intimate*two*.[{287}](#)
 
 The rapture of Lydia on this occasion, her adoration of Mrs. Forster,
 the delight of Mrs. Bennet, and the mortification of Kitty, are scarcely
@@ -8058,8 +8101,8 @@ congratulations, and laughing and talking with more violence than ever;
 whilst the luckless Kitty continued in the parlour repining at her fate
 in terms as unreasonable as her accent was peevish.
 
-“I cannot see why Mrs. Forster should not askmeas well as Lydia,”
-said she, “though I amnother particular friend. I have just as much
+“I cannot see why Mrs. Forster should not ask*me*as well as Lydia,”
+said she, “though I am*not*her particular friend. I have just as much
 right to be asked as she has, and more too, for I am two years older.”
 
 In vain did Elizabeth attempt to make her reasonable, and Jane to make
@@ -8147,7 +8190,7 @@ officers at once.
 
 “Tenderly flirting”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 Had she known that her sister sought to tear her from such prospects and
 such realities as these, what would have been her sensations? They could
@@ -8224,7 +8267,7 @@ accents,—
 
 “You, who so well know my feelings towards Mr. Darcy, will readily
 comprehend how sincerely I must rejoice that he is wise enough to assume
-even the[{293}](#)appearanceof what is right. His pride, in that direction,
+even the[{293}](#)*appearance*of what is right. His pride, in that direction,
 may be of service, if not to himself, to many others, for it must deter
 him from such foul misconduct as I have suffered by. I only fear that
 the sort of cautiousness to which you, I imagine, have been alluding, is
@@ -8237,7 +8280,7 @@ has very much at heart.”
 Elizabeth could not repress a smile at this, but she answered only by a
 slight inclination of the head. She saw that he wanted to engage her on
 the old subject of his grievances, and she was in no humour to indulge
-him. The rest of the evening passed with theappearance, on his side,
+him. The rest of the evening passed with the*appearance*, on his side,
 of usual cheerfulness, but with no further attempt to distinguish
 Elizabeth; and they parted at last with mutual civility, and possibly a
 mutual desire of never meeting again.
@@ -8527,7 +8570,7 @@ Elizabeth coloured, and said, “A little.”
 
 “Yes, very handsome.”
 
-“I am sureIknow none so handsome; but in the gallery upstairs you
+“I am sure*I*know none so handsome; but in the gallery upstairs you
 will see a finer, larger picture of him than this. This room was my late
 master’s favourite room, and these miniatures are just as they used to
 be then. He was very fond of them.”
@@ -8558,7 +8601,7 @@ time here; and Miss Darcy is always down for the summer months.”
 
 “If your master would marry, you might see more of him.”
 
-“Yes, sir; but I do not know whenthatwill be. I do not know who is
+“Yes, sir; but I do not know when*that*will be. I do not know who is
 good enough for him.”
 
 Mr. and Mrs. Gardiner smiled. Elizabeth could not help saying, “It is
@@ -8731,7 +8774,7 @@ one spot of Pemberley House, whichever it might be, where Mr. Darcy then
 was. She longed to know what at that moment was passing in his mind; in
 what manner he thought of her, and whether, in defiance of everything,
 she was still dear to him. Perhaps he had been civil only because he
-felt himself at ease; yet there had been[{311}](#)thatin his voice, which was
+felt himself at ease; yet there had been[{311}](#)*that*in his voice, which was
 not like ease. Whether he had felt more of pain or of pleasure in seeing
 her, she could not tell, but he certainly had not seen her with
 composure.
@@ -8792,7 +8835,7 @@ fashion.”
 The introduction, however, was immediately made; and as she named their
 relationship to herself, she stole a sly look at him, to see how he bore
 it; and was not without the expectation of his decamping as fast as he
-could from such disgraceful companions. That he wassurprisedby the
+could from such disgraceful companions. That he was*surprised*by the
 connection was evident: he sustained it, however, with fortitude: and,
 so far from going away, turned back with them, and entered into
 conversation with Mr. Gardiner. Elizabeth could not but be pleased,
@@ -8811,7 +8854,7 @@ walking arm in arm with Elizabeth, gave her a look expressive of her
 wonder. Elizabeth said nothing, but it gratified her exceedingly; the
 compliment must be all for herself. Her astonishment, however, was
 extreme; and continually was she repeating, “Why is he so altered? From
-what can it proceed? It cannot be forme, it cannot be formysake
+what can it proceed? It cannot be for*me*, it cannot be for*my*sake
 that his manners are thus softened. My reproofs at Hunsford could not
 work such a change as this. It is impossible that he should still love
 me.[{314}](#)”
@@ -8837,7 +8880,7 @@ who will claim an acquaintance with you,—Mr. Bingley and his sisters.”
 
 Elizabeth answered only by a slight bow. Her thoughts were instantly
 driven back to the time when Mr. Bingley’s name had been last mentioned
-between them; and if she might judge from his complexion,hismind was
+between them; and if she might judge from his complexion,*his*mind was
 not very differently engaged.
 
 “There is also one other person in the party,” he continued after a
@@ -8865,7 +8908,7 @@ have been said, and silence was very awkward. She wanted to talk, but
 there seemed an embargo on every subject. At last she recollected that
 she had been travelling, and they talked of Matlock and Dovedale with
 great perseverance. Yet time and her aunt moved slowly—and her patience
-and her ideas were nearly worn out before thetête-à-têtewas over.
+and her ideas were nearly worn out before the*tête-à-tête*was over.
 
 On Mr. and Mrs. Gardiner’s coming up they were all pressed to go into
 the house and take some refreshment; but this was declined, and they
@@ -8878,9 +8921,9 @@ pronounced him to be infinitely superior to anything they had expected.[{316}](#
 
 “He is perfectly well-behaved, polite, and unassuming,” said her uncle.
 
-“Thereissomething a little stately in him, to be sure,” replied her
+“There*is*something a little stately in him, to be sure,” replied her
 aunt; “but it is confined to his air, and is not unbecoming. I can now
-say with the housekeeper, that though some people may call him proud,Ihave seen nothing of it.”
+say with the housekeeper, that though some people may call him proud,*I*have seen nothing of it.”
 
 “I was never more surprised than by his behaviour to us. It was more
 than civil; it was really attentive; and there was no necessity for such
@@ -8911,7 +8954,7 @@ speaks. And there is something of dignity in his countenance, that would
 not give one an[{317}](#)unfavourable idea of his heart. But, to be sure, the
 good lady who showed us the house did give him a most flaming character!
 I could hardly help laughing aloud sometimes. But he is a liberal
-master, I suppose, andthat, in the eye of a servant, comprehends
+master, I suppose, and*that*, in the eye of a servant, comprehends
 every virtue.”
 
 Elizabeth here felt herself called on to say something in vindication of
@@ -9014,7 +9057,7 @@ pleased.
 
 “To make herself agreeable to all”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 In seeing Bingley, her thoughts naturally flew to her sister; and oh!
 how ardently did she long to know whether any of his were directed in a
@@ -9036,14 +9079,14 @@ reply, he added, “It is above eight months. We have not met since the
 26th of November, when we were all dancing together at Netherfield.”
 
 Elizabeth was pleased to find his memory so exact; and he afterwards
-took occasion to ask her, when unattended to by any of the rest, whetherallher sisters were at Longbourn. There was not much in the question,
+took occasion to ask her, when unattended to by any of the rest, whether*all*her sisters were at Longbourn. There was not much in the question,
 nor in the preceding remark; but there was a look and a manner which
 gave them meaning.
 
 It was not often that she could turn her eyes on Mr. Darcy himself; but
 whenever she did catch a glimpse she saw an expression of general
 complaisance, and in all that he said, she heard an accent so far
-removed fromhauteuror disdain of his companions, as convinced her
+removed from*hauteur*or disdain of his companions, as convinced her
 that the improvement of manners which she had yesterday witnessed,
 however temporary its existence might prove, had at least outlived one
 day. When she saw him thus seeking the acquaintance, and courting the
@@ -9067,7 +9110,7 @@ their wish of seeing Mr. and Mrs. Gardiner, and Miss Bennet, to dinner
 at Pemberley, before they left the country. Miss Darcy, though with a
 diffidence which marked her little in the habit of giving invitations,
 readily obeyed. Mrs. Gardiner looked at her niece, desirous of knowing
-howshe, whom the invitation most concerned, felt disposed as to its
+how*she*, whom the invitation most concerned, felt disposed as to its
 acceptance, but Elizabeth had turned away her head. Presuming, however,
 that this studied avoidance spoke rather a momentary embarrassment than
 any dislike of the proposal, and seeing in her husband, who was fond of
@@ -9114,7 +9157,7 @@ him, which Mr. Darcy afterwards discharged.
 
 As for Elizabeth, her thoughts were at Pemberley this evening more than
 the last; and the evening, though as it passed it seemed long, was not
-long enough to determine her feelings towardsonein that mansion; and
+long enough to determine her feelings towards*one*in that mansion; and
 she lay awake two whole hours, endeavouring to make them out. She
 certainly did not hate him. No; hatred had vanished long ago, and she
 had almost as long been ashamed of ever feeling a dislike against him,
@@ -9238,7 +9281,7 @@ Bingley saw all this likewise; and, in the imprudence of anger, took the
 first opportunity of saying, with sneering civility,—
 
 “Pray, Miss Eliza, are not the ——shire militia removed from Meryton?
-They must be a great loss toyourfamily.”
+They must be a great loss to*your*family.”
 
 In Darcy’s presence she dared not mention Wickham’s name: but Elizabeth
 instantly comprehended that he was uppermost in her thoughts; and the
@@ -9310,11 +9353,11 @@ determination of making him speak, she continued,—
 
 “I remember, when we first knew her in Hertfordshire, how amazed we all
 were to find that she was a reputed beauty; and I particularly recollect
-your saying one night, after they had been dining at Netherfield, ‘Shea beauty! I should as soon call her mother a wit.’ But afterwards she
+your saying one night, after they had been dining at Netherfield, ‘*She*a beauty! I should as soon call her mother a wit.’ But afterwards she
 seemed to improve on you, and I believe you thought her rather pretty at
 one time.”
 
-“Yes,” replied Darcy, who could contain himself no longer, “butthatwas only when I first knew her; for it is many months since I have
+“Yes,” replied Darcy, who could contain himself no longer, “but*that*was only when I first knew her; for it is many months since I have
 considered her as one of the handsomest women of my acquaintance.”
 
 He then went away, and Miss Bingley was left to all the satisfaction of
@@ -9402,7 +9445,7 @@ I am sincerely grieved for him and Mrs. F.; but no one can throw any
 blame on them. Our distress, my dear Lizzy, is very great. My father and
 mother believe the worst, but I cannot think so ill of him. Many
 circumstances might make it more eligible for them to be married
-privately in town than to pursue their first plan; and even ifhecould form such a design against a young woman of Lydi[{337}](#)a’s connections,
+privately in town than to pursue their first plan; and even if*he*could form such a design against a young woman of Lydi[{337}](#)a’s connections,
 which is not likely, can I suppose her so lost to everything?
 Impossible! I grieve to find, however, that Colonel F. is not disposed
 to depend upon their marriage: he shook his head when I expressed my
@@ -9467,13 +9510,13 @@ something indistinctly of his[{339}](#)
 concern, and observe her in compassionate silence. At length she spoke
 again. “I have just had a letter from Jane, with such dreadful news. It
 cannot be concealed from anyone. My youngest sister has left all her
-friends—has eloped; has thrown herself into the power of—of Mr.[{340}](#)Wickham. They are gone off together from Brighton. Youknow him too
+friends—has eloped; has thrown herself into the power of—of Mr.[{340}](#)Wickham. They are gone off together from Brighton.*You*know him too
 well to doubt the rest. She has no money, no connections, nothing that
 can tempt him to—she is lost for ever.”
 
 Darcy was fixed in astonishment.
 
-“When I consider,” she added, in a yet more agitated voice, “thatImight have prevented it! Iwho knew what he was. Had I but explained
+“When I consider,” she added, in a yet more agitated voice, “that*I*might have prevented it!*I*who knew what he was. Had I but explained
 some part of it only—some part of what I learnt, to my own family! Had
 his character been known, this could not have happened. But it is all,
 all too late now.”
@@ -9495,14 +9538,14 @@ not the smallest hope. It is every way horrible!”
 
 Darcy shook his head in silent acquiescence.
 
-“Whenmyeyes were opened to his real character, oh! had I known what
+“When*my*eyes were opened to his real character, oh! had I known what
 I ought, what I dared to do! But I knew not—I was afraid of doing too
 much. Wretched, wretched mistake!”
 
 Darcy made no answer. He seemed scarcely to hear her, and was walking up
 and down the room in earnest meditation; his brow contracted, his air
 gloomy.[{341}](#)Elizabeth soon observed, and instantly understood it. Her power
-was sinking; everythingmustsink under such a proof of family
+was sinking; everything*must*sink under such a proof of family
 weakness, such an assurance of the deepest disgrace. She could neither
 wonder nor condemn; but the belief of his self-conquest brought nothing
 consolatory to her bosom, afforded no palliation of her distress. It
@@ -9598,7 +9641,7 @@ settled. They were to be off as soon as possible. “But what is to be
 done about Pemberley?” cried Mrs. Gardiner. “John told us Mr. Darcy was
 here when you sent for us;—was it so?”
 
-“Yes; and I told him we should not be able to keep our engagement. Thatis all settled.”
+“Yes; and I told him we should not be able to keep our engagement.*That*is all settled.”
 
 “What is all settled?” repeated the other, as she ran into her room to
 prepare. “And are they upon such terms as for her to disclose the real
@@ -9667,7 +9710,7 @@ nothing of the effects that such a step might produce. But as to your
 other objection, I am afraid it will hardly hold good. Lydia has no
 brothers to step forward; and he might imagine, from my father’s
 behaviour, from his indolence and the little attention he has ever
-seemed to give to what was going forward in his family, thathewould
+seemed to give to what was going forward in his family, that*he*would
 do as little and think as little about it, as any father could do, in
 such a matter.”
 
@@ -9724,9 +9767,9 @@ necessary to make our knowledge public; for of what use could it
 apparently be to anyone, that the good opinion, which all the
 neighbourhood had of him, should then be overthrown? And even when it
 was settled that Lydia should go with Mrs. Forster, the necessity of
-opening her eyes to his character never occurred to me. Thatshecould
+opening her eyes to his character never occurred to me. That*she*could
 be in any danger from the deception never entered my head. That such a
-consequence asthisshould ensue, you may easily believe was far
+consequence as*this*should ensue, you may easily believe was far
 enough from my thoughts.”
 
 “When they all removed to Brighton, therefore, you had no reason, I
@@ -9737,7 +9780,7 @@ side; and had anything of the kind been perceptible, you must be aware
 that ours is not a family on which it could be thrown away. When first
 he entered the corps, she was ready enough to admire him; but so we all
 were. Every girl in or near Meryton was out of her senses about him for
-the first two months: but he never distinguishedherby any particular
+the first two months: but he never distinguished*her*by any particular
 attention; and, consequently, after a moderate period of extravagant and
 wild admiration, her fancy for him gave way, and others of the regiment,
 who treated her with more distinction, again became her favourites.”
@@ -9814,7 +9857,7 @@ blaming everybody but the person to whose ill-judging indulgence the
 errors of her daughter must be principally owing.
 
 “If I had been able,” said she, “to carry my point in going to Brighton
-with all my family,thiswould not[{352}](#)have happened: but poor dear Lydia
+with all my family,*this*would not[{352}](#)have happened: but poor dear Lydia
 had nobody to take care of her. Why did the Forsters ever let her go out
 of their sight? I am sure there was some great neglect or other on their
 side, for she is not the kind of girl to do such a thing, if she had
@@ -9842,7 +9885,7 @@ together as to what is to be done.”
 
 “Oh, my dear brother,” replied Mrs. Bennet, “that is exactly what I
 could most wish for. And now do, when you get to town, find them out,
-wherever they may be; and if they are not married already,makethem
+wherever they may be; and if they are not married already,*make*them
 marry. And as for wedding clothes, do not let them wait for that,[{353}](#)but
 tell Lydia she shall have as much money as she chooses to buy them,
 after they are married. And, above all things, keep Mr. Bennet from
@@ -9864,7 +9907,7 @@ Though her brother and sister were persuaded that there was no real
 occasion for such a seclusion from the family, they did not attempt to
 oppose it; for they knew that she had not prudence enough to hold her
 tongue before the servants, while they waited at table, and judged it
-better thatoneonly of the household, and the one whom they could
+better that*one*only of the household, and the one whom they could
 most trust, should comprehend all her fears and solicitude on the
 subject.
 
@@ -9906,16 +9949,16 @@ took place? They must have seen them together for ever.”
 
 “Colonel Forster did own that he had often suspected some partiality,
 especially on Lydia’s side, but nothing to give him any alarm. I am so
-grieved for him. His behaviour was attentive and kind to the utmost. Hewascoming to us, in order to assure us of his concern, before he had
+grieved for him. His behaviour was attentive and kind to the utmost. He*was*coming to us, in order to assure us of his concern, before he had
 any idea of their not being gone to Scotland: when that apprehension
 first got abroad, it hastened his journey.”
 
 “And was Denny convinced that Wickham would not marry? Did he know of
 their intending to go off? Had Colonel Forster seen Denny himself?”
 
-“Yes; but when questioned byhim, Denny denied knowing anything of
+“Yes; but when questioned by*him*, Denny denied knowing anything of
 their plan, and would not give his real opinion about it. He did not
-repeat his persuasion of their not marrying, and fromthatI am
+repeat his persuasion of their not marrying, and from*that*I am
 inclined to hope he might have been misunderstood before.”
 
 “And till Colonel Forster came himself, not one of you entertained a
@@ -9986,8 +10029,8 @@ drink to our good journey.
 
 “Oh, thoughtless, thoughtless Lydia!” cried Elizabeth when she had
 finished it. “What a letter is this, to be written at such a moment! But
-at least it shows thatshewas serious in the object of her journey.
-Whatever he might afterwards persuade her to, it was not on her side aschemeof infamy. My poor father! how he must have felt it!”
+at least it shows that*she*was serious in the object of her journey.
+Whatever he might afterwards persuade her to, it was not on her side a*scheme*of infamy. My poor father! how he must have felt it!”
 
 “I never saw anyone so shocked. He could not speak a word for full ten
 minutes. My mother was taken ill immediately, and the whole house in
@@ -10016,7 +10059,7 @@ Lucas has been very kind: she walked here on Wednesday morning to
 condole with us, and offered her services, or any of her daughters, if
 they could be of use to us.”
 
-“She had better have stayed at home,” cried Elizabeth: “perhaps shemeantwell, but, under such a misfortune as this, one cannot see too
+“She had better have stayed at home,” cried Elizabeth: “perhaps she*meant*well, but, under such a misfortune as this, one cannot see too
 little of one’s neighbours. Assistance is impossible; condolence,
 insufferable. Let them triumph over us at a distance, and be satisfied.”
 
@@ -10044,7 +10087,7 @@ morning, but the post came in without bringing a single line from him.
 His family knew him to be, on all common occasions, a most negligent and
 dilatory correspondent; but at such a time they had hoped for exertion.
 They were forced to conclude, that he had no pleasing intelligence to
-send; but even ofthatthey would have been glad to be certain. Mr.
+send; but even of*that*they would have been glad to be certain. Mr.
 Gardiner had waited only for the letters before he set off.
 
 When he was gone, they were certain at least of[{360}](#)receiving constant
@@ -10144,7 +10187,7 @@ of behaviour in your
 
 “To whom I have related the affair”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 daughter has proceeded from a faulty degree of indulgence; though,
 at the same time, for the consolation of yourself and Mrs. Bennet,
@@ -10212,7 +10255,7 @@ Pemberley.
 
 The present unhappy state of the family rendered any[{366}](#)other excuse for
 the lowness of her spirits unnecessary; nothing, therefore, could be
-fairly conjectured fromthat,—though Elizabeth, who was by this time
+fairly conjectured from*that*,—though Elizabeth, who was by this time
 tolerably well acquainted with her own feelings, was perfectly aware
 that, had she known nothing of Darcy, she could have borne the dread of
 Lydia’s infamy somewhat better. It would have spared her, she thought,
@@ -10258,9 +10301,9 @@ elegance to misfortune! Another day I will do the same; I will sit in my
 library, in my nightcap and powdering gown, and give as much trouble as
 I can,—or perhaps I may defer it till Kitty runs away.”
 
-“I am not going to run away, papa,” said Kitty, fretfully. “IfIshould ever go to Brighton, I would behave better than Lydia.”
+“I am not going to run away, papa,” said Kitty, fretfully. “If*I*should ever go to Brighton, I would behave better than Lydia.”
 
-“Yougo to Brighton! I would not trust you so near it as Eastbourne,
+“*You*go to Brighton! I would not trust you so near it as Eastbourne,
 for fifty pounds! No, Kitty, I have at least learnt to be cautious, and
 you will feel the effects of it. No officer is ever to enter my house
 again, nor even to pass through the village. Balls will be absolutely
@@ -10321,7 +10364,7 @@ Elizabeth impatiently caught it from his hand. Jane now came up.
 “Read it aloud,” said their father, “for I hardly know myself what it is
 about.”
 
-“Gracechurch Street,Monday, August 2.
+“Gracechurch Street,*Monday, August 2*.
 
 “My dear Brother,
 
@@ -10334,7 +10377,7 @@ both——”
 
 “But perhaps you would like to read it”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 “Then it is as I always hoped,” cried Jane: “they are married![{371}](#)”
 
@@ -10397,7 +10440,7 @@ complied with.”
 
 “Complied with! I am only ashamed of his asking so little.”
 
-“And theymustmarry! Yet he issucha man.”
+“And they*must*marry! Yet he is*such*a man.”
 
 “Yes, yes, they must marry. There is nothing else to be done. But there
 are two things that I want very much to know:—one is, how much money
@@ -10427,7 +10470,7 @@ silent till they reached the house. Their father then went to the
 library to write, and the girls walked into the breakfast-room.
 
 “And they are really to be married!” cried Elizabeth, as soon as they
-were by themselves. “How strange this is! and forthiswe are to be
+were by themselves. “How strange this is! and for*this*we are to be
 thankful. That they should marry, small as is their chance of happiness,
 and wretched as is his character, we are forced to rejoice! Oh, Lydia!”
 
@@ -10618,7 +10661,7 @@ Purvis Lodge, the attics are dreadful.”
 Her husband allowed her to talk on without interruption while the
 servants remained. But when they had withdrawn, he said to her, “Mrs.
 Bennet, before you take any, or all of these houses, for your son and
-daughter, let us come to a right understanding. Intoonehouse in this
+daughter, let us come to a right understanding. Into*one*house in this
 neighbourhood they shall never have admittance. I will not encourage the
 imprudence of either, by receiving them at Longbourn.”
 
@@ -10756,7 +10799,7 @@ HEIR sister’s wedding-day arrived; and Jane and Elizabeth felt for her
 probably more than she felt for herself. The carriage was sent to meet
 them at——, and they were to return in it by dinnertime. Their arrival
 was dreaded by the elder Miss Bennets—and Jane more[{386}](#)especially, who
-gave Lydia the feelings which would have attended herself, hadshebeen the culprit, and was wretched in the thought of what her sister
+gave Lydia the feelings which would have attended herself, had*she*been the culprit, and was wretched in the thought of what her sister
 must endure.
 
 They came. The family were assembled in the breakfast-room to receive
@@ -10787,7 +10830,7 @@ were always so pleasing, that, had his character and his marriage been
 exactly what they ought, his smiles and his easy address, while he
 claimed their relationship, would have delighted them all. Elizabeth[{387}](#)had not before believed him quite equal to such assurance; but she sat
 down, resolving within herself to draw no limits in future to the
-impudence of an impudent man. Sheblushed, and Jane blushed; but the
+impudence of an impudent man.*She*blushed, and Jane blushed; but the
 cheeks of the two who caused their confusion suffered no variation of
 colour.
 
@@ -10884,7 +10927,7 @@ on the first of September than anybody else in the country.
 One morning, soon after their arrival, as she was sitting with her two
 elder sisters, she said to Elizabeth,—
 
-“Lizzy, I never gaveyouan account of my wedding, I believe. You were
+“Lizzy, I never gave*you*an account of my wedding, I believe. You were
 not by, when I told mamma, and the others, all about it. Are not you
 curious to hear how it was managed?”
 
@@ -10918,7 +10961,7 @@ know, when once they get together, there is no end of it. Well, I was so
 frightened I did not know what to do, for my uncle was to give me away;
 and if we were beyond the hour we could not be married all day. But,
 luckily, he came back again in ten minutes’ time, and then we all set
-out. However, I recollected afterwards, that if hehadbeen prevented
+out. However, I recollected afterwards, that if he*had*been prevented
 going, the wedding need not be put off, for Mr. Darcy might have done as
 well.”
 
@@ -10960,7 +11003,7 @@ for very cogent reasons, to remain in the secrecy which Lydia seems to
 think necessary; and then I must endeavour to be satisfied with
 ignorance.”
 
-“Not that Ishall, though,” she added to herself, and she finished the
+“Not that I*shall*, though,” she added to herself, and she finished the
 letter; “and, my dear aunt, if you do not tell me in an honourable
 manner, I shall certainly be reduced to tricks and stratagems to find it
 out.”
@@ -10979,16 +11022,16 @@ interrupted, she sat down on one of the benches, and prepared[{394}](#)to be
 happy; for the length of the letter convinced her that it did not
 contain a denial.
 
-“Gracechurch Street,Sept. 6.
+“Gracechurch Street,*Sept. 6*.
 
 “My dear Niece,
 
 “I have just received your letter, and shall devote this whole
-morning to answering it, as I foresee that alittlewriting will
+morning to answering it, as I foresee that a*little*writing will
 not comprise what I have to tell you. I must confess myself
-surprised by your application; I did not expect it fromyou.
+surprised by your application; I did not expect it from*you*.
 Don’t think me angry, however, for I only mean to let you know,
-that I had not imagined such inquiries to be necessary onyourside. If you do not choose to understand me, forgive my
+that I had not imagined such inquiries to be necessary on*your*side. If you do not choose to understand me, forgive my
 impertinence. Your uncle is as much surprised as I am; and nothing
 but the belief of your being a party concerned would have allowed
 him to act as he has done. But if you are really innocent and
@@ -10996,7 +11039,7 @@ ignorant, I must be more explicit. On the very day of my coming
 home from Longbourn, your uncle had a most unexpected visitor. Mr.
 Darcy called, and was shut up with him several hours. It was all
 over before I arrived; so my curiosity was not so dreadfully racked
-asyoursseems to have been. He came to tell Mr. Gardiner that he
+as*yours*seems to have been. He came to tell Mr. Gardiner that he
 had found out where your sister and Mr. Wickham were, and that he
 had seen and talked with them both—Wickham repeatedly, Lydia once.
 From what I can collect, he left Derbyshire only one day after
@@ -11009,10 +11052,10 @@ pride, and confessed that he had before thought it beneath him to
 lay his private actions open to[{395}](#)the world. His character was to
 speak for itself. He called it, therefore, his duty to step
 forward, and endeavour to remedy an evil which had been brought on
-by himself. If hehad anothermotive, I am sure it would never
+by himself. If he*had another*motive, I am sure it would never
 disgrace him. He had been some days in town before he was able to
 discover them; but he had something to direct his search, which was
-more thanwehad; and the consciousness of this was another
+more than*we*had; and the consciousness of this was another
 reason for his resolving to follow us. There is a lady, it seems, a
 Mrs. Younge, who was some time ago governess to Miss Darcy, and was
 dismissed from her charge on some cause of disapprobation, though
@@ -11038,7 +11081,7 @@ leaving Wickham.[{396}](#)She was sure they should be married some time or
 other, and it did not much signify when. Since such were her
 feelings, it only remained, he thought, to secure and expedite a
 marriage, which, in his very first conversation with Wickham, he
-easily learnt had never beenhisdesign. He confessed himself
+easily learnt had never been*his*design. He confessed himself
 obliged to leave the regiment on account of some debts of honour
 which were very pressing; and scrupled not to lay all the ill
 consequences of Lydia’s flight on her own folly alone. He meant to
@@ -11055,7 +11098,7 @@ circumstances, however, he was not likely to be proof against the
 temptation of immediate relief. They met several times, for there
 was much to be discussed. Wickham, of course, wanted more than he
 could get; but at length was reduced to be reasonable. Everything
-being settled betweenthem, Mr. Darcy’s next step was to make
+being settled between*them*, Mr. Darcy’s next step was to make
 your uncle acquainted with it, and he first called in Gracechurch
 Street the evening before I came home. But Mr. Gardiner could not
 be seen; and Mr. Darcy found, on further inquiry, that your father
@@ -11066,12 +11109,12 @@ till after the[{397}](#)departure of the former. He did not leave his name,
 and till the next day it was only known that a gentleman had called
 on business. On Saturday he came again. Your father was gone, your
 uncle at home, and, as I said before, they had a great deal of talk
-together. They met again on Sunday, and thenIsaw him too. It
+together. They met again on Sunday, and then*I*saw him too. It
 was not all settled before Monday: as soon as it was, the express
 was sent off to Longbourn. But our visitor was very obstinate. I
 fancy, Lizzy, that obstinacy is the real defect of his character,
 after all. He has been accused of many faults at different times;
-butthisis the true one. Nothing was to be done that he did not
+but*this*is the true one. Nothing was to be done that he did not
 do himself; though I am sure (and I do not speak it to be thanked,
 therefore say nothing about it) your uncle would most readily have
 settled the whole. They battled it together for a long time, which
@@ -11086,24 +11129,24 @@ it was due. But, Lizzy, this must go no further than yourself, or
 Jane at most. You know pretty well, I suppose, what has been done
 for the young people. His debts are to be paid, amounting, I
 believe, to considerably more than a thousand pounds, another
-thousand in addition to her own settled uponher, and his
+thousand in addition to her own settled upon*her*, and his
 commission purchased. The reason why all this was to be done by him
 alone, was such as I have given above. It was owing to him, to his
 reserve and want of proper consideration, that Wickham’s character
 had been so[{398}](#)misunderstood, and consequently that he had been
-received and noticed as he was. Perhaps there was some truth inthis; though I doubt whetherhisreserve, oranybody’sreserve can be answerable for the event. But in spite of all this
+received and noticed as he was. Perhaps there was some truth in*this*; though I doubt whether*his*reserve, or*anybody’s*reserve can be answerable for the event. But in spite of all this
 fine talking, my dear Lizzy, you may rest perfectly assured that
 your uncle would never have yielded, if we had not given him credit
-foranother interestin the affair. When all this was resolved
+for*another interest*in the affair. When all this was resolved
 on, he returned again to his friends, who were still staying at
 Pemberley; but it was agreed that he should be in London once more
 when the wedding took place, and all money matters were then to
 receive the last finish. I believe I have now told you everything.
 It is a relation which you tell me is to give you great surprise; I
 hope at least it will not afford you any displeasure. Lydia came to
-us, and Wickham had constant admission to the house. Hewas
+us, and Wickham had constant admission to the house.*He*was
 exactly what he had been when I knew him in Hertfordshire; but I
-would not tell you how little I was satisfied withherbehaviour
+would not tell you how little I was satisfied with*her*behaviour
 while she stayed with us, if I had not perceived, by Jane’s letter
 last Wednesday, that her conduct on coming home was exactly of a
 piece with it, and therefore what I now tell you can give you no
@@ -11119,7 +11162,7 @@ Wednesday or Thursday. Will you be very angry with me, my dear[{399}](#)Lizzy, i
 enough to say before) how much I like him? His behaviour to us has,
 in every respect, been as pleasing as when we were in Derbyshire.
 His understanding and opinions all please me; he wants nothing but
-a little more liveliness, andthat, if he marryprudently, his
+a little more liveliness, and*that*, if he marry*prudently*, his
 wife may teach him. I thought him very sly; he hardly ever
 mentioned your name. But slyness seems the fashion. Pray forgive
 me, if I have been very presuming, or at least do not punish me so
@@ -11181,7 +11224,7 @@ as he joined her.
 “You certainly do,” she replied with a smile; “but it does not follow
 that the interruption must be unwelcome.”
 
-“I should be sorry, indeed, if it were. Wewere always good friends,
+“I should be sorry, indeed, if it were.*We*were always good friends,
 and now we are better.”
 
 “True. Are the others coming out?”
@@ -11202,7 +11245,7 @@ me. But of course she did not mention my name to you.”
 “And what did she say?”
 
 “That you were gone into the army, and she was afraid had—not turned
-out well. At such a distance asthat, you know, things are strangely
+out well. At such a distance as*that*, you know, things are strangely
 misrepresented.”
 
 “Certainly,” he replied, biting his lips. Elizabeth hoped she had
@@ -11247,13 +11290,13 @@ retirement of such a life, would have answered all my ideas of
 happiness! But it was not to be. Did you ever hear Darcy mention the
 circumstance when you were in Kent?”
 
-“Ihaveheard from authority, which I thoughtas good,[{403}](#)that it was
+“I*have*heard from authority, which I thought*as good*,[{403}](#)that it was
 left you conditionally only, and at the will of the present patron.”
 
-“You have! Yes, there was something inthat; I told you so from the
+“You have! Yes, there was something in*that*; I told you so from the
 first, you may remember.”
 
-“Ididhear, too, that there was a time when sermon-making was not so
+“I*did*hear, too, that there was a time when sermon-making was not so
 palatable to you as it seems to be at present; that you actually
 declared your resolution of never taking orders, and that the business
 had been compromised accordingly.”
@@ -11291,7 +11334,7 @@ continue at least a twelvemonth.
 “Write to me very often, my dear.”
 
 “As often as I can. But you know married women have never much time for
-writing. My sisters may write tome. They will have nothing else to
+writing. My sisters may write to*me*. They will have nothing else to
 do.”
 
 Mr. Wickham’s adieus were much more affectionate than his wife’s. He
@@ -11327,7 +11370,7 @@ smiled, and shook her head, by turns.
 Philips first brought her the news). “Well, so much the better. Not that
 I care about it, though. He is nothing to us, you know, and I am sure I
 never want to see him again. But, however, he is very welcome to come to
-Netherfield, if he likes it. And who knows whatmayhappen? But that
+Netherfield, if he likes it. And who knows what*may*happen? But that
 is nothing to us. You know, sister, we agreed long ago never to mention
 a word about it. And so, it is quite certain he is coming?”
 
@@ -11345,20 +11388,20 @@ Elizabeth; but now, as soon as they were alone together, she said,—
 “I saw you look at me to-day, Lizzy, when my aunt told us of the present
 report; and I know I appeared[{407}](#)distressed; but don’t imagine it was from
 any silly cause. I was only confused for the moment, because I felt that
-Ishouldbe looked at. I do assure you that the news does not affect
+I*should*be looked at. I do assure you that the news does not affect
 me either with pleasure or pain. I am glad of one thing, that he comes
-alone; because we shall see the less of him. Not that I am afraid ofmyself, but I dread other people’s remarks.”
+alone; because we shall see the less of him. Not that I am afraid of*myself*, but I dread other people’s remarks.”
 
 Elizabeth did not know what to make of it. Had she not seen him in
 Derbyshire, she might have supposed him capable of coming there with no
 other view than what was acknowledged; but she still thought him partial
 to Jane, and she wavered as to the greater probability of his coming
-therewithhis friend’s permission, or being bold enough to come
+there*with*his friend’s permission, or being bold enough to come
 without it.
 
 “Yet it is hard,” she sometimes thought, “that this poor man cannot come
 to a house, which he has legally hired, without raising all this
-speculation! Iwillleave him to himself.”
+speculation! I*will*leave him to himself.”
 
 In spite of what her sister declared, and really believed to be her
 feelings, in the expectation of his arrival, Elizabeth could easily
@@ -11379,8 +11422,8 @@ His wife represented to him how absolutely necessary[{408}](#)such an attention
 would be from all the neighbouring gentlemen, on his returning to
 Netherfield.
 
-“’Tis anetiquetteI despise,” said he. “If he wants our society, let
-him seek it. He knows where we live. I will not spendmyhours in
+“’Tis an*etiquette*I despise,” said he. “If he wants our society, let
+him seek it. He knows where we live. I will not spend*my*hours in
 running after my neighbours every time they go away and come back
 again.”
 
@@ -11392,7 +11435,7 @@ him.”
 
 Consoled by this resolution, she was the better able to bear her
 husband’s incivility; though it was very mortifying to know that her
-neighbours might all see Mr. Bingley, in consequence of it, beforetheydid. As the day of his arrival drew near,—
+neighbours might all see Mr. Bingley, in consequence of it, before*they*did. As the day of his arrival drew near,—
 
 “I begin to be sorry that he comes at all,” said Jane to her sister. “It
 would be nothing; I could see him with perfect indifference; but I can
@@ -11508,7 +11551,7 @@ She inquired after his sister, but could do no more.
 
 He readily agreed to it.
 
-“I began to be afraid you would never come back again. Peopledidsay,
+“I began to be afraid you would never come back again. People*did*say,
 you meant to quit the place entirely at Michaelmas; but, however, I hope
 it is not true. A great many changes have happened in the neighbourhood
 since you went away. Miss Lucas is married and settled: and one of my
@@ -11530,7 +11573,7 @@ hard to have her taken away from me. They are gone down to Newcastle, a
 place quite northward it seems, and there they are to stay, I do not
 know how long. His regiment is there; for I suppose you have heard of
 his leaving the ——shire, and of his being gone into the Regulars.
-Thank heaven![{413}](#)he hassomefriends, though, perhaps, not so many as he
+Thank heaven![{413}](#)he has*some*friends, though, perhaps, not so many as he
 deserves.”
 
 Elizabeth, who knew this to be levelled at Mr. Darcy, was in such misery
@@ -11668,7 +11711,7 @@ came, was wearisome and dull to a degree that almost made her uncivil.
 She looked forward to their entrance as the point on which all her
 chance of pleasure for the evening must depend.
 
-“If he does not come to me,then,” said she, “I shall give him up for
+“If he does not come to me,*then*,” said she, “I shall give him up for
 ever.”
 
 The gentlemen came; and she thought he looked as if he would have
@@ -11768,7 +11811,7 @@ acknowledge?”
 
 “That is a question which I hardly know how to answer. We all love to
 instruct, though we can teach only what is not worth knowing. Forgive
-me; and if you persist in indifference, do not makemeyour
+me; and if you persist in indifference, do not make*me*your
 confidante.[{422}](#)”
 
 ## “Lizzy, my dear, I want to speak to you.”CHAPTER LV.
@@ -11823,7 +11866,7 @@ suddenly got up, and saying to Kitty,—
 
 “Come here, my love, I want to speak to you,” took her out of the room.
 Jane instantly gave a look at Elizabeth which spoke her distress at such
-premeditation, and her entreaty thatshewould not give in to it. In a
+premeditation, and her entreaty that*she*would not give in to it. In a
 few minutes, Mrs. Bennet half opened the door and called out,—
 
 “Lizzy, my dear, I want to speak with you.”
@@ -11875,7 +11918,7 @@ mother had been too ingenious for her. On opening the door, she
 perceived her sister and Bingley standing together over the hearth, as
 if engaged in earnest conversation; and had this led to no suspicion,
 the faces of both, as they hastily turned round and moved away from each
-other, would have told it all. Theirsituation was awkward enough; buthersshe thought was still worse. Not a syllable was uttered by
+other, would have told it all.*Their*situation was awkward enough; but*hers*she thought was still worse. Not a syllable was uttered by
 either; and Elizabeth was on the point of going away again, when
 Bingley, who as well as the other had sat[{426}](#)down, suddenly rose, and,
 whispering a few words to her sister, ran out of the room.
@@ -11954,7 +11997,7 @@ easy, that every servant will cheat you; and so generous, that you will
 always exceed your income.”
 
 “I hope not so. Imprudence or thoughtlessness in money matters would be
-unpardonable inme.”
+unpardonable in*me*.”
 
 “Exceed their income! My dear Mr. Bennet,” cried his wife, “what are you
 talking of? Why, he has four or five thousand a year, and very likely
@@ -12006,7 +12049,7 @@ heard you utter. Good girl! It would vex me, indeed, to see you again
 the dupe of Miss Bingley’s pretended regard.”
 
 “Would you believe it, Lizzy, that when he went to town last November he
-really loved me, and nothing but a persuasion ofmybeing indifferent
+really loved me, and nothing but a persuasion of*my*being indifferent
 would have prevented his coming down again?[{430}](#)”
 
 “He made a little mistake, to be sure; but it is to the credit of his
@@ -12075,7 +12118,7 @@ mother?”
 
 Elizabeth replied very concisely that she was.
 
-“Andthat, I suppose, is one of your sisters?”
+“And*that*, I suppose, is one of your sisters?”
 
 “Yes, madam,” said Mrs. Bennet, delighted to speak to a Lady Catherine.
 “She is my youngest girl but one. My youngest of all is lately married,
@@ -12128,7 +12171,7 @@ disagreeable.
 
 “After a short survey”
 
-[Copyright 1894 by George Allen.]
+[*Copyright 1894 by George Allen.*]
 
 [{435}](#)
 
@@ -12148,13 +12191,13 @@ Elizabeth looked with unaffected astonishment.
 for the honour of seeing you here.”
 
 “Miss Bennet,” replied her Ladyship, in an angry tone, “you ought to
-know that I am not to be trifled with. But however insincereyoumay
-choose to be, you shall not findmeso. My character has ever been
+know that I am not to be trifled with. But however insincere*you*may
+choose to be, you shall not find*me*so. My character has ever been
 celebrated for its sincerity and frankness; and in a cause of such
 moment as this, I shall certainly not depart from it. A report of a most
 alarming nature reached me two days ago. I was told, that not only your
-sister was on the point of being most advantageously married, but thatyou—that Miss Elizabeth Bennet would, in all likelihood, be soon
-afterwards united to my nephew—my own nephew, Mr. Darcy. Though Iknowit must be a scandalous falsehood, though I would not injure him
+sister was on the point of being most advantageously married, but that*you*—that Miss Elizabeth Bennet would, in all likelihood, be soon
+afterwards united to my nephew—my own nephew, Mr. Darcy. Though I*know*it must be a scandalous falsehood, though I would not injure him
 so much as to suppose the truth of it possible, I instantly resolved on
 setting off for this place, that I might make my sentiments known to
 you.”
@@ -12175,9 +12218,9 @@ report is spread abroad?”
 
 “I never heard that it was.”
 
-“And can you likewise declare, that there is nofoundationfor it?”
+“And can you likewise declare, that there is no*foundation*for it?”
 
-“I do not pretend to possess equal frankness with your Ladyship. Youmay ask questions whichIshall not choose to answer.”
+“I do not pretend to possess equal frankness with your Ladyship.*You*may ask questions which*I*shall not choose to answer.”
 
 “This is not to be borne. Miss Bennet, I insist on being satisfied. Has
 he, has my nephew, made you an offer of marriage?”
@@ -12185,7 +12228,7 @@ he, has my nephew, made you an offer of marriage?”
 “Your Ladyship has declared it to be impossible.”
 
 “It ought to be so; it must be so, while he retains the use of his
-reason. Butyourarts and allurements may, in a moment of infatuation,
+reason. But*your*arts and allurements may, in a moment of infatuation,
 have made him forget what he owes to himself and to all his family. You
 may have drawn him in.”
 
@@ -12195,12 +12238,12 @@ may have drawn him in.”
 language as this. I am almost the nearest relation he has in the world,
 and am entitled to know all his dearest concerns.”
 
-“But you are not entitled to knowmine; nor will such behaviour as
+“But you are not entitled to know*mine*; nor will such behaviour as
 this ever induce me to be explicit.”
 
 “Let me be rightly understood. This match, to which you have the
 presumption to aspire, can never take place. No, never. Mr. Darcy is
-engaged tomy daughter. Now, what have you to say?[{437}](#)”
+engaged to*my daughter*. Now, what have you to say?[{437}](#)”
 
 “Only this,—that if he is so, you can have no reason to suppose he will
 make an offer to me.”
@@ -12208,7 +12251,7 @@ make an offer to me.”
 Lady Catherine hesitated for a moment, and then replied,—
 
 “The engagement between them is of a peculiar kind. From their infancy,
-they have been intended for each other. It was the favourite wish ofhismother, as well as of hers. While in their cradles we planned the
+they have been intended for each other. It was the favourite wish of*his*mother, as well as of hers. While in their cradles we planned the
 union; and now, at the moment when the wishes of both sisters would be
 accomplished, is their marriage to be prevented by a young woman of
 inferior birth, of no importance in the world, and wholly unallied to
@@ -12244,8 +12287,8 @@ here with the determined resolution of carrying my purpose; nor will I
 be dissuaded from it. I have not been used to submit to any person’s
 whims. I have not been in the habit of brooking disappointment.”
 
-“Thatwill make your Ladyship’s situation at present more pitiable;
-but it will have no effect onme.”
+“*That*will make your Ladyship’s situation at present more pitiable;
+but it will have no effect on*me*.”
 
 “I will not be interrupted! Hear me in silence. My daughter and my
 nephew are formed for each other. They are descended, on the maternal
@@ -12262,12 +12305,12 @@ quit the sphere in which you have been brought up.”
 sphere. He is a gentleman; I am a gentleman’s daughter; so far we are
 equal.”
 
-“True. Youarea gentleman’s daughter. But what was your mother? Who
+“True. You*are*a gentleman’s daughter. But what was your mother? Who
 are your uncles and aunts? Do not imagine me ignorant of their
 condition.[{439}](#)”
 
 “Whatever my connections may be,” said Elizabeth, “if your nephew does
-not object to them, they can be nothing toyou.”
+not object to them, they can be nothing to*you*.”
 
 “Tell me, once for all, are you engaged to him?”
 
@@ -12288,15 +12331,15 @@ reasonable young woman. But do not deceive yourself into a belief that I
 will ever recede. I shall not go away till you have given me the
 assurance I require.”
 
-“And I certainlynevershall give it. I am not to be intimidated into
+“And I certainly*never*shall give it. I am not to be intimidated into
 anything so wholly unreasonable. Your Ladyship wants Mr. Darcy to marry
-your daughter; but would my giving you the wished-for promise maketheirmarriage at all more probable? Supposing him to be attached to
-me, wouldmyrefusing to accept his hand make him wish to bestow it on
+your daughter; but would my giving you the wished-for promise make*their*marriage at all more probable? Supposing him to be attached to
+me, would*my*refusing to accept his hand make him wish to bestow it on
 his cousin? Allow me to say, Lady Catherine, that the arguments with
 which you have supported this extraordinary application have been as
 frivolous as the application was ill-judged. You have widely mistaken my
 character, if you think I can be worked on by such persuasions as these.
-How far your nephew might approve of your interference inhisaffairs,
+How far your nephew might approve of your interference in*his*affairs,
 I cannot tell; but you have certainly no right to concern yourself in
 mine. I must beg, therefore, to be importuned no further on the
 subject.[{440}](#)”
@@ -12305,11 +12348,11 @@ subject.[{440}](#)”
 objections I have already urged I have still another to add. I am no
 stranger to the particulars of your youngest sister’s infamous
 elopement. I know it all; that the young man’s marrying her was a
-patched-up business, at the expense of your father and uncle. And issucha girl to be my nephew’s sister? Isherhusband, who is the son
+patched-up business, at the expense of your father and uncle. And is*such*a girl to be my nephew’s sister? Is*her*husband, who is the son
 of his late father’s steward, to be his brother? Heaven and earth!—of
 what are you thinking? Are the shades of Pemberley to be thus polluted?”
 
-“You cannowhave nothing further to say,” she resentfully answered.
+“You can*now*have nothing further to say,” she resentfully answered.
 “You have insulted me, in every possible method. I must beg to return to
 the house.”
 
@@ -12326,7 +12369,7 @@ must disgrace him in the eyes of everybody?”
 
 “I have said no such thing. I am only resolved to act in that manner,
 which will, in my own opinion, constitute my happiness, without
-reference toyou, or to any person so wholly unconnected with me.”
+reference to*you*, or to any person so wholly unconnected with me.”
 
 “It is well. You refuse, then, to oblige me. You refuse to obey the
 claims of duty, honour, and gratitude. You are determined to ruin him in
@@ -12335,7 +12378,7 @@ the opinion of all his friends, and make him the contempt of the world.”
 “Neither duty, nor honour, nor gratitude,” replied Elizabeth, “has any
 possible claim on me, in the present instance. No principle of either
 would be violated by my[{441}](#)marriage with Mr. Darcy. And with regard to the
-resentment of his family, or the indignation of the world, if the formerwereexcited by his marrying me, it would not give me one moment’s
+resentment of his family, or the indignation of the world, if the former*were*excited by his marrying me, it would not give me one moment’s
 concern—and the world in general would have too much sense to join in
 the scorn.”
 
@@ -12376,14 +12419,14 @@ appeared, had actually taken the trouble of this journey from Rosings
 for the sole purpose of breaking off her supposed engagement with Mr.
 Darcy. It was a rational scheme, to be sure! but from what the report of
 their engagement could originate, Elizabeth was at a loss to imagine;
-till she recollected thathisbeing the intimate friend of Bingley,
-andherbeing the sister of Jane, was enough, at a time when the
+till she recollected that*his*being the intimate friend of Bingley,
+and*her*being the sister of Jane, was enough, at a time when the
 expectation of one wedding made everybody eager for another, to supply
 the idea. She had not herself forgotten to feel that the marriage of her
 sister must bring them more frequently together. And her neighbours at
 Lucas Lodge, therefore, (for through their[{443}](#)communication with the
 Collinses, the report, she concluded, had reached Lady Catherine,) had
-only setthatdown as almost certain and immediate whichshehad
+only set*that*down as almost certain and immediate which*she*had
 looked forward to as possible at some future time.
 
 In revolving Lady Catherine’s expressions, however, she could not help
@@ -12394,8 +12437,8 @@ application to her nephew; and how he might take a similar
 representation of the evils attached to a connection with her she dared
 not pronounce. She knew not the exact degree of his affection for his
 aunt, or his dependence on her judgment, but it was natural to suppose
-that he thought much higher of her Ladyship thanshecould do; and it
-was certain, that in enumerating the miseries of a marriage withonewhose immediate connections were so unequal to his own, his aunt would
+that he thought much higher of her Ladyship than*she*could do; and it
+was certain, that in enumerating the miseries of a marriage with*one*whose immediate connections were so unequal to his own, his aunt would
 address him on his weakest side. With his notions of dignity, he would
 probably feel that the arguments, which to Elizabeth had appeared weak
 and ridiculous, contained much good sense and solid reasoning.
@@ -12435,7 +12478,7 @@ then said,—
 
 “I have received a letter this morning that has astonished me
 exceedingly. As it principally concerns yourself, you ought to know its
-contents. I did not know before that I hadtwodaughters on the brink
+contents. I did not know before that I had*two*daughters on the brink
 of matrimony. Let me congratulate you on a very important conquest.”
 
 The colour now rushed into Elizabeth’s cheeks in the instantaneous
@@ -12445,10 +12488,10 @@ himself at all, or offended that his letter was not rather addressed to
 herself, when her father continued,[{445}](#)—
 
 “You look conscious. Young ladies have great penetration in such matters
-as these; but I think I may defy evenyoursagacity to discover the
+as these; but I think I may defy even*your*sagacity to discover the
 name of your admirer. This letter is from Mr. Collins.”
 
-“From Mr. Collins! and what canhehave to say?”
+“From Mr. Collins! and what can*he*have to say?”
 
 “Something very much to the purpose, of course. He begins with
 congratulations on the approaching nuptials of my eldest daughter, of
@@ -12471,10 +12514,10 @@ you will be inclined to take immediate advantage of.’ Have you any idea,
 Lizzy, who this gentleman is? But now it comes out. ‘My motive for
 cautioning you is as follows:—We have reason to imagine that his aunt,
 Lady Catherine de Bourgh, does not look on the match with a friendly
-eye.’Mr. Darcy, you see, is the man! Now, Lizzy, I think[{446}](#)Ihavesurprised you. Could he, or the Lucases, have pitched on any man, within
+eye.’*Mr. Darcy*, you see, is the man! Now, Lizzy, I think[{446}](#)I*have*surprised you. Could he, or the Lucases, have pitched on any man, within
 the circle of our acquaintance, whose name would have given the lie more
 effectually to what they related? Mr. Darcy, who never looks at any
-woman but to see a blemish, and who probably never looked atyouin
+woman but to see a blemish, and who probably never looked at*you*in
 his life! It is admirable!”
 
 Elizabeth tried to join in her father’s pleasantry, but could only force
@@ -12502,18 +12545,18 @@ couple into your house as soon as they were married. It was an
 encouragement of vice; and had I been the rector of Longbourn, I should
 very strenuously have opposed it. You ought certainly to forgive them as
 a Christian, but never to admit them[{447}](#)in your sight, or allow their
-names to be mentioned in your hearing.’Thatis his notion of
+names to be mentioned in your hearing.’*That*is his notion of
 Christian forgiveness! The rest of his letter is only about his dear
 Charlotte’s situation, and his expectation of a young olive-branch. But,
-Lizzy, you look as if you did not enjoy it. You are not going to bemissish, I hope, and pretend to be affronted at an idle report. For
+Lizzy, you look as if you did not enjoy it. You are not going to be*missish*, I hope, and pretend to be affronted at an idle report. For
 what do we live, but to make sport for our neighbours, and laugh at them
 in our turn?”
 
 “Oh,” cried Elizabeth, “I am exceedingly diverted. But it is so
 strange!”
 
-“Yes,thatis what makes it amusing. Had they fixed on any other man
-it would have been nothing; buthisperfect indifference andyourpointed dislike make it so delightfully absurd! Much as I abominate
+“Yes,*that*is what makes it amusing. Had they fixed on any other man
+it would have been nothing; but*his*perfect indifference and*your*pointed dislike make it so delightfully absurd! Much as I abominate
 writing, I would not give up Mr. Collins’s correspondence for any
 consideration. Nay, when I read a letter of his, I cannot help giving
 him the preference even over Wickham, much as I value the impudence and
@@ -12527,7 +12570,7 @@ feelings appear what they were not. It was necessary to laugh when she
 would rather have cried. Her father had most cruelly mortified her by
 what he said of Mr. Darcy’s indifference; and she could do nothing but
 wonder at such a want of penetration, or fear that, perhaps, instead of
-his seeing toolittle, she might have fancied toomuch.[{448}](#)
+his seeing too*little*, she might have fancied too*much*.[{448}](#)
 
 ## “The efforts of his aunt.”CHAPTER LVIII.
 
@@ -12570,14 +12613,14 @@ in the name of all my family, for that generous compassion which induced
 you to take so much trouble, and bear so many mortifications, for the
 sake of discovering them.”
 
-“If youwillthank me,” he replied, “let it be for yourself alone.
+“If you*will*thank me,” he replied, “let it be for yourself alone.
 That the wish of giving happiness to you might add force to the other
-inducements which led me on, I shall not attempt to deny. But yourfamilyowe me nothing. Much as I respect them, I believe I thought
-only ofyou.”
+inducements which led me on, I shall not attempt to deny. But your*family*owe me nothing. Much as I respect them, I believe I thought
+only of*you*.”
 
 Elizabeth was too much embarrassed to say a word. After a short pause,
 her companion added, “You are too generous to trifle with me. If your
-feelings are still what they were last April, tell me so at once. Myaffections and wishes are unchanged; but one word from you will silence
+feelings are still what they were last April, tell me so at once.*My*affections and wishes are unchanged; but one word from you will silence
 me on this subject for ever.”
 
 Elizabeth, feeling all the more than common awkwardness and anxiety of
@@ -12597,13 +12640,13 @@ every moment more valuable.
 They walked on without knowing in what direction. There was too much to
 be thought, and felt, and said, for attention to any other objects. She
 soon learnt that they were indebted for their present good understanding
-to the efforts of his aunt, whodidcall on him in her return through
+to the efforts of his aunt, who*did*call on him in her return through
 London, and there relate her journey to Longbourn, its motive, and the
 substance of her conversation with Elizabeth; dwelling emphatically on
 every expression of the latter, which, in her Ladyship’s apprehension,
 peculiarly denoted her perverseness and assurance, in the belief that
 such a relation must assist her endeavours to obtain that promise from
-her nephew whichshehad refused to give. But, unluckily for her
+her nephew which*she*had refused to give. But, unluckily for her
 Ladyship, its effect had been exactly contrariwise.
 
 “It taught me to hope,” said he, “as I had scarcely ever allowed myself
@@ -12612,7 +12655,7 @@ had you been absolutely, irrevocably decided against me, you would have
 acknowledged it to Lady Catherine frankly and openly.”
 
 Elizabeth coloured and laughed as she replied, “Yes, you know enough of
-myfranknessto believe me capable ofthat. After abusing you so
+my*frankness*to believe me capable of*that*. After abusing you so
 abominably to your face, I could have no scruple in abusing you to all
 your relations.”
 
@@ -12646,7 +12689,7 @@ way that would induce you to accept me.”
 “Oh, do not repeat what I then said. These recollections will not do at
 all. I assure you that I have long been most heartily ashamed of it.”
 
-Darcy mentioned his letter. “Did it,” said he,—“did itsoonmake you
+Darcy mentioned his letter. “Did it,” said he,—“did it*soon*make you
 think better of me? Did you, on reading it, give any credit to its
 contents?”
 
@@ -12676,18 +12719,18 @@ attending it ought to be forgotten. You must learn some of my
 philosophy. Think only of the past as its remembrance gives you
 pleasure.”
 
-“I cannot give you credit for any philosophy of the kind. Yourretrospections must be so totally void of reproach, that the contentment
+“I cannot give you credit for any philosophy of the kind.*Your*retrospections must be so totally void of reproach, that the contentment
 arising from them is not of philosophy, but, what is much better, of
-ignorance. But withme, it is not so. Painful recollections will
+ignorance. But with*me*, it is not so. Painful recollections will
 intrude, which cannot, which ought not to be repelled. I have been a
 selfish being all my life, in practice, though not in principle. As a
-child I was taught what wasright, but I was not taught to correct my
+child I was taught what was*right*, but I was not taught to correct my
 temper. I was given good principles, but left to follow them in pride
-and conceit. Unfortunately an only son (for many years an onlychild),
+and conceit. Unfortunately an only son (for many years an only*child*),
 I was spoiled by my parents, who, though good themselves, (my father
 particularly, all that was benevolent and amiable,) allowed, encouraged,
 almost taught me to be selfish and overbearing, to care for none beyond
-my[{454}](#)own family circle, to think meanly of all the rest of the world, towishat least to think meanly of their sense and worth compared with
+my[{454}](#)own family circle, to think meanly of all the rest of the world, to*wish*at least to think meanly of their sense and worth compared with
 my own. Such I was, from eight to eight-and-twenty; and such I might
 still have been but for you, dearest, loveliest Elizabeth! What do I not
 owe you! You taught me a lesson, hard indeed at first, but most
@@ -12702,7 +12745,7 @@ wishing, expecting my addresses.”
 
 “My manners must have been in fault, but not intentionally, I assure
 you. I never meant to deceive you, but my spirits might often lead me
-wrong. How you must have hated me afterthatevening!”
+wrong. How you must have hated me after*that*evening!”
 
 “Hate you! I was angry, perhaps, at first, but my anger soon began to
 take a proper direction.”
@@ -12712,11 +12755,11 @@ Pemberley. You blamed me for coming?”
 
 “No, indeed, I felt nothing but surprise.”
 
-“Your surprise could not be greater thanminein being noticed by you.
+“Your surprise could not be greater than*mine*in being noticed by you.
 My conscience told me that I deserved no extraordinary politeness, and I
-confess that I did not expect to receivemorethan my due.”
+confess that I did not expect to receive*more*than my due.”
 
-“My objectthen,” replied Darcy, “was to show you, by every civility
+“My object*then*,” replied Darcy, “was to show you, by every civility
 in my power, that I was not so mean as to resent the past; and I hoped
 to obtain your forgiveness, to lessen your ill opinion, by letting you
 see that your reproofs had been attended to. How soon any other wishes
@@ -12739,7 +12782,7 @@ anything about it, they found at last, on examining their watches, that
 it was time to be at home.
 
 “What could have become of Mr. Bingley and Jane?” was a wonder which
-introduced the discussion oftheiraffairs. Darcy was delighted with
+introduced the discussion of*their*affairs. Darcy was delighted with
 their engagement; his friend had given him the earliest information of
 it.
 
@@ -12802,11 +12845,11 @@ else, awakened a suspicion of the truth.
 The evening passed quietly, unmarked by anything extraordinary. The
 acknowledged lovers talked and laughed; the unacknowledged were silent.
 Darcy was not of a disposition in which happiness overflows in mirth;
-and Elizabeth, agitated and confused, ratherknewthat she was happy
-thanfeltherself to be so; for, besides the immediate embarrassment,
+and Elizabeth, agitated and confused, rather*knew*that she was happy
+than*felt*herself to be so; for, besides the immediate embarrassment,
 there were other evils before her. She anticipated what would be felt in
 the family when her situation became known: she was aware that no one
-liked him but Jane; and even feared that with the others it was adislikewhich not all his fortune and consequence might do away.
+liked him but Jane; and even feared that with the others it was a*dislike*which not all his fortune and consequence might do away.
 
 At night she opened her heart to Jane. Though suspicion was very far
 from Miss Bennet’s general habits, she was absolutely incredulous here.
@@ -12822,7 +12865,7 @@ are engaged.”
 Jane looked at her doubtingly. “Oh, Lizzy! it cannot be. I know how much
 you dislike him.”
 
-“You know nothing of the matter. Thatis all to be forgot. Perhaps I
+“You know nothing of the matter.*That*is all to be forgot. Perhaps I
 did not always love him so well as I do now; but in such cases as these
 a good memory is unpardonable. This is the last time I shall ever
 remember it myself.[{459}](#)”
@@ -12845,7 +12888,7 @@ really love him quite well enough? Oh, Lizzy! do anything rather than
 marry without affection. Are you quite sure that you feel what you ought
 to do?”
 
-“Oh, yes! You will only think I feelmorethan I ought to do when I
+“Oh, yes! You will only think I feel*more*than I ought to do when I
 tell you all.”
 
 “What do you mean?”
@@ -12853,7 +12896,7 @@ tell you all.”
 “Why, I must confess that I love him better than I do Bingley. I am
 afraid you will be angry.”
 
-“My dearest sister, now be,beserious. I want to talk very seriously.
+“My dearest sister, now be,*be*serious. I want to talk very seriously.
 Let me know everything that I am to know without delay. Will you tell me
 how long you have loved him?”
 
@@ -12928,7 +12971,7 @@ disapprobation.
 In the evening, soon after Mr. Bennet withdrew to the library, she saw
 Mr. Darcy rise also and follow him, and her agitation on seeing it was
 extreme. She did not fear her father’s opposition, but he was going to
-be made unhappy, and that it should be through her means; thatshe,
+be made unhappy, and that it should be through her means; that*she*,
 his favourite child, should be distressing him by her choice, should be
 filling him with fears and regrets in[{462}](#)disposing of her, was a wretched
 reflection, and she sat in misery till Mr. Darcy appeared again, when,
@@ -12964,13 +13007,13 @@ such terms.”
 
 “Lizzy,” said her father, “I have given him my consent. He is the kind
 of man, indeed, to whom I[{463}](#)should never dare refuse anything, which he
-condescended to ask. I now give it toyou, if you are resolved on
+condescended to ask. I now give it to*you*, if you are resolved on
 having him. But let me advise you to think better of it. I know your
 disposition, Lizzy. I know that you could be neither happy nor
 respectable, unless you truly esteemed your husband, unless you looked
 up to him as a superior. Your lively talents would place you in the
 greatest danger in an unequal marriage. You could scarcely escape
-discredit and misery. My child, let me not have the grief of seeingyouunable to respect your partner in life. You know not what you are
+discredit and misery. My child, let me not have the grief of seeing*you*unable to respect your partner in life. You know not what you are
 about.”
 
 Elizabeth, still more affected, was earnest and solemn in her reply;
@@ -12992,7 +13035,7 @@ had voluntarily done for Lydia. He heard her with astonishment.
 “This is an evening of wonders, indeed! And so, Darcy did everything;
 made up the match, gave the money, paid the fellow’s debts, and got him
 his commission! So much the better. It will save me a world of trouble
-and economy. Had it been your uncle’s doing, I must andwouldhave
+and economy. Had it been your uncle’s doing, I must and*would*have
 paid him; but these violent[{464}](#)young lovers carry everything their own
 way. I shall offer to pay him to-morrow, he will rant and storm about
 his love for you, and there will be an end of the matter.”
@@ -13053,7 +13096,7 @@ acquainted with him; and Mr. Bennet soon assured her that he was rising
 every hour in his esteem.
 
 “I admire all my three sons-in-law highly,” said he. “Wickham, perhaps,
-is my favourite; but I think I shall likeyourhusband quite as well
+is my favourite; but I think I shall like*your*husband quite as well
 as Jane’s.[{466}](#)”
 
 ## “The obsequious civility.”CHAPTER LX.
@@ -13066,10 +13109,10 @@ place?[{467}](#)”
 
 “I cannot fix on the hour, or the spot, or the look, or the words, which
 laid the foundation. It is too long ago. I was in the middle before I
-knew that Ihadbegun.”
+knew that I*had*begun.”
 
 “My beauty you had early withstood, and as for my manners—my behaviour
-toyouwas at least always bordering on the uncivil, and I never spoke
+to*you*was at least always bordering on the uncivil, and I never spoke
 to you without rather wishing to give you pain than not. Now, be
 sincere; did you admire me for my impertinence?”
 
@@ -13078,15 +13121,15 @@ sincere; did you admire me for my impertinence?”
 “You may as well call it impertinence at once. It was very little less.
 The fact is, that you were sick of civility, of deference, of officious
 attention. You were disgusted with the women who were always speaking,
-and looking, and thinking foryourapprobation alone. I roused and
-interested you, because I was so unlikethem. Had you not been really
+and looking, and thinking for*your*approbation alone. I roused and
+interested you, because I was so unlike*them*. Had you not been really
 amiable you would have hated me for it: but in spite of the pains you
 took to disguise yourself, your feelings were always noble and just; and
 in your heart you thoroughly despised the persons who so assiduously
 courted you. There—I have saved you the trouble of accounting for it;
 and really, all things considered, I begin to think it perfectly
 reasonable. To be sure you know no actual good of me—but nobody thinks
-ofthatwhen they fall in love.”
+of*that*when they fall in love.”
 
 “Was there no good in your affectionate behaviour to Jane, while she was
 ill at Netherfield?”
@@ -13111,10 +13154,10 @@ called, did you look as if you did not care about me?”
 “A man who had felt less might.”
 
 “How unlucky that you should have a reasonable answer to give, and that
-I should be so reasonable as to admit it! But I wonder how long youwouldhave gone on, if you had been left to yourself. I wonder when
-youwouldhave spoken if I had not asked you! My resolution of
-thanking you for your kindness to Lydia had certainly great effect. Too
-much, I am afraid; for what becomes of the moral, if our comfort
+I should be so reasonable as to admit it! But I wonder how long you*would*have gone on, if you had been left to yourself. I wonder when
+you*would*have spoken if I had not asked you! My resolution of
+thanking you for your kindness to Lydia had certainly great effect.*Too
+much*, I am afraid; for what becomes of the moral, if our comfort
 springs from a breach of promise, for I ought not to have mentioned the
 subject? This will never do.”
 
@@ -13130,7 +13173,7 @@ for she loves to be of use. But tell me, what did you come down to
 Netherfield for? Was it merely to ride to Longbourn and be embarrassed?
 or had you intended any more serious consequences?[{469}](#)”
 
-“My real purpose was to seeyou, and to judge, if I could, whether I
+“My real purpose was to see*you*, and to judge, if I could, whether I
 might ever hope to make you love me. My avowed one, or what I avowed to
 myself, was to see whether your sister was still partial to Bingley, and
 if she were, to make the confession to him which I have since made.”
@@ -13148,7 +13191,7 @@ I have an aunt, too, who must not be longer neglected.”
 
 From an unwillingness to confess how much her intimacy with Mr. Darcy
 had been overrated, Elizabeth had never yet answered Mrs. Gardiner’s
-long letter; but now, havingthatto communicate which she knew would
+long letter; but now, having*that*to communicate which she knew would
 be most welcome, she was almost ashamed to find that her uncle and aunt
 had already lost three days of happiness, and immediately wrote as
 follows:—
@@ -13156,7 +13199,7 @@ follows:—
 “I would have thanked you before, my dear aunt, as I ought to have done,
 for your long, kind, satisfactory detail of particulars; but, to say the
 truth, I was too cross to write. You supposed more than really existed.
-Butnowsuppose as much as you choose; give a loose to your fancy,
+But*now*suppose as much as you choose; give a loose to your fancy,
 indulge your imagination in every possible flight which the subject will
 afford, and unless you believe me actually married, you cannot greatly
 err. You must write again very soon, and praise him a great deal more
@@ -13213,7 +13256,7 @@ shrug his shoulders, it was not till Sir William was out of sight.
 Mrs. Philips’s vulgarity was another, and, perhaps, a greater tax on his
 forbearance; and though Mrs. Philips, as well as her sister, stood in
 too much awe of him to speak with the familiarity which Bingley’s
-good-humour encouraged; yet, whenever shedidspeak, she must be
+good-humour encouraged; yet, whenever she*did*speak, she must be
 vulgar. Nor was her respect for him, though it made her more quiet, at
 all likely to make her more elegant. Elizabeth did all she could to
 shield him from the frequent notice of either, and was ever anxious to
@@ -13243,7 +13286,7 @@ drew him oftener from home than anything else could do. He delighted in
 going to Pemberley, especially when he was least expected.[{473}](#)
 
 Mr. Bingley and Jane remained at Netherfield only a twelvemonth. So near
-a vicinity to her mother and Meryton relations was not desirable even tohiseasy temper, orheraffectionate heart. The darling wish of his
+a vicinity to her mother and Meryton relations was not desirable even to*his*easy temper, or*her*affectionate heart. The darling wish of his
 sisters was then gratified: he bought an estate in a neighbouring county
 to Derbyshire; and Jane and Elizabeth, in addition to every other source
 of happiness, were within thirty miles of each other.
@@ -13305,11 +13348,11 @@ cheap situation, and always spending more than they ought. His affection
 for her soon sunk into indifference: hers lasted a little longer; and,
 in spite of her youth and her manners, she retained all the claims to
 reputation which her marriage had given her. Though Darcy could never
-receivehimat Pemberley, yet, for Elizabeth’s sake, he assisted him
+receive*him*at Pemberley, yet, for Elizabeth’s sake, he assisted him
 further in his profession. Lydia was occasionally a visitor there, when
 her husband was gone to enjoy himself in London or Bath; and with the
 Bingleys they both of them frequently stayed so long, that even
-Bingley’s good-humour was overcome, and he proceeded so far as totalkof giving them a hint to be gone.
+Bingley’s good-humour was overcome, and he proceeded so far as to*talk*of giving them a hint to be gone.
 
 Miss Bingley was very deeply mortified by Darcy’s marriage; but as she
 thought it advisable to retain the right of visiting at Pemberley, she
@@ -13349,255 +13392,3 @@ her into Derbyshire, had been the means of uniting them.
 
 CHISWICK PRESS:—CHARLES WHITTINGHAM AND CO.
 TOOKS COURT, CHANCERY LANE, LONDON.
-
-*** END OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***Updated editions will replace the previous one—the old editions will
-be renamed. Creating the works from print editions not protected by U. S. copyright
-law means that no one owns a United States copyright in these works,
-so the Foundation (and you!) can copy and distribute it in the United
-States without permission and without paying copyright
-royalties. Special rules, set forth in the General Terms of Use part
-of this license, apply to copying and distributing Project
-Gutenberg™ electronic works to protect the PROJECT GUTENBERG™
-concept and trademark. Project Gutenberg is a registered trademark,
-and may not be used if you charge for an eBook, except by following
-the terms of the trademark license, including paying royalties for use
-of the Project Gutenberg trademark. If you do not charge anything for
-copies of this eBook, complying with the trademark license is very
-easy. You may use this eBook for nearly any purpose such as creation
-of derivative works, reports, performances and research. Project
-Gutenberg eBooks may be modified and printed and given away—you may
-do practically ANYTHING in the United States with eBooks not protected
-by U. S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
-
-PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
-distribution of electronic works, by using or distributing this work
-(or any other work associated in any way with the phrase “Project
-Gutenberg”), you agree to comply with all the terms of the Full
-Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1. A. By reading or using any part of this Project Gutenberg™
-electronic work, you indicate that you have read, understand, agree to
-and accept all the terms of this license and intellectual property
-(trademark/copyright) agreement. If you do not agree to abide by all
-the terms of this agreement, you must cease using and return or
-destroy all copies of Project Gutenberg™ electronic works in your
-possession. If you paid a fee for obtaining a copy of or access to a
-Project Gutenberg™ electronic work and you do not agree to be bound
-by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
-used on or associated in any way with an electronic work by people who
-agree to be bound by the terms of this agreement. There are a few
-things that you can do with most Project Gutenberg™ electronic works
-even without complying with the full terms of this agreement. See
-paragraph 1. C below. There are a lot of things you can do with Project
-Gutenberg™ electronic works if you follow the terms of this
-agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
-Foundation” or PGLAF), owns a compilation copyright in the collection
-of Project Gutenberg™ electronic works. Nearly all the individual
-works in the collection are in the public domain in the United
-States. If an individual work is unprotected by copyright law in the
-United States and you are located in the United States, we do not
-claim a right to prevent you from copying, distributing, performing,
-displaying or creating derivative works based on the work as long as
-all references to Project Gutenberg are removed. Of course, we hope
-that you will support the Project Gutenberg™ mission of promoting
-free access to electronic works by freely sharing Project Gutenberg™
-works in compliance with the terms of this agreement for keeping the
-Project Gutenberg™ name associated with the work. You can easily
-comply with the terms of this agreement by keeping this work in the
-same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
-what you can do with this work. Copyright laws in most countries are
-in a constant state of change. If you are outside the United States,
-check the laws of your country in addition to the terms of this
-agreement before downloading, copying, displaying, performing,
-distributing or creating derivative works based on this work or any
-other Project Gutenberg™ work. The Foundation makes no
-representations concerning the copyright status of any work in any
-country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
-immediate access to, the full Project Gutenberg™ License must appear
-prominently whenever any copy of a Project Gutenberg™ work (any work
-on which the phrase “Project Gutenberg” appears, or with which the
-phrase “Project Gutenberg” is associated) is accessed, displayed,
-performed, viewed, copied or distributed:This eBook is for the use of anyone anywhere in the United States and most
-    other parts of the world at no cost and with almost no restrictions
-    whatsoever. You may copy it, give it away or re-use it under the terms
-    of the Project Gutenberg License included with this eBook or online
-    at[www.gutenberg.org](https://www.gutenberg.org). If you
-    are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U. S. copyright law (does not
-contain a notice indicating that it is posted with permission of the
-copyright holder), the work can be copied and distributed to anyone in
-the United States without paying any fees or charges. If you are
-redistributing or providing access to a work with the phrase “Project
-Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1. E.1 through 1. E.7 or
-obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
-with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1. E.1 through 1. E.7 and any
-additional terms imposed by the copyright holder. Additional terms
-will be linked to the Project Gutenberg™ License for all works
-posted with the permission of the copyright holder found at the
-beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
-License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
-electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1. E.1 with
-active links or immediate access to the full terms of the Project
-Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
-compressed, marked up, nonproprietary or proprietary form, including
-any word processing or hypertext form. However, if you provide access
-to or distribute copies of a Project Gutenberg™ work in a format
-other than “Plain Vanilla ASCII” or other format used in the official
-version posted on the official Project Gutenberg™ website
-(www.gutenberg.org), you must, at no additional cost, fee or expense
-to the user, provide a copy, a means of exporting a copy, or a means
-of obtaining a copy upon request, of the work in its original “Plain
-Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
-performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
-access to or distributing Project Gutenberg™ electronic works
-provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
-        the use of Project Gutenberg™ works calculated using the method
-        you already use to calculate your applicable taxes. The fee is owed
-        to the owner of the Project Gutenberg™ trademark, but he has
-        agreed to donate royalties under this paragraph to the Project
-        Gutenberg Literary Archive Foundation. Royalty payments must be paid
-        within 60 days following each date on which you prepare (or are
-        legally required to prepare) your periodic tax returns. Royalty
-        payments should be clearly marked as such and sent to the Project
-        Gutenberg Literary Archive Foundation at the address specified in
-        Section 4, “Information about donations to the Project Gutenberg
-        Literary Archive Foundation.”
-- • You provide a full refund of any money paid by a user who notifies
-        you in writing (or by e-mail) within 30 days of receipt that s/he
-        does not agree to the terms of the full Project Gutenberg™
-        License. You must require such a user to return or destroy all
-        copies of the works possessed in a physical medium and discontinue
-        all use of and all access to other copies of Project Gutenberg™
-        works.
-- • You provide, in accordance with paragraph 1. F.3, a full refund of
-        any money paid for a work or a replacement copy, if a defect in the
-        electronic work is discovered and reported to you within 90 days of
-        receipt of the work.
-- • You comply with all other terms of this agreement for free
-        distribution of Project Gutenberg™ works.
-
-1. E.9. If you wish to charge a fee or distribute a Project
-Gutenberg™ electronic work or group of works on different terms than
-are set forth in this agreement, you must obtain permission in writing
-from the Project Gutenberg Literary Archive Foundation, the manager of
-the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
-effort to identify, do copyright research on, transcribe and proofread
-works not protected by U. S. copyright law in creating the Project
-Gutenberg™ collection. Despite these efforts, Project Gutenberg™
-electronic works, and the medium on which they may be stored, may
-contain “Defects,” such as, but not limited to, incomplete, inaccurate
-or corrupt data, transcription errors, a copyright or other
-intellectual property infringement, a defective or damaged disk or
-other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1. F.3, the Project
-Gutenberg Literary Archive Foundation, the owner of the Project
-Gutenberg™ trademark, and any other party distributing a Project
-Gutenberg™ electronic work under this agreement, disclaim all
-liability to you for damages, costs and expenses, including legal
-fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
-LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
-TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
-LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
-INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
-defect in this electronic work within 90 days of receiving it, you can
-receive a refund of the money (if any) you paid for it by sending a
-written explanation to the person you received the work from. If you
-received the work on a physical medium, you must return the medium
-with your written explanation. The person or entity that provided you
-with the defective work may elect to provide a replacement copy in
-lieu of a refund. If you received the work electronically, the person
-or entity providing it to you may choose to give you a second
-opportunity to receive the work electronically in lieu of a refund. If
-the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
-OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
-warranties or the exclusion or limitation of certain types of
-damages. If any disclaimer or limitation set forth in this agreement
-violates the law of the state applicable to this agreement, the
-agreement shall be interpreted to make the maximum disclaimer or
-limitation permitted by the applicable state law. The invalidity or
-unenforceability of any provision of this agreement shall not void the
-remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
-trademark owner, any agent or employee of the Foundation, anyone
-providing copies of Project Gutenberg™ electronic works in
-accordance with this agreement, and any volunteers associated with the
-production, promotion and distribution of Project Gutenberg™
-electronic works, harmless from all liability, costs and expenses,
-including legal fees, that arise directly or indirectly from any of
-the following which you do or cause to occur: (a) distribution of this
-or any Project Gutenberg™ work, (b) alteration, modification, or
-additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
-electronic works in formats readable by the widest variety of
-computers including obsolete, old, middle-aged and new computers. It
-exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life. Volunteers and financial support to provide volunteers with the
-assistance they need are critical to reaching Project Gutenberg™’s
-goals and ensuring that the Project Gutenberg™ collection will
-remain freely available for generations to come. In 2001, the Project
-Gutenberg Literary Archive Foundation was created to provide a secure
-and permanent future for Project Gutenberg™ and future
-generations. To learn more about the Project Gutenberg Literary
-Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
-501(c)(3) educational corporation organized under the laws of the
-state of Mississippi and granted tax exempt status by the Internal
-Revenue Service. The Foundation’s EIN or federal tax identification
-number is 64-6221541. Contributions to the Project Gutenberg Literary
-Archive Foundation are tax deductible to the full extent permitted by
-U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
-Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
-to date contact information can be found at the Foundation’s website
-and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
-Literary Archive FoundationProject Gutenberg™ depends upon and cannot survive without widespread
-public support and donations to carry out its mission of
-increasing the number of public domain and licensed works that can be
-freely distributed in machine-readable form accessible by the widest
-array of equipment including outdated equipment. Many small donations
-($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS. The Foundation is committed to complying with the laws regulating
-charities and charitable donations in all 50 states of the United
-States. Compliance requirements are not uniform and it takes a
-considerable effort, much paperwork and many fees to meet and keep up
-with these requirements. We do not solicit donations in locations
-where we have not received written confirmation of compliance. To SEND
-DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
-have not met the solicitation requirements, we know of no prohibition
-against accepting unsolicited donations from donors in such states who
-approach us with offers to donate. International donations are gratefully accepted, but we cannot make
-any statements concerning tax treatment of donations received from
-outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
-methods and addresses. Donations are accepted in a number of other
-ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
-Gutenberg™ concept of a library of electronic works that could be
-freely shared with anyone. For forty years, he produced and
-distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support. Project Gutenberg™ eBooks are often created from several printed
-editions, all of which are confirmed as not protected by copyright in
-the U. S. unless a copyright notice is included. Thus, we do not
-necessarily keep eBooks in compliance with any particular paper
-edition. Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
-including how to make donations to the Project Gutenberg Literary
-Archive Foundation, how to help produce our new eBooks, and how to
-subscribe to our email newsletter to hear about new eBooks.

@@ -1,18 +1,7 @@
 # The CALL of CTHULHU
-**by H. P. LOVECRAFT**
 
----
-
-## Table of Contents
-
-1. [Chapter 1: The Horror in Clay.](#chapter-1)
-2. [Chapter 2: The Tale of Inspector Legrasse.](#chapter-2)
-3. [Chapter 3: The Madness from the Sea.](#chapter-3)
-
----
-
-# The CALL of CTHULHU
 ## By H. P. LOVECRAFT
+
 [Transcriber's Note: This etext was produced from
 Weird Tales, February 1928.
 Extensive research did not uncover any evidence that
@@ -27,7 +16,13 @@ the tide of advancing humanity ... forms of which poetry and legend
 alone have caught a flying memory and called them gods, monsters,
 mythical beings of all sorts and kinds...."
 
-—Algernon Blackwood.
+—*Algernon Blackwood.*
+
+## Table of Contents
+
+1. [night in the cabin whilst Johansen was wandering deliriously.](#chapter-1)
+
+---
 
 ---
 
@@ -36,7 +31,7 @@ between the ring of bodies and the ring of fire."[](#)[[1]](#Footnote_1_1)
 
 ---
 
-## Chapter 1: The Horror in Clay.
+*1. The Horror in Clay.*
 
 The most merciful thing in the world, I think, is the inability of the
 human mind to correlate all its contents. We live on a placid island
@@ -114,14 +109,14 @@ conceive. If I say that my somewhat extravagant imagination yielded
 simultaneous pictures of an octopus, a dragon, and a human caricature,
 I shall not be unfaithful to the spirit of the thing. A pulpy,
 tentacled head surmounted a grotesque and scaly body with rudimentary
-wings; but it was thegeneral outlineof the whole which made it most
+wings; but it was the*general outline*of the whole which made it most
 shockingly frightful. Behind the figure was a vague suggestion of a
 Cyclopean architectural background.
 
 The writing accompanying this oddity was, aside from a stack of
 press cuttings, in Professor Angell's most recent hand; and made no
 pretense to literary style. What seemed to be the main document was
-headed "CTHULHU CULT" in characters painstakingly printed to avoid
+headed "*CTHULHU CULT*" in characters painstakingly printed to avoid
 the erroneous reading of a word so unheard-of. This manuscript was
 divided into two sections, the first of which was headed "1925—Dream
 and Dream Work of H. A. Wilcox, 7 Thomas St., Providence, R. I.," and
@@ -130,11 +125,11 @@ St., New Orleans, La., at 1908 A. A. S. Mtg—Notes on Same, & Prof.
 Webb's Acct." The other manuscript papers were all brief notes, some
 of them accounts of the queer dreams of different persons, some of
 them citations from theosophical books and magazines (notably W.
-Scott-Eliott'sAtlantis and the Lost Lemuria), and the rest comments
+Scott-Eliott's*Atlantis and the Lost Lemuria*), and the rest comments
 on long-surviving secret societies and hidden cults, with references
 to passages in such mythological and anthropological source-books
-as Frazer'sGolden Boughand Miss Murray'sWitch-Cult in Western
-Europe. The cuttings largely alluded to outré mental illnesses and
+as Frazer's*Golden Bough*and Miss Murray's*Witch-Cult in Western
+Europe*. The cuttings largely alluded to outré mental illnesses and
 outbreaks of group folly or mania in the spring of 1925.
 
 ---
@@ -181,7 +176,7 @@ dripping with green ooze and sinister with latent horror. Hieroglyphics
 had covered the walls and pillars, and from some undetermined point
 below had come a voice that was not a voice; a chaotic sensation which
 only fancy could transmute into sound, but which he attempted to render
-by the almost unpronounceable jumble of letters, "Cthulhu fhtagn".
+by the almost unpronounceable jumble of letters, "*Cthulhu fhtagn*".
 
 This verbal jumble was the key to the recollection which excited and
 disturbed Professor Angell. He questioned the sculptor with scientific
@@ -204,7 +199,7 @@ burden was always some terrible Cyclopean vista of dark and dripping
 stone, with a subterrene voice or intelligence shouting monotonously
 in enigmatical sense-impacts uninscribable save as gibberish. The two
 sounds most frequently repeated are those rendered by the letters
-"Cthulhu" and "R'lyeh".
+"*Cthulhu*" and "*R'lyeh*".
 
 On March 23rd, the manuscript continued, Wilcox failed to appear; and
 inquiries at his quarters revealed that he had been stricken with an
@@ -304,7 +299,7 @@ mutterings. American officers in the Philippines find certain tribes
 bothersome about this time, and New York policemen are mobbed by
 hysterical Levantines on the night of March 22-23. The west of Ireland,
 too, is full of wild rumor and legendry, and a fantastic painter named
-Ardois-Bonnot hangs a blasphemousDream Landscapein the Paris spring
+Ardois-Bonnot hangs a blasphemous*Dream Landscape*in the Paris spring
 salon of 1926. And so numerous are the recorded troubles in insane
 asylums that only a miracle can have stopped the medical fraternity
 from noting strange parallelisms and drawing mystified conclusions.
@@ -315,14 +310,14 @@ mentioned by the professor.
 
 ---
 
-## Chapter 2: The Tale of Inspector Legrasse.
+*2. The Tale of Inspector Legrasse.*
 
 The older matters which had made the sculptor's dream and bas-relief so
 significant to my uncle formed the subject of the second half of his
 long manuscript. Once before, it appears, Professor Angell had seen the
 hellish outlines of the nameless monstrosity, puzzled over the unknown
 hieroglyphics, and heard the ominous syllables which can be rendered
-only as "Cthulhu"; and all this in so stirring and horrible a
+only as "*Cthulhu*"; and all this in so stirring and horrible a
 connection that it is small wonder he pursued young Wilcox with queries
 and demands for data.
 
@@ -415,8 +410,8 @@ deliberate bloodthirstiness and repulsiveness. It was a faith of which
 other Eskimos knew little, and which they mentioned only with shudders,
 saying that it had come down from horribly ancient eons before ever the
 world was made. Besides nameless rites and human sacrifices there were
-certain queer hereditary rituals addressed to a supreme elder devil ortornasuk; and of this Professor Webb had taken a careful phonetic
-copy from an agedangekokor wizard-priest, expressing the sounds in
+certain queer hereditary rituals addressed to a supreme elder devil or*tornasuk*; and of this Professor Webb had taken a careful phonetic
+copy from an aged*angekok*or wizard-priest, expressing the sounds in
 Roman letters as best he knew how. But just now of prime significance
 was the fetish which this cult had cherished, and around which they
 danced when the aurora leaped high over the ice cliffs. It was, the
@@ -439,7 +434,7 @@ had chanted to their kindred idols was something very like this—the
 word-divisions being guessed at from traditional breaks in the phrase
 as chanted aloud:
 
-"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn."
+"*Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.*"
 
 Legrasse had one point in advance of Professor Webb, for several among
 his mongrel prisoners had repeated to him what older celebrants had
@@ -515,7 +510,7 @@ and then the less organized ululations would cease, and from what
 seemed a well-drilled chorus of hoarse voices would rise in singsong
 chant that hideous phrase or ritual:
 
-"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn."
+"*Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.*"
 
 Then the men, having reached a spot where the trees were thinner, came
 suddenly in sight of the spectacle itself. Four of them reeled, one
@@ -662,13 +657,13 @@ the stars were right. Then came out of the earth the black spirits of
 earth, moldy and shadowy, and full of dim rumors picked up in caverns
 beneath forgotten sea-bottoms. But of them old Castro dared not speak
 much. He cut himself off hurriedly, and no amount of persuasion or
-subtlety could elicit more in this direction. Thesizeof the Old
+subtlety could elicit more in this direction. The*size*of the Old
 Ones, too, he curiously declined to mention. Of the cult, he said that
 he thought the center lay amid the pathless deserts of Arabia, where
 Irem, the City of Pillars, dreams hidden and untouched. It was not
 allied to the European witch-cult, and was virtually unknown beyond its
 members. No book had ever really hinted of it, though the deathless
-Chinamen said that there were double meanings in theNecronomiconof the mad Arab Abdul Alhazred which the initiated might read as they
+Chinamen said that there were double meanings in the*Necronomicon*of the mad Arab Abdul Alhazred which the initiated might read as they
 chose, especially the much-discussed couplet:
 
 "That is not dead which can eternal lie,And with strange eons even death may die."Legrasse, deeply impressed and not a little bewildered, had inquired
@@ -694,9 +689,9 @@ akin to the dream-sculpture of young Wilcox.
 That my uncle was excited by the tale of the sculptor I did not
 wonder, for what thoughts must arise upon hearing, after a knowledge
 of what Legrasse had learned of the cult, of a sensitive young man
-who haddreamednot only the figure and exact hieroglyphics of the
-swamp-found image and the Greenland devil tablet, but had comein his
-dreamsupon at least three of the precise words of the formula uttered
+who had*dreamed*not only the figure and exact hieroglyphics of the
+swamp-found image and the Greenland devil tablet, but had come*in his
+dreams*upon at least three of the precise words of the formula uttered
 alike by Eskimo diabolists and mongrel Louisianans? Professor Angell's
 instant start on an investigation of the utmost thoroughness was
 eminently natural; though privately I suspected young Wilcox of having
@@ -744,9 +739,9 @@ which he could possibly have received the weird impressions.
 
 He talked of his dreams in a strangely poetic fashion; making me
 see with terrible vividness the damp Cyclopean city of slimy green
-stone—whosegeometry, he oddly said, wasall wrong—and hear
+stone—whose*geometry*, he oddly said, was*all wrong*—and hear
 with frightened expectancy the ceaseless, half-mental calling from
-underground: "Cthulhu fhtagn," "Cthulhu fhtagn."
+underground: "*Cthulhu fhtagn*," "*Cthulhu fhtagn*."
 
 These words had formed part of that dread ritual which told of dead
 Cthulhu's dream-vigil in his stone vault at R'lyeh, and I felt deeply
@@ -771,12 +766,12 @@ graphically at first hand, though it was really no more than a detailed
 confirmation of what my uncle had written, excited me afresh; for I
 felt sure that I was on the track of a very real, very secret, and
 very ancient religion whose discovery would make me an anthropologist
-of note. My attitude was still one of absolute materialism,as I wish
-it still were, and I discounted with almost inexplicable perversity
+of note. My attitude was still one of absolute materialism,*as I wish
+it still were*, and I discounted with almost inexplicable perversity
 the coincidence of the dream notes and odd cuttings collected by
 Professor Angell.
 
-One thing which I began to suspect, and which I now fear Iknow, is
+One thing which I began to suspect, and which I now fear I*know*, is
 that my uncle's death was far from natural. He fell on a narrow hill
 street leading up from an ancient waterfront swarming with foreign
 mongrels, after a careless push from a negro sailor. I did not forget
@@ -792,13 +787,13 @@ he did remains to be seen, for I have learned much now.
 
 ---
 
-## Chapter 3: The Madness from the Sea.
+*3. The Madness from the Sea.*
 
 If heaven ever wishes to grant me a boon, it will be a total effacing
 of the results of a mere chance which fixed my eye on a certain stray
 piece of shelf-paper. It was nothing on which I would naturally have
 stumbled in the course of my daily round, for it was an old number of
-an Australian journal,Sydney Bulletinfor April 18, 1925. It had
+an Australian journal,*Sydney Bulletin*for April 18, 1925. It had
 escaped even the cutting bureau which had at the time of its issuance
 been avidly collecting material for my uncle's research.
 
@@ -807,7 +802,7 @@ the "Cthulhu Cult," and was visiting a learned friend of Paterson,
 New Jersey, the curator of a local museum and a mineralogist of note.
 Examining one day the reserve specimens roughly set on the storage
 shelves in a rear room of the museum, my eye was caught by an odd
-picture in one of the old papers spread beneath the stones. It was theSydney BulletinI have mentioned, for my friend has wide affiliations
+picture in one of the old papers spread beneath the stones. It was the*Sydney Bulletin*I have mentioned, for my friend has wide affiliations
 in all conceivable foreign parts; and the picture was a half-tone cut
 of a hideous stone image almost identical with that which Legrasse had
 found in the swamp.
@@ -820,20 +815,20 @@ read as follows:
 
 MYSTERY DERELICT FOUND AT SEA
 
-VigilantArrives With Helpless Armed New Zealand Yacht in Tow.
+*Vigilant*Arrives With Helpless Armed New Zealand Yacht in Tow.
 One Survivor and Dead Man Found Aboard. Tale of Desperate Battle
 and Deaths at Sea. Rescued Seaman Refuses Particulars of Strange
 Experience. Odd Idol Found in His Possession. Inquiry to Follow.
 
 ---
 
-The Morrison Co.'s freighterVigilant, bound from Valparaiso,
+The Morrison Co.'s freighter*Vigilant*, bound from Valparaiso,
 arrived this morning at its wharf in Darling Harbour, having in tow
-the battled and disabled but heavily armed steam yachtAlertof
+the battled and disabled but heavily armed steam yacht*Alert*of
 Dunedin, N. Z., which was sighted April 12th in S. Latitude 34° 21',
 W. Longitude 152° 17', with one living and one dead man aboard.
 
-TheVigilantleft Valparaiso March 25th, and on April 2d was driven
+The*Vigilant*left Valparaiso March 25th, and on April 2d was driven
 considerably south of her course by exceptionally heavy storms and
 monster waves. On April 12th the derelict was sighted; and though
 apparently deserted, was found upon boarding to contain one survivor
@@ -848,26 +843,26 @@ the cabin of the yacht, in a small carved shrine of common pattern.
 
 This man, after recovering his senses, told an exceedingly strange
 story of piracy and slaughter. He is Gustaf Johansen, a Norwegian of
-some intelligence, and had been second mate of the two-masted schoonerEmmaof Auckland, which sailed for Callao February 20th, with a
+some intelligence, and had been second mate of the two-masted schooner*Emma*of Auckland, which sailed for Callao February 20th, with a
 complement of eleven men.
 
-TheEmma, he says, was delayed and thrown widely south of her course
+The*Emma*, he says, was delayed and thrown widely south of her course
 by the great storm of March 1st, and on March 22d, in S. Latitude
-49° 51´, W. Longitude 128° 34´, encountered theAlert, manned by
+49° 51´, W. Longitude 128° 34´, encountered the*Alert*, manned by
 a queer and evil-looking crew of Kanakas and half-castes. Being
 ordered peremptorily to turn back, Capt. Collins refused; whereupon
 the strange crew began to fire savagely and without warning upon the
 schooner with a peculiarly heavy battery of brass cannon forming part
 of the yacht's equipment.
 
-TheEmma'smen showed fight, says the survivor, and though the
+The*Emma's*men showed fight, says the survivor, and though the
 schooner began to sink from shots beneath the waterline they managed
 to heave alongside their enemy and board her, grappling with the
 savage crew on the yacht's deck, and being forced to kill them all,
 the number being slightly superior, because of their particularly
 abhorrent and desperate though rather clumsy mode of fighting.
 
-Three of theEmma'smen, including Capt. Collins and First Mate
+Three of the*Emma's*men, including Capt. Collins and First Mate
 Green, were killed; and the remaining eight under Second Mate Johansen
 proceeded to navigate the captured yacht, going ahead in their
 original direction to see if any reason for their ordering back had
@@ -887,14 +882,14 @@ and he does not even recall when William Briden, his companion, died.
 Briden's death reveals no apparent cause, and was probably due to
 excitement or exposure.
 
-Cable advices from Dunedin report that theAlertwas well known
+Cable advices from Dunedin report that the*Alert*was well known
 there as an island trader, and bore an evil reputation along the
 waterfront. It was owned by a curious group of half-castes whose
 frequent meetings and night trips to the woods attracted no little
 curiosity; and it had set sail in great haste just after the storm and
 earth tremors of March 1st.
 
-Our Auckland correspondent gives theEmmaand her crew an excellent
+Our Auckland correspondent gives the*Emma*and her crew an excellent
 reputation, and Johansen is described as a sober and worthy man.
 
 The admiralty will institute an inquiry on the whole matter beginning
@@ -907,8 +902,8 @@ This was all, together with the picture of the hellish image; but what
 a train of ideas it started in my mind! Here were new treasuries of
 data on the Cthulhu Cult, and evidence that it had strange interests
 at sea as well as on land. What motive prompted the hybrid crew to
-order back theEmmaas they sailed about with their hideous idol?
-What was the unknown island on which six of theEmma'screw had
+order back the*Emma*as they sailed about with their hideous idol?
+What was the unknown island on which six of the*Emma's*crew had
 died, and about which the mate Johansen was so secretive? What had the
 vice-admiralty's investigation brought out, and what was known of the
 noxious cult in Dunedin? And most marvelous of all, what deep and more
@@ -917,12 +912,12 @@ undeniable significance to the various turns of events so carefully
 noted by my uncle?
 
 March 1st—our February 28th according to the International Date
-Line—the earthquake and storm had come. From Dunedin theAlertand
+Line—the earthquake and storm had come. From Dunedin the*Alert*and
 her noisome crew had darted eagerly forth as if imperiously summoned,
 and on the other side of the earth poets and artists had begun to
 dream of a strange, dank Cyclopean city whilst a young sculptor had
 molded in his sleep the form of the dreaded Cthulhu. March 23rd the
-crew of theEmmalanded on an unknown island and left six men dead;
+crew of the*Emma*landed on an unknown island and left six men dead;
 and on that date the dreams of sensitive men assumed a heightened
 vividness and darkened with dread of a giant monster's malign pursuit,
 whilst an architect had gone mad and a sculptor had lapsed suddenly
@@ -930,7 +925,7 @@ into delirium! And what of this storm of April 2nd—the date on which
 all dreams of the dank city ceased, and Wilcox emerged unharmed from
 the bondage of strange fever? What of all this—and of those hints of
 old Castro about the sunken, star-born Old Ones and their coming reign;
-their faithful cultand their mastery of dreams? Was I tottering on
+their faithful cult*and their mastery of dreams*? Was I tottering on
 the brink of cosmic horrors beyond man's power to bear? If so, they
 must be horrors of the mind alone, for in some way the second of April
 had put a stop to whatever monstrous menace had begun its siege of
@@ -946,15 +941,15 @@ Waterfront scum was far too common for special mention; though there
 was vague talk about one inland trip these mongrels had made, during
 which faint drumming and red flame were noted on the distant hills.
 
-In Auckland I learned that Johansen had returnedwith yellow hair
-turned whiteafter a perfunctory and inconclusive questioning at
+In Auckland I learned that Johansen had returned*with yellow hair
+turned white*after a perfunctory and inconclusive questioning at
 Sydney, and had thereafter sold his cottage in West Street and sailed
 with his wife to his old home in Oslo. Of his stirring experience
 he would tell his friends no more than he had told the admiralty
 officials, and all they could do was to give me his Oslo address.
 
 After that I went to Sydney and talked profitlessly with seamen and
-members of the vice-admiralty court. I saw theAlert, now sold and
+members of the vice-admiralty court. I saw the*Alert*, now sold and
 in commercial use, at Circular Quay in Sydney Cove, but gained nothing
 from its non-committal bulk. The crouching image with its cuttlefish
 head, dragon body, scaly wings, and hieroglyphed pedestal, was
@@ -1015,13 +1010,13 @@ their monstrous stone city again to the sun and air.
 ---
 
 Johansen's voyage had begun just as he told it to the vice-admiralty.
-TheEmma, in ballast, had cleared Auckland on February 20th, and had
+The*Emma*, in ballast, had cleared Auckland on February 20th, and had
 felt the full force of that earthquake-born tempest which must have
 heaved up from the sea-bottom the horrors that filled men's dreams.
 Once more under control, the ship was making good progress when held
-up by theAlerton March 22nd, and I could feel the mate's regret as
+up by the*Alert*on March 22nd, and I could feel the mate's regret as
 he wrote of her bombardment and sinking. Of the swarthy cult-fiends
-on theAlerthe speaks with significant horror. There was some
+on the*Alert*he speaks with significant horror. There was some
 peculiarly abominable quality about them which made their destruction
 seem almost a duty, and Johansen shows ingenuous wonder at the charge
 of ruthlessness brought against his party during the proceedings of the
@@ -1041,14 +1036,14 @@ suspect, but God knows he soon saw enough!
 
 I suppose that only a single mountain-top, the hideous monolith-crowned
 citadel whereon great Cthulhu was buried, actually emerged from the
-waters. When I think of theextentof all that may be brooding down
+waters. When I think of the*extent*of all that may be brooding down
 there I almost wish to kill myself forthwith. Johansen and his men were
 awed by the cosmic majesty of this dripping Babylon of elder demons,
 and must have guessed without guidance that it was nothing of this or
 of any sane planet. Awe at the unbelievable size of the greenish stone
 blocks, at the dizzying height of the great carven monolith, and at the
 stupefying identity of the colossal statues and bas-reliefs with the
-queer image found in the shrine on theAlert, is poignantly visible
+queer image found in the shrine on the*Alert*, is poignantly visible
 in every line of the mate's frightened description.
 
 Without knowing what futurism is like, Johansen achieved something
@@ -1056,8 +1051,8 @@ very close to it when he spoke of the city; for instead of describing
 any definite structure or building, he dwells only on the broad
 impressions of vast angles and stone surfaces—surfaces too great to
 belong to anything right or proper for this earth, and impious with
-horrible images and hieroglyphs. I mention his talk aboutanglesbecause it suggests something Wilcox had told me of his awful dreams.
-He had said that thegeometryof the dream-place he saw was abnormal,
+horrible images and hieroglyphs. I mention his talk about*angles*because it suggests something Wilcox had told me of his awful dreams.
+He had said that the*geometry*of the dream-place he saw was abnormal,
 non-Euclidean, and loathsomely redolent of spheres and dimensions apart
 from ours. Now an unlettered seaman felt the same thing whilst gazing
 at the terrible reality.
@@ -1102,7 +1097,7 @@ moved anomalously in a diagonal way, so that all the rules of matter
 and perspective seemed upset.
 
 The aperture was black with a darkness almost material. That
-tenebrousness was indeed apositive quality; for it obscured such
+tenebrousness was indeed a*positive quality*; for it obscured such
 parts of the inner walls as ought to have been revealed, and actually
 burst forth like smoke from its eon-long imprisonment, visibly
 darkening the sun as it slunk away into the shrunken and gibbous sky
@@ -1133,14 +1128,14 @@ frenziedly over endless vistas of green-crusted rock to the boat,
 and Johansen swears he was swallowed up by an angle of masonry which
 shouldn't have been there; an angle which was acute, but behaved as
 if it were obtuse. So only Briden and Johansen reached the boat, and
-pulled desperately for theAlertas the mountainous monstrosity
+pulled desperately for the*Alert*as the mountainous monstrosity
 flopped down the slimy stones and hesitated floundering at the edge of
 the water.
 
 Steam had not been suffered to go down entirely, despite the departure
 of all hands for the shore; and it was the work of only a few moments
 of feverish rushing up and down between wheels and engines to get
-theAlertunder way. Slowly, amidst the distorted horrors of that
+the*Alert*under way. Slowly, amidst the distorted horrors of that
 indescribable scene, she began to churn the lethal waters; whilst on
 the masonry of that charnel shore that was not of earth the titan Thing
 from the stars slavered and gibbered like Polypheme cursing the fleeing
@@ -1151,7 +1146,7 @@ shrilly as he kept on laughing at intervals till death found him one
 night in the cabin whilst Johansen was wandering deliriously.
 
 But Johansen had not given out yet. Knowing that the Thing could
-surely overtake theAlertuntil steam was fully up, he resolved
+surely overtake the*Alert*until steam was fully up, he resolved
 on a desperate chance; and, setting the engine for full speed, ran
 lightning-like on deck and reversed the wheel. There was a mighty
 eddying and foaming in the noisome brine, and as the steam mounted
@@ -1166,8 +1161,8 @@ as of a cloven sunfish, a stench as of a thousand opened graves, and
 a sound that the chronicler would not put on paper. For an instant
 the ship was befouled by an acrid and blinding green cloud, and then
 there was only a venomous seething astern; where—God in heaven!—the
-scattered plasticity of that nameless sky-spawn was nebulouslyrecombiningin its hateful original form, whilst its distance widened
-every second as theAlertgained impetus from its mounting steam.
+scattered plasticity of that nameless sky-spawn was nebulously*recombining*in its hateful original form, whilst its distance widened
+every second as the*Alert*gained impetus from its mounting steam.
 
 ---
 
@@ -1183,7 +1178,7 @@ from the moon back again to the pit, all livened by a cachinnating
 chorus of the distorted, hilarious elder gods and the green, bat-winged
 mocking imps of Tartarus.
 
-Out of that dream came rescue—theVigilant, the vice-admiralty
+Out of that dream came rescue—the*Vigilant*, the vice-admiralty
 court, the streets of Dunedin, and the long voyage back home to the
 old house by the Egeberg. He could not tell—they would think him mad.
 He would write of what he knew before death came, but his wife must not
@@ -1201,7 +1196,7 @@ lives.
 
 Cthulhu still lives, too, I suppose, again in that chasm of stone
 which has shielded him since the sun was young. His accursed city is
-sunken once more, for theVigilantsailed over the spot after the
+sunken once more, for the*Vigilant*sailed over the spot after the
 April storm; but his ministers on earth still bellow and prance and
 slay around idol-capped monoliths in lonely places. He must have been
 trapped by the sinking whilst within his black abyss, or else the world

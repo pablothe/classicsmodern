@@ -63,7 +63,7 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
         # Save file
         book_dir = downloader.books_dir / book_slug
         book_dir.mkdir(parents=True, exist_ok=True)
-        output_file = book_dir / "source.md"
+        output_file = book_dir / "book.md"
 
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(cleaned)

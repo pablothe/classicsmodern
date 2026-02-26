@@ -1,9 +1,9 @@
-**_ START OF THE PROJECT GUTENBERG EBOOK 1228 _**There are several editions of this ebook in the Project Gutenberg collection.
 Various characteristics of each ebook are listed to aid in selecting the
 preferred file.
 Click on any of the filenumbers below to quickly view each ebook.
 
-[1228](http://www.gutenberg.org/files/1228/1228-h/1228-h.htm)1859, First Edition[22764](http://www.gutenberg.org/files/22764/22764-h/22764-h.htm)1860, Second Edition[2009](http://www.gutenberg.org/files/2009/2009-h/2009-h.htm)1872, Sixth Edition, considered the definitive edition.# Onthe Origin of Species
+**1228**1859, First Edition**22764**1860, Second Edition**2009**1872, Sixth Edition, considered the definitive edition.
+# Onthe Origin of Species
 
 #### BY MEANS OF NATURAL SELECTION,
 
@@ -12,7 +12,6 @@ Click on any of the filenumbers below to quickly view each ebook.
 ## By Charles Darwin, M. A.,
 
 #### Fellow Of The Royal, Geological, Linnæan, Etc., Societies;Author Of ‘Journal Of Researches During H. M. S. Beagle’s Voyage
-
 Round The World.’LONDON:JOHN MURRAY, ALBEMARLE STREET.1859.
 
 ---
@@ -22,7 +21,7 @@ this—we can perceive that events are brought about not by insulated
 interpositions of Divine power, exerted in each particular case, but by the
 establishment of general laws.”
 
-W. WHEWELL:Bridgewater Treatise.
+W. WHEWELL:*Bridgewater Treatise*.
 
 “To conclude, therefore, let no man out of a weak conceit of sobriety, or
 an ill-applied moderation, think or maintain, that a man can search too far or
@@ -30,16 +29,16 @@ be too well studied in the book of God’s word, or in the book of
 God’s works; divinity or philosophy; but rather let men endeavour an
 endless progress or proficience in both.”
 
-BACON:Advancement of Learning.
+BACON:*Advancement of Learning*.
 
-Down, Bromley, Kent,
-October, 1st, 1859.
+*Down, Bromley, Kent,October*, 1*st*, 1859.
 
 ---
 
 ## Contents
 
-[INTRODUCTION.](#chap00)[1. VARIATION UNDER DOMESTICATION.](#chap01)[2. VARIATION UNDER NATURE.](#chap02)[3. STRUGGLE FOR EXISTENCE.](#chap03)[4. NATURAL SELECTION.](#chap04)[5. LAWS OF VARIATION.](#chap05)[6. DIFFICULTIES ON THEORY.](#chap06)[7. INSTINCT.](#chap07)[8. HYBRIDISM.](#chap08)[9. ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.](#chap09)[10. ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.](#chap10)[11. GEOGRAPHICAL DISTRIBUTION.](#chap11)[12. GEOGRAPHICAL DISTRIBUTION—continued.](#chap12)[13. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY:](#chap13)[14. RECAPITULATION AND CONCLUSION.](#chap14)[INDEX](#chap15)### DETEAILED CONTENTS. ON THE ORIGIN OF SPECIES.
+[INTRODUCTION.](#chap00)[1. VARIATION UNDER DOMESTICATION.](#chap01)[2. VARIATION UNDER NATURE.](#chap02)[3. STRUGGLE FOR EXISTENCE.](#chap03)[4. NATURAL SELECTION.](#chap04)[5. LAWS OF VARIATION.](#chap05)[6. DIFFICULTIES ON THEORY.](#chap06)[7. INSTINCT.](#chap07)[8. HYBRIDISM.](#chap08)[9. ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.](#chap09)[10. ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.](#chap10)[11. GEOGRAPHICAL DISTRIBUTION.](#chap11)[12. GEOGRAPHICAL DISTRIBUTION—*continued*.](#chap12)[13. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY:](#chap13)[14. RECAPITULATION AND CONCLUSION.](#chap14)[INDEX](#chap15)
+### DETEAILED CONTENTS. ON THE ORIGIN OF SPECIES.
 
 [INTRODUCTION.](#chap00)
 
@@ -65,10 +64,10 @@ Individual Differences.
 Doubtful species.
 Wide ranging, much diffused, and common species vary most.
 Species of the larger genera in any country vary more than the species
-of the smaller genera.
+  of the smaller genera.
 Many of the species of the larger genera resemble varieties in being
-very closely, but unequally, related to each other, and in having
-restricted ranges.
+  very closely, but unequally, related to each other, and in having
+  restricted ranges.
 
 [CHAPTER 3. STRUGGLE FOR EXISTENCE.](#chap03)
 
@@ -82,23 +81,23 @@ Effects of climate.
 Protection from the number of individuals.
 Complex relations of all animals and plants throughout nature.
 Struggle for life most severe between individuals and varieties of the
-same species; often severe between species of the same genus.
+  same species; often severe between species of the same genus.
 The relation of organism to organism the most important of all relations.
 
 [CHAPTER 4. NATURAL SELECTION.](#chap04)
 
 Natural Selection: its power compared with man’s selection, its power
-on characters of trifling importance, its power at all ages and on
-both sexes.
+  on characters of trifling importance, its power at all ages and on
+  both sexes.
 Sexual Selection.
 On the generality of intercrosses between individuals of the same
-species.
+  species.
 Circumstances favourable and unfavourable to Natural Selection,
 namely, intercrossing, isolation, number of individuals.
 Slow action.
 Extinction caused by Natural Selection.
 Divergence of Character, related to the diversity of inhabitants of
-any small area, and to naturalisation.
+  any small area, and to naturalisation.
 Action of Natural Selection, through Divergence of Character and
 Extinction, on the descendants from a common parent.
 Explains the Grouping of all organic beings.
@@ -107,15 +106,15 @@ Explains the Grouping of all organic beings.
 
 Effects of external conditions.
 Use and disuse, combined with natural selection; organs of flight and
-of vision.
+  of vision.
 Acclimatisation.
 Correlation of growth.
 Compensation and economy of growth.
 False correlations.
 Multiple, rudimentary, and lowly organised structures variable.
 Parts developed in an unusual manner are highly variable: specific
-characters more variable than generic: secondary sexual characters
-variable.
+  characters more variable than generic: secondary sexual characters
+  variable.
 Species of the same genus vary in an analogous manner.
 Reversions to long-lost characters.
 Summary.
@@ -135,7 +134,7 @@ Natura non facit saltum.
 Organs of small importance.
 Organs not in all cases absolutely perfect.
 The law of Unity of Type and of the Conditions of Existence embraced
-by the theory of Natural Selection.
+  by the theory of Natural Selection.
 
 [CHAPTER 7. INSTINCT.](#chap07)
 
@@ -156,15 +155,15 @@ Summary.
 
 Distinction between the sterility of first crosses and of hybrids.
 Sterility various in degree, not universal, affected by close
-interbreeding, removed by domestication.
+  interbreeding, removed by domestication.
 Laws governing the sterility of hybrids.
 Sterility not a special endowment, but incidental on other
-differences.
+  differences.
 Causes of the sterility of first crosses and of hybrids.
 Parallelism between the effects of changed conditions of life and
-crossing.
+  crossing.
 Fertility of varieties when crossed and of their mongrel offspring not
-universal.
+  universal.
 Hybrids and mongrels compared independently of their fertility.
 Summary.
 
@@ -173,7 +172,7 @@ Summary.
 On the absence of intermediate varieties at the present day.
 On the nature of extinct intermediate varieties; on their number.
 On the vast lapse of time, as inferred from the rate of deposition and
-of denudation.
+  of denudation.
 On the poorness of our palæontological collections.
 On the intermittence of geological formations.
 On the absence of intermediate varieties in any one formation.
@@ -186,7 +185,7 @@ On the slow and successive appearance of new species.
 On their different rates of change.
 Species once lost do not reappear.
 Groups of species follow the same general rules in their appearance
-and disappearance as do single species.
+  and disappearance as do single species.
 On Extinction.
 On simultaneous changes in the forms of life throughout the world.
 On the affinities of extinct species to each other and to living species.
@@ -197,40 +196,40 @@ Summary of preceding and present chapters.
 [CHAPTER 11. GEOGRAPHICAL DISTRIBUTION.](#chap11)
 
 Present distribution cannot be accounted for by differences in
-physical conditions.
+  physical conditions.
 Importance of barriers.
 Affinity of the productions of the same continent.
 Centres of creation.
 Means of dispersal, by changes of climate and of the level of the
-land, and by occasional means.
+  land, and by occasional means.
 Dispersal during the Glacial period co-extensive with the world.
 
-[CHAPTER 12. GEOGRAPHICAL DISTRIBUTION—continued.](#chap12)
+[CHAPTER 12. GEOGRAPHICAL DISTRIBUTION—*continued*.](#chap12)
 
 Distribution of fresh-water productions.
 On the inhabitants of oceanic islands.
 Absence of Batrachians and of terrestrial Mammals.
 On the relation of the inhabitants of islands to those of the nearest
-mainland.
+  mainland.
 On colonisation from the nearest source with subsequent modification.
 Summary of the last and present chapters.
 
 [CHAPTER 13. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY: EMBRYOLOGY:
-RUDIMENTARY ORGANS.](#chap13)
+  RUDIMENTARY ORGANS.](#chap13)
 
 CLASSIFICATION, groups subordinate to groups.
 Natural system.
 Rules and difficulties in classification, explained on the theory of
-descent with modification.
+  descent with modification.
 Classification of varieties.
 Descent always used in classification.
 Analogical or adaptive characters.
 Affinities, general, complex and radiating.
 Extinction separates and defines groups.
 MORPHOLOGY, between members of the same class, between parts of the
-same individual.
+  same individual.
 EMBRYOLOGY, laws of, explained by variations not supervening at an
-early age, and being inherited at a corresponding age.
+  early age, and being inherited at a corresponding age.
 RUDIMENTARY ORGANS; their origin explained.
 Summary.
 
@@ -245,7 +244,7 @@ Concluding remarks.
 
 ## ON THE ORIGIN OF SPECIES.
 
-end chapter## INTRODUCTION.
+## Chapter 3: . NTRODUCTIONINTRODUCTION.
 
 [](#)When on board H. M. S. ‘Beagle,’ as naturalist, I was much struck
 with certain facts in the distribution of the inhabitants of South America, and
@@ -349,7 +348,7 @@ whole animal and vegetable kingdoms. As many more individuals of each species
 are born than can possibly survive; and as, consequently, there is a frequently
 recurring struggle for existence, it follows that any being, if it vary however
 slightly in any manner profitable to itself, under the complex and sometimes
-varying conditions of life, will have a better chance of surviving, and thus benaturally selected. From the strong principle of inheritance, any
+varying conditions of life, will have a better chance of surviving, and thus be*naturally selected*. From the strong principle of inheritance, any
 selected variety will tend to propagate its new and modified form.
 
 This fundamental subject of Natural Selection will be treated at some length in
@@ -390,7 +389,7 @@ manner as the acknowledged varieties of any one species are the descendants of
 that species. Furthermore, I am convinced that Natural Selection has been the
 main but not exclusive means of modification.
 
-end chapter## CHAPTER I. VARIATION UNDER DOMESTICATION.
+## Chapter 1: . VARIATION UNDER DOMESTICATIONCHAPTER I. VARIATION UNDER DOMESTICATION.
 
 Causes of Variability. Effects of Habit. Correlation of Growth. Inheritance.
 Character of Domestic Varieties. Difficulty of distinguishing between Varieties
@@ -580,7 +579,7 @@ wider extension, and that when there is no apparent reason why a peculiarity
 should appear at any particular age, yet that it does tend to appear in the
 offspring at the same period at which it first appeared in the parent. I
 believe this rule to be of the highest importance in explaining the laws of
-embryology. These remarks are of course confined to the firstappearanceof the peculiarity, and not to its primary cause, which may have acted on the
+embryology. These remarks are of course confined to the first*appearance*of the peculiarity, and not to its primary cause, which may have acted on the
 ovules or male element; in nearly the same manner as in the crossed offspring
 from a short-horned cow by a long-horned bull, the greater length of horn,
 though appearing late in life, is clearly due to the male element.
@@ -739,11 +738,11 @@ with pigeons) extremely uniform, and everything seems simple enough; but when
 these mongrels are crossed one with another for several generations, hardly two
 of them will be alike, and then the extreme difficulty, or rather utter
 hopelessness, of the task becomes apparent. Certainly, a breed intermediate
-betweentwo very distinctbreeds could not be got without extreme care
+between*two very distinct*breeds could not be got without extreme care
 and long-continued selection; nor can I find a single case on record of a
 permanent race having been thus formed.
 
-On the Breeds of the Domestic Pigeon.—Believing that it is always
+*On the Breeds of the Domestic Pigeon*.—Believing that it is always
 best to study some special group, I have, after deliberation, taken up domestic
 pigeons. I have kept every breed which I could purchase or obtain, and have
 been most kindly favoured with skins from several quarters of the world, more
@@ -897,14 +896,14 @@ inheritance.
 Lastly, the hybrids or mongrels from between all the domestic breeds of pigeons
 are perfectly fertile. I can state this from my own observations, purposely
 made on the most distinct breeds. Now, it is difficult, perhaps impossible, to
-bring forward one case of the hybrid offspring of two animalsclearly
-distinctbeing themselves perfectly fertile. Some authors believe that
+bring forward one case of the hybrid offspring of two animals*clearly
+distinct*being themselves perfectly fertile. Some authors believe that
 long-continued domestication eliminates this strong tendency to sterility: from
 the history of the dog I think there is some probability in this hypothesis, if
 applied to species closely related together, though it is unsupported by a
 single experiment. But to extend the hypothesis so far as to suppose that
 species, aboriginally as distinct as carriers, tumblers, pouters, and fantails
-now are, should yield offspring perfectly fertile,inter se, seems to me
+now are, should yield offspring perfectly fertile,*inter se*, seems to me
 rash in the extreme.
 
 From these several reasons, namely, the improbability of man having formerly
@@ -980,7 +979,7 @@ the same parents—may they not learn a lesson of caution, when they deride
 the idea of species in a state of nature being lineal descendants of other
 species?
 
-Selection.—Let us now briefly consider the steps by which
+*Selection*.—Let us now briefly consider the steps by which
 domestic races have been produced, either from one or from several allied
 species. Some little effect may, perhaps, be attributed to the direct action of
 the external conditions of life, and some little to habit; but he would be a
@@ -1285,7 +1284,7 @@ useful or pleasing to man appear only occasionally, the chance of their
 appearance will be much increased by a large number of individuals being kept;
 and hence this comes to be of the highest importance to success. On this
 principle Marshall has remarked, with respect to the sheep of parts of
-Yorkshire, that “as they generally belong to poor people, and are mostlyin small lots, they never can be improved.” On the other hand,
+Yorkshire, that “as they generally belong to poor people, and are mostly*in small lots*, they never can be improved.” On the other hand,
 nurserymen, from raising large stocks of the same plants, are generally far
 more successful than amateurs in getting new and valuable varieties. The
 keeping of a large number of individuals of a species in any country requires
@@ -1356,7 +1355,7 @@ of Change I am convinced that the accumulative action of Selection, whether
 applied methodically and more quickly, or unconsciously and more slowly, but
 more efficiently, is by far the predominant Power.
 
-end chapter## CHAPTER II. VARIATION UNDER NATURE.
+## Chapter 2: . VARIATION UNDER NATURECHAPTER II. VARIATION UNDER NATURE.
 
 Variability. Individual differences. Doubtful species. Wide ranging, much
 diffused, and common species vary most. Species of the larger genera in any
@@ -1654,7 +1653,7 @@ geographical distribution.
 From looking at species as only strongly-marked and well-defined varieties, I
 was led to anticipate that the species of the larger genera in each country
 would oftener present varieties, than the species of the smaller genera; for
-wherever many closely related species (i.e.species of the same genus)
+wherever many closely related species (*i.e.*species of the same genus)
 have been formed, many varieties or incipient species ought, as a general rule,
 to be now forming. Where many large trees grow, we expect to find saplings.
 Where many species of a genus have been formed through variation, circumstances
@@ -1772,7 +1771,7 @@ modified and dominant descendants. But by steps hereafter to be explained, the
 larger genera also tend to break up into smaller genera. And thus, the forms of
 life throughout the universe become divided into groups subordinate to groups.
 
-end chapter## CHAPTER III. STRUGGLE FOR EXISTENCE.
+## Chapter 3: . STRUGGLE FOR EXISTENCECHAPTER III. STRUGGLE FOR EXISTENCE.
 
 Bears on natural selection. The term used in a wide sense. Geometrical powers
 of increase. Rapid increase of naturalised animals and plants. Nature of the
@@ -2023,7 +2022,7 @@ numbers, we may feel sure that the cause lies quite as much in other species
 being favoured, as in this one being hurt. So it is when we travel northward,
 but in a somewhat lesser degree, for the number of species of all kinds, and
 therefore of competitors, decreases northwards; hence in going northward, or in
-ascending a mountain, we far oftener meet with stunted forms, due to thedirectlyinjurious action of climate, than we do in proceeding
+ascending a mountain, we far oftener meet with stunted forms, due to the*directly*injurious action of climate, than we do in proceeding
 southwards or in descending a mountain. When we reach the Arctic regions, or
 snow-capped summits, or absolute deserts, the struggle for life is almost
 exclusively with the elements.
@@ -2273,7 +2272,7 @@ with the full belief, that the war of nature is not incessant, that no fear is
 felt, that death is generally prompt, and that the vigorous, the healthy, and
 the happy survive and multiply.
 
-end chapter## CHAPTER IV. NATURAL SELECTION.
+## Chapter 4: . NATURAL SELECTIONCHAPTER IV. NATURAL SELECTION.
 
 Natural Selection: its power compared with man’s selection, its power on
 characters of trifling importance, its power at all ages and on both sexes.
@@ -2472,7 +2471,7 @@ inevitably perish: or, more delicate and more easily broken shells might be
 selected, the thickness of the shell being known to vary like every other
 structure.
 
-Sexual Selection.—Inasmuch as peculiarities often appear under
+*Sexual Selection*.—Inasmuch as peculiarities often appear under
 domestication in one sex and become hereditarily attached to that sex, the same
 fact probably occurs under nature, and if so, natural selection will be able to
 modify one sex in its functional relations to the other sex, or in relation to
@@ -2538,7 +2537,7 @@ the tuft of hair on the breast of the turkey-cock, which can hardly be either
 useful or ornamental to this bird;—indeed, had the tuft appeared under
 domestication, it would have been called a monstrosity.
 
-Illustrations of the action of Natural Selection.—In order to make
+*Illustrations of the action of Natural Selection*.—In order to make
 it clear how, as I believe, natural selection acts, I must beg permission to
 give one or two imaginary illustrations. Let us take the case of a wolf, which
 preys on various animals, securing some by craft, some by strength, and some by
@@ -2682,7 +2681,7 @@ has almost banished such views as the excavation of a great valley by a single
 diluvial wave, so will natural selection, if it be a true principle, banish the
 belief of the continued creation of new organic[](#)beings, or of any great and sudden modification in their structure.
 
-On the Intercrossing of Individuals.—I must here introduce a short
+*On the Intercrossing of Individuals*.—I must here introduce a short
 digression. In the case of animals and plants with separated sexes, it is of
 course obvious that two individuals must always unite for each birth; but in
 the case of hermaphrodites this is far from obvious. Nevertheless I am strongly
@@ -2705,7 +2704,7 @@ In the first place, I have collected so large a body of facts, showing, in
 accordance with the almost universal belief of breeders, that with animals and
 plants a cross between different varieties, or between individuals of the same
 variety but of another strain, gives vigour and fertility to the offspring; and
-on the other hand, thatcloseinterbreeding diminishes vigour and
+on the other hand, that*close*interbreeding diminishes vigour and
 fertility; that[](#)these facts alone incline me to believe that it is a general law of nature
 (utterly ignorant though we be of the meaning of the law) that no organic being
 self-fertilises itself for an eternity of generations; but that a cross with
@@ -2777,9 +2776,9 @@ other, and of these only 78 were true to their kind, and some even of these
 were not perfectly true. Yet the pistil of each cabbage-flower is surrounded
 not only by its own six stamens, but by those of the many other flowers on the
 same plant. How, then, comes it that such a vast number of the seedlings are
-mongrelized? I suspect that it must arise from the pollen of a distinctvarietyhaving a prepotent effect over a flower’s own pollen; and
+mongrelized? I suspect that it must arise from the pollen of a distinct*variety*having a prepotent effect over a flower’s own pollen; and
 that this is part of the general law of good being derived from the
-intercrossing of distinct individuals of the same species. When distinctspeciesare crossed the case is directly the reverse, for a
+intercrossing of distinct individuals of the same species. When distinct*species*are crossed the case is directly the reverse, for a
 plant’s own pollen is always prepotent over foreign pollen; but to this
 subject we shall return in a future chapter.
 
@@ -2838,7 +2837,7 @@ between two individuals is an obvious necessity for each birth; in many others
 it occurs perhaps only at long intervals; but in none, as I suspect, can
 self-fertilisation go on for perpetuity.
 
-Circumstances favourable to Natural Selection.—This[](#)is an extremely intricate subject. A large amount of inheritable and
+*Circumstances favourable to Natural Selection*.—This[](#)is an extremely intricate subject. A large amount of inheritable and
 diversified variability is favourable, but I believe mere individual
 differences suffice for the work. A large number of individuals, by giving a
 better chance for the appearance within any given period of profitable
@@ -3031,7 +3030,7 @@ the beauty and infinite complexity of the coadaptations between all organic
 beings, one with another and with their physical conditions of life, which may
 be effected in the long course of time by nature’s power of selection.
 
-Extinction.—This subject will be more fully discussed in our
+*Extinction*.—This subject will be more fully discussed in our
 chapter on Geology; but it must be here alluded to from being intimately
 connected with natural selection. Natural selection acts solely through the
 preservation of variations in some way advantageous, which consequently endure.
@@ -3080,7 +3079,7 @@ were displaced by the long-horns, and that these “were swept away by the
 short-horns” (I quote the words of an agricultural writer) “as if
 by some murderous pestilence.”
 
-Divergence of Character.—The principle, which I have designated by
+*Divergence of Character*.—The principle, which I have designated by
 this term, is of high importance on my theory, and explains, as I believe,
 several important facts. In the first place, varieties, even strongly-marked
 ones, though having somewhat of the character of species—as is shown by
@@ -3253,7 +3252,7 @@ record in a systematic work.
 The intervals between the horizontal lines in the diagram, may represent each a
 thousand generations; but it would have been better if each had represented ten
 thousand generations. After a thousand generations, species (A) is supposed to
-have produced two fairly well-marked varieties, namelya1andm1. These two varieties will generally continue to be exposed
+have produced two fairly well-marked varieties, namely*a*1and*m*1. These two varieties will generally continue to be exposed
 to the same conditions which made their parents variable,[](#)and the tendency to variability is in itself hereditary, consequently they will
 tend to vary, and generally to vary in nearly the same manner as their parents
 varied. Moreover, these two varieties, being only slightly modified forms, will
@@ -3265,10 +3264,10 @@ circumstances we know to be favourable to the production of new varieties.
 
 If, then, these two varieties be variable, the most divergent of their
 variations will generally be preserved during the next thousand generations.
-And after this interval, varietya1is supposed in the
-diagram to have produced varietya2, which will, owing to the
-principle of divergence, differ more from (A) than did varietya1. Varietym1is supposed to have produced
-two varieties, namelym2ands2, differing
+And after this interval, variety*a*1is supposed in the
+diagram to have produced variety*a*2, which will, owing to the
+principle of divergence, differ more from (A) than did variety*a*1. Variety*m*1is supposed to have produced
+two varieties, namely*m*2and*s*2, differing
 from each other, and more considerably from their common parent (A). We may
 continue the process by similar steps for any length of time; some of the
 varieties, after each thousand generations, producing only a single variety,
@@ -3308,13 +3307,13 @@ doubt that the process of modification will be confined to a single line of
 descent, and the number of the descendants will not be increased; although the
 amount[](#)of divergent modification may have been increased in the successive
 generations. This case would be represented in the diagram, if all the lines
-proceeding from (A) were removed, excepting that froma1toa10. In the same way, for instance, the English race-horse
+proceeding from (A) were removed, excepting that from*a*1to*a*10. In the same way, for instance, the English race-horse
 and English pointer have apparently both gone on slowly diverging in character
 from their original stocks, without either having given off any fresh branches
 or races.
 
 After ten thousand generations, species (A) is supposed to have produced three
-forms,a10,f10, andm10,
+forms,*a*10,*f*10, and*m*10,
 which, from having diverged in character during the successive generations,
 will have come to differ largely, but perhaps unequally, from each other and
 from their common parent. If we suppose the amount of change between each
@@ -3326,15 +3325,15 @@ three forms into well-defined species: thus the diagram illustrates the steps
 by which the small differences distinguishing varieties are increased into the
 larger differences distinguishing species. By continuing the same process for a
 greater number of generations (as shown in the diagram in a condensed and
-simplified manner), we get eight species, marked by the letters betweena14andm14, all descended from (A). Thus,
+simplified manner), we get eight species, marked by the letters between*a*14and*m*14, all descended from (A). Thus,
 as I believe, species are multiplied and genera are formed.
 
 In a large genus it is probable that more than one species would vary. In the
 diagram I have assumed that a second species (I) has produced, by analogous
 steps, after ten thousand generations, either two well-marked varieties
-(w10andz10) or two species, according to
+(*w*10and*z*10) or two species, according to
 the amount of change supposed to be represented between[](#)the horizontal lines.
-After fourteen thousand generations, six new species, marked by the lettersn14toz14, are supposed to have been
+After fourteen thousand generations, six new species, marked by the letters*n*14to*z*14, are supposed to have been
 produced. In each genus, the species, which are already extremely different in
 character, will generally tend to produce the greatest number of modified
 descendants; for these will have the best chance of filling new and widely
@@ -3364,8 +3363,8 @@ come into competition, both may continue to exist.
 
 If then our diagram be assumed to represent a considerable amount of
 modification, species (A) and all the earlier varieties will have become
-extinct, having been replaced by eight new species (a14tom14); and (I) will have been replaced by six
-(n14toz14) new species.
+extinct, having been replaced by eight new species (*a*14to*m*14); and (I) will have been replaced by six
+(*n*14to*z*14) new species.
 
 But we may go further than this. The original species of our genus were
 supposed to resemble each other in unequal degrees, as is so generally the case
@@ -3388,13 +3387,13 @@ has transmitted descendants to this late stage of descent.
 
 [](#)The new species in our diagram descended from the original eleven species, will
 now be fifteen in number. Owing to the divergent tendency of natural selection,
-the extreme amount of difference in character between speciesa14andz14will be much greater than that
+the extreme amount of difference in character between species*a*14and*z*14will be much greater than that
 between the most different of the original eleven species. The new species,
 moreover, will be allied to each other in a widely different manner. Of the
-eight descendants from (A) the three markeda14,q14,p14, will be nearly related from
-having recently branched off froma10;b14andf14, from having diverged at an earlier period froma5, will be in some degree distinct from the three
-first-named species; and lastly,o14,e14,
-andm14, will be nearly related one to the other, but from
+eight descendants from (A) the three marked*a*14,*q*14,*p*14, will be nearly related from
+having recently branched off from*a*10;*b*14and*f*14, from having diverged at an earlier period from*a*5, will be in some degree distinct from the three
+first-named species; and lastly,*o*14,*e*14,
+and*m*14, will be nearly related one to the other, but from
 having diverged at the first commencement of the process of modification, will
 be widely different from the other five species, and may constitute a sub-genus
 or even a distinct genus.
@@ -3443,8 +3442,8 @@ descent had diverged less.
 I see no reason to limit the process of modification, as now explained, to the
 formation of genera alone. If, in our diagram, we suppose the amount of change
 represented by each successive group of diverging dotted lines to be very
-great, the forms markeda14top14, those
-markedb14andf14, and those markedo14tom14, will form three very distinct
+great, the forms marked*a*14to*p*14, those
+marked*b*14and*f*14, and those marked*o*14to*m*14, will form three very distinct
 genera. We shall also have two very distinct genera descended from (I) and as
 these latter two genera, both from continued divergence of character and from
 inheritance from a different parent, will differ widely from the three genera
@@ -3488,7 +3487,7 @@ have living and modified descendants, yet at the most remote geological period,
 the earth may have been as well peopled with many species of many genera,
 families, orders, and classes, as at the present day.
 
-Summary of the Chapter.—If during the long course of ages and
+*Summary of the Chapter*.—If during the long course of ages and
 under varying conditions of life, organic beings[](#)vary at all in the several parts of their organisation, and I think this cannot
 be disputed; if there be, owing to the high geometrical powers of increase of
 each species, at some age, season, or year, a severe struggle for life, and
@@ -3579,7 +3578,7 @@ feebler branch, so by generation I believe it has been with the great Tree of
 Life, which fills with its dead and broken branches the crust of the earth, and
 covers the surface with its ever branching and beautiful ramifications.
 
-end chapter## CHAPTER V. LAWS OF VARIATION.
+## Chapter 5: . LAWS OF VARIATIONCHAPTER V. LAWS OF VARIATION.
 
 Effects of external conditions. Use and disuse, combined with natural
 selection; organs of flight and of vision. Acclimatisation. Correlation of
@@ -3664,7 +3663,7 @@ affecting the reproductive system, and in thus inducing variability; and
 natural selection will then accumulate all profitable variations, however
 slight, until they become plainly developed and appreciable by us.
 
-Effects of Use and Disuse.—From the facts alluded to in the first
+*Effects of Use and Disuse*.—From the facts alluded to in the first
 chapter, I think there can be little doubt that use in our domestic animals
 strengthens and enlarges certain parts, and disuse diminishes them; and that
 such modifications are inherited. Under free nature, we can have no standard of
@@ -3798,7 +3797,7 @@ wrecks of ancient life have not been preserved, owing to the less severe
 competition to which the inhabitants of these dark abodes will probably have
 been exposed.
 
-Acclimatisation.—Habit is hereditary with plants, as in the period
+*Acclimatisation*.—Habit is hereditary with plants, as in the period
 of flowering, in the amount of rain requisite for seeds to germinate, in the
 time of sleep, etc., and this leads me to say a few words on acclimatisation.
 As it is extremely common for species of the same genus to inhabit very hot and
@@ -3889,7 +3888,7 @@ modification of the constitution, and of the structure of various organs; but
 that the effects of use and disuse have often been largely combined with, and
 sometimes overmastered by, the natural selection of innate differences.
 
-Correlation of Growth.—I mean by this expression that the whole
+*Correlation of Growth*.—I mean by this expression that the whole
 organisation is so tied together during its growth and development, that when
 slight variations in any one part occur, and are accumulated through natural
 selection, other parts become modified. This is a very important subject, most
@@ -4068,9 +4067,9 @@ variability seems to be owing to their uselessness, and therefore to natural
 selection having no power to check deviations in their structure. Thus[](#)rudimentary parts are left to the free play of the various laws of growth, to
 the effects of long-continued disuse, and to the tendency to reversion.
 
-A part developed in any species in an extraordinary degree or manner, in
+*A part developed in any species in an extraordinary degree or manner, in
 comparison with the same part in allied species, tends to be highly
-variable.—Several years ago I was much struck with a remark, nearly
+variable*.—Several years ago I was much struck with a remark, nearly
 to the above effect, published by Mr. Waterhouse. I infer also from an
 observation made by Professor Owen, with respect to the length of the arms of
 the ourang-outang, that he has come to a nearly similar conclusion. It is
@@ -4173,7 +4172,7 @@ modified descendants, as in the case of the wing of the bat, it must have
 existed, according to my theory, for an immense period in nearly the same
 state; and thus it comes to be no more variable than any other structure. It is
 only in those cases in which the modification has been comparatively recent and
-extraordinarily great that we ought to find thegenerative variability,
+extraordinarily great that we ought to find the*generative variability*,
 as it may be called, still present in a high degree. For in this case the
 variability will seldom as yet have been fixed by the continued selection of
 the individuals varying in the required manner and degree, and by the continued
@@ -4195,9 +4194,9 @@ return[](#)to this subject in our chapter on Classification. It would be almost
 superfluous to adduce evidence in support of the above statement, that specific
 characters are more variable than generic; but I have repeatedly noticed in
 works on natural history, that when an author has remarked with surprise that
-someimportantorgan or part, which is generally very constant
-throughout large groups of species, hasdifferedconsiderably in
-closely-allied species, that it has, also, beenvariablein the
+some*important*organ or part, which is generally very constant
+throughout large groups of species, has*differed*considerably in
+closely-allied species, that it has, also, been*variable*in the
 individuals of some of the species. And this fact shows that a character, which
 is generally of generic value, when it sinks in value and becomes only of
 specific value, often becomes variable, though its physiological importance may
@@ -4295,9 +4294,9 @@ variations in the same parts having been accumulated by natural and sexual
 selection, and thus adapted for secondary sexual, and for ordinary specific
 purposes.
 
-[](#)Distinct species present analogous variations; and a variety of one species
+[](#)*Distinct species present analogous variations; and a variety of one species
 often assumes some of the characters of an allied species, or reverts to some
-of the characters of an early progenitor.—These propositions will be
+of the characters of an early progenitor*.—These propositions will be
 most readily understood by looking to our domestic races. The most distinct
 breeds of pigeons, in countries most widely apart, present sub-varieties with
 reversed feathers on the head and feathers on the feet,—characters not
@@ -4340,7 +4339,7 @@ many generations—some say, for a dozen or even a score of generations.
 After twelve generations, the proportion of blood, to use a common expression,
 of any one ancestor, is only 1 in 2048; and yet, as we see, it is generally
 believed that a tendency to reversion is retained by this very small proportion
-of foreign blood. In a breed which has not been crossed, but in whichbothparents have lost some character which their progenitor possessed,
+of foreign blood. In a breed which has not been crossed, but in which*both*parents have lost some character which their progenitor possessed,
 the tendency, whether strong or weak, to reproduce the lost character might be,
 as was formerly remarked, for all that we can see to the contrary, transmitted
 for almost any number of generations. When a character which has been lost in a
@@ -4409,7 +4408,7 @@ like those on the legs of a zebra: it has been asserted that these are plainest
 in the foal, and from inquiries which I have made, I believe this to be true.
 It has also been asserted that the stripe on each shoulder is sometimes double.
 The shoulder stripe is certainly very variable in length and outline. A white
-ass, butnotan albino, has been described without either spinal or
+ass, but*not*an albino, has been described without either spinal or
 shoulder-stripe; and these stripes are sometimes very obscure, or actually
 quite lost, in dark-coloured asses. The koulan of Pallas is said to have been
 seen with a double shoulder-stripe. The hemionus has no shoulder-stripe; but
@@ -4421,13 +4420,13 @@ Dr. Gray has figured one specimen with very distinct zebra-like bars on the
 hocks.
 
 With respect to the horse, I have collected cases in England of the spinal
-stripe in horses of the most distinct breeds, and ofallcolours;
+stripe in horses of the most distinct breeds, and of*all*colours;
 transverse bars on the legs are not rare in duns, mouse-duns, and in one
 instance in a chestnut: a faint shoulder-stripe may sometimes be seen in duns,
 and I have seen a trace in a[](#)bay horse. My son made a careful examination and sketch for me of a dun Belgian
 cart-horse with a double stripe on each shoulder and with leg-stripes; and a
 man, whom I can implicitly trust, has examined for me a small dun Welch pony
-withthreeshort parallel stripes on each shoulder.
+with*three*short parallel stripes on each shoulder.
 
 In the north-west part of India the Kattywar breed of horses is so generally
 striped, that, as I hear from Colonel Poole, who examined the breed for the
@@ -4495,7 +4494,7 @@ other change of form or character. When the oldest and truest breeds of various
 colours are crossed, we see a strong tendency for the blue tint and bars and
 marks to reappear in the mongrels. I have stated that the most probable
 hypothesis to account for the reappearance of very ancient characters,
-is—that there is atendencyin the young of each successive
+is—that there is a*tendency*in the young of each successive
 generation to produce the long-lost character, and that this tendency, from
 unknown causes, sometimes prevails. And we have just seen that in several
 species of the horse-genus the stripes are either plainer or appear more
@@ -4520,7 +4519,7 @@ believe with the old and ignorant cosmogonists, that fossil shells had never
 lived, but had been created in stone so as to mock the shells now living on the
 sea-shore.
 
-Summary.—Our ignorance of the laws of variation is profound. Not
+*Summary*.—Our ignorance of the laws of variation is profound. Not
 in one case out of a hundred can we pretend to assign any reason why this or
 that part differs, more or less, from the same part in the parents. But
 whenever we have the means of instituting a comparison, the same laws appear to
@@ -4584,7 +4583,7 @@ to the individual, that gives rise to all the more important modifications of
 structure, by which the innumerable beings on the face of this earth are
 enabled to struggle with each other, and the best adapted to survive.
 
-end chapter## CHAPTER VI. DIFFICULTIES ON THEORY.
+## Chapter 6: . DIFFICULTIES ON THEORYCHAPTER VI. DIFFICULTIES ON THEORY.
 
 Difficulties on the theory of descent with modification. Transitions. Absence
 or rarity of transitional varieties. Transitions in habits of life. Diversified
@@ -4627,7 +4626,7 @@ fertility is unimpaired?
 The two first heads shall be here discussed—Instinct and Hybridism in
 separate chapters.
 
-On the absence or rarity of transitional varieties.—As natural
+*On the absence or rarity of transitional varieties.*—As natural
 selection acts solely by the preservation of profitable modifications, each new
 form will tend in a fully-stocked country to take the place of, and finally to
 exterminate, its own less improved parent or other less-favoured forms with
@@ -4811,8 +4810,8 @@ of their former existence could be found only amongst fossil remains, which are
 preserved, as we shall in a future chapter attempt to show, in an extremely
 imperfect and intermittent record.
 
-On the origin and transitions of organic beings with peculiar habits and
-structure.—It has been asked by the opponents of such views as I
+*On the origin and transitions of organic beings with peculiar habits and
+structure*.—It has been asked by the opponents of such views as I
 hold, how, for instance, a land carnivorous animal could have been converted
 into one with aquatic habits; for how could the animal in its transitional
 state have subsisted? It would be easy to show that within the same group
@@ -4996,7 +4995,7 @@ long-toed corncrakes living in meadows instead of in swamps; that there should
 be woodpeckers where not a tree grows; that there should be diving thrushes,
 and petrels with the habits of auks.
 
-Organs of extreme perfection and complication.—To suppose that the
+*Organs of extreme perfection and complication*.—To suppose that the
 eye, with all its inimitable contrivances for adjusting the focus to different
 distances, for admitting different amounts of light, and for the correction of
 spherical and chromatic aberration, could have been formed by natural
@@ -5213,7 +5212,7 @@ clearly understand why she should not; for natural selection can act only by
 taking advantage of slight successive variations; she can never take a leap,
 but must advance by the shortest and slowest steps.
 
-Organs of little apparent importance.—As natural selection acts by
+*Organs of little apparent importance*.—As natural selection acts by
 life and death,—by the preservation of individuals with any favourable
 variation, and by the destruction of those with any unfavourable deviation of
 structure,—I have sometimes felt much difficulty in[](#)understanding the origin of simple parts, of which the importance does not seem
@@ -5427,7 +5426,7 @@ plants are fertilised through insect agency, can we consider as equally perfect
 the elaboration by our fir-trees of dense clouds of pollen, in order that a few
 granules may be wafted by a chance breeze on to the ovules?
 
-Summary of Chapter.—We have in this chapter discussed some of the
+*Summary of Chapter*.—We have in this chapter discussed some of the
 difficulties and objections which may be urged against my theory. Many of them
 are very grave; but I think that in the discussion light has been thrown on
 several facts, which on the theory of independent acts of creation are utterly
@@ -5523,7 +5522,7 @@ of life, and being in all cases subjected to the several laws of growth. Hence,
 in fact, the law of the Conditions of Existence is the higher law; as it
 includes, through the inheritance of former adaptations, that of Unity of Type.
 
-end chapter## CHAPTER VII. INSTINCT.
+## Chapter 7: . INSTINCTCHAPTER VII. INSTINCT.
 
 Instincts comparable with habits, but different in their origin. Instincts
 graduated. Aphides and ants. Instincts variable. Domestic instincts, their
@@ -5840,7 +5839,7 @@ supposed case of the cuckoo, I can[](#)see no difficulty in natural selection ma
 of advantage to the species, and if the insect whose nest and stored food are
 thus feloniously appropriated, be not thus exterminated.
 
-Slave-making instinct.—This remarkable instinct was first
+*Slave-making instinct*.—This remarkable instinct was first
 discovered in the Formica (Polyerges) rufescens by Pierre Huber, a better
 observer even than his celebrated father. This ant is absolutely dependent on
 its slaves; without their aid, the species would certainly become extinct in a
@@ -5974,7 +5973,7 @@ selection increasing and modifying the instinct—always supposing each
 modification to be of use to the species—until an ant was formed as
 abjectly dependent on its slaves as is the Formica rufescens.
 
-Cell-making instinct of the Hive-Bee.—I will not here enter on
+*Cell-making instinct of the Hive-Bee*.—I will not here enter on
 minute details on this subject, but will merely give an outline of the
 conclusions at which I have arrived. He must be a dull man who can examine the
 exquisite structure of a comb, so beautifully adapted to its end, without
@@ -6077,7 +6076,7 @@ they were converted into shallow basins, appearing to the eye perfectly true or
 parts of a sphere, and of about the diameter of a cell. It was most interesting
 to me to observe that wherever several bees had begun to excavate these basins
 near together, they had begun their work at such a distance from each other,
-that by the time the basins had acquired the above stated width (i.e.about the width of an ordinary cell), and were in depth about one sixth of the
+that by the time the basins had acquired the above stated width (*i.e.*about the width of an ordinary cell), and were in depth about one sixth of the
 diameter of the sphere of which they formed a part, the rims of the basins
 intersected or broke into each other. As soon as this occurred, the bees ceased
 to excavate, and began to build up flat walls of wax on the lines of
@@ -6114,7 +6113,7 @@ slightly concave on one side, where I suppose that the bees had excavated too
 quickly, and convex on the opposed side, where the bees had worked less
 quickly. In one well-marked instance, I put the comb back into the hive, and
 allowed the bees to go on working for a short time, and again examined the
-cell, and I found that the rhombic plate had been completed, and had becomeperfectly flat:it was absolutely impossible, from the extreme thinness
+cell, and I found that the rhombic plate had been completed, and had become*perfectly flat:*it was absolutely impossible, from the extreme thinness
 of the little rhombic plate, that they could have effected[](#)this by gnawing away the convex side; and I suspect that the bees in such cases
 stand in the opposed cells and push and bend the ductile and warm wax (which as
 I have tried is easily done) into its proper intermediate plane, and thus
@@ -6445,7 +6444,7 @@ structure or instincts of the fertile members, which alone leave descendants. I
 am surprised that no one has advanced this demonstrative case of neuter
 insects, against the well-known doctrine of Lamarck.
 
-Summary.—I have endeavoured briefly in this chapter to show that
+*Summary*.—I have endeavoured briefly in this chapter to show that
 the mental qualities of our domestic animals vary, and that the variations are
 inherited. Still more briefly I have attempted to show that instincts[](#)vary slightly in a state of nature. No one will dispute that instincts are of
 the highest importance to each animal. Therefore I can see no difficulty, under
@@ -6478,7 +6477,7 @@ specially endowed or created instincts, but as small consequences of one
 general law, leading to the advancement of all organic beings, namely,
 multiply, vary, let the strongest live and the weakest die.
 
-end chapter## CHAPTER VIII. HYBRIDISM.
+## Chapter 8: . HYBRIDISMCHAPTER VIII. HYBRIDISM.
 
 Distinction between the sterility of first crosses and of hybrids. Sterility
 various in degree, not universal, affected by close interbreeding, removed by
@@ -6605,7 +6604,7 @@ whenever complicated experiments are in progress, so careful an observer as
 Gärtner would have castrated his hybrids, and this would have insured in each
 generation a cross with the pollen from a distinct flower, either from the same
 plant or from another plant of the same hybrid nature. And thus, the strange
-fact of the increase of fertility in the successive generations ofartificially fertilisedhybrids may, I believe, be accounted for by
+fact of the increase of fertility in the successive generations of*artificially fertilised*hybrids may, I believe, be accounted for by
 close interbreeding having been avoided.
 
 Now let us turn to the results arrived at by the third most experienced
@@ -6702,7 +6701,7 @@ Cervulus vaginalis and Reevesii, and from Phasianus colchicus with P. torquatus
 and with P. versicolor are perfectly fertile. The hybrids from the common and
 Chinese geese (A. cygnoides), species which are so different that they are
 generally ranked in distinct genera, have often bred in this country with
-either pure parent, and in one single instance they have bredinter se.
+either pure parent, and in one single instance they have bred*inter se*.
 This was effected by Mr. Eyton, who raised two hybrids from the same parents
 but from different hatches; and from these two birds he raised no less than
 eight hybrids (grandchildren of the pure geese) from one nest. In India,
@@ -6736,7 +6735,7 @@ and animals, it may be concluded that some degree of sterility, both in first
 crosses and in hybrids,is an extremely general result; but that it cannot,
 under our present state of knowledge, be considered as absolutely universal.
 
-Laws governing the Sterility of first Crosses and of Hybrids.—We
+*Laws governing the Sterility of first Crosses and of Hybrids*.—We
 will now consider a little more in detail the[](#)circumstances and rules governing the sterility of first crosses and of
 hybrids. Our chief object will be to see whether or not the rules indicate that
 species have specially been endowed with this quality, in order to prevent
@@ -6901,7 +6900,7 @@ a reversed direction. It will be advisable to explain a little more fully by an
 example what I mean by sterility being incidental on other differences, and not
 a specially endowed quality. As the capacity of one plant to be grafted or
 budded on another is so entirely unimportant for its welfare in a state of
-nature, I presume that no one will suppose that this capacity is aspeciallyendowed quality, but will admit that it is incidental on
+nature, I presume that no one will suppose that this capacity is a*specially*endowed quality, but will admit that it is incidental on
 differences in the laws of growth of the two plants. We can sometimes see the
 reason why one tree will not take on another, from differences in their rate of
 growth, in the hardness of their wood, in the period of the flow or nature of
@@ -6921,7 +6920,7 @@ quince, which is ranked as a distinct genus, than on the apple, which is a
 member of the same genus. Even different varieties of the pear take[](#)with different degrees of facility on the quince; so do different varieties of
 the apricot and peach on certain varieties of the plum.
 
-As Gärtner found that there was sometimes an innate difference in differentindividualsof the same two species in crossing; so Sagaret believes
+As Gärtner found that there was sometimes an innate difference in different*individuals*of the same two species in crossing; so Sagaret believes
 this to be the case with different individuals of the same two species in being
 grafted together. As in reciprocal crosses, the facility of effecting an union
 is often very far from equal, so it sometimes is in grafting; the common
@@ -6958,7 +6957,7 @@ although in the case of crossing, the difficulty is as important for the
 endurance and stability of specific forms, as in the case of grafting it is
 unimportant for their welfare.
 
-Causes of the Sterility of first Crosses and of Hybrids.—We may
+*Causes of the Sterility of first Crosses and of Hybrids*.—We may
 now look a little closer at the probable causes of the sterility of first
 crosses and of hybrids. These two cases are fundamentally different, for, as
 just remarked, in the union of two pure species the male and female sexual
@@ -7026,7 +7025,7 @@ two different structures and constitutions having been blended into one. For it
 is scarcely possible that two organisations should be compounded into one,
 without some disturbance occurring in the development, or periodical action, or
 mutual relation of the different parts and organs one to another, or to the
-conditions of life. When hybrids are able to breedinter se, they
+conditions of life. When hybrids are able to breed*inter se*, they
 transmit to their offspring from generation to generation the same compounded
 organisation, and hence we need not be surprised that their sterility, though
 in some degree variable, rarely diminishes.
@@ -7072,8 +7071,8 @@ persuade myself that this parallelism is an accident or an illusion. Both
 series of facts seem to be connected together by some common but unknown bond,
 which is essentially related to the principle of life.
 
-Fertility of Varieties when crossed, and of their Mongrel
-offspring.—It may be urged, as a most forcible argument,[](#)that there must be some essential distinction between species and varieties,
+*Fertility of Varieties when crossed, and of their Mongrel
+offspring*.—It may be urged, as a most forcible argument,[](#)that there must be some essential distinction between species and varieties,
 and that there must be some error in all the foregoing remarks, inasmuch as
 varieties, however much they may differ from each other in external appearance,
 cross with perfect facility, and yield perfectly fertile offspring. I fully
@@ -7134,7 +7133,7 @@ one with the pollen of the other; but only a single head produced any seed, and
 this one head produced only five grains. Manipulation in this case could not
 have been injurious, as the plants have separated sexes. No one, I believe, has
 suspected that these varieties of maize are distinct species; and it is
-important to notice that the hybrid plants thus raised were themselvesperfectlyfertile; so that even Gärtner did not venture to consider the
+important to notice that the hybrid plants thus raised were themselves*perfectly*fertile; so that even Gärtner did not venture to consider the
 two varieties as specifically distinct.
 
 Girou de Buzareingues crossed three varieties of gourd, which like the maize
@@ -7151,7 +7150,7 @@ witness, as Gärtner: namely, that yellow and white varieties of the same
 species of Verbascum when intercrossed produce less seed, than do either
 coloured varieties when fertilised with pollen from their own coloured flowers.
 Moreover, he asserts that when[](#)yellow and white varieties of one species are crossed with yellow and white
-varieties of adistinctspecies, more seed is produced by the crosses
+varieties of a*distinct*species, more seed is produced by the crosses
 between the same coloured flowers, than between those which are differently
 coloured. Yet these varieties of Verbascum present no other difference besides
 the mere colour of the flower; and one variety can sometimes be raised from the
@@ -7186,8 +7185,8 @@ crosses and of hybrids, namely, that it is not a special endowment, but is
 incidental on slowly acquired modifications, more especially in the
 reproductive systems of the forms which are crossed.
 
-Hybrids and Mongrels compared, independently of their
-fertility.—Independently of the question of fertility, the offspring
+*Hybrids and Mongrels compared, independently of their
+fertility*.—Independently of the question of fertility, the offspring
 of species when crossed and of varieties when crossed may be compared in
 several other respects. Gärtner, whose strong wish was to draw a marked line of
 distinction between species and varieties, could find very few and, as it seems
@@ -7287,7 +7286,7 @@ specially created, and at varieties as having been produced by secondary laws,
 this similarity would be an[](#)astonishing fact. But it harmonises perfectly with the view that there is no
 essential distinction between species and varieties.
 
-Summary of Chapter.—First crosses between forms sufficiently
+*Summary of Chapter*.—First crosses between forms sufficiently
 distinct to be ranked as species, and their hybrids, are very generally, but
 not universally, sterile. The sterility is of all degrees, and is often so
 slight that the two most careful experimentalists who have ever lived, have
@@ -7344,7 +7343,7 @@ facts briefly given in this chapter do not seem to me opposed to, but even
 rather to support the view, that there is no fundamental distinction between
 species and varieties.
 
-end chapter## CHAPTER IX. ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.
+## Chapter 9: . ON THE IMPERFECTION OF THE GEOLOGICAL RECORDCHAPTER IX. ON THE IMPERFECTION OF THE GEOLOGICAL RECORD.
 
 On the absence of intermediate varieties at the present day. On the nature of
 extinct intermediate varieties; on their number. On the vast lapse of time, as
@@ -7381,7 +7380,7 @@ as I believe, in the extreme imperfection of the geological record.
 
 In the first place it should always be borne in mind what sort of intermediate
 forms must, on my theory, have formerly existed. I have found it difficult,
-when looking at any two species, to avoid picturing to myself, formsdirectlyintermediate between them. But this is a wholly false view; we
+when looking at any two species, to avoid picturing to myself, forms*directly*intermediate between them. But this is a wholly false view; we
 should always look for forms intermediate between each species and a common but
 unknown progenitor; and the progenitor will generally have differed in some
 respects from all its modified descendants. To give a simple illustration: the
@@ -7408,7 +7407,7 @@ structure of the parent with that of its modified descendants, unless at the
 same time we had a nearly perfect chain of the intermediate links.
 
 It is just possible by my theory, that one of two living forms might have
-descended from the other; for instance, a horse from a tapir; and in this casedirectintermediate links will have existed between them. But such a
+descended from the other; for instance, a horse from a tapir; and in this case*direct*intermediate links will have existed between them. But such a
 case would imply that one form had remained for a very long period unaltered,
 whilst its descendants had undergone a vast amount of change; and the principle
 of competition between organism and organism, between child and parent, will
@@ -7424,7 +7423,7 @@ intermediate and transitional links, between all living and extinct species,
 must have been inconceivably great. But assuredly, if this theory be true, such
 have lived upon this earth.
 
-On the lapse of Time.—Independently of our not finding fossil
+*On the lapse of Time*.—Independently of our not finding fossil
 remains of such infinitely numerous connecting links, it may be objected, that
 time will not have sufficed for so great an amount of organic change, all
 changes having been effected very slowly through natural selection. It is
@@ -7474,12 +7473,17 @@ maximum thickness, in most cases from actual measurement, in a few cases from
 estimate, of each formation in different parts of Great Britain; and this is
 the result:—
 
-Feet
+```
+
+                                                      Feet
 
      Palæozoic strata (not including igneous beds)...57,154.
      Secondary strata................................13,190.
-     Tertiary strata..................................2,240.—making altogether 72,584 feet; that is, very nearly thirteen and
+     Tertiary strata..................................2,240.
 
+```
+
+—making altogether 72,584 feet; that is, very nearly thirteen and
 three-quarters British miles. Some of these formations, which are represented
 in England by thin beds, are thousands of feet in thickness on the Continent.
 Moreover, between each successive formation, we have, in the opinion of most
@@ -7567,7 +7571,7 @@ of living forms. What an infinite number of generations, which the mind cannot
 grasp, must have succeeded each other in the long roll of years! Now turn to
 our richest geological museums, and what a paltry display we behold!
 
-On the poorness of our Palæontological collections.—That our
+*On the poorness of our Palæontological collections*.—That our
 palæontological collections are very imperfect, is admitted by every one. The
 remark of that admirable palæontologist, the late Edward Forbes, should not be
 forgotten, namely, that numbers of our fossil species are known and named from
@@ -7676,7 +7680,7 @@ spaces. Consequently formations rich in fossils and sufficiently thick and
 extensive to resist subsequent degradation, may have been formed over wide
 spaces during periods of subsidence, but only where the supply of sediment was
 sufficient to keep the sea shallow and to embed and[](#)preserve the remains before they had time to decay. On the other hand, as long
-as the bed of the sea remained stationary,thickdeposits could not have
+as the bed of the sea remained stationary,*thick*deposits could not have
 been accumulated in the shallow parts, which are the most favourable to life.
 Still less could this have happened during the alternate periods of elevation;
 or, to speak more accurately, the beds which were then accumulated will have
@@ -7744,7 +7748,7 @@ migration of the inhabitants of Europe during the Glacial period, which forms
 only a part of one whole geological period; and likewise to reflect on the
 great changes of level, on the inordinately great change of climate, on the
 prodigious lapse of time, all included within this same glacial period. Yet it
-may be doubted whether in any quarter of the world, sedimentary deposits,including fossil remains, have gone on accumulating within the same area
+may be doubted whether in any quarter of the world, sedimentary deposits,*including fossil remains*, have gone on accumulating within the same area
 during the whole of this period. It is not, for instance, probable that
 sediment was deposited during the whole of the glacial period near the mouth of
 the Mississippi, within that limit of depth at which marine animals can
@@ -7909,7 +7913,7 @@ geological record would then be least perfect.
 
 It may be doubted whether the duration of any one great period of subsidence
 over the whole or part of the archipelago, together with a contemporaneous
-accumulation of sediment, wouldexceedthe average duration of the same
+accumulation of sediment, would*exceed*the average duration of the same
 specific forms; and these contingencies are[](#)indispensable for the preservation of all the transitional gradations between
 any two or more species. If such gradations were not fully preserved,
 transitional varieties would merely appear as so many distinct species. It is,
@@ -7943,7 +7947,7 @@ geological section presented, had not the difficulty of our not discovering
 innumerable transitional links between the species which appeared at the
 commencement and close of each formation, pressed so hardly on my theory.
 
-On the sudden appearance of whole groups of Allied Species.—The
+*On the sudden appearance of whole groups of Allied Species*.—The
 abrupt manner in which whole groups of species suddenly appear in certain
 formations, has been urged by several palæontologists, for instance, by
 Agassiz, Pictet, and by none more forcibly than by Professor Sedgwick, as a
@@ -8049,8 +8053,8 @@ the world, as it would be for a naturalist to land for five minutes on some one
 barren point in Australia, and then to discuss the number and range of its
 productions.
 
-On the sudden appearance of groups of Allied Species in the lowest known
-fossiliferous strata.—There is another and allied difficulty, which
+*On the sudden appearance of groups of Allied Species in the lowest known
+fossiliferous strata*.—There is another and allied difficulty, which
 is much graver. I allude to the manner in which numbers of species of the same
 group, suddenly appear in the lowest known fossiliferous rocks. Most of the
 arguments which have convinced me that all the existing species of the same
@@ -8168,7 +8172,7 @@ represent the apparently abruptly changed forms of life, entombed in our
 consecutive, but widely separated formations. On this view, the difficulties
 above discussed are greatly diminished, or even disappear.
 
-end chapter## CHAPTER X. ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.
+## Chapter 10: . ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGSCHAPTER X. ON THE GEOLOGICAL SUCCESSION OF ORGANIC BEINGS.
 
 On the slow and successive appearance of new species. On their different rates
 of change. Species once lost do not reappear. Groups of species follow the same
@@ -8311,7 +8315,7 @@ to two or three varieties, these being slowly converted into species, which in
 their turn produce by equally slow steps other species, and so on, like the
 branching of a great tree from a single stem, till the group becomes large.
 
-On Extinction.—We have as yet spoken only incidentally of the
+*On Extinction*.—We have as yet spoken only incidentally of the
 disappearance of species and of groups of species. On the theory of natural
 selection the extinction of old forms and the production of new and improved
 forms are intimately connected together. The old notion of all the inhabitants
@@ -8400,7 +8404,7 @@ The competition will generally be most severe, as formerly explained and
 illustrated by examples, between the forms which are most like each other in
 all respects.[](#)Hence the improved and modified descendants of a species will generally cause
 the extermination of the parent-species; and if many new forms have been
-developed from any one species, the nearest allies of that species,i.e.the species of the same genus, will be the most liable to extermination. Thus,
+developed from any one species, the nearest allies of that species,*i.e.*the species of the same genus, will be the most liable to extermination. Thus,
 as I believe, a number of new species descended from one species, that is a new
 genus, comes to supplant an old genus, belonging to the same family. But it
 must often have happened that a new species belonging to some one group will
@@ -8442,8 +8446,8 @@ given country; then, and not till then, we may justly feel surprise why we
 cannot account for the extinction of this particular species or group of
 species.
 
-On the Forms of Life changing almost simultaneously throughout the
-World.—Scarcely any palæontological discovery is more striking than
+*On the Forms of Life changing almost simultaneously throughout the
+World*.—Scarcely any palæontological discovery is more striking than
 the fact, that the forms of life change almost simultaneously throughout the
 world. Thus our European Chalk formation can be recognised in many distant
 parts of the world, under the most different climates, where not a fragment of
@@ -8491,7 +8495,7 @@ tertiary stages, than to those which now live here; and if this be so, it is
 evident that fossiliferous beds deposited at the present day on the shores of
 North America would hereafter be liable to be classed with somewhat older
 European beds. Nevertheless, looking to a remotely future epoch, there can, I
-think, be little doubt that all the more modernmarineformations,
+think, be little doubt that all the more modern*marine*formations,
 namely, the upper pliocene, the pleistocene and strictly modern beds, of
 Europe, North and South America, and Australia, from containing fossil remains
 in some degree allied, and from not including those forms which are only found
@@ -8611,8 +8615,8 @@ general succession of the form of life, and the order would falsely appear to
 be strictly parallel; nevertheless the species would not all be the same in the
 apparently corresponding stages in the two regions.
 
-On the Affinities of extinct Species to each other, and to living
-forms.—Let us now look to the mutual affinities of extinct and living
+*On the Affinities of extinct Species to each other, and to living
+forms*.—Let us now look to the mutual affinities of extinct and living
 species. They all fall into one grand natural system; and this fact is at once
 explained on the principle of descent. The more ancient any form is, the more,
 as a general rule, it differs from living forms. But, as Buckland long ago
@@ -8664,9 +8668,9 @@ the numbered letters represent genera, and the dotted lines diverging from them
 the species in each genus. The diagram is much too simple, too few genera and
 too few species being given, but this is unimportant for us. The horizontal
 lines may represent successive geological formations, and all the forms beneath
-the uppermost line may be considered as extinct. The three existing genera,a14,q14,p14, will form
-a small family;b14andf14a closely
-allied family or sub-family; ando14,e14,m14, a third family. These three families, together with the
+the uppermost line may be considered as extinct. The three existing genera,*a*14,*q*14,*p*14, will form
+a small family;*b*14and*f*14a closely
+allied family or sub-family; and*o*14,*e*14,*m*14, a third family. These three families, together with the
 many extinct genera on the several lines of descent diverging from the
 parent-form A, will form an order; for all will have inherited something in
 common from their ancient and common progenitor. On the principle of the
@@ -8692,7 +8696,7 @@ By looking at the diagram we can see that if many of the extinct forms,
 supposed to be embedded in the successive formations, were discovered at
 several points low down in the series, the three existing families on the
 uppermost line would be rendered less distinct from each other. If, for
-instance, the generaa1,a5,a10,f8,m3,m6,m9were disinterred, these three
+instance, the genera*a*1,*a*5,*a*10,*f*8,*m*3,*m*6,*m*9were disinterred, these three
 families would be so closely linked together that they probably would have to
 be united into one great family, in nearly the same manner as has occurred with
 ruminants and pachyderms. Yet he who objected to call the extinct genera, which
@@ -8701,8 +8705,8 @@ character, would be justified, as they are intermediate, not directly, but only
 by a long and circuitous course through many widely different forms. If many
 extinct forms were to be discovered above one of the middle horizontal lines or
 geological formations—for instance, above Number VI.—but none from
-beneath this line, then only the two families on the left hand (namely,a14, etc., andb14, etc.) would have to be
-united into one family; and the two other families (namely,a14tof14now including five genera, ando14tom14) would yet remain distinct.
+beneath this line, then only the two families on the left hand (namely,*a*14, etc., and*b*14, etc.) would have to be
+united into one family; and the two other families (namely,*a*14to*f*14now including five genera, and*o*14to*m*14) would yet remain distinct.
 These two families, however, would be less distinct from each other than they
 were before the[](#)discovery of the fossils. If, for instance, we suppose the existing genera of
 the two families to differ from each other by a dozen characters, in this case
@@ -8803,7 +8807,7 @@ or, as they have been called by some authors, representative species; and these
 we assuredly do find. We find, in short, such evidence of the slow and scarcely
 sensible mutation of specific forms, as we have a just right to expect to find.
 
-On the state of Development of Ancient Forms.—There has been much
+*On the state of Development of Ancient Forms*.—There has been much
 discussion whether recent forms are more highly developed than ancient. I will
 not here enter on this subject, for naturalists have not as yet defined to each
 other’s satisfaction what is meant by high and low forms. But in one
@@ -8855,7 +8859,7 @@ day, it would be vain to look for animals having the common embryological
 character of the Vertebrata, until beds far beneath the lowest Silurian strata
 are discovered—a discovery of which the chance is very small.
 
-On the Succession of the same Types within the same[](#)areas, during the later tertiary periods.—Mr. Clift many years ago
+*On the Succession of the same Types within the sameareas, during the later tertiary periods*.—Mr. Clift many years ago
 showed that the fossil mammals from the Australian caves were closely allied to
 the living marsupials of that continent. In South America, a similar
 relationship is manifest, even to an uneducated eye, in the gigantic pieces of
@@ -8929,7 +8933,7 @@ orders, with the genera and species decreasing in numbers, as apparently is the
 case of the Edentata of South America, still fewer genera and species will have
 left modified blood-descendants.
 
-Summary of the preceding and present Chapters.—I have attempted to
+*Summary of the preceding and present Chapters*.—I have attempted to
 show that the geological record is extremely imperfect; that only a small
 portion of the globe has been geologically explored with care; that only[](#)certain classes of organic beings have been largely preserved in a fossil
 state; that the number both of specimens and of species, preserved in our
@@ -9034,7 +9038,7 @@ generation: old forms having been supplanted by new and improved forms of life,
 produced by the laws of variation still acting round us, and preserved by
 Natural Selection.
 
-end chapter## CHAPTER XI. GEOGRAPHICAL DISTRIBUTION.
+## Chapter 11: . GEOGRAPHICAL DISTRIBUTIONCHAPTER XI. GEOGRAPHICAL DISTRIBUTION.
 
 Present distribution cannot be accounted for by differences in physical
 conditions. Importance of barriers. Affinity of the productions of the same
@@ -9199,7 +9203,7 @@ difficulty, in understanding how the same species could possibly have migrated
 from some one point to the several distant and isolated points, where now
 found. Nevertheless the simplicity of the view that each species was first
 produced within a single region captivates the mind. He who rejects it, rejects
-thevera causaof ordinary generation with subsequent migration, and
+the*vera causa*of ordinary generation with subsequent migration, and
 calls in the agency of a miracle. It is universally admitted, that in most
 cases the area inhabited by a species is continuous; and when a plant or animal
 inhabits two points so distant from each other, or with an interval of such a
@@ -9305,7 +9309,7 @@ Before discussing the three classes of facts, which I have selected as
 presenting the greatest amount of difficulty on the theory of “single
 centres of creation,” I must say a few words on the means of dispersal.
 
-Means of Dispersal.—Sir C. Lyell and other authors have ably
+*Means of Dispersal*.—Sir C. Lyell and other authors have ably
 treated this subject. I can give here only the briefest abstract of the more
 important facts. Change of climate must have had a powerful influence on
 migration: a region when its climate was different may have been a high road
@@ -9420,7 +9424,7 @@ being a valuable royal tax. I find on examination, that when irregularly shaped
 stones are embedded in the roots of trees, small parcels of earth are very
 frequently enclosed in their interstices and behind them,—so perfectly
 that not a particle could be washed away in the longest transport: out of one
-small portion of earth thuscompletelyenclosed by wood in an oak about
+small portion of earth thus*completely*enclosed by wood in an oak about
 50 years old, three dicotyledonous plants germinated: I am certain of the
 accuracy of this observation. Again, I can show that the carcasses of birds,
 when floating on the sea, sometimes escape being immediately devoured; and
@@ -9526,7 +9530,7 @@ had become fully stocked with inhabitants. On almost bare land, with few or no
 destructive insects or birds living there, nearly every seed, which chanced to
 arrive, would be sure to germinate and survive.
 
-Dispersal during the Glacial period.—The identity of many plants
+*Dispersal during the Glacial period*.—The identity of many plants
 and animals, on mountain-summits, separated from each other by hundreds of
 miles of lowlands, where the Alpine species could not possibly exist, is one of
 the most striking cases known of the same species living at distant points,
@@ -9853,7 +9857,7 @@ great lines of invasion: and it is a striking fact, lately communicated to me
 by Dr. Hooker, that all the flowering plants, about forty-six in number, common
 to Tierra del Fuego and to Europe still exist in North America, which must have
 lain on the line of march. But I do not doubt that some temperate productions
-entered and crossed even thelowlandsof the tropics at the period when
+entered and crossed even the*lowlands*of the tropics at the period when
 the cold was most intense,—when arctic forms had migrated some
 twenty-five degrees of latitude from their native country and covered the land
 at the foot of the Pyrenees. At this period of extreme cold, I believe that the
@@ -9968,7 +9972,7 @@ with savage races of man, driven up and surviving in the mountain-fastnesses of
 almost every land, which serve as a record, full of interest to us, of the
 former inhabitants of the surrounding lowlands.
 
-end chapter## CHAPTER XII. GEOGRAPHICAL DISTRIBUTION—continued.
+## Chapter 12: . GEOGRAPHICAL DISTRIBUTION—continuedCHAPTER XII. GEOGRAPHICAL DISTRIBUTION—continued.
 
 Distribution of fresh-water productions. On the inhabitants of oceanic islands.
 Absence of Batrachians and of terrestrial Mammals. On the relation of the
@@ -10113,7 +10117,7 @@ of flight, and naturally travel from one to another and often distant piece of
 water. Nature, like a careful gardener, thus takes her seeds from a bed of a
 particular nature, and drops them in another equally well fitted for them.
 
-On the Inhabitants of Oceanic Islands.—We now come to the last of
+*On the Inhabitants of Oceanic Islands*.—We now come to the last of
 the three classes of facts, which I[](#)have selected as presenting the greatest amount of difficulty, on the view that
 all the individuals both of the same and of allied species have descended from
 a single parent; and therefore have all proceeded from a common birthplace,
@@ -10149,7 +10153,7 @@ islands; for man has unintentionally stocked them from various sources far more
 fully and perfectly than has nature.
 
 Although in oceanic islands the number of kinds of inhabitants is scanty, the
-proportion of endemic species (i.e.those found nowhere else in the
+proportion of endemic species (*i.e.*those found nowhere else in the
 world) is often extremely large. If we compare, for instance, the number of the
 endemic land-shells in Madeira, or of the endemic birds in the Galapagos
 Archipelago, with the number found on any continent, and then compare the area
@@ -10510,7 +10514,7 @@ though it would be difficult to prove it. Amongst mammals, we see it strikingly
 displayed in Bats, and in a lesser degree in the Felidæ and Canidæ. We see it,
 if we compare the distribution of butterflies and beetles. So it is with most
 fresh-water productions, in which so many genera range over the world, and many
-individual species have enormous ranges. It is not meant that in world-ranging[](#)genera all the species have a wide range, or even that they have on anaveragea wide range; but only that some of the species range very
+individual species have enormous ranges. It is not meant that in world-ranging[](#)genera all the species have a wide range, or even that they have on an*average*a wide range; but only that some of the species range very
 widely; for the facility with which widely-ranging species vary and give rise
 to new forms will largely determine their average range. For instance, two
 varieties of the same species inhabit America and Europe, and the species thus
@@ -10558,7 +10562,7 @@ independent creation of each species, but are explicable on the view of
 colonisation from the nearest and readiest source, together with the subsequent
 modification and better adaptation of the colonists to their new homes.
 
-Summary of last and present Chapters.—In these chapters I have
+*Summary of last and present Chapters*.—In these chapters I have
 endeavoured to show, that if we make due allowance for our ignorance of the
 full effects of all[](#)the changes of climate and of the level of the land, which have certainly
 occurred within the recent period, and of other similar changes which may have
@@ -10665,7 +10669,8 @@ they will generally stand to each other in time and space; in both cases the
 laws of variation have been the same, and modifications have been accumulated
 by the same power of natural selection.
 
-end chapter## CHAPTER XIII. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY:
+## Chapter 13: . MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY: EMBRYOLOGY:
+  RUDIMENTARY ORGANSCHAPTER XIII. MUTUAL AFFINITIES OF ORGANIC BEINGS: MORPHOLOGY:
 EMBRYOLOGY: RUDIMENTARY ORGANS.
 
 CLASSIFICATION, groups subordinate to groups. Natural system.
@@ -10914,8 +10919,8 @@ bond which naturalists have been unconsciously seeking, and not some unknown
 plan of creation, or the enunciation of general propositions, and the mere
 putting together and separating objects more or less alike.
 
-But I must explain my meaning more fully. I believe that thearrangementof the groups within each class, in due subordination and relation to the other
-groups, must be strictly genealogical in order to be natural; but that theamountof difference in the several branches or groups, though allied in
+But I must explain my meaning more fully. I believe that the*arrangement*of the groups within each class, in due subordination and relation to the other
+groups, must be strictly genealogical in order to be natural; but that the*amount*of difference in the several branches or groups, though allied in
 the same degree in blood to their common progenitor, may differ greatly, being
 due to the different degrees of modification which they have undergone; and
 this is expressed by the forms being ranked under different genera, families,
@@ -10925,7 +10930,7 @@ suppose the letters A to L to represent allied genera, which lived during the
 Silurian epoch, and these have descended from a species which existed at an
 unknown anterior period. Species of three of these genera (A, F, and I) have
 transmitted modified descendants to the present day, represented by the fifteen
-genera (a14toz14) on the uppermost
+genera (*a*14to*z*14) on the uppermost
 horizontal line. Now all these modified descendants from a single species, are
 represented as related in blood or descent to the same[](#)degree; they may metaphorically be called cousins to the same millionth degree;
 yet they differ widely and in different degrees from each other. The forms
@@ -10937,7 +10942,7 @@ F14may be supposed to have been but slightly modified; and it will
 then rank with the parent-genus F; just as some few still living organic beings
 belong to Silurian genera. So that the amount or value of the differences
 between organic beings all related to each other in the same degree in blood,
-has come to be widely different. Nevertheless their genealogicalarrangementremains strictly true, not only at the present time, but at
+has come to be widely different. Nevertheless their genealogical*arrangement*remains strictly true, not only at the present time, but at
 each successive period of descent. All the modified descendants from A will
 have inherited something in common from their common parent, as will all the
 descendants from I; so will it be with each subordinate branch of descendants,
@@ -11029,7 +11034,7 @@ they were immediately included as a single species.[](#)But it may be asked, wha
 species of kangaroo had been produced, by a long course of modification, from a
 bear? Ought we to rank this one species with bears, and what should we do with
 the other species? The supposition is of course preposterous; and I might
-answer by theargumentum ad hominem, and ask what should be done if a
+answer by the*argumentum ad hominem*, and ask what should be done if a
 perfect kangaroo were seen to come out of the womb of a bear? According to all
 analogy, it would be ranked with bears; but then assuredly all the other
 species of the kangaroo family would have to be classed under the bear genus.
@@ -11260,7 +11265,7 @@ of affinities between the members of any one class; but when we have a distinct
 object in view, and do not look to some unknown plan of creation, we may hope
 to make sure but slow progress.
 
-Morphology.—We have seen that the members of the same class,
+*Morphology*.—We have seen that the members of the same class,
 independently of their habits of life, resemble each other in the general plan
 of their organisation. This resemblance is often expressed by the term
 “unity of type;” or by saying that the several parts and organs in
@@ -11390,7 +11395,7 @@ have retained through inheritance, if they had really been metamorphosed during
 a long course of descent from true legs, or from some simple appendage, is
 explained.
 
-Embryology.—It has already been casually remarked that certain
+*Embryology*.—It has already been casually remarked that certain
 organs in the individual, which when mature become widely different and serve
 for different purposes, are in the embryo exactly alike. The embryos, also, of
 distinct animals within the same class are often strikingly similar: a better
@@ -11687,7 +11692,7 @@ Embryology rises greatly in interest, when we thus look at the embryo as a
 picture, more or less obscured, of the common parent-form of each great class
 of animals.
 
-Rudimentary, atrophied, or aborted organs.—Organs or parts in this
+*Rudimentary, atrophied, or aborted organs*.—Organs or parts in this
 strange condition, bearing the stamp of inutility, are extremely common
 throughout nature. For instance, rudimentary mammæ are very general in the
 males of mammals: I presume that the “bastard-wing” in birds may be
@@ -11834,7 +11839,7 @@ quite aborted, far[](#)from presenting a strange difficulty, as they assuredly d
 doctrine of creation, might even have been anticipated, and can be accounted
 for by the laws of inheritance.
 
-Summary.—In this chapter I have attempted to show, that the
+*Summary*.—In this chapter I have attempted to show, that the
 subordination of group to group in all organisms throughout all time; that the
 nature of the relationship, by which all living and extinct beings are united
 by complex, radiating, and circuitous lines of affinities into one grand
@@ -11887,7 +11892,7 @@ parents, and have all been modified in the course of descent, that I should
 without hesitation adopt this view, even if it were unsupported by other facts
 or arguments.
 
-end chapter## CHAPTER XIV. RECAPITULATION AND CONCLUSION.
+## Chapter 14: . RECAPITULATION AND CONCLUSIONCHAPTER XIV. RECAPITULATION AND CONCLUSION.
 
 Recapitulation of the difficulties on the theory of Natural Selection.
 Recapitulation of the general and special circumstances in its favour. Causes
@@ -11992,7 +11997,7 @@ forms must have existed, linking together all the species in each group by
 gradations as fine as our present varieties, it may be asked, Why do we not see
 these linking forms all around us? Why are not all organic beings blended
 together in an inextricable chaos? With respect to existing forms, we should
-remember that we have no right to expect (excepting in rare cases) to discoverdirectlyconnecting[](#)links between them, but only between each and some extinct and supplanted form.
+remember that we have no right to expect (excepting in rare cases) to discover*directly*connecting[](#)links between them, but only between each and some extinct and supplanted form.
 Even on a wide area, which has during a long period remained continuous, and of
 which the climate and other conditions of life change insensibly in going from
 a district occupied by one species into another district occupied by a closely
@@ -12505,7 +12510,7 @@ every external characteristic feature of true species,—they admit that
 these have been produced by variation, but they refuse to extend the same view
 to other and very slightly different forms. Nevertheless they do not pretend
 that they can define, or even conjecture, which are the created forms of life,
-and which are those produced by secondary laws. They admit variation as avera causain one case, they arbitrarily reject it in another, without
+and which are those produced by secondary laws. They admit variation as a*vera causa*in one case, they arbitrarily reject it in another, without
 assigning any distinction in the two cases. The day will come when this will be
 given as a curious illustration of[](#)the blindness of preconceived opinion. These authors seem no more startled at a
 miraculous act of creation than at an ordinary birth. But do they really
@@ -12698,7 +12703,7 @@ this planet has gone cycling on according to the fixed law of gravity, from so
 simple a beginning endless forms most beautiful and most wonderful have been,
 and are being, evolved.
 
-end chapter## INDEX.
+## INDEX.
 
 Aberrant groups,[429](#Page429).
 
@@ -14298,5 +14303,3 @@ on sub-breeds of sheep,[36](#Page36).
 on rudimentary horns in young cattle,[454](#Page454).
 
 Zebra, stripes on,[163](#Page163).
-
-end chapter**_ END OF THE PROJECT GUTENBERG EBOOK 1228 _**

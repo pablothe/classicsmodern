@@ -12,6 +12,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from lib.utils import safe_json_write
+
 USERS_DB = Path(__file__).parent / "users_db.json"
 
 DEFAULT_SETTINGS = {
@@ -43,9 +45,8 @@ def load_users_db() -> Dict:
 
 
 def save_users_db(db: Dict) -> None:
-    """Save users database to JSON file."""
-    with open(USERS_DB, 'w') as f:
-        json.dump(db, f, indent=2, ensure_ascii=False)
+    """Save users database to JSON file (atomic write)."""
+    safe_json_write(USERS_DB, db)
 
 
 def _generate_user_id(name: str) -> str:

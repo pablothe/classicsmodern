@@ -103,7 +103,7 @@ class GutenbergDownloader:
             normalized = self._normalize_markdown(cleaned)
 
             # Save to file
-            output_file = book_dir / "source.md"
+            output_file = book_dir / "book.md"
             with open(output_file, 'w', encoding='utf-8') as f:
                 f.write(normalized)
 

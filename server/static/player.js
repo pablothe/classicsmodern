@@ -81,8 +81,7 @@ const API = {
     async getBooks() {
         const response = await fetch(`${this.baseURL}/api/books`);
         if (!response.ok) throw new Error('Failed to fetch books');
-        const data = await response.json();
-        return data.books;
+        return response.json();
     },
 
     async getBook(bookId) {
@@ -544,7 +543,9 @@ const ui = {
 
 async function loadLibrary() {
     try {
-        state.books = await API.getBooks();
+        const data = await API.getBooks();
+        state.books = data.books;
+        state.totalLibrarySizeMb = data.total_library_size_mb || 0;
 
         // Fetch playback progress for all books
         const positions = await API.getAllPlaybackPositions();
@@ -567,6 +568,13 @@ async function loadLibrary() {
     }
 }
 
+function formatSize(sizeMb) {
+    if (!sizeMb || sizeMb === 0) return '';
+    if (sizeMb >= 1024) return `${(sizeMb / 1024).toFixed(1)} GB`;
+    if (sizeMb >= 1) return `${Math.round(sizeMb)} MB`;
+    return '< 1 MB';
+}
+
 function sortBooks(books, sortBy) {
     const sorted = [...books];
     switch (sortBy) {
@@ -584,6 +592,12 @@ function sortBooks(books, sortBy) {
             break;
         case 'year-asc':
             sorted.sort((a, b) => (a.year || 9999) - (b.year || 9999));
+            break;
+        case 'size-desc':
+            sorted.sort((a, b) => (b.total_size_bytes || 0) - (a.total_size_bytes || 0));
+            break;
+        case 'size-asc':
+            sorted.sort((a, b) => (a.total_size_bytes || 0) - (b.total_size_bytes || 0));
             break;
     }
     return sorted;
@@ -645,7 +659,8 @@ function renderUnifiedSearch() {
     // Update counts
     ui.libraryCount.textContent = filteredLibraryBooks.length;
     ui.storeCount.textContent = filteredStoreBooks.length;
-    ui.bookCount.textContent = `${state.books.length} in library • ${state.gutenberg.catalog.length} in store`;
+    const libSizeStr = state.totalLibrarySizeMb > 0 ? ` • ${formatSize(state.totalLibrarySizeMb)}` : '';
+    ui.bookCount.textContent = `${state.books.length} in library${libSizeStr} • ${state.gutenberg.catalog.length} in store`;
 
     // Show/hide sections based on tab (separate views now)
     if (tab === 'library') {
@@ -718,6 +733,7 @@ function renderLibraryBooks(books) {
                     <div class="book-meta">
                         ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
                         ${hasAudio ? `<span>${book.variant_count} version${book.variant_count !== 1 ? 's' : ''}</span>` : '<span>No audio</span>'}
+                        ${book.total_size_mb > 0 ? `<span class="book-size">${formatSize(book.total_size_mb)}</span>` : ''}
                     </div>
                 </div>
             </div>
@@ -812,7 +828,6 @@ function renderStoreBooks(books) {
                         <div class="store-book-meta">
                             ${book.year ? `<span>${book.year}</span>` : ''}
                             <span class="${langClass}">${langLabel}</span>
-                            <span>&#8595; ${book.downloads || 0}</span>
                         </div>
                     </div>
                 </div>

@@ -161,30 +161,23 @@ clean_audio.m4a
 server.pid
 server/playback_db.json
 server/playback_db.json.backup
-server/pipeline_jobs/*.json
+server/playback_db.json.tmp
+server/users_db.json
+server/users_db.json.tmp
+server/pipeline_jobs/
 server/jobs.db
 test_jobs.db
-books/processing_results.json
 .claude/settings.local.json
-books/*/call_*_chapter_data.json
 
 # Book processing artifacts
 books/*/.audiobook_state*.json
 books/*/.vector_cache/
 books/*/*.md.bak
 books/*/*.md.backup*
-books/*/*_cleaned_*.md
-books/*/*_original_*.md
 books/*/audio_kokoro/
 books/*/audio_edge/
-books/*/*_chapter_data.json
-books/*/source.md
 books/*/*_word_timings.json
-books/*/source_*_manifest.json
-
-# Book migration backups
-books/*/.old_structure_backup/
-books/*/.old_duplicates/
+books/*/gutenberg_chapters.json
 
 # Test/debug scripts and results (ad-hoc development)
 tests/adhoc/*.json

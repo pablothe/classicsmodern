@@ -38,6 +38,7 @@ from server.users_db import (
     get_all_users, get_user, create_user, update_user, delete_user,
     ensure_initialized as ensure_users_initialized
 )
+from lib.utils import safe_json_write
 
 # Import Gutenberg modules
 try:
@@ -150,9 +151,8 @@ def load_playback_db() -> Dict:
 
 
 def save_playback_db(db: Dict) -> None:
-    """Save playback database to JSON file."""
-    with open(PLAYBACK_DB, 'w') as f:
-        json.dump(db, f, indent=2)
+    """Save playback database to JSON file (atomic write)."""
+    safe_json_write(PLAYBACK_DB, db)
 
 
 # ============================================================================
@@ -276,90 +276,36 @@ def discover_books() -> List[Dict]:
             year = catalog_info.get('year', year)
             language = catalog_info.get('original_language')
 
-        # Extract metadata from translated files
-        translated_files = list(book_dir.glob("*_modern_*.md")) + list(book_dir.glob("*translated*.md"))
-        if translated_files and not language:
-            filename = translated_files[0].stem
-            if 'spanish' in filename.lower():
-                language = 'Spanish'
-            elif 'english' in filename.lower():
-                language = 'English'
-            elif 'french' in filename.lower():
-                language = 'French'
-            elif 'german' in filename.lower():
-                language = 'German'
-            elif 'russian' in filename.lower():
-                language = 'Russian'
-            elif 'italian' in filename.lower():
-                language = 'Italian'
-
-        # Load chapter data and metadata
-        # NEW STANDARD: Check metadata.json first
+        # Load chapter data from book_manifest.json (single source of truth)
         chapters = None
-        has_chapters = False
-        metadata_file = book_dir / "metadata.json"
-
-        if metadata_file.exists():
+        manifest_path = book_dir / "book_manifest.json"
+        if manifest_path.exists():
             try:
-                with open(metadata_file, 'r') as f:
-                    metadata = json.load(f)
-                    if 'chapters' in metadata:
-                        chapters = metadata['chapters']
-                        has_chapters = True
-                    if 'title' in metadata and not catalog_info:
-                        title = metadata['title']
-                    if 'author' in metadata and not author:
-                        author = metadata['author']
+                with open(manifest_path, 'r') as f:
+                    manifest = json.load(f)
+                raw_chapters = manifest.get('chapters', [])
+                if raw_chapters:
+                    chapters = [
+                        {
+                            'title': ch.get('marker', f"Chapter {ch.get('number', i+1)}"),
+                            'number': ch.get('number', i+1),
+                            'index': i
+                        }
+                        for i, ch in enumerate(raw_chapters)
+                    ]
+                meta = manifest.get('metadata', {})
+                if not catalog_info and meta.get('title'):
+                    title = meta['title']
+                if not author and meta.get('author'):
+                    author = meta['author']
             except (json.JSONDecodeError, IOError):
                 pass
 
-        # LEGACY: Fall back to old chapter_data.json files
-        if not has_chapters:
-            chapter_json = list(book_dir.glob("*_chapter_data.json"))
-            if chapter_json:
-                try:
-                    with open(chapter_json[0], 'r') as f:
-                        chapter_data = json.load(f)
-                        chapters = chapter_data.get('chapters', [])
-                        if 'title' in chapter_data and not catalog_info:
-                            title = chapter_data['title']
-                        if 'author' in chapter_data and not author:
-                            author = chapter_data['author']
-                except (json.JSONDecodeError, IOError):
-                    pass
-
-        # FALLBACK: Extract chapters from chunk manifest
-        if not has_chapters:
-            chunk_manifests = list(book_dir.rglob("*_chunk_manifest.json"))
-            if chunk_manifests:
-                try:
-                    with open(chunk_manifests[0], 'r') as f:
-                        manifest = json.load(f)
-                    chapter_nums = set()
-                    for chunk in manifest.get('chunks', []):
-                        ch = chunk.get('chapter')
-                        if ch is not None:
-                            chapter_nums.add(ch)
-                    if chapter_nums:
-                        chapters = [{'title': f'Chapter {n}', 'number': n, 'index': n - 1} for n in sorted(chapter_nums)]
-                        has_chapters = True
-                except (json.JSONDecodeError, IOError):
-                    pass
-
-        # Find cover image (check multiple locations)
+        # Find cover image
         cover_path = None
-        cover_locations = [
-            book_dir / "cover.png",                           # Root level
-            book_dir / "audio" / "kokoro" / "cover.png",      # New structure
-            book_dir / "audio" / "original" / "cover.png",    # New structure
-            book_dir / "audio_kokoro" / "cover.png",          # Legacy
-            book_dir / "audio_xtts" / "cover.png",            # Legacy
-            book_dir / "audio_xtts" / f"{book_id}_cover.png"  # Legacy
-        ]
-        for loc in cover_locations:
-            if loc.exists():
-                cover_path = str(loc.relative_to(BOOKS_DIR))
-                break
+        cover_loc = book_dir / "cover.png"
+        if cover_loc.exists():
+            cover_path = str(cover_loc.relative_to(BOOKS_DIR))
 
         # Check for source text availability
         source_text_path = find_source_text(book_dir)
@@ -379,7 +325,6 @@ def discover_books() -> List[Dict]:
             'has_chapters': chapters is not None,
             'cover_image': cover_path,
             'has_cover': cover_path is not None,
-            'cover_generating': (book_dir / ".cover_generating").exists(),
             'has_audio': False,  # Will be set to True if variants found
             'has_source_text': has_source_text,
             'source_text_path': str(source_text_path.relative_to(book_dir)) if source_text_path else None,
@@ -389,16 +334,6 @@ def discover_books() -> List[Dict]:
 
     # STAGE 2: Find all M3U playlists and add as variants
     for playlist_path in BOOKS_DIR.rglob("*.m3u"):
-        # Skip backup directories (migration artifacts)
-        path_str = str(playlist_path)
-        if '.old_structure_backup' in path_str or '.old_duplicates' in path_str:
-            continue
-
-        # Skip timestamped backup playlists (e.g., *_20260208_115152.m3u)
-        # These are created for history but shouldn't appear as separate variants
-        if re.search(r'_\d{8}_\d{6}\.m3u$', playlist_path.name):
-            continue
-
         # Skip chunks playlists — intermediate build artifacts, not playable variants
         if playlist_path.name.endswith('_chunks.m3u'):
             continue
@@ -471,6 +406,9 @@ def discover_books() -> List[Dict]:
             book_data['variants'].sort(key=lambda v: v['created_at'], reverse=True)
         # Add summary stats
         book_data['variant_count'] = len(book_data['variants'])
+        total_audio_size = sum(v['size_bytes'] for v in book_data['variants'])
+        book_data['total_size_bytes'] = total_audio_size
+        book_data['total_size_mb'] = round(total_audio_size / (1024 * 1024), 2) if total_audio_size else 0
         books.append(book_data)
 
     return sorted(books, key=lambda x: x['title'])
@@ -511,12 +449,14 @@ async def list_books():
         List of books with metadata (title, file count, size, etc.)
     """
     books = discover_books()
-    print(f"[API /api/books] Returning {len(books)} books")
+    total_library_bytes = sum(b.get('total_size_bytes', 0) for b in books)
+    print(f"[API /api/books] Returning {len(books)} books, {round(total_library_bytes / (1024*1024), 1)} MB total")
     for book in books:
         print(f"  - {book['title']} ({book['book_id']}): {book['variant_count']} variants")
     return {
         "books": books,
-        "total": len(books)
+        "total": len(books),
+        "total_library_size_mb": round(total_library_bytes / (1024 * 1024), 2)
     }
 
 
@@ -1585,215 +1525,144 @@ if GUTENBERG_AVAILABLE:
 # Audiobook Pipeline API Endpoints
 # ============================================================================
 
-# Import pipeline module
+# Import language detector for pipeline routes
 try:
-    from server.audiobook_pipeline import (
-        create_job,
-        get_job,
-        get_all_jobs as get_all_pipeline_jobs,  # Use alias to avoid namespace collision
-        cancel_job
-    )
     from server.language_detector import detect_language as detect_lang_func
-    PIPELINE_AVAILABLE = True
-except ImportError as e:
-    PIPELINE_AVAILABLE = False
-    print(f"⚠️  Audiobook pipeline not available: {e}")
+    LANGUAGE_DETECTOR_AVAILABLE = True
+except ImportError:
+    LANGUAGE_DETECTOR_AVAILABLE = False
 
 
-if PIPELINE_AVAILABLE:
-    @app.post("/api/pipeline/generate")
-    async def start_audiobook_generation(request: Request):
-        """
-        Start audiobook generation pipeline.
-
-        Request Body:
-        {
-            "book_id": "crime_punishment",
-            "source_file": "Преступление_и_наказание.md",
-            "translate": true,
-            "source_language": "Russian",
-            "target_language": "Modern English",
-            "translation_model": "zongwei/gemma3-translator:4b",
-            "summarize": 50,  // Optional: 10-90 or null
-            "voice": "bf_emma",
-            "speed": 1.0,
-            "generate_cover": true
-        }
-
-        Returns:
-            {
-                "job_id": "...",
-                "status": "pending",
-                "estimated_duration": "2-4 hours"
-            }
-        """
-        try:
-            data = await request.json()
-        except json.JSONDecodeError:
-            raise HTTPException(status_code=400, detail="Invalid JSON")
-
-        # Validate required fields
-        book_id = data.get('book_id')
-        source_file = data.get('source_file')
-
-        if not book_id or not source_file:
-            raise HTTPException(
-                status_code=400,
-                detail="Missing required fields: book_id, source_file"
-            )
-
-        # Validate book exists
-        book_dir = BOOKS_DIR / book_id
-        source_path = book_dir / source_file
-
-        if not source_path.exists():
-            raise HTTPException(
-                status_code=404,
-                detail=f"Source file not found: {source_file}"
-            )
-
-        # Build config
-        config = {
-            'translate': data.get('translate', False),
-            'source_language': data.get('source_language', 'Russian'),
-            'target_language': data.get('target_language', 'Modern English'),
-            'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b'),
-            'summarize': data.get('summarize'),  # Can be None
-            'voice': data.get('voice', 'bf_emma'),
-            'speed': data.get('speed', 1.0),
-            'generate_cover': data.get('generate_cover', True)
-        }
-
-        # Create job
-        job_id = create_job(book_id, source_file, config)
-
-        return {
-            'job_id': job_id,
-            'status': 'pending',
-            'estimated_duration': '2-4 hours',
-            'message': 'Audiobook generation started'
-        }
+def _format_pipeline_job(job: Dict) -> Dict:
+    """Convert unified queue job to pipeline API response format."""
+    state = job.get('state', {}) or {}
+    config = job.get('config', {}) or {}
+    result = job.get('result', {}) or {}
+    return {
+        'job_id': job['job_id'],
+        'book_id': config.get('book_id'),
+        'source_file': config.get('source_file'),
+        'config': config,
+        'status': job['status'],
+        'current_stage': state.get('stage', 'queued'),
+        'progress': job.get('progress', 0),
+        'stage_progress': state.get('details', {}),
+        'created_at': job.get('created_at'),
+        'updated_at': job.get('started_at'),
+        'started_at': job.get('started_at'),
+        'completed_at': job.get('completed_at'),
+        'eta_seconds': job.get('eta_seconds'),
+        'error': job.get('error'),
+        'output_files': result.get('output_files', {})
+    }
 
 
-    @app.get("/api/pipeline/jobs/{job_id}")
-    async def get_pipeline_job_status(job_id: str):
-        """
-        Get status of a pipeline job.
+@app.post("/api/pipeline/generate")
+async def start_audiobook_generation(request: Request):
+    """Start audiobook generation pipeline via unified job queue."""
+    if not UNIFIED_QUEUE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Job queue not available")
 
-        Args:
-            job_id: Job identifier
+    try:
+        data = await request.json()
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
 
-        Returns:
-            Job status with progress
-        """
-        job = get_job(job_id)
+    book_id = data.get('book_id')
+    source_file = data.get('source_file')
 
-        if not job:
-            raise HTTPException(status_code=404, detail="Job not found")
+    if not book_id or not source_file:
+        raise HTTPException(status_code=400, detail="Missing required fields: book_id, source_file")
 
-        return job
+    source_path = BOOKS_DIR / book_id / source_file
+    if not source_path.exists():
+        raise HTTPException(status_code=404, detail=f"Source file not found: {source_file}")
 
+    config = {
+        'book_id': book_id,
+        'source_file': source_file,
+        'translate': data.get('translate', False),
+        'source_language': data.get('source_language', 'Russian'),
+        'target_language': data.get('target_language', 'Modern English'),
+        'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b'),
+        'summarize': data.get('summarize'),
+        'voice': data.get('voice', 'bf_emma'),
+        'speed': data.get('speed', 1.0),
+        'generate_cover': data.get('generate_cover', True)
+    }
 
-    @app.get("/api/pipeline/jobs")
-    async def list_pipeline_jobs():
-        """
-        List all pipeline jobs.
+    queue = get_queue()
+    job_id = queue.create_job(job_type=JobType.AUDIOBOOK, config=config)
 
-        Returns:
-            List of jobs with their status
-        """
-        jobs = get_all_pipeline_jobs()  # Use correct function (not gutenberg jobs!)
-        return {
-            'jobs': jobs,
-            'total': len(jobs)
-        }
-
-
-    @app.delete("/api/pipeline/jobs/{job_id}")
-    async def cancel_pipeline_job(job_id: str):
-        """
-        Cancel a running pipeline job.
-
-        Args:
-            job_id: Job identifier
-
-        Returns:
-            Success status
-        """
-        success = cancel_job(job_id)
-
-        if not success:
-            raise HTTPException(
-                status_code=404,
-                detail="Job not found or cannot be cancelled"
-            )
-
-        return {
-            'status': 'cancelled',
-            'job_id': job_id
-        }
+    return {
+        'job_id': job_id,
+        'status': 'pending',
+        'estimated_duration': '2-4 hours',
+        'message': 'Audiobook generation started'
+    }
 
 
-    @app.post("/api/pipeline/cleanup")
-    async def cleanup_old_jobs(max_age_hours: int = 24):
-        """
-        Manually cleanup old/orphaned pipeline jobs.
+@app.get("/api/pipeline/jobs/{job_id}")
+async def get_pipeline_job_status(job_id: str):
+    """Get status of a pipeline job from unified queue."""
+    if not UNIFIED_QUEUE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Job queue not available")
 
-        Query Parameters:
-            max_age_hours: Maximum age in hours (default: 24)
+    queue = get_queue()
+    job = queue.get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
 
-        Returns:
-            Cleanup statistics
-        """
-        from pathlib import Path
-        import json
-        from datetime import datetime
-
-        jobs_dir = Path(__file__).parent / "pipeline_jobs"
-        if not jobs_dir.exists():
-            return {
-                'cleaned': 0,
-                'message': 'No jobs directory found'
-            }
-
-        cleaned = 0
-        for state_file in jobs_dir.glob("*.json"):
-            try:
-                with open(state_file, 'r') as f:
-                    state_data = json.load(f)
-
-                created_at = datetime.fromisoformat(state_data['created_at'])
-                age_hours = (datetime.now() - created_at).total_seconds() / 3600
-
-                # Delete old pending/running jobs
-                if age_hours > max_age_hours and state_data['status'] in ['pending', 'running']:
-                    state_file.unlink()
-                    cleaned += 1
-                    print(f"🗑️  Cleaned up job {state_data['job_id']} (age: {age_hours:.1f}h)")
-
-            except Exception as e:
-                print(f"⚠️  Failed to cleanup {state_file}: {e}")
-
-        return {
-            'cleaned': cleaned,
-            'max_age_hours': max_age_hours,
-            'message': f'Cleaned up {cleaned} orphaned jobs'
-        }
+    return _format_pipeline_job(job)
 
 
+@app.get("/api/pipeline/jobs")
+async def list_pipeline_jobs():
+    """List all pipeline (audiobook) jobs from unified queue."""
+    if not UNIFIED_QUEUE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Job queue not available")
+
+    queue = get_queue()
+    all_jobs = queue.get_all_jobs(job_type=JobType.AUDIOBOOK)
+    return {
+        'jobs': [_format_pipeline_job(j) for j in all_jobs],
+        'total': len(all_jobs)
+    }
+
+
+@app.delete("/api/pipeline/jobs/{job_id}")
+async def cancel_pipeline_job(job_id: str):
+    """Cancel a running pipeline job."""
+    if not UNIFIED_QUEUE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Job queue not available")
+
+    queue = get_queue()
+    success = queue.cancel_job(job_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Job not found or cannot be cancelled")
+
+    return {'status': 'cancelled', 'job_id': job_id}
+
+
+@app.post("/api/pipeline/cleanup")
+async def cleanup_pipeline_jobs(max_age_hours: int = 24):
+    """Cleanup old pipeline jobs via unified queue."""
+    if not UNIFIED_QUEUE_AVAILABLE:
+        return {'cleaned': 0, 'message': 'Job queue not available'}
+
+    queue = get_queue()
+    cleaned = queue.db.cleanup_old_jobs(max_age_hours)
+    return {
+        'cleaned': cleaned,
+        'max_age_hours': max_age_hours,
+        'message': f'Cleaned up {cleaned} old jobs'
+    }
+
+
+if LANGUAGE_DETECTOR_AVAILABLE:
     @app.get("/api/pipeline/detect-language/{book_id}/{file_name}")
     async def detect_book_language(book_id: str, file_name: str, preferred_language: str = "en"):
-        """
-        Auto-detect language of a book file.
-
-        Args:
-            book_id: Book directory name
-            file_name: Filename to analyze
-            preferred_language: User's preferred reading language (ISO 639-1 code)
-
-        Returns:
-            Language detection results
-        """
+        """Auto-detect language of a book file."""
         book_dir = BOOKS_DIR / book_id
         file_path = book_dir / file_name
 
@@ -1801,54 +1670,33 @@ if PIPELINE_AVAILABLE:
             raise HTTPException(status_code=404, detail="File not found")
 
         result = detect_lang_func(file_path)
-
-        # Compute needs_translation based on user's preferred language
         detected_code = result.get('code', 'en')
         result['needs_translation'] = detected_code != preferred_language
-
         return result
 
 
-    @app.get("/api/pipeline/source-files/{book_id}")
-    async def list_source_files(book_id: str):
-        """
-        List available source markdown files for a book.
+@app.get("/api/pipeline/source-files/{book_id}")
+async def list_source_files(book_id: str):
+    """List available source markdown files for a book."""
+    book_dir = BOOKS_DIR / book_id
 
-        Args:
-            book_id: Book directory name
+    if not book_dir.exists():
+        raise HTTPException(status_code=404, detail="Book not found")
 
-        Returns:
-            List of available source files
-        """
-        book_dir = BOOKS_DIR / book_id
+    source_files = []
+    for md_file in book_dir.glob("*.md"):
+        if any(x in md_file.stem.lower() for x in ['_modern_', '_translated', '_summarized', '_cleaned_cleaned', '_original_original']):
+            continue
+        stat = md_file.stat()
+        source_files.append({
+            'filename': md_file.name,
+            'size_bytes': stat.st_size,
+            'size_kb': round(stat.st_size / 1024, 1),
+            'modified_at': datetime.fromtimestamp(stat.st_mtime).isoformat()
+        })
 
-        if not book_dir.exists():
-            raise HTTPException(status_code=404, detail="Book not found")
-
-        # Find all markdown files (exclude generated files)
-        source_files = []
-        for md_file in book_dir.glob("*.md"):
-            # Skip generated files
-            if any(x in md_file.stem.lower() for x in ['_modern_', '_translated', '_summarized', '_cleaned_cleaned', '_original_original']):
-                continue
-
-            # Get file info
-            stat = md_file.stat()
-            source_files.append({
-                'filename': md_file.name,
-                'size_bytes': stat.st_size,
-                'size_kb': round(stat.st_size / 1024, 1),
-                'modified_at': datetime.fromtimestamp(stat.st_mtime).isoformat()
-            })
-
-        # Sort by modification date (newest first)
-        source_files.sort(key=lambda x: x['modified_at'], reverse=True)
-
-        return {
-            'book_id': book_id,
-            'files': source_files,
-            'total': len(source_files)
-        }
+    source_files.sort(key=lambda x: x['modified_at'], reverse=True)
+    return {'book_id': book_id, 'files': source_files, 'total': len(source_files)}
 
 
 # ============================================================================

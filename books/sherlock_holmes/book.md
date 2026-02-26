@@ -1,24 +1,3 @@
-## The Project Gutenberg eBook of The Adventures of Sherlock Holmes
-
-This ebook is for the use of anyone anywhere in the United States and
-most other parts of the world at no cost and with almost no restrictions
-whatsoever. You may copy it, give it away or re-use it under the terms
-of the Project Gutenberg License included with this ebook or online
-at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
-you will have to check the laws of the country where you are located
-before using this eBook. Title: The Adventures of Sherlock Holmes
-
-Author: Arthur Conan Doyle
-
-Release date: March 1, 1999 [eBook #1661]
-Most recently updated: October 10, 2023
-
-Language: English
-
-Credits: an anonymous Project Gutenberg volunteer and Jose Menendez
-
-**_ START OF THE PROJECT GUTENBERG EBOOK THE ADVENTURES OF SHERLOCK HOLMES _**THERE IS AN ILLUSTRATED EDITION OF THIS TITLE WHICH MAY VIEWED AT EBOOK[[#48320]](https://www.gutenberg.org/ebooks/48320)
-
 # The Adventures of Sherlock Holmes
 
 ## by Arthur Conan Doyle
@@ -27,12 +6,13 @@ Credits: an anonymous Project Gutenberg volunteer and Jose Menendez
 
 ## Contents
 
-I.[A Scandal in Bohemia](#chap01)II.[The Red-Headed League](#chap02)III.[A Case of Identity](#chap03)IV.[The Boscombe Valley Mystery](#chap04)V.[The Five Orange Pips](#chap05)VI.[The Man with the Twisted Lip](#chap06)VII.[The Adventure of the Blue Carbuncle](#chap07)VIII.[The Adventure of the Speckled Band](#chap08)IX.[The Adventure of the Engineer’s Thumb](#chap09)X.[The Adventure of the Noble Bachelor](#chap10)XI.[The Adventure of the Beryl Coronet](#chap11)XII.[The Adventure of the Copper Beeches](#chap12)## I. A SCANDAL IN BOHEMIA
+I.[A Scandal in Bohemia](#chap01)II.[The Red-Headed League](#chap02)III.[A Case of Identity](#chap03)IV.[The Boscombe Valley Mystery](#chap04)V.[The Five Orange Pips](#chap05)VI.[The Man with the Twisted Lip](#chap06)VII.[The Adventure of the Blue Carbuncle](#chap07)VIII.[The Adventure of the Speckled Band](#chap08)IX.[The Adventure of the Engineer’s Thumb](#chap09)X.[The Adventure of the Noble Bachelor](#chap10)XI.[The Adventure of the Beryl Coronet](#chap11)XII.[The Adventure of the Copper Beeches](#chap12)
+## I. A SCANDAL IN BOHEMIA
 
 ### I.
 
 To Sherlock Holmes she
-is alwaysthewoman. I have seldom heard him mention her under any other
+is always*the*woman. I have seldom heard him mention her under any other
 name. In his eyes she eclipses and predominates the whole of her sex. It was
 not that he felt any emotion akin to love for Irene Adler. All emotions, and
 that one particularly, were abhorrent to his cold, precise but admirably
@@ -313,7 +293,7 @@ Ormstein, Grand Duke of Cassel-Felstein, and hereditary King of Bohemia.”
 once more and passing his hand over his high white forehead, “you can
 understand that I am not accustomed to doing such business in my own person.
 Yet the matter was so delicate that I could not confide it to an agent without
-putting myself in his power. I have comeincognitofrom Prague for the
+putting myself in his power. I have come*incognito*from Prague for the
 purpose of consulting you.”
 
 “Then, pray consult,” said Holmes, shutting his eyes once more.
@@ -446,7 +426,7 @@ Von Kramm.”
 
 “Then, as to money?”
 
-“You havecarte blanche.”
+“You have*carte blanche*.”
 
 “Absolutely?”
 
@@ -519,7 +499,7 @@ and perhaps the house, of Miss Irene Adler.”
 left the house a little after eight o’clock this morning in the character
 of a groom out of work. There is a wonderful sympathy and freemasonry among
 horsey men. Be one of them, and you will know all that there is to know. I soon
-found Briony Lodge. It is abijouvilla, with a garden at the back, but
+found Briony Lodge. It is a*bijou*villa, with a garden at the back, but
 built out in front right up to the road, two stories. Chubb lock to the door.
 Large sitting-room on the right side, well furnished, with long windows almost
 to the floor, and those preposterous English window fasteners which a child
@@ -1021,7 +1001,7 @@ take in the future. I leave a photograph which he might care to possess; and I
 remain, dear Mr. Sherlock Holmes,
 
 “Very truly yours,
-“IRENE NORTON,néeADLER.”
+“IRENE NORTON,*née*ADLER.”
 
 “What a woman—oh, what a woman!” cried the King of Bohemia,
 when we had all three read this epistle. “Did I not tell you how quick
@@ -1064,9 +1044,9 @@ And that was how a great scandal threatened to affect the kingdom of Bohemia,
 and how the best plans of Mr. Sherlock Holmes were beaten by a woman’s
 wit. He used to make merry over the cleverness of women, but I have not heard
 him do it of late. And when he speaks of Irene Adler, or when he refers to her
-photograph, it is always under the honourable title ofthewoman.
+photograph, it is always under the honourable title of*the*woman.
 
-end chapter## II. THE RED-HEADED LEAGUE
+## II. THE RED-HEADED LEAGUE
 
 Ihad
 called upon my friend, Mr. Sherlock Holmes, one day in the autumn of last year
@@ -1189,7 +1169,7 @@ Mr. Jabez Wilson laughed heavily. “Well, I never!” said he.
 there was nothing in it after all.”
 
 “I begin to think, Watson,” said Holmes, “that I make a
-mistake in explaining. ‘Omne ignotum pro magnifico,’ you
+mistake in explaining. ‘*Omne ignotum pro magnifico*,’ you
 know, and my poor little reputation, such as it is, will suffer shipwreck if I
 am so candid. Can you not find the advertisement, Mr. Wilson?”
 
@@ -1217,7 +1197,7 @@ about yourself, your household, and the effect which this advertisement had
 upon your fortunes. You will first make a note, Doctor, of the paper and the
 date.”
 
-“It isThe Morning Chronicleof April 27, 1890. Just two months
+“It is*The Morning Chronicle*of April 27, 1890. Just two months
 ago.”
 
 “Very good. Now, Mr. Wilson?”
@@ -1238,7 +1218,7 @@ Holmes; and I know very well that he could better himself and earn twice what I
 am able to give him. But, after all, if he is satisfied, why should I put ideas
 in his head?”
 
-“Why, indeed? You seem most fortunate in having anemployéwho
+“Why, indeed? You seem most fortunate in having an*employé*who
 comes under the full market price. It is not a common experience among
 employers in this age. I don’t know that your assistant is not as
 remarkable as your advertisement.”
@@ -1440,7 +1420,7 @@ you lose your billet.’
 
 “‘And the work?’
 
-“‘Is to copy out theEncyclopædia Britannica. There is the
+“‘Is to copy out the*Encyclopædia Britannica*. There is the
 first volume of it in that press. You must find your own ink, pens, and
 blotting-paper, but we provide this table and chair. Will you be ready
 to-morrow?’
@@ -1456,7 +1436,7 @@ hardly knowing what to say or do, I was so pleased at my own good fortune.
 spirits again; for I had quite persuaded myself that the whole affair must be
 some great hoax or fraud, though what its object might be I could not imagine.
 It seemed altogether past belief that anyone could make such a will, or that
-they would pay such a sum for doing anything so simple as copying out theEncyclopædia Britannica. Vincent Spaulding did what he could to cheer me
+they would pay such a sum for doing anything so simple as copying out the*Encyclopædia Britannica*. Vincent Spaulding did what he could to cheer me
 up, but by bedtime I had reasoned myself out of the whole thing. However, in
 the morning I determined to have a look at it anyhow, so I bought a penny
 bottle of ink, and with a quill-pen, and seven sheets of foolscap paper, I
@@ -1763,7 +1743,7 @@ had heard what he had heard, I had seen what he had seen, and yet from his
 words it was evident that he saw clearly not only what had happened but what
 was about to happen, while to me the whole business was still confused and
 grotesque. As I drove home to my house in Kensington I thought over it all,
-from the extraordinary story of the red-headed copier of theEncyclopædiadown to the visit to Saxe-Coburg Square, and the ominous
+from the extraordinary story of the red-headed copier of the*Encyclopædia*down to the visit to Saxe-Coburg Square, and the ominous
 words with which he had parted from me. What was this nocturnal expedition, and
 why should I go armed? Where were we going, and what were we to do? I had the
 hint from Holmes that this smooth-faced pawnbroker’s assistant was a
@@ -1895,7 +1875,7 @@ screen over that dark lantern.”
 “And sit in the dark?”
 
 “I am afraid so. I had brought a pack of cards in my pocket, and I
-thought that, as we were apartie carrée, you might have your rubber
+thought that, as we were a*partie carrée*, you might have your rubber
 after all. But I see that the enemy’s preparations have gone so far that
 we cannot risk the presence of a light. And, first of all, we must choose our
 positions. These are daring men, and though we shall take them at a
@@ -2005,7 +1985,7 @@ the very remarkable narrative of the Red-headed League.”
 “You see, Watson,” he explained in the early hours of the morning
 as we sat over a glass of whisky and soda in Baker Street, “it was
 perfectly obvious from the first that the only possible object of this rather
-fantastic business of the advertisement of the League, and the copying of theEncyclopædia, must be to get this not over-bright pawnbroker out of the
+fantastic business of the advertisement of the League, and the copying of the*Encyclopædia*, must be to get this not over-bright pawnbroker out of the
 way for a number of hours every day. It was a curious way of managing it, but,
 really, it would be difficult to suggest a better. The method was no doubt
 suggested to Clay’s ingenious mind by the colour of his
@@ -2066,11 +2046,11 @@ so.”
 “And you are a benefactor of the race,” said I.
 
 He shrugged his shoulders. “Well, perhaps, after all, it is of some
-little use,” he remarked. “‘L’homme
-c’est rien—l’œuvre c’est tout,’ as Gustave
+little use,” he remarked. “‘*L’homme
+c’est rien—l’œuvre c’est tout*,’ as Gustave
 Flaubert wrote to George Sand.”
 
-end chapter## III. A CASE OF IDENTITY
+## III. A CASE OF IDENTITY
 
 “My dear
 fellow,” said Sherlock Holmes as we sat on either side of the fire in his
@@ -2080,7 +2060,7 @@ which are really mere commonplaces of existence. If we could fly out of that
 window hand in hand, hover over this great city, gently remove the roofs, and
 peep in at the queer things which are going on, the strange coincidences, the
 plannings, the cross-purposes, the wonderful chains of events, working through
-generations, and leading to the mostoutréresults, it would make all
+generations, and leading to the most*outré*results, it would make all
 fiction with its conventionalities and foreseen conclusions most stale and
 unprofitable.”
 
@@ -2159,7 +2139,7 @@ leaves the bank, she hurried across the road, and we heard the sharp clang of
 the bell.
 
 “I have seen those symptoms before,” said Holmes, throwing his
-cigarette into the fire. “Oscillation upon the pavement always means anaffaire de cœur. She would like advice, but is not sure that the matter
+cigarette into the fire. “Oscillation upon the pavement always means an*affaire de cœur*. She would like advice, but is not sure that the matter
 is not too delicate for communication. And yet even here we may discriminate.
 When a woman has been seriously wronged by a man she no longer oscillates, and
 the usual symptom is a broken bell wire. Here we may take it that there is a
@@ -2423,7 +2403,7 @@ has done from your life.”
 “You will leave that question in my hands. I should like an accurate
 description of him and any letters of his which you can spare.”
 
-“I advertised for him in last Saturday’sChronicle,”
+“I advertised for him in last Saturday’s*Chronicle*,”
 said she. “Here is the slip and here are four letters from him.”
 
 “Thank you. And your address?”
@@ -2576,7 +2556,7 @@ A professional case of great gravity was engaging my own attention at the time,
 and the whole of next day I was busy at the bedside of the sufferer. It was not
 until close upon six o’clock that I found myself free and was able to
 spring into a hansom and drive to Baker Street, half afraid that I might be too
-late to assist at thedénouementof the little mystery. I found Sherlock
+late to assist at the*dénouement*of the little mystery. I found Sherlock
 Holmes alone, however, half asleep, with his long, thin form curled up in the
 recesses of his armchair. A formidable array of bottles and test-tubes, with
 the pungent cleanly smell of hydrochloric acid, told me that he had spent his
@@ -2781,8 +2761,8 @@ and I wrote to the man himself at his business address asking him if he would
 come here. As I expected, his reply was typewritten and revealed the same
 trivial but characteristic defects. The same post brought me a letter from
 Westhouse & Marbank, of Fenchurch Street, to say that the description
-tallied in every respect with that of their employé, James Windibank. Voilà
-tout!”
+tallied in every respect with that of their employé, James Windibank.*Voilà
+tout*!”
 
 “And Miss Sutherland?”
 
@@ -2791,7 +2771,7 @@ saying, ‘There is danger for him who taketh the tiger cub, and danger
 also for whoso snatches a delusion from a woman.’ There is as much sense
 in Hafiz as in Horace, and as much knowledge of the world.”
 
-end chapter## IV. THE BOSCOMBE VALLEY MYSTERY
+## IV. THE BOSCOMBE VALLEY MYSTERY
 
 We were seated at
 breakfast one morning, my wife and I, when the maid brought in a telegram. It
@@ -2955,7 +2935,7 @@ back on the left side, until it becomes positively slovenly as we get round the
 angle of the jaw, it is surely very clear that that side is less illuminated
 than the other. I could not imagine a man of your habits looking at himself in
 an equal light and being satisfied with such a result. I only quote this as a
-trivial example of observation and inference. Therein lies mymétier,
+trivial example of observation and inference. Therein lies my*métier*,
 and it is just possible that it may be of some service in the investigation
 which lies before us. There are one or two minor points which were brought out
 in the inquest, and which are worth considering.”
@@ -3093,7 +3073,7 @@ help?’
 
 “‘Yes, it was gone.’
 
-“ ‘You cannot say what it was?’
+“  ‘You cannot say what it was?’
 
 “‘No, I had a feeling something was there.’
 
@@ -3125,7 +3105,7 @@ seat. “Both you and the coroner have been at some pains,” said he,
 Don’t you see that you alternately give him credit for having too much
 imagination and too little? Too little, if he could not invent a cause of
 quarrel which would give him the sympathy of the jury; too much, if he evolved
-from his own inner consciousness anything sooutréas a dying reference
+from his own inner consciousness anything so*outré*as a dying reference
 to a rat, and the incident of the vanishing cloth. No, sir, I shall approach
 this case from the point of view that what this young man says is true, and we
 shall see whither that hypothesis will lead us. And now here is my pocket
@@ -3513,7 +3493,7 @@ Lestrade laughed. “I am afraid that I am still a sceptic,” he said.
 “Theories are all very well, but we have to deal with a hard-headed
 British jury.”
 
-“Nous verrons,” answered Holmes calmly. “You work your
+“*Nous verrons*,” answered Holmes calmly. “You work your
 own method, and I shall work mine. I shall be busy this afternoon, and shall
 probably return to London by the evening train.”
 
@@ -3812,7 +3792,7 @@ counsel. Old Turner lived for seven months after our interview, but he is now
 dead; and there is every prospect that the son and daughter may come to live
 happily together in ignorance of the black cloud which rests upon their past.
 
-end chapter## V. THE FIVE ORANGE PIPS
+## V. THE FIVE ORANGE PIPS
 
 When I glance over my
 notes and records of the Sherlock Holmes cases between the years ’82 and
@@ -3834,7 +3814,7 @@ The year ’87 furnished us with a long series of cases of greater or less
 interest, of which I retain the records. Among my headings under this one
 twelve months I find an account of the adventure of the Paradol Chamber, of the
 Amateur Mendicant Society, who held a luxurious club in the lower vault of a
-furniture warehouse, of the facts connected with the loss of the British barqueSophy Anderson, of the singular adventures of the Grice Patersons in the
+furniture warehouse, of the facts connected with the loss of the British barque*Sophy Anderson*, of the singular adventures of the Grice Patersons in the
 island of Uffa, and finally of the Camberwell poisoning case. In the latter, as
 may be remembered, Sherlock Holmes was able, by winding up the dead man’s
 watch, to prove that it had been wound up two hours before, and that therefore
@@ -4345,8 +4325,8 @@ as I said then, that a man should keep his little brain-attic stocked with all
 the furniture that he is likely to use, and the rest he can put away in the
 lumber-room of his library, where he can get it if he wants it. Now, for such a
 case as the one which has been submitted to us to-night, we need certainly to
-muster all our resources. Kindly hand me down the letter K of theAmerican
-Encyclopædiawhich stands upon the shelf beside you. Thank you. Now let us
+muster all our resources. Kindly hand me down the letter K of the*American
+Encyclopædia*which stands upon the shelf beside you. Thank you. Now let us
 consider the situation and see what may be deduced from it. In the first place,
 we may start with a strong presumption that Colonel Openshaw had some very
 strong reason for leaving America. Men at his time of life do not change all
@@ -4554,8 +4534,8 @@ them. It is well thought of!”
 He took an orange from the cupboard, and tearing it to pieces he squeezed out
 the pips upon the table. Of these he took five and thrust them into an
 envelope. On the inside of the flap he wrote “S. H. for J. O.” Then
-he sealed it and addressed it to “Captain James Calhoun, BarqueLone
-Star, Savannah, Georgia.”
+he sealed it and addressed it to “Captain James Calhoun, Barque*Lone
+Star*, Savannah, Georgia.”
 
 “That will await him when he enters port,” said he, chuckling.
 “It may give him a sleepless night. He will find it as sure a precursor
@@ -4574,7 +4554,7 @@ names.
 registers and files of the old papers, following the future career of every
 vessel which touched at Pondicherry in January and February in ’83. There
 were thirty-six ships of fair tonnage which were reported there during those
-months. Of these, one, theLone Star, instantly attracted my attention,
+months. Of these, one, the*Lone Star*, instantly attracted my attention,
 since, although it was reported as having cleared from London, the name is that
 which is given to one of the states of the Union.”
 
@@ -4585,14 +4565,14 @@ American origin.”
 
 “What then?”
 
-“I searched the Dundee records, and when I found that the barqueLone
-Starwas there in January, ’85, my suspicion became a certainty. I
+“I searched the Dundee records, and when I found that the barque*Lone
+Star*was there in January, ’85, my suspicion became a certainty. I
 then inquired as to the vessels which lay at present in the port of
 London.”
 
 “Yes?”
 
-“TheLone Starhad arrived here last week. I went down to the
+“The*Lone Star*had arrived here last week. I went down to the
 Albert Dock and found that she had been taken down the river by the early tide
 this morning, homeward bound to Savannah. I wired to Gravesend and learned that
 she had passed some time ago, and as the wind is easterly I have no doubt that
@@ -4612,13 +4592,13 @@ There is ever a flaw, however, in the best laid of human plans, and the
 murderers of John Openshaw were never to receive the orange pips which would
 show them that another, as cunning and as resolute as themselves, was upon
 their track. Very long and very severe were the equinoctial gales that year. We
-waited long for news of theLone Starof Savannah, but none ever reached
+waited long for news of the*Lone Star*of Savannah, but none ever reached
 us. We did at last hear that somewhere far out in the Atlantic a shattered
 stern-post of a boat was seen swinging in the trough of a wave, with the
 letters “L. S.” carved upon it, and that is all which we shall ever
-know of the fate of theLone Star.
+know of the fate of the*Lone Star*.
 
-end chapter## VI. THE MAN WITH THE TWISTED LIP
+## VI. THE MAN WITH THE TWISTED LIP
 
 Isa Whitney, brother of
 the late Elias Whitney, D. D., Principal of the Theological College of St.
@@ -4895,7 +4875,7 @@ went into town as a rule in the morning, returning by the 5:14 from Cannon
 Street every night. Mr. St. Clair is now thirty-seven years of age, is a man of
 temperate habits, a good husband, a very affectionate father, and a man who is
 popular with all who know him. I may add that his whole debts at the present
-moment, as far as we have been able to ascertain, amount to £ 88 10s.,
+moment, as far as we have been able to ascertain, amount to £ 88 10*s*.,
 while he has £ 220 standing to his credit in the Capital and Counties Bank.
 There is no reason, therefore, to think that money troubles have been weighing
 upon his mind.
@@ -5530,10 +5510,11 @@ flesh-coloured plaster. Then with a red head of hair, and an appropriate dress,
 I took my station in the business part of the city, ostensibly as a
 match-seller but really as a beggar. For seven hours I plied my trade, and when
 I returned home in the evening I found to my surprise that I had received no
-less than 26s. 4d.
+less than 26*s*. 4*d*.
 
 “I wrote my articles and thought little more of the matter until, some
-time later, I backed a bill for a friend and had a writ served upon me for £ 25. I was at my wit’s end where to get the money, but a sudden idea came
+time later, I backed a bill for a friend and had a writ served upon me for £
+25. I was at my wit’s end where to get the money, but a sudden idea came
 to me. I begged a fortnight’s grace from the creditor, asked for a
 holiday from my employers, and spent the time in begging in the City under my
 disguise. In ten days I had the money and had paid the debt.
@@ -5616,7 +5597,7 @@ I wish I knew how you reach your results.”
 pillows and consuming an ounce of shag. I think, Watson, that if we drive to
 Baker Street we shall just be in time for breakfast.”
 
-end chapter## VII. THE ADVENTURE OF THE BLUE CARBUNCLE
+## VII. THE ADVENTURE OF THE BLUE CARBUNCLE
 
 Ihad called upon my
 friend Sherlock Holmes upon the second morning after Christmas, with the
@@ -5858,13 +5839,13 @@ got?”
 “A diamond, sir? A precious stone. It cuts into glass as though it were
 putty.”
 
-“It’s more than a precious stone. It istheprecious
+“It’s more than a precious stone. It is*the*precious
 stone.”
 
 “Not the Countess of Morcar’s blue carbuncle!” I ejaculated.
 
 “Precisely so. I ought to know its size and shape, seeing that I have
-read the advertisement about it inThe Timesevery day lately. It is
+read the advertisement about it in*The Times*every day lately. It is
 absolutely unique, and its value can only be conjectured, but the reward
 offered of £ 1000 is certainly not within a twentieth part of the market
 price.”
@@ -5942,8 +5923,8 @@ papers.”
 
 “In which, sir?”
 
-“Oh, in theGlobe,Star,Pall Mall,St.
-James’s Gazette,Evening News,Standard,Echo,
+“Oh, in the*Globe*,*Star*,*Pall Mall*,*St.
+James’s Gazette*,*Evening News*,*Standard*,*Echo*,
 and any others that occur to you.”
 
 “Very well, sir. And this stone?”
@@ -6045,7 +6026,7 @@ bird, so if you wish—”
 
 The man burst into a hearty laugh. “They might be useful to me as relics
 of my adventure,” said he, “but beyond that I can hardly see what
-use thedisjecta membraof my late acquaintance are going to be to me.
+use the*disjecta membra*of my late acquaintance are going to be to me.
 No, sir, I think that, with your permission, I will confine my attentions to
 the excellent bird which I perceive upon the sideboard.”
 
@@ -6095,7 +6076,7 @@ said he.
 “Yes. I was speaking only half an hour ago to Mr. Henry Baker, who was a
 member of your goose club.”
 
-“Ah! yes, I see. But you see, sir, them’s notourgeese.”
+“Ah! yes, I see. But you see, sir, them’s not*our*geese.”
 
 “Indeed! Whose, then?”
 
@@ -6220,13 +6201,13 @@ Holmes turned to the page indicated. “Here you are, ‘Mrs. Oakshott,
 
 “Now, then, what’s the last entry?”
 
-“‘December 22nd. Twenty-four geese at 7s.
-6d.’”
+“‘December 22nd. Twenty-four geese at 7*s*.
+6*d*.’”
 
 “Quite so. There you are. And underneath?”
 
 “‘Sold to Mr. Windigate of the Alpha, at
-12s.’”
+12*s*.’”
 
 “What have you to say now?”
 
@@ -6520,7 +6501,7 @@ its own reward. If you will have the goodness to touch the bell, Doctor, we
 will begin another investigation, in which, also a bird will be the chief
 feature.”
 
-end chapter## VIII. THE ADVENTURE OF THE SPECKLED BAND
+## VIII. THE ADVENTURE OF THE SPECKLED BAND
 
 On glancing over my
 notes of the seventy odd cases in which I have during the last eight years
@@ -7613,7 +7594,7 @@ temper, so that it flew upon the first person it saw. In this way I am no doubt
 indirectly responsible for Dr. Grimesby Roylott’s death, and I cannot say
 that it is likely to weigh very heavily upon my conscience.”
 
-end chapter## IX. THE ADVENTURE OF THE ENGINEER’S THUMB
+## IX. THE ADVENTURE OF THE ENGINEER’S THUMB
 
 Of all the problems
 which have been submitted to my friend, Mr. Sherlock Holmes, for solution
@@ -7625,8 +7606,8 @@ its inception and so dramatic in its details that it may be the more worthy of
 being placed upon record, even if it gave my friend fewer openings for those
 deductive methods of reasoning by which he achieved such remarkable results.
 The story has, I believe, been told more than once in the newspapers, but, like
-all such narratives, its effect is much less striking when set forthen
-blocin a single half-column of print than when the facts slowly evolve
+all such narratives, its effect is much less striking when set forth*en
+bloc*in a single half-column of print than when the facts slowly evolve
 before your own eyes, and the mystery clears gradually away as each new
 discovery furnishes a step which leads on to the complete truth. At the time
 the circumstances made a deep impression upon me, and the lapse of two years
@@ -7780,7 +7761,7 @@ in five minutes was inside a hansom, driving with my new acquaintance to Baker
 Street.
 
 Sherlock Holmes was, as I expected, lounging about his sitting-room in his
-dressing-gown, reading the agony column ofThe Timesand smoking his
+dressing-gown, reading the agony column of*The Times*and smoking his
 before-breakfast pipe, which was composed of all the plugs and dottles left
 from his smokes of the day before, all carefully dried and collected on the
 corner of the mantelpiece. He received us in his quietly genial fashion,
@@ -7813,7 +7794,7 @@ in business for myself and took professional chambers in Victoria Street.
 “I suppose that everyone finds his first independent start in business a
 dreary experience. To me it has been exceptionally so. During two years I have
 had three consultations and one small job, and that is absolutely all that my
-profession has brought me. My gross takings amount to £ 27 10s. Every
+profession has brought me. My gross takings amount to £ 27 10*s*. Every
 day, from nine in the morning until four in the afternoon, I waited in my
 little den, until at last my heart began to sink, and I came to believe that I
 should never have any practice at all.
@@ -8247,8 +8228,8 @@ so-precious time, but come!’
 and ran with her along the corridor and down a winding stair. The latter led to
 another broad passage, and just as we reached it we heard the sound of running
 feet and the shouting of two voices, one answering the other from the floor on
-which we were and from the one beneath. My guide stopped and looked about her
-like one who is at her wit’s end. Then she threw open a door which led
+which  we were and from the one beneath. My guide stopped and looked about her
+like one  who is at her wit’s end. Then she threw open a door which led
 into a bedroom, through the window of which the moon was shining brightly.
 
 “‘It is your only chance,’ said she. ‘It is high,
@@ -8491,7 +8472,7 @@ my thumb and I have lost a fifty-guinea fee, and what have I gained?”
 value, you know; you have only to put it into words to gain the reputation of
 being excellent company for the remainder of your existence.”
 
-end chapter## X. THE ADVENTURE OF THE NOBLE BACHELOR
+## X. THE ADVENTURE OF THE NOBLE BACHELOR
 
 The Lord St. Simon
 marriage, and its curious termination, have long ceased to be a subject of
@@ -8601,7 +8582,7 @@ That is quite cleared up now—though, indeed, it was obvious from the
 first. Pray give me the results of your newspaper selections.”
 
 “Here is the first notice which I can find. It is in the personal column
-of theMorning Post, and dates, as you see, some weeks back: ‘A
+of the*Morning Post*, and dates, as you see, some weeks back: ‘A
 marriage has been arranged,’ it says, ‘and will, if rumour is
 correct, very shortly take place, between Lord Robert St. Simon, second son of
 the Duke of Balmoral, and Miss Hatty Doran, the only daughter of Aloysius
@@ -8612,7 +8593,7 @@ thin legs towards the fire.
 
 “There was a paragraph amplifying this in one of the society papers of
 the same week. Ah, here it is: ‘There will soon be a call for protection
-in the marriage market, for the present free-trade principle appears to tell
+in the marriage  market, for the present free-trade principle appears to tell
 heavily against our home product. One by one the management of the noble houses
 of Great Britain is passing into the hands of our fair cousins from across the
 Atlantic. An important addition has been made during the last week to the list
@@ -8632,7 +8613,7 @@ British peeress.’”
 
 “Anything else?” asked Holmes, yawning.
 
-“Oh, yes; plenty. Then there is another note in theMorning Postto say that the marriage would be an absolutely quiet one, that it would be at
+“Oh, yes; plenty. Then there is another note in the*Morning Post*to say that the marriage would be an absolutely quiet one, that it would be at
 St. George’s, Hanover Square, that only half a dozen intimate friends
 would be invited, and that the party would return to the furnished house at
 Lancaster Gate which has been taken by Mr. Aloysius Doran. Two days
@@ -8713,7 +8694,7 @@ suggestive one.”
 “And it is—”
 
 “That Miss Flora Millar, the lady who had caused the disturbance, has
-actually been arrested. It appears that she was formerly adanseuseat
+actually been arrested. It appears that she was formerly a*danseuse*at
 the Allegro, and that she has known the bridegroom for some years. There are no
 further particulars, and the whole case is in your hands now—so far as it
 has been set forth in the public press.”
@@ -8839,8 +8820,8 @@ several times, became engaged to her, and have now married her.”
 
 “A fair dowry. Not more than is usual in my family.”
 
-“And this, of course, remains to you, since the marriage is afait
-accompli?”
+“And this, of course, remains to you, since the marriage is a*fait
+accompli*?”
 
 “I really have made no inquiries on the subject.”
 
@@ -8936,7 +8917,7 @@ disturbance at Mr. Doran’s house that morning.”
 relations to her.”
 
 Lord St. Simon shrugged his shoulders and raised his eyebrows. “We have
-been on a friendly footing for some years—I may say on averyfriendly footing. She used to be at the Allegro. I have not treated her
+been on a friendly footing for some years—I may say on a*very*friendly footing. She used to be at the Allegro. I have not treated her
 ungenerously, and she had no just cause of complaint against me, but you know
 what women are, Mr. Holmes. Flora was a dear little thing, but exceedingly
 hot-headed and devotedly attached to me. She wrote me dreadful letters when she
@@ -9137,9 +9118,9 @@ over here.”
 interests me deeply.”
 
 “There’s nothing in it. I looked at it before,” said
-Lestrade. “‘Oct. 4th, rooms 8s., breakfast 2s.
-6d., cocktail 1s., lunch 2s. 6d., glass sherry,
-8d.’ I see nothing in that.”
+Lestrade. “‘Oct. 4th, rooms 8*s*., breakfast 2*s*.
+6*d*., cocktail 1*s*., lunch 2*s*. 6*d*., glass sherry,
+8*d*.’ I see nothing in that.”
 
 “Very likely not. It is most important, all the same. As to the note, it
 is important also, or at least the initials are, so I congratulate you
@@ -9169,8 +9150,8 @@ to be lonely, for within an hour there arrived a confectioner’s man with
 a very large flat box. This he unpacked with the help of a youth whom he had
 brought with him, and presently, to my very great astonishment, a quite
 epicurean little cold supper began to be laid out upon our humble lodging-house
-mahogany. There were a couple of brace of cold woodcock, a pheasant, apâté
-de foie graspie with a group of ancient and cobwebby bottles. Having laid
+mahogany. There were a couple of brace of cold woodcock, a pheasant, a*pâté
+de foie gras*pie with a group of ancient and cobwebby bottles. Having laid
 out all these luxuries, my two visitors vanished away, like the genii of the
 Arabian Nights, with no explanation save that the things had been paid for and
 were ordered to this address.
@@ -9438,7 +9419,7 @@ likely to find ourselves in the same position. Draw your chair up and hand me
 my violin, for the only problem we have still to solve is how to while away
 these bleak autumnal evenings.”
 
-end chapter## XI. THE ADVENTURE OF THE BERYL CORONET
+## XI. THE ADVENTURE OF THE BERYL CORONET
 
 “Holmes,”
 said I as I stood one morning in our bow-window looking down the street,
@@ -10147,7 +10128,7 @@ in my house last night?”
 
 “If you can call upon me at my Baker Street rooms to-morrow morning
 between nine and ten I shall be happy to do what I can to make it clearer. I
-understand that you give mecarte blancheto act for you, provided only
+understand that you give me*carte blanche*to act for you, provided only
 that I get back the gems, and that you place no limit on the sum I may
 draw.”
 
@@ -10473,16 +10454,16 @@ now.”
 is wherever Sir George Burnwell is. It is equally certain, too, that whatever
 her sins are, they will soon receive a more than sufficient punishment.”
 
-end chapter## XII. THE ADVENTURE OF THE COPPER BEECHES
+## XII. THE ADVENTURE OF THE COPPER BEECHES
 
 “To the man who
 loves art for its own sake,” remarked Sherlock Holmes, tossing aside the
-advertisement sheet ofThe Daily Telegraph, “it is frequently in
+advertisement sheet of*The Daily Telegraph*, “it is frequently in
 its least important and lowliest manifestations that the keenest pleasure is to
 be derived. It is pleasant to me to observe, Watson, that you have so far
 grasped this truth that in these little records of our cases which you have
 been good enough to draw up, and, I am bound to say, occasionally to embellish,
-you have given prominence not so much to the manycauses célèbresand
+you have given prominence not so much to the many*causes célèbres*and
 sensational trials in which I have figured but rather to those incidents which
 may have been trivial in themselves, but which have given room for those
 faculties of deduction and of logical synthesis which I have made my special
@@ -10928,7 +10909,7 @@ personally threatened.”
 
 “Quite so. She has her freedom.”
 
-“Whatcanbe the matter, then? Can you suggest no
+“What*can*be the matter, then? Can you suggest no
 explanation?”
 
 “I have devised seven separate explanations, each of which would cover
@@ -11049,7 +11030,7 @@ dress and go to little Edward in the nursery.
 “Two days later this same performance was gone through under exactly
 similar circumstances. Again I changed my dress, again I sat in the window, and
 again I laughed very heartily at the funny stories of which my employer had an
-immenserépertoire, and which he told inimitably. Then he handed me a
+immense*répertoire*, and which he told inimitably. Then he handed me a
 yellow-backed novel, and moving my chair a little sideways, that my own shadow
 might not fall upon the page, he begged me to read aloud to him. I read for
 about ten minutes, beginning in the heart of a chapter, and then suddenly, in
@@ -11319,7 +11300,7 @@ You were chosen, doubtless, as resembling her in height, figure, and the colour
 of your hair. Hers had been cut off, very possibly in some illness through
 which she has passed, and so, of course, yours had to be sacrificed also. By a
 curious chance you came upon her tresses. The man in the road was undoubtedly
-some friend of hers—possibly herfiancé—and no doubt, as you
+some friend of hers—possibly her*fiancé*—and no doubt, as you
 wore the girl’s dress and were so like her, he was convinced from your
 laughter, whenever he saw you, and afterwards from your gesture, that Miss
 Rucastle was perfectly happy, and that she no longer desired his attentions.
@@ -11497,8 +11478,8 @@ gone out.”
 “I am sure we owe you an apology, Mrs. Toller,” said Holmes,
 “for you have certainly cleared up everything which puzzled us. And here
 comes the country surgeon and Mrs. Rucastle, so I think, Watson, that we had
-best escort Miss Hunter back to Winchester, as it seems to me that ourlocus
-standinow is rather a questionable one.”
+best escort Miss Hunter back to Winchester, as it seems to me that our*locus
+standi*now is rather a questionable one.”
 
 And thus was solved the mystery of the sinister house with the copper beeches
 in front of the door. Mr. Rucastle survived, but was always a broken man, kept
@@ -11511,256 +11492,3 @@ Miss Violet Hunter, my friend Holmes, rather to my disappointment, manifested
 no further interest in her when once she had ceased to be the centre of one of
 his problems, and she is now the head of a private school at Walsall, where I
 believe that she has met with considerable success.
-
-end chapter**_ END OF THE PROJECT GUTENBERG EBOOK THE ADVENTURES OF SHERLOCK HOLMES _**Updated editions will replace the previous one—the old editions will
-be renamed. Creating the works from print editions not protected by U. S. copyright
-law means that no one owns a United States copyright in these works,
-so the Foundation (and you!) can copy and distribute it in the United
-States without permission and without paying copyright
-royalties. Special rules, set forth in the General Terms of Use part
-of this license, apply to copying and distributing Project
-Gutenberg™ electronic works to protect the PROJECT GUTENBERG™
-concept and trademark. Project Gutenberg is a registered trademark,
-and may not be used if you charge for an eBook, except by following
-the terms of the trademark license, including paying royalties for use
-of the Project Gutenberg trademark. If you do not charge anything for
-copies of this eBook, complying with the trademark license is very
-easy. You may use this eBook for nearly any purpose such as creation
-of derivative works, reports, performances and research. Project
-Gutenberg eBooks may be modified and printed and given away—you may
-do practically ANYTHING in the United States with eBooks not protected
-by U. S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
-
-PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
-distribution of electronic works, by using or distributing this work
-(or any other work associated in any way with the phrase “Project
-Gutenberg”), you agree to comply with all the terms of the Full
-Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1. A. By reading or using any part of this Project Gutenberg™
-electronic work, you indicate that you have read, understand, agree to
-and accept all the terms of this license and intellectual property
-(trademark/copyright) agreement. If you do not agree to abide by all
-the terms of this agreement, you must cease using and return or
-destroy all copies of Project Gutenberg™ electronic works in your
-possession. If you paid a fee for obtaining a copy of or access to a
-Project Gutenberg™ electronic work and you do not agree to be bound
-by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
-used on or associated in any way with an electronic work by people who
-agree to be bound by the terms of this agreement. There are a few
-things that you can do with most Project Gutenberg™ electronic works
-even without complying with the full terms of this agreement. See
-paragraph 1. C below. There are a lot of things you can do with Project
-Gutenberg™ electronic works if you follow the terms of this
-agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
-Foundation” or PGLAF), owns a compilation copyright in the collection
-of Project Gutenberg™ electronic works. Nearly all the individual
-works in the collection are in the public domain in the United
-States. If an individual work is unprotected by copyright law in the
-United States and you are located in the United States, we do not
-claim a right to prevent you from copying, distributing, performing,
-displaying or creating derivative works based on the work as long as
-all references to Project Gutenberg are removed. Of course, we hope
-that you will support the Project Gutenberg™ mission of promoting
-free access to electronic works by freely sharing Project Gutenberg™
-works in compliance with the terms of this agreement for keeping the
-Project Gutenberg™ name associated with the work. You can easily
-comply with the terms of this agreement by keeping this work in the
-same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
-what you can do with this work. Copyright laws in most countries are
-in a constant state of change. If you are outside the United States,
-check the laws of your country in addition to the terms of this
-agreement before downloading, copying, displaying, performing,
-distributing or creating derivative works based on this work or any
-other Project Gutenberg™ work. The Foundation makes no
-representations concerning the copyright status of any work in any
-country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
-immediate access to, the full Project Gutenberg™ License must appear
-prominently whenever any copy of a Project Gutenberg™ work (any work
-on which the phrase “Project Gutenberg” appears, or with which the
-phrase “Project Gutenberg” is associated) is accessed, displayed,
-performed, viewed, copied or distributed:This eBook is for the use of anyone anywhere in the United States and most
-other parts of the world at no cost and with almost no restrictions
-whatsoever. You may copy it, give it away or re-use it under the terms
-of the Project Gutenberg License included with this eBook or online
-at[www.gutenberg.org](https://www.gutenberg.org). If you
-are not located in the United States, you will have to check the laws
-of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U. S. copyright law (does not
-contain a notice indicating that it is posted with permission of the
-copyright holder), the work can be copied and distributed to anyone in
-the United States without paying any fees or charges. If you are
-redistributing or providing access to a work with the phrase “Project
-Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1. E.1 through 1. E.7 or
-obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
-with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1. E.1 through 1. E.7 and any
-additional terms imposed by the copyright holder. Additional terms
-will be linked to the Project Gutenberg™ License for all works
-posted with the permission of the copyright holder found at the
-beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
-License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
-electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1. E.1 with
-active links or immediate access to the full terms of the Project
-Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
-compressed, marked up, nonproprietary or proprietary form, including
-any word processing or hypertext form. However, if you provide access
-to or distribute copies of a Project Gutenberg™ work in a format
-other than “Plain Vanilla ASCII” or other format used in the official
-version posted on the official Project Gutenberg™ website
-(www.gutenberg.org), you must, at no additional cost, fee or expense
-to the user, provide a copy, a means of exporting a copy, or a means
-of obtaining a copy upon request, of the work in its original “Plain
-Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
-performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
-access to or distributing Project Gutenberg™ electronic works
-provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
-the use of Project Gutenberg™ works calculated using the method
-you already use to calculate your applicable taxes. The fee is owed
-to the owner of the Project Gutenberg™ trademark, but he has
-agreed to donate royalties under this paragraph to the Project
-Gutenberg Literary Archive Foundation. Royalty payments must be paid
-within 60 days following each date on which you prepare (or are
-legally required to prepare) your periodic tax returns. Royalty
-payments should be clearly marked as such and sent to the Project
-Gutenberg Literary Archive Foundation at the address specified in
-Section 4, “Information about donations to the Project Gutenberg
-Literary Archive Foundation.”
-
-- • You provide a full refund of any money paid by a user who notifies
-  you in writing (or by e-mail) within 30 days of receipt that s/he
-  does not agree to the terms of the full Project Gutenberg™
-  License. You must require such a user to return or destroy all
-  copies of the works possessed in a physical medium and discontinue
-  all use of and all access to other copies of Project Gutenberg™
-  works.
-- • You provide, in accordance with paragraph 1. F.3, a full refund of
-  any money paid for a work or a replacement copy, if a defect in the
-  electronic work is discovered and reported to you within 90 days of
-  receipt of the work.
-- • You comply with all other terms of this agreement for free
-  distribution of Project Gutenberg™ works.
-
-  1. E.9. If you wish to charge a fee or distribute a Project
-  Gutenberg™ electronic work or group of works on different terms than
-  are set forth in this agreement, you must obtain permission in writing
-  from the Project Gutenberg Literary Archive Foundation, the manager of
-  the Project Gutenberg™ trademark. Contact the Foundation as set
-  forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
-  effort to identify, do copyright research on, transcribe and proofread
-  works not protected by U. S. copyright law in creating the Project
-  Gutenberg™ collection. Despite these efforts, Project Gutenberg™
-  electronic works, and the medium on which they may be stored, may
-  contain “Defects,” such as, but not limited to, incomplete, inaccurate
-  or corrupt data, transcription errors, a copyright or other
-  intellectual property infringement, a defective or damaged disk or
-  other medium, a computer virus, or computer codes that damage or
-  cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-  of Replacement or Refund” described in paragraph 1. F.3, the Project
-  Gutenberg Literary Archive Foundation, the owner of the Project
-  Gutenberg™ trademark, and any other party distributing a Project
-  Gutenberg™ electronic work under this agreement, disclaim all
-  liability to you for damages, costs and expenses, including legal
-  fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
-  LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-  PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
-  TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
-  LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
-  INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-  DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
-  defect in this electronic work within 90 days of receiving it, you can
-  receive a refund of the money (if any) you paid for it by sending a
-  written explanation to the person you received the work from. If you
-  received the work on a physical medium, you must return the medium
-  with your written explanation. The person or entity that provided you
-  with the defective work may elect to provide a replacement copy in
-  lieu of a refund. If you received the work electronically, the person
-  or entity providing it to you may choose to give you a second
-  opportunity to receive the work electronically in lieu of a refund. If
-  the second copy is also defective, you may demand a refund in writing
-  without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
-  in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
-  OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-  LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
-  warranties or the exclusion or limitation of certain types of
-  damages. If any disclaimer or limitation set forth in this agreement
-  violates the law of the state applicable to this agreement, the
-  agreement shall be interpreted to make the maximum disclaimer or
-  limitation permitted by the applicable state law. The invalidity or
-  unenforceability of any provision of this agreement shall not void the
-  remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
-  trademark owner, any agent or employee of the Foundation, anyone
-  providing copies of Project Gutenberg™ electronic works in
-  accordance with this agreement, and any volunteers associated with the
-  production, promotion and distribution of Project Gutenberg™
-  electronic works, harmless from all liability, costs and expenses,
-  including legal fees, that arise directly or indirectly from any of
-  the following which you do or cause to occur: (a) distribution of this
-  or any Project Gutenberg™ work, (b) alteration, modification, or
-  additions or deletions to any Project Gutenberg™ work, and (c) any
-  Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
-  electronic works in formats readable by the widest variety of
-  computers including obsolete, old, middle-aged and new computers. It
-  exists because of the efforts of hundreds of volunteers and donations
-  from people in all walks of life. Volunteers and financial support to provide volunteers with the
-  assistance they need are critical to reaching Project Gutenberg™’s
-  goals and ensuring that the Project Gutenberg™ collection will
-  remain freely available for generations to come. In 2001, the Project
-  Gutenberg Literary Archive Foundation was created to provide a secure
-  and permanent future for Project Gutenberg™ and future
-  generations. To learn more about the Project Gutenberg Literary
-  Archive Foundation and how your efforts and donations can help, see
-  Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
-  501(c)(3) educational corporation organized under the laws of the
-  state of Mississippi and granted tax exempt status by the Internal
-  Revenue Service. The Foundation’s EIN or federal tax identification
-  number is 64-6221541. Contributions to the Project Gutenberg Literary
-  Archive Foundation are tax deductible to the full extent permitted by
-  U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
-  Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
-  to date contact information can be found at the Foundation’s website
-  and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
-  Literary Archive FoundationProject Gutenberg™ depends upon and cannot survive without widespread
-  public support and donations to carry out its mission of
-  increasing the number of public domain and licensed works that can be
-  freely distributed in machine-readable form accessible by the widest
-  array of equipment including outdated equipment. Many small donations
-  ($1 to $5,000) are particularly important to maintaining tax exempt
-  status with the IRS. The Foundation is committed to complying with the laws regulating
-  charities and charitable donations in all 50 states of the United
-  States. Compliance requirements are not uniform and it takes a
-  considerable effort, much paperwork and many fees to meet and keep up
-  with these requirements. We do not solicit donations in locations
-  where we have not received written confirmation of compliance. To SEND
-  DONATIONS or determine the status of compliance for any particular state
-  visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
-  have not met the solicitation requirements, we know of no prohibition
-  against accepting unsolicited donations from donors in such states who
-  approach us with offers to donate. International donations are gratefully accepted, but we cannot make
-  any statements concerning tax treatment of donations received from
-  outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
-  methods and addresses. Donations are accepted in a number of other
-  ways including checks, online payments and credit card donations. To
-  donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
-  Gutenberg™ concept of a library of electronic works that could be
-  freely shared with anyone. For forty years, he produced and
-  distributed Project Gutenberg™ eBooks with only a loose network of
-  volunteer support. Project Gutenberg™ eBooks are often created from several printed
-  editions, all of which are confirmed as not protected by copyright in
-  the U. S. unless a copyright notice is included. Thus, we do not
-  necessarily keep eBooks in compliance with any particular paper
-  edition. Most people start at our website which has the main PG search
-  facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
-  including how to make donations to the Project Gutenberg Literary
-  Archive Foundation, how to help produce our new eBooks, and how to
-  subscribe to our email newsletter to hear about new eBooks.

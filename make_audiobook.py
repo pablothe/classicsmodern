@@ -107,17 +107,6 @@ class AudiobookMaker:
             print(f"  Cover generation error: {e}")
             return None
 
-    def _generate_chapter_metadata(self, audio_dir: Path, playlist_path: str) -> bool:
-        """Generate chapter metadata JSON for web player navigation."""
-        try:
-            from lib.audio.chapter_metadata import generate_chapter_metadata
-            generate_chapter_metadata(Path(playlist_path))
-            print("  Chapter metadata generated")
-            return True
-        except Exception as e:
-            print(f"  Chapter metadata generation error: {e}")
-            return False
-
     def _register_with_server(self, audio_dir: Path, cover_path: Optional[Path]):
         """Register audiobook with local server for web playback."""
         print("\nRegistering with audiobook server...")
@@ -253,11 +242,6 @@ class AudiobookMaker:
                 print(f"   Output: {result['output_directory']}")
                 print(f"   Chapters: {result['chapters']}")
                 print(f"   Format: {result['format'].upper()}")
-
-                if result['chapters'] > 0:
-                    print(f"\n  Generating chapter metadata for web player...")
-                    audio_dir = Path(result['output_directory'])
-                    self._generate_chapter_metadata(audio_dir, result['playlist'])
 
             else:
                 print("  Audio already generated, skipping...\n")

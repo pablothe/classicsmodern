@@ -101,13 +101,15 @@ def pipeline_handler(job: Dict, progress_callback: Callable) -> Dict:
     import uuid
     internal_job_id = str(uuid.uuid4())
 
-    # Create pipeline job state
+    # Create pipeline job state (without JSON file persistence —
+    # the unified queue handles persistence via SQLite)
     pipeline_job = JobState(
         job_id=internal_job_id,
         book_id=book_id,
         source_file=source_file,
         config=config
     )
+    pipeline_job.persist_to_json = False
 
     # Attach progress adapter
     adapter = ProgressAdapter(job, progress_callback)

@@ -59,37 +59,15 @@ def check_book_health(book_dir: Path) -> Dict:
     playlists.sort(key=lambda p: (0 if 'audiobook' in p.name else 1, p.name))
     has_playlist = len(playlists) > 0
 
-    # 4. Chapter metadata — auto-recoverable
-    has_chapter_meta = (
-        (book_dir / "metadata.json").exists()
-        or len(list(book_dir.glob("*_chapter_data.json"))) > 0
-    )
-    if not has_chapter_meta and has_playlist:
-        # AUTO-RECOVER: generate chapter metadata from playlist
-        try:
-            from lib.audio.chapter_metadata import generate_chapter_metadata, save_chapter_metadata
-            metadata = generate_chapter_metadata(playlists[0])
-            save_chapter_metadata(metadata, book_dir / "metadata.json")
-            recovered.append("generated_chapter_metadata")
-            has_chapter_meta = True
-        except Exception as e:
-            issues.append(f"chapter_metadata_recovery_failed:{e}")
-    elif not has_chapter_meta and has_audio:
-        issues.append("missing_chapter_metadata_no_playlist")
+    # 4. Book manifest (single source of truth for chapter data)
+    has_chapter_meta = (book_dir / "book_manifest.json").exists()
+    if not has_chapter_meta:
+        issues.append("missing_book_manifest")
 
     # 5. Cover image
-    cover_locations = [
-        book_dir / "cover.png",
-        *[d / "cover.png" for d in audio_dirs],
-    ]
-    has_cover = any(c.exists() for c in cover_locations)
+    has_cover = (book_dir / "cover.png").exists()
     if not has_cover and has_audio:
         issues.append("missing_cover")
-
-    # Clean stale marker files from old auto-generation
-    marker = book_dir / ".cover_generating"
-    if marker.exists():
-        marker.unlink(missing_ok=True)
 
     return {
         "book_id": book_id,

@@ -17,13 +17,7 @@ from typing import List, Dict, Optional, Tuple
 
 def find_source_text(book_dir: Path) -> Optional[Path]:
     """
-    Find the best source text file for a book.
-
-    Priority order:
-    1. book.md (new standard - single source of truth)
-    2. *_cleaned.md (legacy)
-    3. *_original.md (legacy)
-    4. *.md (any markdown file)
+    Find the source text file for a book.
 
     Args:
         book_dir: Path to book directory
@@ -34,35 +28,9 @@ def find_source_text(book_dir: Path) -> Optional[Path]:
     if not book_dir.exists():
         return None
 
-    # NEW STANDARD: book.md is the single source of truth
     book_md = book_dir / 'book.md'
     if book_md.exists():
         return book_md
-
-    # LEGACY: Try cleaned files
-    cleaned_files = list(book_dir.glob("*_cleaned.md"))
-    if cleaned_files:
-        # Prefer shorter names (more likely to be the main book)
-        return min(cleaned_files, key=lambda p: len(p.name))
-
-    # LEGACY: Try original files
-    original_files = list(book_dir.glob("*_original.md"))
-    if original_files:
-        return min(original_files, key=lambda p: len(p.name))
-
-    # LEGACY: Try any markdown file
-    md_files = list(book_dir.glob("*.md"))
-    if md_files:
-        # Exclude chunk files and translation files
-        main_files = [
-            f for f in md_files
-            if 'chunk' not in f.name.lower()
-            and not f.name.startswith('_')
-            and not f.parent.name == 'translations'  # Skip translations subdir
-            and not f.parent.name == 'summaries'      # Skip summaries subdir
-        ]
-        if main_files:
-            return min(main_files, key=lambda p: len(p.name))
 
     return None
 
@@ -79,10 +47,9 @@ def discover_text_tracks(book_dir: Path, book_language: Optional[str] = None) ->
     """
     Discover all available text language tracks for a book.
 
-    Combines three discovery sources (deduplicated by resolved file path):
-    1. Original source file from find_source_text()
-    2. metadata.json translations dict
-    3. Filename pattern scan for *_{Language}_{timestamp}.md and translations/*.md
+    Sources:
+    1. Original source file (book.md)
+    2. Filename pattern scan for *_{Language}_{timestamp}.md and translations/*.md
 
     Args:
         book_dir: Path to book directory
@@ -95,39 +62,8 @@ def discover_text_tracks(book_dir: Path, book_language: Optional[str] = None) ->
         return []
 
     tracks = []
-    seen_paths = set()  # Deduplicate by resolved file path
-
-    # Try to detect original language from Gutenberg metadata or metadata.json
+    seen_paths = set()
     original_language = book_language
-    # Check metadata.json language field
-    metadata_file = book_dir / 'metadata.json'
-    if not original_language and metadata_file.exists():
-        try:
-            with open(metadata_file, 'r', encoding='utf-8') as f:
-                meta = json.load(f)
-            if meta.get('language'):
-                original_language = meta['language']
-        except (json.JSONDecodeError, IOError):
-            pass
-    # Gutenberg metadata is most authoritative
-    gutenberg_meta = book_dir / 'gutenberg_metadata.json'
-    if gutenberg_meta.exists():
-        try:
-            with open(gutenberg_meta, 'r', encoding='utf-8') as f:
-                gdata = json.load(f)
-            lang_code = gdata.get('language', '')
-            GUTENBERG_LANG_MAP = {
-                'en': 'English', 'fr': 'French', 'de': 'German', 'es': 'Spanish',
-                'it': 'Italian', 'pt': 'Portuguese', 'la': 'Latin', 'el': 'Greek',
-                'ru': 'Russian', 'nl': 'Dutch', 'zh': 'Chinese', 'ja': 'Japanese',
-                'fi': 'Finnish', 'hu': 'Hungarian', 'da': 'Danish', 'sv': 'Swedish',
-                'no': 'Norwegian', 'pl': 'Polish', 'cs': 'Czech', 'ca': 'Catalan',
-                'eo': 'Esperanto',
-            }
-            if lang_code in GUTENBERG_LANG_MAP:
-                original_language = GUTENBERG_LANG_MAP[lang_code]
-        except (json.JSONDecodeError, IOError):
-            pass
 
     # --- Source 1: Original source text ---
     source_path = find_source_text(book_dir)
@@ -142,44 +78,17 @@ def discover_text_tracks(book_dir: Path, book_language: Optional[str] = None) ->
         })
         seen_paths.add(source_path.resolve())
 
-    # --- Source 2: metadata.json translations dict ---
-    metadata_file = book_dir / 'metadata.json'
-    if metadata_file.exists():
-        try:
-            with open(metadata_file, 'r', encoding='utf-8') as f:
-                metadata = json.load(f)
-            for lang_key, rel_path in metadata.get('translations', {}).items():
-                full_path = book_dir / rel_path
-                if full_path.exists() and full_path.resolve() not in seen_paths:
-                    language = _normalize_language_name(lang_key)
-                    tracks.append({
-                        'track_id': lang_key,
-                        'language': language,
-                        'label': language,
-                        'file_path': rel_path,
-                        'is_original': False,
-                    })
-                    seen_paths.add(full_path.resolve())
-        except (json.JSONDecodeError, IOError):
-            pass
-
-    # --- Source 3: Filename pattern scan ---
-    # Pattern: {name}_{Language}_{YYYYMMDD}_{HHMMSS}.md (e.g., source_Modern_English_20260223_124443.md)
+    # --- Source 2: Filename pattern scan ---
     lang_timestamp_pattern = re.compile(
         r'^.+?_([A-Z][a-z]+(?:_[A-Z][a-z]+)*)_(\d{8}_\d{6})\.md$'
     )
 
-    skip_suffixes = ('.bak', '.backup')
     skip_substrings = ('manifest', 'checkpoint', 'chapter_data', 'state')
 
-    # Scan book root directory
     for md_file in sorted(book_dir.glob('*.md')):
         if md_file.resolve() in seen_paths:
             continue
         name = md_file.name
-        # Skip non-translation files
-        if any(name.endswith(s) for s in skip_suffixes):
-            continue
         if any(s in name.lower() for s in skip_substrings):
             continue
 
@@ -216,7 +125,6 @@ def discover_text_tracks(book_dir: Path, book_language: Optional[str] = None) ->
             seen_paths.add(md_file.resolve())
 
     # Deduplicate non-original tracks by language (keep latest per language)
-    # The original track is always kept regardless
     original_tracks = [t for t in tracks if t.get('is_original')]
     non_original_tracks = [t for t in tracks if not t.get('is_original')]
 
@@ -227,7 +135,7 @@ def discover_text_tracks(book_dir: Path, book_language: Optional[str] = None) ->
 
     deduped = list(original_tracks)
     for lang, group in language_groups.items():
-        deduped.append(group[-1])  # Keep the latest by sorted order
+        deduped.append(group[-1])
 
     return deduped
 
@@ -261,7 +169,10 @@ def detect_chapter_markers(text: str) -> List[Dict]:
     current_pos = 0
     for line_num, line in enumerate(lines):
         line = line.strip()
+        # Strip "end chapter" artifacts from Gutenberg HTML conversion
+        line = re.sub(r'^end chapter', '', line, flags=re.IGNORECASE).strip()
 
+        matched = False
         for pattern in patterns:
             match = re.match(pattern, line, re.IGNORECASE)
             if match:
@@ -285,7 +196,36 @@ def detect_chapter_markers(text: str) -> List[Dict]:
                     'start_line': line_num,
                     'start_pos': start_pos
                 })
+                matched = True
                 break
+
+        # Handle mid-line ## headers (e.g., TOC text followed by ## Chapter I.)
+        if not matched:
+            mid_match = re.search(r'(?<![#\[])##\s+(?:CHAPTER|Chapter)', line)
+            if mid_match:
+                rest = line[mid_match.start():]
+                for pattern in patterns:
+                    match = re.match(pattern, rest, re.IGNORECASE)
+                    if match:
+                        chapter_num = match.group(1)
+                        chapter_title = match.group(2).strip() if len(match.groups()) > 1 else ""
+
+                        if chapter_num.isdigit():
+                            num = int(chapter_num)
+                        else:
+                            num = roman_to_int(chapter_num)
+
+                        text_before = '\n'.join(lines[:line_num])
+                        start_pos = len(text_before) + mid_match.start()
+
+                        chapters.append({
+                            'number': num,
+                            'title': chapter_title or f"Chapter {num}",
+                            'full_title': rest,
+                            'start_line': line_num,
+                            'start_pos': start_pos
+                        })
+                        break
 
     return chapters
 

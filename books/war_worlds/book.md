@@ -1,22 +1,3 @@
-## The Project Gutenberg eBook ofThe War of the Worlds
-
-This ebook is for the use of anyone anywhere in the United States and
-most other parts of the world at no cost and with almost no restrictions
-whatsoever. You may copy it, give it away or re-use it under the terms
-of the Project Gutenberg License included with this ebook or online
-at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
-you will have to check the laws of the country where you are located
-before using this eBook. Title: The War of the Worlds
-
-Author: H. G. Wells
-
-Release date: October 1, 2004 [eBook #36]
-Most recently updated: November 27, 2021
-
-Language: English
-
-*** START OF THE PROJECT GUTENBERG EBOOK THE WAR OF THE WORLDS ***
-
 # The War of the Worlds
 
 ## by H. G. Wells
@@ -26,19 +7,20 @@ Language: English
 ‘But who shall dwell in these worlds if they be inhabited?
 . . . Are we or they Lords of the World? . . . And
 how are all things made for man?’
-KEPLER (quoted inThe Anatomy of Melancholy)
+KEPLER (quoted in*The Anatomy of Melancholy*)
 
 ## Contents
 
-[BOOK ONE.—THE COMING OF THE MARTIANS](#book01)
+[**BOOK ONE.—THE COMING OF THE MARTIANS**](#book01)
 
 [I. THE EVE OF THE WAR.](#chap01)[II. THE FALLING STAR.](#chap02)[III. ON HORSELL COMMON.](#chap03)[IV. THE CYLINDER OPENS.](#chap04)[V. THE HEAT-RAY.](#chap05)[VI. THE HEAT-RAY IN THE CHOBHAM ROAD.](#chap06)[VII. HOW I REACHED HOME.](#chap07)[VIII. FRIDAY NIGHT.](#chap08)[IX. THE FIGHTING BEGINS.](#chap09)[X. IN THE STORM.](#chap10)[XI. AT THE WINDOW.](#chap11)[XII. WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.](#chap12)[XIII. HOW I FELL IN WITH THE CURATE.](#chap13)[XIV. IN LONDON.](#chap14)[XV. WHAT HAD HAPPENED IN SURREY.](#chap15)[XVI. THE EXODUS FROM LONDON.](#chap16)[XVII. THE “THUNDER CHILD”.](#chap17)
 
-[BOOK TWO.—THE EARTH UNDER THE MARTIANS](#book02)
+[**BOOK TWO.—THE EARTH UNDER THE MARTIANS**](#book02)
 
-[I. UNDER FOOT.](#chap18)[II. WHAT WE SAW FROM THE RUINED HOUSE.](#chap19)[III. THE DAYS OF IMPRISONMENT.](#chap20)[IV. THE DEATH OF THE CURATE.](#chap21)[V. THE STILLNESS.](#chap22)[VI. THE WORK OF FIFTEEN DAYS.](#chap23)[VII. THE MAN ON PUTNEY HILL.](#chap24)[VIII. DEAD LONDON.](#chap25)[IX. WRECKAGE.](#chap26)[X. THE EPILOGUE.](#chap27)## BOOK ONETHE COMING OF THE MARTIANS
+[I. UNDER FOOT.](#chap18)[II. WHAT WE SAW FROM THE RUINED HOUSE.](#chap19)[III. THE DAYS OF IMPRISONMENT.](#chap20)[IV. THE DEATH OF THE CURATE.](#chap21)[V. THE STILLNESS.](#chap22)[VI. THE WORK OF FIFTEEN DAYS.](#chap23)[VII. THE MAN ON PUTNEY HILL.](#chap24)[VIII. DEAD LONDON.](#chap25)[IX. WRECKAGE.](#chap26)[X. THE EPILOGUE.](#chap27)
+## Chapter 1: . BOOK ONE.—THE COMING OF THE MARTIANSBOOK ONETHE COMING OF THE MARTIANS
 
-end chapter## I. THE EVE OF THE WAR.
+## Chapter 1: . THE EVE OF THE WARI. THE EVE OF THE WAR.
 
 No one would have believed in the last years of the nineteenth century that
 this world was being watched keenly and closely by intelligences greater than
@@ -122,7 +104,7 @@ getting ready.
 
 During the opposition of 1894 a great light was seen on the illuminated part of
 the disk, first at the Lick Observatory, then by Perrotin of Nice, and then by
-other observers. English readers heard of it first in the issue ofNaturedated August 2. I am inclined to think that this blaze may have
+other observers. English readers heard of it first in the issue of*Nature*dated August 2. I am inclined to think that this blaze may have
 been the casting of the huge gun, in the vast pit sunk into their planet, from
 which their shots were fired at us. Peculiar markings, as yet unexplained, were
 seen near the site of that outbreak during the next two oppositions.
@@ -138,7 +120,7 @@ flame suddenly and violently squirted out of the planet, “as flaming
 gases rushed out of a gun.”
 
 A singularly appropriate phrase it proved. Yet the next day there was nothing
-of this in the papers except a little note in theDaily Telegraph, and
+of this in the papers except a little note in the*Daily Telegraph*, and
 the world went in ignorance of one of the gravest dangers that ever threatened
 the human race. I might not have heard of the eruption at all had I not met
 Ogilvy, the well-known astronomer, at Ottershaw. He was immensely excited at
@@ -210,7 +192,7 @@ planet’s atmosphere and obscured its more familiar features.
 
 Even the daily papers woke up to the disturbances at last, and popular notes
 appeared here, there, and everywhere concerning the volcanoes upon Mars. The
-seriocomic periodicalPunch, I remember, made a happy use of it in the
+seriocomic periodical*Punch*, I remember, made a happy use of it in the
 political cartoon. And, all unsuspected, those missiles the Martians had fired
 at us drew earthward, rushing now at a pace of many miles a second through the
 empty gulf of space, hour by hour and day by day, nearer and nearer. It seems
@@ -235,7 +217,7 @@ melody by the distance. My wife pointed out to me the brightness of the red,
 green, and yellow signal lights hanging in a framework against the sky. It
 seemed so safe and tranquil.
 
-end chapter## II. THE FALLING STAR.
+## Chapter 2: . THE FALLING STARII. THE FALLING STAR.
 
 Then came the night of the first falling star. It was seen early in the
 morning, rushing over Winchester eastward, a line of flame high in the
@@ -367,11 +349,11 @@ articles had prepared men’s minds for the reception of the idea.
 By eight o’clock a number of boys and unemployed men had already started
 for the common to see the “dead men from Mars.” That was the form
 the story took. I heard of it first from my newspaper boy about a quarter to
-nine when I went out to get myDaily Chronicle. I was naturally
+nine when I went out to get my*Daily Chronicle*. I was naturally
 startled, and lost no time in going out and across the Ottershaw bridge to the
 sand-pits.
 
-end chapter## III. ON HORSELL COMMON.
+## Chapter 3: . ON HORSELL COMMONIII. ON HORSELL COMMON.
 
 I found a little crowd of perhaps twenty people surrounding the huge hole in
 which the cylinder lay. I have already described the appearance of that
@@ -468,7 +450,7 @@ his house, but I was told he was expected from London by the six o’clock
 train from Waterloo; and as it was then about a quarter past five, I went home,
 had some tea, and walked up to the station to waylay him.
 
-end chapter## IV. THE CYLINDER OPENS.
+## Chapter 4: . THE CYLINDER OPENSIV. THE CYLINDER OPENS.
 
 When I returned to the common the sun was setting. Scattered groups were
 hurrying from the direction of Woking, and one or two persons were returning.
@@ -584,7 +566,7 @@ few heaps of sand. The barrow of ginger beer stood, a queer derelict, black
 against the burning sky, and in the sand-pits was a row of deserted vehicles
 with their horses feeding out of nosebags or pawing the ground.
 
-end chapter## V. THE HEAT-RAY.
+## Chapter 5: . THE HEAT-RAYV. THE HEAT-RAY.
 
 After the glimpse I had had of the Martians emerging from the cylinder in which
 they had come to the earth from their planet, a kind of fascination paralysed
@@ -606,7 +588,7 @@ approached—he was, I perceived, a neighbour of mine, though I did not
 know his name—and accosted. But it was scarcely a time for articulate
 conversation.
 
-“What uglybrutes!” he said. “Good God! What ugly
+“What ugly*brutes*!” he said. “Good God! What ugly
 brutes!” He repeated this over and over again.
 
 “Did you see a man in the pit?” I said; but he made no answer to
@@ -726,7 +708,7 @@ that presently, when I was upon the very verge of safety, this mysterious
 death—as swift as the passage of light—would leap after me from the
 pit about the cylinder, and strike me down.
 
-end chapter## VI. THE HEAT-RAY IN THE CHOBHAM ROAD.
+## Chapter 6: . THE HEAT-RAY IN THE CHOBHAM ROADVI. THE HEAT-RAY IN THE CHOBHAM ROAD.
 
 It is still a matter of wonder how the Martians are able to slay men so swiftly
 and so silently. Many think that in some way they are able to generate an
@@ -805,7 +787,7 @@ desperate struggle occurred. All that crowd did not escape; three persons at
 least, two women and a little boy, were crushed and trampled there, and left to
 die amid the terror and the darkness.
 
-end chapter## VII. HOW I REACHED HOME.
+## Chapter 7: . HOW I REACHED HOMEVII. HOW I REACHED HOME.
 
 For my own part, I remember nothing of my flight except the stress of
 blundering against trees and stumbling through the heather. All about me
@@ -866,7 +848,7 @@ There were two men and a woman at the gate.
 
 “What news from the common?” I said.
 
-“Ain’t yer justbeenthere?” asked the men.
+“Ain’t yer just*been*there?” asked the men.
 
 “People seem fair silly about the common,” said the woman over the
 gate. “What’s it all abart?”
@@ -914,7 +896,7 @@ particular I laid stress on the gravitational difficulty. On the surface of the
 earth the force of gravity is three times what it is on the surface of Mars. A
 Martian, therefore, would weigh three times more than on Mars, albeit his
 muscular strength would be the same. His own body would be a cope of lead to
-him, therefore. That, indeed, was the general opinion. BothThe Timesand theDaily Telegraph, for instance, insisted on it the next morning,
+him, therefore. That, indeed, was the general opinion. Both*The Times*and the*Daily Telegraph*, for instance, insisted on it the next morning,
 and both overlooked, just as I did, two obvious modifying influences.
 
 The atmosphere of the earth, we now know, contains far more oxygen or far less
@@ -954,7 +936,7 @@ food. “We will peck them to death tomorrow, my dear.”
 I did not know it, but that was the last civilised dinner I was to eat for very
 many strange and terrible days.
 
-end chapter## VIII. FRIDAY NIGHT.
+## Chapter 8: . FRIDAY NIGHTVIII. FRIDAY NIGHT.
 
 The most extraordinary thing to my mind, of all the strange and wonderful
 things that happened upon that Friday, was the dovetailing of the commonplace
@@ -1044,7 +1026,7 @@ fall from heaven into the pine woods to the northwest. It had a greenish
 colour, and caused a silent brightness like summer lightning. This was the
 second cylinder.
 
-end chapter## IX. THE FIGHTING BEGINS.
+## Chapter 9: . THE FIGHTING BEGINSIX. THE FIGHTING BEGINS.
 
 Saturday lives in my memory as a day of suspense. It was a day of lassitude
 too, hot and close, with, I am told, a rapidly fluctuating barometer. I had
@@ -1265,7 +1247,7 @@ slashed the horse with the whip, and gave him a loose rein until Woking and
 Send lay between us and that quivering tumult. I overtook and passed the doctor
 between Woking and Send.
 
-end chapter## X. IN THE STORM.
+## Chapter 10: . IN THE STORMX. IN THE STORM.
 
 Leatherhead is about twelve miles from Maybury Hill. The scent of hay was in
 the air through the lush meadows beyond Pyrford, and the hedges on either side
@@ -1468,7 +1450,7 @@ monsters, and of the dead body smashed against the fence.
 I crouched at the foot of the staircase with my back to the wall, shivering
 violently.
 
-end chapter## XI. AT THE WINDOW.
+## Chapter 11: . AT THE WINDOWXI. AT THE WINDOW.
 
 I have already said that my storms of emotion have a trick of exhausting
 themselves. After a time I discovered that I was cold and wet, and with little
@@ -1668,7 +1650,7 @@ dawn—streamed up, whirled, broke, and vanished.
 Beyond were the pillars of fire about Chobham. They became pillars of bloodshot
 smoke at the first touch of day.
 
-end chapter## XII. WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.
+## Chapter 12: . WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTONXII. WHAT I SAW OF THE DESTRUCTION OF WEYBRIDGE AND SHEPPERTON.
 
 As the dawn grew brighter we withdrew from the window from which we had watched
 the Martians, and went very quietly downstairs.
@@ -2060,7 +2042,7 @@ through a veil of smoke, receding interminably, as it seemed to me, across a
 vast space of river and meadow. And then, very slowly, I realised that by a
 miracle I had escaped.
 
-end chapter## XIII. HOW I FELL IN WITH THE CURATE.
+## Chapter 13: . HOW I FELL IN WITH THE CURATEXIII. HOW I FELL IN WITH THE CURATE.
 
 After getting this sudden lesson in the power of terrestrial weapons, the
 Martians retreated to their original position upon Horsell Common; and in their
@@ -2266,7 +2248,7 @@ splendour of the sunset.
 
 “We had better follow this path,” I said, “northward.”
 
-end chapter## XIV. IN LONDON.
+## Chapter 14: . IN LONDONXIV. IN LONDON.
 
 My younger brother was in London when the Martians fell at Woking. He was a
 medical student working for an imminent examination, and he heard nothing of
@@ -2288,7 +2270,7 @@ brother went that day, were intensely interested, but there were no signs of
 any unusual excitement in the streets. The afternoon papers puffed scraps of
 news under big headlines. They had nothing to tell beyond the movements of
 troops about the common, and the burning of the pine woods between Woking and
-Weybridge, until eight. Then theSt. James’s Gazette, in an
+Weybridge, until eight. Then the*St. James’s Gazette*, in an
 extra-special edition, announced the bare fact of the interruption of
 telegraphic communication. This was thought to be due to the falling of burning
 pine trees across the line. Nothing more of the fighting was known that night,
@@ -2334,8 +2316,8 @@ useless against their armour; the field guns have been disabled by them. Flying
 hussars have been galloping into Chertsey. The Martians appear to be moving
 slowly towards Chertsey or Windsor. Great anxiety prevails in West Surrey, and
 earthworks are being thrown up to check the advance Londonward.” That was
-how theSunday Sunput it, and a clever and remarkably prompt
-“handbook” article in theRefereecompared the affair to a
+how the*Sunday Sun*put it, and a clever and remarkably prompt
+“handbook” article in the*Referee*compared the affair to a
 menagerie suddenly let loose in a village.
 
 No one in London knew positively of the nature of the armoured Martians, and
@@ -2351,7 +2333,7 @@ pouring along the roads Londonward, and that was all.
 
 My brother went to church at the Foundling Hospital in the morning, still in
 ignorance of what had happened on the previous night. There he heard allusions
-made to the invasion, and a special prayer for peace. Coming out, he bought aReferee. He became alarmed at the news in this, and went again to
+made to the invasion, and a special prayer for peace. Coming out, he bought a*Referee*. He became alarmed at the news in this, and went again to
 Waterloo station to find out if communication were restored. The omnibuses,
 carriages, cyclists, and innumerable people walking in their best clothes
 seemed scarcely affected by the strange intelligence that the newsvendors were
@@ -2618,8 +2600,8 @@ London, destroying everything on the way. It is impossible to stop them. There
 is no safety from the Black Smoke but in instant flight.”
 
 That was all, but it was enough. The whole population of the great six-million
-city was stirring, slipping, running; presently it would be pouringen
-massenorthward.
+city was stirring, slipping, running; presently it would be pouring*en
+masse*northward.
 
 “Black Smoke!” the voices cried. “Fire!”
 
@@ -2637,7 +2619,7 @@ As my brother began to realise the import of all these things, he turned
 hastily to his own room, put all his available money—some ten pounds
 altogether—into his pockets, and went out again into the streets.
 
-end chapter## XV. WHAT HAD HAPPENED IN SURREY.
+## Chapter 15: . WHAT HAD HAPPENED IN SURREYXV. WHAT HAD HAPPENED IN SURREY.
 
 It was while the curate had sat and talked so wildly to me under the hedge in
 the flat meadows near Halliford, and while my brother was watching the
@@ -2900,7 +2882,7 @@ Before dawn the black vapour was pouring through the streets of Richmond, and
 the disintegrating organism of government was, with a last expiring effort,
 rousing the population of London to the necessity of flight.
 
-end chapter## XVI. THE EXODUS FROM LONDON.
+## Chapter 16: . THE EXODUS FROM LONDONXVI. THE EXODUS FROM LONDON.
 
 So you understand the roaring wave of fear that swept through the greatest city
 in the world just as Monday was dawning—the stream of flight rising
@@ -2930,7 +2912,7 @@ Ealing, and surrounded a little island of survivors on Castle Hill, alive, but
 unable to escape.
 
 After a fruitless struggle to get aboard a North-Western train at Chalk
-Farm—the engines of the trains that had loaded in the goods yard thereploughedthrough shrieking people, and a dozen stalwart men fought to
+Farm—the engines of the trains that had loaded in the goods yard there*ploughed*through shrieking people, and a dozen stalwart men fought to
 keep the crowd from crushing the driver against his furnace—my brother
 emerged upon the Chalk Farm road, dodged across through a hurrying swarm of
 vehicles, and had the luck to be foremost in the sack of a cycle shop. The
@@ -3347,7 +3329,7 @@ And in the evening many people came hurrying along the road nearby their
 stopping place, fleeing from unknown dangers before them, and going in the
 direction from which my brother had come.
 
-end chapter## XVII. THE “THUNDER CHILD”.
+## Chapter 17: . THE “THUNDER CHILD”XVII. THE “THUNDER CHILD”.
 
 Had the Martians aimed only at destruction, they might on Monday have
 annihilated the entire population of London, as it spread itself slowly through
@@ -3370,7 +3352,7 @@ It was the beginning of the rout of civilisation, of the massacre of mankind.
 
 Directly below him the balloonist would have seen the network of streets far
 and wide, houses, churches, squares, crescents, gardens—already
-derelict—spread out like a huge map, and in the southwardblotted.
+derelict—spread out like a huge map, and in the southward*blotted*.
 Over Ealing, Richmond, Wimbledon, it would have seemed as if some monstrous pen
 had flung ink upon the chart. Steadily, incessantly, each black splash grew and
 spread, shooting out ramifications this way and that, now banking itself
@@ -3468,7 +3450,7 @@ boats chaffering with the people on the beach, a swarm which also extended up
 the Blackwater almost to Maldon.
 
 About a couple of miles out lay an ironclad, very low in the water, almost, to
-my brother’s perception, like a water-logged ship. This was the ramThunder Child. It was the only warship in sight, but far away to the
+my brother’s perception, like a water-logged ship. This was the ram*Thunder Child*. It was the only warship in sight, but far away to the
 right over the smooth surface of the sea—for that day there was a dead
 calm—lay a serpent of black smoke to mark the next ironclads of the
 Channel Fleet, which hovered in an extended line, steam up and ready for
@@ -3551,7 +3533,7 @@ sucking her deck down almost to the waterline.
 A douche of spray blinded my brother for a moment. When his eyes were clear
 again he saw the monster had passed and was rushing landward. Big iron
 upperworks rose out of this headlong structure, and from that twin funnels
-projected and spat a smoking blast shot with fire. It was the torpedo ram,Thunder Child, steaming headlong, coming to the rescue of the threatened
+projected and spat a smoking blast shot with fire. It was the torpedo ram,*Thunder Child*, steaming headlong, coming to the rescue of the threatened
 shipping.
 
 Keeping his footing on the heaving deck by clutching the bulwarks, my brother
@@ -3561,7 +3543,7 @@ supports were almost entirely submerged. Thus sunken, and seen in remote
 perspective, they appeared far less formidable than the huge iron bulk in whose
 wake the steamer was pitching so helplessly. It would seem they were regarding
 this new antagonist with astonishment. To their intelligence, it may be, the
-giant was even such another as themselves. TheThunder Childfired no
+giant was even such another as themselves. The*Thunder Child*fired no
 gun, but simply drove full speed towards them. It was probably her not firing
 that enabled her to get so near the enemy as she did. They did not know what to
 make of her. One shell, and they would have sent her to the bottom forthwith
@@ -3586,7 +3568,7 @@ ship’s side like a white-hot iron rod through paper.
 
 A flicker of flame went up through the rising steam, and then the Martian
 reeled and staggered. In another moment he was cut down, and a great body of
-water and steam shot high in the air. The guns of theThunder Childsounded through the reek, going off one after the other, and one shot splashed
+water and steam shot high in the air. The guns of the*Thunder Child*sounded through the reek, going off one after the other, and one shot splashed
 the water high close by the steamer, ricocheted towards the other flying ships
 to the north, and smashed a smack to matchwood.
 
@@ -3615,8 +3597,8 @@ multitude of ships and boats that was driving out to sea.
 The steam hung upon the water for many minutes, hiding the third Martian and
 the coast altogether. And all this time the boat was paddling steadily out to
 sea and away from the fight; and when at last the confusion cleared, the
-drifting bank of black vapour intervened, and nothing of theThunder
-Childcould be made out, nor could the third Martian be seen. But the
+drifting bank of black vapour intervened, and nothing of the*Thunder
+Child*could be made out, nor could the third Martian be seen. But the
 ironclads to seaward were now quite close and standing in towards shore past
 the steamboat.
 
@@ -3645,9 +3627,9 @@ very large, that swept round in a vast curve, grew smaller, sank slowly, and
 vanished again into the grey mystery of the night. And as it flew it rained
 down darkness upon the land.
 
-end chapter## BOOK TWOTHE EARTH UNDER THE MARTIANS.
+## Chapter 19: . BOOK TWO.—THE EARTH UNDER THE MARTIANSBOOK TWOTHE EARTH UNDER THE MARTIANS.
 
-end chapter## I. UNDER FOOT.
+## Chapter 1: . UNDER FOOTI. UNDER FOOT.
 
 In the first book I have wandered so much from my own adventures to tell of the
 experiences of my brother that all through the last two chapters I and the
@@ -3822,7 +3804,7 @@ At last I answered him. I sat up.
 
 “Don’t move,” he said. “The floor is covered with
 smashed crockery from the dresser. You can’t possibly move without making
-a noise, and I fancytheyare outside.”
+a noise, and I fancy*they*are outside.”
 
 We both sat quite silent, so that we could scarcely hear each other breathing.
 Everything seemed deadly still, but once something near us, some plaster or
@@ -3894,7 +3876,7 @@ to seek food, and felt my way towards the pantry. He made me no answer, but so
 soon as I began eating the faint noise I made stirred him up and I heard him
 crawling after me.
 
-end chapter## II. WHAT WE SAW FROM THE RUINED HOUSE.
+## Chapter 2: . WHAT WE SAW FROM THE RUINED HOUSEII. WHAT WE SAW FROM THE RUINED HOUSE.
 
 After eating we crept back to the scullery, and there I must have dozed again,
 for when presently I looked round I was alone. The thudding vibration continued
@@ -3993,7 +3975,7 @@ to speak of it—was the single tight tympanic surface, since known to be
 anatomically an ear, though it must have been almost useless in our dense air.
 In a group round the mouth were sixteen slender, almost whiplike tentacles,
 arranged in two bunches of eight each. These bunches have since been named
-rather aptly, by that distinguished anatomist, Professor Howes, thehands. Even as I saw these Martians for the first time they seemed to be
+rather aptly, by that distinguished anatomist, Professor Howes, the*hands*. Even as I saw these Martians for the first time they seemed to be
 endeavouring to raise themselves on these hands, but of course, with the
 increased weight of terrestrial conditions, this was impossible. There is
 reason to suppose that on Mars they may have progressed upon them with some
@@ -4010,7 +3992,7 @@ And this was the sum of the Martian organs. Strange as it may seem to a human
 being, all the complex apparatus of digestion, which makes up the bulk of our
 bodies, did not exist in the Martians. They were heads—merely heads.
 Entrails they had none. They did not eat, much less digest. Instead, they took
-the fresh, living blood of other creatures, andinjectedit into their
+the fresh, living blood of other creatures, and*injected*it into their
 own veins. I have myself seen this being done, as I shall mention in its place.
 But, squeamish as I may seem, I cannot bring myself to describe what I could
 not endure even to continue watching. Let it suffice to say, blood obtained
@@ -4058,7 +4040,7 @@ In the next place, wonderful as it seems in a sexual world, the Martians were
 absolutely without sex, and therefore without any of the tumultuous emotions
 that arise from that difference among men. A young Martian, there can now be no
 dispute, was really born upon earth during the war, and it was found attached
-to its parent, partiallybuddedoff, just as young lilybulbs bud off, or
+to its parent, partially*budded*off, just as young lilybulbs bud off, or
 like the young animals in the fresh-water polyp.
 
 In man, in all the higher terrestrial animals, such a method of increase has
@@ -4071,8 +4053,8 @@ reverse has apparently been the case.
 It is worthy of remark that a certain speculative writer of quasi-scientific
 repute, writing long before the Martian invasion, did forecast for man a final
 structure not unlike the actual Martian condition. His prophecy, I remember,
-appeared in November or December, 1893, in a long-defunct publication, thePall Mall Budget, and I recall a caricature of it in a pre-Martian
-periodical calledPunch. He pointed out—writing in a foolish,
+appeared in November or December, 1893, in a long-defunct publication, the*Pall Mall Budget*, and I recall a caricature of it in a pre-Martian
+periodical called*Punch*. He pointed out—writing in a foolish,
 facetious tone—that the perfection of mechanical appliances must
 ultimately supersede limbs; the perfection of chemical devices, digestion; that
 such organs as hair, external nose, teeth, ears, and chin were no longer
@@ -4147,7 +4129,7 @@ They have become practically mere brains, wearing different bodies according to
 their needs just as men wear suits of clothes and take a bicycle in a hurry or
 an umbrella in the wet. And of their appliances, perhaps nothing is more
 wonderful to a man than the curious fact that what is the dominant feature of
-almost all human devices in mechanism is absent—thewheelis
+almost all human devices in mechanism is absent—the*wheel*is
 absent; among all the things they brought to earth there is no trace or
 suggestion of their use of wheels. One would have at least expected it in
 locomotion. And in this connection it is curious to remark that even on this
@@ -4185,7 +4167,7 @@ rhythmic shocks that had kept our ruinous refuge quivering. It piped and
 whistled as it worked. So far as I could see, the thing was without a directing
 Martian at all.
 
-end chapter## III. THE DAYS OF IMPRISONMENT.
+## Chapter 3: . THE DAYS OF IMPRISONMENTIII. THE DAYS OF IMPRISONMENT.
 
 The arrival of a second fighting-machine drove us from our peephole into the
 scullery, for we feared that from his elevation the Martian might see down upon
@@ -4350,7 +4332,7 @@ listen. Then I heard quite distinctly a booming exactly like the sound of great
 guns. Six distinct reports I counted, and after a long interval six again. And
 that was all.
 
-end chapter## IV. THE DEATH OF THE CURATE.
+## Chapter 4: . THE DEATH OF THE CURATEIV. THE DEATH OF THE CURATE.
 
 It was on the sixth day of our imprisonment that I peeped for the last time,
 and presently found myself alone. Instead of keeping close to me and trying to
@@ -4510,7 +4492,7 @@ darkness, buried among coals and firewood, not daring even to crawl out for the
 drink for which I craved. It was the eleventh day before I ventured so far from
 my security.
 
-end chapter## V. THE STILLNESS.
+## Chapter 5: . THE STILLNESSV. THE STILLNESS.
 
 My first act before I went into the pantry was to fasten the door between the
 kitchen and the scullery. But the pantry was empty; every scrap of food had
@@ -4608,7 +4590,7 @@ The day seemed, by contrast with my recent confinement, dazzlingly bright, the
 sky a glowing blue. A gentle breeze kept the red weed that covered every scrap
 of unoccupied ground gently swaying. And oh! the sweetness of the air!
 
-end chapter## VI. THE WORK OF FIFTEEN DAYS.
+## Chapter 6: . THE WORK OF FIFTEEN DAYSVI. THE WORK OF FIFTEEN DAYS.
 
 For some time I stood tottering on the mound regardless of my safety. Within
 that noisome den from which I had emerged I had thought with a narrow intensity
@@ -4716,7 +4698,7 @@ accomplished in this part of the world. The Martians, I thought, had gone on
 and left the country desolated, seeking food elsewhere. Perhaps even now they
 were destroying Berlin or Paris, or it might be they had gone northward.
 
-end chapter## VII. THE MAN ON PUTNEY HILL.
+## Chapter 7: . THE MAN ON PUTNEY HILLVII. THE MAN ON PUTNEY HILL.
 
 I spent that night in the inn that stands at the top of Putney Hill, sleeping
 in a made bed for the first time since my flight to Leatherhead. I will not
@@ -4840,7 +4822,7 @@ I recognised him at the same moment.
 
 “You are the artilleryman who came into my garden.”
 
-“Good luck!” he said. “We are lucky ones! Fancyyou!” He put out a hand, and I took it. “I crawled up a
+“Good luck!” he said. “We are lucky ones! Fancy*you*!” He put out a hand, and I took it. “I crawled up a
 drain,” he said. “But they didn’t kill everyone. And after
 they went away I got off towards Walton across the fields. But——
 It’s not sixteen days altogether—and your hair is grey.” He
@@ -4877,14 +4859,14 @@ He nodded.
 
 “They will. But—— It will relieve things over here a bit. And
 besides——” He looked at me. “Aren’t you satisfied
-itisup with humanity? I am. We’re down; we’re beat.”
+it*is*up with humanity? I am. We’re down; we’re beat.”
 
 I stared. Strange as it may seem, I had not arrived at this fact—a fact
 perfectly obvious so soon as he spoke. I had still held a vague hope; rather, I
 had kept a lifelong habit of mind. He repeated his words, “We’re
 beat.” They carried absolute conviction.
 
-“It’s all over,” he said. “They’ve lostone—justone. And they’ve made their footing good and
+“It’s all over,” he said. “They’ve lost*one*—just*one*. And they’ve made their footing good and
 crippled the greatest power in the world. They’ve walked over us. The
 death of that one at Weybridge was an accident. And these are only pioneers.
 They kept on coming. These green stars—I’ve seen none these five or
@@ -4988,7 +4970,7 @@ ain’t no further use.”
 
 “I mean that men like me are going on living—for the sake of the
 breed. I tell you, I’m grim set on living. And if I’m not mistaken,
-you’ll show what insidesyou’vegot, too, before long. We
+you’ll show what insides*you’ve*got, too, before long. We
 aren’t going to be exterminated. And I don’t mean to be caught
 either, and tamed and fattened and bred like a thundering ox. Ugh! Fancy those
 brown creepers!”
@@ -5017,7 +4999,7 @@ beasts; and that’s what it’s got to be. That’s why I watched
 you. I had my doubts. You’re slender. I didn’t know that it was
 you, you see, or just how you’d been buried. All these—the sort of
 people that lived in these houses, and all those damn little clerks that used
-to live downthatway—they’d be no good. They haven’t
+to live down*that*way—they’d be no good. They haven’t
 any spirit in them—no proud dreams and no proud lusts; and a man who
 hasn’t one or the other—Lord! What is he but funk and precautions?
 They just used to skedaddle off to work—I’ve seen hundreds of
@@ -5138,7 +5120,7 @@ you smashed to smithereens at the end of the run, after a bust like that? I
 reckon the Martians’ll open their beautiful eyes! Can’t you see
 them, man? Can’t you see them hurrying, hurrying—puffing and
 blowing and hooting to their other mechanical affairs? Something out of gear in
-every case. And swish, bang, rattle, swish! Just as they are fumbling over it,swishcomes the Heat-Ray, and, behold! man has come back to his
+every case. And swish, bang, rattle, swish! Just as they are fumbling over it,*swish*comes the Heat-Ray, and, behold! man has come back to his
 own.”
 
 For a while the imaginative daring of the artilleryman, and the tone of
@@ -5282,7 +5264,7 @@ to his drink and gluttony, and to go on into London. There, it seemed to me, I
 had the best chance of learning what the Martians and my fellowmen were doing.
 I was still upon the roof when the late moon rose.
 
-end chapter## VIII. DEAD LONDON.
+## Chapter 8: . DEAD LONDONVIII. DEAD LONDON.
 
 After I had parted from the artilleryman, I went down the hill, and by the High
 Street across the bridge to Fulham. The red weed was tumultuous at that time,
@@ -5463,7 +5445,7 @@ with gigantic machines here and there within it, huge mounds of material and
 strange shelter places. And scattered about it, some in their overturned
 war-machines, some in the now rigid handling-machines, and a dozen of them
 stark and silent and laid in a row, were the
-Martians—dead!—slain by the putrefactive and disease
+Martians—*dead*!—slain by the putrefactive and disease
 bacteria against which their systems were unprepared; slain as the red weed was
 being slain; slain, after all man’s devices had failed, by the humblest
 things that God, in his wisdom, has put upon this earth.
@@ -5555,7 +5537,7 @@ towards the sky and began thanking God. In a year, thought I—in a year. .
 With overwhelming force came the thought of myself, of my wife, and the old
 life of hope and tender helpfulness that had ceased for ever.
 
-end chapter## IX. WRECKAGE.
+## Chapter 9: . WRECKAGEIX. WRECKAGE.
 
 And now comes the strangest thing in my story. Yet, perhaps, it is not
 altogether strange. I remember, clearly and coldly and vividly, all that I did
@@ -5626,7 +5608,7 @@ there I saw the red weed clambering over the buttresses of Waterloo Bridge.
 At the corner of the bridge, too, I saw one of the common contrasts of that
 grotesque time—a sheet of paper flaunting against a thicket of the red
 weed, transfixed by a stick that kept it in place. It was the placard of the
-first newspaper to resume publication—theDaily Mail. I bought a
+first newspaper to resume publication—the*Daily Mail*. I bought a
 copy for a blackened shilling I found in my pocket. Most of it was in blank,
 but the solitary compositor who did the thing had amused himself by making a
 grotesque scheme of advertisement stereo on the back page. The matter he
@@ -5693,7 +5675,7 @@ with the development of the civilising process; and the last sentence was the
 opening of a prophecy: “In about two hundred years,” I had written,
 “we may expect——” The sentence ended abruptly. I
 remembered my inability to fix my mind that morning, scarcely a month gone by,
-and how I had broken off to get myDaily Chroniclefrom the newsboy. I
+and how I had broken off to get my*Daily Chronicle*from the newsboy. I
 remembered how I went down to the garden gate as he came along, and how I had
 listened to his odd story of “Men from Mars.”
 
@@ -5716,7 +5698,7 @@ and my wife—my wife white and tearless. She gave a faint cry.
 She put her hand to her throat—swayed. I made a step forward, and caught
 her in my arms.
 
-end chapter## X. THE EPILOGUE.
+## Chapter 10: . THE EPILOGUEX. THE EPILOGUE.
 
 I cannot but regret, now that I am concluding my story, how little I am able to
 contribute to the discussion of the many debatable questions which are still
@@ -5835,255 +5817,3 @@ and silent, under the dawn of that last great day. . . .
 
 And strangest of all is it to hold my wife’s hand again, and to think
 that I have counted her, and that she has counted me, among the dead.
-
-end chapter*** END OF THE PROJECT GUTENBERG EBOOK THE WAR OF THE WORLDS ***Updated editions will replace the previous one—the old editions will
-be renamed. Creating the works from print editions not protected by U. S. copyright
-law means that no one owns a United States copyright in these works,
-so the Foundation (and you!) can copy and distribute it in the United
-States without permission and without paying copyright
-royalties. Special rules, set forth in the General Terms of Use part
-of this license, apply to copying and distributing Project
-Gutenberg™ electronic works to protect the PROJECT GUTENBERG™
-concept and trademark. Project Gutenberg is a registered trademark,
-and may not be used if you charge for an eBook, except by following
-the terms of the trademark license, including paying royalties for use
-of the Project Gutenberg trademark. If you do not charge anything for
-copies of this eBook, complying with the trademark license is very
-easy. You may use this eBook for nearly any purpose such as creation
-of derivative works, reports, performances and research. Project
-Gutenberg eBooks may be modified and printed and given away—you may
-do practically ANYTHING in the United States with eBooks not protected
-by U. S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
-
-PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
-distribution of electronic works, by using or distributing this work
-(or any other work associated in any way with the phrase “Project
-Gutenberg”), you agree to comply with all the terms of the Full
-Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1. A. By reading or using any part of this Project Gutenberg™
-electronic work, you indicate that you have read, understand, agree to
-and accept all the terms of this license and intellectual property
-(trademark/copyright) agreement. If you do not agree to abide by all
-the terms of this agreement, you must cease using and return or
-destroy all copies of Project Gutenberg™ electronic works in your
-possession. If you paid a fee for obtaining a copy of or access to a
-Project Gutenberg™ electronic work and you do not agree to be bound
-by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
-used on or associated in any way with an electronic work by people who
-agree to be bound by the terms of this agreement. There are a few
-things that you can do with most Project Gutenberg™ electronic works
-even without complying with the full terms of this agreement. See
-paragraph 1. C below. There are a lot of things you can do with Project
-Gutenberg™ electronic works if you follow the terms of this
-agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
-Foundation” or PGLAF), owns a compilation copyright in the collection
-of Project Gutenberg™ electronic works. Nearly all the individual
-works in the collection are in the public domain in the United
-States. If an individual work is unprotected by copyright law in the
-United States and you are located in the United States, we do not
-claim a right to prevent you from copying, distributing, performing,
-displaying or creating derivative works based on the work as long as
-all references to Project Gutenberg are removed. Of course, we hope
-that you will support the Project Gutenberg™ mission of promoting
-free access to electronic works by freely sharing Project Gutenberg™
-works in compliance with the terms of this agreement for keeping the
-Project Gutenberg™ name associated with the work. You can easily
-comply with the terms of this agreement by keeping this work in the
-same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
-what you can do with this work. Copyright laws in most countries are
-in a constant state of change. If you are outside the United States,
-check the laws of your country in addition to the terms of this
-agreement before downloading, copying, displaying, performing,
-distributing or creating derivative works based on this work or any
-other Project Gutenberg™ work. The Foundation makes no
-representations concerning the copyright status of any work in any
-country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
-immediate access to, the full Project Gutenberg™ License must appear
-prominently whenever any copy of a Project Gutenberg™ work (any work
-on which the phrase “Project Gutenberg” appears, or with which the
-phrase “Project Gutenberg” is associated) is accessed, displayed,
-performed, viewed, copied or distributed:This eBook is for the use of anyone anywhere in the United States and most
-    other parts of the world at no cost and with almost no restrictions
-    whatsoever. You may copy it, give it away or re-use it under the terms
-    of the Project Gutenberg License included with this eBook or online
-    at[www.gutenberg.org](https://www.gutenberg.org). If you
-    are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U. S. copyright law (does not
-contain a notice indicating that it is posted with permission of the
-copyright holder), the work can be copied and distributed to anyone in
-the United States without paying any fees or charges. If you are
-redistributing or providing access to a work with the phrase “Project
-Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1. E.1 through 1. E.7 or
-obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
-with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1. E.1 through 1. E.7 and any
-additional terms imposed by the copyright holder. Additional terms
-will be linked to the Project Gutenberg™ License for all works
-posted with the permission of the copyright holder found at the
-beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
-License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
-electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1. E.1 with
-active links or immediate access to the full terms of the Project
-Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
-compressed, marked up, nonproprietary or proprietary form, including
-any word processing or hypertext form. However, if you provide access
-to or distribute copies of a Project Gutenberg™ work in a format
-other than “Plain Vanilla ASCII” or other format used in the official
-version posted on the official Project Gutenberg™ website
-(www.gutenberg.org), you must, at no additional cost, fee or expense
-to the user, provide a copy, a means of exporting a copy, or a means
-of obtaining a copy upon request, of the work in its original “Plain
-Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
-performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
-access to or distributing Project Gutenberg™ electronic works
-provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
-        the use of Project Gutenberg™ works calculated using the method
-        you already use to calculate your applicable taxes. The fee is owed
-        to the owner of the Project Gutenberg™ trademark, but he has
-        agreed to donate royalties under this paragraph to the Project
-        Gutenberg Literary Archive Foundation. Royalty payments must be paid
-        within 60 days following each date on which you prepare (or are
-        legally required to prepare) your periodic tax returns. Royalty
-        payments should be clearly marked as such and sent to the Project
-        Gutenberg Literary Archive Foundation at the address specified in
-        Section 4, “Information about donations to the Project Gutenberg
-        Literary Archive Foundation.”
-- • You provide a full refund of any money paid by a user who notifies
-        you in writing (or by e-mail) within 30 days of receipt that s/he
-        does not agree to the terms of the full Project Gutenberg™
-        License. You must require such a user to return or destroy all
-        copies of the works possessed in a physical medium and discontinue
-        all use of and all access to other copies of Project Gutenberg™
-        works.
-- • You provide, in accordance with paragraph 1. F.3, a full refund of
-        any money paid for a work or a replacement copy, if a defect in the
-        electronic work is discovered and reported to you within 90 days of
-        receipt of the work.
-- • You comply with all other terms of this agreement for free
-        distribution of Project Gutenberg™ works.
-
-1. E.9. If you wish to charge a fee or distribute a Project
-Gutenberg™ electronic work or group of works on different terms than
-are set forth in this agreement, you must obtain permission in writing
-from the Project Gutenberg Literary Archive Foundation, the manager of
-the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
-effort to identify, do copyright research on, transcribe and proofread
-works not protected by U. S. copyright law in creating the Project
-Gutenberg™ collection. Despite these efforts, Project Gutenberg™
-electronic works, and the medium on which they may be stored, may
-contain “Defects,” such as, but not limited to, incomplete, inaccurate
-or corrupt data, transcription errors, a copyright or other
-intellectual property infringement, a defective or damaged disk or
-other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1. F.3, the Project
-Gutenberg Literary Archive Foundation, the owner of the Project
-Gutenberg™ trademark, and any other party distributing a Project
-Gutenberg™ electronic work under this agreement, disclaim all
-liability to you for damages, costs and expenses, including legal
-fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
-LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
-TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
-LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
-INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
-defect in this electronic work within 90 days of receiving it, you can
-receive a refund of the money (if any) you paid for it by sending a
-written explanation to the person you received the work from. If you
-received the work on a physical medium, you must return the medium
-with your written explanation. The person or entity that provided you
-with the defective work may elect to provide a replacement copy in
-lieu of a refund. If you received the work electronically, the person
-or entity providing it to you may choose to give you a second
-opportunity to receive the work electronically in lieu of a refund. If
-the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
-OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
-warranties or the exclusion or limitation of certain types of
-damages. If any disclaimer or limitation set forth in this agreement
-violates the law of the state applicable to this agreement, the
-agreement shall be interpreted to make the maximum disclaimer or
-limitation permitted by the applicable state law. The invalidity or
-unenforceability of any provision of this agreement shall not void the
-remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
-trademark owner, any agent or employee of the Foundation, anyone
-providing copies of Project Gutenberg™ electronic works in
-accordance with this agreement, and any volunteers associated with the
-production, promotion and distribution of Project Gutenberg™
-electronic works, harmless from all liability, costs and expenses,
-including legal fees, that arise directly or indirectly from any of
-the following which you do or cause to occur: (a) distribution of this
-or any Project Gutenberg™ work, (b) alteration, modification, or
-additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
-electronic works in formats readable by the widest variety of
-computers including obsolete, old, middle-aged and new computers. It
-exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life. Volunteers and financial support to provide volunteers with the
-assistance they need are critical to reaching Project Gutenberg™’s
-goals and ensuring that the Project Gutenberg™ collection will
-remain freely available for generations to come. In 2001, the Project
-Gutenberg Literary Archive Foundation was created to provide a secure
-and permanent future for Project Gutenberg™ and future
-generations. To learn more about the Project Gutenberg Literary
-Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
-501(c)(3) educational corporation organized under the laws of the
-state of Mississippi and granted tax exempt status by the Internal
-Revenue Service. The Foundation’s EIN or federal tax identification
-number is 64-6221541. Contributions to the Project Gutenberg Literary
-Archive Foundation are tax deductible to the full extent permitted by
-U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
-Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
-to date contact information can be found at the Foundation’s website
-and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
-Literary Archive FoundationProject Gutenberg™ depends upon and cannot survive without widespread
-public support and donations to carry out its mission of
-increasing the number of public domain and licensed works that can be
-freely distributed in machine-readable form accessible by the widest
-array of equipment including outdated equipment. Many small donations
-($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS. The Foundation is committed to complying with the laws regulating
-charities and charitable donations in all 50 states of the United
-States. Compliance requirements are not uniform and it takes a
-considerable effort, much paperwork and many fees to meet and keep up
-with these requirements. We do not solicit donations in locations
-where we have not received written confirmation of compliance. To SEND
-DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
-have not met the solicitation requirements, we know of no prohibition
-against accepting unsolicited donations from donors in such states who
-approach us with offers to donate. International donations are gratefully accepted, but we cannot make
-any statements concerning tax treatment of donations received from
-outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
-methods and addresses. Donations are accepted in a number of other
-ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
-Gutenberg™ concept of a library of electronic works that could be
-freely shared with anyone. For forty years, he produced and
-distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support. Project Gutenberg™ eBooks are often created from several printed
-editions, all of which are confirmed as not protected by copyright in
-the U. S. unless a copyright notice is included. Thus, we do not
-necessarily keep eBooks in compliance with any particular paper
-edition. Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
-including how to make donations to the Project Gutenberg Literary
-Archive Foundation, how to help produce our new eBooks, and how to
-subscribe to our email newsletter to hear about new eBooks.

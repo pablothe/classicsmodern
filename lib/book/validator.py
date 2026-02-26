@@ -548,17 +548,37 @@ def auto_fix_book(file_path: str, backup: bool = True) -> bool:
             modified = True
             print("✅ Removed Gutenberg footer")
 
-    # Fix 2: Generate TOC if missing
+    # Fix 2: Split concatenated "end chapter## CHAPTER" patterns
+    # Gutenberg HTML-to-Markdown conversion artifact where chapter headings
+    # are appended to the previous chapter's last line without a newline
+    if re.search(r'end chapter##', text, re.IGNORECASE):
+        text = re.sub(r'(end chapter)(##\s)', r'\1\n\n\2', text, flags=re.IGNORECASE)
+        modified = True
+        print("✅ Split concatenated 'end chapter##' patterns")
+
+    # Fix 3: Split any remaining text## CHAPTER concatenation
+    # e.g., "Alice's Evidence## CHAPTER I." → "Alice's Evidence\n\n## CHAPTER I."
+    if re.search(r'[^\n]##\s+CHAPTER', text):
+        text = re.sub(r'([^\n])(##\s+CHAPTER)', r'\1\n\n\2', text)
+        modified = True
+        print("✅ Split concatenated heading patterns")
+
+    # Fix 4: Generate TOC if missing (run AFTER heading fixes so detection works)
+    # Skip if text already has a Contents/TOC header
+    has_existing_toc_header = bool(re.search(
+        r'^##\s+(Table of Contents|Contents)\s*$', text, re.MULTILINE | re.IGNORECASE
+    ))
     processor = BookProcessor(verbose=False)
     bp_chapters = processor.detect_chapters(text, book_dir=Path(file_path).parent)
     chapters = [{'number': ch.number, 'marker': ch.marker} for ch in bp_chapters]
     toc = processor.detect_toc(text)
 
-    if len(chapters) > 0 and len(toc) == 0:
-        # Generate TOC
+    if len(chapters) > 0 and len(toc) == 0 and not has_existing_toc_header:
+        # Generate TOC — strip markdown header prefix from markers
         toc_lines = ["## Table of Contents\n"]
         for ch in chapters:
-            toc_lines.append(f"{ch['number']}. [{ch['marker']}](#chapter-{ch['number']})")
+            marker = re.sub(r'^#+\s*', '', ch['marker'])
+            toc_lines.append(f"{ch['number']}. [{marker}](#chapter-{ch['number']})")
         toc_lines.append("\n---\n")
 
         # Insert after title/author (first 20 lines)

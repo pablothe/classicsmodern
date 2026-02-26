@@ -1,27 +1,3 @@
-## The Project Gutenberg eBook ofWinnie-the-Pooh
-
-This ebook is for the use of anyone anywhere in the United States and
-most other parts of the world at no cost and with almost no restrictions
-whatsoever. You may copy it, give it away or re-use it under the terms
-of the Project Gutenberg License included with this ebook or online
-at[www.gutenberg.org](https://www.gutenberg.org). If you are not located in the United States,
-you will have to check the laws of the country where you are located
-before using this eBook. Title: Winnie-the-Pooh
-
-Author: A. A. Milne
-
-Illustrator: Ernest H. Shepard
-
-Release date: January 3, 2022 [eBook #67098]
-Most recently updated: December 31, 2024
-
-Language: English
-
-Original publication: Canada: McClelland & Stewart, Ltd, 1926
-
-Credits: Greg Weeks, Mary Meehan, Iona Vaughan, David T. Jones and the online Distributed Proofreaders Canada team at http://www.pgdpcanada.net
-
-*** START OF THE PROJECT GUTENBERG EBOOK WINNIE-THE-POOH ***
 ---
 
 # WINNIE-THE-POOH
@@ -30,11 +6,11 @@ Credits: Greg Weeks, Mary Meehan, Iona Vaughan, David T. Jones and the online Di
 
 ---
 
-JUVENILES
+*JUVENILES*
 
 When We Were Very Young
-"The best book of verses for children ever
-written."—A. EDWARD NEWTON inThe Atlantic Monthly.
+"*The best book of verses for children ever
+written.*"—A. EDWARD NEWTON in*The Atlantic Monthly*.
 
 Fourteen Songs from When We Were Very Young
 Words by A. A. Milne.
@@ -44,13 +20,13 @@ The King's Breakfast
 Words by A. A. Milne. Music by H. Fraser-Simson.
 Decorations by E. H. Shepard
 
-ESSAYS
+*ESSAYS*
 
 Not That It Matters
 The Sunny Side
 If I May
 
-MYSTERY STORY
+*MYSTERY STORY*
 
 The Red House Mystery
 
@@ -110,7 +86,7 @@ called after Pooh, or Pooh after Winnie. We did know once, but we have
 forgotten....
 
 I had written as far as this when Piglet looked up and said in his
-squeaky voice, "What aboutMe?" "My dear Piglet," I said, "the whole
+squeaky voice, "What about*Me*?" "My dear Piglet," I said, "the whole
 book is about you." "So it is about Pooh," he squeaked. You see what it
 is. He is jealous because he thinks Pooh is having a Grand Introduction
 all to himself. Pooh is the favourite, of course, there's no denying it,
@@ -122,7 +98,7 @@ twenty-two. Sometimes he slips out and has a good look in the ink-pot,
 and in this way he has got more education than Pooh, but Pooh doesn't
 mind. Some have brains, and some haven't, he says, and there it is.
 
-And now all the others are saying, "What aboutUs?" So perhaps the
+And now all the others are saying, "What about*Us*?" So perhaps the
 best thing to do is to stop writing Introductions and get on with the
 book.
 
@@ -168,7 +144,7 @@ I thought he was a boy?"
 
 "But you said——"
 
-"He's Winnie-ther-Pooh. Don't you know what 'ther' means?"
+"He's Winnie-ther-Pooh. Don't you know what '*ther*' means?"
 
 "Ah, yes, now I do," I said quickly; and I hope you do too, because it
 is all the explanation you are going to get.
@@ -179,13 +155,13 @@ and listen to a story. This evening——
 
 "What about a story?" said Christopher Robin.
 
-"Whatabout a story?" I said.
+"*What*about a story?" I said.
 
 "Could you very sweetly tell Winnie-the-Pooh one?"
 
 "I suppose I could," I said. "What sort of stories does he like?"
 
-"About himself. Because he'sthatsort of Bear."
+"About himself. Because he's*that*sort of Bear."
 
 "Oh, I see."
 
@@ -205,16 +181,16 @@ Sanders.
 
 ---
 
-("What does 'under the name' mean?" asked Christopher Robin.
+(*"What does 'under the name' mean?" asked Christopher Robin.*
 
-"It means he had the name over the door in gold letters, and lived
-under it."
+"*It means he had the name over the door in gold letters, and lived
+under it.*"
 
-"Winnie-the-Pooh wasn't quite sure," said Christopher Robin.
+*"Winnie-the-Pooh wasn't quite sure," said Christopher Robin.*
 
-"Now I am," said a growly voice.
+*"Now I am," said a growly voice.*
 
-"Then I will go on," said I.)
+*"Then I will go on," said I.*)
 
 One day when he was out walking, he came to an open place in the middle
 of the forest, and in the middle of this place was a large oak-tree,
@@ -231,13 +207,13 @@ First of all he said to himself: "That buzzing-noise means something.
 You don't get a buzzing-noise like that, just buzzing and buzzing,
 without its meaning something. If there's a buzzing-noise, somebody's
 making a buzzing-noise, and the only reason for making a buzzing-noise
-thatIknow of is because you're a bee."
+that*I*know of is because you're a bee."
 
 Then he thought another long time, and said: "And the only reason for
 being a bee that I know of is making honey."
 
 And then he got up, and said: "And the only reason for making honey is
-so asIcan eat it." So he began to climb the tree.
+so as*I*can eat it." So he began to climb the tree.
 
 ---
 
@@ -249,11 +225,11 @@ little song to himself. It went like this:
 Isn't it funnyHow a bear likes honey? Buzz! Buzz! Buzz! I wonder why he does? Then he climbed a little further ... and a little further ... and
 then just a little further. By that time he had thought of another song.
 
-It's a very funny thought that, if Bears were Bees,They'd build their nests at thebottomof trees. And that being so (if the Bees were Bears),We shouldn't have to climb up all these stairs. He was getting rather tired by this time, so that is why he sang a
+It's a very funny thought that, if Bears were Bees,They'd build their nests at the*bottom*of trees. And that being so (if the Bees were Bears),We shouldn't have to climb up all these stairs. He was getting rather tired by this time, so that is why he sang a
 Complaining Song. He was nearly there now, and if he just stood on that
 branch ...
 
-Crack!
+*Crack!*
 
 "Oh, help!" said Pooh, as he dropped ten feet on the branch below him.
 
@@ -264,16 +240,16 @@ Crack!
 "If only I hadn't——" he said, as he bounced twenty feet on to the next
 branch.
 
-"You see, what Imeantto do," he explained, as he turned
+"You see, what I*meant*to do," he explained, as he turned
 head-over-heels, and crashed on to another branch thirty feet below,
-"what Imeantto do——"
+"what I*meant*to do——"
 
-"Of course, itwasrather——" he admitted, as he slithered very
+"Of course, it*was*rather——" he admitted, as he slithered very
 quickly through the next six branches.
 
 "It all comes, I suppose," he decided, as he said good-bye to the last
 branch, spun round three times, and flew gracefully into a gorse-bush,
-"it all comes oflikinghoney so much. Oh, help!"
+"it all comes of*liking*honey so much. Oh, help!"
 
 He crawled out of the gorse-bush, brushed the prickles from his nose,
 and began to think again. And the first person he thought of was
@@ -283,13 +259,13 @@ Christopher Robin.
 
 ---
 
-("Was that me?" said Christopher Robin in an awed voice, hardly daring
-to believe it.
+(*"Was that me?" said Christopher Robin in an awed voice, hardly daring
+to believe it.*
 
-"That was you."
+"*That was you.*"
 
-Christopher Robin said nothing, but his eyes got larger and larger, and
-his face got pinker and pinker.)
+*Christopher Robin said nothing, but his eyes got larger and larger, and
+his face got pinker and pinker.*)
 
 So Winnie-the-Pooh went round to his friend Christopher Robin, who lived
 behind a green door in another part of the forest.
@@ -300,7 +276,7 @@ behind a green door in another part of the forest.
 
 "Good morning, Christopher Robin," he said.
 
-"Good morning, Winnie-ther-Pooh," said you.
+"Good morning, Winnie-*ther*-Pooh," said you.
 
 "I wonder if you've got such a thing as a balloon about you?"
 
@@ -313,17 +289,17 @@ thinking of balloons, and wondering."
 "What do you want a balloon for?" you said.
 
 Winnie-the-Pooh looked round to see that nobody was listening, put his
-paw to his mouth, and said in a deep whisper: "Honey!"
+paw to his mouth, and said in a deep whisper: "*Honey!*"
 
 "But you don't get honey with balloons!"
 
-"Ido," said Pooh.
+"*I*do," said Pooh.
 
 Well, it just happened that you had been to a party the day before at
 the house of your friend Piglet, and you had balloons at the party. You
 had had a big green balloon; and one of Rabbit's relations had had a big
 blue one, and had left it behind, being really too young to go to a
-party at all; and so you had brought the green oneandthe blue one
+party at all; and so you had brought the green one*and*the blue one
 home with you.
 
 "Which one would you like?" you asked Pooh.
@@ -337,7 +313,7 @@ not notice you, and, if you have a blue balloon, they might think you
 were only part of the sky, and not notice you, and the question is:
 Which is most likely?"
 
-"Wouldn't they noticeyouunderneath the balloon?" you asked.
+"Wouldn't they notice*you*underneath the balloon?" you asked.
 
 "They might or they might not," said Winnie-the-Pooh. "You never can
 tell with bees." He thought for a moment and said: "I shall try to look
@@ -392,11 +368,11 @@ After a little while he called down to you.
 
 "Hallo!"
 
-"I think the beessuspectsomething!"
+"I think the bees*suspect*something!"
 
 "What sort of thing?"
 
-"I don't know. But something tells me that they'resuspicious!"
+"I don't know. But something tells me that they're*suspicious*!"
 
 ---
 
@@ -448,7 +424,7 @@ Cloud Song, such as a cloud might sing.... Go!"
 So, while you walked up and down and wondered if it would rain,
 Winnie-the-Pooh sang this song:
 
-How sweet to be a CloudFloating in the Blue! Every little cloudAlwayssings aloud."How sweet to be a CloudFloating in the Blue!"It makes him very proudTo be a little cloud. The bees were still buzzing as suspiciously as ever. Some of them,
+How sweet to be a CloudFloating in the Blue! Every little cloud*Always*sings aloud."How sweet to be a CloudFloating in the Blue!"It makes him very proudTo be a little cloud. The bees were still buzzing as suspiciously as ever. Some of them,
 indeed, left their nests and flew all round the cloud as it began the
 second verse of this song, and one bee sat down on the nose of the cloud
 for a moment, and then got up again.
@@ -457,12 +433,12 @@ for a moment, and then got up again.
 
 ---
 
-"Christopher—ow!—Robin," called out the cloud.
+"Christopher—*ow!*—Robin," called out the cloud.
 
 "Yes?"
 
 "I have just been thinking, and I have come to a very important
-decision. These are the wrong sort of bees."
+decision.*These are the wrong sort of bees.*"
 
 "Are they?"
 
@@ -480,7 +456,7 @@ of honey, shouldn't you?"
 "How?" asked you.
 
 Winnie-the-Pooh hadn't thought about this. If he let go of the string,
-he would fall—bump—and he didn't like the idea of that. So he
+he would fall—*bump*—and he didn't like the idea of that. So he
 thought for a long time, and then he said:
 
 "Christopher Robin, you must shoot the balloon with your gun. Have you
@@ -489,17 +465,17 @@ got your gun?"
 "Of course I have," you said. "But if I do that, it will spoil the
 balloon," you said.
 
-"But if youdon't," said Pooh, "I shall have to let go, and that would
-spoilme."
+"But if you*don't*," said Pooh, "I shall have to let go, and that would
+spoil*me*."
 
 When he put it like this, you saw how it was, and you aimed very
 carefully at the balloon, and fired.
 
-"Ow!" said Pooh.
+"*Ow!*" said Pooh.
 
 "Did I miss?" you asked.
 
-"You didn't exactlymiss," said Pooh, "but you missed theballoon."
+"You didn't exactly*miss*," said Pooh, "but you missed the*balloon*."
 
 "I'm so sorry," you said, and you fired again, and this time you hit the
 balloon, and the air came slowly out, and Winnie-the-Pooh floated down
@@ -508,7 +484,7 @@ to the ground.
 But his arms were so stiff from holding on to the string of the balloon
 all that time that they stayed up straight in the air for more than a
 week, and whenever a fly came and settled on his nose he had to blow it
-off. And I think—but I am not sure—thatthatis why he was always
+off. And I think—but I am not sure—that*that*is why he was always
 called Pooh.
 
 ---
@@ -531,7 +507,7 @@ called Pooh.
 
 "No."
 
-"Pooh couldn't, because he hasn't any brain. DidIcatch it?"
+"Pooh couldn't, because he hasn't any brain. Did*I*catch it?"
 
 "Well, that comes into the story."
 
@@ -541,7 +517,7 @@ Christopher Robin nodded.
 likes having it told to him again. Because then it's a real story and
 not just a remembering."
 
-"That's just howIfeel," I said.
+"That's just how*I*feel," I said.
 
 Christopher Robin gave a deep sigh, picked his Bear up by the leg, and
 walked off to the door, trailing Pooh behind him. At the door he turned
@@ -553,8 +529,8 @@ and said, "Coming to see me have my bath?"
 
 "Not a bit."
 
-He nodded and went out, and in a moment I heard Winnie-the-Pooh—bump,
-bump, bump—going up the stairs behind him.
+He nodded and went out, and in a moment I heard Winnie-the-Pooh—*bump,
+bump, bump*—going up the stairs behind him.
 
 ---
 
@@ -569,14 +545,14 @@ bump, bump—going up the stairs behind him.
 Edward Bear, known to his friends as Winnie-the-Pooh, or Pooh for
 short, was walking through the forest one day, humming proudly to
 himself. He had made up a little hum that very morning, as he was doing
-his Stoutness Exercises in front of the glass:Tra-la-la, tra-la-la,
-as he stretched up as high as he could go, and thenTra-la-la,
-tra-la—oh, help!—la, as he tried to reach his toes. After breakfast
+his Stoutness Exercises in front of the glass:*Tra-la-la, tra-la-la*,
+as he stretched up as high as he could go, and then*Tra-la-la,
+tra-la—oh, help!—la*, as he tried to reach his toes. After breakfast
 he had said it over and over to himself until he had learnt it off by
 heart, and now he was humming it right through, properly. It went like
 this:
 
-Tra-la-la, tra-la-la,Tra-la-la, tra-la-la,Rum-tum-tiddle-um-tum. Tiddle-iddle, tiddle-iddle,Tiddle-iddle, tiddle-iddle,Rum-tum-tum-tiddle-um.
+*Tra-la-la, tra-la-la,**Tra-la-la, tra-la-la,**Rum-tum-tiddle-um-tum.**Tiddle-iddle, tiddle-iddle,**Tiddle-iddle, tiddle-iddle,**Rum-tum-tum-tiddle-um.*
 ---
 
 ---
@@ -586,10 +562,10 @@ wondering what everybody else was doing, and what it felt like, being
 somebody else, when suddenly he came to a sandy bank, and in the bank
 was a large hole.
 
-"Aha!" said Pooh. (Rum-tum-tiddle-um-tum.) "If I know anything about
+"Aha!" said Pooh. (*Rum-tum-tiddle-um-tum.*) "If I know anything about
 anything, that hole means Rabbit," he said, "and Rabbit means Company,"
 he said, "and Company means Food and Listening-to-Me-Humming and such
-like. Rum-tum-tum-tiddle-um."
+like.*Rum-tum-tum-tiddle-um.*"
 
 So he bent down, put his head into the hole, and called out:
 
@@ -609,7 +585,7 @@ you quite well the first time."
 
 Winnie-the-Pooh took his head out of the hole, and thought for a little,
 and he thought to himself, "There must be somebody there, because
-somebody must havesaid'Nobody.'" So he put his head back in the
+somebody must have*said*'Nobody.'" So he put his head back in the
 hole, and said:
 
 "Hallo, Rabbit, isn't that you?"
@@ -618,7 +594,7 @@ hole, and said:
 
 "But isn't that Rabbit's voice?"
 
-"I don'tthinkso," said Rabbit. "It isn'tmeantto be."
+"I don't*think*so," said Rabbit. "It isn't*meant*to be."
 
 "Oh!" said Pooh.
 
@@ -629,7 +605,7 @@ it back, and said:
 
 "He has gone to see his friend Pooh Bear, who is a great friend of his."
 
-"But thisisMe!" said Bear, very much surprised.
+"But this*is*Me!" said Bear, very much surprised.
 
 "What sort of Me?"
 
@@ -648,11 +624,11 @@ it back, and said:
 So Pooh pushed and pushed and pushed his way through the hole, and at
 last he got in.
 
-"You were quite right," said Rabbit, looking at him all over. "Itisyou. Glad to see you."
+"You were quite right," said Rabbit, looking at him all over. "It*is*you. Glad to see you."
 
 "Who did you think it was?"
 
-"Well, I wasn't sure. You know how it is in the Forest. One can't haveanybodycoming into one's house. One has to becareful. What about a
+"Well, I wasn't sure. You know how it is in the Forest. One can't have*anybody*coming into one's house. One has to be*careful*. What about a
 mouthful of something?"
 
 Pooh always liked a little something at eleven o'clock in the morning,
@@ -675,7 +651,7 @@ he tried very hard to look in the direction of the larder.
 
 "Well, good-bye, if you're sure you won't have any more."
 
-"Isthere any more?" asked Pooh quickly.
+"*Is*there any more?" asked Pooh quickly.
 
 Rabbit took the covers off the dishes, and said, "No, there wasn't."
 
@@ -695,7 +671,7 @@ and then his shoulders ... and then——
 
 "Oh, bother!" said Pooh. "I shall have to go on."
 
-"I can't do either!" said Pooh. "Oh, helpandbother!"
+"I can't do either!" said Pooh. "Oh, help*and*bother!"
 
 Now by this time Rabbit wanted to go for a walk too, and finding the
 front door full, he went out by the back door, and came round to Pooh,
@@ -715,7 +691,7 @@ myself."
 Pooh Bear stretched out a paw, and Rabbit pulled and pulled and
 pulled....
 
-"Ow!" cried Pooh. "You're hurting!"
+"*Ow!*" cried Pooh. "You're hurting!"
 
 "The fact is," said Rabbit, "you're stuck."
 
@@ -725,7 +701,7 @@ enough."
 "It all comes," said Rabbit sternly, "of eating too much. I thought at
 the time," said Rabbit, "only I didn't like to say anything," said
 Rabbit, "that one of us was eating too much," said Rabbit, "and I knew
-it wasn'tme," he said. "Well, well, I shall go and fetch Christopher
+it wasn't*me*," he said. "Well, well, I shall go and fetch Christopher
 Robin."
 
 Christopher Robin lived at the other end of the Forest, and when he came
@@ -733,7 +709,7 @@ back with Rabbit, and saw the front half of Pooh, he said, "Silly old
 Bear," in such a loving voice that everybody felt quite hopeful again.
 
 "I was just beginning to think," said Bear, sniffing slightly, "that
-Rabbit might never be able to use his front door again. And I shouldhatethat," he said.
+Rabbit might never be able to use his front door again. And I should*hate*that," he said.
 
 "So should I," said Rabbit.
 
@@ -746,12 +722,12 @@ his front door again."
 
 Rabbit scratched his whiskers thoughtfully, and pointed out that, when
 once Pooh was pushed back, he was back, and of course nobody was more
-glad to see Pooh thanhewas, still there it was, some lived in trees
+glad to see Pooh than*he*was, still there it was, some lived in trees
 and some lived underground, and——
 
-"You mean I'dneverget out?" said Pooh.
+"You mean I'd*never*get out?" said Pooh.
 
-"I mean," said Rabbit, "that having gotsofar, it seems a pity to
+"I mean," said Rabbit, "that having got*so*far, it seems a pity to
 waste it."
 
 Christopher Robin nodded.
@@ -763,21 +739,21 @@ wait for you to get thin again."
 
 "About a week, I should think."
 
-"But I can't stay here for aweek!"
+"But I can't stay here for a*week*!"
 
-"You canstayhere all right, silly old Bear. It's getting you out
+"You can*stay*here all right, silly old Bear. It's getting you out
 which is so difficult."
 
 "We'll read to you," said Rabbit cheerfully. "And I hope it won't snow,"
 he added. "And I say, old fellow, you're taking up a good deal of room
-in my house—doyou mind if I use your back legs as a towel-horse?
+in my house—*do*you mind if I use your back legs as a towel-horse?
 Because, I mean, there they are—doing nothing—and it would be very
 convenient just to hang the towels on them."
 
-"A week!" said Pooh gloomily. "What about meals?"
+"A week!" said Pooh gloomily. "*What about meals?*"
 
 "I'm afraid no meals," said Christopher Robin, "because of getting thin
-quicker. But wewillread to you."
+quicker. But we*will*read to you."
 
 Bear began to sigh, and then found he couldn't because he was so tightly
 stuck; and a tear rolled down his eye, as he said:
@@ -792,7 +768,7 @@ Wedged Bear in Great Tightness?"
 So for a week Christopher Robin read that sort of book at the North end
 of Pooh, and Rabbit hung his washing on the South end ... and in
 between Bear felt himself getting slenderer and slenderer. And at the
-end of the week Christopher Robin said, "Now!"
+end of the week Christopher Robin said, "*Now!*"
 
 ---
 
@@ -802,15 +778,15 @@ So he took hold of Pooh's front paws and Rabbit took hold of Christopher
 Robin, and all Rabbit's friends and relations took hold of Rabbit, and
 they all pulled together....
 
-And for a long time Pooh only said "Ow!" ...
+And for a long time Pooh only said "*Ow!*" ...
 
-And "Oh!" ...
-
----
+And "*Oh!*" ...
 
 ---
 
-And then, all of a sudden, he said "Pop!" just as if a cork were
+---
+
+And then, all of a sudden, he said "*Pop!*" just as if a cork were
 coming out of a bottle.
 
 And Christopher Robin and Rabbit and all Rabbit's friends and relations
@@ -834,7 +810,7 @@ and the beech-tree was in the middle of the forest, and the Piglet lived
 in the middle of the house. Next to his house was a piece of broken
 board which had: "TRESPASSERS W" on it. When Christopher Robin asked the
 Piglet what it meant, he said it was his grandfather's name, and had
-been in the family for a long time, Christopher Robin said youcouldn'tbe called Trespassers W, and Piglet said yes, you could,
+been in the family for a long time, Christopher Robin said you*couldn't*be called Trespassers W, and Piglet said yes, you could,
 because his grandfather was, and it was short for Trespassers Will,
 which was short for Trespassers William. And his grandfather had had two
 names in case he lost one—Trespassers after an uncle, and William after
@@ -849,7 +825,7 @@ his house, he happened to look up, and there was Winnie-the-Pooh. Pooh
 was walking round and round in a circle, thinking of something else, and
 when Piglet called to him, he just went on walking.
 
-"Hallo!" said Piglet, "what areyoudoing?"
+"Hallo!" said Piglet, "what are*you*doing?"
 
 "Hunting," said Pooh.
 
@@ -883,14 +859,14 @@ stop, and was bending over the tracks in a puzzled sort of way.
 
 "What's the matter?" asked Piglet.
 
-"It's a very funny thing," said Bear, "but there seem to betwoanimals now. This—whatever-it-was—has been joined by
+"It's a very funny thing," said Bear, "but there seem to be*two*animals now. This—whatever-it-was—has been joined by
 another—whatever-it-is—and the two of them are now proceeding in
 company. Would you mind coming with me, Piglet, in case they turn out
 to be Hostile Animals?"
 
 Piglet scratched his ear in a nice sort of way, and said that he had
 nothing to do until Friday, and would be delighted to come, in case it
-reallywasa Woozle.
+really*was*a Woozle.
 
 "You mean, in case it really is two Woozles," said Winnie-the-Pooh, and
 Piglet said that anyhow he had nothing to do until Friday. So off they
@@ -913,9 +889,9 @@ what Christopher Robin would say. And still the tracks went on in front
 of them....
 
 Suddenly Winnie-the-Pooh stopped, and pointed excitedly in front of him.
-"Look!"
+"*Look!*"
 
-"What?" said Piglet, with a jump. And then, to show that he hadn't
+"*What?*" said Piglet, with a jump. And then, to show that he hadn't
 been frightened, he jumped up and down once or twice more in an
 exercising sort of way.
 
@@ -923,7 +899,7 @@ exercising sort of way.
 
 ---
 
-"The tracks!" said Pooh. "A third animal has joined the other two!"
+"The tracks!" said Pooh. "*A third animal has joined the other two!*"
 
 "Pooh!" cried Piglet. "Do you think it is another Woozle?"
 
@@ -938,11 +914,11 @@ Pooh thought how nice it would be if they met Christopher Robin suddenly
 but quite accidentally, and only because he liked Christopher Robin so
 much. And then, all of a sudden, Winnie-the-Pooh stopped again, and
 licked the tip of his nose in a cooling manner, for he was feeling more
-hot and anxious than ever in his life before. There were four animals
-in front of them!
+hot and anxious than ever in his life before.*There were four animals
+in front of them!*
 
 "Do you see, Piglet? Look at their tracks! Three, as it were, Woozles,
-and one, as it was, Wizzle. Another Woozle has joined them!"
+and one, as it was, Wizzle.*Another Woozle has joined them!*"
 
 And so it seemed to be. There were the tracks; crossing over each other
 here, getting muddled up with each other there; but, quite plainly every
@@ -952,8 +928,8 @@ now and then, the tracks of four sets of paws.
 
 ---
 
-"Ithink," said Piglet, when he had licked the tip of his nose too,
-and found that it brought very little comfort, "Ithinkthat I have
+"I*think*," said Piglet, when he had licked the tip of his nose too,
+and found that it brought very little comfort, "I*think*that I have
 just remembered something. I have just remembered something that I
 forgot to do yesterday and shan't be able to do to-morrow. So I suppose
 I really ought to go back and do it now."
@@ -968,7 +944,7 @@ say the time was?"
 "About twelve," said Winnie-the-Pooh, looking at the sun.
 
 "Between, as I was saying, the hours of twelve and twelve five. So,
-really, dear old Pooh, if you'll excuse me——What's that?"
+really, dear old Pooh, if you'll excuse me——*What's that?*"
 
 Pooh looked up at the sky, and then, as he heard the whistle again, he
 looked up into the branches of a big oak-tree, and then he saw a friend
@@ -980,7 +956,7 @@ of his.
 
 "It's Christopher Robin," he said.
 
-"Ah, then you'll be all right," said Piglet. "You'll be quite safe withhim. Good-bye," and he trotted off home as quickly as he could, very
+"Ah, then you'll be all right," said Piglet. "You'll be quite safe with*him*. Good-bye," and he trotted off home as quickly as he could, very
 glad to be Out of All Danger again.
 
 ---
@@ -989,7 +965,7 @@ glad to be Out of All Danger again.
 
 Christopher Robin came slowly down his tree.
 
-"Silly old Bear," he said, "whatwereyou doing? First you went round
+"Silly old Bear," he said, "what*were*you doing? First you went round
 the spinney twice by yourself, and then Piglet ran after you and you
 went round again together, and then you were just going round a fourth
 time——"
@@ -1028,7 +1004,7 @@ The Old Grey Donkey, Eeyore, stood by himself in a thistly corner of
 the forest, his front feet well apart, his head on one side, and thought
 about things. Sometimes he thought sadly to himself, "Why?" and
 sometimes he thought, "Wherefore?" and sometimes he thought, "Inasmuch
-as which?"—and sometimes he didn't quite know what hewasthinking
+as which?"—and sometimes he didn't quite know what he*was*thinking
 about. So when Winnie-the-Pooh came stumping along, Eeyore was very glad
 to be able to stop thinking for a little, in order to say "How do you
 do?" in a gloomy manner to him.
@@ -1052,14 +1028,14 @@ walked all round him once.
 
 "Why, what's happened to your tail?" he said in surprise.
 
-"Whathashappened to it?" said Eeyore.
+"What*has*happened to it?" said Eeyore.
 
 "It isn't there!"
 
 "Are you sure?"
 
-"Well, either a tailisthere or it isn't there. You can't make a
-mistake about it. And yoursisn'tthere!"
+"Well, either a tail*is*there or it isn't there. You can't make a
+mistake about it. And yours*isn't*there!"
 
 "Then what is?"
 
@@ -1120,7 +1096,7 @@ are."
 
 Owl lived at The Chestnuts, an old-world residence of great charm, which
 was grander than anybody else's, or seemed so to Bear, because it had
-both a knockeranda bell-pull. Underneath the knocker there was a
+both a knocker*and*a bell-pull. Underneath the knocker there was a
 notice which said:
 
 PLES RING IF AN RNSER IS REQIRD.
@@ -1162,11 +1138,11 @@ Very Little Brain, and long words Bother me."
 
 "The thing to do is as follows. First, Issue a Reward. Then——"
 
-"Just a moment," said Pooh, holding up his paw. "Whatdo we do to
+"Just a moment," said Pooh, holding up his paw. "*What*do we do to
 this—what you were saying? You sneezed just as you were going to tell
 me."
 
-"Ididn'tsneeze."
+"I*didn't*sneeze."
 
 "Yes, you did, Owl."
 
@@ -1174,7 +1150,7 @@ me."
 
 "Well, you can't know it without something having been sneezed."
 
-"What Isaidwas, 'FirstIssuea Reward'."
+"What I*said*was, 'First*Issue*a Reward'."
 
 "You're doing it again," said Pooh sadly.
 
@@ -1255,7 +1231,7 @@ Winnie-the-Pooh came over all funny, and had to hurry home for a little
 snack of something to sustain him. And, wiping his mouth half an hour
 afterwards, he sang to himself proudly:
 
-Who found the Tail?"I," said Pooh,"At a quarter to two(Only it was quarter to eleven really),Ifound the Tail!"
+*Who found the Tail?*"I," said Pooh,"At a quarter to two(Only it was quarter to eleven really),*I*found the Tail!"
 ---
 
 ---
@@ -1272,7 +1248,7 @@ eating and said carelessly: "I saw a Heffalump to-day, Piglet."
 
 "What was it doing?" asked Piglet.
 
-"Just lumping along," said Christopher Robin. "I don't think it sawme."
+"Just lumping along," said Christopher Robin. "I don't think it saw*me*."
 
 "I saw one once," said Piglet. "At least, I think I did," he said. "Only
 perhaps it wasn't."
@@ -1306,7 +1282,7 @@ said in a very solemn voice:
 
 Pooh nodded his head several times as he said this, and waited for
 Piglet to say "How?" or "Pooh, you couldn't!" or something helpful of
-that sort, but Piglet said nothing. The fact was Piglet was wishing thathehad thought about it first.
+that sort, but Piglet said nothing. The fact was Piglet was wishing that*he*had thought about it first.
 
 "I shall do it," said Pooh, after waiting a little longer, "by means of
 a trap. And it must be a Cunning Trap, so you will have to help me,
@@ -1335,7 +1311,7 @@ raining already?
 
 Pooh rubbed his nose again, and said that he hadn't thought of that. And
 then he brightened up, and said that, if it were raining already, the
-Heffalump would be looking at the sky wondering if it wouldclear up,
+Heffalump would be looking at the sky wondering if it would*clear up*,
 and so he wouldn't see the Very Deep Pit until he was half-way
 down.... When it would be too late.
 
@@ -1344,8 +1320,8 @@ was a Cunning Trap.
 
 Pooh was very proud when he heard this, and he felt that the Heffalump
 was as good as caught already, but there was just one other thing which
-had to be thought about, and it was this. Where should they dig the
-Very Deep Pit?
+had to be thought about, and it was this.*Where should they dig the
+Very Deep Pit?*
 
 Piglet said that the best place would be somewhere where a Heffalump
 was, just before he fell into it, only about a foot farther on.
@@ -1356,17 +1332,17 @@ was, just before he fell into it, only about a foot farther on.
 
 "He would Suspect," said Pooh, "if he happened to look down." He thought
 for a long time and then added sadly, "It isn't as easy as I thought. I
-suppose that's why Heffalumps hardlyeverget caught."
+suppose that's why Heffalumps hardly*ever*get caught."
 
 "That must be it," said Piglet.
 
 They sighed and got up; and when they had taken a few gorse prickles out
 of themselves they sat down again; and all the time Pooh was saying to
-himself, "If only I couldthinkof something!" For he felt sure that a
+himself, "If only I could*think*of something!" For he felt sure that a
 Very Clever Brain could catch a Heffalump if only he knew the right way
 to go about it.
 
-"Suppose," he said to Piglet, "youwanted to catchme, how would you
+"Suppose," he said to Piglet, "*you*wanted to catch*me*, how would you
 do it?"
 
 "Well," said Piglet, "I should do it like this. I should make a Trap,
@@ -1388,13 +1364,13 @@ up, Pooh!"
 Pooh, who had gone into a happy dream, woke up with a start, and said
 that Honey was a much more trappy thing than Haycorns. Piglet didn't
 think so; and they were just going to argue about it, when Piglet
-remembered that, if they put acorns in the Trap,hewould have to find
+remembered that, if they put acorns in the Trap,*he*would have to find
 the acorns, but if they put honey, then Pooh would have to give up some
 of his own honey, so he said, "All right, honey then," just as Pooh
 remembered it too, and was going to say, "All right, haycorns."
 
 "Honey," said Piglet to himself in a thoughtful way, as if it were now
-settled. "I'lldig the pit, whileyougo and get the honey."
+settled. "*I'll*dig the pit, while*you*go and get the honey."
 
 "Very well," said Pooh, and he stumped off.
 
@@ -1405,12 +1381,12 @@ settled. "I'lldig the pit, whileyougo and get the honey."
 As soon as he got home, he went to the larder; and he stood on a chair,
 and took down a very large jar of honey from the top shelf. It had HUNNY
 written on it, but, just to make sure, he took off the paper cover and
-looked at it, and itlookedjust like honey. "But you never can tell,"
+looked at it, and it*looked*just like honey. "But you never can tell,"
 said Pooh. "I remember my uncle saying once that he had seen cheese just
 this colour." So he put his tongue in, and took a large lick. "Yes," he
 said, "it is. No doubt about that. And honey, I should say, right down
 to the bottom of the jar. Unless, of course," he said, "somebody put
-cheese in at the bottom just for a joke. Perhaps I had better go alittlefurther ... just in case ... in case Heffalumpsdon'tlike cheese ... same as me.... Ah!" And he gave a deep sigh. "Iwasright. Itishoney, right the way down."
+cheese in at the bottom just for a joke. Perhaps I had better go a*little*further ... just in case ... in case Heffalumps*don't*like cheese ... same as me.... Ah!" And he gave a deep sigh. "I*was*right. It*is*honey, right the way down."
 
 ---
 
@@ -1437,7 +1413,7 @@ and see how many Heffalumps we've got in our Trap."
 
 "To lead them home with."
 
-"Oh! ... IthinkHeffalumps come if you whistle."
+"Oh! ... I*think*Heffalumps come if you whistle."
 
 "Some do and some don't. You never can tell with Heffalumps. Well, good
 night!"
@@ -1449,7 +1425,7 @@ preparations for bed.
 
 Some hours later, just as the night was beginning to steal away, Pooh
 woke up suddenly with a sinking feeling. He had had that sinking feeling
-before, and he knew what it meant. He was hungry. So he went to the
+before, and he knew what it meant.*He was hungry.*So he went to the
 larder, and he stood on a chair and reached up to the top shelf, and
 found—nothing.
 
@@ -1459,7 +1435,7 @@ so that I should know it was honey. That's very funny." And then he
 began to wander up and down, wondering where it was and murmuring a
 murmur to himself. Like this:
 
-It's very, very funny,'Cos IknowI had some honey;'Cos it had a label on,Saying HUNNY. A goloptious full-up pot too,And I don't know where it's got to,No, I don't know where it's gone—Well, it's funny. He had murmured this to himself three times in a singing sort of way,
+It's very, very funny,'Cos I*know*I had some honey;'Cos it had a label on,Saying HUNNY. A goloptious full-up pot too,And I don't know where it's got to,No, I don't know where it's gone—Well, it's funny. He had murmured this to himself three times in a singing sort of way,
 when suddenly he remembered. He had put it into the Cunning Trap to
 catch the Heffalump.
 
@@ -1470,7 +1446,7 @@ But he couldn't sleep. The more he tried to sleep, the more he couldn't.
 He tried Counting Sheep, which is sometimes a good way of getting to
 sleep, and, as that was no good, he tried counting Heffalumps. And that
 was worse. Because every Heffalump that he counted was making straight
-for a pot of Pooh's honey,and eating it all. For some minutes he lay
+for a pot of Pooh's honey,*and eating it all*. For some minutes he lay
 there miserably, but when the five hundred and eighty-seventh Heffalump
 was licking its jaws, and saying to itself, "Very good honey this, I
 don't know when I've tasted better," Pooh could bear it no longer. He
@@ -1495,7 +1471,7 @@ for it.
 ---
 
 "Bother!" said Pooh, as he got his nose inside the jar. "A Heffalump has
-been eating it!" And then he thought a little and said, "Oh, no,Idid. I forgot."
+been eating it!" And then he thought a little and said, "Oh, no,*I*did. I forgot."
 
 Indeed, he had eaten most of it. But there was a little left at the very
 bottom of the jar, and he pushed his head right in, and began to
@@ -1514,14 +1490,14 @@ What was a Heffalump like?
 
 Was it Fierce?
 
-Didit come when you whistled? Andhowdid it come?
+*Did*it come when you whistled? And*how*did it come?
 
 Was it Fond of Pigs at all?
 
-If it was Fond of Pigs, did it make any differencewhat sort of Pig?
+If it was Fond of Pigs, did it make any difference*what sort of Pig*?
 
-Supposing it was Fierce with Pigs, would it make any differenceif the
-Pig had a grandfather called TRESPASSERS WILLIAM?
+Supposing it was Fierce with Pigs, would it make any difference*if the
+Pig had a grandfather called TRESPASSERS WILLIAM*?
 
 ---
 
@@ -1531,7 +1507,7 @@ He didn't know the answer to any of these questions ... and he was
 going to see his first Heffalump in about an hour from now!
 
 Of course Pooh would be with him, and it was much more Friendly with
-two. But suppose Heffalumps were Very Fierce with PigsandBears?
+two. But suppose Heffalumps were Very Fierce with Pigs*and*Bears?
 Wouldn't it be better to pretend that he had a headache, and couldn't go
 up to the Six Pine Trees this morning? But then suppose that it was a
 very fine day, and there was no Heffalump in the trap, here he would be,
@@ -1539,12 +1515,12 @@ in bed all the morning, simply wasting his time for nothing. What should
 he do?
 
 And then he had a Clever Idea. He would go up very quietly to the Six
-Pine Trees now, peep very cautiously into the Trap, and see if therewasa Heffalump there. And if there was, he would go back to bed, and
+Pine Trees now, peep very cautiously into the Trap, and see if there*was*a Heffalump there. And if there was, he would go back to bed, and
 if there wasn't, he wouldn't.
 
 So off he went. At first he thought that there wouldn't be a Heffalump
 in the Trap, and then he thought that there would, and as he got nearer
-he wassurethat there would, because he could hear it heffalumping
+he was*sure*that there would, because he could hear it heffalumping
 about it like anything.
 
 "Oh, dear, oh, dear, oh, dear!" said Piglet to himself. And he wanted to
@@ -1559,8 +1535,8 @@ looked in....
 And all the time Winnie-the-Pooh had been trying to get the honey-jar
 off his head. The more he shook it, the more tightly it stuck.
 
-"Bother!" he said, inside the jar, and "Oh, help!" and, mostly,
-"Ow!" And he tried bumping it against things, but as he couldn't see
+"*Bother!*" he said, inside the jar, and "*Oh, help!*" and, mostly,
+"*Ow!*" And he tried bumping it against things, but as he couldn't see
 what he was bumping it against, it didn't help him; and he tried to
 climb out of the Trap, but as he could see nothing but jar, and not much
 of that, he couldn't find his way. So at last he lifted up his head, jar
@@ -1605,15 +1581,15 @@ went....
 
 "I can hear it, can't you?" said Piglet anxiously, as they got near.
 
-"I can hearsomething," said Christopher Robin.
+"I can hear*something*," said Christopher Robin.
 
 It was Pooh bumping his head against a tree-root he had found.
 
-"There!" said Piglet. "Isn't itawful?" And he held on tight to
+"There!" said Piglet. "Isn't it*awful*?" And he held on tight to
 Christopher Robin's hand.
 
 Suddenly Christopher Robin began to laugh ... and he laughed ... and he
-laughed ... and he laughed. And while he was still laughing—Crashwent the Heffalump's head against the tree-root, Smash went the jar,
+laughed ... and he laughed. And while he was still laughing—*Crash*went the Heffalump's head against the tree-root, Smash went the jar,
 and out came Pooh's head again....
 
 ---
@@ -1646,7 +1622,7 @@ He turned and walked slowly down the stream for twenty yards, splashed
 across it, and walked slowly back on the other side. Then he looked at
 himself in the water again.
 
-"As I thought," he said. "No better fromthisside. But nobody minds.
+"As I thought," he said. "No better from*this*side. But nobody minds.
 Nobody cares. Pathetic, that's what it is."
 
 There was a crackling noise in the bracken behind him, and out came
@@ -1654,7 +1630,7 @@ Pooh.
 
 "Good morning, Eeyore," said Pooh.
 
-"Good morning, Pooh Bear," said Eeyore gloomily. "If itisa good
+"Good morning, Pooh Bear," said Eeyore gloomily. "If it*is*a good
 morning," he said. "Which I doubt," said he.
 
 "Why, what's the matter?"
@@ -1662,7 +1638,7 @@ morning," he said. "Which I doubt," said he.
 "Nothing, Pooh Bear, nothing. We can't all, and some of us don't. That's
 all there is to it."
 
-"Can't allwhat?" said Pooh, rubbing his nose.
+"Can't all*what*?" said Pooh, rubbing his nose.
 
 "Gaiety. Song-and-dance. Here we go round the mulberry bush."
 
@@ -1678,16 +1654,16 @@ explained. "I'm not complaining, but There It Is."
 
 Pooh sat down on a large stone, and tried to think this out. It sounded
 to him like a riddle, and he was never much good at riddles, being a
-Bear of Very Little Brain. So he sangCottleston Pieinstead:
+Bear of Very Little Brain. So he sang*Cottleston Pie*instead:
 
-Cottleston, Cottleston, Cottleston Pie,A fly can't bird, but a bird can fly. Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."That was the first verse. When he had finished it, Eeyore didn't
+Cottleston, Cottleston, Cottleston Pie,A fly can't bird, but a bird can fly. Ask me a riddle and I reply:"*Cottleston, Cottleston, Cottleston Pie.*"That was the first verse. When he had finished it, Eeyore didn't
 actually say that he didn't like it, so Pooh very kindly sang the second
 verse to him:
 
-Cottleston, Cottleston, Cottleston Pie,A fish can't whistle and neither can I. Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."Eeyore still said nothing at all, so Pooh hummed the third verse quietly
+Cottleston, Cottleston, Cottleston Pie,A fish can't whistle and neither can I. Ask me a riddle and I reply:"*Cottleston, Cottleston, Cottleston Pie*."Eeyore still said nothing at all, so Pooh hummed the third verse quietly
 to himself:
 
-Cottleston, Cottleston, Cottleston Pie,Why does a chicken, I don't know why. Ask me a riddle and I reply:"Cottleston, Cottleston, Cottleston Pie."
+Cottleston, Cottleston, Cottleston Pie,Why does a chicken, I don't know why. Ask me a riddle and I reply:"*Cottleston, Cottleston, Cottleston Pie*."
 ---
 
 ---
@@ -1701,7 +1677,7 @@ gathering Nuts and May. Enjoy yourself."
 
 "Why, what's the matter?"
 
-"Isanything the matter?"
+"*Is*anything the matter?"
 
 "You seem so sad, Eeyore."
 
@@ -1716,7 +1692,7 @@ and pink sugar."
 
 Pooh looked—first to the right and then to the left.
 
-"Presents?" said Pooh. "Birthday cake?" said Pooh. "Where?"
+"Presents?" said Pooh. "Birthday cake?" said Pooh. "*Where?*"
 
 "Can't you see them?"
 
@@ -1734,7 +1710,7 @@ Pooh scratched his head, being a little puzzled by all this.
 
 "And many happy returns to you, Pooh Bear."
 
-"But it isn'tmybirthday."
+"But it isn't*my*birthday."
 
 "No, it's mine."
 
@@ -1752,7 +1728,7 @@ miserable too——"
 
 This was too much for Pooh. "Stay there!" he called to Eeyore, as he
 turned and hurried back home as quick as he could; for he felt that he
-must get poor Eeyore a present ofsomesort at once, and he could
+must get poor Eeyore a present of*some*sort at once, and he could
 always think of a proper one afterwards.
 
 ---
@@ -1766,7 +1742,7 @@ the knocker.
 
 "Hallo, Pooh," said Piglet.
 
-"What areyoutrying to do?"
+"What are*you*trying to do?"
 
 "I was trying to reach the knocker," said Piglet. "I just came
 round——"
@@ -1790,16 +1766,16 @@ down.
 
 ---
 
-"I'm giving this to Eeyore," he explained, "as a present. What areyougoing to give?"
+"I'm giving this to Eeyore," he explained, "as a present. What are*you*going to give?"
 
 "Couldn't I give it too?" said Piglet. "From both of us?"
 
-"No," said Pooh. "That wouldnotbe a good plan."
+"No," said Pooh. "That would*not*be a good plan."
 
 "All right, then, I'll give him a balloon. I've got one left from my
 party. I'll go and get it now, shall I?"
 
-"That, Piglet, is averygood idea. It is just what Eeyore wants to
+"That, Piglet, is a*very*good idea. It is just what Eeyore wants to
 cheer him up. Nobody can be uncheered with a balloon."
 
 So off Piglet trotted; and in the other direction went Pooh, with his
@@ -1831,7 +1807,7 @@ the jar, "where was I going? Ah, yes, Eeyore." He got up slowly.
 And then, suddenly, he remembered. He had eaten Eeyore's birthday
 present!
 
-"Bother!" said Pooh. "WhatshallI do? Imustgive himsomething."
+"*Bother!*" said Pooh. "What*shall*I do? I*must*give him*something*."
 
 ---
 
@@ -1839,7 +1815,7 @@ present!
 
 For a little while he couldn't think of anything. Then he thought:
 "Well, it's a very nice pot, even if there's no honey in it, and if I
-washed it clean, and got somebody to write 'A Happy Birthday' on it,
+washed it clean, and got somebody to write '*A Happy Birthday*' on it,
 Eeyore could keep things in it, which might be Useful." So, as he was
 just passing the Hundred Acre Wood, he went inside to call on Owl, who
 lived there.
@@ -1854,7 +1830,7 @@ lived there.
 
 "What are you giving him, Owl?"
 
-"What areyougiving him, Pooh?"
+"What are*you*giving him, Pooh?"
 
 "I'm giving him a Useful Pot to Keep Things In, and I wanted to ask
 you——"
@@ -1865,19 +1841,19 @@ you——"
 
 "Somebody has been keeping honey in it," said Owl.
 
-"You can keepanythingin it," said Pooh earnestly. "It's Very Useful
+"You can keep*anything*in it," said Pooh earnestly. "It's Very Useful
 like that. And I wanted to ask you——"
 
-"You ought to write 'A Happy Birthday' on it."
+"You ought to write '*A Happy Birthday*' on it."
 
-"Thatwas what I wanted to ask you," said Pooh. "Because my spelling
+"*That*was what I wanted to ask you," said Pooh. "Because my spelling
 is Wobbly. It's good spelling but it Wobbles, and the letters get in the
-wrong places. Wouldyouwrite 'A Happy Birthday' on it for me?"
+wrong places. Would*you*write 'A Happy Birthday' on it for me?"
 
 "It's a nice pot," said Owl, looking at it all round. "Couldn't I give
 it too? From both of us?"
 
-"No," said Pooh. "That wouldnotbe a good plan. Now I'll just wash it
+"No," said Pooh. "That would*not*be a good plan. Now I'll just wash it
 first, and then you can write on it."
 
 Well, he washed the pot out, and dried it, while Owl licked the end of
@@ -1887,9 +1863,9 @@ his pencil, and wondered how to spell "birthday."
 about knocking and ringing outside my door, which Christopher Robin
 wrote. Could you read it?"
 
-"Christopher Robin told me what it said, andthenI could."
+"Christopher Robin told me what it said, and*then*I could."
 
-"Well, I'll tell you whatthissays, and then you'll be able to."
+"Well, I'll tell you what*this*says, and then you'll be able to."
 
 ---
 
@@ -1905,7 +1881,7 @@ Pooh looked on admiringly.
 
 "It's a nice long one," said Pooh, very much impressed by it.
 
-"Well,actually, of course, I'm saying 'A Very Happy Birthday with
+"Well,*actually*, of course, I'm saying 'A Very Happy Birthday with
 love from Pooh.' Naturally it takes a good deal of pencil to say a long
 thing like that."
 
@@ -1928,7 +1904,7 @@ BANG!!!???***!!!
 
 Piglet lay there, wondering what had happened. At first he thought that
 the whole world had blown up; and then he thought that perhaps only the
-Forest part of it had; and then he thought that perhaps onlyhehad,
+Forest part of it had; and then he thought that perhaps only*he*had,
 and he was now alone in the moon or somewhere, and would never see
 Christopher Robin or Pooh or Eeyore again. And then he thought, "Well,
 even if I'm in the moon, I needn't be face downwards all the time," so
@@ -1944,14 +1920,14 @@ It was the balloon!
 
 "Oh, dear!" said Piglet "Oh, dear, oh, dearie, dearie, dear! Well, it's
 too late now. I can't go back, and I haven't another balloon, and
-perhaps Eeyore doesn'tlikeballoons soverymuch."
+perhaps Eeyore doesn't*like*balloons so*very*much."
 
 So he trotted on, rather sadly now, and down he came to the side of the
 stream where Eeyore was, and called out to him.
 
 "Good morning, Eeyore," shouted Piglet.
 
-"Good morning, Little Piglet," said Eeyore. "If itisa good morning,"
+"Good morning, Little Piglet," said Eeyore. "If it*is*a good morning,"
 he said. "Which I doubt," said he. "Not that it matters," he said.
 
 "Many happy returns of the day," said Piglet, having now got closer.
@@ -2012,7 +1988,7 @@ with great difficulty put up his left hoof.
 
 ---
 
-"Balloon?" said Eeyore. "You did say balloon? One of those big
+"*Balloon?*" said Eeyore. "You did say balloon? One of those big
 coloured things you blow up? Gaiety, song-and-dance, here we are and
 there we are?"
 
@@ -2049,7 +2025,7 @@ Piglet nodded again.
 "Yes."
 
 "Thank you, Piglet," said Eeyore. "You don't mind my asking," he went
-on, "but what colour was this balloon when it—when itwasa balloon?"
+on, "but what colour was this balloon when it—when it*was*a balloon?"
 
 "Red."
 
@@ -2063,7 +2039,7 @@ sadly. "My favourite size. Well, well."
 
 Piglet felt very miserable, and didn't know what to say. He was still
 opening his mouth to begin something, and then deciding that it wasn't
-any good sayingthat, when he heard a shout from the other side of the
+any good saying*that*, when he heard a shout from the other side of the
 river, and there was Pooh.
 
 "Many happy returns of the day," called out Pooh, forgetting that he had
@@ -2113,7 +2089,7 @@ it back again, as happy as could be....
 
 ---
 
-"And didn'tIgive him anything?" asked Christopher Robin sadly.
+"And didn't*I*give him anything?" asked Christopher Robin sadly.
 
 "Of course you did," I said. "You gave him—don't you remember—a
 little—a little——"
@@ -2128,7 +2104,7 @@ little—a little——"
 icing on the top, and three candles, and his name in pink sugar,
 and——"
 
-"Yes,Iremember," said Christopher Robin.
+"Yes,*I*remember," said Christopher Robin.
 
 ---
 
@@ -2143,7 +2119,7 @@ Forest: Kanga and Baby Roo. When Pooh asked Christopher Robin, "How did
 they come here?" Christopher Robin said, "In the Usual Way, if you know
 what I mean, Pooh," and Pooh, who didn't, said "Oh!" Then he nodded his
 head twice and said, "In the Usual Way. Ah!" Then he went to call upon
-his friend Piglet to see whathethought about it. And at Piglet's
+his friend Piglet to see what*he*thought about it. And at Piglet's
 house he found Rabbit. So they all talked about it together.
 
 "What I don't like about it is this," said Rabbit. "Here are we—you,
@@ -2157,13 +2133,13 @@ Pooh, and you, Piglet, and Me—and suddenly——"
 
 "And Owl—and then all of a sudden——"
 
-"Oh, and Eeyore," said Pooh. "I was forgettinghim."
+"Oh, and Eeyore," said Pooh. "I was forgetting*him*."
 
 "Here—we—are," said Rabbit very slowly and carefully, "all—of—us,
 and then, suddenly, we wake up one morning and, what do we find? We find
 a Strange Animal among us. An animal of whom we have never even heard
 before! An animal who carries her family about with her in her pocket!
-SupposeIcarriedmyfamily about with me inmypocket, how many
+Suppose*I*carried*my*family about with me in*my*pocket, how many
 pockets should I want?"
 
 "Sixteen," said Piglet.
@@ -2173,7 +2149,7 @@ handkerchief—that's eighteen. Eighteen pockets in one suit! I haven't
 time."
 
 There was a long and thoughtful silence ... and then Pooh, who had
-been frowning very hard for some minutes, said: "Imake it fifteen."
+been frowning very hard for some minutes, said: "*I*make it fifteen."
 
 "What?" said Rabbit.
 
@@ -2200,17 +2176,17 @@ about his family.
 
 "The best way," said Rabbit, "would be this. The best way would be to
 steal Baby Roo and hide him, and then when Kanga says, 'Where's Baby
-Roo?' we say, 'Aha!'"
+Roo?' we say, '*Aha!*'"
 
-"Aha!" said Pooh, practising. "Aha! Aha!... Of course," he went
+"*Aha!*" said Pooh, practising. "*Aha! Aha!*... Of course," he went
 on, "we could say 'Aha!' even if we hadn't stolen Baby Roo."
 
 "Pooh," said Rabbit kindly, "you haven't any brain."
 
 "I know," said Pooh humbly.
 
-"We say 'Aha!' so that Kanga knows thatweknow where Baby Roo is.
-'Aha!' means 'We'll tell you where Baby Roo is, if you promise to go
+"We say '*Aha!*' so that Kanga knows that*we*know where Baby Roo is.
+'*Aha!*' means 'We'll tell you where Baby Roo is, if you promise to go
 away from the Forest and never come back.' Now don't talk while I
 think."
 
@@ -2225,7 +2201,7 @@ to Christopher Robin, and he said that a Kanga was Generally Regarded as
 One of the Fiercer Animals. I am not frightened of Fierce Animals in the
 ordinary way, but it is well known that, if One of the Fiercer Animals
 is Deprived of Its Young, it becomes as fierce as Two of the Fiercer
-Animals. In which case 'Aha!' is perhaps afoolishthing to say."
+Animals. In which case '*Aha!*' is perhaps a*foolish*thing to say."
 
 "Piglet," said Rabbit, taking out a pencil, and licking the end of it,
 "you haven't any pluck."
@@ -2248,7 +2224,7 @@ only Fierce during the winter months, being at other times of an
 Affectionate Disposition, he could hardly sit still, he was so eager to
 begin being useful at once.
 
-"What about me?" said Pooh sadly. "I supposeIshan't be useful?"
+"What about me?" said Pooh sadly. "I suppose*I*shan't be useful?"
 
 "Never mind, Pooh," said Piglet comfortingly. "Another time perhaps."
 
@@ -2257,7 +2233,7 @@ adventure would be impossible."
 
 "Oh!" said Piglet, and tried not to look disappointed. But Pooh went
 into a corner of the room and said proudly to himself, "Impossible
-without Me! Thatsort of Bear."
+without Me!*That*sort of Bear."
 
 "Now listen all of you," said Rabbit when he had finished writing, and
 Pooh and Piglet sat listening very eagerly with their mouths open. This
@@ -2265,8 +2241,8 @@ was what Rabbit read out:
 
 PLAN TO CAPTURE BABY ROO
 
-1. General Remarks. Kanga runs faster than any of Us, even Me.2. More General Remarks. Kanga never takes her eye off Baby Roo, except when he's safely buttoned up in her pocket.3. Therefore. If we are to capture Baby Roo, we must get a Long Start, because Kanga runs faster than any of Us, even Me.
-(See1.)4. A Thought. If Roo had jumped out of Kanga's pocket and Piglet had jumped in, Kanga wouldn't know the difference, because Piglet is a Very Small Animal.5. Like Roo.6. But Kanga would have to be looking the other way first, so as not to see Piglet jumping in.7. See 2.8. Another Thought. But if Pooh was talking to her very excitedly, shemightlook the other way for a moment.9. And then I could run away with Roo.10. Quickly.11. And Kanga wouldn't discover the difference until Afterwards.
+1.*General Remarks.*Kanga runs faster than any of Us, even Me.2.*More General Remarks.*Kanga never takes her eye off Baby Roo, except when he's safely buttoned up in her pocket.3.*Therefore.*If we are to capture Baby Roo, we must get a Long Start, because Kanga runs faster than any of Us, even Me.
+(*See*1.)4.*A Thought.*If Roo had jumped out of Kanga's pocket and Piglet had jumped in, Kanga wouldn't know the difference, because Piglet is a Very Small Animal.5. Like Roo.6. But Kanga would have to be looking the other way first, so as not to see Piglet jumping in.7. See 2.8.*Another Thought.*But if Pooh was talking to her very excitedly, she*might*look the other way for a moment.9. And then I could run away with Roo.10. Quickly.11.*And Kanga wouldn't discover the difference until Afterwards.*
 ---
 
 ---
@@ -2280,9 +2256,9 @@ huskily:
 
 "How do you mean?"
 
-"When KangadoesDiscover the Difference?"
+"When Kanga*does*Discover the Difference?"
 
-"Then we all say 'Aha!'"
+"Then we all say '*Aha!*'"
 
 "All three of us?"
 
@@ -2292,10 +2268,10 @@ huskily:
 
 "Why, what's the trouble, Piglet?"
 
-"Nothing," said Piglet, "as long aswe all threesay it. As long as we
+"Nothing," said Piglet, "as long as*we all three*say it. As long as we
 all three say it," said Piglet, "I don't mind," he said, "but I
-shouldn't care to say 'Aha!' by myself. It wouldn't soundnearlyso
-well. By the way," he said, "youarequite sure about what you said
+shouldn't care to say '*Aha!*' by myself. It wouldn't sound*nearly*so
+well. By the way," he said, "you*are*quite sure about what you said
 about the winter months?"
 
 "The winter months?"
@@ -2305,7 +2281,7 @@ about the winter months?"
 "Oh, yes, yes, that's all right. Well, Pooh? You see what you have to
 do?"
 
-"No," said Pooh Bear. "Not yet," he said. "WhatdoI do?"
+"No," said Pooh Bear. "Not yet," he said. "What*do*I do?"
 
 "Well, you just have to talk very hard to Kanga so as she doesn't notice
 anything."
@@ -2376,12 +2352,12 @@ coming along. It went like this. Er—now let me see——"
 
 "Oh, yes," said Kanga, but she still looked at Baby Roo.
 
-"Howdid it go, Pooh?" said Rabbit.
+"*How*did it go, Pooh?" said Rabbit.
 
 Pooh gave a little cough and began.
 
 LINES WRITTEN BY A BEAR OF VERY LITTLE BRAINOn Monday, when the sun is hotI wonder to myself a lot:"Now is it true, or is it not,"That what is which and which is what?"On Tuesday, when it hails and snows,The feeling on me grows and growsThat hardly anybody knowsIf those are these or these are those. On Wednesday, when the sky is blue,And I have nothing else to do,I sometimes wonder if it's trueThat who is what and what is who. On Thursday, when it starts to freezeAnd hoar-frost twinkles on the trees,How very readily one seesThat these are whose—but whose are these? On Friday——"Yes, it is, isn't it?" said Kanga, not waiting to hear what happened on
-Friday. "Just one more jump, Roo, dear, and then we reallymustbe
+Friday. "Just one more jump, Roo, dear, and then we really*must*be
 going."
 
 ---
@@ -2452,9 +2428,9 @@ Kanga's pocket,
 
 "Ifthisisflying Ishallneverreallytaketoit."
 
-And as he went up in the air he said, "Ooooooo!" and as he came down
-he said, "Ow!" And he was saying, "Ooooooo-ow, Ooooooo-ow,
-Ooooooo-ow" all the way to Kanga's house.
+And as he went up in the air he said, "*Ooooooo!*" and as he came down
+he said, "*Ow!*" And he was saying, "*Ooooooo-ow, Ooooooo-ow,
+Ooooooo-ow*" all the way to Kanga's house.
 
 Of course as soon as Kanga unbuttoned her pocket, she saw what had
 happened. Just for a moment, she thought she was frightened, and then
@@ -2469,13 +2445,13 @@ are having a joke with me, I will have a joke with them."
 "Now then, Roo, dear," she said, as she took Piglet out of her pocket.
 "Bed-time."
 
-"Aha!" said Piglet, as well as he could after his Terrifying Journey.
-But it wasn't a very good "Aha!" and Kanga didn't seem to understand
+"*Aha!*" said Piglet, as well as he could after his Terrifying Journey.
+But it wasn't a very good "*Aha!*" and Kanga didn't seem to understand
 what it meant.
 
 "Bath first," said Kanga in a cheerful voice.
 
-"Aha!" said Piglet again, looking round anxiously for the others. But
+"*Aha!*" said Piglet again, looking round anxiously for the others. But
 the others weren't there. Rabbit was playing with Baby Roo in his own
 house, and feeling more fond of him every minute, and Pooh, who had
 decided to be a Kanga, was still at the sandy place on the top of the
@@ -2486,7 +2462,7 @@ Forest, practising jumps.
 ---
 
 "I am not at all sure," said Kanga in a thoughtful voice, "that it
-wouldn't be a good idea to have acoldbath this evening. Would you
+wouldn't be a good idea to have a*cold*bath this evening. Would you
 like that, Roo, dear?"
 
 Piglet, who had never been really fond of baths, shuddered a long
@@ -2496,18 +2472,18 @@ indignant shudder, and said in as brave a voice as he could:
 
 "Funny little Roo," said Kanga, as she got the bath-water ready.
 
-"I amnotRoo," said Piglet loudly. "I am Piglet!"
+"I am*not*Roo," said Piglet loudly. "I am Piglet!"
 
 "Yes, dear, yes," said Kanga soothingly. "And imitating Piglet's voice
 too! So clever of him," she went on, as she took a large bar of yellow
-soap out of the cupboard. "Whatwillhe be doing next?"
+soap out of the cupboard. "What*will*he be doing next?"
 
-"Can't yousee?" shouted Piglet. "Haven't you goteyes? Lookat
+"Can't you*see*?" shouted Piglet. "Haven't you got*eyes*?*Look*at
 me!"
 
-"Iamlooking, Roo, dear," said Kanga rather severely. "And you know
+"I*am*looking, Roo, dear," said Kanga rather severely. "And you know
 what I told you yesterday about making faces. If you go on making faces
-like Piglet's, you will grow up tolooklike Piglet—andthenthink
+like Piglet's, you will grow up to*look*like Piglet—and*then*think
 how sorry you will be. Now then, into the bath, and don't let me have to
 speak to you about it again."
 
@@ -2546,7 +2522,7 @@ At that moment there was a knock at the door.
 ---
 
 "Christopher Robin, Christopher Robin!" cried Piglet. "Tell Kanga who I
-am! She keeps saying I'm Roo. I'mnotRoo, am I?"
+am! She keeps saying I'm Roo. I'm*not*Roo, am I?"
 
 Christopher Robin looked at him very carefully, and shook his head.
 
@@ -2559,7 +2535,7 @@ Rabbit's house."
 
 Christopher Robin shook his head again.
 
-"Oh, you're not Piglet," he said. "I know Piglet well, and he'squitea different colour."
+"Oh, you're not Piglet," he said. "I know Piglet well, and he's*quite*a different colour."
 
 Piglet began to say that this was because he had just had a bath, and
 then he thought that perhaps he wouldn't say that, and as he opened his
@@ -2608,7 +2584,7 @@ breakfast that morning (a simple meal of marmalade spread lightly over a
 honeycomb or two) he had suddenly thought of a new song. It began like
 this:
 
-"Sing Ho! for the life of a Bear."When he had got as far as this, he scratched his head, and thought to
+"*Sing Ho! for the life of a Bear.*"When he had got as far as this, he scratched his head, and thought to
 himself "That's a very good start for a song, but what about the second
 line?" He tried singing "Ho," two or three times, but it didn't seem to
 help. "Perhaps it would be better," he thought, "if I sang Hi for the
@@ -2660,7 +2636,7 @@ been on one of those. Where are we going to on this Expotition?"
 
 "We're going to discover the North Pole."
 
-"Oh!" said Pooh again. "Whatisthe North Pole?" he asked.
+"Oh!" said Pooh again. "What*is*the North Pole?" he asked.
 
 "It's just a thing you discover," said Christopher Robin carelessly, not
 being quite sure himself.
@@ -2713,7 +2689,7 @@ He left Rabbit and hurried down to Piglet's house. The Piglet was
 sitting on the ground at the door of his house blowing happily at a
 dandelion, and wondering whether it would be this year, next year,
 sometime or never. He had just discovered that it would be never, and
-was trying to remember what "it" was, and hoping it wasn't anything
+was trying to remember what "*it*" was, and hoping it wasn't anything
 nice, when Pooh came up.
 
 ---
@@ -2750,10 +2726,10 @@ always do. They can march at the end, after Eeyore."
 "What I say," said Eeyore, "is that it's unsettling. I didn't want to
 come on this Expo—what Pooh said. I only came to oblige. But here I
 am; and if I am the end of the Expo—what we're talking about—then
-let mebethe end. But if, every time I want to sit down for a
+let me*be*the end. But if, every time I want to sit down for a
 little rest, I have to brush away half a dozen of Rabbit's smaller
 friends-and-relations first, then this isn't an Expo—whatever it
-is—at all, it's simply a Confused Noise. That's whatIsay."
+is—at all, it's simply a Confused Noise. That's what*I*say."
 
 ---
 
@@ -2816,11 +2792,11 @@ himself very quietly.
 
 "Hush!" said Owl to Eeyore.
 
-"Hush!" said Eeyore in a terrible voice to all Rabbit's
+"*Hush!*" said Eeyore in a terrible voice to all Rabbit's
 friends-and-relations, and "Hush!" they said hastily to each other all
 down the line, until it got to the last one of all. And the last and
 smallest friend-and-relation was so upset to find that the whole
-Expotition was saying "Hush!" tohim, that he buried himself head
+Expotition was saying "Hush!" to*him*, that he buried himself head
 downwards in a crack in the ground, and stayed there for two days until
 the danger was over, and then went home in a great hurry, and lived
 quietly with his Aunt ever-afterwards. His name was Alexander Beetle.
@@ -2858,7 +2834,7 @@ Pooh, who now knew what an Ambush was, said that a gorse-bush had sprung
 at him suddenly one day when he fell off a tree, and he had taken six
 days to get all the prickles out of himself.
 
-"We are nottalkingabout gorse-bushes," said Owl a little crossly.
+"We are not*talking*about gorse-bushes," said Owl a little crossly.
 
 "I am," said Pooh.
 
@@ -2908,8 +2884,8 @@ way up the stream together.
 
 "Quite so," said Rabbit, looking important.
 
-"It's—I wondered—It's only—Rabbit, I supposeyoudon't know, What
-does the North Polelooklike?"
+"It's—I wondered—It's only—Rabbit, I suppose*you*don't know, What
+does the North Pole*look*like?"
 
 "Well," said Rabbit, stroking his whiskers. "Now you're asking me."
 
@@ -2917,7 +2893,7 @@ does the North Polelooklike?"
 carelessly.
 
 "It's a funny thing," said Rabbit, "but I've sort of forgotten too,
-although I did knowonce."
+although I did know*once*."
 
 "I suppose it's just a pole stuck in the ground?"
 
@@ -2927,7 +2903,7 @@ shouldn't you, because there'd be nowhere else to stick it."
 
 "Yes, that's what I thought."
 
-"The only thing," said Rabbit, "is,where is it sticking?"
+"The only thing," said Rabbit, "is,*where is it sticking*?"
 
 "That's what we're looking for," said Christopher Robin.
 
@@ -2935,18 +2911,18 @@ They went back to the others. Piglet was lying on his back, sleeping
 peacefully. Roo was washing his face and paws in the stream, while Kanga
 explained to everybody proudly that this was the first time he had ever
 washed his face himself, and Owl was telling Kanga an Interesting
-Anecdote full of long words like EncyclopÃ¦dia and Rhododendron to which
+Anecdote full of long words like Encyclopædia and Rhododendron to which
 Kanga wasn't listening.
 
 "I don't hold with all this washing," grumbled Eeyore. "This modern
-Behind-the-ears nonsense. What doyouthink, Pooh?"
+Behind-the-ears nonsense. What do*you*think, Pooh?"
 
-"Well," said Pooh, "Ithink——"
+"Well," said Pooh, "*I*think——"
 
 But we shall never know what Pooh thought, for there came a sudden
 squeak from Roo, a splash, and a loud cry of alarm from Kanga.
 
-"So much forwashing," said Eeyore.
+"So much for*washing*," said Eeyore.
 
 "Roo's fallen in!" cried Rabbit, and he and Christopher Robin came
 rushing down to the rescue.
@@ -2967,7 +2943,7 @@ Everybody was doing something to help. Piglet, wide awake suddenly, was
 jumping up and down and making "Oo, I say" noises; Owl was explaining
 that in a case of Sudden and Temporary Immersion the Important Thing was
 to keep the Head Above Water; Kanga was jumping along the bank, saying
-"Are yousureyou're all right, Roo dear?" to which Roo, from whatever
+"Are you*sure*you're all right, Roo dear?" to which Roo, from whatever
 pool he was in at the moment, was answering "Look at me swimming!"
 Eeyore had turned round and hung his tail over the first pool into which
 Roo fell, and with his back to the accident was grumbling quietly to
@@ -3039,9 +3015,9 @@ took out his handkerchief and rubbed it up.
 
 "Thank you, Christopher Robin. You're the only one who seems to
 understand about tails. They don't think—that's what the matter with
-some of these others. They've no imagination. A tail isn't a tail tothem, it's just a Little Bit Extra at the back."
+some of these others. They've no imagination. A tail isn't a tail to*them*, it's just a Little Bit Extra at the back."
 
-"Never mind, Eeyore," said Christopher Robin, rubbing his hardest. "Isthatbetter?"
+"Never mind, Eeyore," said Christopher Robin, rubbing his hardest. "Is*that*better?"
 
 "It's feeling more like a tail perhaps. It Belongs again, if you know
 what I mean."
@@ -3107,7 +3083,7 @@ something to revive himself.
 ### IN WHICH PIGLET IS ENTIRELY SURROUNDED BY WATER
 
 It rained and it rained and it rained. Piglet told himself that never
-in all his life, andhewas goodness knowshowold—three, was it,
+in all his life, and*he*was goodness knows*how*old—three, was it,
 or four?—never had he seen so much rain. Days and days and days.
 
 "If only," he thought, as he looked out of the window, "I had been in
@@ -3115,7 +3091,7 @@ Pooh's house, or Christopher Robin's house, or Rabbit's house when it
 began to rain, then I should have had Company all this time, instead of
 being here all alone, with nothing to do except wonder when it will
 stop." And he imagined himself with Pooh, saying, "Did you ever see such
-rain, Pooh?" and Pooh saying, "Isn't itawful, Piglet?" and Piglet
+rain, Pooh?" and Pooh saying, "Isn't it*awful*, Piglet?" and Piglet
 saying, "I wonder how it is over Christopher Robin's way" and Pooh
 saying, "I should think poor old Rabbit is about flooded out by this
 time." It would have been jolly to talk like this, and really, it wasn't
@@ -3127,14 +3103,14 @@ nosed about so often had become streams, the little streams across which
 he had splashed were rivers, and the river, between whose steep banks
 they had played so happily, had sprawled out of its own bed and was
 taking up so much room everywhere, that Piglet was beginning to wonder
-whether it would be coming intohisbed soon.
+whether it would be coming into*his*bed soon.
 
 "It's a little Anxious," he said to himself, "to be a Very Small Animal
 Entirely Surrounded by Water. Christopher Robin and Pooh could escape by
 Climbing Trees, and Kanga could escape by Jumping, and Rabbit could
 escape by Burrowing, and Owl could escape by Flying, and Eeyore could
 escape by—by Making a Loud Noise Until Rescued, and here am I,
-surrounded by water and I can't doanything."
+surrounded by water and I can't do*anything*."
 
 It went on raining, and every day the water got a little higher, until
 now it was nearly up to Piglet's window ... and still he hadn't done
@@ -3158,7 +3134,7 @@ would do?"
 Then suddenly he remembered a story which Christopher Robin had told him
 about a man on a desert island who had written something in a bottle and
 thrown it in the sea; and Piglet thought that if he wrote something in a
-bottle and threw it in the water, perhaps somebody would come and rescuehim!
+bottle and threw it in the water, perhaps somebody would come and rescue*him*!
 
 He left the window and began to search his house, all of it that wasn't
 under water, and at last he found a pencil and a small piece of dry
@@ -3175,7 +3151,7 @@ IT'S ME PIGLET, HELP HELP.
 Then he put the paper in the bottle, and he corked the bottle up as
 tightly as he could, and he leant out of his window as far as he could
 lean without falling in, and he threw the bottle as far as he could
-throw—splash!—and in a little while it bobbed up again on the water;
+throw—*splash!*—and in a little while it bobbed up again on the water;
 and he watched it floating slowly away in the distance, until his eyes
 ached with looking, and sometimes he thought it was the bottle, and
 sometimes he thought it was just a ripple on the water which he was
@@ -3217,7 +3193,7 @@ found a bee-hive to sleep in, but there wasn't room for his legs, so he
 had left them outside. And Wild Woozles, such as inhabit the East Pole,
 came and nibbled all the fur off his legs to make nests for their Young.
 And the more they nibbled, the colder his legs got, until suddenly he
-woke up with anOw!—and there he was, sitting in his chair with his
+woke up with an*Ow!*—and there he was, sitting in his chair with his
 feet in the water, and water all round him!
 
 He splashed to his door and looked out....
@@ -3273,16 +3249,16 @@ sit on the top of it, if it's a very big jar."
 ---
 
 So he took his biggest jar, and corked it up. "All boats have to have a
-name," he said, "so I shall call mineThe Floating Bear." And with
+name," he said, "so I shall call mine*The Floating Bear*." And with
 these words he dropped his boat into the water and jumped in after it.
 
 ---
 
 ---
 
-For a little while Pooh andThe Floating Bearwere uncertain as to
+For a little while Pooh and*The Floating Bear*were uncertain as to
 which of them was meant to be on the top, but after trying one or two
-different positions, they settled down withThe Floating Bearunderneath and Pooh triumphantly astride it, paddling vigorously with
+different positions, they settled down with*The Floating Bear*underneath and Pooh triumphantly astride it, paddling vigorously with
 his feet.
 
 ---
@@ -3290,7 +3266,7 @@ his feet.
 ---
 
 Christopher Robin lived at the very top of the Forest. It rained, and it
-rained, and it rained, but the water couldn't come up tohishouse. It
+rained, and it rained, but the water couldn't come up to*his*house. It
 was rather jolly to look down into the valleys and see the water all
 round him, but it rained so hard that he stayed indoors most of the
 time, and thought about things. Every morning he went out with his
@@ -3353,10 +3329,10 @@ In a little while he was back again.
 
 "Not there?"
 
-"Hasbeenthere. He's been sitting on a branch of his tree outside his
+"Has*been*there. He's been sitting on a branch of his tree outside his
 house with nine pots of honey. But he isn't there now."
 
-"Oh, Pooh!" cried Christopher Robin. "Whereareyou?"
+"Oh, Pooh!" cried Christopher Robin. "Where*are*you?"
 
 ---
 
@@ -3390,15 +3366,15 @@ Christopher Robin read the message aloud.
 
 "Oh, are those 'P's' piglets? I thought they were poohs."
 
-"We must rescue him at once! I thought he was withyou, Pooh. Owl,
+"We must rescue him at once! I thought he was with*you*, Pooh. Owl,
 could you rescue him on your back?"
 
 "I don't think so," said Owl, after grave thought. "It is doubtful if
 the necessary dorsal muscles——"
 
-"Then would you fly to him atonceand say that Rescue is Coming? And
+"Then would you fly to him at*once*and say that Rescue is Coming? And
 Pooh and I will think of a Rescue and come as quick as ever we can. Oh,
-don'ttalk, Owl, go on quick!" And, still thinking of something to
+don't*talk*, Owl, go on quick!" And, still thinking of something to
 say, Owl flew off.
 
 "Now then, Pooh," said Christopher Robin, "where's your boat?"
@@ -3413,7 +3389,7 @@ Boat, and sometimes it's more of an Accident. It all depends."
 
 "Oh! Well, where is it?"
 
-"There!" said Pooh, pointing proudly toThe Floating Bear.
+"There!" said Pooh, pointing proudly to*The Floating Bear*.
 
 It wasn't what Christopher Robin expected, and the more he looked at it,
 the more he thought what a Brave and Clever Bear Pooh was, and the more
@@ -3456,8 +3432,8 @@ got in together, and it wobbled no longer.
 
 ---
 
-"I shall call this boatThe Brain of Pooh," said Christopher Robin,
-andThe Brain of Poohset sail forthwith in a south-westerly
+"I shall call this boat*The Brain of Pooh*," said Christopher Robin,
+and*The Brain of Pooh*set sail forthwith in a south-westerly
 direction, revolving gracefully.
 
 ---
@@ -3477,8 +3453,8 @@ he was only hanging on by his toes, at which moment luckily, a sudden
 loud squawk from Owl, which was really part of the story, being what his
 aunt said, woke the Piglet up and just gave him time to jerk himself
 back into safety and say, "How interesting, and did she?" when—well,
-you can imagine his joy when at last he saw the good ship,Brain of
-Pooh(Captain, C. Robin;1st Mate, P. Bear) coming over the sea to
+you can imagine his joy when at last he saw the good ship,*Brain of
+Pooh*(*Captain*, C. Robin;*1st Mate*, P. Bear) coming over the sea to
 rescue him. Christopher Robin and Pooh again....
 
 ---
@@ -3543,14 +3519,14 @@ had said, and flew off to Eeyore.
 
 "A party for Me?" thought Pooh to himself. "How grand!" And he began to
 wonder if all the other animals would know that it was a special Pooh
-Party, and if Christopher Robin had told them aboutThe Floating Bearand theBrain of Poohand all the wonderful ships he had invented and
+Party, and if Christopher Robin had told them about*The Floating Bear*and the*Brain of Pooh*and all the wonderful ships he had invented and
 sailed on, and he began to think how awful it would be if everybody had
 forgotten about it, and nobody quite knew what the party was for; and
 the more he thought like this, the more the party got muddled in his
 mind, like a dream when nothing goes right. And the dream began to sing
 itself over in his head until it became a sort of song. It was an
 
-ANXIOUS POOH SONG.3 Cheers for Pooh!(For Who?)For Pooh—(Why what did he do?)I thought you knew;He saved his friend from a wetting!3 Cheers for Bear!(For where?)For Bear—He couldn't swim,But he rescued him!(He rescued who?)Oh, listen, do! I am talking of Pooh—(Of who?)Of Pooh!(I'm sorry I keep forgetting). Well, Pooh was a Bear of Enormous Brain(Just say it again!)Of enormous brain—(Of enormous what?)Well, he ate a lot,And I don't know if he could swim or not,But he managed to floatOn a sort of boat(On a sort of what?)Well, a sort of pot—So now let's give him three hearty cheers(So now let's give him three hearty whiches?)And hope he'll be with us for years and years,And grow in health and wisdom and riches!3 Cheers for Pooh!(For who?)For Pooh—3 Cheers for Bear!(For where?)For Bear—3 Cheers for the wonderful Winnie-the-Pooh!(Just tell me, somebody—WHAT DID HE DO?)While this was going on inside him, Owl was talking to Eeyore.
+ANXIOUS POOH SONG.3 Cheers for Pooh!(*For Who?*)For Pooh—(*Why what did he do?*)I thought you knew;He saved his friend from a wetting!3 Cheers for Bear!(*For where?*)For Bear—He couldn't swim,But he rescued him!(*He rescued who?*)Oh, listen, do! I am talking of Pooh—(*Of who?*)Of Pooh!(*I'm sorry I keep forgetting*). Well, Pooh was a Bear of Enormous Brain(*Just say it again!*)Of enormous brain—(*Of enormous what?*)Well, he ate a lot,And I don't know if he could swim or not,But he managed to floatOn a sort of boat(*On a sort of what?*)Well, a sort of pot—So now let's give him three hearty cheers(*So now let's give him three hearty whiches?*)And hope he'll be with us for years and years,And grow in health and wisdom and riches!3 Cheers for Pooh!(*For who?*)For Pooh—3 Cheers for Bear!(*For where?*)For Bear—3 Cheers for the wonderful Winnie-the-Pooh!(*Just tell me, somebody*—WHAT DID HE DO?)While this was going on inside him, Owl was talking to Eeyore.
 
 "Eeyore," said Owl, "Christopher Robin is giving a party."
 
@@ -3597,7 +3573,7 @@ them.'"
 "All of them," said Owl sulkily.
 
 "Ah!" said Eeyore. "A mistake, no doubt, but still, I shall come. Only
-don't blamemeif it rains."
+don't blame*me*if it rains."
 
 But it didn't rain. Christopher Robin had made a long table out of some
 long pieces of wood, and they all sat round it. Christopher Robin sat at
@@ -3678,9 +3654,9 @@ all——"
 
 "I don't know," said Pooh rather dolefully.
 
-"I thought this wasyourparty."
+"I thought this was*your*party."
 
-"I thought it wasonce. But I suppose it isn't."
+"I thought it was*once*. But I suppose it isn't."
 
 "I'd sooner it was yours than Eeyore's," said Piglet.
 
@@ -3745,9 +3721,9 @@ the golden evening, and for a long time they were silent.
 "When you wake up in the morning, Pooh," said Piglet at last, "what's
 the first thing you say to yourself?"
 
-"What's for breakfast?" said Pooh. "What doyousay, Piglet?"
+"What's for breakfast?" said Pooh. "What do*you*say, Piglet?"
 
-"I say, I wonder what's going to happen excitingto-day?" said Piglet.
+"I say, I wonder what's going to happen exciting*to-day*?" said Piglet.
 
 Pooh nodded thoughtfully.
 
@@ -3780,7 +3756,7 @@ said "Coming to see me have my bath?"
 "It was just the same," I said.
 
 He nodded and went out ... and in a moment I heard
-Winnie-the-Pooh—bump, bump, bump—going up the stairs behind him.
+Winnie-the-Pooh—*bump, bump, bump*—going up the stairs behind him.
 
 ---
 
@@ -3796,255 +3772,3 @@ Toronto
 [Transcriber's Note: Near the end of Chapter VI, the reference to Kanga was modified to
 read "... and every Tuesday Kanga spent the day with her great friend
 Pooh ..."]
-
-*** END OF THE PROJECT GUTENBERG EBOOK WINNIE-THE-POOH ***Updated editions will replace the previous one—the old editions will
-be renamed. Creating the works from print editions not protected by U. S. copyright
-law means that no one owns a United States copyright in these works,
-so the Foundation (and you!) can copy and distribute it in the United
-States without permission and without paying copyright
-royalties. Special rules, set forth in the General Terms of Use part
-of this license, apply to copying and distributing Project
-Gutenberg™ electronic works to protect the PROJECT GUTENBERG™
-concept and trademark. Project Gutenberg is a registered trademark,
-and may not be used if you charge for an eBook, except by following
-the terms of the trademark license, including paying royalties for use
-of the Project Gutenberg trademark. If you do not charge anything for
-copies of this eBook, complying with the trademark license is very
-easy. You may use this eBook for nearly any purpose such as creation
-of derivative works, reports, performances and research. Project
-Gutenberg eBooks may be modified and printed and given away—you may
-do practically ANYTHING in the United States with eBooks not protected
-by U. S. copyright law. Redistribution is subject to the trademark
-license, especially commercial redistribution. START: FULL LICENSE## THE FULL PROJECT GUTENBERG LICENSE
-
-PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORKTo protect the Project Gutenberg™ mission of promoting the free
-distribution of electronic works, by using or distributing this work
-(or any other work associated in any way with the phrase “Project
-Gutenberg”), you agree to comply with all the terms of the Full
-Project Gutenberg™ License available with this file or online at
-www.gutenberg.org/license. Section 1. General Terms of Use and Redistributing Project Gutenberg™
-electronic works1. A. By reading or using any part of this Project Gutenberg™
-electronic work, you indicate that you have read, understand, agree to
-and accept all the terms of this license and intellectual property
-(trademark/copyright) agreement. If you do not agree to abide by all
-the terms of this agreement, you must cease using and return or
-destroy all copies of Project Gutenberg™ electronic works in your
-possession. If you paid a fee for obtaining a copy of or access to a
-Project Gutenberg™ electronic work and you do not agree to be bound
-by the terms of this agreement, you may obtain a refund from the person
-or entity to whom you paid the fee as set forth in paragraph 1. E.8.1. B. “Project Gutenberg” is a registered trademark. It may only be
-used on or associated in any way with an electronic work by people who
-agree to be bound by the terms of this agreement. There are a few
-things that you can do with most Project Gutenberg™ electronic works
-even without complying with the full terms of this agreement. See
-paragraph 1. C below. There are a lot of things you can do with Project
-Gutenberg™ electronic works if you follow the terms of this
-agreement and help preserve free future access to Project Gutenberg™
-electronic works. See paragraph 1. E below.1. C. The Project Gutenberg Literary Archive Foundation (“the
-Foundation” or PGLAF), owns a compilation copyright in the collection
-of Project Gutenberg™ electronic works. Nearly all the individual
-works in the collection are in the public domain in the United
-States. If an individual work is unprotected by copyright law in the
-United States and you are located in the United States, we do not
-claim a right to prevent you from copying, distributing, performing,
-displaying or creating derivative works based on the work as long as
-all references to Project Gutenberg are removed. Of course, we hope
-that you will support the Project Gutenberg™ mission of promoting
-free access to electronic works by freely sharing Project Gutenberg™
-works in compliance with the terms of this agreement for keeping the
-Project Gutenberg™ name associated with the work. You can easily
-comply with the terms of this agreement by keeping this work in the
-same format with its attached full Project Gutenberg™ License when
-you share it without charge with others.1. D. The copyright laws of the place where you are located also govern
-what you can do with this work. Copyright laws in most countries are
-in a constant state of change. If you are outside the United States,
-check the laws of your country in addition to the terms of this
-agreement before downloading, copying, displaying, performing,
-distributing or creating derivative works based on this work or any
-other Project Gutenberg™ work. The Foundation makes no
-representations concerning the copyright status of any work in any
-country other than the United States.1. E. Unless you have removed all references to Project Gutenberg:1. E.1. The following sentence, with active links to, or other
-immediate access to, the full Project Gutenberg™ License must appear
-prominently whenever any copy of a Project Gutenberg™ work (any work
-on which the phrase “Project Gutenberg” appears, or with which the
-phrase “Project Gutenberg” is associated) is accessed, displayed,
-performed, viewed, copied or distributed:This eBook is for the use of anyone anywhere in the United States and most
-    other parts of the world at no cost and with almost no restrictions
-    whatsoever. You may copy it, give it away or re-use it under the terms
-    of the Project Gutenberg License included with this eBook or online
-    at[www.gutenberg.org](https://www.gutenberg.org). If you
-    are not located in the United States, you will have to check the laws
-    of the country where you are located before using this eBook.1. E.2. If an individual Project Gutenberg™ electronic work is
-derived from texts not protected by U. S. copyright law (does not
-contain a notice indicating that it is posted with permission of the
-copyright holder), the work can be copied and distributed to anyone in
-the United States without paying any fees or charges. If you are
-redistributing or providing access to a work with the phrase “Project
-Gutenberg” associated with or appearing on the work, you must comply
-either with the requirements of paragraphs 1. E.1 through 1. E.7 or
-obtain permission for the use of the work and the Project Gutenberg™
-trademark as set forth in paragraphs 1. E.8 or 1. E.9.1. E.3. If an individual Project Gutenberg™ electronic work is posted
-with the permission of the copyright holder, your use and distribution
-must comply with both paragraphs 1. E.1 through 1. E.7 and any
-additional terms imposed by the copyright holder. Additional terms
-will be linked to the Project Gutenberg™ License for all works
-posted with the permission of the copyright holder found at the
-beginning of this work.1. E.4. Do not unlink or detach or remove the full Project Gutenberg™
-License terms from this work, or any files containing a part of this
-work or any other work associated with Project Gutenberg™.1. E.5. Do not copy, display, perform, distribute or redistribute this
-electronic work, or any part of this electronic work, without
-prominently displaying the sentence set forth in paragraph 1. E.1 with
-active links or immediate access to the full terms of the Project
-Gutenberg™ License.1. E.6. You may convert to and distribute this work in any binary,
-compressed, marked up, nonproprietary or proprietary form, including
-any word processing or hypertext form. However, if you provide access
-to or distribute copies of a Project Gutenberg™ work in a format
-other than “Plain Vanilla ASCII” or other format used in the official
-version posted on the official Project Gutenberg™ website
-(www.gutenberg.org), you must, at no additional cost, fee or expense
-to the user, provide a copy, a means of exporting a copy, or a means
-of obtaining a copy upon request, of the work in its original “Plain
-Vanilla ASCII” or other form. Any alternate format must include the
-full Project Gutenberg™ License as specified in paragraph 1. E.1.1. E.7. Do not charge a fee for access to, viewing, displaying,
-performing, copying or distributing any Project Gutenberg™ works
-unless you comply with paragraph 1. E.8 or 1. E.9.1. E.8. You may charge a reasonable fee for copies of or providing
-access to or distributing Project Gutenberg™ electronic works
-provided that:- • You pay a royalty fee of 20% of the gross profits you derive from
-        the use of Project Gutenberg™ works calculated using the method
-        you already use to calculate your applicable taxes. The fee is owed
-        to the owner of the Project Gutenberg™ trademark, but he has
-        agreed to donate royalties under this paragraph to the Project
-        Gutenberg Literary Archive Foundation. Royalty payments must be paid
-        within 60 days following each date on which you prepare (or are
-        legally required to prepare) your periodic tax returns. Royalty
-        payments should be clearly marked as such and sent to the Project
-        Gutenberg Literary Archive Foundation at the address specified in
-        Section 4, “Information about donations to the Project Gutenberg
-        Literary Archive Foundation.”
-- • You provide a full refund of any money paid by a user who notifies
-        you in writing (or by e-mail) within 30 days of receipt that s/he
-        does not agree to the terms of the full Project Gutenberg™
-        License. You must require such a user to return or destroy all
-        copies of the works possessed in a physical medium and discontinue
-        all use of and all access to other copies of Project Gutenberg™
-        works.
-- • You provide, in accordance with paragraph 1. F.3, a full refund of
-        any money paid for a work or a replacement copy, if a defect in the
-        electronic work is discovered and reported to you within 90 days of
-        receipt of the work.
-- • You comply with all other terms of this agreement for free
-        distribution of Project Gutenberg™ works.
-
-1. E.9. If you wish to charge a fee or distribute a Project
-Gutenberg™ electronic work or group of works on different terms than
-are set forth in this agreement, you must obtain permission in writing
-from the Project Gutenberg Literary Archive Foundation, the manager of
-the Project Gutenberg™ trademark. Contact the Foundation as set
-forth in Section 3 below.1. F.1. F.1. Project Gutenberg volunteers and employees expend considerable
-effort to identify, do copyright research on, transcribe and proofread
-works not protected by U. S. copyright law in creating the Project
-Gutenberg™ collection. Despite these efforts, Project Gutenberg™
-electronic works, and the medium on which they may be stored, may
-contain “Defects,” such as, but not limited to, incomplete, inaccurate
-or corrupt data, transcription errors, a copyright or other
-intellectual property infringement, a defective or damaged disk or
-other medium, a computer virus, or computer codes that damage or
-cannot be read by your equipment.1. F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
-of Replacement or Refund” described in paragraph 1. F.3, the Project
-Gutenberg Literary Archive Foundation, the owner of the Project
-Gutenberg™ trademark, and any other party distributing a Project
-Gutenberg™ electronic work under this agreement, disclaim all
-liability to you for damages, costs and expenses, including legal
-fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
-LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
-PROVIDED IN PARAGRAPH 1. F.3. YOU AGREE THAT THE FOUNDATION, THE
-TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
-LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
-INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
-DAMAGE.1. F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
-defect in this electronic work within 90 days of receiving it, you can
-receive a refund of the money (if any) you paid for it by sending a
-written explanation to the person you received the work from. If you
-received the work on a physical medium, you must return the medium
-with your written explanation. The person or entity that provided you
-with the defective work may elect to provide a replacement copy in
-lieu of a refund. If you received the work electronically, the person
-or entity providing it to you may choose to give you a second
-opportunity to receive the work electronically in lieu of a refund. If
-the second copy is also defective, you may demand a refund in writing
-without further opportunities to fix the problem.1. F.4. Except for the limited right of replacement or refund set forth
-in paragraph 1. F.3, this work is provided to you ‘AS-IS’, WITH NO
-OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.1. F.5. Some states do not allow disclaimers of certain implied
-warranties or the exclusion or limitation of certain types of
-damages. If any disclaimer or limitation set forth in this agreement
-violates the law of the state applicable to this agreement, the
-agreement shall be interpreted to make the maximum disclaimer or
-limitation permitted by the applicable state law. The invalidity or
-unenforceability of any provision of this agreement shall not void the
-remaining provisions.1. F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
-trademark owner, any agent or employee of the Foundation, anyone
-providing copies of Project Gutenberg™ electronic works in
-accordance with this agreement, and any volunteers associated with the
-production, promotion and distribution of Project Gutenberg™
-electronic works, harmless from all liability, costs and expenses,
-including legal fees, that arise directly or indirectly from any of
-the following which you do or cause to occur: (a) distribution of this
-or any Project Gutenberg™ work, (b) alteration, modification, or
-additions or deletions to any Project Gutenberg™ work, and (c) any
-Defect you cause. Section 2. Information about the Mission of Project Gutenberg™Project Gutenberg™ is synonymous with the free distribution of
-electronic works in formats readable by the widest variety of
-computers including obsolete, old, middle-aged and new computers. It
-exists because of the efforts of hundreds of volunteers and donations
-from people in all walks of life. Volunteers and financial support to provide volunteers with the
-assistance they need are critical to reaching Project Gutenberg™’s
-goals and ensuring that the Project Gutenberg™ collection will
-remain freely available for generations to come. In 2001, the Project
-Gutenberg Literary Archive Foundation was created to provide a secure
-and permanent future for Project Gutenberg™ and future
-generations. To learn more about the Project Gutenberg Literary
-Archive Foundation and how your efforts and donations can help, see
-Sections 3 and 4 and the Foundation information page at www.gutenberg.org. Section 3. Information about the Project Gutenberg Literary Archive FoundationThe Project Gutenberg Literary Archive Foundation is a non-profit
-501(c)(3) educational corporation organized under the laws of the
-state of Mississippi and granted tax exempt status by the Internal
-Revenue Service. The Foundation’s EIN or federal tax identification
-number is 64-6221541. Contributions to the Project Gutenberg Literary
-Archive Foundation are tax deductible to the full extent permitted by
-U. S. federal laws and your state’s laws. The Foundation’s business office is located at 809 North 1500 West,
-Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
-to date contact information can be found at the Foundation’s website
-and official page at www.gutenberg.org/contactSection 4. Information about Donations to the Project Gutenberg
-Literary Archive FoundationProject Gutenberg™ depends upon and cannot survive without widespread
-public support and donations to carry out its mission of
-increasing the number of public domain and licensed works that can be
-freely distributed in machine-readable form accessible by the widest
-array of equipment including outdated equipment. Many small donations
-($1 to $5,000) are particularly important to maintaining tax exempt
-status with the IRS. The Foundation is committed to complying with the laws regulating
-charities and charitable donations in all 50 states of the United
-States. Compliance requirements are not uniform and it takes a
-considerable effort, much paperwork and many fees to meet and keep up
-with these requirements. We do not solicit donations in locations
-where we have not received written confirmation of compliance. To SEND
-DONATIONS or determine the status of compliance for any particular state
-visit[www.gutenberg.org/donate](https://www.gutenberg.org/donate/). While we cannot and do not solicit contributions from states where we
-have not met the solicitation requirements, we know of no prohibition
-against accepting unsolicited donations from donors in such states who
-approach us with offers to donate. International donations are gratefully accepted, but we cannot make
-any statements concerning tax treatment of donations received from
-outside the United States. U. S. laws alone swamp our small staff. Please check the Project Gutenberg web pages for current donation
-methods and addresses. Donations are accepted in a number of other
-ways including checks, online payments and credit card donations. To
-donate, please visit: www.gutenberg.org/donate. Section 5. General Information About Project Gutenberg™ electronic worksProfessor Michael S. Hart was the originator of the Project
-Gutenberg™ concept of a library of electronic works that could be
-freely shared with anyone. For forty years, he produced and
-distributed Project Gutenberg™ eBooks with only a loose network of
-volunteer support. Project Gutenberg™ eBooks are often created from several printed
-editions, all of which are confirmed as not protected by copyright in
-the U. S. unless a copyright notice is included. Thus, we do not
-necessarily keep eBooks in compliance with any particular paper
-edition. Most people start at our website which has the main PG search
-facility:[www.gutenberg.org](https://www.gutenberg.org). This website includes information about Project Gutenberg™,
-including how to make donations to the Project Gutenberg Literary
-Archive Foundation, how to help produce our new eBooks, and how to
-subscribe to our email newsletter to hear about new eBooks.

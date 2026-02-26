@@ -6,10 +6,27 @@ Shared utility functions for text processing, file management, and helpers.
 
 import re
 import os
+import json
 from pathlib import Path
 from typing import List, Tuple, Optional
 from datetime import datetime
 import hashlib
+
+
+def safe_json_write(path: Path, data: dict, indent: int = 2) -> None:
+    """Atomically write JSON data to a file using write-then-rename.
+
+    Writes to a temporary file first, flushes to disk, then atomically
+    replaces the target file. This prevents corruption if the process
+    crashes mid-write.
+    """
+    path = Path(path)
+    tmp_path = path.with_suffix('.json.tmp')
+    with open(tmp_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=indent, ensure_ascii=False)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(str(tmp_path), str(path))
 
 
 class TextProcessor:

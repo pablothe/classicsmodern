@@ -95,9 +95,8 @@ class TestBasicPipeline:
         )
 
         # Run pipeline
-        with patch.object(maker, '_generate_chapter_metadata', return_value=True):
-            with patch.object(maker, '_register_with_server'):
-                result = maker.make_audiobook()
+        with patch.object(maker, '_register_with_server'):
+            result = maker.make_audiobook()
 
         # Verify success
         assert result['success'] is True
@@ -129,9 +128,8 @@ class TestBasicPipeline:
             generate_cover=False
         )
 
-        with patch.object(maker, '_generate_chapter_metadata', return_value=True):
-            with patch.object(maker, '_register_with_server'):
-                result = maker.make_audiobook()
+        with patch.object(maker, '_register_with_server'):
+            result = maker.make_audiobook()
 
         # Verify directory exists
         assert audio_dir.exists()
@@ -178,9 +176,8 @@ class TestValidation:
                 generate_cover=False
             )
 
-            with patch.object(maker, '_generate_chapter_metadata', return_value=True):
-                with patch.object(maker, '_register_with_server'):
-                    result = maker.make_audiobook()
+            with patch.object(maker, '_register_with_server'):
+                result = maker.make_audiobook()
 
             # Should complete successfully
             assert result['success'] is True
@@ -387,8 +384,7 @@ class TestServerRegistration:
             generate_cover=False
         )
 
-        with patch.object(maker, '_generate_chapter_metadata', return_value=True):
-            result = maker.make_audiobook()
+        result = maker.make_audiobook()
 
         # Check for metadata file
         metadata_file = audio_dir / "audiobook_metadata.json"

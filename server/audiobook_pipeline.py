@@ -19,14 +19,13 @@ Features:
 import json
 import os
 import re
-import threading
 import time
 import uuid
 import subprocess
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, Optional, List
+from typing import Dict, Optional
 from enum import Enum
 
 from server.language_detector import detect_language
@@ -43,9 +42,6 @@ from lib.translation.structured import (
 
 # Constants
 BOOKS_DIR = Path(__file__).parent.parent / "books"
-JOBS_DIR = Path(__file__).parent / "pipeline_jobs"
-MAX_CONCURRENT_JOBS = 2
-POLL_INTERVAL = 2.0  # seconds
 
 # Retry configuration for audio generation subprocess
 AUDIO_MAX_RETRIES = 3
@@ -90,14 +86,11 @@ class PipelineStage(str, Enum):
     DONE = "done"
 
 
-# Global state
-jobs_lock = threading.Lock()
-jobs = {}  # {job_id: JobState}
-job_semaphore = threading.Semaphore(MAX_CONCURRENT_JOBS)
-
-
 class JobState:
     """Represents a pipeline job with state tracking"""
+
+    # Set to False to disable JSON file persistence (when managed by unified queue)
+    persist_to_json = True
 
     def __init__(
         self,
@@ -136,33 +129,10 @@ class JobState:
         self.error = None
         self.output_files = {}  # {stage: file_path}
 
-        # Save state
-        self.state_file = JOBS_DIR / f"{job_id}.json"
-        self._save_state()
-
     def _save_state(self):
-        """Save job state to disk"""
-        JOBS_DIR.mkdir(parents=True, exist_ok=True)
-
-        state = {
-            'job_id': self.job_id,
-            'book_id': self.book_id,
-            'source_file': self.source_file,
-            'config': self.config,
-            'status': self.status,
-            'current_stage': self.current_stage,
-            'progress': self.progress,
-            'stage_progress': self.stage_progress,
-            'created_at': self.created_at,
-            'updated_at': datetime.now().isoformat(),
-            'started_at': self.started_at,
-            'completed_at': self.completed_at,
-            'error': self.error,
-            'output_files': self.output_files
-        }
-
-        with open(self.state_file, 'w') as f:
-            json.dump(state, f, indent=2)
+        """Save job state to disk (only if JSON persistence is enabled)."""
+        if not self.persist_to_json:
+            return
 
     def update(
         self,
@@ -840,151 +810,11 @@ class PipelineRunner:
 
         self.job.output_files['metadata'] = str(metadata_path)
 
-        # Generate chapter metadata for web player navigation
-        try:
-            playlist_files = list(audio_dir.glob("*.m3u"))
-            playlist_files = [p for p in playlist_files if not re.search(r'_\d{8}_\d{6}\.m3u$', p.name)]
-            if playlist_files:
-                from lib.audio.chapter_metadata import generate_chapter_metadata
-                generate_chapter_metadata(playlist_files[0])
-                self.job.update(stage_progress={'message': 'Chapter metadata generated'})
-        except Exception as e:
-            self.job.update(stage_progress={'message': f'Chapter metadata skipped: {e}'})
-
         self.job.update(progress=100)
 
 
-# ============================================================================
-# Public API
-# ============================================================================
-
-def create_job(
-    book_id: str,
-    source_file: str,
-    config: Dict
-) -> str:
-    """
-    Create a new pipeline job.
-
-    Args:
-        book_id: Book directory name
-        source_file: Source markdown filename
-        config: Job configuration
-
-    Returns:
-        job_id
-    """
-    job_id = str(uuid.uuid4())
-
-    # Create job
-    job = JobState(job_id, book_id, source_file, config)
-
-    with jobs_lock:
-        jobs[job_id] = job
-
-    # Start worker thread
-    thread = threading.Thread(target=_run_job, args=(job_id,), daemon=True)
-    thread.start()
-
-    return job_id
-
-
-def get_job(job_id: str) -> Optional[Dict]:
-    """Get job status"""
-    with jobs_lock:
-        job = jobs.get(job_id)
-        if job:
-            return job.to_dict()
-    return None
-
-
-def get_all_jobs() -> List[Dict]:
-    """Get all jobs"""
-    with jobs_lock:
-        return [job.to_dict() for job in jobs.values()]
-
-
-def cancel_job(job_id: str) -> bool:
-    """Cancel a running job"""
-    with jobs_lock:
-        job = jobs.get(job_id)
-        if job and job.status in [JobStatus.PENDING, JobStatus.RUNNING]:
-            job.update(status=JobStatus.CANCELLED)
-            return True
-    return False
-
-
-def _run_job(job_id: str):
-    """Worker thread to run a job"""
-    with job_semaphore:  # Limit concurrent jobs
-        with jobs_lock:
-            job = jobs.get(job_id)
-
-        if not job:
-            return
-
-        try:
-            runner = PipelineRunner(job)
-            runner.run()
-        except Exception as e:
-            print(f"❌ Job {job_id} failed: {e}")
-            job.update(status=JobStatus.FAILED, error=str(e))
-
-
-# Load existing jobs on startup
-def load_existing_jobs():
-    """Load job state from disk"""
-    if not JOBS_DIR.exists():
-        return
-
-    for state_file in JOBS_DIR.glob("*.json"):
-        try:
-            with open(state_file, 'r') as f:
-                state_data = json.load(f)
-
-            # Check if job is too old (orphaned)
-            created_at = datetime.fromisoformat(state_data['created_at'])
-            age_hours = (datetime.now() - created_at).total_seconds() / 3600
-
-            # Auto-cleanup: Delete orphaned jobs older than 24 hours that are still pending
-            if age_hours > 24 and state_data['status'] in ['pending', 'running']:
-                print(f"🗑️  Auto-cleanup: Removing orphaned job {state_data['job_id']} (age: {age_hours:.1f}h, status: {state_data['status']})")
-                state_file.unlink()
-                continue
-
-            # Recreate job object
-            job = JobState(
-                state_data['job_id'],
-                state_data['book_id'],
-                state_data['source_file'],
-                state_data['config']
-            )
-
-            # Restore state
-            job.status = state_data['status']
-            job.current_stage = state_data['current_stage']
-            job.progress = state_data['progress']
-            job.stage_progress = state_data['stage_progress']
-            job.created_at = state_data['created_at']
-            job.updated_at = state_data['updated_at']
-            job.started_at = state_data.get('started_at')
-            job.completed_at = state_data.get('completed_at')
-            job.error = state_data.get('error')
-            job.output_files = state_data.get('output_files', {})
-
-            with jobs_lock:
-                jobs[job.job_id] = job
-
-        except Exception as e:
-            print(f"⚠️  Failed to load job {state_file}: {e}")
-
-
-# Load existing jobs on module import
-load_existing_jobs()
-
-
 if __name__ == '__main__':
-    # Test the pipeline
+    # Test the pipeline directly (without unified queue)
     import argparse
 
     parser = argparse.ArgumentParser(description="Audiobook Pipeline Test")
@@ -1009,23 +839,13 @@ if __name__ == '__main__':
         'generate_cover': args.generate_cover
     }
 
-    job_id = create_job(args.book_id, args.source_file, config)
-    print(f"✅ Created job: {job_id}")
+    job_id = str(uuid.uuid4())
+    job = JobState(job_id, args.book_id, args.source_file, config)
+    print(f"Created job: {job_id}")
 
-    # Monitor progress
-    while True:
-        job = get_job(job_id)
-        if not job:
-            break
-
-        print(f"\r[{job['progress']:3d}%] {job['current_stage']:20s} - {job.get('stage_progress', {}).get('message', '')}", end='', flush=True)
-
-        if job['status'] in [JobStatus.COMPLETED, JobStatus.FAILED, JobStatus.CANCELLED]:
-            print()
-            break
-
-        time.sleep(2)
-
-    print(f"\n{'✅' if job['status'] == JobStatus.COMPLETED else '❌'} Job {job['status']}")
-    if job.get('error'):
-        print(f"Error: {job['error']}")
+    runner = PipelineRunner(job)
+    try:
+        runner.run()
+        print(f"\nJob completed")
+    except Exception as e:
+        print(f"\nJob failed: {e}")
