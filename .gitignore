@@ -163,6 +163,7 @@ test_jobs.db
 
 # Test/debug scripts and results (ad-hoc development)
 tests/adhoc/*.json
+scripts/*_results.json
 test_sample.txt
 test_chunking_simple.py
 test_hybrid_rag_demo.py
