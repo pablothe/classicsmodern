@@ -570,16 +570,15 @@ header h2 {
     font-size: 3rem;
 }
 
-/* Cover generation shimmer animation */
+/* Cover generation spinner */
 .book-cover-generating,
 .variant-cover-generating {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 12px;
     background: var(--bg-secondary);
-    position: relative;
-    overflow: hidden;
 }
 
 .book-cover-generating {
@@ -593,29 +592,25 @@ header h2 {
     border: 1px solid var(--border-color);
 }
 
-.cover-shimmer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        110deg,
-        transparent 25%,
-        rgba(255,255,255,0.08) 37%,
-        transparent 63%
-    );
-    animation: shimmer 1.8s ease-in-out infinite;
+.cover-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--text-secondary);
+    border-radius: 50%;
+    animation: cover-spin 0.8s linear infinite;
 }
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+.variant-cover-generating .cover-spinner {
+    width: 24px;
+    height: 24px;
+}
+
+@keyframes cover-spin {
+    to { transform: rotate(360deg); }
 }
 
 .cover-generating-label {
-    position: relative;
-    z-index: 1;
     font-size: 12px;
     color: var(--text-secondary);
     text-align: center;
@@ -952,6 +947,8 @@ header h2 {
 .skip-icon {
     font-size: 1rem;
     line-height: 1;
+    display: inline-block;
+    transform: rotate(90deg);
 }
 
 .skip-label {
@@ -1866,6 +1863,14 @@ header h2 {
     background: var(--text-primary);
     color: var(--bg-color);
     border-color: var(--text-primary);
+}
+
+.filter-divider {
+    width: 1px;
+    height: 1.25rem;
+    background: var(--border-color);
+    align-self: center;
+    margin: 0 0.125rem;
 }
 
 .sort-select {
@@ -2875,6 +2880,164 @@ header h2 {
     border-left: 3px solid var(--text-primary);
 }
 
+/* ============================================================================
+   Pipeline Single Screen
+   ============================================================================ */
+
+.pipeline-loading-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.pipeline-loading-state p {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Compact key-value rows */
+.pipeline-row {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pipeline-row-label {
+    width: 100px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pipeline-row-value {
+    flex: 1;
+    font-size: 15px;
+}
+
+.pipeline-row-value .form-select {
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.pipeline-inline-select {
+    width: auto;
+    min-width: 180px;
+}
+
+.pipeline-meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-left: 8px;
+}
+
+.pipeline-speed-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pipeline-speed-row .speed-presets {
+    display: flex;
+    gap: 4px;
+}
+
+.preset-active {
+    background: var(--text-primary) !important;
+    color: var(--bg-color) !important;
+    border-color: var(--text-primary) !important;
+}
+
+.pipeline-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.pipeline-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Collapsible sections */
+.pipeline-collapsible {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pipeline-collapsible-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.pipeline-collapsible-header:hover {
+    color: var(--text-secondary);
+}
+
+.pipeline-section-icon {
+    display: inline-block;
+    width: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.pipeline-section-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.pipeline-collapsible-body {
+    padding: 0 0 16px 0;
+    animation: fadeIn 0.15s ease;
+}
+
+/* Estimate and actions */
+.pipeline-estimate {
+    text-align: center;
+    padding: 16px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.pipeline-actions {
+    display: flex;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+/* Inline spinner for language re-detection */
+.pipeline-inline-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--text-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
     .pipeline-modal-container {
@@ -2887,6 +3050,24 @@ header h2 {
         right: 10px;
         left: 10px;
         width: auto;
+    }
+
+    .pipeline-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .pipeline-row-label {
+        width: auto;
+    }
+
+    .pipeline-speed-row {
+        flex-wrap: wrap;
+    }
+
+    .pipeline-actions {
+        flex-direction: column;
     }
 
     .step-buttons {
@@ -3982,4 +4163,343 @@ body.has-now-playing .view {
 
 .form-buttons button:hover {
     opacity: 0.8;
+}
+
+/* ============================================================================
+   Split View Layout (Player View)
+   ============================================================================ */
+
+/* Container */
+.split-view-container {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+}
+
+/* Player header: back + title + toggle */
+#player-view > header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-header-title {
+    flex: 1;
+    font-size: 1.125rem !important;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center !important;
+}
+
+/* Mobile read toggle button */
+.mobile-read-toggle {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* --- Mobile (default): stacked, toggle between listen/read --- */
+
+/* On mobile, split-right is hidden by default (listen mode) */
+.split-right {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* When in read mode on mobile, show split-right and hide split-left */
+#player-view.read-mode .split-left {
+    display: none;
+}
+
+#player-view.read-mode .split-right {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+#player-view.read-mode .split-view-container {
+    min-height: 0;
+    flex: 1;
+}
+
+/* No-audio CTA */
+.split-no-audio-cta {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.split-no-audio-cta p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+/* --- Split Tabs (YouTube Music style) --- */
+
+.split-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 1rem;
+    flex-shrink: 0;
+    background: var(--bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.split-tab {
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.split-tab.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+    font-weight: 600;
+}
+
+.split-tab:hover:not(.active) {
+    color: var(--text-primary);
+}
+
+/* --- Split Tab Content --- */
+
+.split-tab-content {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.split-tab-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chapters list in split view */
+.split-chapters-list {
+    padding: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.split-chapter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.split-chapter-item:hover {
+    background: var(--bg-secondary);
+}
+
+.split-chapter-item.active {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--text-primary);
+}
+
+.split-chapter-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.split-chapter-item.active .split-chapter-title {
+    font-weight: 600;
+}
+
+.split-chapter-duration {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+/* Inline reader in split view */
+.split-reader-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+    background: var(--bg-color);
+}
+
+.split-reader-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1rem 4rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.split-reader-content .reader-chapter-section {
+    max-width: 42rem;
+    margin: 0 auto 3rem;
+}
+
+/* Chat container in split view */
+.split-chat-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.split-chat-container .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: var(--bg-secondary);
+}
+
+/* Mini player bar at bottom of split-right (mobile read mode) */
+.split-mini-player {
+    display: none;
+    flex-shrink: 0;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-color);
+    padding: 0.5rem 1rem;
+}
+
+#player-view.read-mode .split-mini-player {
+    display: block;
+}
+
+.split-mini-progress {
+    height: 2px;
+    background: var(--border-color);
+    margin-bottom: 0.5rem;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.split-mini-progress-fill {
+    height: 100%;
+    background: var(--text-primary);
+    width: 0%;
+    transition: width 0.3s linear;
+}
+
+.split-mini-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* --- Desktop (≥1024px): side-by-side split --- */
+
+@media (min-width: 1024px) {
+    /* Expand app width for desktop */
+    #app {
+        max-width: 100%;
+    }
+
+    /* Player view fills viewport */
+    #player-view {
+        padding-bottom: 0;
+    }
+
+    #player-view.view.active {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .split-view-container {
+        flex-direction: row;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .split-left {
+        flex: 0 0 420px;
+        max-width: 480px;
+        overflow-y: auto;
+        border-right: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .split-left .player-container {
+        max-width: 100%;
+        padding: 2rem 1.5rem;
+    }
+
+    .split-left .book-cover {
+        width: 320px;
+        height: 320px;
+    }
+
+    /* Always show split-right on desktop (regardless of read-mode class) */
+    .split-right,
+    #player-view.read-mode .split-right {
+        display: flex;
+    }
+
+    /* Always show split-left on desktop */
+    #player-view.read-mode .split-left {
+        display: flex;
+    }
+
+    .split-right {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .split-tabs {
+        padding: 0 1.5rem;
+    }
+
+    .split-tab {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.875rem;
+    }
+
+    /* Hide mobile-only elements on desktop */
+    .mobile-read-toggle {
+        display: none !important;
+    }
+
+    /* Hide mobile-only secondary buttons that are now in split-right */
+    #chapters-btn,
+    #ai-assistant-btn,
+    #reader-btn {
+        display: none !important;
+    }
+
+    /* Mini player hidden on desktop (controls are in split-left) */
+    .split-mini-player,
+    #player-view.read-mode .split-mini-player {
+        display: none;
+    }
+
+    /* Simplify secondary grid to 2 columns on desktop */
+    .secondary-controls-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Inline reader gets more padding */
+    .split-reader-content {
+        padding: 2rem 2rem 4rem;
+    }
 }

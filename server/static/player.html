@@ -22,7 +22,7 @@
     <title>Audiobook Player</title>
 
     <!-- Stylesheets & Manifest -->
-    <link rel="stylesheet" href="/static/player.css?v=20260222">
+    <link rel="stylesheet" href="/static/player.css?v=20260225">
     <link rel="manifest" href="/static/manifest.json">
 </head>
 <body>
@@ -153,179 +153,237 @@
         <!-- Player View -->
         <div id="player-view" class="view">
             <header>
-                <button id="back-btn" class="icon-btn">← Versions</button>
+                <button id="back-btn" class="icon-btn">← Library</button>
+                <h2 id="player-header-title" class="player-header-title"></h2>
+                <button id="mobile-read-toggle" class="icon-btn mobile-read-toggle" title="Toggle Read mode">&#9776;</button>
             </header>
 
-            <div class="player-container">
-                <!-- Cover/Info Area -->
-                <div class="book-info">
-                    <div class="book-cover"></div>
-                    <h3 id="player-book-title">Book Title</h3>
-                    <p id="player-narrator" class="narrator-info"></p>
-                    <p id="current-chapter-name" class="current-chapter-name"></p>
+            <div class="split-view-container">
+                <!-- LEFT PANEL: Cover + Audio Controls -->
+                <div class="split-left">
+                    <div class="player-container">
+                        <!-- Cover/Info Area -->
+                        <div class="book-info">
+                            <div class="book-cover"></div>
+                            <h3 id="player-book-title">Book Title</h3>
+                            <p id="player-narrator" class="narrator-info"></p>
+                            <p id="current-chapter-name" class="current-chapter-name"></p>
+                        </div>
+
+                        <!-- No-audio CTA (shown when book has no audio) -->
+                        <div id="split-no-audio-cta" class="split-no-audio-cta" style="display: none;">
+                            <p>No audio available</p>
+                            <button id="split-generate-btn" class="generate-new-version-btn">+ Generate Audiobook</button>
+                        </div>
+
+                        <!-- Progress Bar (Audible Style) -->
+                        <div class="progress-container">
+                            <div class="time-display">
+                                <span id="current-time">0:00</span>
+                                <span id="time-remaining">--:-- left</span>
+                            </div>
+                            <input
+                                type="range"
+                                id="progress-bar"
+                                class="progress-bar"
+                                min="0"
+                                max="100"
+                                value="0"
+                                step="0.1"
+                            >
+                        </div>
+
+                        <!-- Main Controls -->
+                        <div class="controls">
+                            <button id="prev-file-btn" class="control-btn secondary" title="Previous file">◁</button>
+                            <button id="rewind-btn" class="control-btn skip-btn" title="Rewind 30s">
+                                <span class="skip-icon">↶</span>
+                                <span class="skip-label">30</span>
+                            </button>
+                            <button id="play-pause-btn" class="control-btn primary" title="Play/Pause">▶</button>
+                            <button id="forward-btn" class="control-btn skip-btn" title="Forward 30s">
+                                <span class="skip-icon">↷</span>
+                                <span class="skip-label">30</span>
+                            </button>
+                            <button id="next-file-btn" class="control-btn secondary" title="Next file">▷</button>
+                        </div>
+
+                        <!-- Secondary Controls (Audible Style) -->
+                        <div class="secondary-controls-grid" id="secondary-controls-grid">
+                            <button id="speed-btn" class="secondary-action-btn">
+                                <span id="speed-display">1.0x</span>
+                                <span class="action-label">Narration Speed</span>
+                            </button>
+                            <button id="chapters-btn" class="secondary-action-btn" style="display: none;">
+                                <span class="action-icon">≡</span>
+                                <span class="action-label">Chapters</span>
+                            </button>
+                            <button id="sleep-timer-btn" class="secondary-action-btn">
+                                <span class="action-icon">Timer</span>
+                                <span class="action-label">Sleep Timer</span>
+                            </button>
+                            <button id="reader-btn" class="secondary-action-btn" style="display: none;">
+                                <span class="action-icon">&#9776;</span>
+                                <span class="action-label">Read</span>
+                            </button>
+                            <button id="ai-assistant-btn" class="secondary-action-btn" style="display: none;">
+                                <span class="action-icon">AI</span>
+                                <span class="action-label">AI Assistant</span>
+                            </button>
+                            <!-- Audio Track Selector (Netflix-style) -->
+                            <div id="audio-track-selector" class="track-selector audio-track-selector" style="display: none;">
+                                <button id="audio-track-btn" class="track-selector-btn">
+                                    <span class="audio-track-icon">&#9835;</span>
+                                    <span id="audio-track-current">Audio</span>
+                                    <span class="track-selector-arrow">&#9662;</span>
+                                </button>
+                                <div id="audio-track-dropdown" class="track-selector-dropdown" style="display: none;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Speed Control Modal (Hidden by default) -->
+                        <div id="speed-modal" class="settings-modal" style="display: none;">
+                            <div class="speed-control">
+                                <input
+                                    type="range"
+                                    id="speed-slider"
+                                    min="0.5"
+                                    max="2.0"
+                                    value="1.0"
+                                    step="0.05"
+                                >
+                                <div class="speed-presets">
+                                    <button class="preset-btn" data-speed="0.75">0.75x</button>
+                                    <button class="preset-btn" data-speed="1.0">1x</button>
+                                    <button class="preset-btn" data-speed="1.25">1.25x</button>
+                                    <button class="preset-btn" data-speed="1.5">1.5x</button>
+                                    <button class="preset-btn" data-speed="2.0">2x</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Progress Bar (Audible Style) -->
-                <div class="progress-container">
-                    <div class="time-display">
-                        <span id="current-time">0:00</span>
-                        <span id="time-remaining">--:-- left</span>
+                <!-- RIGHT PANEL: Tabbed Content (Chapters / Read / AI Chat) -->
+                <div class="split-right">
+                    <div class="split-tabs">
+                        <button class="split-tab active" data-split-tab="chapters">Chapters</button>
+                        <button class="split-tab" data-split-tab="read">Read</button>
+                        <button class="split-tab" data-split-tab="chat">AI Chat</button>
                     </div>
+
+                    <!-- Chapters Tab -->
+                    <div class="split-tab-content active" data-split-content="chapters">
+                        <div id="split-chapters-list" class="split-chapters-list"></div>
+                    </div>
+
+                    <!-- Read Tab -->
+                    <div class="split-tab-content" data-split-content="read">
+                        <div class="split-reader-toolbar">
+                            <div id="split-text-track-selector" class="track-selector text-track-selector"></div>
+                            <button id="split-reader-settings-btn" class="reader-toolbar-btn" title="Reading settings">Aa</button>
+                        </div>
+                        <div id="split-reader-content" class="reader-content split-reader-content"></div>
+                    </div>
+
+                    <!-- AI Chat Tab -->
+                    <div class="split-tab-content" data-split-content="chat">
+                        <div class="split-chat-container">
+                            <div id="split-chat-messages" class="chat-messages"></div>
+                            <div class="chat-suggestions split-chat-suggestions">
+                                <button class="suggestion-btn" data-question="Summarize this chapter">Summarize</button>
+                                <button class="suggestion-btn" data-question="Who are the main characters?">Characters</button>
+                                <button class="suggestion-btn" data-question="What are the key themes?">Themes</button>
+                            </div>
+                            <form id="split-chat-form" class="chat-form">
+                                <input type="text" id="split-chat-input" placeholder="Ask about this book..." autocomplete="off" maxlength="500" />
+                                <button type="submit" id="split-chat-submit-btn">Send</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Mini player for mobile read mode (sticky bottom) -->
+                    <div class="split-mini-player">
+                        <div class="split-mini-progress">
+                            <div class="split-mini-progress-fill" id="split-mini-progress-fill"></div>
+                        </div>
+                        <div class="split-mini-controls">
+                            <button id="split-mini-rewind" class="np-btn" title="Back 30s"><span class="skip-icon">&#8630;</span></button>
+                            <button id="split-mini-play-pause" class="np-btn np-play-btn" title="Play/Pause">&#9654;</button>
+                            <button id="split-mini-forward" class="np-btn" title="Forward 30s"><span class="skip-icon">&#8631;</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modals (fixed position, work from any container) -->
+            <!-- Chapter Navigation Modal -->
+            <div id="chapters-backdrop" class="chapters-backdrop" style="display: none;"></div>
+            <div id="chapters-modal" class="chapters-modal" style="display: none;">
+                <div class="chapters-modal-header">
+                    <h4>Chapters</h4>
+                    <button id="close-chapters-btn" class="close-btn">✕</button>
+                </div>
+                <div id="chapters-list" class="chapters-list"></div>
+            </div>
+
+            <!-- Sleep Timer Modal -->
+            <div id="sleep-timer-backdrop" class="chapters-backdrop" style="display: none;"></div>
+            <div id="sleep-timer-modal" class="chapters-modal" style="display: none;">
+                <div class="chapters-modal-header">
+                    <h4>Sleep Timer</h4>
+                    <button id="close-sleep-timer-btn" class="close-btn">✕</button>
+                </div>
+                <div class="sleep-timer-content">
+                    <div class="timer-status" id="timer-status">No timer set</div>
+                    <div class="timer-buttons">
+                        <button class="timer-btn" data-minutes="15">15 min</button>
+                        <button class="timer-btn" data-minutes="30">30 min</button>
+                        <button class="timer-btn" data-minutes="45">45 min</button>
+                        <button class="timer-btn" data-minutes="60">60 min</button>
+                        <button class="timer-btn" data-action="end-of-chapter">End of Chapter</button>
+                        <button class="timer-btn cancel" id="cancel-timer-btn" style="display: none;">Cancel Timer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chat Panel (mobile bottom-sheet, hidden by default) -->
+            <div id="ai-chat-backdrop" class="chapters-backdrop" style="display: none;"></div>
+            <div id="ai-chat-panel" class="ai-chat-panel" style="display: none;">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <h4 id="chat-book-title">Book Title</h4>
+                        <p id="chat-chapter-info">AI Book Assistant</p>
+                    </div>
+                    <button id="close-chat-btn" class="close-btn">✕</button>
+                </div>
+
+                <div id="chat-messages" class="chat-messages">
+                    <!-- Messages render here -->
+                </div>
+
+                <div id="chat-tools-status" class="chat-tools-status" style="display: none;">
+                    <span class="spinner"></span>
+                    <span id="tools-status-text">Loading...</span>
+                </div>
+
+                <!-- Suggested Questions -->
+                <div class="chat-suggestions">
+                    <button class="suggestion-btn" data-question="Summarize this chapter">Summarize this chapter</button>
+                    <button class="suggestion-btn" data-question="Who are the main characters?">Main characters</button>
+                    <button class="suggestion-btn" data-question="What are the key themes?">Key themes</button>
+                </div>
+
+                <form id="chat-form" class="chat-form">
                     <input
-                        type="range"
-                        id="progress-bar"
-                        class="progress-bar"
-                        min="0"
-                        max="100"
-                        value="0"
-                        step="0.1"
-                    >
-                </div>
-
-                <!-- Main Controls -->
-                <div class="controls">
-                    <button id="prev-file-btn" class="control-btn secondary" title="Previous file">◁</button>
-                    <button id="rewind-btn" class="control-btn skip-btn" title="Rewind 30s">
-                        <span class="skip-icon">↶</span>
-                        <span class="skip-label">30</span>
-                    </button>
-                    <button id="play-pause-btn" class="control-btn primary" title="Play/Pause">▶</button>
-                    <button id="forward-btn" class="control-btn skip-btn" title="Forward 30s">
-                        <span class="skip-icon">↷</span>
-                        <span class="skip-label">30</span>
-                    </button>
-                    <button id="next-file-btn" class="control-btn secondary" title="Next file">▷</button>
-                </div>
-
-                <!-- Listen / Read Tabs -->
-                <div class="player-tabs" id="player-tabs" style="display:none">
-                    <button class="player-tab active" data-tab="listen">Listen</button>
-                    <button class="player-tab" data-tab="read">Read</button>
-                    <button class="player-tab-sync" id="player-sync-btn" title="Sync text with audio" style="display:none">Sync</button>
-                </div>
-
-                <!-- Secondary Controls (Audible Style) -->
-                <div class="secondary-controls-grid" id="secondary-controls-grid">
-                    <button id="speed-btn" class="secondary-action-btn">
-                        <span id="speed-display">1.0x</span>
-                        <span class="action-label">Narration Speed</span>
-                    </button>
-                    <button id="chapters-btn" class="secondary-action-btn" style="display: none;">
-                        <span class="action-icon">≡</span>
-                        <span class="action-label">Chapters</span>
-                    </button>
-                    <button id="sleep-timer-btn" class="secondary-action-btn">
-                        <span class="action-icon">Timer</span>
-                        <span class="action-label">Sleep Timer</span>
-                    </button>
-                    <button id="reader-btn" class="secondary-action-btn" style="display: none;">
-                        <span class="action-icon">&#9776;</span>
-                        <span class="action-label">Read</span>
-                    </button>
-                    <button id="ai-assistant-btn" class="secondary-action-btn" style="display: none;">
-                        <span class="action-icon">AI</span>
-                        <span class="action-label">AI Assistant</span>
-                    </button>
-                    <!-- Audio Track Selector (Netflix-style) -->
-                    <div id="audio-track-selector" class="track-selector audio-track-selector" style="display: none;">
-                        <button id="audio-track-btn" class="track-selector-btn">
-                            <span class="audio-track-icon">&#9835;</span>
-                            <span id="audio-track-current">Audio</span>
-                            <span class="track-selector-arrow">&#9662;</span>
-                        </button>
-                        <div id="audio-track-dropdown" class="track-selector-dropdown" style="display: none;"></div>
-                    </div>
-                </div>
-
-                <!-- Speed Control Modal (Hidden by default) -->
-                <div id="speed-modal" class="settings-modal" style="display: none;">
-                    <div class="speed-control">
-                        <input
-                            type="range"
-                            id="speed-slider"
-                            min="0.5"
-                            max="2.0"
-                            value="1.0"
-                            step="0.05"
-                        >
-                        <div class="speed-presets">
-                            <button class="preset-btn" data-speed="0.75">0.75x</button>
-                            <button class="preset-btn" data-speed="1.0">1x</button>
-                            <button class="preset-btn" data-speed="1.25">1.25x</button>
-                            <button class="preset-btn" data-speed="1.5">1.5x</button>
-                            <button class="preset-btn" data-speed="2.0">2x</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chapter Navigation Modal (if available) -->
-                <div id="chapters-backdrop" class="chapters-backdrop" style="display: none;"></div>
-                <div id="chapters-modal" class="chapters-modal" style="display: none;">
-                    <div class="chapters-modal-header">
-                        <h4>Chapters</h4>
-                        <button id="close-chapters-btn" class="close-btn">✕</button>
-                    </div>
-                    <div id="chapters-list" class="chapters-list"></div>
-                </div>
-
-                <!-- Sleep Timer Modal (Hidden by default) -->
-                <div id="sleep-timer-backdrop" class="chapters-backdrop" style="display: none;"></div>
-                <div id="sleep-timer-modal" class="chapters-modal" style="display: none;">
-                    <div class="chapters-modal-header">
-                        <h4>Sleep Timer</h4>
-                        <button id="close-sleep-timer-btn" class="close-btn">✕</button>
-                    </div>
-                    <div class="sleep-timer-content">
-                        <div class="timer-status" id="timer-status">No timer set</div>
-                        <div class="timer-buttons">
-                            <button class="timer-btn" data-minutes="15">15 min</button>
-                            <button class="timer-btn" data-minutes="30">30 min</button>
-                            <button class="timer-btn" data-minutes="45">45 min</button>
-                            <button class="timer-btn" data-minutes="60">60 min</button>
-                            <button class="timer-btn" data-action="end-of-chapter">End of Chapter</button>
-                            <button class="timer-btn cancel" id="cancel-timer-btn" style="display: none;">Cancel Timer</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Chat Panel (Hidden by default) -->
-                <div id="ai-chat-backdrop" class="chapters-backdrop" style="display: none;"></div>
-                <div id="ai-chat-panel" class="ai-chat-panel" style="display: none;">
-                    <div class="chat-header">
-                        <div class="chat-title">
-                            <h4 id="chat-book-title">Book Title</h4>
-                            <p id="chat-chapter-info">AI Book Assistant</p>
-                        </div>
-                        <button id="close-chat-btn" class="close-btn">✕</button>
-                    </div>
-
-                    <div id="chat-messages" class="chat-messages">
-                        <!-- Messages render here -->
-                    </div>
-
-                    <div id="chat-tools-status" class="chat-tools-status" style="display: none;">
-                        <span class="spinner"></span>
-                        <span id="tools-status-text">Loading...</span>
-                    </div>
-
-                    <!-- Suggested Questions -->
-                    <div class="chat-suggestions">
-                        <button class="suggestion-btn" data-question="Summarize this chapter">Summarize this chapter</button>
-                        <button class="suggestion-btn" data-question="Who are the main characters?">Main characters</button>
-                        <button class="suggestion-btn" data-question="What are the key themes?">Key themes</button>
-                    </div>
-
-                    <form id="chat-form" class="chat-form">
-                        <input
-                            type="text"
-                            id="chat-input"
-                            placeholder="Ask about this book..."
-                            autocomplete="off"
-                            maxlength="500"
-                        />
-                        <button type="submit" id="chat-submit-btn">Send</button>
-                    </form>
-                </div>
+                        type="text"
+                        id="chat-input"
+                        placeholder="Ask about this book..."
+                        autocomplete="off"
+                        maxlength="500"
+                    />
+                    <button type="submit" id="chat-submit-btn">Send</button>
+                </form>
             </div>
         </div>
     </div>
@@ -344,9 +402,9 @@
                 <span class="now-playing-chapter" id="np-chapter"></span>
             </div>
             <div class="now-playing-controls">
-                <button id="np-rewind" class="np-btn" title="Back 30s">&#8630;</button>
+                <button id="np-rewind" class="np-btn" title="Back 30s"><span class="skip-icon">&#8630;</span></button>
                 <button id="np-play-pause" class="np-btn np-play-btn" title="Play/Pause">&#9654;</button>
-                <button id="np-forward" class="np-btn" title="Forward 30s">&#8631;</button>
+                <button id="np-forward" class="np-btn" title="Forward 30s"><span class="skip-icon">&#8631;</span></button>
             </div>
         </div>
     </div>
@@ -431,9 +489,9 @@
                     <div class="reader-progress-fill" id="reader-progress-fill"></div>
                 </div>
                 <div class="reader-player-buttons">
-                    <button id="reader-rewind" class="reader-ctrl-btn" title="Rewind 30s">&#8630;30</button>
+                    <button id="reader-rewind" class="reader-ctrl-btn" title="Rewind 30s"><span class="skip-icon">&#8630;</span>30</button>
                     <button id="reader-play-pause" class="reader-mini-play-btn">&#9654;</button>
-                    <button id="reader-forward" class="reader-ctrl-btn" title="Forward 30s">&#8631;30</button>
+                    <button id="reader-forward" class="reader-ctrl-btn" title="Forward 30s"><span class="skip-icon">&#8631;</span>30</button>
                 </div>
             </div>
 
@@ -714,9 +772,9 @@
         </div>
     </div>
 
-    <script src="/static/karaoke.js?v=20260222"></script>
-    <script src="/static/reader.js?v=20260224"></script>
-    <script src="/static/player.js?v=20260224"></script>
-    <script src="/static/pipeline.js?v=20260222"></script>
+    <script src="/static/karaoke.js?v=20260225"></script>
+    <script src="/static/reader.js?v=20260225"></script>
+    <script src="/static/player.js?v=20260225"></script>
+    <script src="/static/pipeline.js?v=20260225"></script>
 </body>
 </html>
