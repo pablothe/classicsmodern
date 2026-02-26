@@ -171,6 +171,7 @@ test_jobs.db
 
 # Book processing artifacts
 books/*/.audiobook_state*.json
+books/*/.translation_checkpoint*.json
 books/*/.vector_cache/
 books/*/*.md.bak
 books/*/*.md.backup*
