@@ -137,11 +137,11 @@ def check_file_exists(file_path: Path) -> Tuple[bool, List[str]]:
     return True, errors
 
 
-def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], List[str], Dict]:
+def check_chapter_structure(text: str, filename: str, book_file=None) -> Tuple[bool, List[str], List[str], Dict]:
     """
     Validate chapter structure.
 
-    Uses BookProcessor as the canonical chapter detection system (14+ patterns).
+    Uses BookProcessor as the canonical chapter detection system.
     Also checks TOC via ChapterDetector for TOC/content mismatch warnings.
 
     Returns:
@@ -167,8 +167,8 @@ def check_chapter_structure(text: str, filename: str) -> Tuple[bool, List[str], 
     metrics['has_toc'] = len(toc) > 0
     metrics['toc_count'] = len(toc)
 
-    # Detect chapters from ## headers or regex fallback
-    bp_chapters = processor.detect_chapters(cleaned_text)
+    # Detect chapters (Gutenberg TOC → ## headers → regex fallback)
+    bp_chapters = processor.detect_chapters(cleaned_text, book_file=book_file)
     chapters = []
     for ch in bp_chapters:
         chapters.append({
@@ -444,7 +444,7 @@ def validate_book(file_path: str, verbose: bool = False) -> ValidationReport:
         print("Checking chapter structure...")
 
     chapter_valid, chapter_errors, chapter_warnings, chapter_metrics = check_chapter_structure(
-        text, path.name
+        text, path.name, book_file=path
     )
     errors.extend(chapter_errors)
     warnings.extend(chapter_warnings)
@@ -568,7 +568,7 @@ def auto_fix_book(file_path: str, backup: bool = True) -> bool:
         r'^##\s+(Table of Contents|Contents)\s*$', text, re.MULTILINE | re.IGNORECASE
     ))
     processor = BookProcessor(verbose=False)
-    bp_chapters = processor.detect_chapters(text)
+    bp_chapters = processor.detect_chapters(text, book_file=path)
     chapters = [{'number': ch.number, 'marker': ch.marker} for ch in bp_chapters]
     toc = processor.detect_toc(text)
 

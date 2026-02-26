@@ -332,9 +332,9 @@ class GutenbergDownloader:
             if kw_match:
                 section_type = _section_type_map.get(kw_match.group(1).lower(), 'chapter')
 
-            # Also accept standalone Roman numerals (e.g., "I.", "XIV.")
+            # Also accept standalone Roman numerals (e.g., "I.", "XIV.", "II.,")
             if not is_chapter:
-                is_chapter = bool(re.match(r'^[IVXLCDM]+\.?\s', text))
+                is_chapter = bool(re.match(r'^[IVXLCDM]+\.?[\s,;]?$|^[IVXLCDM]+\.?\s', text.strip()))
 
             if is_chapter:
                 chapter_links.append({'anchor': href, 'title': text, 'section_type': section_type})
@@ -369,6 +369,144 @@ class GutenbergDownloader:
             })
 
         return toc_entries
+
+    def _extract_chapters_from_headings(self, soup) -> list:
+        """
+        Fallback: extract chapter entries from HTML heading tags (h2, h3, h4).
+
+        Used when no anchor-based TOC is found. Scans heading tags for content
+        that looks like chapter titles (has chapter keywords or Roman/Arabic numerals).
+
+        Returns:
+            List of dicts with 'anchor', 'title', 'number', 'section_type' keys
+        """
+        chapter_kw = re.compile(
+            r'(chapter|chapitre|kapitel|capítulo|capitolo|глава|'
+            r'part|partie|teil|parte|часть|'
+            r'book|livre|buch|libro|книга|'
+            r'act|scene|acte|akt|'
+            r'prologue|epilogue|préface|introduction|conclusion|foreword|preface)',
+            re.IGNORECASE
+        )
+        _section_type_map = {
+            'chapter': 'chapter', 'chapitre': 'chapter', 'kapitel': 'chapter',
+            'capítulo': 'chapter', 'capitolo': 'chapter', 'глава': 'chapter',
+            'part': 'part', 'partie': 'part', 'teil': 'part', 'часть': 'part',
+            'book': 'book', 'livre': 'book', 'buch': 'book', 'libro': 'book', 'книга': 'book',
+            'act': 'act', 'acte': 'act', 'akt': 'act',
+            'scene': 'scene',
+            'prologue': 'prologue', 'epilogue': 'epilogue',
+            'préface': 'preface', 'preface': 'preface', 'foreword': 'foreword',
+            'introduction': 'introduction', 'conclusion': 'conclusion',
+        }
+
+        # Skip headers that are clearly metadata, not content
+        skip_patterns = re.compile(
+            r'(table of contents|contents|copyright|gutenberg|'
+            r'transcriber|produced by|about the author|license|'
+            r'^\s*by\s)',
+            re.IGNORECASE
+        )
+
+        # Try heading levels in order of preference
+        for tag_name in ['h2', 'h3', 'h4']:
+            headings = soup.find_all(tag_name)
+            if len(headings) < 2:
+                continue
+
+            chapter_headings = []
+            for heading in headings:
+                text = heading.get_text(strip=True)
+                if not text or len(text) > 200:
+                    continue
+                if skip_patterns.search(text):
+                    continue
+
+                # Check for chapter keywords
+                kw_match = chapter_kw.search(text)
+                section_type = 'chapter'
+                is_chapter = False
+
+                if kw_match:
+                    is_chapter = True
+                    section_type = _section_type_map.get(kw_match.group(1).lower(), 'chapter')
+
+                # Accept Roman numerals (e.g., "I.", "XIV. Title")
+                if not is_chapter:
+                    is_chapter = bool(re.match(r'^[IVXLCDM]+\.?\s', text))
+
+                # Accept "Of Our Spiritual Strivings" style descriptive titles
+                # if they are consistently at the same heading level
+                # (we'll check this by total count below)
+
+                if is_chapter:
+                    chapter_headings.append({
+                        'text': text,
+                        'section_type': section_type,
+                        'element': heading
+                    })
+
+            # If we found 3+ chapter headings at this level, use them
+            if len(chapter_headings) >= 3:
+                toc_entries = []
+                for i, ch in enumerate(chapter_headings):
+                    title = ch['text']
+                    # Extract number
+                    number = i + 1
+                    num_match = re.search(r'\b([IVXLCDM]+)\b', title)
+                    if num_match:
+                        try:
+                            number = self._roman_to_int(num_match.group(1))
+                        except Exception:
+                            pass
+                    else:
+                        digit_match = re.search(r'\b(\d+)\b', title)
+                        if digit_match:
+                            try:
+                                number = int(digit_match.group(1))
+                            except Exception:
+                                pass
+
+                    # Generate a synthetic anchor from the heading text
+                    anchor = re.sub(r'[^\w]', '_', title[:30]).strip('_')
+
+                    toc_entries.append({
+                        'anchor': anchor,
+                        'title': title,
+                        'number': number,
+                        'section_type': ch['section_type']
+                    })
+
+                print(f"  Found {len(toc_entries)} chapters from <{tag_name}> heading tags")
+                return toc_entries
+
+        # Fallback: if many headings exist at one level without chapter keywords,
+        # check if they're all descriptive titles (short, no Gutenberg boilerplate)
+        for tag_name in ['h2', 'h3', 'h4']:
+            headings = soup.find_all(tag_name)
+            content_headings = []
+            for heading in headings:
+                text = heading.get_text(strip=True)
+                if not text or len(text) > 200 or len(text) < 2:
+                    continue
+                if skip_patterns.search(text):
+                    continue
+                content_headings.append(text)
+
+            if len(content_headings) >= 5:
+                toc_entries = []
+                for i, title in enumerate(content_headings):
+                    anchor = re.sub(r'[^\w]', '_', title[:30]).strip('_')
+                    toc_entries.append({
+                        'anchor': anchor,
+                        'title': title,
+                        'number': i + 1,
+                        'section_type': 'chapter'
+                    })
+                print(f"  Found {len(toc_entries)} chapters from <{tag_name}> descriptive headings")
+                return toc_entries
+
+        return []
 
     @staticmethod
     def _clean_toc_title(original_title: str) -> str:
@@ -461,11 +599,19 @@ class GutenbergDownloader:
         for tag in soup(['script', 'style', 'nav', 'header', 'footer']):
             tag.decompose()
 
-        # Extract TOC and inject chapter headers before conversion
+        # Extract TOC from anchor links, or fall back to heading tags
         toc_entries = self._extract_toc_from_html(soup)
+        if not toc_entries:
+            toc_entries = self._extract_chapters_from_headings(soup)
         if toc_entries:
-            print(f"  Found {len(toc_entries)} chapters in HTML TOC")
-            self._inject_chapter_headers(soup, toc_entries)
+            if not any(soup.find_all('a', attrs={'name': e.get('anchor', '')}) or
+                       soup.find_all(attrs={'id': e.get('anchor', '')})
+                       for e in toc_entries[:1]):
+                # Heading-based entries don't have anchors to inject at
+                pass
+            else:
+                print(f"  Found {len(toc_entries)} chapters in HTML TOC")
+                self._inject_chapter_headers(soup, toc_entries)
 
         # Get body content
         body = soup.body if soup.body else soup

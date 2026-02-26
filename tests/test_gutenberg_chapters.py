@@ -70,9 +70,10 @@ def _get_cached_markdown(downloader, gutenberg_id, slug):
 
 def _get_chapters(downloader, processor, gutenberg_id, slug):
     """Get cached chapters for a book."""
+    book_file = CACHE_DIR / slug / "book.md"
     markdown = _get_cached_markdown(downloader, gutenberg_id, slug)
     cleaned, _ = processor.strip_gutenberg(markdown)
-    return processor.detect_chapters(cleaned)
+    return processor.detect_chapters(cleaned, book_file=book_file)
 
 
 @pytest.mark.requires_network

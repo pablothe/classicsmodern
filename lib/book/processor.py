@@ -14,7 +14,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 import argparse
@@ -158,8 +158,8 @@ class BookProcessor:
         metadata = self.extract_metadata(cleaned_text)
         self.log_message(f"Metadata: {metadata.get('title', 'Unknown')} by {metadata.get('author', 'Unknown')}")
 
-        # Step 3: Detect chapters from ## headers or regex fallback
-        chapters = self.detect_chapters(cleaned_text)
+        # Step 3: Detect chapters (Gutenberg TOC → ## headers → regex fallback)
+        chapters = self.detect_chapters(cleaned_text, book_file=book_file)
         self.log_message(f"Detected {len(chapters)} chapters")
 
         if chapters:
@@ -319,15 +319,17 @@ class BookProcessor:
 
         return 'Unknown'
 
-    def detect_chapters(self, text: str) -> List[Chapter]:
+    def detect_chapters(self, text: str, book_file: Path = None) -> List[Chapter]:
         """
-        Detect all chapters using a 2-step priority chain.
+        Detect all chapters using a 3-step priority chain.
 
+        Priority 0: Gutenberg HTML TOC (gutenberg_chapters.json) — most reliable
         Priority 1: Markdown ## headers
         Priority 2: Minimal regex fallback
 
         Args:
             text: Book text content
+            book_file: Path to the book file (used to find gutenberg_chapters.json)
 
         Returns:
             List of Chapter objects
@@ -335,10 +337,19 @@ class BookProcessor:
         lines = text.split('\n')
         chapter_dicts = []
 
+        # PRIORITY 0: Gutenberg HTML TOC — authoritative chapter list from HTML
+        if book_file is not None:
+            gutenberg_chapters = self._load_gutenberg_chapters(Path(book_file))
+            if gutenberg_chapters:
+                chapter_dicts = self._locate_chapters_by_titles(lines, gutenberg_chapters)
+                if chapter_dicts:
+                    self.log_message(f"Priority 0: Found {len(chapter_dicts)} chapters from gutenberg_chapters.json")
+
         # PRIORITY 1: Markdown ## headers (Gutenberg downloads + any structured markdown)
-        chapter_dicts = self._detect_header_chapters(lines)
-        if chapter_dicts:
-            self.log_message(f"Priority 1: Found {len(chapter_dicts)} chapters from ## headers")
+        if not chapter_dicts:
+            chapter_dicts = self._detect_header_chapters(lines)
+            if chapter_dicts:
+                self.log_message(f"Priority 1: Found {len(chapter_dicts)} chapters from ## headers")
 
         # PRIORITY 2: Minimal regex fallback (bare "Chapter I" lines, acts, prologues)
         if not chapter_dicts:
@@ -360,6 +371,232 @@ class BookProcessor:
                 }]
 
         return self._dicts_to_chapters(chapter_dicts, lines, text)
+
+    def _load_gutenberg_chapters(self, book_file: Path) -> Optional[list]:
+        """Load chapter metadata from gutenberg_chapters.json if available."""
+        gutenberg_json = book_file.parent / "gutenberg_chapters.json"
+        if not gutenberg_json.exists():
+            return None
+        try:
+            with open(gutenberg_json, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            chapters = data.get('chapters', [])
+            if len(chapters) >= 1:
+                self.log_message(f"Loaded {len(chapters)} chapters from gutenberg_chapters.json")
+                return chapters
+        except (json.JSONDecodeError, IOError) as e:
+            self.log_message(f"Failed to load gutenberg_chapters.json: {e}")
+        return None
+
+    # Ordinal words → numbers for matching "FIRST ACT" style labels
+    ORDINAL_MAP = {
+        'first': 1, 'second': 2, 'third': 3, 'fourth': 4, 'fifth': 5,
+        'sixth': 6, 'seventh': 7, 'eighth': 8, 'ninth': 9, 'tenth': 10,
+    }
+
+    # Structural keywords used in prefix stripping
+    _STRUCT_KEYWORDS = (
+        r'Chapter|CHAPTER|Chapitre|CHAPITRE|Kapitel|KAPITEL|Part|PART|Partie|'
+        r'Act|ACT|Acte|ACTE|Scene|SCENE|Scène|SCÈNE|Book|BOOK|Volume|VOLUME'
+    )
+
+    @staticmethod
+    def _normalize_title_for_matching(title: str) -> str:
+        """Normalize a chapter title for fuzzy matching.
+
+        Strips structural prefixes (Chapter/Part/Act/Scene + number),
+        handles ordinal words (FIRST ACT → strip), normalizes whitespace/case/punctuation.
+        """
+        kw = BookProcessor._STRUCT_KEYWORDS
+        # Strip "Chapter N:", "Part N.", "Act N", "Scene N", etc.
+        title = re.sub(
+            rf'^({kw})\s+([IVXLCDM]+|\d+)[.:,]?\s*',
+            '', title, flags=re.IGNORECASE
+        )
+        # Strip ordinal word + structural keyword (e.g., "FIRST ACT", "SECOND PART")
+        ordinals = '|'.join(BookProcessor.ORDINAL_MAP.keys())
+        title = re.sub(
+            rf'^({ordinals})\s+({kw})\.?\s*',
+            '', title, flags=re.IGNORECASE
+        )
+        # Strip leading number with dot (e.g., "1. Title")
+        title = re.sub(r'^\d+\.\s*', '', title)
+        # Normalize whitespace and case
+        title = re.sub(r'\s+', ' ', title).strip().lower()
+        # Remove punctuation
+        title = re.sub(r'[^\w\s]', '', title)
+        return title
+
+    @staticmethod
+    def _extract_chapter_number(title: str) -> int:
+        """Extract chapter/part/act number from a structural label.
+
+        Handles: 'CHAPTER I', 'Chapter 3:', 'Part II', 'Act V', 'Scene 2',
+                 'FIRST ACT', 'SECOND PART', etc.
+        Returns 0 if no number found.
+        """
+        kw = BookProcessor._STRUCT_KEYWORDS
+        # Standard format: keyword + number
+        m = re.match(rf'^(?:{kw})\s+([IVXLCDM]+|\d+)', title, re.IGNORECASE)
+        if m:
+            num_str = m.group(1)
+            if num_str.isdigit():
+                return int(num_str)
+            try:
+                return BookProcessor.roman_to_int(num_str)
+            except (ValueError, KeyError):
+                return 0
+
+        # Ordinal format: "FIRST ACT", "SECOND PART", etc.
+        ordinals = '|'.join(BookProcessor.ORDINAL_MAP.keys())
+        m = re.match(rf'^({ordinals})\s+(?:{kw})', title, re.IGNORECASE)
+        if m:
+            return BookProcessor.ORDINAL_MAP.get(m.group(1).lower(), 0)
+
+        return 0
+
+    @staticmethod
+    def _is_bare_chapter_label(title: str) -> bool:
+        """Check if a title is just a structural label with no subtitle.
+
+        Matches: 'CHAPTER I', 'Part 2', 'ACT V', 'Scene III', 'FIRST ACT', etc.
+        """
+        kw = BookProcessor._STRUCT_KEYWORDS
+        if re.match(rf'^(?:{kw})\s+([IVXLCDM]+|\d+)\.?\s*$', title.strip(), re.IGNORECASE):
+            return True
+        ordinals = '|'.join(BookProcessor.ORDINAL_MAP.keys())
+        if re.match(rf'^({ordinals})\s+(?:{kw})\.?\s*$', title.strip(), re.IGNORECASE):
+            return True
+        return False
+
+    # Headers to skip when matching (metadata, not content)
+    _SKIP_HEADERS = {
+        'contents', 'table of contents', 'copyright',
+        'acknowledgements', 'acknowledgments', 'about the author',
+        'colophon', 'note', 'notes', 'bibliography', 'index',
+        'footnotes', 'endnotes', 'glossary',
+    }
+
+    def _locate_chapters_by_titles(self, lines: list, gutenberg_chapters: list) -> list:
+        """Locate chapters in markdown by matching against known Gutenberg titles.
+
+        Uses the structured data from gutenberg_chapters.json to find where each
+        chapter starts in the markdown text. Matching strategies:
+        1. Title-based: normalized title comparison against ## headers
+        2. Number-based: for bare "CHAPTER N" labels, match by chapter number
+        3. Structural fallback: if strategies 1-2 matched very few, accept any
+           structural ## headers (Act/Part/Chapter) since we know it's a Gutenberg book
+        """
+        # Build lookups from Gutenberg data
+        title_lookup = {}  # normalized_title -> gc
+        number_lookup = {}  # chapter_number -> gc (only for bare labels)
+
+        for gc in gutenberg_chapters:
+            norm = self._normalize_title_for_matching(gc['title'])
+            if norm:
+                title_lookup[norm] = gc
+            # Also try original_title if present
+            if 'original_title' in gc:
+                norm_orig = self._normalize_title_for_matching(gc['original_title'])
+                if norm_orig and norm_orig not in title_lookup:
+                    title_lookup[norm_orig] = gc
+
+            # For bare chapter labels like "CHAPTER I", build a number-based lookup
+            if self._is_bare_chapter_label(gc['title']):
+                ch_num = self._extract_chapter_number(gc['title'])
+                if ch_num > 0:
+                    number_lookup[ch_num] = gc
+
+        # Collect all ## headers with their positions
+        all_headers = []
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            match = re.match(r'^##\s+(.+)', stripped)
+            if not match:
+                continue
+            header_text = match.group(1).strip()
+            # Skip metadata headers
+            if header_text.lower() in self._SKIP_HEADERS:
+                continue
+            if header_text.lower().startswith('by '):
+                continue
+            if re.match(r'^\[.*\]\(#', header_text):
+                continue
+            all_headers.append((i, stripped, header_text))
+
+        # Pass 1: Title and number matching
+        chapter_dicts = []
+        matched_gc = set()
+        matched_header_indices = set()
+
+        for i, stripped, header_text in all_headers:
+            norm_header = self._normalize_title_for_matching(header_text)
+            gc = None
+
+            # Strategy 1: Exact normalized title match
+            if norm_header:
+                gc = title_lookup.get(norm_header)
+
+            # Strategy 2: Substring match (handles reformatted titles)
+            if not gc and norm_header:
+                for norm_title, gc_candidate in title_lookup.items():
+                    if id(gc_candidate) in matched_gc:
+                        continue
+                    if norm_title in norm_header or norm_header in norm_title:
+                        gc = gc_candidate
+                        break
+
+            # Strategy 3: Number-based match for bare "CHAPTER N" labels
+            if not gc and number_lookup:
+                ch_num = self._extract_chapter_number(header_text)
+                if ch_num > 0 and ch_num in number_lookup:
+                    gc_candidate = number_lookup[ch_num]
+                    if id(gc_candidate) not in matched_gc:
+                        gc = gc_candidate
+
+            if gc:
+                matched_gc.add(id(gc))
+                matched_header_indices.add(i)
+                chapter_dicts.append({
+                    'line_num': i,
+                    'char_pos': len('\n'.join(lines[:i])),
+                    'marker': stripped,
+                    'title': header_text,
+                    'detection_type': 'gutenberg_toc',
+                    'section_type': gc.get('section_type', 'chapter')
+                })
+
+        # Pass 2: Structural fallback for granularity mismatches
+        # (e.g., JSON has Scenes but MD only has Acts)
+        # If we matched very few entries, accept unmatched structural headers
+        if len(chapter_dicts) < len(gutenberg_chapters) * 0.5:
+            for i, stripped, header_text in all_headers:
+                if i in matched_header_indices:
+                    continue
+                # Accept if this header has a structural keyword with a number
+                ch_num = self._extract_chapter_number(header_text)
+                if ch_num > 0:
+                    # Detect section_type from the header
+                    section_type = 'chapter'
+                    header_lower = header_text.lower()
+                    for kw, stype in [('act', 'act'), ('part', 'part'), ('book', 'book'),
+                                      ('volume', 'volume'), ('scene', 'scene')]:
+                        if kw in header_lower:
+                            section_type = stype
+                            break
+                    chapter_dicts.append({
+                        'line_num': i,
+                        'char_pos': len('\n'.join(lines[:i])),
+                        'marker': stripped,
+                        'title': header_text,
+                        'detection_type': 'gutenberg_toc',
+                        'section_type': section_type
+                    })
+
+            # Re-sort by line number after adding fallback entries
+            chapter_dicts.sort(key=lambda x: x['line_num'])
+
+        return chapter_dicts
 
     def _detect_header_chapters(self, lines: list) -> list:
         """

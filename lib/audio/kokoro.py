@@ -682,16 +682,17 @@ class KokoroAudioGenerator:
         silence = np.zeros(int(sample_rate * duration), dtype=np.float32)
         sf.write(str(output_path), silence, sample_rate)
 
-    def detect_chapters(self, text: str, is_cleaned: bool = False) -> list:
+    def detect_chapters(self, text: str, is_cleaned: bool = False, book_file=None) -> list:
         """
         Detect chapter boundaries in text.
 
-        Delegates to BookProcessor for raw text detection (canonical 14-pattern system).
+        Delegates to BookProcessor for raw text detection.
         For cleaned text (with <<<CHAPTER:MARKER:...>>> tags), uses marker-based detection.
 
         Args:
             text: Text to search for chapters (should have Gutenberg boilerplate stripped)
             is_cleaned: Whether text has been cleaned for speech
+            book_file: Path to the book file (for Gutenberg TOC lookup)
 
         Returns:
             List of tuples: (chapter_number, start_position, title)
@@ -703,7 +704,7 @@ class KokoroAudioGenerator:
         from lib.book.processor import BookProcessor
         processor = BookProcessor(verbose=False)
         cleaned_text, _ = processor.strip_gutenberg(text)
-        bp_chapters = processor.detect_chapters(cleaned_text)
+        bp_chapters = processor.detect_chapters(cleaned_text, book_file=book_file)
 
         # Convert BookProcessor Chapter objects to v1 tuple format
         return [(ch.number, ch.start_char, ch.marker) for ch in bp_chapters]
@@ -1141,12 +1142,12 @@ class KokoroAudioGenerator:
             raw_text = f.read()
 
         # IMPORTANT: Detect chapters from ORIGINAL markdown using BookProcessor
-        # This ensures chapter structure comes from source text with full 14-pattern detection
+        # This ensures chapter structure comes from source text (Gutenberg TOC → headers → regex)
         print("Detecting chapters from source markdown...")
         from lib.book.processor import BookProcessor
         processor = BookProcessor(verbose=False)
         stripped_text, _ = processor.strip_gutenberg(raw_text)
-        chapter_objects = processor.detect_chapters(stripped_text)
+        chapter_objects = processor.detect_chapters(stripped_text, book_file=input_path)
 
         # Also build tuples for backward-compat
         chapters = [(ch.number, ch.start_char, ch.marker) for ch in chapter_objects]
