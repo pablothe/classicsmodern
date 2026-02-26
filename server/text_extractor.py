@@ -383,6 +383,41 @@ def _load_manifest(book_dir: Path) -> Optional[Dict]:
         return None
 
 
+def _get_audio_extras(book_dir: Path, max_manifest_chapter: int = 0) -> tuple:
+    """Check chunk manifest for prologue (chapter 0) and epilogue.
+
+    discover_books() injects a prologue at index 0 and/or appends an
+    epilogue when the chunk manifest has chapters outside the manifest
+    range.  The text API must account for these extra entries.
+
+    Returns:
+        (has_prologue, has_epilogue)
+    """
+    for name in ('book_chunk_manifest.json',
+                 f'{book_dir.name}_chunk_manifest.json'):
+        cm_path = book_dir / 'audio_kokoro' / name
+        if cm_path.exists():
+            try:
+                with open(cm_path, 'r') as f:
+                    cm = json.load(f)
+                chunk_chapters = {c.get('chapter') for c in cm.get('chunks', [])}
+                has_prologue = 0 in chunk_chapters
+                has_epilogue = any(
+                    c is not None and c > max_manifest_chapter
+                    for c in chunk_chapters
+                ) if max_manifest_chapter > 0 else False
+                return has_prologue, has_epilogue
+            except (json.JSONDecodeError, IOError):
+                pass
+    return False, False
+
+
+def _has_audio_prologue(book_dir: Path) -> bool:
+    """Convenience wrapper — True when chunk manifest has chapter 0."""
+    has_prologue, _ = _get_audio_extras(book_dir)
+    return has_prologue
+
+
 def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timing: Optional[Dict] = None, total_audio_chapters: int = None, source_path: Optional[Path] = None) -> Optional[Dict]:
     """
     Get chapter text data for text sync API.
@@ -430,10 +465,74 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
                     'audio_duration': audio_chapter_timing.get('duration')
                 }
 
-            if chapter_index < 0 or chapter_index >= len(manifest_chapters):
+            # Audio extras: discover_books() injects a prologue at index 0
+            # and/or appends an epilogue.  Detect both to adjust indices.
+            max_ch = max((ch.get('number', 0) for ch in manifest_chapters), default=0)
+            has_prologue, has_epilogue = _get_audio_extras(book_dir, max_ch)
+            prologue_offset = 1 if has_prologue else 0
+            epilogue_index = len(manifest_chapters) + prologue_offset if has_epilogue else -1
+
+            # --- Prologue: front matter before first chapter ---
+            if has_prologue and chapter_index == 0:
+                src = find_source_text(book_dir)
+                if src:
+                    try:
+                        with open(src, 'r', encoding='utf-8') as f:
+                            full_text = f.read()
+                        first_start = manifest_chapters[0].get('start_char', 0)
+                        front_matter = full_text[:first_start].strip() if first_start > 0 else ''
+                        if front_matter:
+                            paragraphs = split_into_paragraphs(front_matter)
+                            result = {
+                                'chapter_num': 0,
+                                'title': 'Prologue',
+                                'text': front_matter,
+                                'paragraphs': paragraphs,
+                                'word_count': len(front_matter.split()),
+                                'estimated_duration': len(front_matter.split()) / 200 * 60
+                            }
+                            if audio_chapter_timing:
+                                result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
+                                result['audio_duration'] = audio_chapter_timing.get('duration')
+                            return result
+                    except IOError:
+                        pass
                 return None
 
-            chapter = manifest_chapters[chapter_index]
+            # --- Epilogue: text after last chapter ---
+            if has_epilogue and chapter_index == epilogue_index:
+                src = find_source_text(book_dir)
+                if src:
+                    try:
+                        with open(src, 'r', encoding='utf-8') as f:
+                            full_text = f.read()
+                        last_end = manifest_chapters[-1].get('end_char', len(full_text))
+                        back_matter = full_text[last_end:].strip() if last_end < len(full_text) else ''
+                        if back_matter:
+                            paragraphs = split_into_paragraphs(back_matter)
+                            result = {
+                                'chapter_num': max_ch + 1,
+                                'title': 'Epilogue',
+                                'text': back_matter,
+                                'paragraphs': paragraphs,
+                                'word_count': len(back_matter.split()),
+                                'estimated_duration': len(back_matter.split()) / 200 * 60
+                            }
+                            if audio_chapter_timing:
+                                result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
+                                result['audio_duration'] = audio_chapter_timing.get('duration')
+                            return result
+                    except IOError:
+                        pass
+                return None
+
+            # Adjust index to account for injected prologue
+            manifest_index = chapter_index - prologue_offset
+
+            if manifest_index < 0 or manifest_index >= len(manifest_chapters):
+                return None
+
+            chapter = manifest_chapters[manifest_index]
             chapter_text = chapter.get('content', '')
             if not chapter_text:
                 # Manifest chapter has no content, fall through to detection
@@ -549,14 +648,34 @@ def get_book_chapters_list(book_dir: Path) -> List[Dict]:
     # Manifest-first path
     manifest = _load_manifest(book_dir)
     if manifest and manifest.get('chapters'):
-        return [
+        manifest_chapters = manifest['chapters']
+        max_ch = max((ch.get('number', 0) for ch in manifest_chapters), default=0)
+        has_prologue, has_epilogue = _get_audio_extras(book_dir, max_ch)
+
+        chapters = []
+        offset = 0
+
+        if has_prologue:
+            chapters.append({'number': 0, 'title': 'Prologue', 'index': 0})
+            offset = 1
+
+        chapters.extend(
             {
                 'number': ch.get('number', i + 1),
                 'title': ch.get('title', f'Chapter {i + 1}'),
-                'index': i
+                'index': i + offset
             }
-            for i, ch in enumerate(manifest['chapters'])
-        ]
+            for i, ch in enumerate(manifest_chapters)
+        )
+
+        if has_epilogue:
+            chapters.append({
+                'number': max_ch + 1,
+                'title': 'Epilogue',
+                'index': len(manifest_chapters) + offset
+            })
+
+        return chapters
 
     # Fallback: detect from source text
     source_path = find_source_text(book_dir)
