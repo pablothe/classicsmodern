@@ -756,8 +756,10 @@ class PipelineRunner:
             self.job.update(progress=int(end_pct), stage_progress={'message': 'Cover generation skipped (cover.py not found)'})
             return
 
-        # Generate cover
-        prompt = f"Book cover art for '{book_title}', classic literature style, elegant typography, vintage aesthetic"
+        # Generate cover prompt from book content using LLM
+        from lib.cover.prompts import get_book_prompt
+        source_path = self.book_dir / self.job.source_file
+        prompt = get_book_prompt(str(source_path))
 
         cmd = [
             sys.executable,

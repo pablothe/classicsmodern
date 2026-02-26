@@ -3,13 +3,16 @@
 Language Detector for Book Pipeline
 
 Detects the language of source text files to determine if translation is needed.
-Uses Gutenberg metadata (if available), script detection, and pattern matching (100% local).
+Uses Gutenberg metadata (if available), script detection, LLM analysis, and pattern matching.
 """
 
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Dict, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 
 class LanguageDetector:
@@ -127,6 +130,35 @@ class LanguageDetector:
 
         return None
 
+    def _detect_with_llm(self, filepath: Path) -> Optional[str]:
+        """
+        Use LLM to detect language from ~30 words in the middle of the book.
+
+        Reads from the midpoint to avoid Gutenberg headers and mixed-language
+        frontmatter. Handles Latin-script languages (French, Spanish, Latin, etc.)
+        that script detection can't distinguish.
+
+        Args:
+            filepath: Path to book file
+
+        Returns:
+            Language name or None
+        """
+        try:
+            import sys
+            # Ensure project root is on path for lib imports
+            project_root = str(Path(__file__).parent.parent)
+            if project_root not in sys.path:
+                sys.path.insert(0, project_root)
+            from lib.cover.prompts import detect_language_with_llm
+            language = detect_language_with_llm(filepath)
+            if language:
+                return language
+        except Exception as e:
+            logger.warning(f"LLM language detection failed: {e}")
+
+        return None
+
     def detect_language(self, filepath: Path) -> Dict:
         """
         Detect the language of a book file using multiple methods.
@@ -175,7 +207,19 @@ class LanguageDetector:
                 'needs_translation': script_lang.lower() != 'english'
             }
 
-        # Method 2: Filename pattern matching
+        # Method 2: LLM-based detection (reads ~30 words from middle of book)
+        # Handles Latin-script languages that script detection can't distinguish
+        llm_lang = self._detect_with_llm(filepath)
+        if llm_lang:
+            return {
+                'language': llm_lang,
+                'code': self._get_language_code(llm_lang),
+                'confidence': 0.9,
+                'method': 'llm',
+                'needs_translation': llm_lang.lower() != 'english'
+            }
+
+        # Method 3: Filename pattern matching
         filename_lang = self._detect_from_filename(filepath)
         if filename_lang:
             return {

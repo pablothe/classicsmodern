@@ -41,11 +41,14 @@ def cover_handler(job: Dict, progress_callback: Callable) -> Dict:
     if not book_dir.exists():
         raise Exception(f"Book directory not found: {book_id}")
 
-    # Stage 1: Get book prompt (0-10%)
-    progress_callback(5, {'message': 'Preparing cover prompt...', 'stage': 'prepare'})
+    # Stage 1: Get book prompt from content using LLM (0-10%)
+    progress_callback(5, {'message': 'Analyzing book content for cover prompt...', 'stage': 'prepare'})
 
     from lib.cover.prompts import get_book_prompt
-    prompt = get_book_prompt(book_id)
+    # Pass actual book file path so LLM can read content
+    book_files = list(book_dir.glob("*.md"))
+    book_file = str(book_files[0]) if book_files else book_id
+    prompt = get_book_prompt(book_file)
 
     progress_callback(10, {'message': 'Prompt ready', 'stage': 'prepare'})
 

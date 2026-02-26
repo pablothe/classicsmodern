@@ -17,7 +17,7 @@ All models run 100% locally. No cloud APIs, no API keys.
 
 | Model | Purpose | Runtime | Notes |
 |-------|---------|---------|-------|
-| **zongwei/gemma3-translator:4b** | Translation & summarization | Ollama | Primary translation model, ~16-20 words/sec |
+| **zongwei/gemma3-translator:4b** | Translation, summarization, cover prompts & language detection | Ollama | Primary translation model, ~16-20 words/sec |
 | **zongwei/gemma3-translator:1b** | Translation (lightweight) | Ollama | Faster alternative, lower quality |
 | **llama3.2:3b** | AI chat / Q&A about books | Ollama | Used by web player's chat feature |
 | **Kokoro v1.0** | Text-to-speech (52 voices) | ONNX Runtime | Apache 2.0, ~335MB, auto-downloaded |
@@ -26,7 +26,7 @@ All models run 100% locally. No cloud APIs, no API keys.
 | **WhisperX base** | Word-level timing (Karaoke) | PyTorch | Optional, for karaoke text sync |
 
 **Required services:**
-- **Ollama** must be running locally (`ollama serve`) for translation, summarization, and AI chat
+- **Ollama** must be running locally (`ollama serve`) for translation, summarization, cover prompt generation, language detection, and AI chat
 - All other models are loaded directly (no server needed)
 
 ## Environment Setup
@@ -380,7 +380,7 @@ classicsmodern/
 │   │   └── chapter_metadata.py # Chapter metadata generation
 │   ├── cover/
 │   │   ├── generator.py       # Stable Diffusion cover generation
-│   │   └── prompts.py         # Book-specific prompt catalog
+│   │   └── prompts.py         # LLM-powered prompt generation (reads book content, watercolor style)
 │   └── summarize/
 │       └── engine.py          # BookSummarizer (LLM summarization)
 │
@@ -395,7 +395,7 @@ classicsmodern/
 │   │   ├── download_handler.py
 │   │   ├── pipeline_handler.py
 │   │   └── cover_handler.py
-│   ├── language_detector.py   # Language detection
+│   ├── language_detector.py   # Language detection (LLM-enhanced for Latin-script languages)
 │   ├── text_extractor.py      # Text extraction
 │   ├── llm_chat.py            # AI chat (Ollama)
 │   ├── hybrid_rag.py          # RAG retrieval
@@ -465,8 +465,17 @@ The project uses a unified manifest system for consistent chapter handling:
 
 ### Cover Art System
 - **Model**: Stable Diffusion v1.5 (runwayml/stable-diffusion-v1-5)
+- **Prompt Generation**: LLM-powered via gemma3-translator:4b — reads ~30 words from the middle of the book, asks the model to name the main character and describe what makes them visually distinctive (appearance, clothing, expression, setting)
+- **Style**: All covers use watercolor illustration style (enforced by prompt wrapper)
+- **Fallback**: Hardcoded catalog of 17 book-specific prompts when Ollama is unavailable, generic watercolor prompt as last resort
 - **Hardware**: Apple Silicon GPU (MPS) or CPU fallback
 - **Output**: 512x512 PNG, customizable
+
+### Language Detection
+- **Primary**: Gutenberg metadata (100% reliable when available)
+- **Script detection**: Identifies non-Latin scripts (Cyrillic, Greek, Chinese, Arabic)
+- **LLM detection**: gemma3-translator:4b reads ~30 words from the middle of the book to identify Latin-script languages (French, Spanish, Latin, Italian, etc.)
+- **Fallback**: Filename patterns, then defaults to English
 
 ### File Organization Pattern
 ```
