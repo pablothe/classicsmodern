@@ -267,13 +267,14 @@
                 <!-- RIGHT PANEL: Tabbed Content (Chapters / Read / AI Chat) -->
                 <div class="split-right">
                     <div class="split-tabs">
-                        <button class="split-tab active" data-split-tab="chapters">Chapters</button>
+                        <button class="split-tab active" data-split-tab="chapters">Audio Files</button>
                         <button class="split-tab" data-split-tab="read">Read</button>
                         <button class="split-tab" data-split-tab="chat">AI Chat</button>
                     </div>
 
-                    <!-- Chapters Tab -->
+                    <!-- Audio Files Tab -->
                     <div class="split-tab-content active" data-split-content="chapters">
+                        <div id="split-variant-info" class="split-variant-info"></div>
                         <div id="split-chapters-list" class="split-chapters-list"></div>
                     </div>
 
@@ -282,6 +283,31 @@
                         <div class="split-reader-toolbar">
                             <div id="split-text-track-selector" class="track-selector text-track-selector"></div>
                             <button id="split-reader-settings-btn" class="reader-toolbar-btn" title="Reading settings">Aa</button>
+                        </div>
+                        <div id="split-reader-settings" class="reader-settings-panel hidden">
+                            <div class="reader-setting-row">
+                                <span class="reader-setting-label">Font Size</span>
+                                <div class="reader-setting-control">
+                                    <button class="split-font-size-btn" data-delta="-2">A&minus;</button>
+                                    <span id="split-font-size-display">18</span>
+                                    <button class="split-font-size-btn" data-delta="2">A+</button>
+                                </div>
+                            </div>
+                            <div class="reader-setting-row">
+                                <span class="reader-setting-label">Font</span>
+                                <select id="split-font-select" class="reader-select">
+                                    <option value="Georgia, serif">Georgia</option>
+                                    <option value="'Times New Roman', serif">Times New Roman</option>
+                                    <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino</option>
+                                    <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
+                                    <option value="system-ui, sans-serif">System</option>
+                                    <option value="'Courier New', Courier, monospace">Courier</option>
+                                </select>
+                            </div>
+                            <div class="reader-setting-row">
+                                <span class="reader-setting-label">Line Height</span>
+                                <input type="range" id="split-line-height" min="1.4" max="2.6" step="0.2" value="1.8">
+                            </div>
                         </div>
                         <div id="split-reader-content" class="reader-content split-reader-content"></div>
                     </div>
@@ -416,7 +442,7 @@
             <button id="reader-close-btn" class="reader-toolbar-btn" title="Close reader">&times;</button>
             <span id="reader-chapter-title" class="reader-toolbar-title">Chapter</span>
             <div class="reader-toolbar-actions">
-                <button id="reader-audio-sync-btn" class="reader-toolbar-btn reader-sync-btn" title="Sync with audio" style="display: none;">Sync</button>
+                <button id="reader-audio-sync-btn" class="reader-toolbar-btn reader-sync-btn" title="Sync with audio">Sync</button>
                 <button id="reader-chapter-nav-btn" class="reader-toolbar-btn" title="Jump to chapter">&#9776;</button>
                 <button id="reader-settings-btn" class="reader-toolbar-btn" title="Reading settings">Aa</button>
                 <button id="reader-more-btn" class="reader-toolbar-btn" title="More options">&#8943;</button>

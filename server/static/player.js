@@ -77,6 +77,33 @@ const state = {
 };
 
 // ============================================================================
+// Voice Name Mapping
+// ============================================================================
+
+const VOICE_NAMES = {
+    'af_sky': 'Sky', 'af_bella': 'Bella', 'af_nicole': 'Nicole', 'af_sarah': 'Sarah',
+    'af_heart': 'Heart', 'af_star': 'Star', 'af_jessica': 'Jessica', 'af_river': 'River',
+    'am_adam': 'Adam', 'am_michael': 'Michael', 'am_onyx': 'Onyx', 'am_eric': 'Eric',
+    'am_liam': 'Liam', 'am_fenrir': 'Fenrir',
+    'bf_emma': 'Emma', 'bf_isabella': 'Isabella', 'bf_alice': 'Alice', 'bf_lily': 'Lily',
+    'bm_george': 'George', 'bm_lewis': 'Lewis', 'bm_daniel': 'Daniel', 'bm_fable': 'Fable',
+};
+const VOICE_ACCENTS = { af: 'American', am: 'American', bf: 'British', bm: 'British' };
+const VOICE_GENDERS = { af: 'Female', am: 'Male', bf: 'Female', bm: 'Male' };
+
+function getVoiceDisplayName(voiceId, short) {
+    if (!voiceId) return null;
+    const prefix = voiceId.substring(0, 2);
+    const parts = voiceId.split('_');
+    const name = VOICE_NAMES[voiceId] || (parts[1] ? parts[1].charAt(0).toUpperCase() + parts[1].slice(1) : voiceId);
+    if (short) return name;
+    const accent = VOICE_ACCENTS[prefix] || '';
+    const gender = VOICE_GENDERS[prefix] || '';
+    if (accent || gender) return `${name} (${accent} ${gender})`.trim();
+    return name;
+}
+
+// ============================================================================
 // API Client
 // ============================================================================
 
@@ -559,6 +586,7 @@ async function loadLibrary() {
 
         // Fetch playback progress and compute reading status for all books
         const positions = await API.getAllPlaybackPositions();
+        state.allPlaybackPositions = positions;
         state.playbackProgress = {};
         state.bookStatus = {};
         state.bookDuration = {};
@@ -964,7 +992,8 @@ async function quickPlayBook(bookId) {
     state.currentBook = book;
     state.textTracks = book.text_tracks || [];
     autoSelectTextTrack();
-    await loadVariantAudio(book, book.variants[0]);
+    const bestVariant = selectBestVariant(book);
+    await loadVariantAudio(book, bestVariant);
     ui.audio.play();
     updateNowPlayingBar();
 }
@@ -1250,50 +1279,53 @@ function renderVariants() {
     const book = state.currentBook;
 
     ui.variantList.innerHTML = book.variants.map(variant => {
+        // Voice name as primary title
+        const voiceName = getVoiceDisplayName(variant.voice);
         const typeBadge = variant.type === 'summary' && variant.summary_pct
             ? `${variant.summary_pct}% Summary`
             : variant.type === 'deduped'
-            ? 'Full (Deduped)'
-            : 'Full Translation';
+            ? 'Full (Cleaned)'
+            : 'Full';
+        const title = voiceName || typeBadge;
 
         const date = new Date(variant.created_at).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
         });
 
-        // Language info
-        let langInfo = '';
+        // Subtitle: type + language if translated
+        const subtitleParts = [];
+        if (voiceName) subtitleParts.push(typeBadge);
         if (variant.source_lang && variant.target_lang) {
-            langInfo = `${variant.source_lang} → ${variant.target_lang}`;
+            subtitleParts.push(`${variant.source_lang} \u2192 ${variant.target_lang}`);
         } else if (variant.target_lang) {
-            langInfo = variant.target_lang;
-        } else if (book.language) {
-            langInfo = book.language;
+            subtitleParts.push(variant.target_lang);
         }
+        subtitleParts.push(date);
+        const subtitle = subtitleParts.join(' \u00b7 ');
+
+        // Duration and size
+        const duration = variant.total_duration ? formatDuration(variant.total_duration) : '';
+        const chapterCount = book.chapters?.length || 0;
+        const metaParts = [];
+        if (chapterCount > 0) metaParts.push(`${chapterCount} chapter${chapterCount !== 1 ? 's' : ''}`);
+        if (duration) metaParts.push(duration);
+        metaParts.push(formatSize(variant.size_mb));
 
         return `
             <div class="variant-item" data-variant-id="${variant.variant_id}">
                 <div class="variant-header">
                     <div class="variant-title">
-                        <h4>${typeBadge}</h4>
-                        <p class="variant-subtitle">
-                            ${langInfo ? `${langInfo} • ` : ''}${date}
-                        </p>
+                        <h4>${title}</h4>
+                        <p class="variant-subtitle">${subtitle}</p>
                     </div>
                     <div class="variant-actions">
-                        <div class="variant-badges">
-                            <span class="variant-badge ${variant.type}">${variant.type}</span>
-                            ${variant.is_combined ? '<span class="variant-badge combined">Single File</span>' : ''}
-                        </div>
-                        <button class="delete-variant-btn" data-variant-id="${variant.variant_id}" title="Delete this audiobook">×</button>
+                        <button class="delete-variant-btn" data-variant-id="${variant.variant_id}" title="Delete this audiobook">\u00d7</button>
                     </div>
                 </div>
                 <div class="variant-meta">
-                    <span>${variant.file_count} file${variant.file_count !== 1 ? 's' : ''}</span>
-                    <span>${variant.size_mb} MB</span>
+                    ${metaParts.map(p => `<span>${p}</span>`).join('')}
                 </div>
             </div>
         `;
@@ -1860,23 +1892,27 @@ function renderAudioTrackSelector() {
 
     ui.audioTrackSelector.style.display = 'block';
 
-    // Display current variant language
-    const currentLang = state.currentVariant?.target_lang || state.currentVariant?.source_lang || 'Audio';
+    // Display current variant — use voice name (short) as button label
+    const currentVoice = getVoiceDisplayName(state.currentVariant?.voice, true);
+    const currentLang = state.currentVariant?.target_lang || state.currentVariant?.source_lang || '';
     const currentType = state.currentVariant?.type === 'summary'
         ? ` (${state.currentVariant.summary_pct}%)`
         : '';
+    const currentLabel = (currentVoice || currentLang || 'Audio') + currentType;
     if (ui.audioTrackCurrent) {
-        ui.audioTrackCurrent.textContent = currentLang + currentType;
+        ui.audioTrackCurrent.textContent = currentLabel;
     }
 
-    // Build track list from variants
+    // Build track list from variants — use full voice names in dropdown
     const audioTracks = book.variants.map(v => {
-        const lang = v.target_lang || v.source_lang || 'Audio';
+        const voiceName = getVoiceDisplayName(v.voice);
+        const lang = v.target_lang || v.source_lang || '';
         const suffix = v.type === 'summary' ? ` (${v.summary_pct}%)` : '';
+        const label = (voiceName || lang || 'Audio') + suffix;
         return {
             track_id: v.variant_id,
-            language: lang + suffix,
-            label: lang + suffix,
+            language: label,
+            label: label,
             is_original: false,
         };
     });
@@ -2793,17 +2829,19 @@ function showDeleteConfirmation(variant) {
      * Uses custom modal if available, falls back to window.confirm().
      */
     // Build variant display name
+    const voiceName = getVoiceDisplayName(variant.voice);
     const typeBadge = variant.type === 'summary' && variant.summary_pct
         ? `${variant.summary_pct}% Summary`
         : variant.type === 'deduped'
-        ? 'Full (Deduped)'
-        : 'Full Translation';
+        ? 'Full (Cleaned)'
+        : 'Full';
+    const displayName = voiceName ? `${voiceName} — ${typeBadge}` : typeBadge;
 
-    const details = `${variant.file_count} file${variant.file_count !== 1 ? 's' : ''} • ${variant.size_mb} MB`;
+    const details = formatSize(variant.size_mb);
 
     // Try custom modal first
     if (ui.deleteModal && ui.deleteBackdrop) {
-        if (ui.deleteVariantName) ui.deleteVariantName.textContent = typeBadge;
+        if (ui.deleteVariantName) ui.deleteVariantName.textContent = displayName;
         if (ui.deleteVariantDetails) ui.deleteVariantDetails.textContent = details;
         if (ui.confirmDeleteBtn) {
             ui.confirmDeleteBtn.dataset.variantId = variant.variant_id;
@@ -2816,7 +2854,7 @@ function showDeleteConfirmation(variant) {
     } else {
         // Fallback: use native confirm dialog
         const confirmed = window.confirm(
-            `Delete "${typeBadge}"?\n\n${details}\n\nThis action cannot be undone.`
+            `Delete "${displayName}"?\n\n${details}\n\nThis action cannot be undone.`
         );
         if (confirmed) {
             executeDelete(variant.variant_id);
@@ -2947,6 +2985,26 @@ function setupEventListeners() {
     // Split view tabs
     document.querySelectorAll('.split-tab').forEach(tab => {
         tab.addEventListener('click', () => switchSplitTab(tab.dataset.splitTab));
+    });
+
+    // Split reader settings
+    document.getElementById('split-reader-settings-btn')?.addEventListener('click', () => {
+        const panel = document.getElementById('split-reader-settings');
+        if (panel) panel.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.split-font-size-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const delta = parseInt(e.target.dataset.delta);
+            if (!isNaN(delta) && window.bookReader) {
+                window.bookReader.setFontSize(window.bookReader.prefs.fontSize + delta);
+            }
+        });
+    });
+    document.getElementById('split-font-select')?.addEventListener('change', (e) => {
+        if (window.bookReader) window.bookReader.setFontFamily(e.target.value);
+    });
+    document.getElementById('split-line-height')?.addEventListener('input', (e) => {
+        if (window.bookReader) window.bookReader.setLineHeight(e.target.value);
     });
 
     // Split view generate button
@@ -3304,6 +3362,31 @@ async function openReader() {
     updateNowPlayingBar();
 }
 
+function selectBestVariant(book) {
+    if (!book.variants || book.variants.length === 0) return null;
+    if (book.variants.length === 1) return book.variants[0];
+
+    // 1. Prefer variant with existing playback position (most recently used)
+    let bestByPlayback = null;
+    let bestPlaybackTime = null;
+    for (const v of book.variants) {
+        const k = `${book.book_id}:${v.variant_id}`;
+        const p = state.allPlaybackPositions?.[k];
+        if (p && p.last_updated && (!bestPlaybackTime || p.last_updated > bestPlaybackTime)) {
+            bestByPlayback = v;
+            bestPlaybackTime = p.last_updated;
+        }
+    }
+    if (bestByPlayback) return bestByPlayback;
+
+    // 2. Prefer combined (chapter-based) over chunks, then most recent
+    const combined = book.variants.filter(v => v.is_combined);
+    if (combined.length > 0) return combined[0]; // variants already sorted newest-first
+
+    // 3. Fallback: first variant (newest)
+    return book.variants[0];
+}
+
 async function openBook(bookId) {
     const book = state.books.find(b => b.book_id === bookId);
     if (!book) return;
@@ -3321,7 +3404,8 @@ async function openBook(bookId) {
         state.chunkManifest = null;
         state.paragraphTimings = null;
         if (book.has_audio && book.variants.length > 0) {
-            await loadVariantAudio(book, book.variants[0]);
+            const bestVariant = selectBestVariant(book);
+            await loadVariantAudio(book, bestVariant);
         } else {
             state.currentVariant = null;
         }
@@ -4025,6 +4109,9 @@ function renderSplitView() {
 }
 
 function renderSplitChapters() {
+    // Render variant info section above chapters
+    renderSplitVariantInfo();
+
     const container = document.getElementById('split-chapters-list');
     if (!container) return;
 
@@ -4050,6 +4137,112 @@ function renderSplitChapters() {
             const idx = parseInt(item.dataset.chapterIndex);
             jumpToChapter(idx);
             renderSplitChapters(); // re-render to update active state
+        });
+    });
+}
+
+function renderSplitVariantInfo() {
+    const container = document.getElementById('split-variant-info');
+    if (!container) return;
+
+    const book = state.currentBook;
+    const variant = state.currentVariant;
+    if (!book || !variant) {
+        container.innerHTML = '';
+        return;
+    }
+
+    const voiceName = getVoiceDisplayName(variant.voice) || 'Audiobook';
+    const duration = variant.total_duration ? formatDuration(variant.total_duration) : '';
+    const size = formatSize(variant.size_mb);
+    const hasMultiple = book.variants && book.variants.length > 1;
+
+    // Build current variant card
+    let switcherHtml = '';
+    if (hasMultiple) {
+        const options = book.variants.map(v => {
+            const isActive = v.variant_id === variant.variant_id;
+            const vVoice = getVoiceDisplayName(v.voice) || 'Audiobook';
+            const vSuffix = v.type === 'summary' && v.summary_pct ? ` (${v.summary_pct}%)` : '';
+            const vDuration = v.total_duration ? formatDuration(v.total_duration) : '';
+            const vSize = formatSize(v.size_mb);
+            const metaParts = [vDuration, vSize].filter(Boolean).join(' \u00b7 ');
+            return `
+                <div class="split-variant-option ${isActive ? 'active' : ''}" data-variant-id="${v.variant_id}">
+                    <div class="split-variant-option-left">
+                        <div class="split-variant-option-name">${vVoice}${vSuffix}</div>
+                        <div class="split-variant-option-meta">${metaParts}</div>
+                    </div>
+                    <div class="split-variant-option-right">
+                        ${isActive ? '<span class="split-variant-check">&#10003;</span>' : `<button class="split-variant-option-delete" data-variant-id="${v.variant_id}" title="Delete">&#128465;</button>`}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        switcherHtml = `
+            <div class="split-variant-selector">
+                <button class="split-variant-switch-btn" id="split-variant-switch">
+                    ${book.variants.length} versions available &#9662;
+                </button>
+                <div id="split-variant-dropdown" class="split-variant-dropdown" style="display:none;">
+                    ${options}
+                </div>
+            </div>
+        `;
+    }
+
+    const suffix = variant.type === 'summary' && variant.summary_pct ? ` (${variant.summary_pct}% Summary)` : '';
+    const metaParts = [duration, size].filter(Boolean).join(' \u00b7 ');
+
+    container.innerHTML = `
+        <div class="split-variant-card">
+            <div class="split-variant-main">
+                <div class="split-variant-title">&#9835; ${voiceName}${suffix}</div>
+                <div class="split-variant-meta">${metaParts}</div>
+            </div>
+            <button class="split-variant-delete-btn" title="Delete this version">&#128465;</button>
+        </div>
+        ${switcherHtml}
+    `;
+
+    // Delete current variant
+    const deleteBtn = container.querySelector('.split-variant-delete-btn');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => showDeleteConfirmation(variant));
+    }
+
+    // Version switcher toggle
+    const switchBtn = container.querySelector('#split-variant-switch');
+    if (switchBtn) {
+        const dropdown = container.querySelector('#split-variant-dropdown');
+        switchBtn.addEventListener('click', () => {
+            const isOpen = dropdown.style.display !== 'none';
+            dropdown.style.display = isOpen ? 'none' : 'block';
+            switchBtn.classList.toggle('open', !isOpen);
+        });
+    }
+
+    // Variant option clicks (switch audio)
+    container.querySelectorAll('.split-variant-option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+            if (e.target.closest('.split-variant-option-delete')) return;
+            const variantId = opt.dataset.variantId;
+            if (variantId !== variant.variant_id) {
+                selectAudioTrack(variantId);
+            }
+            const dropdown = container.querySelector('#split-variant-dropdown');
+            if (dropdown) dropdown.style.display = 'none';
+        });
+    });
+
+    // Delete buttons in dropdown
+    container.querySelectorAll('.split-variant-option-delete').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const variantId = btn.dataset.variantId;
+            const v = book.variants.find(vr => vr.variant_id === variantId);
+            if (v) showDeleteConfirmation(v);
         });
     });
 }

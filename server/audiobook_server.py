@@ -456,7 +456,8 @@ def discover_books() -> List[Dict]:
             'size_mb': round(total_size / (1024 * 1024), 2),
             'created_at': created_at,
             'timestamp': variant_info['timestamp'],
-            'total_duration': 0
+            'total_duration': 0,
+            'voice': None
         }
 
         # Try to get total_duration from chunk manifest
@@ -475,6 +476,16 @@ def discover_books() -> List[Dict]:
                 except (json.JSONDecodeError, IOError):
                     pass
                 break
+
+        # Try to load voice metadata from audiobook_metadata.json
+        metadata_path = playlist_path.parent / "audiobook_metadata.json"
+        if metadata_path.exists():
+            try:
+                with open(metadata_path, 'r') as meta_f:
+                    audio_meta = json.load(meta_f)
+                variant['voice'] = audio_meta.get('voice')
+            except (json.JSONDecodeError, IOError):
+                pass
 
         # Add variant to book and mark book as having audio
         books_by_id[book_id]['variants'].append(variant)

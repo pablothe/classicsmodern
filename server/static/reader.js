@@ -108,8 +108,7 @@ class BookReader {
         // Show/hide sync button
         const syncBtn = document.getElementById('reader-audio-sync-btn');
         if (syncBtn) {
-            syncBtn.style.display = this.hasAudio ? '' : 'none';
-            syncBtn.classList.toggle('active', this.audioSyncEnabled && this.hasAudio);
+            syncBtn.classList.toggle('active', this.audioSyncEnabled);
         }
 
         // Show translation banner if text not in preferred language
@@ -392,33 +391,52 @@ class BookReader {
 
     applyPreferences() {
         const overlay = document.getElementById('reader-overlay');
-        if (!overlay) return;
 
-        const content = document.getElementById('reader-content');
-        if (content) {
-            content.style.fontSize = `${this.prefs.fontSize}px`;
-            content.style.fontFamily = this.prefs.fontFamily;
-            content.style.lineHeight = this.prefs.lineHeight;
+        // Update fullscreen overlay content
+        if (overlay) {
+            const content = document.getElementById('reader-content');
+            if (content) {
+                content.style.fontSize = `${this.prefs.fontSize}px`;
+                content.style.fontFamily = this.prefs.fontFamily;
+                content.style.lineHeight = this.prefs.lineHeight;
+            }
+
+            // Apply theme
+            overlay.classList.remove('reader-theme-light', 'reader-theme-sepia', 'reader-theme-dark');
+            overlay.classList.add(`reader-theme-${this.prefs.theme}`);
+
+            // Update overlay settings UI
+            const fontSizeDisplay = document.getElementById('reader-font-size-display');
+            if (fontSizeDisplay) fontSizeDisplay.textContent = this.prefs.fontSize;
+
+            const fontSelect = document.getElementById('reader-font-select');
+            if (fontSelect) fontSelect.value = this.prefs.fontFamily;
+
+            const lineHeightSlider = document.getElementById('reader-line-height');
+            if (lineHeightSlider) lineHeightSlider.value = this.prefs.lineHeight;
+
+            // Update theme button active states
+            document.querySelectorAll('.reader-theme-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === this.prefs.theme);
+            });
         }
 
-        // Apply theme
-        overlay.classList.remove('reader-theme-light', 'reader-theme-sepia', 'reader-theme-dark');
-        overlay.classList.add(`reader-theme-${this.prefs.theme}`);
+        // Update inline container (split view)
+        if (this.inlineMode && this.inlineContainer) {
+            this.inlineContainer.style.fontSize = `${this.prefs.fontSize}px`;
+            this.inlineContainer.style.fontFamily = this.prefs.fontFamily;
+            this.inlineContainer.style.lineHeight = this.prefs.lineHeight;
+        }
 
-        // Update settings UI
-        const fontSizeDisplay = document.getElementById('reader-font-size-display');
-        if (fontSizeDisplay) fontSizeDisplay.textContent = this.prefs.fontSize;
+        // Update split-view settings UI
+        const splitFontSize = document.getElementById('split-font-size-display');
+        if (splitFontSize) splitFontSize.textContent = this.prefs.fontSize;
 
-        const fontSelect = document.getElementById('reader-font-select');
-        if (fontSelect) fontSelect.value = this.prefs.fontFamily;
+        const splitFontSelect = document.getElementById('split-font-select');
+        if (splitFontSelect) splitFontSelect.value = this.prefs.fontFamily;
 
-        const lineHeightSlider = document.getElementById('reader-line-height');
-        if (lineHeightSlider) lineHeightSlider.value = this.prefs.lineHeight;
-
-        // Update theme button active states
-        document.querySelectorAll('.reader-theme-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.theme === this.prefs.theme);
-        });
+        const splitLineHeight = document.getElementById('split-line-height');
+        if (splitLineHeight) splitLineHeight.value = this.prefs.lineHeight;
     }
 
     savePreferences() {
