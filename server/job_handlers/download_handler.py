@@ -52,7 +52,7 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
 
         # Stage 2: Convert to Markdown (40-60%)
         progress_callback(45, {'message': 'Converting to Markdown...', 'stage': 'convert'})
-        markdown = downloader._html_to_markdown(html_content)
+        markdown, toc_entries = downloader._html_to_markdown(html_content)
 
         progress_callback(60, {'message': 'Conversion complete', 'stage': 'convert'})
 
@@ -60,13 +60,34 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
         progress_callback(65, {'message': 'Cleaning Gutenberg boilerplate...', 'stage': 'clean'})
         cleaned = downloader._strip_boilerplate(markdown)
 
+        # Stage 3b: Normalize markdown formatting
+        normalized = downloader._normalize_markdown(cleaned)
+
         # Save file
         book_dir = downloader.books_dir / book_slug
         book_dir.mkdir(parents=True, exist_ok=True)
         output_file = book_dir / "book.md"
 
         with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(cleaned)
+            f.write(normalized)
+
+        # Save Gutenberg chapter metadata
+        if toc_entries:
+            chapters_data = {
+                "source": "gutenberg_html_toc",
+                "chapter_count": len(toc_entries),
+                "chapters": [
+                    {
+                        "number": entry["number"],
+                        "title": downloader._clean_toc_title(entry["title"]),
+                        "section_type": entry.get("section_type", "chapter")
+                    }
+                    for entry in toc_entries
+                ]
+            }
+            gutenberg_json = book_dir / "gutenberg_chapters.json"
+            with open(gutenberg_json, 'w', encoding='utf-8') as f:
+                json.dump(chapters_data, f, indent=2, ensure_ascii=False)
 
         # Save Gutenberg metadata (language source of truth)
         if language:

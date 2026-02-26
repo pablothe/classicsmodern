@@ -13,6 +13,83 @@ Version history, bug fixes, and validation results for Modern Classics.
 
 ---
 
+### Audible + Kindle Unified Player (Feb 25, 2026)
+
+- Per-card play button on covers for instant resume from library
+- Three-dot overflow menu with View Details, Read, Play actions
+- Grid/List view toggle with compact Audible-style list layout
+- Recent Activity sort option using playback timestamps
+- Listen/Read tab bar in player view for seamless switching between audio and text
+- Sync button in tab bar to toggle read-while-listening mode
+
+### Audible-Style Library Filters (Feb 25, 2026)
+
+- Filter chips: Not Started / In Progress / Finished
+- Book cards show time remaining (e.g., "3h 43min left") for in-progress books
+- Total duration displayed for not-started books, "Finished" badge for completed
+- Backend exposes `total_duration` from chunk manifests via `/api/books`
+
+### Generic Italic Chapter Detection (Feb 25, 2026)
+
+- Detects Gutenberg chapter titles like `*1. The Horror in Clay.*` automatically
+- Fallback pattern added to `BookProcessor.FALLBACK_PATTERNS`
+- Italic chapters promoted to `##` headers during Gutenberg download
+- Added top-1000 Gutenberg test suite (`tests/test_gutenberg_1000.py`)
+
+### Audio Intro Generation (Feb 25, 2026)
+
+- Generates spoken front matter (title, author, epigraphs, dedications) as audio intro
+- Manifest-first text extraction using `book_manifest.json` as primary source
+- Reader theme syncs with global dark mode on open
+
+### Reading-State Filters & Job Notifications (Feb 24, 2026)
+
+- Replaced language filter chips with reading-state filters (Not Started / In Progress / Finished)
+- Book title shown in toast notification on job completion
+
+### Book Manifest v3.0 Migration (Feb 24, 2026)
+
+- Migrated to `book_manifest.json` v3.0 with paragraph registry
+- Stable IDs (`ch01_p001`), character offsets, word counts, content hashes per paragraph
+- Enables paragraph-level audio sync
+
+### Netflix-Style Multi-User Profiles (Feb 23, 2026)
+
+- Profile picker on every app load — family members pick their profile
+- Isolated playback positions, dark mode, language prefs, reader settings per user
+- No authentication, pure LAN-based
+- New `server/users_db.py` module and `/api/users` endpoints
+
+### Persistent Now-Playing Bar (Feb 23, 2026)
+
+- Spotify-style mini player fixed at bottom of screen
+- Shows book title, chapter name, play/pause, skip controls
+- Visible while browsing library; auto-hides in player/reader views
+
+### Paragraph Position Middleware (Feb 22, 2026)
+
+- Precise text-audio sync at paragraph level via `/api/books/{book_id}/paragraph-timings`
+
+### Reader-First Unified Book Experience (Feb 22, 2026)
+
+- All library clicks route through fullscreen reader
+- Books without audio show "Generate Audiobook" CTA
+- Books missing preferred-language text show translation banner
+- Audio sync toggle in reader
+
+### Fullscreen Reader Mode (Feb 22, 2026)
+
+- Fullscreen e-reader with reading controls (font size, theme)
+- Audio sync with text highlighting
+- Persistent mini player during reading
+
+### Netflix-Style Language Track Selection (Feb 22, 2026)
+
+- Multi-language track selection for text and audio per book
+- Per-user language preferences stored in profile
+
+---
+
 ### Remove Cloud Dependencies (Feb 22, 2026)
 
 - Archived 7 OpenAI-dependent scripts to `legacy_archive_2026/openai_scripts/`
@@ -452,9 +529,9 @@ Do not write about what you're doing - just translate."
 - Long-term fix: Pre-process TOC before translation
 
 **2. No Cross-Device Progress Sync**
-- Web player uses localStorage (local only)
-- Workaround: Manual export/import via console
-- Planned: Mobile app with cloud sync (V1.0)
+- Playback positions stored server-side per user profile
+- Works across devices on the same LAN
+- Planned: Cloud sync for remote access (V2.0)
 
 **3. Translation Quality Varies**
 - Local 4b model good but not perfect for complex literary text
@@ -531,14 +608,25 @@ Translation Progress: 17/18 chunks (94.4%)
 
 ## Version History
 
-### V0.9 (January 2026) - Current
+### V1.0 (February 2026) - Current
+- ✅ 100% local operation (no cloud APIs)
+- ✅ Audible-style library with filters and time remaining
+- ✅ Fullscreen e-reader with Listen/Read tabs
+- ✅ Multi-user profiles with isolated playback
+- ✅ Persistent now-playing bar
+- ✅ Multi-language track selection
+- ✅ Paragraph-level audio sync
+- ✅ Audio intro generation
+- ✅ Generic italic chapter detection
+- ✅ Book manifest v3.0 with paragraph registry
+
+### V0.9 (January 2026)
 - ✅ Anti-duplication system (two-layer)
 - ✅ Translation validation and retry
 - ✅ Progress tracking and resume
 - ✅ Local TTS with voice cloning
-- ✅ Cloud TTS integration
 - ✅ Audio combining and compression
-- 🔄 Web interface (in progress)
+- ✅ Web interface with job dashboard
 
 ### V0.8 (December 2025)
 - ✅ Local XTTS-v2 integration
@@ -561,22 +649,14 @@ Translation Progress: 17/18 chunks (94.4%)
 
 ## Future Roadmap
 
-### V1.0 (Planned - Q1 2026)
+### V1.5 (Planned - Q2 2026)
 - [ ] Mobile app (React Native)
 - [ ] Server auto-discovery
-- [ ] Full audiobook player
-- [ ] Background playback
-- [ ] Lock screen controls
-
-### V1.5 (Planned - Q2 2026)
+- [ ] Background playback / lock screen controls
 - [ ] Enhanced local TTS (Orpheus-3B)
 - [ ] Voice customization
-- [ ] Faster generation speeds
 
 ### V2.0 (Planned - Q3 2026)
-- [ ] Book compression/summarization
-- [ ] Adjustable compression ratios
-- [ ] Multi-user support
 - [ ] CarPlay/Android Auto
 - [ ] Cross-device sync
 
@@ -640,4 +720,4 @@ python3 check_translation_progress.py books/crime_punishment/chunks/
 
 ---
 
-**Last Updated:** February 22, 2026
+**Last Updated:** February 25, 2026

@@ -23,3 +23,7 @@ fastapi  # API server
 # AI Assistant (Local LLM via Ollama)
 ollama>=0.1.0
 sentence-transformers>=2.2.0  # Semantic search for AI chat RAG
+
+# EPUB conversion (optional, for epub_to_md.py)
+ebooklib>=0.18
+markdownify>=0.11.0

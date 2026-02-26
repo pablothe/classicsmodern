@@ -8,7 +8,8 @@ Translate classic literature and generate audiobooks using local AI.
 
 - Translates books from any language to any language using local AI
 - Generates high-quality audiobooks with Kokoro TTS (52 voices, 100% local)
-- Serves audiobooks via web player with Karaoke mode and AI chat
+- Serves audiobooks via web player with e-reader, Karaoke mode, and AI chat
+- Multi-user profiles with per-user playback positions and preferences
 - Downloads books from Project Gutenberg automatically
 
 ---
@@ -78,6 +79,7 @@ This will:
 | `summarize.py` | Summarize a book |
 | `cover.py` | Generate cover art |
 | `validate.py` | Validate book structure |
+| `epub_to_md.py` | Convert EPUB to Markdown |
 
 ---
 
@@ -134,10 +136,13 @@ python3 summarize.py book.md 50
 
 The web player (`./start_server.sh`) includes:
 
-- **Book catalog** with cover art and search
-- **Audio player** with chapter navigation and progress tracking
+- **Audible-style library** with cover art, grid/list toggle, and filter chips (Not Started / In Progress / Finished) showing time remaining
+- **Audio player** with chapter navigation, progress tracking, and persistent now-playing bar
+- **E-reader** with fullscreen reading, Listen/Read tabs, and sync toggle for read-while-listening
+- **Multi-user profiles** -- Netflix-style profile picker with isolated playback positions and settings
 - **Karaoke mode** -- synchronized text highlighting during playback
 - **AI chat** -- ask questions about the book while listening (requires Ollama)
+- **Multi-language tracks** -- switch between text and audio language variants
 - **Job dashboard** -- monitor translation and audio generation jobs
 - **Gutenberg browser** -- search and download public domain books
 

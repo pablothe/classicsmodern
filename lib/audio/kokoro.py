@@ -19,6 +19,7 @@ Requirements:
 """
 
 import os
+import json
 import sys
 import re
 import subprocess
@@ -765,6 +766,172 @@ class KokoroAudioGenerator:
             print(f"⚠️  Warning: Failed to combine files: {e}")
             return None
 
+    @staticmethod
+    def recombine_chapters(audio_dir: Path, book_dir: Path) -> bool:
+        """
+        Recombine existing chunk MP3 files into chapter files with prologue separation.
+
+        Reads the chunk manifest to identify which chunks are prologue (pre-chapter content),
+        updates the chapter assignments, and recombines chunks into new chapter files using
+        ffmpeg concat (no re-encoding, instant).
+
+        Args:
+            audio_dir: Path to audio_kokoro directory containing chunk files
+            book_dir: Path to book directory containing book_manifest.json
+
+        Returns:
+            True if recombination was performed, False if not needed
+        """
+        # Find chunk manifest
+        chunk_manifest_path = None
+        for name in sorted(audio_dir.glob("*_chunk_manifest.json")):
+            chunk_manifest_path = name
+            break
+        if not chunk_manifest_path:
+            print("  No chunk manifest found, skipping recombine")
+            return False
+
+        with open(chunk_manifest_path, 'r') as f:
+            cm_data = json.load(f)
+
+        chunks = cm_data.get('chunks', [])
+        if not chunks:
+            return False
+
+        # Check if already recombined (has chapter 0)
+        existing_chapters = set(c.get('chapter') for c in chunks)
+        if 0 in existing_chapters:
+            print("  Already has prologue (chapter 0), skipping")
+            return False
+
+        # Load book manifest to find where chapter 1 actually starts
+        book_manifest_path = book_dir / "book_manifest.json"
+        if not book_manifest_path.exists():
+            return False
+
+        with open(book_manifest_path, 'r') as f:
+            book_manifest = json.load(f)
+
+        book_chapters = book_manifest.get('chapters', [])
+        if not book_chapters:
+            return False
+
+        first_ch = book_chapters[0]
+        first_ch_start = first_ch.get('start_char', 0)
+        if first_ch_start <= 0:
+            print("  No front matter content, skipping")
+            return False
+
+        # Find prologue chunks: chunks whose text_preview starts with "Classics Modern presents"
+        # or whose content is entirely before the first chapter
+        prologue_chunk_count = 0
+        for chunk in chunks:
+            preview = chunk.get('text_preview', '')
+            if preview.startswith('Classics Modern presents'):
+                prologue_chunk_count += 1
+            else:
+                break  # Once we hit a non-prologue chunk, stop
+
+        if prologue_chunk_count == 0:
+            print("  No prologue chunks detected, skipping")
+            return False
+
+        print(f"  Detected {prologue_chunk_count} prologue chunk(s)")
+
+        # Update chunk manifest: reassign prologue chunks to chapter 0
+        min_chapter = min(c.get('chapter', 1) for c in chunks)
+        for i in range(prologue_chunk_count):
+            chunks[i]['chapter'] = 0
+
+        # Build sections array from book manifest
+        max_chapter = max(c.get('chapter', 0) for c in chunks)
+        sections = [{"chapter": 0, "section_type": "prologue", "title": "Prologue"}]
+        for ch in book_chapters:
+            sections.append({
+                "chapter": ch.get('number', 0),
+                "section_type": ch.get('section_type', 'chapter'),
+                "title": ch.get('title', f"Chapter {ch.get('number', 0)}")
+            })
+
+        cm_data['sections'] = sections
+        cm_data['version'] = '3.0'
+
+        # Save updated chunk manifest
+        with open(chunk_manifest_path, 'w') as f:
+            json.dump(cm_data, f, indent=2, ensure_ascii=False)
+        print(f"  Updated chunk manifest with prologue")
+
+        # Recombine chunk files into chapter files
+        unique_chapters = sorted(set(c.get('chapter') for c in chunks))
+        base_name = chunk_manifest_path.stem.replace('_chunk_manifest', '')
+
+        # Find all chunk audio files
+        chunk_files = {}
+        for chunk in chunks:
+            chunk_file = audio_dir / chunk['file']
+            if chunk_file.exists():
+                ch_num = chunk['chapter']
+                if ch_num not in chunk_files:
+                    chunk_files[ch_num] = []
+                chunk_files[ch_num].append(chunk_file)
+
+        # Combine each chapter's chunks into a chapter file
+        chapter_files = []
+        max_real_chapter = max(ch.get('number', 0) for ch in book_chapters)
+        chapter_labels = []
+
+        for seq_idx, ch_num in enumerate(unique_chapters, 1):
+            if ch_num not in chunk_files:
+                continue
+
+            chapter_filename = f"{base_name}_chapter_{seq_idx:02d}.mp3"
+            chapter_path = audio_dir / chapter_filename
+
+            if ch_num == 0:
+                label = "Prologue"
+            elif ch_num > max_real_chapter:
+                label = "Epilogue"
+            else:
+                label = f"Chapter {ch_num}"
+            chapter_labels.append(label)
+
+            files = chunk_files[ch_num]
+            print(f"  {label}: Combining {len(files)} chunks → {chapter_filename}")
+
+            # Use ffmpeg concat (no re-encoding)
+            concat_file = audio_dir / f"_concat_recombine.txt"
+            with open(concat_file, 'w') as cf:
+                for af in files:
+                    cf.write(f"file '{af.resolve()}'\n")
+
+            try:
+                subprocess.run(
+                    ['ffmpeg', '-y', '-f', 'concat', '-safe', '0',
+                     '-i', str(concat_file), '-c', 'copy', str(chapter_path)],
+                    capture_output=True, check=True
+                )
+                chapter_files.append(chapter_path)
+            except subprocess.CalledProcessError as e:
+                print(f"  Failed to combine: {e}")
+            finally:
+                concat_file.unlink(missing_ok=True)
+
+        if not chapter_files:
+            return False
+
+        # Rewrite M3U playlist
+        playlist_path = audio_dir / f"{base_name}_audiobook.m3u"
+        with open(playlist_path, 'w', encoding='utf-8') as f:
+            f.write("#EXTM3U\n")
+            for i, chapter_file in enumerate(chapter_files):
+                label = chapter_labels[i] if i < len(chapter_labels) else f"Chapter {i + 1}"
+                f.write(f"#EXTINF:-1,{label}\n")
+                f.write(f"{chapter_file.name}\n")
+
+        print(f"  Updated M3U playlist: {playlist_path.name}")
+        print(f"  Recombination complete: {len(chapter_files)} files")
+        return True
+
     def post_process_audio(
         self,
         input_file: Path,
@@ -837,7 +1004,8 @@ class KokoroAudioGenerator:
         clean_text: str,
         base_name: str,
         output_dir: Path,
-        paragraph_boundaries: Optional[list] = None
+        paragraph_boundaries: Optional[list] = None,
+        sections: Optional[List[dict]] = None
     ) -> dict:
         """
         Generate chunk manifest for text synchronization.
@@ -850,6 +1018,7 @@ class KokoroAudioGenerator:
             base_name: Base filename for output
             output_dir: Output directory
             paragraph_boundaries: Optional list of (para_id, global_clean_start, global_clean_end)
+            sections: Optional list of section metadata dicts with chapter, section_type, title
 
         Returns:
             Chunk manifest dictionary
@@ -857,10 +1026,11 @@ class KokoroAudioGenerator:
         import json
 
         manifest = {
-            "version": "2.0",
+            "version": "3.0",
             "created_at": datetime.now().isoformat(),
             "total_chunks": len(chunks),
             "total_text_length": len(clean_text),
+            "sections": sections or [],
             "chunks": []
         }
 
@@ -976,7 +1146,7 @@ class KokoroAudioGenerator:
         from lib.book.processor import BookProcessor
         processor = BookProcessor(verbose=False)
         stripped_text, _ = processor.strip_gutenberg(raw_text)
-        chapter_objects = processor.detect_chapters(stripped_text, book_dir=input_path.parent)
+        chapter_objects = processor.detect_chapters(stripped_text)
 
         # Also build tuples for backward-compat
         chapters = [(ch.number, ch.start_char, ch.marker) for ch in chapter_objects]
@@ -1011,7 +1181,7 @@ class KokoroAudioGenerator:
                 if intro_clean.strip():
                     intro_chunks = self.chunk_text(intro_clean, chunk_size)
                     chunks.extend(intro_chunks)
-                    chunk_to_chapter.extend([first_ch.number] * len(intro_chunks))
+                    chunk_to_chapter.extend([0] * len(intro_chunks))
                     clean_text += intro_clean + "\n\n"
                     print(f"  Intro: {len(intro_chunks)} chunk(s) ({len(intro_clean):,} chars)")
 
@@ -1058,6 +1228,19 @@ class KokoroAudioGenerator:
                 clean_text += chapter_clean + "\n\n"
 
                 print(f"  Chapter {ch_obj.number}: {chunk_count} chunks ({len(chapter_clean):,} chars, {len(clean_paras)} paragraphs)")
+
+            # Check for epilogue content after the last chapter
+            last_ch = chapter_objects[-1]
+            epilogue_text = stripped_text[last_ch.end_char:].strip()
+            if epilogue_text and len(epilogue_text) > 50:
+                epilogue_clean = self._clean_chapter_text(epilogue_text)
+                if epilogue_clean.strip() and len(epilogue_clean.strip()) > 50:
+                    epilogue_chunks = self.chunk_text(epilogue_clean, chunk_size)
+                    epilogue_chapter_num = last_ch.number + 1
+                    chunks.extend(epilogue_chunks)
+                    chunk_to_chapter.extend([epilogue_chapter_num] * len(epilogue_chunks))
+                    clean_text += epilogue_clean + "\n\n"
+                    print(f"  Epilogue: {len(epilogue_chunks)} chunk(s) ({len(epilogue_clean):,} chars)")
 
             # Save text mapping if preprocessing was used
             if PREPROCESSOR_AVAILABLE:
@@ -1254,6 +1437,25 @@ class KokoroAudioGenerator:
         else:
             audio_files = raw_audio_files
 
+        # Build sections metadata for chunk manifest
+        sections = []
+        unique_chapter_nums = sorted(set(chunk_to_chapter))
+        if has_chapters:
+            max_real_ch = max(ch.number for ch in chapter_objects)
+            for ch_num in unique_chapter_nums:
+                if ch_num == 0:
+                    sections.append({"chapter": 0, "section_type": "prologue", "title": "Prologue"})
+                elif ch_num > max_real_ch:
+                    sections.append({"chapter": ch_num, "section_type": "epilogue", "title": "Epilogue"})
+                else:
+                    ch_obj = next((c for c in chapter_objects if c.number == ch_num), None)
+                    if ch_obj:
+                        sections.append({
+                            "chapter": ch_num,
+                            "section_type": getattr(ch_obj, 'section_type', 'chapter'),
+                            "title": ch_obj.title
+                        })
+
         # Generate chunk manifest for text synchronization
         print(f"\n📊 Generating chunk manifest for text sync...")
         chunk_manifest = self._generate_chunk_manifest(
@@ -1263,7 +1465,8 @@ class KokoroAudioGenerator:
             clean_text=clean_text,
             base_name=base_name,
             output_dir=output_dir,
-            paragraph_boundaries=paragraph_boundaries
+            paragraph_boundaries=paragraph_boundaries,
+            sections=sections
         )
         print(f"✓ Chunk manifest saved: {base_name}_chunk_manifest.json")
 
@@ -1290,11 +1493,14 @@ class KokoroAudioGenerator:
 
         # Combine chunks into chapter files
         chapter_files = []
-        if chapters and len(chapters) > 1:
-            print(f"\n📚 Combining {len(chunks)} chunks into {len(chapters)} chapters...")
+        num_audio_sections = len(set(chunk_to_chapter)) if chunk_to_chapter else 0
+        if num_audio_sections > 1:
+            print(f"\n📚 Combining {len(chunks)} chunks into {num_audio_sections} sections...")
 
             # Get unique chapter numbers from mapping, sorted
             unique_chapters = sorted(set(chunk_to_chapter))
+            has_prologue = 0 in unique_chapters
+            max_real_chapter = max(ch.number for ch in chapter_objects)
 
             # Iterate through detected chapters and create sequential files (chapter_01, chapter_02, etc.)
             for sequential_index, chapter_num in enumerate(unique_chapters, 1):
@@ -1308,7 +1514,13 @@ class KokoroAudioGenerator:
                     chapter_filename = f"{base_name}_chapter_{sequential_index:02d}{ext}"
                     chapter_path = output_dir / chapter_filename
 
-                    print(f"  Chapter {sequential_index:2d}: Combining {len(chapter_audio_files)} chunks...", end=" ", flush=True)
+                    if chapter_num == 0:
+                        label = "Prologue"
+                    elif chapter_num > max_real_chapter:
+                        label = "Epilogue"
+                    else:
+                        label = f"Chapter {chapter_num:2d}"
+                    print(f"  {label}: Combining {len(chapter_audio_files)} chunks...", end=" ", flush=True)
 
                     result = self.combine_audio_files(chapter_audio_files, chapter_path)
                     if result:
@@ -1318,20 +1530,32 @@ class KokoroAudioGenerator:
                         print("✗ Failed")
 
             if chapter_files:
+                # Build chapter labels for playlists
+                chapter_labels = []
+                for i, chapter_num in enumerate(unique_chapters):
+                    if chapter_num == 0:
+                        chapter_labels.append("Prologue")
+                    elif chapter_num > max_real_chapter:
+                        chapter_labels.append("Epilogue")
+                    else:
+                        chapter_labels.append(f"Chapter {chapter_num}")
+
                 # Create primary playlist (consistent name for server, no timestamp)
                 primary_playlist_path = output_dir / f"{base_name}_audiobook.m3u"
                 with open(primary_playlist_path, 'w', encoding='utf-8') as f:
                     f.write("#EXTM3U\n")
-                    for i, chapter_file in enumerate(chapter_files, 1):
-                        f.write(f"#EXTINF:-1,Chapter {i}\n")
+                    for i, chapter_file in enumerate(chapter_files):
+                        label = chapter_labels[i] if i < len(chapter_labels) else f"Chapter {i + 1}"
+                        f.write(f"#EXTINF:-1,{label}\n")
                         f.write(f"{chapter_file.name}\n")
 
                 # Also create timestamped backup for history
                 timestamped_playlist_path = output_dir / f"{base_name}_audiobook_{timestamp}.m3u"
                 with open(timestamped_playlist_path, 'w', encoding='utf-8') as f:
                     f.write("#EXTM3U\n")
-                    for i, chapter_file in enumerate(chapter_files, 1):
-                        f.write(f"#EXTINF:-1,Chapter {i}\n")
+                    for i, chapter_file in enumerate(chapter_files):
+                        label = chapter_labels[i] if i < len(chapter_labels) else f"Chapter {i + 1}"
+                        f.write(f"#EXTINF:-1,{label}\n")
                         f.write(f"{chapter_file.name}\n")
 
                 playlist_path = primary_playlist_path  # Use primary for return value

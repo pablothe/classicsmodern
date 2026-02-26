@@ -64,9 +64,9 @@ const state = {
     textLanguageMatchesAudio: true,  // Whether text lang matches audio lang (for karaoke)
     // Library sort & filter
     sortBy: 'title-asc',
-    statusFilter: null,              // null = show all, 'not_started' | 'in_progress' | 'finished' | 'no_audio'
+    statusFilter: null,              // null = show all, 'not_started' | 'in_progress' | 'finished' | 'downloaded' | 'not_downloaded'
     playbackProgress: {},            // { bookId: percentage } for progress bars
-    bookStatus: {},                  // { bookId: 'not_started' | 'in_progress' | 'finished' | 'no_audio' }
+    bookStatus: {},                  // { bookId: 'not_started' | 'in_progress' | 'finished' }
     bookDuration: {},                // { bookId: totalSeconds } from chunk manifest
     bookTimeLeft: {},                // { bookId: secondsRemaining } approximate
     bookLastActivity: {},            // { bookId: timestamp } for recent activity sort
@@ -566,16 +566,26 @@ async function loadLibrary() {
         state.bookLastActivity = {};
         for (const book of state.books) {
             if (!book.has_audio || !book.variants.length) {
-                state.bookStatus[book.book_id] = 'no_audio';
+                state.bookStatus[book.book_id] = 'not_started';
                 continue;
             }
-            const variant = book.variants[0];
+            // Find the variant with the most recent playback position
+            let activeVariant = null;
+            let activePos = null;
+            for (const v of book.variants) {
+                const k = `${book.book_id}:${v.variant_id}`;
+                const p = positions[k];
+                if (p && (!activePos || (p.last_updated && (!activePos.last_updated || p.last_updated > activePos.last_updated)))) {
+                    activeVariant = v;
+                    activePos = p;
+                }
+            }
+            const variant = activeVariant || book.variants[0];
+            const pos = activePos;
             const totalDuration = variant.total_duration || 0;
             if (totalDuration > 0) {
                 state.bookDuration[book.book_id] = totalDuration;
             }
-            const key = `${book.book_id}:${variant.variant_id}`;
-            const pos = positions[key];
             if (pos?.last_updated) {
                 state.bookLastActivity[book.book_id] = new Date(pos.last_updated).getTime();
             }
@@ -656,16 +666,24 @@ function renderStatusFilters() {
     const container = document.getElementById('language-filters');
     if (!container) return;
 
-    const categories = [
+    const readingCategories = [
         { key: 'not_started', label: 'Not Started' },
         { key: 'in_progress', label: 'In Progress' },
         { key: 'finished',    label: 'Finished' }
+    ];
+    const audioCategories = [
+        { key: 'downloaded',     label: 'Downloaded' },
+        { key: 'not_downloaded', label: 'Not Downloaded' }
     ];
 
     // Filter chip + category chips
     const filterActive = state.statusFilter !== null;
     let html = `<button class="filter-chip filter-chip-icon${filterActive ? ' active' : ''}" data-status="clear">&#x2195; Filter</button>`;
-    html += categories.map(cat =>
+    html += readingCategories.map(cat =>
+        `<button class="filter-chip${state.statusFilter === cat.key ? ' active' : ''}" data-status="${cat.key}">${cat.label}</button>`
+    ).join('');
+    html += '<span class="filter-divider"></span>';
+    html += audioCategories.map(cat =>
         `<button class="filter-chip${state.statusFilter === cat.key ? ' active' : ''}" data-status="${cat.key}">${cat.label}</button>`
     ).join('');
     container.innerHTML = html;
@@ -701,7 +719,13 @@ function renderUnifiedSearch() {
         });
     }
     if (state.statusFilter) {
-        filteredLibraryBooks = filteredLibraryBooks.filter(book => state.bookStatus[book.book_id] === state.statusFilter);
+        if (state.statusFilter === 'downloaded') {
+            filteredLibraryBooks = filteredLibraryBooks.filter(book => book.has_audio && book.variants.length > 0);
+        } else if (state.statusFilter === 'not_downloaded') {
+            filteredLibraryBooks = filteredLibraryBooks.filter(book => !book.has_audio || !book.variants.length);
+        } else {
+            filteredLibraryBooks = filteredLibraryBooks.filter(book => state.bookStatus[book.book_id] === state.statusFilter);
+        }
     }
 
     // Sort library books
@@ -771,15 +795,16 @@ function renderLibraryBooks(books) {
         const hasAudio = book.has_audio;
         const hasSourceText = book.has_source_text;
         const hasActiveJob = jobsActivity.jobsByBook[book.book_id];
+        const coverJobActive = (hasActiveJob && hasActiveJob.job_type === 'cover') || book.cover_generating;
 
         return `
             <div class="book-item" data-book-id="${book.book_id}">
                 <div class="book-cover-card">
-                    ${hasCover ? `
+                    ${hasCover && !coverJobActive ? `
                         <img src="${coverURL}" alt="${book.title} cover" class="book-cover-image" />
-                    ` : book.cover_generating ? `
+                    ` : coverJobActive ? `
                         <div class="book-cover-generating">
-                            <div class="cover-shimmer"></div>
+                            <div class="cover-spinner"></div>
                             <div class="cover-generating-label">Generating cover...</div>
                         </div>
                     ` : `
@@ -788,7 +813,7 @@ function renderLibraryBooks(books) {
                         </div>
                     `}
                     <div class="book-status-overlay" data-status-book="${book.book_id}" style="display:none"></div>
-                    ${!book.cover_generating && !hasActiveJob ? `
+                    ${!coverJobActive && !hasActiveJob ? `
                         <div class="generate-cover-badge" onclick="event.stopPropagation(); generateCoverForBook('${book.book_id}')">
                             ${hasCover ? '↻ Replace Cover' : '+ Generate Cover'}
                         </div>
@@ -816,7 +841,7 @@ function renderLibraryBooks(books) {
                                 return '<span class="book-status-finished">Finished</span>';
                             } else if (status === 'not_started' && duration) {
                                 return `<span class="book-total-duration">${formatDuration(duration)}</span>`;
-                            } else if (status === 'no_audio') {
+                            } else if (!book.has_audio) {
                                 return '<span>No audio</span>';
                             }
                             return '';
@@ -876,6 +901,24 @@ function renderLibraryList(books) {
 }
 
 async function generateCoverForBook(bookId) {
+    // Show spinner immediately on the card
+    const book = state.books.find(b => b.book_id === bookId);
+    if (book) {
+        book.cover_generating = true;
+        const cardEl = document.querySelector(`.book-item[data-book-id="${bookId}"] .book-cover-card`);
+        if (cardEl) {
+            const coverContent = cardEl.querySelector('.book-cover-content, .book-cover-image');
+            const badge = cardEl.querySelector('.generate-cover-badge');
+            if (coverContent) {
+                coverContent.outerHTML = `<div class="book-cover-generating">
+                    <div class="cover-spinner"></div>
+                    <div class="cover-generating-label">Generating cover...</div>
+                </div>`;
+            }
+            if (badge) badge.remove();
+        }
+    }
+
     try {
         const response = await fetch(`${API.baseURL}/api/jobs/cover`, {
             method: 'POST',
@@ -885,11 +928,14 @@ async function generateCoverForBook(bookId) {
 
         if (response.status === 409) {
             const data = await response.json();
+            if (book) book.cover_generating = false;
             alert(data.message || 'A job is already running for this book');
+            loadLibrary();
             return;
         }
 
         if (!response.ok) {
+            if (book) book.cover_generating = false;
             throw new Error(`Server error: ${response.status}`);
         }
 
@@ -900,7 +946,9 @@ async function generateCoverForBook(bookId) {
         loadLibrary();
     } catch (err) {
         console.error('Failed to create cover job:', err);
+        if (book) book.cover_generating = false;
         alert('Failed to start cover generation: ' + err.message);
+        loadLibrary();
     }
 }
 
@@ -1091,6 +1139,7 @@ function showLibrary() {
     ui.libraryView.classList.add('active');
     ui.variantView.classList.remove('active');
     ui.playerView.classList.remove('active');
+    ui.playerView.classList.remove('read-mode');
     updateNowPlayingBar();
 }
 
@@ -1113,18 +1162,19 @@ async function showVariants(bookId) {
 
         // Update cover image in variant view
         const variantCoverContainer = document.getElementById('variant-cover-container');
-        if (book.has_cover && book.cover_image) {
-            const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
-            variantCoverContainer.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" class="variant-cover-image" />`;
-        } else if (book.cover_generating) {
+        const variantCoverJob = jobsActivity.jobsByBook[book.book_id];
+        const variantCoverJobActive = (variantCoverJob && variantCoverJob.job_type === 'cover') || book.cover_generating;
+        if (variantCoverJobActive) {
             variantCoverContainer.innerHTML = `<div class="variant-cover-generating">
-                <div class="cover-shimmer"></div>
+                <div class="cover-spinner"></div>
                 <div class="cover-generating-label">Generating cover...</div>
             </div>`;
+        } else if (book.has_cover && book.cover_image) {
+            const coverURL = `${API.baseURL}/api/books/${book.book_id}/cover`;
+            variantCoverContainer.innerHTML = `<img src="${coverURL}" alt="${book.title} cover" class="variant-cover-image" />`;
         } else {
-            const hasActiveJob = jobsActivity.jobsByBook[book.book_id];
             variantCoverContainer.innerHTML = `<div class="variant-cover-placeholder"></div>
-                ${!hasActiveJob ? `<button class="generate-cover-btn" onclick="generateCoverForBook('${book.book_id}')">Generate Cover</button>` : ''}`;
+                ${!variantCoverJob ? `<button class="generate-cover-btn" onclick="generateCoverForBook('${book.book_id}')">Generate Cover</button>` : ''}`;
         }
 
         // Show/hide "Generate New Version" button (hide only if job is running/pending)
@@ -1277,11 +1327,8 @@ function showVariantSelection() {
     ui.libraryView.classList.remove('active');
     ui.variantView.classList.add('active');
     ui.playerView.classList.remove('active');
-
-    // Pause playback
-    if (state.isPlaying) {
-        ui.audio.pause();
-    }
+    ui.playerView.classList.remove('read-mode');
+    updateNowPlayingBar();
 }
 
 // ============================================================================
@@ -1399,50 +1446,76 @@ function renderPlayer() {
         ui.aiAssistantBtn.style.display = 'none';
     }
 
-    // Show Listen/Read tabs if book has source text (replaces standalone Read button)
+    // Show Listen/Read tabs if book has source text (mobile only — desktop uses split tabs)
     const tabBar = document.getElementById('player-tabs');
     const syncBtn = document.getElementById('player-sync-btn');
-    if (book.has_source_text) {
+    if (book.has_source_text && !isDesktopSplitView()) {
         if (tabBar) tabBar.style.display = 'flex';
         if (syncBtn) syncBtn.style.display = '';
-        ui.readerBtn.style.display = 'none'; // Hidden — tab replaces it
+        ui.readerBtn.style.display = 'none';
     } else {
         if (tabBar) tabBar.style.display = 'none';
         if (syncBtn) syncBtn.style.display = 'none';
         ui.readerBtn.style.display = 'none';
     }
-    switchPlayerTab('listen');
 
     // Render audio track selector (Netflix-style in-player variant switching)
     renderAudioTrackSelector();
 
     // Update navigation buttons
     updateNavigationButtons();
+
+    // Update player header title
+    const headerTitle = document.getElementById('player-header-title');
+    if (headerTitle) headerTitle.textContent = book.title || '';
+
+    // Handle no-audio state
+    const noAudioCta = document.getElementById('split-no-audio-cta');
+    const hasAudio = book.has_audio && variant;
+    if (noAudioCta) {
+        noAudioCta.style.display = hasAudio ? 'none' : 'block';
+    }
+    // Hide audio controls when no audio
+    const progressEl = document.querySelector('#player-view .progress-container');
+    const controlsEl = document.querySelector('#player-view .controls');
+    if (progressEl) progressEl.style.display = hasAudio ? '' : 'none';
+    if (controlsEl) controlsEl.style.display = hasAudio ? '' : 'none';
+    if (ui.secondaryControls) ui.secondaryControls.style.display = hasAudio ? 'grid' : 'none';
+
+    // Mobile read toggle: show only if book has source text
+    const mobileToggle = document.getElementById('mobile-read-toggle');
+    if (mobileToggle) mobileToggle.style.display = book.has_source_text ? '' : 'none';
+
+    // Populate split-right content (desktop split view and mobile read mode)
+    renderSplitView();
 }
 
 function switchPlayerTab(tab) {
+    if (isDesktopSplitView()) {
+        // On desktop, delegate to split tab
+        if (tab === 'read') switchSplitTab('read');
+        else switchSplitTab('chapters');
+        return;
+    }
+
     document.querySelectorAll('.player-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.tab === tab);
     });
 
     if (tab === 'read' && state.currentBook?.has_source_text) {
-        // Open the overlay reader at the current chapter
-        const book = state.currentBook;
-        const chapterCount = book.chapters?.length || 1;
-        const startChapter = state.currentChapterIndex || 0;
-        const trackId = state.currentTextTrack?.track_id || null;
-
-        // Pre-enable sync if user turned it on via the player sync button
-        if (window.bookReader) {
-            window.bookReader.openedFromPlayerTab = true;
-            window.bookReader.open(book.book_id, startChapter, chapterCount, trackId);
-        }
+        // On mobile, toggle to read mode instead of opening fullscreen overlay
+        toggleMobileReadMode();
     }
     // Listen tab: nothing special — secondary controls already visible
 }
 
 function updateNavigationButtons() {
     const variant = state.currentVariant;
+    if (!variant?.audio_files) {
+        ui.prevFileBtn.disabled = true;
+        ui.nextFileBtn.disabled = true;
+        return;
+    }
     ui.prevFileBtn.disabled = state.currentFileIndex === 0;
     ui.nextFileBtn.disabled = state.currentFileIndex >= variant.audio_files.length - 1;
 }
@@ -1473,7 +1546,7 @@ function renderChapters() {
 
     console.log('[renderChapters]', {
         totalChapters: chapters.length,
-        totalAudioFiles: variant.audio_files.length,
+        totalAudioFiles: variant?.audio_files?.length || 0,
         chapters: chapters
     });
 
@@ -2866,7 +2939,43 @@ function formatTimeRemaining(seconds) {
 function setupEventListeners() {
     // Navigation
     ui.variantBackBtn.addEventListener('click', showLibrary);
-    ui.backBtn.addEventListener('click', showVariantSelection);
+    ui.backBtn.addEventListener('click', showLibrary);
+
+    // Mobile read toggle
+    document.getElementById('mobile-read-toggle')?.addEventListener('click', toggleMobileReadMode);
+
+    // Split view tabs
+    document.querySelectorAll('.split-tab').forEach(tab => {
+        tab.addEventListener('click', () => switchSplitTab(tab.dataset.splitTab));
+    });
+
+    // Split view generate button
+    document.getElementById('split-generate-btn')?.addEventListener('click', () => {
+        if (state.currentBook && typeof pipeline !== 'undefined' && pipeline.openGenerationModal) {
+            pipeline.openGenerationModal(state.currentBook.book_id);
+        }
+    });
+
+    // Split mini player controls
+    document.getElementById('split-mini-play-pause')?.addEventListener('click', togglePlayPause);
+    document.getElementById('split-mini-rewind')?.addEventListener('click', rewind);
+    document.getElementById('split-mini-forward')?.addEventListener('click', forward);
+
+    // Split chat form
+    document.getElementById('split-chat-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('split-chat-input');
+        const question = input?.value.trim();
+        if (question) {
+            sendSplitChatMessage(question);
+            input.value = '';
+        }
+    });
+
+    // Split chat suggestion buttons
+    document.querySelectorAll('.split-chat-suggestions .suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', () => sendSplitChatMessage(btn.dataset.question));
+    });
 
     // Playback controls
     ui.playPauseBtn.addEventListener('click', togglePlayPause);
@@ -3054,6 +3163,7 @@ function setupEventListeners() {
         checkEndOfChapterTimer();
         updateReaderHighlight();
         updateNowPlayingBar();
+        updateSplitMiniPlayer();
 
         // Update reader mini player progress
         if (window.bookReader?.isOpen) {
@@ -3196,7 +3306,7 @@ async function openReader() {
 
 async function openBook(bookId) {
     const book = state.books.find(b => b.book_id === bookId);
-    if (!book || !window.bookReader) return;
+    if (!book) return;
 
     // Check if audio from a different book is currently playing
     const audioIsPlaying = state.playingBook && ui.audio.src && !ui.audio.paused;
@@ -3216,18 +3326,22 @@ async function openBook(bookId) {
             state.currentVariant = null;
         }
     }
-    // If different book while audio plays: keep audio running, just open reader
 
-    // Discover chapter count and open reader
-    try {
-        const response = await fetch(`${API.baseURL}/api/books/${bookId}/text`);
-        const data = await response.json();
-        const chapterCount = data.total_chapters || 1;
-        const trackId = state.currentTextTrack?.track_id || null;
-        window.bookReader.open(bookId, 0, chapterCount, trackId);
-    } catch (err) {
-        console.error('[openBook] Failed to load chapters:', err);
+    // Show player view (split view on desktop, stacked on mobile)
+    renderPlayer();
+
+    ui.libraryView.classList.remove('active');
+    ui.variantView.classList.remove('active');
+    ui.playerView.classList.add('active');
+
+    // On mobile with no audio, default to read mode
+    if (!isDesktopSplitView() && !book.has_audio && book.has_source_text) {
+        ui.playerView.classList.add('read-mode');
+    } else {
+        ui.playerView.classList.remove('read-mode');
     }
+
+    updateNowPlayingBar();
 }
 
 async function loadVariantAudio(book, variant) {
@@ -3529,6 +3643,7 @@ const jobsActivity = {
                 if (prev && prev !== 'completed' && job.status === 'completed') {
                     const bookId = job.config?.book_id || job.config?.book_slug;
                     const bookObj = bookId ? state.books.find(b => b.book_id === bookId) : null;
+                    if (bookObj) bookObj.cover_generating = false;
                     const title = bookObj?.title || bookId || 'Audiobook';
                     showNotification(`${title} is ready!`, 'success');
                     loadLibrary();
@@ -3847,6 +3962,201 @@ async function initProfiles() {
 // ============================================================================
 // Initialization
 // ============================================================================
+
+// ============================================================================
+// Split View Functions
+// ============================================================================
+
+function isDesktopSplitView() {
+    return window.innerWidth >= 1024;
+}
+
+function toggleMobileReadMode() {
+    const playerView = document.getElementById('player-view');
+    if (!playerView) return;
+
+    const isReadMode = playerView.classList.toggle('read-mode');
+    const toggle = document.getElementById('mobile-read-toggle');
+    if (toggle) {
+        toggle.innerHTML = isReadMode ? '&#9835;' : '&#9776;';  // ♫ or ☰
+        toggle.title = isReadMode ? 'Back to player' : 'Read book';
+    }
+
+    // Load reader content if entering read mode for first time
+    if (isReadMode) {
+        ensureSplitReaderLoaded();
+    }
+}
+
+function switchSplitTab(tabName) {
+    document.querySelectorAll('.split-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.splitTab === tabName);
+    });
+    document.querySelectorAll('.split-tab-content').forEach(c => {
+        c.classList.toggle('active', c.dataset.splitContent === tabName);
+    });
+
+    if (tabName === 'chapters') {
+        renderSplitChapters();
+    } else if (tabName === 'read') {
+        ensureSplitReaderLoaded();
+    } else if (tabName === 'chat') {
+        initSplitChat();
+    }
+}
+
+function renderSplitView() {
+    const book = state.currentBook;
+    if (!book) return;
+
+    // Show/hide split tabs based on book capabilities
+    const readTab = document.querySelector('.split-tab[data-split-tab="read"]');
+    const chatTab = document.querySelector('.split-tab[data-split-tab="chat"]');
+    if (readTab) readTab.style.display = book.has_source_text ? '' : 'none';
+    if (chatTab) chatTab.style.display = book.has_source_text ? '' : 'none';
+
+    // Render chapters
+    renderSplitChapters();
+
+    // If no chapters and has source text, default to read tab
+    if ((!book.has_chapters || !book.chapters?.length) && book.has_source_text) {
+        switchSplitTab('read');
+    }
+}
+
+function renderSplitChapters() {
+    const container = document.getElementById('split-chapters-list');
+    if (!container) return;
+
+    const book = state.currentBook;
+    if (!book?.chapters?.length) {
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-secondary);">No chapters available</div>';
+        return;
+    }
+
+    container.innerHTML = book.chapters.map((chapter, index) => {
+        const isActive = state.currentChapterIndex === index;
+        const title = chapter.title || `Chapter ${chapter.number || (index + 1)}`;
+
+        return `
+            <div class="split-chapter-item ${isActive ? 'active' : ''}" data-chapter-index="${index}">
+                <span class="split-chapter-title">${title}</span>
+            </div>
+        `;
+    }).join('');
+
+    container.querySelectorAll('.split-chapter-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const idx = parseInt(item.dataset.chapterIndex);
+            jumpToChapter(idx);
+            renderSplitChapters(); // re-render to update active state
+        });
+    });
+}
+
+async function ensureSplitReaderLoaded() {
+    const book = state.currentBook;
+    if (!book?.has_source_text) return;
+
+    const contentEl = document.getElementById('split-reader-content');
+    if (!contentEl || !window.bookReader) return;
+
+    // Check if already loaded for this book
+    if (contentEl.dataset.bookId === book.book_id && contentEl.children.length > 0) {
+        return; // Already loaded
+    }
+
+    try {
+        const response = await fetch(`${API.baseURL}/api/books/${book.book_id}/text`);
+        const data = await response.json();
+        const chapterCount = data.total_chapters || 1;
+        const startChapter = state.currentChapterIndex || 0;
+        const trackId = state.currentTextTrack?.track_id || null;
+
+        contentEl.dataset.bookId = book.book_id;
+        await window.bookReader.openInline(book.book_id, startChapter, chapterCount, trackId, contentEl);
+    } catch (err) {
+        console.error('[ensureSplitReaderLoaded] Failed:', err);
+        contentEl.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-secondary);">Failed to load text</div>';
+    }
+}
+
+function initSplitChat() {
+    const chatTitle = document.getElementById('split-chat-messages');
+    if (!chatTitle || !state.currentBook) return;
+
+    // Show a welcome message if chat is empty
+    if (chatTitle.children.length === 0) {
+        chatTitle.innerHTML = `
+            <div class="chat-message chat-message-assistant">
+                <div class="message-bubble">Ask me anything about <strong>${state.currentBook.title}</strong>!</div>
+            </div>
+        `;
+    }
+}
+
+function sendSplitChatMessage(question) {
+    if (!question || !state.currentBook) return;
+
+    const messagesEl = document.getElementById('split-chat-messages');
+    if (!messagesEl) return;
+
+    // Add user message
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chat-message chat-message-user';
+    userDiv.innerHTML = `<div class="message-bubble">${escapeHtml(question)}</div>`;
+    messagesEl.appendChild(userDiv);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    // Show loading
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'chat-message chat-message-assistant';
+    loadingDiv.innerHTML = '<div class="message-bubble"><span class="spinner"></span> Thinking...</div>';
+    messagesEl.appendChild(loadingDiv);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    // Send to API
+    fetch(`${API.baseURL}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            question: question,
+            book_id: state.currentBook.book_id,
+            variant_id: state.currentVariant?.variant_id,
+            current_chapter: state.currentChapterIndex || 0,
+            user_language: LANGUAGE_NAMES[state.settings?.preferredLanguage] || 'English'
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        loadingDiv.remove();
+        const assistDiv = document.createElement('div');
+        assistDiv.className = 'chat-message chat-message-assistant';
+        assistDiv.innerHTML = `<div class="message-bubble">${data.answer || 'No response'}</div>`;
+        messagesEl.appendChild(assistDiv);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    })
+    .catch(err => {
+        loadingDiv.remove();
+        const errDiv = document.createElement('div');
+        errDiv.className = 'chat-message chat-message-error';
+        errDiv.innerHTML = `<div class="message-bubble">Error: ${err.message}</div>`;
+        messagesEl.appendChild(errDiv);
+    });
+}
+
+// Update split mini player progress during playback
+function updateSplitMiniPlayer() {
+    const fill = document.getElementById('split-mini-progress-fill');
+    const playBtn = document.getElementById('split-mini-play-pause');
+
+    if (fill && ui.audio.duration > 0) {
+        fill.style.width = `${(ui.audio.currentTime / ui.audio.duration) * 100}%`;
+    }
+    if (playBtn) {
+        playBtn.innerHTML = state.isPlaying ? '&#9646;&#9646;' : '&#9654;';
+    }
+}
 
 async function init() {
     // Load user settings from localStorage (fallback)

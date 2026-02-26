@@ -4407,8 +4407,8 @@ body.has-now-playing .view {
 /* --- Desktop (≥1024px): side-by-side split --- */
 
 @media (min-width: 1024px) {
-    /* Expand app width for desktop */
-    #app {
+    /* Expand app width for desktop when player is active */
+    #app:has(#player-view.active) {
         max-width: 100%;
     }
 

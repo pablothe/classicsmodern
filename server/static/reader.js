@@ -23,6 +23,9 @@ class BookReader {
         this.trackId = null;
         this.hasAudio = false;
         this.audioSyncEnabled = false;
+        this.inlineMode = false;
+        this.inlineContainer = null;
+        this.inlineObserver = null;
 
         // Default preferences
         this.prefs = {
@@ -46,6 +49,8 @@ class BookReader {
         this.trackId = trackId;
         this.loadedChapters = new Set();
         this.chapterData = {};
+        this.inlineMode = false;
+        this.inlineContainer = null;
 
         const overlay = document.getElementById('reader-overlay');
         if (!overlay) return;
@@ -96,9 +101,9 @@ class BookReader {
         // Try to restore scroll position
         this.restoreScrollPosition();
 
-        // Detect whether audio is active
-        const audio = document.getElementById('audio-player');
-        this.hasAudio = !!(audio && audio.src && !audio.src.endsWith('/'));
+        // Detect whether THIS book has audio (not just any audio playing)
+        const bookData = window._appState?.books?.find(b => b.book_id === bookId);
+        this.hasAudio = !!(bookData && bookData.has_audio && bookData.variants?.length > 0);
 
         // Show/hide sync button
         const syncBtn = document.getElementById('reader-audio-sync-btn');
@@ -134,6 +139,69 @@ class BookReader {
     }
 
     // ========================================================================
+    // Inline Mode (for split-view panel)
+    // ========================================================================
+
+    async openInline(bookId, startChapter, totalChapters, trackId, targetContentEl) {
+        this.bookId = bookId;
+        this.totalChapters = totalChapters;
+        this.trackId = trackId;
+        this.loadedChapters = new Set();
+        this.chapterData = {};
+        this.inlineMode = true;
+        this.inlineContainer = targetContentEl;
+
+        // Don't open fullscreen overlay — render into target container
+        targetContentEl.innerHTML = '';
+
+        // Create chapter placeholders
+        for (let i = 0; i < totalChapters; i++) {
+            const section = document.createElement('div');
+            section.className = 'reader-chapter-section';
+            section.id = `reader-chapter-${i}`;
+            section.dataset.chapter = i;
+            section.innerHTML = '<div class="reader-chapter-loading" style="padding: 2rem; text-align: center; color: var(--text-secondary);">Loading...</div>';
+            targetContentEl.appendChild(section);
+        }
+
+        // Apply reading preferences to inline container
+        targetContentEl.style.fontFamily = this.prefs.fontFamily;
+        targetContentEl.style.fontSize = this.prefs.fontSize + 'px';
+        targetContentEl.style.lineHeight = this.prefs.lineHeight;
+
+        // Load initial chapters
+        await this.loadChapter(startChapter);
+        this.loadAdjacentChapters(startChapter);
+
+        // Setup intersection observer for lazy loading
+        this.setupInlineObserver(targetContentEl);
+    }
+
+    setupInlineObserver(container) {
+        if (this.inlineObserver) this.inlineObserver.disconnect();
+
+        this.inlineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const chapterIdx = parseInt(entry.target.dataset.chapter);
+                    if (!isNaN(chapterIdx)) {
+                        this.loadChapter(chapterIdx);
+                        this.loadAdjacentChapters(chapterIdx);
+                    }
+                }
+            });
+        }, {
+            root: container,
+            rootMargin: '200px',
+            threshold: 0.01
+        });
+
+        container.querySelectorAll('.reader-chapter-section').forEach(section => {
+            this.inlineObserver.observe(section);
+        });
+    }
+
+    // ========================================================================
     // Chapter Loading
     // ========================================================================
 
@@ -161,7 +229,9 @@ class BookReader {
     }
 
     renderChapter(data, index) {
-        const section = document.getElementById(`reader-chapter-${index}`);
+        // Find section in the correct container (inline or overlay)
+        const container = this.inlineMode ? this.inlineContainer : document.getElementById('reader-content');
+        const section = container?.querySelector(`[data-chapter="${index}"]`);
         if (!section) return;
 
         const title = data.title || `Chapter ${index + 1}`;
@@ -191,13 +261,15 @@ class BookReader {
 
         // Observe chapter divider for visibility tracking
         const divider = section.querySelector('[data-observe]');
-        if (divider && this.observer) {
-            this.observer.observe(divider);
+        const activeObserver = this.inlineMode ? this.inlineObserver : this.observer;
+        if (divider && activeObserver) {
+            activeObserver.observe(divider);
         }
     }
 
     renderChapterError(index, message) {
-        const section = document.getElementById(`reader-chapter-${index}`);
+        const container = this.inlineMode ? this.inlineContainer : document.getElementById('reader-content');
+        const section = container?.querySelector(`[data-chapter="${index}"]`);
         if (!section) return;
 
         section.innerHTML = `

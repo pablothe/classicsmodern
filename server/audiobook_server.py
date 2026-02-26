@@ -285,16 +285,32 @@ def discover_books() -> List[Dict]:
                     manifest = json.load(f)
                 raw_chapters = manifest.get('chapters', [])
                 if raw_chapters:
-                    chapters = [
-                        {
-                            'title': ch.get('marker', f"Chapter {ch.get('number', i+1)}"),
-                            'number': ch.get('number', i+1),
+                    chapters = []
+                    for i, ch in enumerate(raw_chapters):
+                        ch_title = ch.get('title', '')
+                        ch_number = ch.get('number', i + 1)
+                        section_type = ch.get('section_type', 'chapter')
+                        # Build display title based on section type
+                        non_numbered_types = ('prologue', 'epilogue', 'preface', 'foreword',
+                                             'introduction', 'conclusion', 'interlude', 'appendix', 'dedication')
+                        if section_type in non_numbered_types:
+                            display_title = ch_title or section_type.title()
+                        elif ch_title:
+                            # Strip redundant "Chapter N" prefixes from title
+                            clean_title = re.sub(r'^Chapter\s+\d+[.:]\s*', '', ch_title, flags=re.IGNORECASE)
+                            clean_title = re.sub(r'^CHAPTER\s+[IVXLCDM]+[.:]\s*', '', clean_title)
+                            clean_title = clean_title.strip(' .')
+                            display_title = f"Chapter {ch_number}: {clean_title}" if clean_title else f"Chapter {ch_number}"
+                        else:
+                            display_title = f"Chapter {ch_number}"
+                        chapters.append({
+                            'title': display_title,
+                            'number': ch_number,
+                            'section_type': section_type,
                             'index': i,
                             'file_index': i,
                             'timestamp': 0.0
-                        }
-                        for i, ch in enumerate(raw_chapters)
-                    ]
+                        })
                 meta = manifest.get('metadata', {})
                 if not catalog_info and meta.get('title'):
                     title = meta['title']
@@ -302,6 +318,61 @@ def discover_books() -> List[Dict]:
                     author = meta['author']
             except (json.JSONDecodeError, IOError):
                 pass
+
+        # Check chunk manifest for prologue (chapter 0) and epilogue
+        if chapters:
+            chunk_manifest_paths = [
+                book_dir / "audio_kokoro" / f"{book_id}_chunk_manifest.json",
+                book_dir / "audio_kokoro" / "book_chunk_manifest.json",
+                book_dir / f"{book_id}_chunk_manifest.json",
+            ]
+            for cm_path in chunk_manifest_paths:
+                if cm_path.exists():
+                    try:
+                        with open(cm_path, 'r') as cm_f:
+                            cm_data = json.load(cm_f)
+                        chunk_chapters = set(c.get('chapter') for c in cm_data.get('chunks', []))
+                        max_manifest_chapter = max(ch['number'] for ch in chapters)
+                        # Prologue: chunk manifest has chapter 0
+                        if 0 in chunk_chapters:
+                            # Check if sections metadata has a custom prologue title
+                            prologue_title = 'Prologue'
+                            for sec in cm_data.get('sections', []):
+                                if sec.get('chapter') == 0:
+                                    prologue_title = sec.get('title', 'Prologue')
+                                    break
+                            chapters.insert(0, {
+                                'title': prologue_title,
+                                'number': 0,
+                                'section_type': 'prologue',
+                                'index': 0,
+                                'file_index': 0,
+                                'timestamp': 0.0
+                            })
+                            # Shift existing chapters' indices
+                            for ch in chapters[1:]:
+                                ch['index'] += 1
+                                ch['file_index'] += 1
+                        # Epilogue: chunk manifest has chapter > last manifest chapter
+                        epilogue_chapters = [c for c in chunk_chapters if c is not None and c > max_manifest_chapter]
+                        if epilogue_chapters:
+                            epilogue_title = 'Epilogue'
+                            for sec in cm_data.get('sections', []):
+                                if sec.get('chapter') == min(epilogue_chapters):
+                                    epilogue_title = sec.get('title', 'Epilogue')
+                                    break
+                            next_index = len(chapters)
+                            chapters.append({
+                                'title': epilogue_title,
+                                'number': max_manifest_chapter + 1,
+                                'section_type': 'epilogue',
+                                'index': next_index,
+                                'file_index': next_index,
+                                'timestamp': 0.0
+                            })
+                    except (json.JSONDecodeError, IOError, ValueError):
+                        pass
+                    break
 
         # Find cover image
         cover_path = None

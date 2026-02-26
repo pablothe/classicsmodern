@@ -5,9 +5,7 @@ Unit Tests for Chapter Detection
 Tests the chapter detection functionality used across the codebase.
 """
 
-import json
 import pytest
-from pathlib import Path
 
 from lib.book.processor import BookProcessor
 
@@ -282,45 +280,10 @@ Content.
 
 
 class TestPriorityChain:
-    """Test the 3-step priority chain for chapter detection"""
+    """Test the 2-step priority chain for chapter detection"""
 
-    def test_gutenberg_json_takes_priority(self, tmp_path):
-        """Priority 1: gutenberg_chapters.json should be used when available."""
-        book_text = """# Test Book
-
-## Chapter 1. First
-
-Content here with enough words.
-
-## Chapter 2. Second
-
-More content with enough words.
-"""
-        # Create gutenberg_chapters.json
-        gutenberg_data = {
-            "source": "gutenberg_html_toc",
-            "chapter_count": 2,
-            "chapters": [
-                {"number": 1, "title": "Chapter 1. First", "original_title": "CHAPITRE I"},
-                {"number": 2, "title": "Chapter 2. Second", "original_title": "CHAPITRE II"}
-            ]
-        }
-        json_file = tmp_path / "gutenberg_chapters.json"
-        json_file.write_text(json.dumps(gutenberg_data))
-
-        # Also write the book text so the file exists
-        book_file = tmp_path / "source.md"
-        book_file.write_text(book_text)
-
-        detector = BookProcessor(verbose=False)
-        chapters = detector.detect_chapters(book_text, book_dir=tmp_path)
-
-        assert len(chapters) == 2
-        assert chapters[0].detection_type == 'gutenberg_json'
-        assert chapters[1].detection_type == 'gutenberg_json'
-
-    def test_markdown_headers_when_no_json(self):
-        """Priority 2: ## headers should work without gutenberg_chapters.json."""
+    def test_markdown_headers_priority_1(self):
+        """Priority 1: ## headers are the primary detection method."""
         text = """# Test Book
 
 ## The Beginning
@@ -342,7 +305,7 @@ Final content here with enough words.
         assert chapters[0].detection_type == 'markdown_header'
 
     def test_fallback_regex_for_bare_chapter_lines(self):
-        """Priority 3: Regex fallback for text without ## headers."""
+        """Priority 2: Regex fallback for text without ## headers."""
         text = """Some preamble text.
 
 Chapter I. The First Adventure
@@ -369,30 +332,8 @@ Content of chapter two here with enough words to be meaningful.
         assert len(chapters) == 1
         assert chapters[0].detection_type == 'single_chapter_fallback'
 
-    def test_corrupted_json_falls_through(self, tmp_path):
-        """If gutenberg_chapters.json is corrupted, fall through to Priority 2."""
-        book_text = """# Test Book
-
-## Chapter 1. First
-
-Content here.
-
-## Chapter 2. Second
-
-More content.
-"""
-        # Write corrupted JSON
-        json_file = tmp_path / "gutenberg_chapters.json"
-        json_file.write_text("{invalid json!!")
-
-        detector = BookProcessor(verbose=False)
-        chapters = detector.detect_chapters(book_text, book_dir=tmp_path)
-
-        assert len(chapters) == 2
-        assert chapters[0].detection_type == 'markdown_header'
-
     def test_act_scene_fallback(self):
-        """Priority 3: Act/Scene patterns for plays."""
+        """Priority 2: Act/Scene patterns for plays."""
         text = """A play by Someone.
 
 Act I

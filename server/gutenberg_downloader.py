@@ -46,6 +46,23 @@ download_jobs = {}  # {job_id: {status, progress, error, book_slug, ...}}
 download_semaphore = threading.Semaphore(MAX_CONCURRENT_DOWNLOADS)
 
 
+def _check_siblings_for_heading(element, heading_tags, max_siblings=5):
+    """Check next siblings for heading elements (h1-h4)."""
+    count = 0
+    sibling = element.next_sibling
+    while sibling and count < max_siblings:
+        if hasattr(sibling, 'name'):
+            if sibling.name in heading_tags:
+                return True
+            # Check children of container elements (div wrapping an h2)
+            if sibling.name in ('div', 'section', 'header', 'p'):
+                if sibling.find(list(heading_tags)):
+                    return True
+            count += 1
+        sibling = sibling.next_sibling
+    return False
+
+
 class GutenbergDownloader:
     """Download and process Gutenberg books"""
 
@@ -109,7 +126,7 @@ class GutenbergDownloader:
 
             print(f"✓ Saved: {output_file}")
 
-            # Save Gutenberg chapter metadata for downstream chapter detection
+            # Save Gutenberg chapter metadata
             if toc_entries:
                 chapters_data = {
                     "source": "gutenberg_html_toc",
@@ -117,8 +134,8 @@ class GutenbergDownloader:
                     "chapters": [
                         {
                             "number": entry["number"],
-                            "title": self._normalize_chapter_title(entry["title"], entry["number"]),
-                            "original_title": entry["title"]
+                            "title": self._clean_toc_title(entry["title"]),
+                            "section_type": entry.get("section_type", "chapter")
                         }
                         for entry in toc_entries
                     ]
@@ -290,6 +307,18 @@ class GutenbergDownloader:
             re.IGNORECASE
         )
 
+        # Map matched keywords to section types
+        _section_type_map = {
+            'chapter': 'chapter', 'chapitre': 'chapter', 'kapitel': 'chapter',
+            'capítulo': 'chapter', 'capitolo': 'chapter', 'глава': 'chapter',
+            'part': 'part', 'partie': 'part', 'teil': 'part', 'часть': 'part',
+            'book': 'book', 'livre': 'book', 'buch': 'book', 'libro': 'book', 'книга': 'book',
+            'act': 'act', 'acte': 'act', 'akt': 'act',
+            'scene': 'scene',
+            'prologue': 'prologue', 'epilogue': 'epilogue',
+            'préface': 'preface', 'introduction': 'introduction', 'conclusion': 'conclusion',
+        }
+
         chapter_links = []
         for link in internal_links:
             href = link.get('href', '')[1:]  # Remove leading #
@@ -297,13 +326,18 @@ class GutenbergDownloader:
             if not text or not href:
                 continue
 
-            is_chapter = bool(chapter_kw.search(text))
+            kw_match = chapter_kw.search(text)
+            is_chapter = bool(kw_match)
+            section_type = 'chapter'
+            if kw_match:
+                section_type = _section_type_map.get(kw_match.group(1).lower(), 'chapter')
+
             # Also accept standalone Roman numerals (e.g., "I.", "XIV.")
             if not is_chapter:
                 is_chapter = bool(re.match(r'^[IVXLCDM]+\.?\s', text))
 
             if is_chapter:
-                chapter_links.append({'anchor': href, 'title': text})
+                chapter_links.append({'anchor': href, 'title': text, 'section_type': section_type})
 
         # Need at least 3 chapter links to consider it a real TOC
         if len(chapter_links) < 3:
@@ -330,55 +364,86 @@ class GutenbergDownloader:
             toc_entries.append({
                 'anchor': entry['anchor'],
                 'title': title,
-                'number': number
+                'number': number,
+                'section_type': entry.get('section_type', 'chapter')
             })
 
         return toc_entries
 
-    def _normalize_chapter_title(self, original_title: str, chapter_number: int) -> str:
+    @staticmethod
+    def _clean_toc_title(original_title: str) -> str:
         """
-        Convert a multilingual chapter title to standardized markdown format.
+        Minimal cleanup of TOC title text for header injection.
 
-        Examples:
-            "CHAPITRE I. Comment Candide fut élevé" → "Chapter 1. Comment Candide fut élevé"
-            "Chapter XIV" → "Chapter 14"
+        Only cleans whitespace artifacts and trailing periods.
+        Does NOT restructure, renumber, or strip keywords — the markdown
+        normalizer and display layer handle formatting downstream.
         """
-        title = original_title
-        # Remove chapter keyword in any language
-        title = re.sub(
-            r'^(CHAPITRE|Chapitre|CHAPTER|Chapter|KAPITEL|Kapitel|'
-            r'CAPÍTULO|Capítulo|CAPITOLO|Capitolo|Глава)\s+',
-            '', title, flags=re.IGNORECASE
-        )
-        # Remove leading Roman numeral or number with optional dot
-        title = re.sub(r'^([IVXLCDM]+|\d+)\.?\s*', '', title)
-        # Clean up extra punctuation
-        title = title.strip().strip('.').strip()
+        title = original_title.strip()
+        # Collapse internal whitespace (TOC often has \r\n from HTML formatting)
+        title = re.sub(r'\s+', ' ', title)
+        # Strip trailing periods
+        title = title.rstrip('.')
+        return title
 
-        if title:
-            return f"Chapter {chapter_number}. {title}"
-        else:
-            return f"Chapter {chapter_number}"
+    @staticmethod
+    def _has_nearby_heading(element) -> bool:
+        """Check if there's an h1-h4 heading near this element.
+
+        Gutenberg uses varied structures:
+        - <h2><a id="chap01"></a>CHAPTER I.</h2>  (Alice: anchor inside heading)
+        - <p><a id="link2HCH0001"></a></p><div>...</div><h2>CHAPTER 1.</h2>  (Moby Dick: heading is parent's sibling)
+        """
+        heading_tags = {'h1', 'h2', 'h3', 'h4'}
+
+        # Check the element itself
+        if hasattr(element, 'name') and element.name in heading_tags:
+            return True
+
+        # Check parent (anchor might be inside a heading)
+        parent = getattr(element, 'parent', None)
+        if parent and hasattr(parent, 'name') and parent.name in heading_tags:
+            return True
+
+        # Check element's own siblings
+        if _check_siblings_for_heading(element, heading_tags):
+            return True
+
+        # Check parent's siblings (anchor is often inside a <p> or <span>,
+        # and the heading is a sibling of that container)
+        if parent and hasattr(parent, 'name') and parent.name not in ('body', 'html', '[document]'):
+            if _check_siblings_for_heading(parent, heading_tags):
+                return True
+
+        return False
 
     def _inject_chapter_headers(self, soup, toc_entries: list):
         """
-        Inject <h2> chapter headers into HTML at anchor target positions.
+        Inject <h2> chapter headers at anchor positions only when no heading exists nearby.
 
-        For each TOC entry, find the matching anchor target (by name or id attribute)
-        and insert a standardized chapter header element after it.
+        Many Gutenberg books already have headings in the body. This method
+        only injects when the anchor target has no heading nearby, preventing
+        duplicate headers.
         """
         anchor_map = {entry['anchor']: entry for entry in toc_entries}
+        injected = 0
 
         for anchor_id, entry in anchor_map.items():
-            # Find elements with matching name or id attribute
             targets = soup.find_all(attrs={'name': anchor_id})
             targets += soup.find_all(attrs={'id': anchor_id})
 
             for target in targets:
-                title = self._normalize_chapter_title(entry['title'], entry['number'])
+                if self._has_nearby_heading(target):
+                    continue  # Heading already exists — don't duplicate
+
+                title = self._clean_toc_title(entry['title'])
                 h2 = soup.new_tag('h2')
                 h2.string = title
                 target.insert_after(h2)
+                injected += 1
+
+        if injected:
+            print(f"  Injected {injected} chapter headers (skipped {len(anchor_map) - injected} with existing headings)")
 
     def _html_to_markdown(self, html: str) -> tuple:
         """

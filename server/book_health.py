@@ -83,39 +83,39 @@ def check_book_health(book_dir: Path) -> Dict:
 
 def cleanup_stale_jobs():
     """
-    Mark zombie jobs as cancelled. On server startup, any job still marked
-    'running' is from a previous session and will never complete.
-    Uses 'cancelled' so the UI skips them (it already filters out cancelled jobs).
-
-    Also cleans up old 'failed' jobs that were from previous server restarts
-    (before cleanup was changed to use 'cancelled' status).
+    Re-queue orphaned jobs. Any 'running' job without an active worker
+    is from a previous session — re-queue it so the pipeline resumes
+    from its last checkpoint.
     """
     try:
         from server.job_queue import get_queue
+        from datetime import datetime
         queue = get_queue()
-        count = 0
+        requeued = 0
 
-        # 1. Mark stale running jobs as cancelled
         running_jobs = queue.db.get_all_jobs(status='running')
         for job in (running_jobs or []):
+            # Skip if a worker thread is actually processing this job
+            with queue.lock:
+                if job['job_id'] in queue.running_jobs:
+                    continue
+
+            # Re-queue the orphaned job
             queue.db.update_job(job['job_id'], {
-                'status': 'cancelled',
-                'error': 'Server restarted — job was interrupted'
+                'status': 'pending',
+                'started_at': None,
+                'worker_id': None,
+                'error': None
             })
-            count += 1
+            # Add to in-memory queue so workers pick it up
+            priority = job.get('priority', 0)
+            created_at = datetime.fromisoformat(job['created_at']).timestamp()
+            queue.job_queue.put((-priority, created_at, job['job_id']))
+            requeued += 1
 
-        # 2. Fix old failed jobs that were from server restarts
-        failed_jobs = queue.db.get_all_jobs(status='failed')
-        for job in (failed_jobs or []):
-            if job.get('error') and 'Server restarted' in job['error']:
-                queue.db.update_job(job['job_id'], {
-                    'status': 'cancelled'
-                })
-                count += 1
-
-        if count:
-            print(f"  * Cleaned up {count} stale job(s) from previous session")
-        return count
+        if requeued:
+            print(f"  * Re-queued {requeued} interrupted job(s) from previous session")
+        return requeued
     except Exception:
         return 0
 

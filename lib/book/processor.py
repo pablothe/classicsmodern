@@ -14,7 +14,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 import argparse
@@ -33,6 +33,7 @@ class Chapter:
     content: str
     word_count: int
     detection_type: str  # Which pattern detected this
+    section_type: str = "chapter"  # 'chapter', 'prologue', 'epilogue', 'preface', 'introduction', 'part', etc.
     checkpoints: Dict = field(default_factory=lambda: {
         'translation': None,
         'audio': None
@@ -157,8 +158,8 @@ class BookProcessor:
         metadata = self.extract_metadata(cleaned_text)
         self.log_message(f"Metadata: {metadata.get('title', 'Unknown')} by {metadata.get('author', 'Unknown')}")
 
-        # Step 3: Detect chapters (pass book_dir for Gutenberg metadata lookup)
-        chapters = self.detect_chapters(cleaned_text, book_dir=book_file.parent)
+        # Step 3: Detect chapters from ## headers or regex fallback
+        chapters = self.detect_chapters(cleaned_text)
         self.log_message(f"Detected {len(chapters)} chapters")
 
         if chapters:
@@ -318,17 +319,15 @@ class BookProcessor:
 
         return 'Unknown'
 
-    def detect_chapters(self, text: str, book_dir: Optional[Path] = None) -> List[Chapter]:
+    def detect_chapters(self, text: str) -> List[Chapter]:
         """
-        Detect all chapters using a 3-step priority chain.
+        Detect all chapters using a 2-step priority chain.
 
-        Priority 1: Gutenberg metadata (gutenberg_chapters.json)
-        Priority 2: Markdown ## headers
-        Priority 3: Minimal regex fallback
+        Priority 1: Markdown ## headers
+        Priority 2: Minimal regex fallback
 
         Args:
             text: Book text content
-            book_dir: Optional path to book directory (enables Priority 1)
 
         Returns:
             List of Chapter objects
@@ -336,23 +335,16 @@ class BookProcessor:
         lines = text.split('\n')
         chapter_dicts = []
 
-        # PRIORITY 1: Gutenberg metadata (source of truth from HTML TOC)
-        if book_dir:
-            chapter_dicts = self._detect_from_gutenberg_json(text, lines, book_dir)
-            if chapter_dicts:
-                self.log_message(f"Priority 1: Found {len(chapter_dicts)} chapters from gutenberg_chapters.json")
+        # PRIORITY 1: Markdown ## headers (Gutenberg downloads + any structured markdown)
+        chapter_dicts = self._detect_header_chapters(lines)
+        if chapter_dicts:
+            self.log_message(f"Priority 1: Found {len(chapter_dicts)} chapters from ## headers")
 
-        # PRIORITY 2: Markdown ## headers (Gutenberg downloads + any structured markdown)
-        if not chapter_dicts:
-            chapter_dicts = self._detect_header_chapters(lines)
-            if chapter_dicts:
-                self.log_message(f"Priority 2: Found {len(chapter_dicts)} chapters from ## headers")
-
-        # PRIORITY 3: Minimal regex fallback (bare "Chapter I" lines, acts, prologues)
+        # PRIORITY 2: Minimal regex fallback (bare "Chapter I" lines, acts, prologues)
         if not chapter_dicts:
             chapter_dicts = self._detect_fallback_regex(lines)
             if chapter_dicts:
-                self.log_message(f"Priority 3: Found {len(chapter_dicts)} chapters via regex fallback")
+                self.log_message(f"Priority 2: Found {len(chapter_dicts)} chapters via regex fallback")
 
         # LAST RESORT: Single chapter for whole text
         if not chapter_dicts:
@@ -369,96 +361,6 @@ class BookProcessor:
 
         return self._dicts_to_chapters(chapter_dicts, lines, text)
 
-    def _detect_from_gutenberg_json(self, text: str, lines: list, book_dir: Path) -> list:
-        """
-        Priority 1: Load chapter boundaries from gutenberg_chapters.json.
-
-        The JSON contains chapter titles (from HTML TOC). We match each title
-        against ## headers in the text to find exact line positions.
-
-        Returns:
-            List of chapter dicts, or empty list if file not found or matching fails.
-        """
-        json_path = Path(book_dir) / "gutenberg_chapters.json"
-        if not json_path.exists():
-            return []
-
-        try:
-            with open(json_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-        except (json.JSONDecodeError, IOError):
-            return []
-
-        gutenberg_chapters = data.get('chapters', [])
-        if not gutenberg_chapters:
-            return []
-
-        # Find all ## headers in the text
-        header_candidates = []
-        for i, line in enumerate(lines):
-            stripped = line.strip()
-            if stripped.startswith('## '):
-                header_candidates.append((i, stripped))
-
-        if len(header_candidates) < len(gutenberg_chapters) * 0.5:
-            # Not enough ## headers to match — fall through to Priority 2
-            return []
-
-        # Match gutenberg chapters to ## headers by title similarity
-        matched = []
-        used_headers = set()
-        for gc in gutenberg_chapters:
-            title = gc['title']
-            for idx, (line_num, header_text) in enumerate(header_candidates):
-                if idx in used_headers:
-                    continue
-                header_title = header_text[3:].strip()  # Remove "## "
-                if self._titles_match(title, header_title):
-                    matched.append({
-                        'line_num': line_num,
-                        'char_pos': len('\n'.join(lines[:line_num])),
-                        'marker': header_text,
-                        'title': header_title,
-                        'detection_type': 'gutenberg_json'
-                    })
-                    used_headers.add(idx)
-                    break
-
-        # Require at least 50% match rate
-        if len(matched) < len(gutenberg_chapters) * 0.5:
-            return []
-
-        return matched
-
-    @staticmethod
-    def _titles_match(gutenberg_title: str, header_title: str) -> bool:
-        """Check if a Gutenberg TOC title matches a ## header title."""
-        def normalize(s):
-            s = s.lower().strip()
-            s = re.sub(r'[^\w\s]', '', s)
-            s = re.sub(r'\s+', ' ', s)
-            return s
-
-        gt = normalize(gutenberg_title)
-        ht = normalize(header_title)
-
-        # Exact match after normalization
-        if gt == ht:
-            return True
-
-        # One contains the other (handles "Chapter 1" vs "Chapter 1. Title")
-        if gt in ht or ht in gt:
-            return True
-
-        # Match by chapter number
-        gt_num = re.search(r'\b(\d+)\b', gt)
-        ht_num = re.search(r'\b(\d+)\b', ht)
-        if gt_num and ht_num and gt_num.group(1) == ht_num.group(1):
-            if 'chapter' in gt and 'chapter' in ht:
-                return True
-
-        return False
-
     def _detect_header_chapters(self, lines: list) -> list:
         """
         Priority 2: Detect chapters from ## markdown headers.
@@ -467,9 +369,10 @@ class BookProcessor:
         Returns chapter dicts if 2+ real content headers found.
         """
         SKIP_HEADERS = {
-            'contents', 'table of contents', 'copyright', 'dedication',
+            'contents', 'table of contents', 'copyright',
             'acknowledgements', 'acknowledgments', 'about the author',
             'colophon', 'note', 'notes', 'bibliography', 'index',
+            'footnotes', 'endnotes', 'glossary',
         }
 
         candidates = []
@@ -497,12 +400,28 @@ class BookProcessor:
             # Filter TOC link artifacts like "[Chapter 1](#chapter-1)"
             if re.match(r'^\[.*\]\(#', title):
                 continue
+            # Detect section type from header title
+            section_type = 'chapter'
+            title_lower = title.lower().split('.')[0].split(':')[0].strip()
+            section_keywords = {
+                'prologue': 'prologue', 'epilogue': 'epilogue', 'preface': 'preface',
+                'foreword': 'foreword', 'introduction': 'introduction', 'interlude': 'interlude',
+                'conclusion': 'conclusion', 'appendix': 'appendix', 'afterword': 'epilogue',
+                'dedication': 'dedication',
+                'part': 'part', 'book': 'book', 'act': 'act', 'scene': 'scene',
+                'letter': 'letter',
+            }
+            for kw, stype in section_keywords.items():
+                if kw in title_lower:
+                    section_type = stype
+                    break
             candidates.append({
                 'line_num': i,
                 'char_pos': len('\n'.join(lines[:i])),
                 'marker': stripped,
                 'title': title,
-                'detection_type': 'markdown_header'
+                'detection_type': 'markdown_header',
+                'section_type': section_type
             })
 
         if candidates:
@@ -530,12 +449,33 @@ class BookProcessor:
                 if match:
                     chapter_lines.add(i)
                     title = self.extract_chapter_title(line_stripped, match, pattern_type)
+                    # Determine section_type from pattern and matched text
+                    section_type = 'chapter'
+                    if pattern_type == 'special_section':
+                        keyword = match.group(1).lower()
+                        section_type_map = {
+                            'prologue': 'prologue', 'préface': 'preface', 'preface': 'preface',
+                            'foreword': 'foreword', 'avant-propos': 'foreword', 'vorwort': 'foreword',
+                            'introduction': 'introduction', 'einleitung': 'introduction',
+                            'introducción': 'introduction', 'introduzione': 'introduction',
+                            'epilogue': 'epilogue', 'épilogue': 'epilogue', 'nachwort': 'epilogue',
+                            'epílogo': 'epilogue', 'epilogo': 'epilogue',
+                            'interlude': 'interlude', 'conclusion': 'conclusion',
+                            'conclusión': 'conclusion', 'appendix': 'appendix',
+                            'prólogo': 'prologue', 'prefazione': 'preface',
+                        }
+                        section_type = section_type_map.get(keyword, keyword)
+                    elif pattern_type == 'act_scene':
+                        section_type = 'act' if match.group(1).lower() in ('act', 'acte', 'akt', 'acto', 'atto') else 'scene'
+                    elif pattern_type == 'epistolary':
+                        section_type = match.group(1).lower()
                     chapters.append({
                         'line_num': i,
                         'char_pos': len('\n'.join(lines[:i])),
                         'marker': line_stripped,
                         'title': title,
-                        'detection_type': pattern_type
+                        'detection_type': pattern_type,
+                        'section_type': section_type
                     })
 
         # Sort and deduplicate (remove detections within 3 lines of each other)
@@ -639,7 +579,8 @@ class BookProcessor:
                 end_char=end_char,
                 content=content,
                 word_count=len(content.split()),
-                detection_type=ch_info['detection_type']
+                detection_type=ch_info['detection_type'],
+                section_type=ch_info.get('section_type', 'chapter')
             ))
 
         return chapter_objects

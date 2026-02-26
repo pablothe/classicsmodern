@@ -149,7 +149,7 @@ class MarkdownNormalizer:
             hashes = match.group(1)
             keyword = match.group(2).capitalize()  # Normalize to "Chapter"
             num = match.group(3)
-            title = match.group(4).strip()
+            title = match.group(4).strip().lstrip('.').strip()
 
             # Convert Roman to Arabic if needed
             if re.match(r'^[IVXLCDM]+$', num):

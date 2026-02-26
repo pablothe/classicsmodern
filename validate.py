@@ -71,6 +71,47 @@ def _migrate_paragraphs(path: Path, recursive: bool = False):
     print(f"\nDone: {migrated} migrated, {skipped} already up-to-date")
 
 
+def _recombine_prologues(path: Path, recursive: bool = False):
+    """Recombine existing audio chunks to separate prologues into their own files."""
+    from lib.audio.kokoro import KokoroAudioGenerator
+
+    book_dirs = []
+    if path.is_dir():
+        # Check if this is a book directory (has book_manifest.json)
+        if (path / 'book_manifest.json').exists():
+            book_dirs.append(path)
+        else:
+            # It's a parent directory (e.g., books/)
+            pattern = '**/*' if recursive else '*'
+            for d in sorted(path.glob(pattern)):
+                if d.is_dir() and (d / 'book_manifest.json').exists():
+                    book_dirs.append(d)
+    else:
+        # Path is a file — use its parent directory
+        if (path.parent / 'book_manifest.json').exists():
+            book_dirs.append(path.parent)
+
+    if not book_dirs:
+        print("No book directories found.")
+        return
+
+    recombined = 0
+    skipped = 0
+    for book_dir in book_dirs:
+        audio_dir = book_dir / 'audio_kokoro'
+        if not audio_dir.exists():
+            continue
+
+        print(f"\n{book_dir.name}:")
+        result = KokoroAudioGenerator.recombine_chapters(audio_dir, book_dir)
+        if result:
+            recombined += 1
+        else:
+            skipped += 1
+
+    print(f"\nDone: {recombined} recombined, {skipped} skipped")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Validate book structure for audiobook features"
@@ -95,11 +136,19 @@ def main():
         '--migrate-paragraphs', action='store_true',
         help='Add paragraph registry to book manifests that lack it (v2.0 -> v3.0)'
     )
+    parser.add_argument(
+        '--recombine-prologues', action='store_true',
+        help='Recombine existing audio chunks to separate prologues into their own files'
+    )
 
     args = parser.parse_args()
 
     if args.migrate_paragraphs:
         _migrate_paragraphs(args.path, recursive=args.recursive)
+        sys.exit(0)
+
+    if args.recombine_prologues:
+        _recombine_prologues(args.path, recursive=args.recursive)
         sys.exit(0)
 
     if args.path.is_dir():

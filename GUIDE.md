@@ -12,7 +12,8 @@ End-to-end guide for creating audiobooks with Modern Classics. Everything runs l
 4. [Summarization](#summarization)
 5. [Cover Art](#cover-art)
 6. [Web Server](#web-server)
-7. [Troubleshooting](#troubleshooting)
+7. [Multi-User Profiles](#multi-user-profiles)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -59,7 +60,7 @@ Preserves chapter structure through translation. Best for most books.
 python3 translate.py books/mybook/book.md \
   --source-lang Latin \
   --target-lang "Modern English" \
-  --model ollama:zongwei/gemma3-translator:4b
+  --model zongwei/gemma3-translator:4b
 ```
 
 How it works:
@@ -180,8 +181,11 @@ python3 cover.py "whimsical Alice in Wonderland scene, fantasy illustration" --o
 
 ### Features
 
-- **Book catalog** — browse all audiobooks with cover art
-- **Audio player** — chapter navigation, speed control, progress tracking
+- **Audible-style library** — browse audiobooks with cover art, grid/list view toggle, and filter chips (Not Started / In Progress / Finished) showing time remaining
+- **Audio player** — chapter navigation, speed control, progress tracking, persistent now-playing bar across all views
+- **E-reader** — fullscreen reader with Listen/Read tabs and sync toggle for read-while-listening mode
+- **Per-card controls** — play button on covers for instant resume, three-dot menu with View Details / Read / Play
+- **Multi-language tracks** — switch between text and audio language variants per book
 - **Karaoke mode** — synchronized text highlighting during playback
 - **AI chat** — ask questions about the book (requires Ollama with llama3.2:3b)
 - **Job dashboard** (`/jobs`) — monitor background translation and audio jobs
@@ -211,6 +215,18 @@ ollama pull llama3.2:3b
 ```
 
 The server checks Ollama availability on startup and gracefully disables chat if unavailable.
+
+---
+
+## Multi-User Profiles
+
+The web player supports Netflix-style multi-user profiles. Each user gets isolated playback positions, dark mode preferences, language settings, and reader configuration.
+
+- On first visit, a default profile is created automatically
+- Create additional profiles from the profile picker in the top navigation
+- Profiles are stored locally on the server -- no authentication required
+- All playback progress, settings, and preferences are per-user
+- Designed for family use on a shared LAN
 
 ---
 

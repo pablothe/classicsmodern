@@ -51,6 +51,8 @@ pip install kokoro-tts kokoro-onnx soundfile
 brew install ffmpeg  # macOS
 # or apt-get install ffmpeg  # Linux
 
+# 6. Optional: EPUB conversion support
+pip install ebooklib markdownify
 ```
 
 **Why venv is required:**
@@ -126,7 +128,7 @@ Seven thin CLI wrappers at the project root, each importing from `lib/`:
 | `summarize.py` | Summarize a book (Ollama, local) | `python3 summarize.py book.md 50` |
 | `cover.py` | Generate cover art (Stable Diffusion) | `python3 cover.py "fantasy scene" --output cover.png` |
 | `validate.py` | Validate book structure | `python3 validate.py book.md --auto-fix` |
-| `epub_to_md.py` | Convert EPUB to Markdown | `python3 epub_to_md.py book.epub` |
+| `epub_to_md.py` | Convert EPUB to Markdown | `python3 epub_to_md.py book.epub output_dir/` |
 
 ## Advanced Workflows
 
@@ -147,6 +149,9 @@ python3 validate.py books/mybook/book.md --json
 
 # Validate all books recursively
 python3 validate.py books/ --recursive --verbose
+
+# Auto-fix without creating .bak backup
+python3 validate.py books/mybook/book.md --auto-fix --no-backup
 
 # Migrate older manifests to v3.0 (adds paragraph registry)
 python3 validate.py books/ --recursive --migrate-paragraphs
@@ -176,6 +181,10 @@ python3 translate.py books/mybook/book.md \
   --source-lang Latin \
   --target-lang "Modern English" \
   --model zongwei/gemma3-translator:4b
+
+# Skip translating title/author metadata
+python3 translate.py books/mybook/book.md \
+  --target-lang "Modern English" --no-translate-metadata
 
 # What it does:
 # 1. PRE-VALIDATES source (fails fast if incomplete)
@@ -214,8 +223,8 @@ python3 cover.py "whimsical Alice in Wonderland scene, fantasy illustration" --o
 # Custom size and quality
 python3 cover.py "dark Victorian mystery" --output cover.png --width 512 --height 768 --steps 50
 
-# Auto-generate prompt from book name
-python3 cover.py --book alice_adventures --output cover.png
+# Auto-generate prompt from book name (prompt arg required but overridden by --book)
+python3 cover.py "" --book "Alice in Wonderland" --output cover.png
 ```
 
 ### Audio Generation
@@ -265,8 +274,10 @@ python3 audiobook.py translated.md --speed 1.15
 ```
 
 **Web Interface Features:**
-- **Book Catalog** (`/`) - Browse all audiobooks with cover art
-- **Audio Player** - Chapter-based playback with progress tracking
+- **Book Catalog** (`/`) - Browse audiobooks with cover art, grid/list view, filter chips (Not Started / In Progress / Finished)
+- **Audio Player** - Chapter-based playback with progress tracking, persistent now-playing bar
+- **E-Reader** - Fullscreen reader with Listen/Read tabs, sync toggle for read-while-listening
+- **Multi-User Profiles** - Netflix-style profile picker with isolated playback and settings
 - **Job Dashboard** (`/jobs`) - Monitor translation/audio generation jobs
 - **AI Chat** - Ask questions about book content (requires 3+ chapters)
 - **Karaoke Mode** - Synchronized text highlighting during playback
@@ -295,6 +306,7 @@ GET  /api/playback/all                                       # All positions (li
 GET  /api/users                                              # List all users
 POST /api/users                                              # Create new user
 GET  /api/users/{user_id}                                    # Get user details
+PATCH /api/users/{user_id}                                   # Update user profile
 DELETE /api/users/{user_id}                                  # Delete user
 
 # Jobs
@@ -400,7 +412,9 @@ classicsmodern/
 │       ├── karaoke.js         # Karaoke mode
 │       └── manifest.json      # PWA manifest
 │
-├── templates/                 # HTML templates
+├── scripts/                   # Utility scripts
+│   └── reset_books.py         # Reset book data
+├── templates/                 # HTML templates (legacy)
 ├── books/                     # Book data
 └── tests/                     # Test suite
 ```
@@ -442,6 +456,7 @@ The project uses a unified manifest system for consistent chapter handling:
 - **Performance**: 31x faster than alternatives
 - **Features**: 52 voices, Apple Silicon GPU (MPS), Apache 2.0 license
 - **Chapter Detection**: Detects from raw markdown before text cleaning
+- **Audio Intros**: Generates spoken front matter (title, author, epigraphs, dedications)
 
 ### Summarization System
 - **Model**: zongwei/gemma3-translator:4b via Ollama (same as translation)

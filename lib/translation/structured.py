@@ -86,7 +86,7 @@ class BookParser:
         # Use BookProcessor (canonical chapter detection, 14+ patterns)
         processor = BookProcessor(verbose=False)
         cleaned_text, _ = processor.strip_gutenberg(text)
-        bp_chapters = processor.detect_chapters(cleaned_text, book_dir=input_file.parent)
+        bp_chapters = processor.detect_chapters(cleaned_text)
 
         if not bp_chapters:
             raise ValueError(f"No chapters detected in {input_file}")
