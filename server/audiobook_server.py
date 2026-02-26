@@ -1318,8 +1318,36 @@ async def delete_variant(book_id: str, variant_id: str):
             break
 
     if not variant:
-        logger.warning("Delete: variant not found: %s", variant_id)
-        raise HTTPException(status_code=404, detail=f"Variant '{variant_id}' not found")
+        # Fallback: look for M3U file directly on disk
+        # This handles orphaned playlists whose audio files no longer exist
+        book_dir = BOOKS_DIR / book_id
+        m3u_candidates = list(book_dir.rglob(f"{variant_id}.m3u"))
+        if not m3u_candidates:
+            logger.warning("Delete: variant not found: %s", variant_id)
+            raise HTTPException(status_code=404, detail=f"Variant '{variant_id}' not found")
+
+        playlist_path = m3u_candidates[0]
+        playlist_dir = playlist_path.parent
+
+        # Parse M3U to find referenced audio files (even if missing from disk)
+        referenced_files = []
+        try:
+            with open(playlist_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#'):
+                        referenced_files.append(playlist_dir / line)
+        except IOError:
+            pass
+
+        variant = {
+            'variant_id': variant_id,
+            'playlist_path': str(playlist_path.relative_to(BOOKS_DIR)),
+            'audio_files': [
+                str(f.relative_to(BOOKS_DIR)) for f in referenced_files if f.exists()
+            ],
+        }
+        logger.info("Delete fallback: found orphaned M3U %s", playlist_path)
 
     # Track deleted files
     deleted_files = []
