@@ -64,9 +64,11 @@ const state = {
     textLanguageMatchesAudio: true,  // Whether text lang matches audio lang (for karaoke)
     // Library sort & filter
     sortBy: 'title-asc',
-    statusFilter: null,              // null = show all, 'not_started' | 'reading' | 'finished' | 'no_audio'
+    statusFilter: null,              // null = show all, 'not_started' | 'in_progress' | 'finished' | 'no_audio'
     playbackProgress: {},            // { bookId: percentage } for progress bars
-    bookStatus: {},                  // { bookId: 'not_started' | 'reading' | 'finished' | 'no_audio' }
+    bookStatus: {},                  // { bookId: 'not_started' | 'in_progress' | 'finished' | 'no_audio' }
+    bookDuration: {},                // { bookId: totalSeconds } from chunk manifest
+    bookTimeLeft: {},                // { bookId: secondsRemaining } approximate
     // User profiles
     currentUserId: null,             // Active user profile ID (or null for device mode)
     users: []                        // [{ user_id, name, avatar_emoji }]
@@ -557,12 +559,18 @@ async function loadLibrary() {
         const positions = await API.getAllPlaybackPositions();
         state.playbackProgress = {};
         state.bookStatus = {};
+        state.bookDuration = {};
+        state.bookTimeLeft = {};
         for (const book of state.books) {
             if (!book.has_audio || !book.variants.length) {
                 state.bookStatus[book.book_id] = 'no_audio';
                 continue;
             }
             const variant = book.variants[0];
+            const totalDuration = variant.total_duration || 0;
+            if (totalDuration > 0) {
+                state.bookDuration[book.book_id] = totalDuration;
+            }
             const key = `${book.book_id}:${variant.variant_id}`;
             const pos = positions[key];
             if (!pos) {
@@ -570,7 +578,15 @@ async function loadLibrary() {
             } else if (variant.file_count > 0) {
                 const fileIndex = pos.file_index || 0;
                 state.playbackProgress[book.book_id] = Math.round((fileIndex / variant.file_count) * 100);
-                state.bookStatus[book.book_id] = fileIndex >= variant.file_count - 1 ? 'finished' : 'reading';
+                if (fileIndex >= variant.file_count - 1) {
+                    state.bookStatus[book.book_id] = 'finished';
+                } else {
+                    state.bookStatus[book.book_id] = 'in_progress';
+                    if (totalDuration > 0) {
+                        const progressPct = state.playbackProgress[book.book_id];
+                        state.bookTimeLeft[book.book_id] = Math.round(totalDuration * (1 - progressPct / 100));
+                    }
+                }
             } else {
                 state.bookStatus[book.book_id] = 'not_started';
             }
@@ -582,6 +598,14 @@ async function loadLibrary() {
         console.error('Failed to load library:', error);
         ui.bookList.innerHTML = '<div class="error">Failed to load books. Please check server connection.</div>';
     }
+}
+
+function formatDuration(seconds) {
+    if (!seconds || seconds <= 0) return '';
+    const h = Math.floor(seconds / 3600);
+    const m = Math.round((seconds % 3600) / 60);
+    if (h > 0) return `${h}h ${m}min`;
+    return `${m}min`;
 }
 
 function formatSize(sizeMb) {
@@ -624,27 +648,27 @@ function renderStatusFilters() {
     if (!container) return;
 
     const categories = [
-        { key: 'reading',     label: 'Reading' },
         { key: 'not_started', label: 'Not Started' },
-        { key: 'finished',    label: 'Finished' },
-        { key: 'no_audio',    label: 'No Audio' }
+        { key: 'in_progress', label: 'In Progress' },
+        { key: 'finished',    label: 'Finished' }
     ];
 
-    const counts = {};
-    for (const cat of categories) {
-        counts[cat.key] = state.books.filter(b => state.bookStatus[b.book_id] === cat.key).length;
-    }
-
-    container.innerHTML = categories
-        .filter(cat => counts[cat.key] > 0)
-        .map(cat =>
-            `<button class="filter-chip${state.statusFilter === cat.key ? ' active' : ''}" data-status="${cat.key}">${cat.label} (${counts[cat.key]})</button>`
-        ).join('');
+    // Filter chip + category chips
+    const filterActive = state.statusFilter !== null;
+    let html = `<button class="filter-chip filter-chip-icon${filterActive ? ' active' : ''}" data-status="clear">&#x2195; Filter</button>`;
+    html += categories.map(cat =>
+        `<button class="filter-chip${state.statusFilter === cat.key ? ' active' : ''}" data-status="${cat.key}">${cat.label}</button>`
+    ).join('');
+    container.innerHTML = html;
 
     container.querySelectorAll('.filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
             const status = chip.dataset.status;
-            state.statusFilter = state.statusFilter === status ? null : status;
+            if (status === 'clear') {
+                state.statusFilter = null;
+            } else {
+                state.statusFilter = state.statusFilter === status ? null : status;
+            }
             renderStatusFilters();
             renderUnifiedSearch();
         });
@@ -762,9 +786,22 @@ function renderLibraryBooks(books) {
                         ${book.author || ''}${book.year ? ` (${book.year})` : ''}
                     </p>
                     <div class="book-meta">
-                        ${book.language ? `<span class="language-badge">${book.language}</span>` : ''}
-                        ${hasAudio ? `<span>${book.variant_count} version${book.variant_count !== 1 ? 's' : ''}</span>` : '<span>No audio</span>'}
-                        ${book.total_size_mb > 0 ? `<span class="book-size">${formatSize(book.total_size_mb)}</span>` : ''}
+                        ${(() => {
+                            const status = state.bookStatus[book.book_id];
+                            const timeLeft = state.bookTimeLeft[book.book_id];
+                            const duration = state.bookDuration[book.book_id];
+                            if (status === 'in_progress' && timeLeft) {
+                                const pct = state.playbackProgress[book.book_id] || 0;
+                                return `<div class="book-time-progress"><div class="book-time-bar"><div class="book-time-bar-fill" style="width:${pct}%"></div></div><span class="book-time-left">${formatDuration(timeLeft)} left</span></div>`;
+                            } else if (status === 'finished') {
+                                return '<span class="book-status-finished">Finished</span>';
+                            } else if (status === 'not_started' && duration) {
+                                return `<span class="book-total-duration">${formatDuration(duration)}</span>`;
+                            } else if (status === 'no_audio') {
+                                return '<span>No audio</span>';
+                            }
+                            return '';
+                        })()}
                     </div>
                 </div>
             </div>

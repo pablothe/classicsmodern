@@ -289,7 +289,9 @@ def discover_books() -> List[Dict]:
                         {
                             'title': ch.get('marker', f"Chapter {ch.get('number', i+1)}"),
                             'number': ch.get('number', i+1),
-                            'index': i
+                            'index': i,
+                            'file_index': i,
+                            'timestamp': 0.0
                         }
                         for i, ch in enumerate(raw_chapters)
                     ]
@@ -382,8 +384,26 @@ def discover_books() -> List[Dict]:
             'size_bytes': total_size,
             'size_mb': round(total_size / (1024 * 1024), 2),
             'created_at': created_at,
-            'timestamp': variant_info['timestamp']
+            'timestamp': variant_info['timestamp'],
+            'total_duration': 0
         }
+
+        # Try to get total_duration from chunk manifest
+        book_dir = BOOKS_DIR / book_id
+        chunk_manifest_candidates = [
+            book_dir / "audio_kokoro" / f"{book_id}_chunk_manifest.json",
+            book_dir / "audio_kokoro" / "book_chunk_manifest.json",
+            book_dir / f"{book_id}_chunk_manifest.json",
+        ]
+        for cm_path in chunk_manifest_candidates:
+            if cm_path.exists():
+                try:
+                    with open(cm_path, 'r') as cm_f:
+                        cm_data = json.load(cm_f)
+                        variant['total_duration'] = cm_data.get('total_duration', 0)
+                except (json.JSONDecodeError, IOError):
+                    pass
+                break
 
         # Add variant to book and mark book as having audio
         books_by_id[book_id]['variants'].append(variant)
