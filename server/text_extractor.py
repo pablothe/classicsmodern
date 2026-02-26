@@ -370,37 +370,107 @@ def split_into_paragraphs(text: str, manifest_paragraphs: Optional[List[Dict]] =
     return paragraphs
 
 
+def _load_manifest(book_dir: Path) -> Optional[Dict]:
+    """Load book_manifest.json if it exists."""
+    manifest_path = book_dir / 'book_manifest.json'
+    if not manifest_path.exists():
+        return None
+    try:
+        with open(manifest_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, IOError):
+        return None
+
+
 def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timing: Optional[Dict] = None, total_audio_chapters: int = None, source_path: Optional[Path] = None) -> Optional[Dict]:
     """
     Get chapter text data for text sync API.
+
+    Uses book_manifest.json as the primary source of truth for chapter
+    boundaries and paragraph data. Falls back to detect_chapter_markers()
+    when no manifest exists or when an explicit non-default source_path
+    is provided (e.g., a translation file).
 
     Args:
         book_dir: Path to book directory
         chapter_index: Zero-based chapter index
         audio_chapter_timing: Optional dict with 'timestamp' and 'duration' from audio chapter metadata
         total_audio_chapters: Total number of chapters in audio metadata (helps detect single-file books)
-        source_path: Optional explicit source file path (overrides find_source_text)
+        source_path: Optional explicit source file path (overrides manifest)
 
     Returns:
         Dictionary with chapter data, or None if not found
     """
-    # Find source text (use explicit path if provided)
+    # --- Manifest-first path (for original text) ---
+    use_manifest = source_path is None
+    if use_manifest:
+        manifest = _load_manifest(book_dir)
+        if manifest and manifest.get('chapters'):
+            manifest_chapters = manifest['chapters']
+
+            # Special case: single-file audio with multi-chapter text
+            if (total_audio_chapters == 1 and
+                len(manifest_chapters) > 1 and
+                chapter_index == 0 and
+                audio_chapter_timing and
+                audio_chapter_timing.get('duration')):
+
+                # Concatenate all chapter content for linear interpolation
+                full_text = '\n\n'.join(ch.get('content', '') for ch in manifest_chapters)
+                paragraphs = split_into_paragraphs(full_text)
+                return {
+                    'chapter_num': 0,
+                    'title': 'Complete Book',
+                    'text': full_text,
+                    'paragraphs': paragraphs,
+                    'word_count': len(full_text.split()),
+                    'estimated_duration': len(full_text.split()) / 200 * 60,
+                    'audio_start': audio_chapter_timing.get('timestamp', 0),
+                    'audio_duration': audio_chapter_timing.get('duration')
+                }
+
+            if chapter_index < 0 or chapter_index >= len(manifest_chapters):
+                return None
+
+            chapter = manifest_chapters[chapter_index]
+            chapter_text = chapter.get('content', '')
+            if not chapter_text:
+                # Manifest chapter has no content, fall through to detection
+                pass
+            else:
+                # Use manifest paragraphs (offsets match manifest content)
+                manifest_paras = chapter.get('paragraphs', [])
+                paragraphs = split_into_paragraphs(chapter_text, manifest_paras if manifest_paras else None)
+
+                result = {
+                    'chapter_num': chapter.get('number', chapter_index + 1),
+                    'title': chapter.get('title', f'Chapter {chapter_index + 1}'),
+                    'text': chapter_text,
+                    'paragraphs': paragraphs,
+                    'word_count': len(chapter_text.split()),
+                    'estimated_duration': len(chapter_text.split()) / 200 * 60
+                }
+
+                if audio_chapter_timing:
+                    result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
+                    result['audio_duration'] = audio_chapter_timing.get('duration')
+
+                return result
+
+    # --- Fallback: detect chapters from source text ---
     if not source_path:
         source_path = find_source_text(book_dir)
     if not source_path:
         return None
 
-    # Read text
     try:
         with open(source_path, 'r', encoding='utf-8') as f:
             text = f.read()
     except IOError:
         return None
 
-    # Detect chapters
     chapters = detect_chapter_markers(text)
     if not chapters:
-        # No chapters detected, treat entire text as single chapter
         if chapter_index != 0:
             return None
 
@@ -411,50 +481,40 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
             'text': text,
             'paragraphs': paragraphs,
             'word_count': len(text.split()),
-            'estimated_duration': len(text.split()) / 200 * 60  # 200 WPM → seconds
+            'estimated_duration': len(text.split()) / 200 * 60
         }
 
-        # Add audio timing if available
         if audio_chapter_timing:
             result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
             result['audio_duration'] = audio_chapter_timing.get('duration')
 
         return result
 
-    # Special case: If text has chapters but audio has only ONE chapter marker (single complete file)
-    # This happens when a book has chapter structure in markdown, but the audio was created as one file
-    # Example: Call of Cthulhu has 3 chapters in text, but only 1 "Complete Book" chapter in audio
+    # Special case: single-file audio with multi-chapter text (fallback path)
     if (total_audio_chapters == 1 and
         len(chapters) > 1 and
         chapter_index == 0 and
         audio_chapter_timing and
         audio_chapter_timing.get('duration')):
 
-        # This is a complete-book audio file with multi-chapter text
-        # Return full book text for linear interpolation across entire audiobook
         paragraphs = split_into_paragraphs(text)
-        result = {
+        return {
             'chapter_num': 0,
             'title': 'Complete Book',
             'text': text,
             'paragraphs': paragraphs,
             'word_count': len(text.split()),
-            'estimated_duration': len(text.split()) / 200 * 60,  # 200 WPM → seconds
+            'estimated_duration': len(text.split()) / 200 * 60,
             'audio_start': audio_chapter_timing.get('timestamp', 0),
             'audio_duration': audio_chapter_timing.get('duration')
         }
-        return result
 
-    # Extract chapter text (normal multi-chapter behavior)
     chapter_text = extract_chapter_text(text, chapters, chapter_index)
     if not chapter_text:
         return None
 
     chapter = chapters[chapter_index]
-
-    # Try to load manifest paragraph data for stable IDs
-    manifest_paragraphs = _load_manifest_paragraphs(book_dir, chapter_index)
-    paragraphs = split_into_paragraphs(chapter_text, manifest_paragraphs)
+    paragraphs = split_into_paragraphs(chapter_text)
 
     result = {
         'chapter_num': chapter['number'],
@@ -462,10 +522,9 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
         'text': chapter_text,
         'paragraphs': paragraphs,
         'word_count': len(chapter_text.split()),
-        'estimated_duration': len(chapter_text.split()) / 200 * 60  # 200 WPM → seconds
+        'estimated_duration': len(chapter_text.split()) / 200 * 60
     }
 
-    # Add audio timing if available
     if audio_chapter_timing:
         result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
         result['audio_duration'] = audio_chapter_timing.get('duration')
@@ -477,12 +536,28 @@ def get_book_chapters_list(book_dir: Path) -> List[Dict]:
     """
     Get list of all chapters in a book.
 
+    Uses book_manifest.json as primary source of truth.
+    Falls back to detect_chapter_markers() when no manifest exists.
+
     Args:
         book_dir: Path to book directory
 
     Returns:
         List of chapter info dicts
     """
+    # Manifest-first path
+    manifest = _load_manifest(book_dir)
+    if manifest and manifest.get('chapters'):
+        return [
+            {
+                'number': ch.get('number', i + 1),
+                'title': ch.get('title', f'Chapter {i + 1}'),
+                'index': i
+            }
+            for i, ch in enumerate(manifest['chapters'])
+        ]
+
+    # Fallback: detect from source text
     source_path = find_source_text(book_dir)
     if not source_path:
         return []

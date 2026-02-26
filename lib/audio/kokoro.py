@@ -502,6 +502,143 @@ class KokoroAudioGenerator:
                 # Max retries reached or other error
                 raise
 
+    def _extract_front_matter(self, text: str, first_chapter_start: int, book_dir: Path = None) -> str:
+        """
+        Build intro text from front matter (title, author, epigraph/preface).
+
+        Extracts content before the first chapter, filters out noise (TOC, rules,
+        transcriber notes), and prepends a "Classics Modern presents" announcement.
+
+        Args:
+            text: Full book text (after Gutenberg stripping)
+            first_chapter_start: Character position where the first chapter begins
+            book_dir: Book directory path (for catalog lookup)
+
+        Returns:
+            Intro text ready for TTS, or empty string if nothing meaningful
+        """
+        # Get title and author
+        title = None
+        author = None
+
+        # Priority 1: Book catalog (most reliable, clean titles)
+        if book_dir:
+            try:
+                from lib.book.catalog import get_book_info
+                # Resolve book_id: walk up to the books/ parent
+                resolve_dir = book_dir
+                while resolve_dir.parent.name != 'books' and resolve_dir.parent != resolve_dir:
+                    resolve_dir = resolve_dir.parent
+                catalog_info = get_book_info(resolve_dir.name)
+                if catalog_info:
+                    title = catalog_info.get('title')
+                    author = catalog_info.get('author')
+            except ImportError:
+                pass
+
+        # Priority 2: Parse from front matter markdown
+        raw_front = text[:first_chapter_start] if first_chapter_start > 0 else ''
+        if raw_front and (not title or not author):
+            for line in raw_front.split('\n'):
+                line_s = line.strip()
+                if not title:
+                    m = re.match(r'^#\s+(.+)$', line_s)
+                    if m:
+                        title = m.group(1).strip()
+                if not author:
+                    m = re.match(r'^##?\s*[Bb]y\s+(.+)$', line_s)
+                    if m:
+                        author = m.group(1).strip()
+
+        # Build the "Classics Modern presents" announcement
+        parts = []
+        if title and author:
+            parts.append(f"Classics Modern presents: {title}. Written by {author}.")
+        elif title:
+            parts.append(f"Classics Modern presents: {title}.")
+
+        # Extract meaningful front matter content (epigraphs, prefaces, dedications)
+        if raw_front:
+            # Pre-clean: strip multi-line bracketed notes (transcriber notes, etc.)
+            cleaned_front = re.sub(r'\[Transcriber[^\]]*\]', '', raw_front, flags=re.DOTALL | re.IGNORECASE)
+            # Strip footnote references like [](#)[[1]](#Footnote_1_1)
+            cleaned_front = re.sub(r'\[\]\(#\)\s*\[\[?\d+\]\]\(#[^)]*\)', '', cleaned_front)
+            # Strip standalone bracket references
+            cleaned_front = re.sub(r'\[\[?\d+\]\]\(#[^)]*\)', '', cleaned_front)
+
+            # Whitelist approach: only keep literary front matter
+            # (epigraphs, dedications, preface text), drop everything else
+            filtered_lines = []
+            in_quote = False
+            for line in cleaned_front.split('\n'):
+                line_s = line.strip()
+
+                # Empty lines: preserve only to separate kept content
+                if not line_s:
+                    if in_quote and filtered_lines and filtered_lines[-1] != '':
+                        filtered_lines.append('')
+                    continue
+
+                # Epigraph: quoted text (starts with any quote character)
+                if re.match(r'^["\u201c\u201e\'\u2018\u201a]', line_s):
+                    filtered_lines.append(line)
+                    # Check if quote closes on this same line (single-line epigraph)
+                    # Look after first char for a closing quote
+                    if re.search(r'["\u201d\'\u2019][.\s)*]*$', line_s[1:]):
+                        in_quote = False
+                    else:
+                        in_quote = True
+                    continue
+
+                # Attribution line for epigraph (e.g., "—Author" or "— Author")
+                if re.match(r'^[\u2014\u2013\u2015—–-]\s*\*?[A-Z]', line_s):
+                    filtered_lines.append(line)
+                    in_quote = False
+                    continue
+
+                # Attribution: "NAME: *Work Title*" or "NAME (*work*)"
+                if re.match(r'^[A-Z][A-Z.\s]+[:(]', line_s) and not in_quote:
+                    filtered_lines.append(line)
+                    continue
+
+                # Continuation of a quote (inside a multi-line epigraph)
+                if in_quote:
+                    filtered_lines.append(line)
+                    # End of quote: double quote anywhere, or single quote at end of line
+                    if re.search(r'["\u201d]', line_s) or re.search(r'[\'\u2019][^a-zA-Z]*$', line_s):
+                        in_quote = False
+                    continue
+
+                # Everything else (headers, TOC, links, metadata, publisher info): skip
+                in_quote = False
+
+            # End any unclosed quote tracking
+            in_quote = False
+
+            # Clean up: remove leading/trailing empty lines
+            while filtered_lines and not filtered_lines[0].strip():
+                filtered_lines.pop(0)
+            while filtered_lines and not filtered_lines[-1].strip():
+                filtered_lines.pop()
+
+            meaningful_text = '\n'.join(filtered_lines).strip()
+            # Cap front matter at ~2000 chars to avoid reading excessive preamble
+            if len(meaningful_text) > 2000:
+                # Truncate at last paragraph break before limit
+                truncated = meaningful_text[:2000]
+                last_break = truncated.rfind('\n\n')
+                if last_break > 100:
+                    meaningful_text = truncated[:last_break].strip()
+                else:
+                    meaningful_text = truncated.strip()
+            if meaningful_text and len(meaningful_text) > 10:
+                parts.append(meaningful_text)
+
+        if not parts:
+            return ''
+
+        return '\n\n'.join(parts)
+
     def _clean_chapter_text(self, text: str) -> str:
         """Clean chapter text for speech without Gutenberg stripping (already clean)."""
         # Remove markdown links FIRST (before headers), so [## Chapter 1](#...)
@@ -864,6 +1001,20 @@ class KokoroAudioGenerator:
         paragraph_boundaries = []
 
         if has_chapters:
+            # Generate intro from front matter (title, author, epigraph)
+            first_ch = chapter_objects[0]
+            intro_text = self._extract_front_matter(
+                stripped_text, first_ch.start_char, input_path.parent
+            )
+            if intro_text:
+                intro_clean = self._clean_chapter_text(intro_text)
+                if intro_clean.strip():
+                    intro_chunks = self.chunk_text(intro_clean, chunk_size)
+                    chunks.extend(intro_chunks)
+                    chunk_to_chapter.extend([first_ch.number] * len(intro_chunks))
+                    clean_text += intro_clean + "\n\n"
+                    print(f"  Intro: {len(intro_chunks)} chunk(s) ({len(intro_clean):,} chars)")
+
             print(f"\nProcessing {len(chapter_objects)} chapters independently...")
             for ch_obj in chapter_objects:
                 chapter_content = ch_obj.content

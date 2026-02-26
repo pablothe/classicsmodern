@@ -54,6 +54,14 @@ class BookReader {
         document.body.style.overflow = 'hidden';
         this.isOpen = true;
 
+        // Sync reader theme with global dark mode
+        const globalDark = document.documentElement.classList.contains('dark-mode');
+        if (globalDark && this.prefs.theme === 'light') {
+            this.prefs.theme = 'dark';
+        } else if (!globalDark && this.prefs.theme === 'dark') {
+            this.prefs.theme = 'light';
+        }
+
         this.applyPreferences();
         this.setupIntersectionObserver();
         this.bindEvents();
