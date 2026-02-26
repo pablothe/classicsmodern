@@ -64,8 +64,9 @@ const state = {
     textLanguageMatchesAudio: true,  // Whether text lang matches audio lang (for karaoke)
     // Library sort & filter
     sortBy: 'title-asc',
-    languageFilter: null,            // null = show all, string = filter by language
+    statusFilter: null,              // null = show all, 'not_started' | 'reading' | 'finished' | 'no_audio'
     playbackProgress: {},            // { bookId: percentage } for progress bars
+    bookStatus: {},                  // { bookId: 'not_started' | 'reading' | 'finished' | 'no_audio' }
     // User profiles
     currentUserId: null,             // Active user profile ID (or null for device mode)
     users: []                        // [{ user_id, name, avatar_emoji }]
@@ -279,6 +280,11 @@ function initDarkMode() {
         const dark = document.documentElement.classList.contains('dark-mode');
         localStorage.setItem('audiobook_dark_mode', dark ? 'dark' : 'light');
         toggle.textContent = dark ? '\u2600' : '\u263E';
+        // Sync with reader theme if open
+        if (window.bookReader && window.bookReader.prefs) {
+            window.bookReader.prefs.theme = dark ? 'dark' : 'light';
+            if (window.bookReader.isOpen) window.bookReader.applyPreferences();
+        }
         // Sync to user profile
         if (state.currentUserId) {
             API.updateUser(state.currentUserId, { settings: { dark_mode: dark ? 'dark' : 'light' } });
@@ -547,20 +553,30 @@ async function loadLibrary() {
         state.books = data.books;
         state.totalLibrarySizeMb = data.total_library_size_mb || 0;
 
-        // Fetch playback progress for all books
+        // Fetch playback progress and compute reading status for all books
         const positions = await API.getAllPlaybackPositions();
         state.playbackProgress = {};
+        state.bookStatus = {};
         for (const book of state.books) {
-            if (!book.has_audio || !book.variants.length) continue;
+            if (!book.has_audio || !book.variants.length) {
+                state.bookStatus[book.book_id] = 'no_audio';
+                continue;
+            }
             const variant = book.variants[0];
             const key = `${book.book_id}:${variant.variant_id}`;
             const pos = positions[key];
-            if (pos && variant.file_count > 0) {
-                state.playbackProgress[book.book_id] = Math.round(((pos.file_index || 0) / variant.file_count) * 100);
+            if (!pos) {
+                state.bookStatus[book.book_id] = 'not_started';
+            } else if (variant.file_count > 0) {
+                const fileIndex = pos.file_index || 0;
+                state.playbackProgress[book.book_id] = Math.round((fileIndex / variant.file_count) * 100);
+                state.bookStatus[book.book_id] = fileIndex >= variant.file_count - 1 ? 'finished' : 'reading';
+            } else {
+                state.bookStatus[book.book_id] = 'not_started';
             }
         }
 
-        renderLanguageFilters();
+        renderStatusFilters();
         renderUnifiedSearch();
     } catch (error) {
         console.error('Failed to load library:', error);
@@ -603,18 +619,33 @@ function sortBooks(books, sortBy) {
     return sorted;
 }
 
-function renderLanguageFilters() {
+function renderStatusFilters() {
     const container = document.getElementById('language-filters');
     if (!container) return;
-    const languages = [...new Set(state.books.map(b => b.language).filter(Boolean))].sort();
-    container.innerHTML = languages.map(lang =>
-        `<button class="filter-chip${state.languageFilter === lang ? ' active' : ''}" data-lang="${lang}">${lang}</button>`
-    ).join('');
+
+    const categories = [
+        { key: 'reading',     label: 'Reading' },
+        { key: 'not_started', label: 'Not Started' },
+        { key: 'finished',    label: 'Finished' },
+        { key: 'no_audio',    label: 'No Audio' }
+    ];
+
+    const counts = {};
+    for (const cat of categories) {
+        counts[cat.key] = state.books.filter(b => state.bookStatus[b.book_id] === cat.key).length;
+    }
+
+    container.innerHTML = categories
+        .filter(cat => counts[cat.key] > 0)
+        .map(cat =>
+            `<button class="filter-chip${state.statusFilter === cat.key ? ' active' : ''}" data-status="${cat.key}">${cat.label} (${counts[cat.key]})</button>`
+        ).join('');
+
     container.querySelectorAll('.filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
-            const lang = chip.dataset.lang;
-            state.languageFilter = state.languageFilter === lang ? null : lang;
-            renderLanguageFilters();
+            const status = chip.dataset.status;
+            state.statusFilter = state.statusFilter === status ? null : status;
+            renderStatusFilters();
             renderUnifiedSearch();
         });
     });
@@ -636,8 +667,8 @@ function renderUnifiedSearch() {
             return titleMatch || authorMatch;
         });
     }
-    if (state.languageFilter) {
-        filteredLibraryBooks = filteredLibraryBooks.filter(book => book.language === state.languageFilter);
+    if (state.statusFilter) {
+        filteredLibraryBooks = filteredLibraryBooks.filter(book => state.bookStatus[book.book_id] === state.statusFilter);
     }
 
     // Sort library books
@@ -3269,6 +3300,7 @@ const jobsActivity = {
     pollInterval: null,
     dismissedJobs: new Set(),
     jobsByBook: {},  // book_id → most relevant job
+    previousStatuses: {},  // { jobId: status } for detecting completions
 
     init() {
         this.list = ui.queueJobList;
@@ -3293,6 +3325,22 @@ const jobsActivity = {
             const data = await response.json();
 
             const allJobs = data.jobs || [];
+
+            // Detect job completions and show toast with book title
+            for (const job of allJobs) {
+                const prev = this.previousStatuses[job.job_id];
+                if (prev && prev !== 'completed' && job.status === 'completed') {
+                    const bookId = job.config?.book_id || job.config?.book_slug;
+                    const bookObj = bookId ? state.books.find(b => b.book_id === bookId) : null;
+                    const title = bookObj?.title || bookId || 'Audiobook';
+                    showNotification(`${title} is ready!`, 'success');
+                    loadLibrary();
+                }
+            }
+            this.previousStatuses = {};
+            for (const job of allJobs) {
+                this.previousStatuses[job.job_id] = job.status;
+            }
 
             // Build book_id → job lookup (prefer running > pending > failed)
             this.jobsByBook = {};
@@ -3385,7 +3433,9 @@ const jobsActivity = {
 
         this.list.innerHTML = jobs.map(job => {
             const icon = this.getIcon(job);
-            const name = job.config?.book_id || job.config?.book_slug || 'Unknown';
+            const bookId = job.config?.book_id || job.config?.book_slug;
+            const bookObj = bookId ? state.books.find(b => b.book_id === bookId) : null;
+            const name = bookObj?.title || bookId || 'Unknown';
             const progress = job.progress || 0;
             const status = this.getStatusText(job);
             const statusClass = job.status;
