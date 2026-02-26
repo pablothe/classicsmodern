@@ -61,6 +61,22 @@ def check_book_health(book_dir: Path) -> Dict:
 
     # 4. Book manifest (single source of truth for chapter data)
     has_chapter_meta = (book_dir / "book_manifest.json").exists()
+    if not has_chapter_meta and has_source:
+        # Auto-recover: generate manifest from source text
+        try:
+            from lib.book.manifest import ManifestManager
+            source_file = book_dir / "book.md"
+            if not source_file.exists():
+                source_file = md_files[0]
+            ManifestManager.get_or_create_manifest(
+                source_file, auto_fix=True, verbose=False
+            )
+            has_chapter_meta = (book_dir / "book_manifest.json").exists()
+            if has_chapter_meta:
+                recovered.append("generated_book_manifest")
+        except Exception:
+            pass
+
     if not has_chapter_meta:
         issues.append("missing_book_manifest")
 

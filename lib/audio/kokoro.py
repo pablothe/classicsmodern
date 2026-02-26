@@ -1152,6 +1152,17 @@ class KokoroAudioGenerator:
         stripped_text, _ = processor.strip_gutenberg(raw_text)
         chapter_objects = processor.detect_chapters(stripped_text, book_file=input_path)
 
+        # Persist book_manifest.json if it doesn't already exist
+        manifest_path = input_path.parent / f"{input_path.stem}_manifest.json"
+        if not manifest_path.exists():
+            try:
+                from lib.book.manifest import ManifestManager
+                ManifestManager.get_or_create_manifest(
+                    input_path, auto_fix=True, verbose=False
+                )
+            except Exception as e:
+                print(f"  Note: Could not save manifest: {e}")
+
         # Also build tuples for backward-compat
         chapters = [(ch.number, ch.start_char, ch.marker) for ch in chapter_objects]
 
