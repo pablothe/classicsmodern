@@ -2258,6 +2258,14 @@ header h2 {
     margin-top: 2px;
 }
 
+.job-activity-timer-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
 .job-activity-progress {
     width: 100%;
     height: 4px;

@@ -3836,7 +3836,8 @@ const jobsActivity = {
             const status = this.getStatusText(job);
             const statusClass = job.status;
             const showProgress = job.status === 'running';
-            const showDismiss = job.status === 'failed' || job.status === 'completed';
+            const isActive = job.status === 'running' || job.status === 'pending';
+            const timer = this.getTimerParts(job);
 
             return `
                 <div class="job-activity-item">
@@ -3848,9 +3849,15 @@ const jobsActivity = {
                             <div class="job-activity-progress">
                                 <div class="job-activity-progress-fill ${statusClass}" style="width: ${progress}%"></div>
                             </div>
+                            ${timer ? `
+                                <div class="job-activity-timer-row">
+                                    <span>${progress}% · ${timer.elapsed} elapsed</span>
+                                    ${timer.remaining ? `<span>~${timer.remaining} remaining</span>` : ''}
+                                </div>
+                            ` : ''}
                         ` : ''}
                     </div>
-                    ${showDismiss ? `<button class="job-activity-dismiss" onclick="jobsActivity.dismiss('${job.job_id}')" title="Dismiss">✕</button>` : ''}
+                    <button class="job-activity-dismiss" onclick="jobsActivity.${isActive ? 'cancel' : 'dismiss'}('${job.job_id}')" title="${isActive ? 'Cancel' : 'Dismiss'}">✕</button>
                 </div>
             `;
         }).join('');
@@ -3872,9 +3879,53 @@ const jobsActivity = {
         if (job.status === 'pending') return 'Waiting...';
 
         const msg = job.state?.message || job.state?.stage || 'Processing...';
-        const pct = job.progress ? `${job.progress}%` : '';
-        const eta = job.eta_seconds ? ` · ~${Math.ceil(job.eta_seconds / 60)} min` : '';
-        return `${pct} ${msg}${eta}`.trim();
+        return msg;
+    },
+
+    formatDuration(seconds) {
+        const s = Math.floor(seconds);
+        if (s < 300) {
+            const m = Math.floor(s / 60);
+            const sec = s % 60;
+            return m > 0 ? `${m}m ${sec}s` : `${sec}s`;
+        } else if (s < 3600) {
+            return `${Math.ceil(s / 60)}m`;
+        } else {
+            const h = Math.floor(s / 3600);
+            const m = Math.ceil((s % 3600) / 60);
+            return `${h}h ${m}m`;
+        }
+    },
+
+    getTimerParts(job) {
+        if (job.status !== 'running' || !job.started_at) return null;
+        const elapsed = (Date.now() - new Date(job.started_at).getTime()) / 1000;
+        if (elapsed < 1) return null;
+        const result = { elapsed: this.formatDuration(elapsed), remaining: null };
+        if (job.progress > 5) {
+            const estimatedTotal = elapsed / (job.progress / 100);
+            const remaining = Math.max(0, estimatedTotal - elapsed);
+            if (remaining > 0) {
+                result.remaining = this.formatDuration(remaining);
+            }
+        }
+        return result;
+    },
+
+    async cancel(jobId) {
+        if (!confirm('Cancel this job?')) return;
+        try {
+            const response = await fetch(`/api/jobs/${jobId}`, { method: 'DELETE' });
+            if (response.ok) {
+                showNotification('Job cancelled', 'info');
+                this.dismissedJobs.add(jobId);
+                this.poll();
+            } else {
+                showNotification('Failed to cancel job', 'error');
+            }
+        } catch (e) {
+            showNotification('Failed to cancel job', 'error');
+        }
     },
 
     dismiss(jobId) {
