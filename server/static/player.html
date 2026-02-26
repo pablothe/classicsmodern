@@ -65,6 +65,7 @@
                     <div class="library-toolbar">
                         <div class="filter-chips" id="language-filters"></div>
                         <select id="sort-select" class="sort-select">
+                            <option value="recent">Recent Activity</option>
                             <option value="title-asc">Title A–Z</option>
                             <option value="title-desc">Title Z–A</option>
                             <option value="author-asc">Author A–Z</option>
@@ -73,6 +74,7 @@
                             <option value="size-desc">Size (largest)</option>
                             <option value="size-asc">Size (smallest)</option>
                         </select>
+                        <button id="view-toggle" class="view-toggle-btn" title="Toggle list/grid view">&#9776;</button>
                     </div>
                     <div id="book-list" class="book-list">
                         <div class="loading">Loading books...</div>
@@ -193,6 +195,13 @@
                         <span class="skip-label">30</span>
                     </button>
                     <button id="next-file-btn" class="control-btn secondary" title="Next file">▷</button>
+                </div>
+
+                <!-- Listen / Read Tabs -->
+                <div class="player-tabs" id="player-tabs" style="display:none">
+                    <button class="player-tab active" data-tab="listen">Listen</button>
+                    <button class="player-tab" data-tab="read">Read</button>
+                    <button class="player-tab-sync" id="player-sync-btn" title="Sync text with audio" style="display:none">Sync</button>
                 </div>
 
                 <!-- Secondary Controls (Audible Style) -->

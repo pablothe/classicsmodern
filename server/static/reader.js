@@ -54,6 +54,12 @@ class BookReader {
         document.body.style.overflow = 'hidden';
         this.isOpen = true;
 
+        // Show back arrow instead of × when opened from player tab
+        const closeBtn = document.getElementById('reader-close-btn');
+        if (closeBtn) {
+            closeBtn.textContent = this.openedFromPlayerTab ? '←' : '×';
+        }
+
         // Sync reader theme with global dark mode
         const globalDark = document.documentElement.classList.contains('dark-mode');
         if (globalDark && this.prefs.theme === 'light') {
@@ -116,6 +122,7 @@ class BookReader {
         overlay.classList.add('hidden');
         document.body.style.overflow = '';
         this.isOpen = false;
+        this.openedFromPlayerTab = false;
 
         if (this.observer) {
             this.observer.disconnect();

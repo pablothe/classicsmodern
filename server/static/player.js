@@ -69,6 +69,8 @@ const state = {
     bookStatus: {},                  // { bookId: 'not_started' | 'in_progress' | 'finished' | 'no_audio' }
     bookDuration: {},                // { bookId: totalSeconds } from chunk manifest
     bookTimeLeft: {},                // { bookId: secondsRemaining } approximate
+    bookLastActivity: {},            // { bookId: timestamp } for recent activity sort
+    viewMode: localStorage.getItem('audiobook_view_mode') || 'grid',
     // User profiles
     currentUserId: null,             // Active user profile ID (or null for device mode)
     users: []                        // [{ user_id, name, avatar_emoji }]
@@ -561,6 +563,7 @@ async function loadLibrary() {
         state.bookStatus = {};
         state.bookDuration = {};
         state.bookTimeLeft = {};
+        state.bookLastActivity = {};
         for (const book of state.books) {
             if (!book.has_audio || !book.variants.length) {
                 state.bookStatus[book.book_id] = 'no_audio';
@@ -573,6 +576,9 @@ async function loadLibrary() {
             }
             const key = `${book.book_id}:${variant.variant_id}`;
             const pos = positions[key];
+            if (pos?.last_updated) {
+                state.bookLastActivity[book.book_id] = new Date(pos.last_updated).getTime();
+            }
             if (!pos) {
                 state.bookStatus[book.book_id] = 'not_started';
             } else if (variant.file_count > 0) {
@@ -638,6 +644,9 @@ function sortBooks(books, sortBy) {
             break;
         case 'size-asc':
             sorted.sort((a, b) => (a.total_size_bytes || 0) - (b.total_size_bytes || 0));
+            break;
+        case 'recent':
+            sorted.sort((a, b) => (state.bookLastActivity[b.book_id] || 0) - (state.bookLastActivity[a.book_id] || 0));
             break;
     }
     return sorted;
@@ -748,6 +757,14 @@ function renderLibraryBooks(books) {
         return;
     }
 
+    // Toggle list/grid mode on container
+    ui.bookList.classList.toggle('list-mode', state.viewMode === 'list');
+
+    if (state.viewMode === 'list') {
+        renderLibraryList(books);
+        return;
+    }
+
     ui.bookList.innerHTML = books.map((book, index) => {
         const hasCover = book.has_cover && book.cover_image;
         const coverURL = hasCover ? `${API.baseURL}/api/books/${book.book_id}/cover` : null;
@@ -779,6 +796,8 @@ function renderLibraryBooks(books) {
                     ${state.playbackProgress[book.book_id] > 0 ? `
                         <div class="book-progress-bar" style="width: ${state.playbackProgress[book.book_id]}%"></div>
                     ` : ''}
+                    ${hasAudio ? `<button class="book-card-play" onclick="event.stopPropagation(); quickPlayBook('${book.book_id}')" title="Play">&#9654;</button>` : ''}
+                    <button class="book-card-menu-btn" onclick="event.stopPropagation(); toggleCardMenu('${book.book_id}', this)" title="More">&middot;&middot;&middot;</button>
                 </div>
                 <div class="book-info-bottom">
                     <h3 class="book-title">${book.title}</h3>
@@ -816,6 +835,46 @@ function renderLibraryBooks(books) {
     });
 }
 
+function renderLibraryList(books) {
+    ui.bookList.innerHTML = books.map(book => {
+        const hasCover = book.has_cover && book.cover_image;
+        const coverURL = hasCover ? `${API.baseURL}/api/books/${book.book_id}/cover` : null;
+        const hasAudio = book.has_audio;
+        const status = state.bookStatus[book.book_id];
+        const timeLeft = state.bookTimeLeft[book.book_id];
+        const duration = state.bookDuration[book.book_id];
+
+        let statusText = '';
+        if (status === 'in_progress' && timeLeft) {
+            statusText = `<span class="book-time-left">${formatDuration(timeLeft)} left</span>`;
+        } else if (status === 'finished') {
+            statusText = '<span class="book-status-finished">Finished</span>';
+        } else if (status === 'not_started' && duration) {
+            statusText = `<span class="book-total-duration">${formatDuration(duration)}</span>`;
+        }
+
+        return `
+            <div class="book-list-row" data-book-id="${book.book_id}">
+                <div class="book-list-cover">
+                    ${hasCover ? `<img src="${coverURL}" alt="" />` : '<div class="book-list-cover-placeholder"></div>'}
+                    ${state.playbackProgress[book.book_id] > 0 ? `<div class="book-progress-bar" style="width:${state.playbackProgress[book.book_id]}%"></div>` : ''}
+                </div>
+                <div class="book-list-info">
+                    <div class="book-list-title">${book.title}</div>
+                    <div class="book-list-author">By ${book.author || 'Unknown'}</div>
+                    <div class="book-list-status">${statusText}</div>
+                </div>
+                ${hasAudio ? `<button class="book-card-play book-list-play" onclick="event.stopPropagation(); quickPlayBook('${book.book_id}')">&#9654;</button>` : ''}
+                <button class="book-list-menu" onclick="event.stopPropagation(); toggleCardMenu('${book.book_id}', this)">&middot;&middot;&middot;</button>
+            </div>
+        `;
+    }).join('');
+
+    document.querySelectorAll('.book-list-row').forEach(item => {
+        item.addEventListener('click', () => openBook(item.dataset.bookId));
+    });
+}
+
 async function generateCoverForBook(bookId) {
     try {
         const response = await fetch(`${API.baseURL}/api/jobs/cover`, {
@@ -843,6 +902,49 @@ async function generateCoverForBook(bookId) {
         console.error('Failed to create cover job:', err);
         alert('Failed to start cover generation: ' + err.message);
     }
+}
+
+async function quickPlayBook(bookId) {
+    const book = state.books.find(b => b.book_id === bookId);
+    if (!book) return;
+
+    if (!book.has_audio || !book.variants.length) {
+        openBook(bookId);
+        return;
+    }
+
+    state.currentBook = book;
+    state.textTracks = book.text_tracks || [];
+    autoSelectTextTrack();
+    await loadVariantAudio(book, book.variants[0]);
+    ui.audio.play();
+    updateNowPlayingBar();
+}
+
+function toggleCardMenu(bookId, btn) {
+    // Close any open menu first
+    document.querySelectorAll('.book-card-menu').forEach(m => m.remove());
+
+    const book = state.books.find(b => b.book_id === bookId);
+    if (!book) return;
+
+    const menu = document.createElement('div');
+    menu.className = 'book-card-menu';
+    menu.innerHTML = `
+        <button onclick="event.stopPropagation(); closeCardMenus(); showVariants('${bookId}')">View Details</button>
+        ${book.has_source_text ? `<button onclick="event.stopPropagation(); closeCardMenus(); openBook('${bookId}')">Read</button>` : ''}
+        ${book.has_audio ? `<button onclick="event.stopPropagation(); closeCardMenus(); quickPlayBook('${bookId}')">Play</button>` : ''}
+    `;
+    btn.closest('.book-cover-card').appendChild(menu);
+
+    // Close when clicking outside
+    setTimeout(() => {
+        document.addEventListener('click', closeCardMenus, { once: true });
+    }, 0);
+}
+
+function closeCardMenus() {
+    document.querySelectorAll('.book-card-menu').forEach(m => m.remove());
 }
 
 function renderStoreBooks(books) {
@@ -1297,18 +1399,46 @@ function renderPlayer() {
         ui.aiAssistantBtn.style.display = 'none';
     }
 
-    // Show/hide reader button based on source text availability
+    // Show Listen/Read tabs if book has source text (replaces standalone Read button)
+    const tabBar = document.getElementById('player-tabs');
+    const syncBtn = document.getElementById('player-sync-btn');
     if (book.has_source_text) {
-        ui.readerBtn.style.display = 'block';
+        if (tabBar) tabBar.style.display = 'flex';
+        if (syncBtn) syncBtn.style.display = '';
+        ui.readerBtn.style.display = 'none'; // Hidden — tab replaces it
     } else {
+        if (tabBar) tabBar.style.display = 'none';
+        if (syncBtn) syncBtn.style.display = 'none';
         ui.readerBtn.style.display = 'none';
     }
+    switchPlayerTab('listen');
 
     // Render audio track selector (Netflix-style in-player variant switching)
     renderAudioTrackSelector();
 
     // Update navigation buttons
     updateNavigationButtons();
+}
+
+function switchPlayerTab(tab) {
+    document.querySelectorAll('.player-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === tab);
+    });
+
+    if (tab === 'read' && state.currentBook?.has_source_text) {
+        // Open the overlay reader at the current chapter
+        const book = state.currentBook;
+        const chapterCount = book.chapters?.length || 1;
+        const startChapter = state.currentChapterIndex || 0;
+        const trackId = state.currentTextTrack?.track_id || null;
+
+        // Pre-enable sync if user turned it on via the player sync button
+        if (window.bookReader) {
+            window.bookReader.openedFromPlayerTab = true;
+            window.bookReader.open(book.book_id, startChapter, chapterCount, trackId);
+        }
+    }
+    // Listen tab: nothing special — secondary controls already visible
 }
 
 function updateNavigationButtons() {
@@ -2809,6 +2939,32 @@ function setupEventListeners() {
         });
     }
 
+    // View toggle (grid/list)
+    const viewToggle = document.getElementById('view-toggle');
+    if (viewToggle) {
+        viewToggle.addEventListener('click', () => {
+            state.viewMode = state.viewMode === 'grid' ? 'list' : 'grid';
+            localStorage.setItem('audiobook_view_mode', state.viewMode);
+            renderUnifiedSearch();
+        });
+    }
+
+    // Player Listen/Read tabs
+    document.querySelectorAll('.player-tab').forEach(tab => {
+        tab.addEventListener('click', () => switchPlayerTab(tab.dataset.tab));
+    });
+
+    // Player sync button
+    const playerSyncBtn = document.getElementById('player-sync-btn');
+    if (playerSyncBtn) {
+        playerSyncBtn.addEventListener('click', () => {
+            if (window.bookReader) {
+                window.bookReader.audioSyncEnabled = !window.bookReader.audioSyncEnabled;
+                playerSyncBtn.classList.toggle('active', window.bookReader.audioSyncEnabled);
+            }
+        });
+    }
+
     // Store pagination
     ui.prevPageBtn.addEventListener('click', () => {
         if (state.gutenberg.currentPage > 1) {
@@ -3323,7 +3479,11 @@ function initNowPlayingBar() {
     }
 
     // Show bar again when reader closes
-    document.addEventListener('reader-closed', () => updateNowPlayingBar());
+    document.addEventListener('reader-closed', () => {
+        updateNowPlayingBar();
+        // Return to Listen tab when reader closes
+        switchPlayerTab('listen');
+    });
 }
 
 // ============================================================================

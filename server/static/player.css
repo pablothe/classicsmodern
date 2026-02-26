@@ -196,6 +196,83 @@ header h2 {
     z-index: 2;
 }
 
+/* Per-card play button (Audible-style) */
+.book-card-play {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.book-cover-card:hover .book-card-play { opacity: 1; }
+@media (hover: none) { .book-card-play { opacity: 0.9; } }
+
+/* Per-card three-dot menu button */
+.book-card-menu-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+}
+.book-cover-card:hover .book-card-menu-btn { opacity: 1; }
+@media (hover: none) { .book-card-menu-btn { opacity: 0.7; } }
+
+/* Card dropdown menu */
+.book-card-menu {
+    position: absolute;
+    top: 38px;
+    right: 6px;
+    background: var(--bg-secondary, #1a1a2e);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    z-index: 10;
+    min-width: 140px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+.book-card-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    text-align: left;
+    cursor: pointer;
+}
+.book-card-menu button:hover {
+    background: var(--border-color);
+}
+
 .book-cover-image {
     width: 100%;
     height: 100%;
@@ -333,6 +410,97 @@ header h2 {
 
 .filter-chip-icon {
     font-weight: 600;
+}
+
+/* View toggle button */
+.view-toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+.view-toggle-btn:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+/* List view mode */
+.book-list.list-mode {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+}
+
+.book-list-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    position: relative;
+}
+.book-list-row:last-child { border-bottom: none; }
+
+.book-list-cover {
+    width: 60px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    background: var(--border-color);
+}
+.book-list-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.book-list-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--border-color);
+}
+
+.book-list-info {
+    flex: 1;
+    min-width: 0;
+}
+.book-list-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.book-list-author {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+}
+.book-list-status {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.book-list-play {
+    position: static;
+    opacity: 1;
+    flex-shrink: 0;
+}
+
+.book-list-menu {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-shrink: 0;
+    letter-spacing: 2px;
+    font-weight: bold;
 }
 
 .language-badge {
@@ -811,6 +979,51 @@ header h2 {
 
 .control-btn:disabled:hover {
     opacity: 0.2;
+}
+
+/* Player Listen / Read Tabs */
+.player-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 1.5rem auto 0;
+    max-width: 500px;
+    border-bottom: 1px solid var(--border-color);
+}
+.player-tab {
+    flex: 1;
+    padding: 0.75rem 0;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.player-tab.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+    font-weight: 600;
+}
+.player-tab-sync {
+    padding: 0.4rem 0.75rem;
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.player-tab-sync.active {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    font-weight: 600;
 }
 
 /* Secondary Controls (Speed, Timer, Chapters) */
