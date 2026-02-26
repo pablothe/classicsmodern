@@ -735,12 +735,14 @@ async def get_chapter_text(book_id: str, chapter_num: int, track_id: Optional[st
 
     book_dir = BOOKS_DIR / book_id
 
-    # Resolve text track to a source file path
+    # Resolve text track to a source file path.
+    # Skip for the original track — the manifest path already reads book.md
+    # and correctly handles prologue/epilogue offsets.
     explicit_source = None
     if track_id:
         text_tracks = book.get('text_tracks', [])
         track = next((t for t in text_tracks if t['track_id'] == track_id), None)
-        if track:
+        if track and not track.get('is_original'):
             explicit_source = book_dir / track['file_path']
             if not explicit_source.exists():
                 explicit_source = None

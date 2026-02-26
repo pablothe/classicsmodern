@@ -609,11 +609,53 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
             'audio_duration': audio_chapter_timing.get('duration')
         }
 
-    chapter_text = extract_chapter_text(text, chapters, chapter_index)
+    # Apply prologue/epilogue offset for translation tracks (fallback path).
+    # The UI chapter indices include injected prologue/epilogue from audio,
+    # but detected chapters in the translation file don't have those.
+    detected_max = max((ch.get('number', 0) for ch in chapters), default=0)
+    fb_prologue, fb_epilogue = _get_audio_extras(book_dir, detected_max)
+    fb_offset = 1 if fb_prologue else 0
+
+    if fb_prologue and chapter_index == 0:
+        # Prologue: serve front matter from the original source text
+        orig_src = find_source_text(book_dir)
+        if orig_src:
+            manifest = _load_manifest(book_dir)
+            if manifest and manifest.get('chapters'):
+                try:
+                    with open(orig_src, 'r', encoding='utf-8') as f:
+                        orig_text = f.read()
+                    first_start = manifest['chapters'][0].get('start_char', 0)
+                    front_matter = orig_text[:first_start].strip() if first_start > 0 else ''
+                    if front_matter:
+                        paragraphs = split_into_paragraphs(front_matter)
+                        result = {
+                            'chapter_num': 0,
+                            'title': 'Prologue',
+                            'text': front_matter,
+                            'paragraphs': paragraphs,
+                            'word_count': len(front_matter.split()),
+                            'estimated_duration': len(front_matter.split()) / 200 * 60
+                        }
+                        if audio_chapter_timing:
+                            result['audio_start'] = audio_chapter_timing.get('timestamp', 0)
+                            result['audio_duration'] = audio_chapter_timing.get('duration')
+                        return result
+                except IOError:
+                    pass
+        return None
+
+    fb_epilogue_index = len(chapters) + fb_offset if fb_epilogue else -1
+    if fb_epilogue and chapter_index == fb_epilogue_index:
+        return None  # Epilogue text not available in translation
+
+    adjusted_index = chapter_index - fb_offset
+
+    chapter_text = extract_chapter_text(text, chapters, adjusted_index)
     if not chapter_text:
         return None
 
-    chapter = chapters[chapter_index]
+    chapter = chapters[adjusted_index]
     paragraphs = split_into_paragraphs(chapter_text)
 
     result = {
