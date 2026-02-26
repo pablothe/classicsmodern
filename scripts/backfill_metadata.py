@@ -30,6 +30,23 @@ sys.path.insert(0, str(PROJECT_ROOT))
 BOOKS_DIR = PROJECT_ROOT / "books"
 CATALOG_JSON = PROJECT_ROOT / "server" / "gutenberg_catalog.json"
 
+# Manual overrides for books where automated lookup fails
+# (wrong Gutenberg IDs, not on Gutenberg, or unusual title formats)
+MANUAL_METADATA = {
+    'a_dolls_house': {'gutenberg_id': 2542, 'title': "A Doll's House", 'author': 'Henrik Ibsen'},
+    'count_of_monte_cristo': {'gutenberg_id': 1184, 'title': 'The Count of Monte Cristo', 'author': 'Alexandre Dumas'},
+    'tales_of_edgar_allan_poe': {'gutenberg_id': 2147, 'title': 'Tales of Edgar Allan Poe', 'author': 'Edgar Allan Poe'},
+    'the_art_of_war': {'gutenberg_id': 132, 'title': 'The Art of War', 'author': 'Sun Tzu'},
+    'the_awakening': {'gutenberg_id': 160, 'title': 'The Awakening', 'author': 'Kate Chopin'},
+    'the_heads_of_cerberus': {'gutenberg_id': None, 'title': 'The Heads of Cerberus', 'author': 'Francis Stevens'},
+    'the_time_machine': {'gutenberg_id': 35, 'title': 'The Time Machine', 'author': 'H.G. Wells'},
+    'time_machine': {'gutenberg_id': 35, 'title': 'The Time Machine', 'author': 'H.G. Wells'},
+    'twenty_thousand_leagues_under_the_sea': {'gutenberg_id': 164, 'title': 'Twenty Thousand Leagues Under the Sea', 'author': 'Jules Verne'},
+    'the_pickwick_papers': {'gutenberg_id': 580, 'title': 'The Pickwick Papers', 'author': 'Charles Dickens'},
+    'de_brevitate_vitae': {'gutenberg_id': None, 'title': 'On the Shortness of Life', 'author': 'Seneca'},
+    'importance_of_being_earnest_v2': {'gutenberg_id': 844, 'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'},
+}
+
 
 def load_slug_to_id_mapping() -> dict:
     """Build slug → gutenberg_id mapping from all available sources."""
@@ -134,6 +151,31 @@ def main():
         # Already has title + author? Skip
         if existing.get('title') and existing.get('author'):
             skipped += 1
+            continue
+
+        # Check manual overrides first (fixes wrong IDs and non-Gutenberg books)
+        if slug in MANUAL_METADATA:
+            manual = MANUAL_METADATA[slug]
+            meta = {
+                'gutenberg_id': manual.get('gutenberg_id'),
+                'title': manual['title'],
+                'author': manual['author'],
+                'downloaded_at': existing.get('downloaded_at', datetime.now().isoformat()),
+            }
+            if existing.get('language'):
+                meta['language'] = existing['language']
+            if dry_run:
+                action = "UPDATE" if existing else "CREATE"
+                print(f"  {slug}: [{action}] {meta['title']} by {meta['author']} (manual)")
+            else:
+                with open(meta_path, 'w', encoding='utf-8') as f:
+                    json.dump(meta, f, indent=2, ensure_ascii=False)
+                action = "Updated" if existing else "Created"
+                print(f"  {slug}: {action} — {meta['title']} by {meta['author']} (manual)")
+            if existing:
+                updated += 1
+            else:
+                created += 1
             continue
 
         # Find gutenberg_id

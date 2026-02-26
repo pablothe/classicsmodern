@@ -37,7 +37,7 @@ TOP_100_BOOKS = [
     (46, "a_christmas_carol", "A Christmas Carol", 3),
     (219, "heart_of_darkness", "Heart of Darkness", 2),
     (174, "picture_of_dorian_gray", "The Picture of Dorian Gray", 15),
-    (64, "the_time_machine", "The Time Machine", 10),
+    (35, "the_time_machine", "The Time Machine", 10),
     (36, "war_of_the_worlds", "The War of the Worlds", 20),
     (120, "treasure_island", "Treasure Island", 20),
     (5200, "metamorphosis", "Metamorphosis", 3),
@@ -60,7 +60,7 @@ TOP_100_BOOKS = [
     (829, "gullivers_travels", "Gulliver's Travels", 20),
     (25344, "the_scarlet_letter", "The Scarlet Letter", 20),
     (209, "the_turn_of_the_screw", "The Turn of the Screw", 20),
-    (1259, "twenty_thousand_leagues_under_the_sea", "Twenty Thousand Leagues Under the Sea", 40),
+    (164, "twenty_thousand_leagues_under_the_sea", "Twenty Thousand Leagues Under the Sea", 40),
     (103, "around_the_world_in_eighty_days", "Around the World in Eighty Days", 30),
     (730, "oliver_twist", "Oliver Twist", 40),
     (1023, "bleak_house", "Bleak House", 40),
@@ -83,7 +83,7 @@ TOP_100_BOOKS = [
     (23, "narrative_of_frederick_douglass", "Narrative of the Life of Frederick Douglass", 10),
     (408, "the_souls_of_black_folk", "The Souls of Black Folk", 10),
     (4517, "ethan_frome", "Ethan Frome", 5),
-    (2160, "the_awakening", "The Awakening", 30),
+    (160, "the_awakening", "The Awakening", 30),
     (62, "a_princess_of_mars", "A Princess of Mars", 20),
     (1250, "anthem", "Anthem", 10),
 
@@ -93,7 +93,7 @@ TOP_100_BOOKS = [
     (1497, "the_republic", "The Republic", 8),
     (3207, "leviathan", "Leviathan", 30),
     (7370, "second_treatise_of_government", "Second Treatise of Government", 10),
-    (4280, "the_art_of_war", "The Art of War", 10),
+    (132, "the_art_of_war", "The Art of War", 10),
     (1998, "thus_spake_zarathustra", "Thus Spake Zarathustra", 30),
     (4363, "beyond_good_and_evil", "Beyond Good and Evil", 5),
     (5740, "tractatus_logico_philosophicus", "Tractatus Logico-Philosophicus", 5),
@@ -104,7 +104,7 @@ TOP_100_BOOKS = [
     (1513, "romeo_and_juliet", "Romeo and Juliet", 3),
     (2264, "macbeth", "Macbeth", 3),
     (844, "importance_of_being_earnest", "The Importance of Being Earnest", 3),
-    (19337, "a_dolls_house", "A Doll's House", 3),
+    (2542, "a_dolls_house", "A Doll's House", 3),
     (3825, "pygmalion", "Pygmalion", 3),
     (1322, "leaves_of_grass", "Leaves of Grass", 10),
 
@@ -115,7 +115,7 @@ TOP_100_BOOKS = [
     # World Literature
     (135, "les_miserables", "Les Misérables", 50),
     (996, "don_quixote", "Don Quixote", 40),
-    (2542, "count_of_monte_cristo", "The Count of Monte Cristo", 50),
+    (1184, "count_of_monte_cristo", "The Count of Monte Cristo", 50),
     (2500, "siddhartha", "Siddhartha", 5),
 
     # Non-Fiction & Essays
@@ -123,7 +123,7 @@ TOP_100_BOOKS = [
     (27827, "the_kama_sutra", "The Kama Sutra", 5),
 
     # Gothic & Horror
-    (3600, "tales_of_edgar_allan_poe", "Tales of Edgar Allan Poe", 5),
+    (2147, "tales_of_edgar_allan_poe", "Tales of Edgar Allan Poe", 5),
 
     # More English Classics
     (580, "the_pickwick_papers", "The Pickwick Papers", 40),
@@ -136,8 +136,8 @@ TOP_100_BOOKS = [
     (1661, "sherlock_holmes", "The Adventures of Sherlock Holmes", 10),  # skip dup
 
     # Science Fiction
-    (35, "the_time_machine_v2", "The Time Machine", 10),
-    (5230, "the_heads_of_cerberus", "The Heads of Cerberus", 10),
+    (35, "the_time_machine_v2", "The Time Machine", 10),  # skip dup
+    (5230, "the_heads_of_cerberus", "The Heads of Cerberus", 10),  # Not on Gutenberg — ID 5230 is The Invisible Man
 
     # More American & British
     (2148, "works_of_edgar_allan_poe", "The Works of Edgar Allan Poe", 5),
