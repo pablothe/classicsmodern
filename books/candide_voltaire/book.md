@@ -1,42 +1,6 @@
-Produced by Chuck Greif, Fox in the Stars and the Online
-Distributed Proofreading Team at http://www.pgdp.net
-
-```
-
-### Transcriber's Note:
-
-Obvious typographical errors have been corrected in
-this text. For a complete list, please see[the bottom of
-this document.](#TN)
-
----
-
-### THE MODERN LIBRARY
-
-#### OF THE WORLD'S BEST BOOKS
-
-### CANDIDE BY VOLTAIRE
-
-The Publishers will be glad to mail complete list of titles
-in the Modern Library. The list is representative of the
-Great Moderns and is one of the most important contributions
-to publishing that has been made for many years. Every
-reader of books will find titles he needs at a low price in
-an attractive form.
-
-[](images/001.jpg)
 # CANDIDE
 
-## ByVOLTAIRE
-
-#### INTRODUCTION BY PHILIP LITTELL
-
-BONI AND LIVERIGHT, INC.
-PUBLISHERS NEW YORKCopyright, 1918, by
-Boni & Liveright, Inc.
-Printed in the United States of America[[Pg vii]](#)
-
----
+## By VOLTAIRE
 
 ## INTRODUCTION
 
@@ -4103,34 +4067,3 @@ have been made to do so without any anachronism.
 [](#)[[35]](#FNanchor_35_35)P. 149. François Leopold Ragotsky (1676-1735).
 
 ---
-
-### Typographical errors corrected in text:
-
-[Page xiv](#Page_xiv): Chapter XIII heading in Table of Contents amended to match chapter heading on[page 54](#Page_54).
-
-[Page 2](#Page_2): metaphysicotheo-logico-cosmolo-nigology amended to metaphysico-theologico-cosmolo-nigology.
-
-[Page 158](#Page_158): Liebnitz amended to Leibnitz.
-
-[Page 168](#Page_168): perserved amended to preserved.
-
-[Page 172](#Page_172): rougish amended to roguish; crows amended to crowns.
-
-Where there is an equal number of instances of a word
-being hyphenated and unhyphenated, both versions of the word have been retained: dung-hill/dunghill;
-and new-comers/newcomers.
-
-A single footnote on[page 90](#Page_90)has been moved to the endnotes, and the notes numbers re-indexed. A page
-reference was added to the moved footnote to match the format of other endnotes.
-
-Modern Library blurb: "mail complete list of titles" left as is.
-
-There are two instances of Massa Carara ([pp. 43](#Page_43)and[45](#Page_45)) and one instance of Massa-Carrara ([page ix](#Page_ix)). As this latter is in the Introduction, i.e. distinct from the book proper, it has been retained.
-
-The  different spellings of Cunégonde (which occurs only in the Introduction ([page viii](#Page_viii))) and Robeck (which occurs in the Notes [[p. 170](#Page_170)]; spelt Robek in the text [[p. 53](#Page_53)]) have been retained for the same reason.
-
----
-
-```
-
-End of the Project Gutenberg EBook of Candide, by Voltaire
