@@ -272,13 +272,25 @@ class BlockTranslator:
             return None
 
     def _create_translator(self):
-        """Create Ollama translator"""
+        """Create Ollama translator. Uses llama3.2:3b for English modernization."""
         from lib.translation.engine import OllamaTranslator
         from lib.config import get_config
 
         ollama_config = get_config()
+        model = self.config.model_name
+
+        # Use general-purpose model for English→English modernization
+        is_modernization = (
+            self.config.source_lang and self.config.target_lang
+            and 'english' in self.config.source_lang.lower()
+            and 'english' in self.config.target_lang.lower()
+        )
+        if is_modernization:
+            model = "llama3.2:3b"
+            print(f"  🔄 Using {model} for English modernization")
+
         return OllamaTranslator(
-            model_name=self.config.model_name,
+            model_name=model,
             ollama_host=ollama_config.models.ollama_host
         )
 

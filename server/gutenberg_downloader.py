@@ -106,7 +106,7 @@ class GutenbergDownloader:
 
             # Convert to Markdown
             print("🔄 Converting to Markdown...")
-            markdown, toc_entries = self._html_to_markdown(html_content)
+            markdown, toc_entries, metadata = self._html_to_markdown(html_content)
 
             if job_id:
                 download_jobs[job_id]['progress'] = 60
@@ -144,6 +144,19 @@ class GutenbergDownloader:
                 with open(gutenberg_json, 'w', encoding='utf-8') as f:
                     json.dump(chapters_data, f, indent=2, ensure_ascii=False)
                 print(f"✓ Saved {len(toc_entries)} chapters to gutenberg_chapters.json")
+
+            # Save Gutenberg metadata (title, author from HTML)
+            gutenberg_meta = {
+                'gutenberg_id': gutenberg_id,
+                'title': metadata.get('title'),
+                'author': metadata.get('author'),
+                'downloaded_at': datetime.now().isoformat()
+            }
+            meta_path = book_dir / "gutenberg_metadata.json"
+            with open(meta_path, 'w', encoding='utf-8') as f:
+                json.dump(gutenberg_meta, f, indent=2, ensure_ascii=False)
+            if metadata.get('author'):
+                print(f"✓ Metadata: {metadata['title']} by {metadata['author']}")
 
             if job_id:
                 download_jobs[job_id]['progress'] = 80
@@ -583,6 +596,52 @@ class GutenbergDownloader:
         if injected:
             print(f"  Injected {injected} chapter headers (skipped {len(anchor_map) - injected} with existing headings)")
 
+    @staticmethod
+    def _extract_metadata(soup) -> dict:
+        """
+        Extract title and author from Gutenberg HTML.
+
+        Parses the <title> tag which has the format:
+        "The Project Gutenberg eBook of {Title}, by {Author}"
+
+        Returns:
+            Dict with 'title' and 'author' keys (values may be None)
+        """
+        metadata = {'title': None, 'author': None}
+        title_tag = soup.find('title')
+        if not title_tag:
+            return metadata
+
+        text = title_tag.get_text(strip=True)
+
+        # Strip common Gutenberg prefixes
+        for prefix in [
+            'The Project Gutenberg eBook of ',
+            'The Project Gutenberg EBook of ',
+            'Project Gutenberg eBook of ',
+        ]:
+            if text.startswith(prefix):
+                text = text[len(prefix):]
+                break
+
+        # Strip "| Project Gutenberg" suffix
+        text = re.sub(r'\s*\|\s*Project Gutenberg\s*$', '', text)
+
+        # Split on ", by " to separate title and author
+        # Handle variations: ", by ", " by ", ", par " (French)
+        for sep in [', by ', ' by ', ', par ']:
+            if sep in text:
+                title_part, author_part = text.rsplit(sep, 1)
+                # Clean trailing periods from author
+                author_part = author_part.rstrip('.')
+                metadata['title'] = title_part.strip()
+                metadata['author'] = author_part.strip()
+                return metadata
+
+        # No author separator found — treat whole thing as title
+        metadata['title'] = text.strip()
+        return metadata
+
     def _html_to_markdown(self, html: str) -> tuple:
         """
         Convert HTML to Markdown.
@@ -591,9 +650,12 @@ class GutenbergDownloader:
             html: HTML content
 
         Returns:
-            Tuple of (markdown_content, toc_entries)
+            Tuple of (markdown_content, toc_entries, metadata)
         """
         soup = BeautifulSoup(html, 'html.parser')
+
+        # Extract metadata BEFORE decomposing any tags
+        metadata = self._extract_metadata(soup)
 
         # Remove unwanted elements
         for tag in soup(['script', 'style', 'nav', 'header', 'footer']):
@@ -629,7 +691,7 @@ class GutenbergDownloader:
         # Clean up excessive whitespace
         markdown = re.sub(r'\n{3,}', '\n\n', markdown)
 
-        return markdown.strip(), toc_entries
+        return markdown.strip(), toc_entries, metadata
 
     def _promote_italic_chapter_lines(self, markdown: str) -> str:
         """

@@ -15,15 +15,6 @@ from datetime import datetime
 from pathlib import Path
 import time
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    handlers=[
-        logging.FileHandler('translation_debug.log'),
-        logging.StreamHandler()
-    ]
-)
 logger = logging.getLogger(__name__)
 
 
@@ -256,9 +247,14 @@ class OllamaTranslator:
             r"^I'll (read|translate)",
             r"^Let me (read|translate)",
             r"^Here is the translation",
+            r"^Here's a translation",
             r"^Translation:",
             r"^The text says",
-            r"^This (text|passage) (is|means)"
+            r"^This (text|passage) (is|means)",
+            r"^Translate from \w+ to \w+:",
+            r"^Translate to \w+:",
+            r"^Or,? in (simpler|other|different)",
+            r"^Or,? alternatively",
         ]
 
         for pattern in garbage_patterns:
@@ -308,6 +304,16 @@ class OllamaTranslator:
         """
         # Construct the translation prompt (SIMPLIFIED to prevent prompt leakage)
         # LLM can auto-detect source language, we only specify target
+        # Detect modernization mode (English → Modern English, etc.)
+        is_modernization = (
+            'english' in source_lang.lower() and 'english' in target_lang.lower()
+        )
+
+        if is_modernization:
+            instruction = "Rewrite this in simple, contemporary 21st-century English. Output ONLY the rewritten text, no commentary or alternatives:"
+        else:
+            instruction = f"Translate to {target_lang}:"
+
         if previous_translation:
             # Get last 1-2 sentences from previous translation for context
             context = self._get_last_sentences(previous_translation, count=2)
@@ -315,11 +321,11 @@ class OllamaTranslator:
             prompt = f"""Reference (do not repeat):
 {context}
 
-Translate to {target_lang}:
+{instruction}
 {chunk.content}"""
         else:
             # First chunk, no context
-            prompt = f"Translate to {target_lang}:\n\n{chunk.content}"
+            prompt = f"{instruction}\n\n{chunk.content}"
 
         # Call Ollama API
         chunk_id = f"chunk_{chunk.index}"
@@ -330,6 +336,7 @@ Translate to {target_lang}:
             "model": self.model_name,
             "prompt": prompt,
             "stream": False,
+            "keep_alive": "30m",
             "options": {
                 "temperature": 0.3  # Lower temperature for more consistent translations
             }
@@ -363,6 +370,10 @@ Translate to {target_lang}:
                         time.sleep(1)  # Brief pause before retry
                         continue
                     else:
+                        if is_modernization:
+                            print(f"⚠️  Chunk {chunk.index}: modernization failed after {max_retries} attempts, keeping original text")
+                            logger.warning(f"Chunk {chunk.index} modernization failed, using original")
+                            return chunk.content
                         print(f"❌ ERROR: Chunk {chunk.index} produced invalid translation after {max_retries} attempts")
                         print(f"   Marking as untranslated to prevent silent language mixing")
                         logger.warning(f"Chunk {chunk.index} could not be translated after {max_retries} validation failures")

@@ -18,6 +18,7 @@ Requirements:
     brew install ffmpeg  # macOS
 """
 
+import logging
 import os
 import json
 import sys
@@ -27,6 +28,8 @@ import tempfile
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, List
+
+logger = logging.getLogger(__name__)
 
 try:
     from kokoro_onnx import Kokoro
@@ -741,7 +744,7 @@ class KokoroAudioGenerator:
         try:
             subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
         except (subprocess.CalledProcessError, FileNotFoundError):
-            print("⚠️  Warning: ffmpeg not found, cannot combine files")
+            logger.warning("ffmpeg not found, cannot combine files")
             return None
 
         concat_file = output_file.parent / f"concat_{output_file.stem}.txt"
@@ -764,7 +767,7 @@ class KokoroAudioGenerator:
             concat_file.unlink()
             return output_file
         except subprocess.CalledProcessError as e:
-            print(f"⚠️  Warning: Failed to combine files: {e}")
+            logger.error("Failed to combine files: %s", e)
             return None
 
     @staticmethod
@@ -957,7 +960,7 @@ class KokoroAudioGenerator:
         try:
             subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
         except (subprocess.CalledProcessError, FileNotFoundError):
-            print("⚠️  Warning: ffmpeg not found, skipping post-processing")
+            logger.warning("ffmpeg not found, skipping post-processing")
             return input_file
 
         filters = []
@@ -994,7 +997,7 @@ class KokoroAudioGenerator:
             subprocess.run(cmd, capture_output=True, check=True)
             return output_file
         except subprocess.CalledProcessError as e:
-            print(f"⚠️  Warning: Post-processing failed: {e}")
+            logger.error("Post-processing failed: %s", e)
             return input_file
 
     def _generate_chunk_manifest(
@@ -1054,7 +1057,7 @@ class KokoroAudioGenerator:
                 )
                 duration = float(result.stdout.strip())
             except (subprocess.CalledProcessError, FileNotFoundError, ValueError) as e:
-                print(f"⚠️  Warning: Could not get duration for chunk {i}: {e}")
+                logger.warning("Could not get duration for chunk %d: %s", i, e)
                 duration = 0.0
 
             text_start = current_text_pos

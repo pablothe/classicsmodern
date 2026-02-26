@@ -113,7 +113,7 @@ class UnifiedJobQueue:
                      Signature: handler(job_data: Dict, progress_callback: Callable) -> Dict
         """
         self.handlers[job_type] = handler
-        print(f"✓ Registered handler for {job_type}")
+        logger.info("Registered handler for %s", job_type)
 
     def create_job(
         self,
@@ -154,7 +154,7 @@ class UnifiedJobQueue:
         # Add to queue
         self.job_queue.put((-priority, datetime.now().timestamp(), job_id))
 
-        print(f"✓ Created {job_type} job: {job_id}")
+        logger.info("Created %s job: %s", job_type, job_id)
 
         return job_id
 
@@ -224,7 +224,7 @@ class UnifiedJobQueue:
             'error': 'Cancelled by user'
         })
 
-        print(f"✓ Cancelled job: {job_id}")
+        logger.info("Cancelled job: %s", job_id)
         return True
 
     def delete_job(self, job_id: str) -> bool:
@@ -284,7 +284,7 @@ class UnifiedJobQueue:
             worker.start()
             self.workers.append(worker)
 
-        print(f"✓ Started {self.max_workers} worker threads")
+        logger.info("Started %d worker threads", self.max_workers)
 
     def _worker_loop(self, worker_id: int):
         """
@@ -360,13 +360,13 @@ class UnifiedJobQueue:
                             'result': result
                         })
 
-                        print(f"✅ Job {job_id} completed")
+                        logger.info("Job %s completed", job_id)
 
                     except Exception as e:
                         # Check if cancelled
                         current_job = self.db.get_job(job_id)
                         if current_job and current_job['status'] == JobStatus.CANCELLED:
-                            print(f"⚠️  Job {job_id} cancelled")
+                            logger.warning("Job %s cancelled", job_id)
                         else:
                             # Mark as failed
                             self.db.update_job(job_id, {
@@ -385,7 +385,7 @@ class UnifiedJobQueue:
                             self.running_jobs.pop(job_id, None)
 
             except Exception as e:
-                print(f"⚠️  Worker {worker_id} error: {e}")
+                logger.error("Worker %d error: %s", worker_id, e)
                 time.sleep(1)
 
     def _restore_pending_jobs(self):
@@ -398,11 +398,11 @@ class UnifiedJobQueue:
             self.job_queue.put((-priority, created_at, job['job_id']))
 
         if pending_jobs:
-            print(f"✓ Restored {len(pending_jobs)} pending jobs")
+            logger.info("Restored %d pending jobs", len(pending_jobs))
 
     def shutdown(self):
         """Gracefully shutdown the queue"""
-        print("\n⏹️  Shutting down job queue...")
+        logger.info("Shutting down job queue...")
 
         # Signal workers to stop
         self.shutdown_event.set()
@@ -411,7 +411,7 @@ class UnifiedJobQueue:
         for worker in self.workers:
             worker.join(timeout=5.0)
 
-        print("✓ Job queue shutdown complete")
+        logger.info("Job queue shutdown complete")
 
 
 # Global queue instance (initialized by server)
@@ -447,7 +447,7 @@ def init_queue(db_path: Path, max_workers: int = 4) -> UnifiedJobQueue:
     global _global_queue
 
     if _global_queue is not None:
-        print("⚠️  Job queue already initialized")
+        logger.warning("Job queue already initialized")
         return _global_queue
 
     _global_queue = UnifiedJobQueue(db_path, max_workers)

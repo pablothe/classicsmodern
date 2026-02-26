@@ -17,6 +17,7 @@ Features:
 """
 
 import json
+import logging
 import os
 import re
 import time
@@ -27,6 +28,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Optional
 from enum import Enum
+
+logger = logging.getLogger(__name__)
 
 from server.language_detector import detect_language
 from lib.translation.engine import OllamaTranslator
@@ -343,7 +346,7 @@ class PipelineRunner:
                 raise Exception("Job cancelled by user")
 
             all_output.append(line.rstrip())
-            print(f"  [audio] {line.rstrip()}", flush=True)
+            logger.debug("[audio] %s", line.rstrip())
 
             progress_match = re.search(
                 r'(?:\[|Progress:.*?)(\d+)\s*/\s*(\d+)(?:\]|\s|$)',
@@ -690,8 +693,7 @@ class PipelineRunner:
                     'max_retries': AUDIO_MAX_RETRIES,
                     'voice': voice
                 })
-                print(f"  [audio] Retry {attempt}/{AUDIO_MAX_RETRIES} in {delay}s "
-                      f"(checkpoint will resume from last good chunk)...", flush=True)
+                logger.warning("Audio retry %d/%d in %ds (checkpoint will resume from last good chunk)", attempt, AUDIO_MAX_RETRIES, delay)
 
                 for _ in range(delay):
                     if self.cancelled:
@@ -707,13 +709,12 @@ class PipelineRunner:
 
             # Permanent failure — don't retry
             if self._is_permanent_failure(return_code, all_output):
-                print(f"  [audio] Permanent failure (exit code {return_code}), not retrying", flush=True)
+                logger.error("Audio permanent failure (exit code %d), not retrying", return_code)
                 raise Exception(self._build_error_message(return_code, all_output, cmd))
 
             # Transient failure
             last_error_msg = self._build_error_message(return_code, all_output, cmd)
-            print(f"  [audio] Transient failure (exit code {return_code}), "
-                  f"attempt {attempt}/{AUDIO_MAX_RETRIES}", flush=True)
+            logger.warning("Audio transient failure (exit code %d), attempt %d/%d", return_code, attempt, AUDIO_MAX_RETRIES)
 
             if attempt == AUDIO_MAX_RETRIES:
                 raise Exception(

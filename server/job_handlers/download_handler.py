@@ -52,7 +52,7 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
 
         # Stage 2: Convert to Markdown (40-60%)
         progress_callback(45, {'message': 'Converting to Markdown...', 'stage': 'convert'})
-        markdown, toc_entries = downloader._html_to_markdown(html_content)
+        markdown, toc_entries, html_metadata = downloader._html_to_markdown(html_content)
 
         progress_callback(60, {'message': 'Conversion complete', 'stage': 'convert'})
 
@@ -89,16 +89,18 @@ def download_handler(job: Dict, progress_callback: Callable) -> Dict:
             with open(gutenberg_json, 'w', encoding='utf-8') as f:
                 json.dump(chapters_data, f, indent=2, ensure_ascii=False)
 
-        # Save Gutenberg metadata (language source of truth)
+        # Save Gutenberg metadata (title, author from HTML + language from catalog)
+        gutenberg_meta = {
+            'gutenberg_id': gutenberg_id,
+            'title': html_metadata.get('title'),
+            'author': html_metadata.get('author'),
+            'downloaded_at': datetime.now().isoformat()
+        }
         if language:
-            gutenberg_meta = {
-                'gutenberg_id': gutenberg_id,
-                'language': language,
-                'downloaded_at': datetime.now().isoformat()
-            }
-            meta_path = book_dir / "gutenberg_metadata.json"
-            with open(meta_path, 'w', encoding='utf-8') as f:
-                json.dump(gutenberg_meta, f, indent=2)
+            gutenberg_meta['language'] = language
+        meta_path = book_dir / "gutenberg_metadata.json"
+        with open(meta_path, 'w', encoding='utf-8') as f:
+            json.dump(gutenberg_meta, f, indent=2, ensure_ascii=False)
 
         progress_callback(80, {'message': 'File saved', 'stage': 'save'})
 

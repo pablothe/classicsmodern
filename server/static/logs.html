@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <title>Server Logs - Audiobook Server</title>
+    <script>
+    if (localStorage.getItem('audiobook_dark_mode') === 'dark')
+        document.documentElement.classList.add('dark-mode');
+    </script>
+    <link rel="stylesheet" href="/static/logs.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Server Logs</h1>
+            <div class="header-actions">
+                <button id="refresh-btn" class="btn btn-primary">Refresh</button>
+                <button id="auto-refresh-btn" class="btn btn-secondary">Auto-refresh: OFF</button>
+                <a href="/" class="btn btn-secondary">&larr; Back to Player</a>
+                <button id="dark-mode-toggle" class="dark-mode-toggle" onclick="(function(){document.documentElement.classList.toggle('dark-mode');var d=document.documentElement.classList.contains('dark-mode');localStorage.setItem('audiobook_dark_mode',d?'dark':'light');document.getElementById('dark-mode-toggle').textContent=d?'&#9788;':'&#9790;'})()">&#9790;</button>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <section class="filters-section">
+            <div class="filter-group">
+                <label for="filter-file">Log file:</label>
+                <select id="filter-file" class="filter-select">
+                    <option value="server">server.log</option>
+                    <option value="jobs">jobs.log</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-level">Level:</label>
+                <select id="filter-level" class="filter-select">
+                    <option value="">All Levels</option>
+                    <option value="ERROR">ERROR</option>
+                    <option value="WARNING">WARNING</option>
+                    <option value="INFO">INFO</option>
+                    <option value="DEBUG">DEBUG</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-since">Since:</label>
+                <input type="date" id="filter-since" class="filter-input">
+            </div>
+        </section>
+
+        <!-- Log entries -->
+        <section class="logs-section">
+            <div id="logs-count" class="logs-count"></div>
+            <table class="logs-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Level</th>
+                        <th>Module</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="logs-body"></tbody>
+            </table>
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <p>No log entries found</p>
+                <p class="empty-state-hint">Logs will appear here once the server processes requests</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+    // Sync dark mode toggle icon
+    (function() {
+        var toggle = document.getElementById('dark-mode-toggle');
+        if (toggle) toggle.textContent = document.documentElement.classList.contains('dark-mode') ? '\u2606' : '\u263E';
+    })();
+    </script>
+    <script src="/static/logs.js"></script>
+</body>
+</html>

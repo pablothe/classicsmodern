@@ -114,6 +114,7 @@ books/
 
 TEST_RESULTS_*.md
 translation.log
+logs/
 
 # Local Reader: Progress tracking files
 .translation_progress.json

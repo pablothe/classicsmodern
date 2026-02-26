@@ -1,0 +1,327 @@
+/* Logs Viewer Styles */
+
+:root {
+    --bg-color: #ffffff;
+    --bg-secondary: #f7f7f7;
+    --surface-color: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --border-color: #d0d0d0;
+    --accent-color: #000000;
+}
+
+.dark-mode {
+    --bg-color: #000000;
+    --bg-secondary: #111111;
+    --surface-color: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
+    --border-color: #333333;
+    --accent-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: min(1400px, 100vw);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: var(--surface-color);
+    padding: 24px;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    transition: background 0.15s, color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dark-mode-toggle:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+}
+
+.btn-secondary {
+    background: var(--surface-color);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    opacity: 0.7;
+}
+
+.btn-active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+}
+
+/* Filters */
+.filters-section {
+    background: var(--surface-color);
+    padding: 20px;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 24px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.filter-select,
+.filter-input {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    font-size: 14px;
+    min-width: 150px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Logs table */
+.logs-section {
+    background: var(--surface-color);
+    padding: 20px;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+}
+
+.logs-count {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+    font-size: 13px;
+}
+
+.logs-table thead {
+    position: sticky;
+    top: 0;
+    background: var(--surface-color);
+    z-index: 1;
+}
+
+.logs-table th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border-color);
+    font-weight: 700;
+    white-space: nowrap;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.logs-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.logs-table tbody tr:hover {
+    background: var(--bg-secondary);
+}
+
+/* Timestamp column */
+.logs-table td:first-child {
+    white-space: nowrap;
+    color: var(--text-secondary);
+}
+
+/* Level column */
+.logs-table td:nth-child(2) {
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+/* Module column */
+.logs-table td:nth-child(3) {
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-secondary);
+}
+
+/* Message column */
+.logs-table td:last-child {
+    word-break: break-word;
+}
+
+/* Level color coding */
+.level-ERROR {
+    color: #e74c3c;
+}
+
+.level-WARNING {
+    color: #f39c12;
+}
+
+.level-INFO {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.level-DEBUG {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state p {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.empty-state-hint {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    header {
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .header-actions {
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .filters-section {
+        padding: 16px;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .filter-select,
+    .filter-input {
+        width: 100%;
+    }
+
+    .logs-section {
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    .logs-table {
+        font-size: 11px;
+    }
+
+    .logs-table td:nth-child(3) {
+        max-width: 100px;
+    }
+}

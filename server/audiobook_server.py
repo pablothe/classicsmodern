@@ -29,7 +29,10 @@ from fastapi import FastAPI, HTTPException, Header, Request
 from fastapi.responses import FileResponse, StreamingResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 import uvicorn
+
+logger = logging.getLogger(__name__)
 
 # Import book catalog and text extractor
 from lib.book.catalog import get_book_info
@@ -51,7 +54,7 @@ try:
     GUTENBERG_AVAILABLE = True
 except ImportError:
     GUTENBERG_AVAILABLE = False
-    print("⚠️  Gutenberg browser not available (catalog or downloader module missing)")
+    logger.warning("Gutenberg browser not available (catalog or downloader module missing)")
 
 # Optional: Import LLM chat (only if AI assistant is available)
 try:
@@ -59,7 +62,7 @@ try:
     AI_ASSISTANT_AVAILABLE = True
 except ImportError:
     AI_ASSISTANT_AVAILABLE = False
-    print("⚠️  AI Assistant not available (llm_chat.py or ollama module missing)")
+    logger.warning("AI Assistant not available (llm_chat.py or ollama module missing)")
 
 # Import unified job queue
 try:
@@ -68,7 +71,7 @@ try:
     UNIFIED_QUEUE_AVAILABLE = True
 except ImportError as e:
     UNIFIED_QUEUE_AVAILABLE = False
-    print(f"⚠️  Unified job queue not available: {e}")
+    logger.warning("Unified job queue not available: %s", e)
 
 
 # Constants
@@ -319,6 +322,20 @@ def discover_books() -> List[Dict]:
             except (json.JSONDecodeError, IOError):
                 pass
 
+        # Fallback: Gutenberg download metadata (title, author from HTML)
+        gutenberg_meta_path = book_dir / "gutenberg_metadata.json"
+        if gutenberg_meta_path.exists():
+            try:
+                with open(gutenberg_meta_path, 'r') as f:
+                    g_meta = json.load(f)
+                if not author and g_meta.get('author'):
+                    author = g_meta['author']
+                # Use Gutenberg title only if we still have the slug-derived fallback
+                if g_meta.get('title') and title == book_id.replace('_', ' ').title():
+                    title = g_meta['title']
+            except (json.JSONDecodeError, IOError):
+                pass
+
         # Check chunk manifest for prologue (chapter 0) and epilogue
         if chapters:
             chunk_manifest_paths = [
@@ -552,9 +569,7 @@ async def list_books():
     """
     books = discover_books()
     total_library_bytes = sum(b.get('total_size_bytes', 0) for b in books)
-    print(f"[API /api/books] Returning {len(books)} books, {round(total_library_bytes / (1024*1024), 1)} MB total")
-    for book in books:
-        print(f"  - {book['title']} ({book['book_id']}): {book['variant_count']} variants")
+    logger.info("Returning %d books, %.1f MB total", len(books), total_library_bytes / (1024*1024))
     return {
         "books": books,
         "total": len(books),
@@ -599,11 +614,11 @@ async def stream_audio(
     Returns:
         Audio file stream with range support
     """
-    print(f"[AUDIO STREAM] book={book_id}, variant={variant_id[:40]}..., file_index={file_index}, range={range}")
+    logger.debug("Audio stream: book=%s, variant=%s, file_index=%d", book_id, variant_id[:40], file_index)
 
     book = get_book_by_id(book_id)
     if not book:
-        print(f"[AUDIO STREAM] ERROR: Book not found: {book_id}")
+        logger.warning("Audio stream: book not found: %s", book_id)
         raise HTTPException(status_code=404, detail="Book not found")
 
     # Find variant
@@ -1208,7 +1223,7 @@ async def get_playback_position(
         'last_updated': None
     })
 
-    print(f"[PLAYBACK GET] key={key[:16]}..., book={book_id}, pos={playback['position']:.1f}s")
+    logger.debug("Playback get: book=%s, pos=%.1fs", book_id, playback['position'])
     return playback
 
 
@@ -1248,7 +1263,7 @@ async def save_playback_position(
     file_index = data.get('file_index', 0)
     word_index = data.get('word_index', 0)
 
-    print(f"[PLAYBACK SAVE] key={key[:16]}..., book={book_id}, pos={position:.1f}s, speed={speed}x")
+    logger.debug("Playback save: book=%s, pos=%.1fs, speed=%sx", book_id, position, speed)
 
     db = load_playback_db()
     if key not in db:
@@ -1287,12 +1302,12 @@ async def delete_variant(book_id: str, variant_id: str):
     Returns:
         Success status with deletion details
     """
-    print(f"[DELETE] Request to delete variant: {book_id}/{variant_id}")
+    logger.info("Delete variant request: %s/%s", book_id, variant_id)
 
     # Find the book
     book = get_book_by_id(book_id)
     if not book:
-        print(f"[DELETE] Book not found: {book_id}")
+        logger.warning("Delete: book not found: %s", book_id)
         raise HTTPException(status_code=404, detail=f"Book '{book_id}' not found")
 
     # Find the variant
@@ -1303,7 +1318,7 @@ async def delete_variant(book_id: str, variant_id: str):
             break
 
     if not variant:
-        print(f"[DELETE] Variant not found: {variant_id}")
+        logger.warning("Delete: variant not found: %s", variant_id)
         raise HTTPException(status_code=404, detail=f"Variant '{variant_id}' not found")
 
     # Track deleted files
@@ -1317,10 +1332,10 @@ async def delete_variant(book_id: str, variant_id: str):
             try:
                 playlist_path.unlink()
                 deleted_files.append(str(variant['playlist_path']))
-                print(f"[DELETE] Deleted playlist: {playlist_path}")
+                logger.info("Deleted playlist: %s", playlist_path)
             except Exception as e:
                 errors.append(f"Failed to delete playlist: {e}")
-                print(f"[DELETE] Error deleting playlist: {e}")
+                logger.error("Error deleting playlist: %s", e)
 
         # 2. Delete all audio files referenced in the playlist
         for audio_file in variant['audio_files']:
@@ -1329,10 +1344,10 @@ async def delete_variant(book_id: str, variant_id: str):
                 try:
                     audio_path.unlink()
                     deleted_files.append(audio_file)
-                    print(f"[DELETE] Deleted audio file: {audio_path}")
+                    logger.info("Deleted audio file: %s", audio_path)
                 except Exception as e:
                     errors.append(f"Failed to delete {audio_file}: {e}")
-                    print(f"[DELETE] Error deleting {audio_file}: {e}")
+                    logger.error("Error deleting %s: %s", audio_file, e)
 
         # 3. Delete cover image if it exists in the variant directory
         # Infer variant directory from playlist path
@@ -1351,10 +1366,10 @@ async def delete_variant(book_id: str, variant_id: str):
                     try:
                         cover_path.unlink()
                         deleted_files.append(str(cover_path.relative_to(BOOKS_DIR)))
-                        print(f"[DELETE] Deleted cover: {cover_path}")
+                        logger.info("Deleted cover: %s", cover_path)
                     except Exception as e:
                         errors.append(f"Failed to delete cover: {e}")
-                        print(f"[DELETE] Error deleting cover: {e}")
+                        logger.error("Error deleting cover: %s", e)
 
         # 4. Try to remove empty directories
         try:
@@ -1362,12 +1377,12 @@ async def delete_variant(book_id: str, variant_id: str):
             if variant_dir.exists() and variant_dir != BOOKS_DIR / book_id:
                 if not any(variant_dir.iterdir()):  # Directory is empty
                     variant_dir.rmdir()
-                    print(f"[DELETE] Removed empty directory: {variant_dir}")
+                    logger.info("Removed empty directory: %s", variant_dir)
         except Exception as e:
             # Not critical if directory removal fails
-            print(f"[DELETE] Could not remove directory {variant_dir}: {e}")
+            logger.warning("Could not remove directory %s: %s", variant_dir, e)
 
-        print(f"[DELETE] Successfully deleted variant {variant_id}: {len(deleted_files)} files deleted")
+        logger.info("Deleted variant %s: %d files", variant_id, len(deleted_files))
 
         return {
             'status': 'success',
@@ -1379,7 +1394,7 @@ async def delete_variant(book_id: str, variant_id: str):
         }
 
     except Exception as e:
-        print(f"[DELETE] Unexpected error: {e}")
+        logger.error("Delete variant unexpected error", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Failed to delete variant: {str(e)}"
@@ -1481,7 +1496,7 @@ if AI_ASSISTANT_AVAILABLE:
             }
 
         except Exception as e:
-            print(f"[AI ASSISTANT ERROR] {str(e)}")
+            logger.error("AI assistant error: %s", e, exc_info=True)
             raise HTTPException(
                 status_code=500,
                 detail=f"AI assistant error: {str(e)}"
@@ -1587,7 +1602,7 @@ if GUTENBERG_AVAILABLE:
             List of all jobs with their status
         """
         jobs = get_all_gutenberg_jobs()  # Use correct function (not pipeline jobs!)
-        print(f"[DEBUG] /api/gutenberg/downloads returning {len(jobs)} jobs: {[j.get('job_id', 'no-id') for j in jobs]}")
+        logger.debug("Gutenberg downloads: %d jobs", len(jobs))
         return {
             'jobs': jobs,
             'total': len(jobs)
@@ -2171,11 +2186,82 @@ async def health_check():
 
 
 # ============================================================================
+# Log Viewer API Endpoint
+# ============================================================================
+
+@app.get("/api/logs")
+async def get_logs(
+    file: str = "server",
+    level: Optional[str] = None,
+    since: Optional[str] = None,
+    limit: int = 500,
+):
+    """Return recent log entries from server.log or jobs.log."""
+    if file not in ("server", "jobs"):
+        raise HTTPException(status_code=400, detail="file must be 'server' or 'jobs'")
+
+    log_dir = Path(__file__).parent.parent / "logs"
+    log_path = log_dir / f"{file}.log"
+    if not log_path.exists():
+        return {"entries": [], "total": 0, "file": file}
+
+    import re as _re
+    log_pattern = _re.compile(
+        r'^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) '
+        r'\[(\w+)\] '
+        r'([\w.]+): '
+        r'(.*)$'
+    )
+
+    since_date = None
+    if since:
+        try:
+            since_date = since  # "YYYY-MM-DD" string for prefix comparison
+            datetime.fromisoformat(since)  # validate format
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Invalid 'since' date format (use YYYY-MM-DD)")
+
+    try:
+        lines = log_path.read_text().splitlines()
+    except Exception:
+        return {"entries": [], "total": 0, "file": file}
+
+    entries = []
+    for line in reversed(lines):
+        match = log_pattern.match(line)
+        if not match:
+            continue
+
+        timestamp_str, log_level, module, message = match.groups()
+
+        if level and log_level != level.upper():
+            continue
+
+        if since_date and timestamp_str[:10] < since_date:
+            break
+
+        entries.append({
+            "timestamp": timestamp_str,
+            "level": log_level,
+            "module": module,
+            "message": message,
+        })
+
+        if len(entries) >= limit:
+            break
+
+    return {"entries": entries, "total": len(entries), "file": file}
+
+
+# ============================================================================
 # Main Entry Point
 # ============================================================================
 
 def main():
     """Run the audiobook server."""
+    from lib.config import setup_logging
+    setup_logging()
+
     parser = argparse.ArgumentParser(description="Audiobook Server")
     parser.add_argument(
         '--host',
@@ -2203,7 +2289,7 @@ def main():
     global UNIFIED_QUEUE_AVAILABLE  # Need global declaration to modify module-level variable
     if UNIFIED_QUEUE_AVAILABLE:
         try:
-            print("\n📋 Initializing unified job queue...")
+            logger.info("Initializing unified job queue...")
             queue = init_queue(JOB_DB_PATH, max_workers=4)
 
             # Register job handlers
@@ -2212,25 +2298,25 @@ def main():
             queue.register_handler(JobType.AUDIOBOOK, pipeline_handler)
             queue.register_handler(JobType.COVER, cover_handler)
 
-            print(f"✓ Job queue initialized (database: {JOB_DB_PATH})")
+            logger.info("Job queue initialized (database: %s)", JOB_DB_PATH)
 
             # Show queue stats
             stats = queue.get_stats()
-            print(f"✓ Queue stats: {stats['total']} total jobs")
+            logger.info("Queue stats: %d total jobs", stats['total'])
             if stats.get('by_status'):
                 for status, count in stats['by_status'].items():
-                    print(f"  - {status}: {count}")
+                    logger.info("  %s: %d", status, count)
         except Exception as e:
-            print(f"❌ Failed to initialize job queue: {e}")
+            logger.error("Failed to initialize job queue: %s", e, exc_info=True)
             UNIFIED_QUEUE_AVAILABLE = False
 
     # Initialize user profiles
     playback_db = load_playback_db()
     if ensure_users_initialized(playback_db):
         save_playback_db(playback_db)
-        print("✓ User profiles initialized (Guest profile created)")
+        logger.info("User profiles initialized (Guest profile created)")
     else:
-        print(f"✓ User profiles: {len(get_all_users())} profiles")
+        logger.info("User profiles: %d profiles", len(get_all_users()))
 
     # Print startup info
     print("\n" + "=" * 60)
@@ -2241,6 +2327,7 @@ def main():
     print(f"Server: http://{args.host}:{args.port}")
     print(f"API Docs: http://localhost:{args.port}/docs")
     print(f"Jobs UI: http://localhost:{args.port}/static/jobs.html")
+    print(f"Logs UI: http://localhost:{args.port}/static/logs.html")
 
     # Check Ollama availability for AI assistant
     if AI_ASSISTANT_AVAILABLE:

@@ -5,6 +5,8 @@ Central configuration management for the local reader application.
 """
 
 import os
+import logging
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Dict, List
@@ -262,6 +264,85 @@ def reload_config(config_file: str = "local_reader_config.json"):
     """
     global _config
     _config = AppConfig.from_file(config_file)
+
+
+@dataclass
+class LoggingConfig:
+    """Configuration for centralized logging"""
+    log_dir: str = "logs"
+    log_format: str = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+    console_level: str = "INFO"
+    file_level: str = "DEBUG"
+    max_bytes: int = 5 * 1024 * 1024  # 5MB per file
+    backup_count: int = 3
+
+
+def setup_logging(config: LoggingConfig = None) -> None:
+    """
+    Configure centralized logging with rotating file handlers.
+
+    Call once at application startup. Creates two log files:
+      - logs/server.log  (all application logs)
+      - logs/jobs.log    (job execution: translation, audio, cover)
+    """
+    if config is None:
+        config = LoggingConfig()
+
+    # Resolve logs/ relative to project root (lib/ is one level down)
+    log_dir = Path(__file__).parent.parent / config.log_dir
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    formatter = logging.Formatter(config.log_format)
+
+    # Root logger — catches everything
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.DEBUG)
+    root_logger.handlers.clear()
+
+    # Console handler — same output as before (print-like)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(getattr(logging, config.console_level))
+    console_handler.setFormatter(formatter)
+    root_logger.addHandler(console_handler)
+
+    # Server log file — all application logs
+    server_handler = RotatingFileHandler(
+        log_dir / "server.log",
+        maxBytes=config.max_bytes,
+        backupCount=config.backup_count,
+    )
+    server_handler.setLevel(getattr(logging, config.file_level))
+    server_handler.setFormatter(formatter)
+    root_logger.addHandler(server_handler)
+
+    # Jobs log file — only job-related modules
+    jobs_handler = RotatingFileHandler(
+        log_dir / "jobs.log",
+        maxBytes=config.max_bytes,
+        backupCount=config.backup_count,
+    )
+    jobs_handler.setLevel(getattr(logging, config.file_level))
+    jobs_handler.setFormatter(formatter)
+
+    for name in [
+        "server.job_queue",
+        "server.audiobook_pipeline",
+        "server.job_handlers",
+        "lib.translation.engine",
+        "lib.translation.structured",
+        "lib.audio.kokoro",
+        "lib.cover.generator",
+        "lib.cover.prompts",
+        "lib.summarize.engine",
+    ]:
+        logging.getLogger(name).addHandler(jobs_handler)
+
+    # Suppress uvicorn access logs from file handlers.
+    # They still appear in the terminal via the console handler.
+    uvicorn_access = logging.getLogger("uvicorn.access")
+    uvicorn_access.handlers.clear()
+    uvicorn_access.propagate = False
+    uvicorn_access.addHandler(console_handler)
 
 
 if __name__ == "__main__":
