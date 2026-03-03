@@ -66,6 +66,155 @@ def _check_siblings_for_heading(element, heading_tags, max_siblings=5):
 class GutenbergDownloader:
     """Download and process Gutenberg books"""
 
+    # Multilingual chapter keywords → section types
+    _SECTION_TYPE_MAP = {
+        # Chapters
+        'chapter': 'chapter', 'chapitre': 'chapter', 'kapitel': 'chapter',
+        'capítulo': 'chapter', 'capitolo': 'chapter', 'глава': 'chapter',
+        # Parts
+        'part': 'part', 'partie': 'part', 'teil': 'part', 'часть': 'part',
+        # Books/Volumes
+        'book': 'book', 'livre': 'book', 'buch': 'book', 'libro': 'book', 'книга': 'book',
+        'volume': 'volume',
+        # Drama
+        'act': 'act', 'acte': 'act', 'akt': 'act', 'acto': 'act', 'atto': 'act',
+        'scene': 'scene', 'scène': 'scene',
+        # Front matter
+        'prologue': 'prologue', 'prólogo': 'prologue',
+        'preface': 'preface', 'préface': 'preface', 'prefazione': 'preface', 'vorwort': 'preface',
+        'foreword': 'foreword', 'avant-propos': 'foreword',
+        'introduction': 'introduction', 'einleitung': 'introduction',
+        'introducción': 'introduction', 'introduzione': 'introduction',
+        'dedication': 'dedication',
+        "author's note": 'preface', "editor's note": 'preface', "translator's note": 'preface',
+        # Back matter
+        'epilogue': 'epilogue', 'épilogue': 'epilogue', 'nachwort': 'epilogue',
+        'epílogo': 'epilogue', 'epilogo': 'epilogue',
+        'afterword': 'epilogue',
+        'conclusion': 'conclusion', 'conclusión': 'conclusion',
+        'appendix': 'appendix',
+        # Other
+        'interlude': 'interlude',
+        'letter': 'letter', 'lettre': 'letter', 'brief': 'letter', 'carta': 'letter',
+    }
+
+    # Section types that are front matter
+    _FRONT_MATTER_TYPES = {'prologue', 'preface', 'foreword', 'introduction', 'dedication'}
+
+    # Section types that are back matter
+    _BACK_MATTER_TYPES = {'epilogue', 'afterword', 'conclusion', 'appendix'}
+
+    # Structural parent types (contain children)
+    _PARENT_TYPES = {'part', 'book', 'volume'}
+
+    @staticmethod
+    def _classify_section_type(title: str) -> str:
+        """Classify a section title into a structural type.
+
+        Checks front/back matter keywords first, then structural (part/act/scene),
+        then chapter keywords. Returns 'chapter' as default.
+        """
+        title_lower = title.lower().strip()
+
+        # Check all known keywords, longest match first
+        for keyword, stype in sorted(
+            GutenbergDownloader._SECTION_TYPE_MAP.items(),
+            key=lambda x: -len(x[0])
+        ):
+            # Match at word boundary: keyword at start or after non-alpha
+            if re.search(rf'(?:^|\s){re.escape(keyword)}(?:\s|$|[.:,])', title_lower):
+                return stype
+
+        return 'chapter'
+
+    @staticmethod
+    def _extract_number_from_title(title: str) -> tuple:
+        """Extract ordinal number from title. Returns (number, method).
+
+        Requires Roman numerals to follow a chapter keyword directly,
+        preventing false matches like 'C' in 'P.C.' being parsed as 100.
+
+        Handles: 'CHAPTER I', 'Chapter 3:', 'Part II', 'FIRST ACT',
+                 standalone 'XIV.', 'CHAPTER ONE' (English ordinal words).
+        Returns (0, 'none') if no number found.
+        """
+        # English ordinal words
+        ordinals = {
+            'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
+            'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
+            'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14,
+            'fifteen': 15, 'sixteen': 16, 'seventeen': 17, 'eighteen': 18,
+            'nineteen': 19, 'twenty': 20, 'twenty-one': 21, 'twenty-two': 22,
+            'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25,
+            'twenty-six': 26, 'twenty-seven': 27, 'twenty-eight': 28,
+            'twenty-nine': 29, 'thirty': 30, 'thirty-one': 31,
+            'thirty-two': 32, 'thirty-three': 33, 'thirty-four': 34,
+            'thirty-five': 35, 'thirty-six': 36, 'thirty-seven': 37,
+            'thirty-eight': 38, 'thirty-nine': 39, 'forty': 40,
+            'forty-one': 41, 'forty-two': 42, 'forty-three': 43,
+            'forty-four': 44, 'forty-five': 45, 'forty-six': 46,
+            'forty-seven': 47, 'forty-eight': 48,
+            'first': 1, 'second': 2, 'third': 3, 'fourth': 4, 'fifth': 5,
+            'sixth': 6, 'seventh': 7, 'eighth': 8, 'ninth': 9, 'tenth': 10,
+        }
+
+        # Keyword pattern for structural labels
+        kw = (r'(?:CHAPTER|CHAPITRE|KAPITEL|CAPÍTULO|CAPITOLO|ГЛАВА|'
+              r'PART|PARTIE|TEIL|ЧАСТЬ|'
+              r'BOOK|LIVRE|BUCH|LIBRO|КНИГА|VOLUME|'
+              r'ACT|ACTE|AKT|ACTO|ATTO|'
+              r'SCENE|SCÈNE|'
+              r'LETTER|LETTRE|BRIEF|CARTA|LETTERA|'
+              r'ENTRY|DAY|NIGHT|JOURNAL|DIARY)')
+
+        # 1. Keyword + Roman numeral (strict: must follow keyword directly)
+        m = re.match(rf'({kw})\s+([IVXLCDM]+)\b', title, re.IGNORECASE)
+        if m:
+            roman_str = m.group(2).upper()
+            # Validate it's actually a plausible Roman numeral (not just 'I' from a word)
+            if len(roman_str) > 0:
+                try:
+                    val = GutenbergDownloader._roman_to_int(roman_str)
+                    if val > 0:
+                        return (val, 'roman')
+                except Exception:
+                    pass
+
+        # 2. Keyword + Arabic numeral
+        m = re.match(rf'({kw})\s+(\d+)', title, re.IGNORECASE)
+        if m:
+            return (int(m.group(2)), 'arabic')
+
+        # 3. Keyword + English ordinal word (e.g., "CHAPTER ONE", "CHAPTER TWENTY-THREE")
+        m = re.match(rf'({kw})\s+(\w+(?:-\w+)?)', title, re.IGNORECASE)
+        if m:
+            word = m.group(2).lower()
+            if word in ordinals:
+                return (ordinals[word], 'word')
+
+        # 4. Ordinal word + keyword (e.g., "FIRST ACT", "SECOND PART")
+        ordinal_pattern = '|'.join(sorted(
+            [k for k in ordinals if not k.replace('-', '').isalpha() or len(k) > 2],
+            key=len, reverse=True
+        ))
+        m = re.match(rf'({ordinal_pattern})\s+({kw})', title, re.IGNORECASE)
+        if m:
+            word = m.group(1).lower()
+            if word in ordinals:
+                return (ordinals[word], 'ordinal_word')
+
+        # 5. Standalone Roman numeral (e.g., "XIV.", "II")
+        m = re.match(r'^([IVXLCDM]+)\.?\s*$', title.strip())
+        if m:
+            try:
+                val = GutenbergDownloader._roman_to_int(m.group(1))
+                if val > 0:
+                    return (val, 'roman_standalone')
+            except Exception:
+                pass
+
+        return (0, 'none')
+
     def __init__(self, books_dir: Path = BOOKS_DIR):
         self.books_dir = books_dir
         self.books_dir.mkdir(parents=True, exist_ok=True)
@@ -126,24 +275,16 @@ class GutenbergDownloader:
 
             print(f"✓ Saved: {output_file}")
 
-            # Save Gutenberg chapter metadata
+            # Save Gutenberg chapter metadata (v2.0 format)
             if toc_entries:
-                chapters_data = {
-                    "source": "gutenberg_html_toc",
-                    "chapter_count": len(toc_entries),
-                    "chapters": [
-                        {
-                            "number": entry["number"],
-                            "title": self._clean_toc_title(entry["title"]),
-                            "section_type": entry.get("section_type", "chapter")
-                        }
-                        for entry in toc_entries
-                    ]
-                }
+                chapters_data = self._build_v2_chapters_json(
+                    toc_entries, gutenberg_id, normalized
+                )
                 gutenberg_json = book_dir / "gutenberg_chapters.json"
                 with open(gutenberg_json, 'w', encoding='utf-8') as f:
                     json.dump(chapters_data, f, indent=2, ensure_ascii=False)
-                print(f"✓ Saved {len(toc_entries)} chapters to gutenberg_chapters.json")
+                ch_count = len(chapters_data.get('chapters', []))
+                print(f"✓ Saved {ch_count} chapters to gutenberg_chapters.json (v2.0)")
 
             # Save Gutenberg metadata (title, author from HTML)
             gutenberg_meta = {
@@ -296,41 +437,34 @@ class GutenbergDownloader:
 
     def _extract_toc_from_html(self, soup) -> list:
         """
-        Extract table of contents from Gutenberg HTML.
+        Extract table of contents from Gutenberg HTML (v2.0 format).
 
         Gutenberg books often have a TOC section with internal anchor links like:
             <a href="#chap01">CHAPITRE I. Comment Candide...</a>
             <a href="#link2H_4_0002">Chapter I</a>
 
         Returns:
-            List of dicts with 'anchor', 'title', 'number' keys
+            List of dicts with 'anchor', 'title', 'ordinal', 'section_type' keys.
+            Uses sequential ordinal (1, 2, 3...) instead of parsed number to avoid
+            Roman numeral parsing errors (e.g., 'C' in 'P.C.' = 100).
         """
-        toc_entries = []
-
-        # Find internal links that point to anchors within the document
-        internal_links = soup.find_all('a', href=re.compile(r'^#'))
-
         # Multilingual chapter keyword pattern
         chapter_kw = re.compile(
             r'(chapter|chapitre|kapitel|capítulo|capitolo|глава|'
             r'part|partie|teil|parte|часть|'
-            r'book|livre|buch|libro|книга|'
-            r'act|scene|acte|akt|'
-            r'prologue|epilogue|préface|introduction|conclusion)',
+            r'book|livre|buch|libro|книга|volume|'
+            r'act|scene|acte|akt|acto|atto|scène|'
+            r'prologue|epilogue|préface|preface|foreword|introduction|'
+            r'conclusion|dedication|appendix|interlude|'
+            r'prólogo|epílogo|epilogo|prefazione|vorwort|nachwort|'
+            r'avant-propos|einleitung|introducción|introduzione|conclusión|'
+            r'letter|lettre|brief|carta|lettera|'
+            r'entry|day|night|journal|diary)',
             re.IGNORECASE
         )
 
-        # Map matched keywords to section types
-        _section_type_map = {
-            'chapter': 'chapter', 'chapitre': 'chapter', 'kapitel': 'chapter',
-            'capítulo': 'chapter', 'capitolo': 'chapter', 'глава': 'chapter',
-            'part': 'part', 'partie': 'part', 'teil': 'part', 'часть': 'part',
-            'book': 'book', 'livre': 'book', 'buch': 'book', 'libro': 'book', 'книга': 'book',
-            'act': 'act', 'acte': 'act', 'akt': 'act',
-            'scene': 'scene',
-            'prologue': 'prologue', 'epilogue': 'epilogue',
-            'préface': 'preface', 'introduction': 'introduction', 'conclusion': 'conclusion',
-        }
+        # Find internal links that point to anchors within the document
+        internal_links = soup.find_all('a', href=re.compile(r'^#'))
 
         chapter_links = []
         for link in internal_links:
@@ -339,46 +473,31 @@ class GutenbergDownloader:
             if not text or not href:
                 continue
 
-            kw_match = chapter_kw.search(text)
-            is_chapter = bool(kw_match)
-            section_type = 'chapter'
-            if kw_match:
-                section_type = _section_type_map.get(kw_match.group(1).lower(), 'chapter')
+            is_chapter = bool(chapter_kw.search(text))
 
-            # Also accept standalone Roman numerals (e.g., "I.", "XIV.", "II.,")
+            # Also accept standalone Roman numerals (e.g., "I.", "XIV.")
             if not is_chapter:
                 is_chapter = bool(re.match(r'^[IVXLCDM]+\.?[\s,;]?$|^[IVXLCDM]+\.?\s', text.strip()))
 
             if is_chapter:
+                section_type = self._classify_section_type(text)
                 chapter_links.append({'anchor': href, 'title': text, 'section_type': section_type})
 
         # Need at least 3 chapter links to consider it a real TOC
         if len(chapter_links) < 3:
             return []
 
+        toc_entries = []
         for i, entry in enumerate(chapter_links):
             title = entry['title']
-            # Try to extract chapter number (Roman or Arabic)
-            num_match = re.search(r'\b([IVXLCDM]+)\b', title)
-            number = i + 1
-            if num_match:
-                try:
-                    number = self._roman_to_int(num_match.group(1))
-                except Exception:
-                    pass
-            else:
-                digit_match = re.search(r'\b(\d+)\b', title)
-                if digit_match:
-                    try:
-                        number = int(digit_match.group(1))
-                    except Exception:
-                        pass
+            number, _ = self._extract_number_from_title(title)
 
             toc_entries.append({
                 'anchor': entry['anchor'],
                 'title': title,
-                'number': number,
-                'section_type': entry.get('section_type', 'chapter')
+                'ordinal': i + 1,
+                'number': number if number > 0 else i + 1,
+                'section_type': entry['section_type']
             })
 
         return toc_entries
@@ -391,27 +510,19 @@ class GutenbergDownloader:
         that looks like chapter titles (has chapter keywords or Roman/Arabic numerals).
 
         Returns:
-            List of dicts with 'anchor', 'title', 'number', 'section_type' keys
+            List of dicts with 'anchor', 'title', 'ordinal', 'number', 'section_type' keys
         """
         chapter_kw = re.compile(
             r'(chapter|chapitre|kapitel|capítulo|capitolo|глава|'
             r'part|partie|teil|parte|часть|'
-            r'book|livre|buch|libro|книга|'
-            r'act|scene|acte|akt|'
-            r'prologue|epilogue|préface|introduction|conclusion|foreword|preface)',
+            r'book|livre|buch|libro|книга|volume|'
+            r'act|scene|acte|akt|acto|atto|scène|'
+            r'prologue|epilogue|préface|preface|foreword|introduction|'
+            r'conclusion|dedication|appendix|'
+            r'prólogo|epílogo|epilogo|prefazione|vorwort|nachwort|'
+            r'avant-propos|einleitung|introducción|introduzione)',
             re.IGNORECASE
         )
-        _section_type_map = {
-            'chapter': 'chapter', 'chapitre': 'chapter', 'kapitel': 'chapter',
-            'capítulo': 'chapter', 'capitolo': 'chapter', 'глава': 'chapter',
-            'part': 'part', 'partie': 'part', 'teil': 'part', 'часть': 'part',
-            'book': 'book', 'livre': 'book', 'buch': 'book', 'libro': 'book', 'книга': 'book',
-            'act': 'act', 'acte': 'act', 'akt': 'act',
-            'scene': 'scene',
-            'prologue': 'prologue', 'epilogue': 'epilogue',
-            'préface': 'preface', 'preface': 'preface', 'foreword': 'foreword',
-            'introduction': 'introduction', 'conclusion': 'conclusion',
-        }
 
         # Skip headers that are clearly metadata, not content
         skip_patterns = re.compile(
@@ -435,27 +546,16 @@ class GutenbergDownloader:
                 if skip_patterns.search(text):
                     continue
 
-                # Check for chapter keywords
-                kw_match = chapter_kw.search(text)
-                section_type = 'chapter'
-                is_chapter = False
-
-                if kw_match:
-                    is_chapter = True
-                    section_type = _section_type_map.get(kw_match.group(1).lower(), 'chapter')
+                is_chapter = bool(chapter_kw.search(text))
 
                 # Accept Roman numerals (e.g., "I.", "XIV. Title")
                 if not is_chapter:
                     is_chapter = bool(re.match(r'^[IVXLCDM]+\.?\s', text))
 
-                # Accept "Of Our Spiritual Strivings" style descriptive titles
-                # if they are consistently at the same heading level
-                # (we'll check this by total count below)
-
                 if is_chapter:
                     chapter_headings.append({
                         'text': text,
-                        'section_type': section_type,
+                        'section_type': self._classify_section_type(text),
                         'element': heading
                     })
 
@@ -464,29 +564,14 @@ class GutenbergDownloader:
                 toc_entries = []
                 for i, ch in enumerate(chapter_headings):
                     title = ch['text']
-                    # Extract number
-                    number = i + 1
-                    num_match = re.search(r'\b([IVXLCDM]+)\b', title)
-                    if num_match:
-                        try:
-                            number = self._roman_to_int(num_match.group(1))
-                        except Exception:
-                            pass
-                    else:
-                        digit_match = re.search(r'\b(\d+)\b', title)
-                        if digit_match:
-                            try:
-                                number = int(digit_match.group(1))
-                            except Exception:
-                                pass
-
-                    # Generate a synthetic anchor from the heading text
+                    number, _ = self._extract_number_from_title(title)
                     anchor = re.sub(r'[^\w]', '_', title[:30]).strip('_')
 
                     toc_entries.append({
                         'anchor': anchor,
                         'title': title,
-                        'number': number,
+                        'ordinal': i + 1,
+                        'number': number if number > 0 else i + 1,
                         'section_type': ch['section_type']
                     })
 
@@ -513,8 +598,9 @@ class GutenbergDownloader:
                     toc_entries.append({
                         'anchor': anchor,
                         'title': title,
+                        'ordinal': i + 1,
                         'number': i + 1,
-                        'section_type': 'chapter'
+                        'section_type': self._classify_section_type(title)
                     })
                 print(f"  Found {len(toc_entries)} chapters from <{tag_name}> descriptive headings")
                 return toc_entries
@@ -536,6 +622,160 @@ class GutenbergDownloader:
         # Strip trailing periods
         title = title.rstrip('.')
         return title
+
+    def _build_v2_chapters_json(self, toc_entries: list, gutenberg_id: int,
+                                markdown_text: str) -> dict:
+        """
+        Build v2.0 gutenberg_chapters.json with front matter, hierarchy,
+        and line positions from the final markdown text.
+
+        Args:
+            toc_entries: Raw TOC entries from HTML extraction
+            gutenberg_id: Gutenberg book ID
+            markdown_text: Final normalized markdown content (book.md)
+
+        Returns:
+            Complete v2.0 chapters dict
+        """
+        md_lines = markdown_text.split('\n')
+
+        # Build a map of ## header text → line number in the final markdown
+        header_line_map = {}  # normalized header text → (line_number, raw_line)
+        for line_idx, line in enumerate(md_lines):
+            stripped = line.strip()
+            m = re.match(r'^##\s+(.+)', stripped)
+            if m:
+                header_text = m.group(1).strip()
+                # Store with multiple normalizations for flexible matching
+                norm = re.sub(r'\s+', ' ', header_text).strip()
+                if norm not in header_line_map:
+                    header_line_map[norm] = (line_idx, stripped)
+                # Also store lowercased version
+                norm_lower = norm.lower()
+                if norm_lower not in header_line_map:
+                    header_line_map[norm_lower] = (line_idx, stripped)
+
+        # Build chapter entries with line positions
+        chapters = []
+        for entry in toc_entries:
+            clean_title = self._clean_toc_title(entry['title'])
+            section_type = entry.get('section_type', 'chapter')
+
+            # Try to find this chapter's ## header in the markdown
+            header_line_number = None
+            markdown_header = None
+
+            # Strategy 1: Exact match on clean title
+            norm_title = re.sub(r'\s+', ' ', clean_title).strip()
+            if norm_title in header_line_map:
+                header_line_number, markdown_header = header_line_map[norm_title]
+            elif norm_title.lower() in header_line_map:
+                header_line_number, markdown_header = header_line_map[norm_title.lower()]
+
+            # Strategy 2: Substring match (title may have been truncated or reformatted)
+            if header_line_number is None:
+                for norm_key, (ln, raw) in header_line_map.items():
+                    if norm_title.lower() in norm_key or norm_key in norm_title.lower():
+                        header_line_number = ln
+                        markdown_header = raw
+                        break
+
+            # Strategy 3: Match by sequential position (fallback for order-preserving conversion)
+            # (handled in the position-filling pass below)
+
+            ch_entry = {
+                'ordinal': entry.get('ordinal', entry.get('number', 0)),
+                'title': clean_title,
+                'section_type': section_type,
+            }
+            if header_line_number is not None:
+                ch_entry['header_line_number'] = header_line_number
+                ch_entry['markdown_header'] = markdown_header
+
+            chapters.append(ch_entry)
+
+        # Position-filling pass: for chapters without line numbers, match remaining
+        # ## headers by document order (since HTML→MD preserves order)
+        unmatched_chapters = [i for i, ch in enumerate(chapters) if 'header_line_number' not in ch]
+        if unmatched_chapters:
+            matched_lines = {ch.get('header_line_number') for ch in chapters if 'header_line_number' in ch}
+            unmatched_headers = sorted([
+                (ln, raw) for norm, (ln, raw) in header_line_map.items()
+                if ln not in matched_lines
+            ], key=lambda x: x[0])
+
+            # Deduplicate headers (same line may appear under multiple normalizations)
+            seen_lines = set()
+            unique_unmatched = []
+            for ln, raw in unmatched_headers:
+                if ln not in seen_lines:
+                    seen_lines.add(ln)
+                    unique_unmatched.append((ln, raw))
+
+            # Assign by order: first unmatched chapter gets first unmatched header
+            for ch_idx, (ln, raw) in zip(unmatched_chapters, unique_unmatched):
+                chapters[ch_idx]['header_line_number'] = ln
+                chapters[ch_idx]['markdown_header'] = raw
+
+        # Build front_matter block
+        front_matter_sections = []
+        for ch in chapters:
+            if ch['section_type'] in self._FRONT_MATTER_TYPES:
+                front_matter_sections.append({
+                    'title': ch['title'],
+                    'section_type': ch['section_type']
+                })
+
+        front_matter = {
+            'has_prologue': any(s['section_type'] == 'prologue' for s in front_matter_sections),
+            'has_preface': any(s['section_type'] in ('preface', 'foreword') for s in front_matter_sections),
+            'has_dedication': any(s['section_type'] == 'dedication' for s in front_matter_sections),
+            'has_introduction': any(s['section_type'] == 'introduction' for s in front_matter_sections),
+            'sections': front_matter_sections
+        }
+
+        # Build hierarchy for parent types (parts, books, volumes)
+        hierarchy = []
+        parent_indices = [i for i, ch in enumerate(chapters) if ch['section_type'] in self._PARENT_TYPES]
+        for pi, parent_idx in enumerate(parent_indices):
+            parent = chapters[parent_idx]
+            # Children range: from next entry to either next parent or end
+            child_start = parent_idx + 1
+            if pi + 1 < len(parent_indices):
+                child_end = parent_indices[pi + 1] - 1
+            else:
+                child_end = len(chapters) - 1
+
+            hierarchy.append({
+                'type': parent['section_type'],
+                'title': parent['title'],
+                'ordinal': parent['ordinal'],
+                'children_range': [child_start, child_end]
+            })
+
+        # Determine review_status based on heuristics
+        review_status = 'auto'
+        ordinals_by_type = {}
+        for ch in chapters:
+            st = ch['section_type']
+            ordinals_by_type.setdefault(st, []).append(ch['ordinal'])
+        # Flag if >50 chapters, or missing line numbers
+        if len(chapters) > 50:
+            review_status = 'needs_review'
+        missing_lines = sum(1 for ch in chapters if 'header_line_number' not in ch)
+        if missing_lines > len(chapters) * 0.3:
+            review_status = 'needs_review'
+
+        return {
+            'version': '2.0',
+            'source': 'gutenberg_html',
+            'gutenberg_id': gutenberg_id,
+            'review_status': review_status,
+            'chapter_count': len(chapters),
+            'front_matter': front_matter,
+            'hierarchy': hierarchy,
+            'chapters': chapters
+        }
 
     @staticmethod
     def _has_nearby_heading(element) -> bool:

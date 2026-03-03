@@ -1455,13 +1455,25 @@ class KokoroAudioGenerator:
         # Build sections metadata for chunk manifest
         sections = []
         unique_chapter_nums = sorted(set(chunk_to_chapter))
+        front_matter_types = {'prologue', 'preface', 'foreword', 'introduction', 'dedication'}
+        back_matter_types = {'epilogue', 'conclusion', 'appendix'}
         if has_chapters:
             max_real_ch = max(ch.number for ch in chapter_objects)
             for ch_num in unique_chapter_nums:
                 if ch_num == 0:
-                    sections.append({"chapter": 0, "section_type": "prologue", "title": "Prologue"})
+                    # Intro/front matter — use actual section_type from first chapter if available
+                    first_ch = chapter_objects[0] if chapter_objects else None
+                    if first_ch and getattr(first_ch, 'section_type', 'chapter') in front_matter_types:
+                        sections.append({"chapter": 0, "section_type": first_ch.section_type, "title": first_ch.title})
+                    else:
+                        sections.append({"chapter": 0, "section_type": "prologue", "title": "Prologue"})
                 elif ch_num > max_real_ch:
-                    sections.append({"chapter": ch_num, "section_type": "epilogue", "title": "Epilogue"})
+                    # Back matter — use actual section_type from last chapter if available
+                    last_ch = chapter_objects[-1] if chapter_objects else None
+                    if last_ch and getattr(last_ch, 'section_type', 'chapter') in back_matter_types:
+                        sections.append({"chapter": ch_num, "section_type": last_ch.section_type, "title": last_ch.title})
+                    else:
+                        sections.append({"chapter": ch_num, "section_type": "epilogue", "title": "Epilogue"})
                 else:
                     ch_obj = next((c for c in chapter_objects if c.number == ch_num), None)
                     if ch_obj:

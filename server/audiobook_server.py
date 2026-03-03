@@ -336,8 +336,11 @@ def discover_books() -> List[Dict]:
             except (json.JSONDecodeError, IOError):
                 pass
 
-        # Check chunk manifest for prologue (chapter 0) and epilogue
-        if chapters:
+        # Check chunk manifest for prologue (chapter 0) and epilogue.
+        # Skip for v2.0 manifests where front matter is already in chapters.
+        front_matter_types = {'prologue', 'preface', 'foreword', 'introduction', 'dedication'}
+        has_explicit_fm = any(ch.get('section_type') in front_matter_types for ch in (chapters or []))
+        if chapters and not has_explicit_fm:
             chunk_manifest_paths = [
                 book_dir / "audio_kokoro" / f"{book_id}_chunk_manifest.json",
                 book_dir / "audio_kokoro" / "book_chunk_manifest.json",

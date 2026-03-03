@@ -339,11 +339,19 @@ class BookProcessor:
 
         # PRIORITY 0: Gutenberg HTML TOC — authoritative chapter list from HTML
         if book_file is not None:
-            gutenberg_chapters = self._load_gutenberg_chapters(Path(book_file))
-            if gutenberg_chapters:
-                chapter_dicts = self._locate_chapters_by_titles(lines, gutenberg_chapters)
-                if chapter_dicts:
-                    self.log_message(f"Priority 0: Found {len(chapter_dicts)} chapters from gutenberg_chapters.json")
+            gutenberg_data = self._load_gutenberg_chapters(Path(book_file))
+            if gutenberg_data:
+                version = gutenberg_data.get('version', '1.0')
+                if version == '2.0':
+                    # v2.0: Direct line-number lookup (no fuzzy matching needed)
+                    chapter_dicts = self._locate_chapters_v2(lines, gutenberg_data)
+                    if chapter_dicts:
+                        self.log_message(f"Priority 0: Found {len(chapter_dicts)} chapters from gutenberg_chapters.json v2.0 (direct lookup)")
+                else:
+                    # v1.0 (legacy): Fuzzy title matching
+                    chapter_dicts = self._locate_chapters_by_titles(lines, gutenberg_data['chapters'])
+                    if chapter_dicts:
+                        self.log_message(f"Priority 0: Found {len(chapter_dicts)} chapters from gutenberg_chapters.json v1.0")
 
         # PRIORITY 1: Markdown ## headers (Gutenberg downloads + any structured markdown)
         if not chapter_dicts:
@@ -372,8 +380,14 @@ class BookProcessor:
 
         return self._dicts_to_chapters(chapter_dicts, lines, text)
 
-    def _load_gutenberg_chapters(self, book_file: Path) -> Optional[list]:
-        """Load chapter metadata from gutenberg_chapters.json if available."""
+    def _load_gutenberg_chapters(self, book_file: Path) -> Optional[dict]:
+        """Load chapter metadata from gutenberg_chapters.json if available.
+
+        Returns:
+            For v2.0: dict with 'version', 'chapters', 'front_matter', 'hierarchy', etc.
+            For v1.0 (legacy): dict with 'version': '1.0', 'chapters': [...]
+            None if file doesn't exist or is invalid.
+        """
         gutenberg_json = book_file.parent / "gutenberg_chapters.json"
         if not gutenberg_json.exists():
             return None
@@ -381,9 +395,15 @@ class BookProcessor:
             with open(gutenberg_json, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             chapters = data.get('chapters', [])
-            if len(chapters) >= 1:
-                self.log_message(f"Loaded {len(chapters)} chapters from gutenberg_chapters.json")
-                return chapters
+            if len(chapters) < 1:
+                return None
+            version = data.get('version', '1.0')
+            self.log_message(f"Loaded {len(chapters)} chapters from gutenberg_chapters.json (v{version})")
+            if version == '2.0':
+                return data  # Return full v2.0 structure
+            else:
+                # Legacy v1.0: wrap in standardized format
+                return {'version': '1.0', 'chapters': chapters}
         except (json.JSONDecodeError, IOError) as e:
             self.log_message(f"Failed to load gutenberg_chapters.json: {e}")
         return None
@@ -476,6 +496,61 @@ class BookProcessor:
         'colophon', 'note', 'notes', 'bibliography', 'index',
         'footnotes', 'endnotes', 'glossary',
     }
+
+    def _locate_chapters_v2(self, lines: list, gutenberg_data: dict) -> list:
+        """Locate chapters using v2.0 gutenberg_chapters.json with direct line-number lookup.
+
+        v2.0 files contain header_line_number and markdown_header recorded during
+        download. This eliminates the need for fuzzy title matching entirely.
+
+        Falls back to header text matching if line numbers are not populated.
+        """
+        chapters = gutenberg_data.get('chapters', [])
+        chapter_dicts = []
+
+        for gc in chapters:
+            line_num = gc.get('header_line_number')
+            markdown_header = gc.get('markdown_header')
+
+            # Strategy 1: Direct line-number lookup (most reliable)
+            if line_num is not None and 0 <= line_num < len(lines):
+                actual_line = lines[line_num].strip()
+                # Verify the header is still there (file may have been edited)
+                if actual_line.startswith('##'):
+                    chapter_dicts.append({
+                        'line_num': line_num,
+                        'char_pos': sum(len(l) + 1 for l in lines[:line_num]),
+                        'marker': actual_line,
+                        'title': re.sub(r'^##\s+', '', actual_line).strip(),
+                        'detection_type': 'gutenberg_toc_v2',
+                        'section_type': gc.get('section_type', 'chapter')
+                    })
+                    continue
+
+            # Strategy 2: Match by markdown_header text (if line shifted)
+            if markdown_header:
+                for i, line in enumerate(lines):
+                    if line.strip() == markdown_header:
+                        chapter_dicts.append({
+                            'line_num': i,
+                            'char_pos': sum(len(l) + 1 for l in lines[:i]),
+                            'marker': line.strip(),
+                            'title': re.sub(r'^##\s+', '', line.strip()).strip(),
+                            'detection_type': 'gutenberg_toc_v2',
+                            'section_type': gc.get('section_type', 'chapter')
+                        })
+                        break
+
+        # Sort by line number and deduplicate
+        chapter_dicts.sort(key=lambda x: x['line_num'])
+        seen_lines = set()
+        deduped = []
+        for cd in chapter_dicts:
+            if cd['line_num'] not in seen_lines:
+                seen_lines.add(cd['line_num'])
+                deduped.append(cd)
+
+        return deduped
 
     def _locate_chapters_by_titles(self, lines: list, gutenberg_chapters: list) -> list:
         """Locate chapters in markdown by matching against known Gutenberg titles.
