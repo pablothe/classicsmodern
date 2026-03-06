@@ -149,6 +149,16 @@ class BookReader {
         this.chapterData = {};
         this.inlineMode = true;
         this.inlineContainer = targetContentEl;
+        this.isOpen = true;
+
+        // Detect whether this book has audio
+        const bookData = window._appState?.books?.find(b => b.book_id === bookId);
+        this.hasAudio = !!(bookData && bookData.has_audio && bookData.variants?.length > 0);
+
+        // Enable audio sync by default in inline mode when audio is available
+        if (this.hasAudio) {
+            this.audioSyncEnabled = true;
+        }
 
         // Don't open fullscreen overlay — render into target container
         targetContentEl.innerHTML = '';
@@ -657,7 +667,6 @@ class BookReader {
         );
         if (para) {
             para.classList.add('reader-active');
-            para.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 

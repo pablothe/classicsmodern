@@ -3687,6 +3687,12 @@ header h2 {
     border-radius: 2px;
 }
 
+/* Default active highlight for inline reader (no theme class) */
+.reader-paragraph.reader-active {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--accent, #d4d4d4);
+}
+
 .reader-chapter-loading,
 .reader-chapter-error {
     padding: 3rem 2rem;

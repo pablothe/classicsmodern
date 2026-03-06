@@ -392,7 +392,7 @@ function saveSettings() {
     }
 }
 
-function openSettings() {
+async function openSettings() {
     const modal = document.getElementById('settings-modal');
     const content = document.getElementById('settings-modal-content');
 
@@ -409,6 +409,24 @@ function openSettings() {
             `<option value="${lang}" ${lang === currentTarget ? 'selected' : ''}>${lang}</option>`
         ).join('');
 
+    // Fetch LLM provider info
+    let llmData = { providers: [], current_provider: 'ollama', current_model: '' };
+    try {
+        const resp = await fetch('/api/llm/providers');
+        if (resp.ok) llmData = await resp.json();
+    } catch (e) { console.warn('Could not fetch LLM providers:', e); }
+
+    const providerOptions = llmData.providers.map(p => {
+        const label = p.name.charAt(0).toUpperCase() + p.name.slice(1);
+        const status = !p.installed ? ' (not installed)' : !p.available ? ' (no key)' : '';
+        const disabled = !p.installed ? 'disabled' : '';
+        const selected = p.name === llmData.current_provider ? 'selected' : '';
+        return `<option value="${p.name}" ${selected} ${disabled}>${label}${status}</option>`;
+    }).join('');
+
+    const defaultModels = {};
+    llmData.providers.forEach(p => { defaultModels[p.name] = p.default_model; });
+
     content.innerHTML = `
         <div class="pipeline-step settings-form">
             <div class="form-group">
@@ -416,7 +434,7 @@ function openSettings() {
                 <select id="setting-preferred-lang" class="form-select">
                     ${langOptions}
                 </select>
-                <p class="help-text">Books in this language won't require translation. Used to pre-fill pipeline options.</p>
+                <p class="help-text">Books in this language won't require translation.</p>
             </div>
 
             <div class="form-group">
@@ -427,20 +445,131 @@ function openSettings() {
                 <p class="help-text">Default target language when translating books.</p>
             </div>
 
+            <hr style="border-color: var(--border-color); margin: 16px 0;">
+
+            <div class="form-group">
+                <label>LLM Provider</label>
+                <select id="setting-llm-provider" class="form-select" onchange="onLlmProviderChange()">
+                    ${providerOptions}
+                </select>
+                <p class="help-text">Used for translation, summarization, cover prompts, and AI chat.</p>
+            </div>
+
+            <div class="form-group">
+                <label>Model</label>
+                <input id="setting-llm-model" type="text" class="form-input"
+                    value="${llmData.current_model || ''}"
+                    placeholder="${defaultModels[llmData.current_provider] || ''}"
+                    style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);">
+                <p class="help-text">Leave empty for provider default.</p>
+            </div>
+
+            <div id="api-key-section" style="display: ${llmData.current_provider === 'ollama' ? 'none' : 'block'};">
+                <div class="form-group" id="openai-key-group" style="display: ${llmData.current_provider === 'openai' ? 'block' : 'none'};">
+                    <label>OpenAI API Key</label>
+                    <input id="setting-openai-key" type="password" class="form-input"
+                        placeholder="${llmData.providers.find(p => p.name === 'openai')?.key_set ? '******** (key set)' : 'sk-...'}"
+                        style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);">
+                </div>
+                <div class="form-group" id="anthropic-key-group" style="display: ${llmData.current_provider === 'anthropic' ? 'block' : 'none'};">
+                    <label>Anthropic API Key</label>
+                    <input id="setting-anthropic-key" type="password" class="form-input"
+                        placeholder="${llmData.providers.find(p => p.name === 'anthropic')?.key_set ? '******** (key set)' : 'sk-ant-...'}"
+                        style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);">
+                </div>
+            </div>
+
+            <div id="llm-test-result" style="margin-top: 8px;"></div>
+
             <div class="step-buttons">
+                <button onclick="testLlmConnection()" class="btn-secondary">Test Connection</button>
                 <button onclick="closeSettings()" class="btn-secondary">Cancel</button>
                 <button onclick="applySettings()" class="btn-primary">Save</button>
             </div>
         </div>
     `;
 
+    // Store default models for the provider change handler
+    window._llmDefaultModels = defaultModels;
+
     modal.style.display = 'block';
 }
 
-function applySettings() {
+function onLlmProviderChange() {
+    const provider = document.getElementById('setting-llm-provider').value;
+    const modelInput = document.getElementById('setting-llm-model');
+    const apiKeySection = document.getElementById('api-key-section');
+    const openaiGroup = document.getElementById('openai-key-group');
+    const anthropicGroup = document.getElementById('anthropic-key-group');
+
+    // Update model placeholder
+    if (window._llmDefaultModels) {
+        modelInput.placeholder = window._llmDefaultModels[provider] || '';
+    }
+
+    // Show/hide API key fields
+    apiKeySection.style.display = provider === 'ollama' ? 'none' : 'block';
+    openaiGroup.style.display = provider === 'openai' ? 'block' : 'none';
+    anthropicGroup.style.display = provider === 'anthropic' ? 'block' : 'none';
+}
+
+async function testLlmConnection() {
+    const resultDiv = document.getElementById('llm-test-result');
+    resultDiv.innerHTML = '<span style="color: var(--text-secondary);">Testing...</span>';
+
+    try {
+        const resp = await fetch('/api/llm/providers');
+        if (!resp.ok) throw new Error('Failed to fetch');
+        const data = await resp.json();
+        const provider = document.getElementById('setting-llm-provider').value;
+        const info = data.providers.find(p => p.name === provider);
+
+        if (info && info.available) {
+            resultDiv.innerHTML = `<span style="color: #4caf50;">Connected to ${provider}</span>`;
+        } else if (info && !info.installed) {
+            resultDiv.innerHTML = `<span style="color: #f44336;">Package not installed. Run: pip install ${provider}</span>`;
+        } else {
+            resultDiv.innerHTML = `<span style="color: #f44336;">Not available. ${info ? (provider === 'ollama' ? 'Is Ollama running?' : 'Check your API key.') : ''}</span>`;
+        }
+    } catch (e) {
+        resultDiv.innerHTML = `<span style="color: #f44336;">Error: ${e.message}</span>`;
+    }
+}
+
+async function applySettings() {
+    // Save language settings (local)
     state.settings.preferredLanguage = document.getElementById('setting-preferred-lang').value;
     state.settings.targetTranslationLanguage = document.getElementById('setting-target-lang').value;
     saveSettings();
+
+    // Save LLM settings (server-side .env)
+    const llmProvider = document.getElementById('setting-llm-provider').value;
+    const llmModel = document.getElementById('setting-llm-model').value;
+    const openaiKey = document.getElementById('setting-openai-key')?.value;
+    const anthropicKey = document.getElementById('setting-anthropic-key')?.value;
+
+    const payload = {
+        llm_provider: llmProvider,
+        llm_model: llmModel,
+    };
+    if (openaiKey) payload.openai_api_key = openaiKey;
+    if (anthropicKey) payload.anthropic_api_key = anthropicKey;
+
+    try {
+        const resp = await fetch('/api/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+        if (!resp.ok) {
+            const err = await resp.json();
+            alert(`Failed to save LLM settings: ${err.detail || 'Unknown error'}`);
+            return;
+        }
+    } catch (e) {
+        console.warn('Failed to save LLM settings:', e);
+    }
+
     closeSettings();
     // Re-render store to update language indicators
     if (state.searchTab === 'store') {
@@ -1495,7 +1624,8 @@ function renderPlayer() {
         ui.readerBtn.style.display = 'none';
     } else {
         if (tabBar) tabBar.style.display = 'none';
-        if (syncBtn) syncBtn.style.display = 'none';
+        // Don't hide sync button on desktop — it lives in split-reader-toolbar
+        if (syncBtn && !isDesktopSplitView()) syncBtn.style.display = 'none';
         ui.readerBtn.style.display = 'none';
     }
 
@@ -1645,7 +1775,7 @@ function closeChaptersModal() {
     ui.chaptersModal.style.display = 'none';
 }
 
-function jumpToChapter(chapterIndex) {
+function jumpToChapter(chapterIndex, seekAfterLoad) {
     const chapters = state.currentBook.chapters;
     if (!chapters || chapterIndex >= chapters.length) {
         console.error('Invalid chapter index:', chapterIndex);
@@ -1663,7 +1793,9 @@ function jumpToChapter(chapterIndex) {
 
         // Wait for audio to load, then seek to chapter timestamp
         ui.audio.addEventListener('loadedmetadata', () => {
-            if (chapter.timestamp !== undefined) {
+            if (seekAfterLoad) {
+                seekAfterLoad();
+            } else if (chapter.timestamp !== undefined) {
                 ui.audio.currentTime = chapter.timestamp;
             }
             // Auto-play when jumping to chapter
@@ -3132,9 +3264,15 @@ function setupEventListeners() {
     // Player sync button
     const playerSyncBtn = document.getElementById('player-sync-btn');
     if (playerSyncBtn) {
+        // Set initial state from reader
+        if (window.bookReader) {
+            playerSyncBtn.classList.toggle('active', window.bookReader.audioSyncEnabled);
+        }
         playerSyncBtn.addEventListener('click', () => {
             if (window.bookReader) {
                 window.bookReader.audioSyncEnabled = !window.bookReader.audioSyncEnabled;
+                window.bookReader.prefs.audioSync = window.bookReader.audioSyncEnabled;
+                window.bookReader.savePreferences();
                 playerSyncBtn.classList.toggle('active', window.bookReader.audioSyncEnabled);
             }
         });
@@ -3248,9 +3386,14 @@ function setupEventListeners() {
 
     ui.audio.addEventListener('ended', () => {
         // Auto-advance to next file
+        // Note: can't use playNextFile() here because the 'pause' event
+        // fires before 'ended', setting state.isPlaying = false,
+        // which would prevent playNextFile() from calling play().
         const variant = state.currentVariant;
         if (state.currentFileIndex < variant.audio_files.length - 1) {
-            playNextFile();
+            state.currentFileIndex++;
+            loadAudioFile();
+            ui.audio.play();
         } else {
             // Finished book
             ui.audio.pause();
@@ -3511,12 +3654,9 @@ async function handleReaderSeek(e) {
 
     // Switch audio chapter if needed
     if (state.currentChapterIndex !== chapterIndex) {
-        jumpToChapter(chapterIndex);
-        // After chapter loads, seek to paragraph position
-        ui.audio.addEventListener('loadedmetadata', () => {
+        jumpToChapter(chapterIndex, () => {
             seekReaderParagraph(chapterIndex, paraId);
-            ui.audio.play();
-        }, { once: true });
+        });
     } else {
         seekReaderParagraph(chapterIndex, paraId);
         if (ui.audio.paused) ui.audio.play();
@@ -3537,7 +3677,17 @@ function seekReaderParagraph(chapterIndex, paraId) {
 
     // Fallback: character proportion estimation
     const chapterData = window.bookReader?.chapterData[chapterIndex];
-    if (!chapterData || !chapterData.paragraphs) return;
+    if (!chapterData || !chapterData.paragraphs) {
+        // chapterData not loaded yet — try index-based estimation from para_id
+        const idMatch = String(paraId).match(/p(\d+)/);
+        if (idMatch && timings && timings.length > 0) {
+            const idx = parseInt(idMatch[1]) - 1;
+            if (idx >= 0 && idx < timings.length) {
+                ui.audio.currentTime = timings[idx].audio_start;
+            }
+        }
+        return;
+    }
 
     const paragraphs = chapterData.paragraphs;
     let charsBefore = 0;
@@ -3545,8 +3695,8 @@ function seekReaderParagraph(chapterIndex, paraId) {
 
     totalChars = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
     for (const p of paragraphs) {
-        const pid = p.para_id || p.id;
-        if (pid === paraId || pid === String(paraId)) break;
+        const pid = String(p.para_id || p.id);
+        if (pid === String(paraId)) break;
         charsBefore += p.text.length;
     }
 
@@ -4282,6 +4432,10 @@ function switchSplitTab(tabName) {
         c.classList.toggle('active', c.dataset.splitContent === tabName);
     });
 
+    // Show sync button only on read tab
+    const syncBtn = document.getElementById('player-sync-btn');
+    if (syncBtn) syncBtn.style.display = tabName === 'read' ? '' : 'none';
+
     if (tabName === 'chapters') {
         renderSplitChapters();
     } else if (tabName === 'read') {
@@ -4470,6 +4624,10 @@ async function ensureSplitReaderLoaded() {
 
         contentEl.dataset.bookId = book.book_id;
         await window.bookReader.openInline(book.book_id, startChapter, chapterCount, trackId, contentEl);
+
+        // Update sync button state to match reader
+        const syncBtn = document.getElementById('player-sync-btn');
+        if (syncBtn) syncBtn.classList.toggle('active', window.bookReader.audioSyncEnabled);
     } catch (err) {
         console.error('[ensureSplitReaderLoaded] Failed:', err);
         contentEl.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-secondary);">Failed to load text</div>';
