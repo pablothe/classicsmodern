@@ -1,7 +1,8 @@
 """
 Local Reader Translation Module
 
-Handles translation of classic literature using local Ollama models.
+Handles translation of classic literature using LLM providers.
+Supports Ollama (local), OpenAI, and Anthropic.
 Preserves Markdown structure while translating content.
 """
 
@@ -40,36 +41,48 @@ class TranslationResult:
 
 class OllamaTranslator:
     """
-    Translator using local Ollama models.
-    Designed to work with zongwei/gemma3-translator models.
+    Translator using LLM providers (Ollama, OpenAI, Anthropic).
+    Designed to work with zongwei/gemma3-translator models by default.
     """
 
     def __init__(
         self,
         model_name: str = "zongwei/gemma3-translator:4b",
         ollama_host: str = "http://localhost:11434",
-        chunk_size_words: int = 150  # Reduced from 250 for better Latin translation (less timeout risk)
+        chunk_size_words: int = 150,  # Reduced from 250 for better Latin translation (less timeout risk)
+        llm=None,  # Optional LLMProvider instance
     ):
         """
-        Initialize the Ollama translator.
+        Initialize the translator.
 
         Args:
-            model_name: Name of the Ollama model to use
-            ollama_host: URL of the Ollama API server
+            model_name: Name of the model to use (ignored if llm is provided)
+            ollama_host: URL of the Ollama API server (ignored if llm is provided)
             chunk_size_words: Target number of words per chunk
+            llm: Optional LLMProvider instance. If None, uses Ollama directly.
         """
-        self.model_name = model_name
-        self.ollama_host = ollama_host
+        self.llm = llm
         self.chunk_size_words = chunk_size_words
-        self.api_url = f"{ollama_host}/api/generate"
+        if llm:
+            self.model_name = llm.model
+            self.ollama_host = None
+            self.api_url = None
+        else:
+            self.model_name = model_name
+            self.ollama_host = ollama_host
+            self.api_url = f"{ollama_host}/api/generate"
 
     def check_model_available(self) -> bool:
         """
-        Check if the specified model is available in Ollama.
+        Check if the specified model is available.
 
         Returns:
             True if model is available, False otherwise
         """
+        if self.llm:
+            result = self.llm.is_available()
+            return result.get("available", False)
+
         try:
             response = requests.get(f"{self.ollama_host}/api/tags", timeout=10)
             if response.status_code == 200:
@@ -83,11 +96,20 @@ class OllamaTranslator:
 
     def get_ollama_health(self) -> Dict:
         """
-        Get Ollama health status and running models.
+        Get LLM provider health status.
 
         Returns:
             Dict with health information
         """
+        if self.llm:
+            result = self.llm.is_available()
+            return {
+                'available': result.get('available', False),
+                'models_loaded': result.get('models', []),
+                'error': result.get('error'),
+                'provider': self.llm.name,
+            }
+
         health = {
             'available': False,
             'models_loaded': [],
@@ -327,37 +349,36 @@ class OllamaTranslator:
             # First chunk, no context
             prompt = f"{instruction}\n\n{chunk.content}"
 
-        # Call Ollama API
+        # Call LLM
         chunk_id = f"chunk_{chunk.index}"
         logger.info(f"[{chunk_id}] Starting translation ({len(chunk.content)} chars, {len(chunk.content.split())} words)")
-        logger.info(f"[{chunk_id}] API: {self.api_url}, Model: {self.model_name}")
-
-        payload = {
-            "model": self.model_name,
-            "prompt": prompt,
-            "stream": False,
-            "keep_alive": "30m",
-            "options": {
-                "temperature": 0.3  # Lower temperature for more consistent translations
-            }
-        }
+        logger.info(f"[{chunk_id}] Provider: {self.llm.name if self.llm else 'ollama'}, Model: {self.model_name}")
 
         max_retries = 3
         for attempt in range(max_retries):
             request_start = time.time()
             try:
-                logger.info(f"[{chunk_id}] Attempt {attempt + 1}/{max_retries} - sending request to Ollama...")
+                logger.info(f"[{chunk_id}] Attempt {attempt + 1}/{max_retries} - sending request...")
 
-                # Set timeout to 5 minutes (Latin translation can be slow)
-                response = requests.post(self.api_url, json=payload, timeout=300)
+                if self.llm:
+                    translated = self.llm.generate(prompt, temperature=0.3, timeout=300)
+                else:
+                    payload = {
+                        "model": self.model_name,
+                        "prompt": prompt,
+                        "stream": False,
+                        "keep_alive": "30m",
+                        "options": {
+                            "temperature": 0.3
+                        }
+                    }
+                    response = requests.post(self.api_url, json=payload, timeout=300)
+                    response.raise_for_status()
+                    result = response.json()
+                    translated = result.get('response', '').strip()
 
                 request_duration = time.time() - request_start
-                logger.info(f"[{chunk_id}] Response received in {request_duration:.1f}s (status: {response.status_code})")
-
-                response.raise_for_status()
-
-                result = response.json()
-                translated = result.get('response', '').strip()
+                logger.info(f"[{chunk_id}] Response received in {request_duration:.1f}s")
 
                 logger.info(f"[{chunk_id}] Translation received ({len(translated)} chars)")
                 logger.debug(f"[{chunk_id}] Preview: {translated[:100]}...")
@@ -443,10 +464,17 @@ class OllamaTranslator:
 
         # Check if model is available
         if not self.check_model_available():
-            raise RuntimeError(
-                f"Model '{self.model_name}' not found in Ollama. "
-                f"Please run: ollama pull {self.model_name}"
-            )
+            provider_name = self.llm.name if self.llm else "ollama"
+            if provider_name == "ollama":
+                raise RuntimeError(
+                    f"Model '{self.model_name}' not found in Ollama. "
+                    f"Please run: ollama pull {self.model_name}"
+                )
+            else:
+                raise RuntimeError(
+                    f"LLM provider '{provider_name}' is not available. "
+                    f"Check your API key and network connection."
+                )
 
         # Chunk the document
         chunks = self._chunk_markdown_text(text)
@@ -532,10 +560,17 @@ class OllamaTranslator:
 
         # Check if model is available
         if not self.check_model_available():
-            raise RuntimeError(
-                f"Model '{self.model_name}' not found in Ollama. "
-                f"Please run: ollama pull {self.model_name}"
-            )
+            provider_name = self.llm.name if self.llm else "ollama"
+            if provider_name == "ollama":
+                raise RuntimeError(
+                    f"Model '{self.model_name}' not found in Ollama. "
+                    f"Please run: ollama pull {self.model_name}"
+                )
+            else:
+                raise RuntimeError(
+                    f"LLM provider '{provider_name}' is not available. "
+                    f"Check your API key and network connection."
+                )
 
         # Chunk the document
         chunks = self._chunk_markdown_text(text)

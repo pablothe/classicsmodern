@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize a book using local Ollama LLM (100% offline)."""
+"""Summarize a book using LLM (Ollama local, OpenAI, or Anthropic)."""
 
 import sys
 import argparse
@@ -10,7 +10,7 @@ from lib.summarize.engine import BookSummarizer
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Summarize a book using local Ollama LLM (100% offline)"
+        description="Summarize a book using LLM (default: local Ollama)"
     )
     parser.add_argument('input_file', type=Path, help='Book markdown file')
     parser.add_argument(
@@ -21,6 +21,18 @@ def main():
         'chunk_size', type=int, nargs='?', default=None,
         help='Words per chunk (auto-calculated if omitted)'
     )
+    parser.add_argument(
+        '--provider', choices=['ollama', 'openai', 'anthropic'], default=None,
+        help='LLM provider (default: from LLM_PROVIDER env var or ollama)'
+    )
+    parser.add_argument(
+        '--model', default=None,
+        help='Model name (default: provider default)'
+    )
+    parser.add_argument(
+        '--api-key', default=None,
+        help='API key for OpenAI/Anthropic (default: from env var)'
+    )
 
     args = parser.parse_args()
 
@@ -28,10 +40,21 @@ def main():
         print(f"Error: File not found: {args.input_file}", file=sys.stderr)
         sys.exit(1)
 
+    # Create LLM provider if non-default
+    llm = None
+    provider = args.provider
+    if provider is None:
+        import os
+        provider = os.environ.get('LLM_PROVIDER', 'ollama')
+    if provider != 'ollama':
+        from lib.llm import create_llm_provider
+        llm = create_llm_provider(provider=provider, model=args.model, api_key=args.api_key)
+
     try:
         summarizer = BookSummarizer(
             target_percentage=args.target_percentage,
-            chunk_size_words=args.chunk_size
+            chunk_size_words=args.chunk_size,
+            llm=llm,
         )
         output = summarizer.summarize_file(str(args.input_file))
         print(f"\nOutput: {output}")

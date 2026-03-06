@@ -4,7 +4,7 @@ Technical reference for AI assistants working with this repository.
 
 ## Project Overview
 
-**Modern Classics** translates classic literature and generates audiobooks using 100% local AI. No cloud services, no API keys, no external calls.
+**Modern Classics** translates classic literature and generates audiobooks. Runs 100% locally by default with Ollama, but optionally supports external LLM APIs (OpenAI, Anthropic) for text generation tasks.
 
 **Documentation:**
 - [README.md](README.md) - Project overview and quick start
@@ -13,21 +13,28 @@ Technical reference for AI assistants working with this repository.
 
 ## AI Models Used
 
-All models run 100% locally. No cloud APIs, no API keys.
+By default, all models run 100% locally. External LLM APIs (OpenAI, Anthropic) are supported as an opt-in alternative for text generation tasks.
 
 | Model | Purpose | Runtime | Notes |
 |-------|---------|---------|-------|
-| **zongwei/gemma3-translator:4b** | Translation, summarization, cover prompts & language detection | Ollama | Primary translation model, ~16-20 words/sec |
-| **zongwei/gemma3-translator:1b** | Translation (lightweight) | Ollama | Faster alternative, lower quality |
-| **llama3.2:3b** | AI chat / Q&A about books | Ollama | Used by web player's chat feature |
+| **zongwei/gemma3-translator:4b** | Translation, summarization, cover prompts & language detection | Ollama (local) | Default translation model, ~16-20 words/sec |
+| **zongwei/gemma3-translator:1b** | Translation (lightweight) | Ollama (local) | Faster alternative, lower quality |
+| **llama3.2:3b** | AI chat / Q&A about books | Ollama (local) | Used by web player's chat feature |
+| **OpenAI (gpt-4o-mini, etc.)** | Translation, summarization, chat (optional) | OpenAI API | Requires `pip install openai` + API key |
+| **Anthropic (Claude, etc.)** | Translation, summarization, chat (optional) | Anthropic API | Requires `pip install anthropic` + API key |
 | **Kokoro v1.0** | Text-to-speech (52 voices) | ONNX Runtime | Apache 2.0, ~335MB, auto-downloaded |
 | **Stable Diffusion v1.5** | Cover art generation | PyTorch (MPS/CUDA/CPU) | runwayml/stable-diffusion-v1-5 |
 | **all-MiniLM-L6-v2** | Semantic embeddings (RAG) | sentence-transformers | Used by AI chat for context retrieval |
 | **WhisperX base** | Word-level timing (Karaoke) | PyTorch | Optional, for karaoke text sync |
 
-**Required services:**
+**Required services (local mode, default):**
 - **Ollama** must be running locally (`ollama serve`) for translation, summarization, cover prompt generation, language detection, and AI chat
 - All other models are loaded directly (no server needed)
+
+**Optional: External LLM APIs:**
+- Set `LLM_PROVIDER=openai` or `LLM_PROVIDER=anthropic` in `.env` to use external APIs instead of Ollama
+- API keys: `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in `.env`
+- TTS (Kokoro) and image generation (Stable Diffusion) always run locally
 
 ## Environment Setup
 
@@ -53,6 +60,13 @@ brew install ffmpeg  # macOS
 
 # 6. Optional: EPUB conversion support
 pip install ebooklib markdownify
+
+# 7. Optional: External LLM providers
+pip install openai        # For OpenAI API support
+pip install anthropic     # For Anthropic API support
+
+# 8. Optional: Configure external LLM (copy .env.example to .env)
+cp .env.example .env      # Then edit .env with your API keys
 ```
 
 **Why venv is required:**
@@ -60,13 +74,13 @@ pip install ebooklib markdownify
 - Kokoro TTS dependencies (`kokoro-onnx`, `soundfile`) must be installed in venv
 - Without venv, audio generation will fail with "kokoro-onnx library not installed"
 
-**Offline operation:**
+**Offline operation (default):**
 After initial setup, the entire system works offline:
 - **Translation**: Ollama runs locally (no API calls)
 - **TTS**: Kokoro runs locally via ONNX Runtime (no API calls)
 - **Cover Art**: Stable Diffusion runs locally (no API calls)
 - **Web Server**: Serves on local network only
-- The only feature requiring internet is **Gutenberg downloads** (optional)
+- The only feature requiring internet is **Gutenberg downloads** (optional) and **external LLM APIs** (opt-in)
 
 **Server startup (ALWAYS use start_server.sh):**
 ```bash
@@ -123,9 +137,9 @@ Seven thin CLI wrappers at the project root, each importing from `lib/`:
 | Script | Purpose | Example |
 |--------|---------|---------|
 | `make_audiobook.py` | Full pipeline (validate + translate + audio + cover) | `python3 make_audiobook.py book.md --generate-cover` |
-| `translate.py` | Translate a book (Ollama, local) | `python3 translate.py book.md --source-lang Latin --target-lang English` |
+| `translate.py` | Translate a book | `python3 translate.py book.md --target-lang English [--provider openai]` |
 | `audiobook.py` | Generate audiobook (Kokoro TTS) | `python3 audiobook.py translated.md --voice bf_emma` |
-| `summarize.py` | Summarize a book (Ollama, local) | `python3 summarize.py book.md 50` |
+| `summarize.py` | Summarize a book | `python3 summarize.py book.md 50 [--provider openai]` |
 | `cover.py` | Generate cover art (Stable Diffusion) | `python3 cover.py "fantasy scene" --output cover.png` |
 | `validate.py` | Validate book structure | `python3 validate.py book.md --auto-fix` |
 | `epub_to_md.py` | Convert EPUB to Markdown | `python3 epub_to_md.py book.epub output_dir/` |
@@ -337,9 +351,14 @@ GET  /api/gutenberg/downloads      # List downloads
 GET  /api/gutenberg/downloads/{job_id} # Download status
 GET  /api/gutenberg/stats          # Catalog stats
 
+# LLM Settings
+GET  /api/llm/providers            # Available LLM providers & status
+GET  /api/settings                 # Current LLM config (no keys)
+POST /api/settings                 # Update LLM config (.env)
+
 # Other
 POST /api/ask                      # AI chat about books
-GET  /api/health                   # Health check
+GET  /api/health                   # Health check (includes LLM status)
 ```
 
 ## Architecture
@@ -357,9 +376,11 @@ classicsmodern/
 ├── epub_to_md.py              # CLI: EPUB to Markdown conversion
 ├── start_server.sh            # Server startup
 ├── requirements.txt
+├── .env.example               # Environment variable template (LLM API keys, provider config)
 │
 ├── lib/                       # Core library package
-│   ├── config.py              # Configuration (models, paths)
+│   ├── config.py              # Configuration (models, paths, LLM provider)
+│   ├── llm.py                 # LLM provider abstraction (Ollama, OpenAI, Anthropic)
 │   ├── utils.py               # Shared utilities
 │   ├── book/
 │   │   ├── processor.py       # BookProcessor (chapter detection, TOC, Gutenberg stripping)
@@ -441,8 +462,17 @@ The project uses a unified manifest system for consistent chapter handling:
   ```
   v3.0 adds a paragraph registry per chapter with stable IDs (`ch01_p001`, etc.), character offsets, word counts, and content hashes. These flow through translation, audio generation, and word timings to enable paragraph-level audio sync.
 
+### LLM Provider System
+- **Abstraction**: `lib/llm.py` — unified interface (`generate()`, `chat()`, `is_available()`)
+- **Providers**: `OllamaProvider` (default), `OpenAIProvider`, `AnthropicProvider`
+- **Factory**: `create_llm_provider(provider, model, api_key, host)` — reads from env vars
+- **Config**: `LLM_PROVIDER`, `LLM_MODEL`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` in `.env`
+- **All 6 LLM call sites** support provider injection: translation, summarization, cover prompts, language detection, AI chat, question classifier
+- **Backward compatible**: No env vars = Ollama (same as before)
+
 ### Translation System
-- **Model**: zongwei/gemma3-translator:4b via Ollama (100% local)
+- **Default Model**: zongwei/gemma3-translator:4b via Ollama (local)
+- **External LLMs**: `--provider openai` or `--provider anthropic` via CLI or `.env`
 - **Smart Chunking**: Respects Markdown structure, ~10k words per chunk
 - **Structure Preservation**: Maintains headers, links, tables, and formatting
 - **Context-Aware Translation**: Each chunk receives context from previous chunk

@@ -12,6 +12,12 @@ from dataclasses import dataclass, field
 from typing import Dict, List
 import json
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 
 @dataclass
 class ModelConfig:
@@ -25,8 +31,12 @@ class ModelConfig:
     tts_model_local: str = "kokoro"
 
     # Ollama configuration
-    ollama_host: str = "http://localhost:11434"
+    ollama_host: str = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
     ollama_timeout: int = 300  # seconds
+
+    # LLM provider configuration (ollama, openai, anthropic)
+    llm_provider: str = os.environ.get("LLM_PROVIDER", "ollama")
+    llm_model: str = os.environ.get("LLM_MODEL", "")  # empty = provider default
 
 
 @dataclass
@@ -154,6 +164,8 @@ class AppConfig:
                 "translation_model_4b": self.models.translation_model_4b,
                 "default_translation_model": self.models.default_translation_model,
                 "ollama_host": self.models.ollama_host,
+                "llm_provider": self.models.llm_provider,
+                "llm_model": self.models.llm_model,
             },
             "translation": {
                 "chunk_size_words": self.translation.chunk_size_words,
@@ -264,6 +276,17 @@ def reload_config(config_file: str = "local_reader_config.json"):
     """
     global _config
     _config = AppConfig.from_file(config_file)
+
+
+def create_default_llm():
+    """Create an LLM provider from the current config. Convenience wrapper."""
+    from lib.llm import create_llm_provider
+    config = get_config()
+    return create_llm_provider(
+        provider=config.models.llm_provider,
+        model=config.models.llm_model or None,
+        host=config.models.ollama_host,
+    )
 
 
 @dataclass

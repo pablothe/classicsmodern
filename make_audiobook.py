@@ -39,7 +39,8 @@ class AudiobookMaker:
         summarize_percentage: Optional[int] = None,
         output_dir: Optional[str] = None,
         generate_word_timings: bool = True,
-        non_interactive: bool = False
+        non_interactive: bool = False,
+        llm=None,
     ):
         self.input_file = Path(input_file)
         self.voice = voice
@@ -53,6 +54,7 @@ class AudiobookMaker:
         self.output_dir = output_dir
         self.generate_word_timings = generate_word_timings
         self.non_interactive = non_interactive
+        self.llm = llm
 
         if not self.input_file.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
@@ -89,7 +91,7 @@ class AudiobookMaker:
         print("  No existing cover found, generating new cover...")
 
         try:
-            prompt = get_book_prompt(str(self.input_file))
+            prompt = get_book_prompt(str(self.input_file), llm=self.llm)
             cover_path = self.input_file.parent / "cover.png"
 
             from lib.cover.generator import generate_image
@@ -401,12 +403,27 @@ Top Voices:
                         help='Disable word timing generation')
     parser.add_argument('--non-interactive', action='store_true',
                         help='Skip validation prompts, fail fast (for automation)')
+    parser.add_argument('--llm-provider', choices=['ollama', 'openai', 'anthropic'],
+                        default=None,
+                        help='LLM provider for summarization/cover prompts (default: from env or ollama)')
+    parser.add_argument('--llm-model', default=None,
+                        help='LLM model name (default: provider default)')
 
     args = parser.parse_args()
 
     if args.summarize and (args.summarize < 10 or args.summarize > 90):
         print(f"ERROR: --summarize must be between 10-90 (got {args.summarize})")
         sys.exit(1)
+
+    # Create LLM provider if non-default
+    llm = None
+    provider = args.llm_provider
+    if provider is None:
+        import os
+        provider = os.environ.get('LLM_PROVIDER', 'ollama')
+    if provider != 'ollama':
+        from lib.llm import create_llm_provider
+        llm = create_llm_provider(provider=provider, model=args.llm_model)
 
     try:
         maker = AudiobookMaker(
@@ -421,7 +438,8 @@ Top Voices:
             summarize_percentage=args.summarize,
             output_dir=args.output_dir,
             generate_word_timings=not args.no_word_timings,
-            non_interactive=args.non_interactive
+            non_interactive=args.non_interactive,
+            llm=llm,
         )
 
         maker.make_audiobook()

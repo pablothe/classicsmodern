@@ -454,6 +454,16 @@ class PipelineRunner:
         target_lang = self.job.config.get('target_language', 'Modern English')
         model = self.job.config.get('translation_model', 'zongwei/gemma3-translator:4b')
 
+        # Create LLM provider if configured
+        llm = None
+        llm_provider = self.job.config.get('llm_provider')
+        if llm_provider and llm_provider != 'ollama':
+            from lib.llm import create_llm_provider
+            llm = create_llm_provider(
+                provider=llm_provider,
+                model=self.job.config.get('llm_model'),
+            )
+
         # Create translation config for structured translator
         config = TranslationConfig(
             source_lang=source_lang,
@@ -461,7 +471,8 @@ class PipelineRunner:
             translator_type='ollama',
             model_name=model,
             translate_metadata=True,
-            preserve_markers=True
+            preserve_markers=True,
+            llm=llm,
         )
 
         # Progress callback for chapter-by-chapter tracking

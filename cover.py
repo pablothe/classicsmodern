@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate cover art using local Stable Diffusion (100% offline)."""
+"""Generate cover art using local Stable Diffusion. LLM prompt generation supports Ollama, OpenAI, or Anthropic."""
 
 import sys
 import argparse
@@ -8,7 +8,7 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate cover art using local Stable Diffusion (100% offline)"
+        description="Generate cover art using local Stable Diffusion"
     )
     parser.add_argument('prompt', help='Text prompt for image generation')
     parser.add_argument(
@@ -22,13 +22,27 @@ def main():
         '--book', default=None,
         help='Book name for auto-prompt (e.g., "Alice in Wonderland")'
     )
+    parser.add_argument(
+        '--provider', choices=['ollama', 'openai', 'anthropic'], default=None,
+        help='LLM provider for prompt generation (default: from env or ollama)'
+    )
 
     args = parser.parse_args()
+
+    # Create LLM provider if non-default (for prompt generation only)
+    llm = None
+    provider = args.provider
+    if provider is None:
+        import os
+        provider = os.environ.get('LLM_PROVIDER', 'ollama')
+    if provider != 'ollama':
+        from lib.llm import create_llm_provider
+        llm = create_llm_provider(provider=provider)
 
     # If --book is provided, get a book-specific prompt
     if args.book:
         from lib.cover.prompts import get_book_prompt
-        prompt = get_book_prompt(args.book)
+        prompt = get_book_prompt(args.book, llm=llm)
         print(f"Using book prompt: {prompt[:80]}...")
     else:
         prompt = args.prompt

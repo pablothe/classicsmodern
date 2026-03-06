@@ -439,7 +439,7 @@ class AudiobookPipeline {
     /**
      * Collect all form data before submission
      */
-    collectFormData() {
+    async collectFormData() {
         this.formData.voice = document.getElementById('pipeline-voice')?.value || 'bf_emma';
         this.formData.generate_cover = document.getElementById('pipeline-cover')?.checked ?? true;
 
@@ -456,6 +456,18 @@ class AudiobookPipeline {
             ? parseInt(document.getElementById('pipeline-summary-slider')?.value || '50')
             : null;
 
+        // Pass through LLM provider from global settings (if non-default)
+        try {
+            const resp = await fetch('/api/settings');
+            if (resp.ok) {
+                const settings = await resp.json();
+                if (settings.llm_provider && settings.llm_provider !== 'ollama') {
+                    this.formData.llm_provider = settings.llm_provider;
+                    if (settings.llm_model) this.formData.llm_model = settings.llm_model;
+                }
+            }
+        } catch (e) { /* use defaults */ }
+
         // source_file already set from auto-selection or dropdown change
     }
 
@@ -463,7 +475,7 @@ class AudiobookPipeline {
      * Start the generation process
      */
     async startGeneration() {
-        this.collectFormData();
+        await this.collectFormData();
 
         const content = document.getElementById('pipeline-modal-content');
         content.innerHTML = `

@@ -58,6 +58,14 @@ def translate_handler(job: Dict, progress_callback: Callable) -> Dict:
     if not source_path.exists():
         raise Exception(f"Source file not found: {source_path}")
 
+    # Create LLM provider if configured
+    llm = None
+    llm_provider = config.get('llm_provider')
+    if llm_provider and llm_provider != 'ollama':
+        from lib.llm import create_llm_provider
+        llm_model = config.get('llm_model')
+        llm = create_llm_provider(provider=llm_provider, model=llm_model)
+
     # Create translation config
     trans_config = TranslationConfig(
         source_lang=source_lang,
@@ -65,7 +73,8 @@ def translate_handler(job: Dict, progress_callback: Callable) -> Dict:
         translator_type='ollama',
         model_name=model,
         translate_metadata=True,
-        preserve_markers=True
+        preserve_markers=True,
+        llm=llm,
     )
 
     # Custom progress callback that wraps chapter-by-chapter updates

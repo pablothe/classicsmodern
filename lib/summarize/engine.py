@@ -2,7 +2,8 @@
 """
 Book Summarizer
 
-Summarizes translated books to a target percentage using Ollama LLM.
+Summarizes translated books to a target percentage using LLM providers.
+Supports Ollama (local), OpenAI, and Anthropic.
 Preserves Markdown structure while condensing content.
 """
 
@@ -18,9 +19,9 @@ from lib.book.validator import validate_book
 
 
 class BookSummarizer:
-    """Handles book summarization using Ollama models"""
+    """Handles book summarization using LLM providers"""
 
-    def __init__(self, target_percentage: int = 50, chunk_size_words: int = None, max_chunk_size: int = 1500):
+    def __init__(self, target_percentage: int = 50, chunk_size_words: int = None, max_chunk_size: int = 1500, llm=None):
         """
         Initialize book summarizer.
 
@@ -28,9 +29,11 @@ class BookSummarizer:
             target_percentage: Target length as percentage of original (e.g., 50 = 50%)
             chunk_size_words: Words per chunk for summarization (auto-calculated if None)
             max_chunk_size: Maximum safe chunk size for 4B model (default: 1500 words ~= 2000 tokens)
+            llm: Optional LLMProvider instance. If None, uses Ollama directly.
         """
         self.target_percentage = target_percentage
         self.max_chunk_size = max_chunk_size
+        self.llm = llm
 
         # Conservative chunk sizing to stay within context limits
         # For aggressive compression, we'll use recursive summarization instead
@@ -41,12 +44,13 @@ class BookSummarizer:
         chunk_size_words = min(chunk_size_words, max_chunk_size)
         self.chunk_size_words = chunk_size_words
 
-        # Get config and create translator (we'll reuse the Ollama infrastructure)
+        # Get config and create translator (we'll reuse its chunking infrastructure)
         config = get_config()
         self.translator = OllamaTranslator(
             model_name=config.models.default_translation_model,
             ollama_host=config.models.ollama_host,
-            chunk_size_words=chunk_size_words
+            chunk_size_words=chunk_size_words,
+            llm=llm,
         )
 
     def _summarize_chunk(
@@ -105,25 +109,25 @@ Rules:
 - Do NOT write "This text discusses..." or "The author says..." - stay IN the narrative
 - Output ONLY the condensed passage, no explanations"""
 
-        # Call Ollama API (reuse translator's API structure)
-        payload = {
-            "model": self.translator.model_name,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.5  # Slightly higher for creative summarization
-            }
-        }
-
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                import requests
-                response = requests.post(self.translator.api_url, json=payload)
-                response.raise_for_status()
-
-                result = response.json()
-                summarized = result.get('response', '').strip()
+                if self.llm:
+                    summarized = self.llm.generate(prompt, temperature=0.5, timeout=300)
+                else:
+                    import requests
+                    payload = {
+                        "model": self.translator.model_name,
+                        "prompt": prompt,
+                        "stream": False,
+                        "options": {
+                            "temperature": 0.5
+                        }
+                    }
+                    response = requests.post(self.translator.api_url, json=payload)
+                    response.raise_for_status()
+                    result = response.json()
+                    summarized = result.get('response', '').strip()
 
                 # Basic validation (check it's not completely empty)
                 if len(summarized.strip()) < 5:

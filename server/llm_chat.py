@@ -4,7 +4,7 @@ LLM Chat Integration - Tool-calling AI assistant for audiobooks
 
 Features:
 - Hybrid RAG system with semantic search
-- Tool-calling loop with Ollama llama3.2:3b (fallback)
+- Tool-calling loop with LLM providers (Ollama, OpenAI, Anthropic)
 - Dynamic chapter retrieval
 - Smart context management
 - Error handling and timeouts
@@ -14,7 +14,6 @@ import re
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
-import ollama
 
 # Import hybrid RAG components
 try:
@@ -222,7 +221,8 @@ def ask_with_hybrid_rag(
     current_chapter: int,
     tools: BookTools,
     model: str = "llama3.2:3b",
-    user_language: str = "English"
+    user_language: str = "English",
+    llm=None,
 ) -> Dict:
     """
     Hybrid RAG implementation - uses semantic search or full section retrieval.
@@ -364,8 +364,12 @@ The following text was retrieved to answer your question using {method}.
     # Step 4: Single LLM call
     try:
         print(f"[Hybrid RAG] Calling LLM...")
-        response = ollama.chat(model=model, messages=messages)
-        answer = response['message']['content'].strip()
+        if llm:
+            answer = llm.chat(messages, temperature=0.3)
+        else:
+            import ollama
+            response = ollama.chat(model=model, messages=messages)
+            answer = response['message']['content'].strip()
         print(f"[Hybrid RAG] ✓ Answer generated ({len(answer)} chars)")
 
         return {
@@ -399,7 +403,8 @@ def ask_with_tools(
     tools: BookTools,
     model: str = "llama3.2:3b",
     use_hybrid_rag: bool = True,
-    user_language: str = "English"
+    user_language: str = "English",
+    llm=None,
 ) -> Dict:
     """
     Main LLM query handler with tool-calling loop.
@@ -431,7 +436,7 @@ def ask_with_tools(
     """
     # Use hybrid RAG if enabled and available
     if use_hybrid_rag and HYBRID_RAG_AVAILABLE:
-        return ask_with_hybrid_rag(question, current_chapter, tools, model, user_language=user_language)
+        return ask_with_hybrid_rag(question, current_chapter, tools, model, user_language=user_language, llm=llm)
 
     # Fallback: Build system prompt with tool definitions
     chapter_list = tools.list_chapters()
@@ -506,8 +511,12 @@ You can call the following tools to retrieve book content:
             iterations += 1
 
             # Call LLM
-            response = ollama.chat(model=model, messages=messages)
-            assistant_message = response['message']['content']
+            if llm:
+                assistant_message = llm.chat(messages, temperature=0.3)
+            else:
+                import ollama
+                response = ollama.chat(model=model, messages=messages)
+                assistant_message = response['message']['content']
 
             # Check if LLM wants to call a tool
             tool_calls = re.findall(r'\[TOOL:\s*([^\]]+)\]', assistant_message)
@@ -585,30 +594,49 @@ You can call the following tools to retrieve book content:
         }
 
 
-def check_ollama_available() -> Dict:
+def check_llm_available(llm=None) -> Dict:
     """
-    Health check for Ollama service.
+    Health check for LLM service.
+
+    Args:
+        llm: Optional LLMProvider instance. If None, checks Ollama directly.
 
     Returns:
         {
             'available': bool,
             'models': [...],
-            'error': str (if failed)
+            'error': str (if failed),
+            'provider': str
         }
     """
+    if llm:
+        result = llm.is_available()
+        return {
+            'available': result.get('available', False),
+            'models': result.get('models', []),
+            'error': result.get('error'),
+            'provider': llm.name,
+        }
+
     try:
-        # Try to list models
+        import ollama
         models = ollama.list()
         model_names = [m.model for m in models.models]
 
         return {
             'available': True,
             'models': model_names,
-            'error': None
+            'error': None,
+            'provider': 'ollama',
         }
     except Exception as e:
         return {
             'available': False,
             'models': [],
-            'error': str(e)
+            'error': str(e),
+            'provider': 'ollama',
         }
+
+
+# Backward compatibility alias
+check_ollama_available = check_llm_available

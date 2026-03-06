@@ -58,11 +58,12 @@ except ImportError:
 
 # Optional: Import LLM chat (only if AI assistant is available)
 try:
-    from server.llm_chat import BookTools, ask_with_tools, check_ollama_available
+    from server.llm_chat import BookTools, ask_with_tools, check_llm_available
+    check_ollama_available = check_llm_available  # backward compat
     AI_ASSISTANT_AVAILABLE = True
 except ImportError:
     AI_ASSISTANT_AVAILABLE = False
-    logger.warning("AI Assistant not available (llm_chat.py or ollama module missing)")
+    logger.warning("AI Assistant not available (llm_chat.py module missing)")
 
 # Import unified job queue
 try:
@@ -1503,6 +1504,17 @@ if AI_ASSISTANT_AVAILABLE:
             chapters_metadata=chapters_metadata
         )
 
+        # Create LLM provider if configured
+        chat_llm = None
+        import os as _os
+        chat_provider = _os.environ.get('LLM_PROVIDER', 'ollama')
+        if chat_provider != 'ollama':
+            try:
+                from lib.llm import create_llm_provider
+                chat_llm = create_llm_provider(provider=chat_provider)
+            except Exception as llm_err:
+                logger.warning(f"Failed to create LLM provider for chat: {llm_err}")
+
         # Call LLM with tools
         try:
             result = ask_with_tools(
@@ -1510,7 +1522,8 @@ if AI_ASSISTANT_AVAILABLE:
                 current_chapter=current_chapter,
                 tools=tools,
                 model="llama3.2:3b",
-                user_language=user_language
+                user_language=user_language,
+                llm=chat_llm,
             )
 
             # Extract chapter numbers from tools_used
@@ -1744,7 +1757,9 @@ async def start_audiobook_generation(request: Request):
         'summarize': data.get('summarize'),
         'voice': data.get('voice', 'bf_emma'),
         'speed': data.get('speed', 1.0),
-        'generate_cover': data.get('generate_cover', True)
+        'generate_cover': data.get('generate_cover', True),
+        'llm_provider': data.get('llm_provider'),
+        'llm_model': data.get('llm_model'),
     }
 
     queue = get_queue()
@@ -2048,7 +2063,9 @@ if UNIFIED_QUEUE_AVAILABLE:
                 'source_file': source_file,
                 'source_language': data.get('source_language', 'Russian'),
                 'target_language': data.get('target_language', 'Modern English'),
-                'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b')
+                'translation_model': data.get('translation_model', 'zongwei/gemma3-translator:4b'),
+                'llm_provider': data.get('llm_provider'),
+                'llm_model': data.get('llm_model'),
             }
         )
 
@@ -2211,15 +2228,147 @@ if UNIFIED_QUEUE_AVAILABLE:
             'job_id': job_id
         }
 
+# ============================================================================
+# LLM Provider API Endpoints
+# ============================================================================
+
+@app.get("/api/llm/providers")
+async def get_llm_providers():
+    """
+    List available LLM providers and their status.
+
+    Returns which providers are installed, have API keys configured,
+    and their default models.
+    """
+    from lib.llm import get_available_providers
+    providers = get_available_providers()
+
+    # Include current default
+    import os
+    current_provider = os.environ.get('LLM_PROVIDER', 'ollama')
+    current_model = os.environ.get('LLM_MODEL', '')
+
+    return {
+        'providers': providers,
+        'current_provider': current_provider,
+        'current_model': current_model,
+    }
+
+
+@app.get("/api/settings")
+async def get_settings():
+    """Get current LLM settings (never returns actual API keys)."""
+    import os
+    return {
+        'llm_provider': os.environ.get('LLM_PROVIDER', 'ollama'),
+        'llm_model': os.environ.get('LLM_MODEL', ''),
+        'ollama_host': os.environ.get('OLLAMA_HOST', 'http://localhost:11434'),
+        'openai_key_set': bool(os.environ.get('OPENAI_API_KEY')),
+        'anthropic_key_set': bool(os.environ.get('ANTHROPIC_API_KEY')),
+    }
+
+
+@app.post("/api/settings")
+async def update_settings(request: Request):
+    """
+    Update LLM settings. Writes to .env file and reloads environment.
+
+    Request Body:
+    {
+        "llm_provider": "openai",
+        "llm_model": "gpt-4o-mini",
+        "openai_api_key": "sk-...",
+        "anthropic_api_key": "sk-ant-..."
+    }
+    """
+    try:
+        data = await request.json()
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+
+    import os
+
+    # Build env updates
+    env_updates = {}
+    if 'llm_provider' in data:
+        provider = data['llm_provider']
+        if provider not in ('ollama', 'openai', 'anthropic'):
+            raise HTTPException(status_code=400, detail=f"Invalid provider: {provider}")
+        env_updates['LLM_PROVIDER'] = provider
+
+    if 'llm_model' in data:
+        env_updates['LLM_MODEL'] = data['llm_model']
+
+    if 'ollama_host' in data:
+        env_updates['OLLAMA_HOST'] = data['ollama_host']
+
+    if 'openai_api_key' in data and data['openai_api_key']:
+        env_updates['OPENAI_API_KEY'] = data['openai_api_key']
+
+    if 'anthropic_api_key' in data and data['anthropic_api_key']:
+        env_updates['ANTHROPIC_API_KEY'] = data['anthropic_api_key']
+
+    if not env_updates:
+        return {'status': 'no_changes'}
+
+    # Write to .env file
+    env_path = Path(__file__).parent.parent / ".env"
+    existing_lines = []
+    if env_path.exists():
+        existing_lines = env_path.read_text().splitlines()
+
+    # Update or append each key
+    updated_keys = set()
+    new_lines = []
+    for line in existing_lines:
+        key = line.split('=', 1)[0].strip() if '=' in line and not line.strip().startswith('#') else None
+        if key and key in env_updates:
+            new_lines.append(f"{key}={env_updates[key]}")
+            updated_keys.add(key)
+        else:
+            new_lines.append(line)
+
+    # Append keys not yet in file
+    for key, value in env_updates.items():
+        if key not in updated_keys:
+            new_lines.append(f"{key}={value}")
+
+    env_path.write_text('\n'.join(new_lines) + '\n')
+
+    # Apply to current process environment
+    for key, value in env_updates.items():
+        os.environ[key] = value
+
+    # Reload config
+    from lib.config import reload_config
+    reload_config()
+
+    return {
+        'status': 'ok',
+        'updated': list(env_updates.keys()),
+    }
+
+
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint."""
+    # Include LLM provider status
+    llm_status = {}
+    try:
+        from lib.llm import get_available_providers
+        providers = get_available_providers()
+        for p in providers:
+            llm_status[p['name']] = p['available']
+    except Exception:
+        pass
+
     return {
         'status': 'ok',
         'books_dir': str(BOOKS_DIR),
         'books_count': len(discover_books()),
         'gutenberg_available': GUTENBERG_AVAILABLE,
         'unified_queue_available': UNIFIED_QUEUE_AVAILABLE,
+        'llm_providers': llm_status,
         'timestamp': datetime.utcnow().isoformat() + 'Z'
     }
 

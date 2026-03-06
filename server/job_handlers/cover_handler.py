@@ -45,10 +45,18 @@ def cover_handler(job: Dict, progress_callback: Callable) -> Dict:
     progress_callback(5, {'message': 'Analyzing book content for cover prompt...', 'stage': 'prepare'})
 
     from lib.cover.prompts import get_book_prompt
+
+    # Create LLM provider if configured
+    llm = None
+    llm_provider = config.get('llm_provider')
+    if llm_provider and llm_provider != 'ollama':
+        from lib.llm import create_llm_provider
+        llm = create_llm_provider(provider=llm_provider, model=config.get('llm_model'))
+
     # Pass actual book file path so LLM can read content
     book_files = list(book_dir.glob("*.md"))
     book_file = str(book_files[0]) if book_files else book_id
-    prompt = get_book_prompt(book_file)
+    prompt = get_book_prompt(book_file, llm=llm)
 
     progress_callback(10, {'message': 'Prompt ready', 'stage': 'prepare'})
 

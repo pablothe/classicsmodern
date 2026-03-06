@@ -16,7 +16,9 @@ Translate classic literature and generate audiobooks using local AI.
 
 ## AI Models
 
-All models run locally. No cloud APIs, no API keys required.
+All models run locally by default. No cloud APIs or API keys required.
+
+Optionally, you can use **OpenAI** or **Anthropic** APIs for translation, summarization, and other text tasks (see [External LLM APIs](#optional-external-llm-apis) below).
 
 | Model | Purpose | Runtime |
 |-------|---------|---------|
@@ -26,6 +28,8 @@ All models run locally. No cloud APIs, no API keys required.
 | **Stable Diffusion v1.5** | Cover art generation | PyTorch |
 | **all-MiniLM-L6-v2** | Semantic search (RAG) | sentence-transformers |
 | **WhisperX** | Word timing (Karaoke) | PyTorch (optional) |
+| **OpenAI GPT models** | Translation, summarization, chat (optional) | OpenAI API |
+| **Anthropic Claude models** | Translation, summarization, chat (optional) | Anthropic API |
 
 ---
 
@@ -158,9 +162,38 @@ The web player (`./start_server.sh`) includes:
 
 ---
 
+## Optional: External LLM APIs
+
+By default everything runs locally with Ollama. To use OpenAI or Anthropic instead:
+
+1. Install the optional package:
+   ```bash
+   pip install openai      # for OpenAI
+   pip install anthropic   # for Anthropic
+   ```
+
+2. Configure via `.env` file (copy from `.env.example`):
+   ```bash
+   LLM_PROVIDER=openai          # or anthropic
+   LLM_MODEL=gpt-4o-mini        # optional, uses provider default
+   OPENAI_API_KEY=sk-...        # your API key
+   ```
+
+3. Or pass directly via CLI:
+   ```bash
+   python3 translate.py book.md --provider openai --api-key sk-...
+   python3 make_audiobook.py book.md --llm-provider anthropic
+   ```
+
+4. Or configure from the web UI: Settings page (gear icon) lets you set provider, model, and API keys.
+
+External LLM support applies to: translation, summarization, cover prompt generation, language detection, and AI chat. TTS (Kokoro) and image generation (Stable Diffusion) always run locally.
+
+---
+
 ## Design Principles
 
-1. **100% local** -- no cloud services, no API keys, no external calls
+1. **Local by default** -- runs fully offline with Ollama, with optional cloud LLM support
 2. **One command** -- `make_audiobook.py` handles the full pipeline
 3. **Resumable** -- interrupted jobs pick up where they left off
 4. **Structure-preserving** -- maintains chapters and formatting through all processing

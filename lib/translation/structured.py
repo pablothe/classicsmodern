@@ -61,6 +61,7 @@ class TranslationConfig:
     model_name: str = "zongwei/gemma3-translator:4b"
     translate_metadata: bool = True
     preserve_markers: bool = True
+    llm: object = None  # Optional LLMProvider instance
 
 
 # ============================================================================
@@ -272,11 +273,12 @@ class BlockTranslator:
             return None
 
     def _create_translator(self):
-        """Create Ollama translator. Uses llama3.2:3b for English modernization."""
+        """Create translator with configured LLM provider."""
         from lib.translation.engine import OllamaTranslator
         from lib.config import get_config
 
         ollama_config = get_config()
+        llm = self.config.llm
         model = self.config.model_name
 
         # Use general-purpose model for English→English modernization
@@ -285,13 +287,14 @@ class BlockTranslator:
             and 'english' in self.config.source_lang.lower()
             and 'english' in self.config.target_lang.lower()
         )
-        if is_modernization:
+        if is_modernization and not llm:
             model = "llama3.2:3b"
-            print(f"  🔄 Using {model} for English modernization")
+            print(f"  Using {model} for English modernization")
 
         return OllamaTranslator(
             model_name=model,
-            ollama_host=ollama_config.models.ollama_host
+            ollama_host=ollama_config.models.ollama_host,
+            llm=llm,
         )
 
     def translate_structure(self, structure: BookStructure) -> BookStructure:

@@ -141,14 +141,17 @@ def classify_question(question: str) -> Dict:
 # Alternative: LLM-based classifier for edge cases
 # ============================================================================
 
-def classify_question_with_llm(question: str, model: str = 'llama3.2:3b') -> Dict:
+def classify_question_with_llm(question: str, model: str = 'llama3.2:3b', llm=None) -> Dict:
     """
     Use LLM to classify ambiguous questions.
 
     Use this for low-confidence classifications if accuracy is critical.
-    """
-    import ollama
 
+    Args:
+        question: The question to classify
+        model: Ollama model name (used if llm is None)
+        llm: Optional LLMProvider instance
+    """
     prompt = f"""You are a question classifier. Classify this question into EXACTLY ONE category:
 
 SPECIFIC_FACTUAL: Questions asking for specific facts, descriptions, quotes, names, or details about a particular thing or event.
@@ -172,8 +175,12 @@ Question: "{question}"
 Answer with ONLY the category name (one word): SPECIFIC_FACTUAL or BROAD_SUMMARY"""
 
     try:
-        response = ollama.generate(model=model, prompt=prompt)
-        result = response['response'].strip().upper()
+        if llm:
+            result = llm.generate(prompt, temperature=0.1).strip().upper()
+        else:
+            import ollama
+            response = ollama.generate(model=model, prompt=prompt)
+            result = response['response'].strip().upper()
 
         if 'BROAD_SUMMARY' in result:
             return {

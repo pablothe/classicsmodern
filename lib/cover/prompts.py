@@ -2,9 +2,10 @@
 """
 Book Prompt Generator for Cover Art
 
-Generates Stable Diffusion prompts using a local LLM (Ollama) to describe
+Generates Stable Diffusion prompts using an LLM to describe
 the main character and environment from actual book content.
-Falls back to a hardcoded catalog when Ollama is unavailable.
+Supports Ollama (local), OpenAI, and Anthropic providers.
+Falls back to a hardcoded catalog when LLM is unavailable.
 All prompts enforce watercolor illustration style.
 """
 
@@ -15,10 +16,6 @@ from pathlib import Path
 import requests
 
 logger = logging.getLogger(__name__)
-
-# Ollama configuration (matches lib/config.py defaults)
-OLLAMA_HOST = "http://localhost:11434"
-OLLAMA_MODEL = "zongwei/gemma3-translator:4b"
 
 # Offline fallback catalog (used when Ollama is unavailable)
 BOOK_PROMPTS_FALLBACK = {
@@ -85,12 +82,22 @@ def _read_excerpt_from_middle(filepath: Path, target_words: int = 30) -> str:
         return ""
 
 
-def _generate_prompt_with_llm(excerpt: str) -> str:
+def _get_default_llm():
+    """Get the default LLM provider from config."""
+    try:
+        from lib.config import create_default_llm
+        return create_default_llm()
+    except Exception:
+        return None
+
+
+def _generate_prompt_with_llm(excerpt: str, llm=None) -> str:
     """
-    Ask Ollama to describe the main character and environment from a book excerpt.
+    Ask an LLM to describe the main character and environment from a book excerpt.
 
     Args:
         excerpt: ~30 words from the middle of the book
+        llm: Optional LLMProvider instance. If None, uses default from config.
 
     Returns:
         Comma-separated visual descriptors, or empty string on failure
@@ -106,25 +113,31 @@ def _generate_prompt_with_llm(excerpt: str) -> str:
         f"Excerpt:\n{excerpt}"
     )
 
-    payload = {
-        "model": OLLAMA_MODEL,
-        "prompt": prompt,
-        "stream": False,
-        "options": {"temperature": 0.7}
-    }
-
     try:
-        response = requests.post(
-            f"{OLLAMA_HOST}/api/generate",
-            json=payload,
-            timeout=60
-        )
-        response.raise_for_status()
-        result = response.json()
-        descriptors = result.get('response', '').strip()
+        if llm is None:
+            llm = _get_default_llm()
+
+        if llm:
+            descriptors = llm.generate(prompt, temperature=0.7, timeout=60)
+        else:
+            # Direct Ollama fallback when no provider is configured
+            from lib.config import get_config
+            config = get_config()
+            payload = {
+                "model": config.models.default_translation_model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"temperature": 0.7}
+            }
+            response = requests.post(
+                f"{config.models.ollama_host}/api/generate",
+                json=payload,
+                timeout=60
+            )
+            response.raise_for_status()
+            descriptors = response.json().get('response', '').strip()
 
         # Clean up: remove any sentence-like output, keep comma-separated descriptors
-        # Remove leading/trailing quotes if present
         descriptors = descriptors.strip('"\'')
 
         # Filter garbage responses (translator model sometimes treats input as translation task)
@@ -137,9 +150,7 @@ def _generate_prompt_with_llm(excerpt: str) -> str:
             logger.info(f"LLM generated cover descriptors: {descriptors[:100]}...")
             return descriptors
     except requests.ConnectionError:
-        logger.warning("Ollama not available for cover prompt generation")
-    except requests.Timeout:
-        logger.warning("Ollama timed out generating cover prompt")
+        logger.warning("LLM not available for cover prompt generation")
     except Exception as e:
         logger.warning(f"LLM cover prompt generation failed: {e}")
 
@@ -186,18 +197,19 @@ def _resolve_book_path(title_or_filename: str) -> Path:
     return None
 
 
-def get_book_prompt(title_or_filename: str) -> str:
+def get_book_prompt(title_or_filename: str, llm=None) -> str:
     """
     Generate a Stable Diffusion prompt for a book cover.
 
-    Uses the local LLM to read ~30 words from the middle of the book and
+    Uses an LLM to read ~30 words from the middle of the book and
     describe the main character and environment. Falls back to a hardcoded
-    catalog if Ollama is unavailable.
+    catalog if LLM is unavailable.
 
     All prompts enforce watercolor illustration style.
 
     Args:
         title_or_filename: Book file path, book ID, or title
+        llm: Optional LLMProvider instance. If None, uses default from config.
 
     Returns:
         Stable Diffusion prompt string (always includes watercolor style)
@@ -207,7 +219,7 @@ def get_book_prompt(title_or_filename: str) -> str:
     if book_path:
         excerpt = _read_excerpt_from_middle(book_path)
         if excerpt:
-            descriptors = _generate_prompt_with_llm(excerpt)
+            descriptors = _generate_prompt_with_llm(excerpt, llm=llm)
             if descriptors:
                 return f"watercolor illustration, {descriptors}, soft flowing brushstrokes, professional book cover"
 
@@ -221,13 +233,14 @@ def get_book_prompt(title_or_filename: str) -> str:
     return GENERIC_FALLBACK
 
 
-def detect_language_with_llm(filepath: Path) -> str:
+def detect_language_with_llm(filepath: Path, llm=None) -> str:
     """
-    Use the LLM to detect the language of a book by reading ~30 words
+    Use an LLM to detect the language of a book by reading ~30 words
     from the middle of the file.
 
     Args:
         filepath: Path to book file
+        llm: Optional LLMProvider instance. If None, uses default from config.
 
     Returns:
         Language name (e.g., "English", "Latin", "French"), or empty string on failure
@@ -242,22 +255,29 @@ def detect_language_with_llm(filepath: Path) -> str:
         f"Text:\n{excerpt}"
     )
 
-    payload = {
-        "model": OLLAMA_MODEL,
-        "prompt": prompt,
-        "stream": False,
-        "options": {"temperature": 0.1}
-    }
-
     try:
-        response = requests.post(
-            f"{OLLAMA_HOST}/api/generate",
-            json=payload,
-            timeout=30
-        )
-        response.raise_for_status()
-        result = response.json()
-        language = result.get('response', '').strip()
+        if llm is None:
+            llm = _get_default_llm()
+
+        if llm:
+            language = llm.generate(prompt, temperature=0.1, timeout=30)
+        else:
+            # Direct Ollama fallback
+            from lib.config import get_config
+            config = get_config()
+            payload = {
+                "model": config.models.default_translation_model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"temperature": 0.1}
+            }
+            response = requests.post(
+                f"{config.models.ollama_host}/api/generate",
+                json=payload,
+                timeout=30
+            )
+            response.raise_for_status()
+            language = response.json().get('response', '').strip()
 
         # Clean up: take first word only (model might add explanation)
         language = language.split('\n')[0].strip().rstrip('.')

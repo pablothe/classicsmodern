@@ -27,3 +27,8 @@ sentence-transformers>=2.2.0  # Semantic search for AI chat RAG
 # EPUB conversion (optional, for epub_to_md.py)
 ebooklib>=0.18
 markdownify>=0.11.0
+
+# External LLM APIs (optional, for OpenAI/Anthropic support)
+# Uncomment to enable:
+# openai>=1.0.0
+# anthropic>=0.18.0
