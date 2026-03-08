@@ -302,10 +302,75 @@ def _find_para_id_for_offset(chunk_paras: list, char_offset: int) -> Optional[st
     for para in chunk_paras:
         if para['char_start_in_chunk'] <= char_offset < para['char_end_in_chunk']:
             return para['para_id']
-    # If offset is past all paragraphs, return last one
+    # Offset is outside all paragraph ranges — return nearest paragraph
     if chunk_paras:
-        return chunk_paras[-1]['para_id']
+        if char_offset < chunk_paras[0]['char_start_in_chunk']:
+            return chunk_paras[0]['para_id']  # Before first paragraph
+        return chunk_paras[-1]['para_id']  # Past last paragraph
     return None
+
+
+def _build_paragraph_timings_from_chunks(chapter_chunks: list, chapter_start_time: float) -> list:
+    """
+    Build paragraph timings directly from chunk manifest data.
+
+    Each chunk knows its duration and which paragraphs it contains (with character
+    ranges). We distribute each chunk's duration proportionally by character count
+    across its paragraphs, then merge across chunks to get total paragraph timings.
+
+    This is more accurate than the word-based approach since it doesn't depend on
+    per-word para_id assignments which can misalign at chunk boundaries.
+    """
+    # Accumulate (audio_start, audio_end) per para_id across all chunks
+    para_segments = {}  # para_id -> list of (start, end) segments
+
+    for chunk in chapter_chunks:
+        chunk_start = chunk['cumulative_duration'] - chapter_start_time
+        chunk_duration = chunk['duration']
+        chunk_paras = chunk.get('paragraphs', [])
+
+        if not chunk_paras:
+            continue
+
+        # Total characters in this chunk's paragraph annotations
+        total_chars = sum(
+            p['char_end_in_chunk'] - p['char_start_in_chunk']
+            for p in chunk_paras
+        )
+        if total_chars <= 0:
+            continue
+
+        # Distribute chunk duration proportionally by character count
+        current_time = chunk_start
+        for para in chunk_paras:
+            chars = para['char_end_in_chunk'] - para['char_start_in_chunk']
+            proportion = chars / total_chars
+            para_duration = proportion * chunk_duration
+
+            pid = para['para_id']
+            if pid not in para_segments:
+                para_segments[pid] = []
+            para_segments[pid].append((current_time, current_time + para_duration))
+            current_time += para_duration
+
+    # Merge segments into final paragraph timings (ordered by first appearance)
+    paragraphs = []
+    seen = set()
+    # Preserve order from chunks
+    for chunk in chapter_chunks:
+        for para in chunk.get('paragraphs', []):
+            pid = para['para_id']
+            if pid in seen or pid not in para_segments:
+                continue
+            seen.add(pid)
+            segments = para_segments[pid]
+            paragraphs.append({
+                "para_id": pid,
+                "audio_start": round(segments[0][0], 3),
+                "audio_end": round(segments[-1][1], 3),
+            })
+
+    return paragraphs
 
 
 def _build_paragraph_timings(words: list) -> list:
@@ -549,8 +614,8 @@ def generate_word_timings_from_chunks(
                             "para_id": para_id
                         })
 
-        # Build paragraph timing summaries from word-level para_id assignments
-        paragraph_timings = _build_paragraph_timings(all_words)
+        # Build paragraph timings directly from chunk manifest (not from word assignments)
+        paragraph_timings = _build_paragraph_timings_from_chunks(chapter_chunks, chapter_start_time)
 
         chapter_key = f"chapter_{seq_idx}"
         word_timings_data[chapter_key] = {

@@ -152,6 +152,8 @@ def format_year(year: int) -> str:
     Returns:
         Formatted string (e.g., "1865" or "49 AD")
     """
+    if year < 0:
+        return f"{abs(year)} BC"
     if year < 1000:
         return f"{year} AD"
     return str(year)

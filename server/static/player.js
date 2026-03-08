@@ -837,8 +837,8 @@ function renderStatusFilters() {
         { key: 'finished',    label: 'Finished' }
     ];
     const audioCategories = [
-        { key: 'downloaded',     label: 'Downloaded' },
-        { key: 'not_downloaded', label: 'Not Downloaded' }
+        { key: 'downloaded',     label: 'Audio Ready' },
+        { key: 'not_downloaded', label: 'No Audio' }
     ];
 
     // Filter chip + category chips
@@ -992,7 +992,7 @@ function renderLibraryBooks(books) {
                 <div class="book-info-bottom">
                     <h3 class="book-title">${book.title}</h3>
                     <p class="book-author">
-                        ${book.author || ''}${book.year ? ` (${book.year})` : ''}
+                        ${book.author || ''}${book.year ? ` (${formatYear(book.year)})` : ''}
                     </p>
                     <div class="book-meta">
                         ${(() => {
@@ -1210,7 +1210,7 @@ function renderStoreBooks(books) {
                         <div class="store-book-title">${escapeHtml(book.title)}</div>
                         <div class="store-book-author">${escapeHtml(book.author)}</div>
                         <div class="store-book-meta">
-                            ${book.year ? `<span>${book.year}</span>` : ''}
+                            ${book.year ? `<span>${formatYear(book.year)}</span>` : ''}
                             <span class="${langClass}">${langLabel}</span>
                         </div>
                     </div>
@@ -1579,7 +1579,7 @@ function renderPlayer() {
     // Update narrator info
     const narratorEl = document.getElementById('player-narrator');
     if (book.author) {
-        narratorEl.textContent = `Narrated by ${book.author}`;
+        narratorEl.textContent = `by ${book.author}`;
         narratorEl.style.display = 'block';
     } else {
         narratorEl.style.display = 'none';
@@ -1617,15 +1617,11 @@ function renderPlayer() {
 
     // Show Listen/Read tabs if book has source text (mobile only — desktop uses split tabs)
     const tabBar = document.getElementById('player-tabs');
-    const syncBtn = document.getElementById('player-sync-btn');
     if (book.has_source_text && !isDesktopSplitView()) {
         if (tabBar) tabBar.style.display = 'flex';
-        if (syncBtn) syncBtn.style.display = '';
         ui.readerBtn.style.display = 'none';
     } else {
         if (tabBar) tabBar.style.display = 'none';
-        // Don't hide sync button on desktop — it lives in split-reader-toolbar
-        if (syncBtn && !isDesktopSplitView()) syncBtn.style.display = 'none';
         ui.readerBtn.style.display = 'none';
     }
 
@@ -1973,6 +1969,13 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+function formatYear(year) {
+    if (!year) return '';
+    if (year < 0) return `${Math.abs(year)} BC`;
+    if (year < 1000) return `${year} AD`;
+    return String(year);
 }
 
 // ============================================================================
@@ -3127,6 +3130,26 @@ function setupEventListeners() {
         tab.addEventListener('click', () => switchSplitTab(tab.dataset.splitTab));
     });
 
+    // Audio picker in tab bar
+    const audioPickerBtn = document.getElementById('split-audio-picker-btn');
+    if (audioPickerBtn) {
+        audioPickerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const dropdown = document.getElementById('split-audio-picker-dropdown');
+            if (dropdown) {
+                const isOpen = dropdown.style.display !== 'none';
+                dropdown.style.display = isOpen ? 'none' : 'block';
+            }
+        });
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.split-audio-picker')) {
+                const dropdown = document.getElementById('split-audio-picker-dropdown');
+                if (dropdown) dropdown.style.display = 'none';
+            }
+        });
+    }
+
     // Split reader settings
     document.getElementById('split-reader-settings-btn')?.addEventListener('click', () => {
         const panel = document.getElementById('split-reader-settings');
@@ -3668,9 +3691,15 @@ function seekReaderParagraph(chapterIndex, paraId) {
     const chapterKey = `chapter_${chapterIndex + 1}`;
     const timings = state.paragraphTimings?.[chapterKey]?.paragraphs;
     if (timings) {
-        const match = timings.find(p => p.para_id === paraId || p.para_id === String(paraId));
-        if (match) {
-            ui.audio.currentTime = match.audio_start;
+        // Find all matches (duplicates possible from word timing misalignment)
+        // Pick the one with the longest duration (the real paragraph, not a fragment)
+        const paraIdStr = String(paraId);
+        const matches = timings.filter(p => p.para_id === paraIdStr);
+        if (matches.length > 0) {
+            const best = matches.reduce((a, b) =>
+                (b.audio_end - b.audio_start) > (a.audio_end - a.audio_start) ? b : a
+            );
+            ui.audio.currentTime = best.audio_start;
             return;
         }
     }
@@ -3865,13 +3894,16 @@ function initNowPlayingBar() {
     // Tap meta area to open full player
     const tapTarget = document.getElementById('np-tap-target');
     if (tapTarget) {
-        tapTarget.addEventListener('click', () => {
+        tapTarget.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (state.playingBook && state.playingVariant) {
-                if (window.bookReader?.isOpen && window.bookReader.bookId !== state.playingBook.book_id) {
-                    openBook(state.playingBook.book_id);
-                } else {
-                    openVariant(state.currentVariant.variant_id);
-                }
+                state.currentBook = state.playingBook;
+                state.currentVariant = state.playingVariant;
+                renderPlayer();
+                ui.libraryView.classList.remove('active');
+                ui.variantView.classList.remove('active');
+                ui.playerView.classList.add('active');
+                updateNowPlayingBar();
             }
         });
     }
@@ -4432,10 +4464,6 @@ function switchSplitTab(tabName) {
         c.classList.toggle('active', c.dataset.splitContent === tabName);
     });
 
-    // Show sync button only on read tab
-    const syncBtn = document.getElementById('player-sync-btn');
-    if (syncBtn) syncBtn.style.display = tabName === 'read' ? '' : 'none';
-
     if (tabName === 'chapters') {
         renderSplitChapters();
     } else if (tabName === 'read') {
@@ -4465,8 +4493,8 @@ function renderSplitView() {
 }
 
 function renderSplitChapters() {
-    // Render variant info section above chapters
-    renderSplitVariantInfo();
+    // Update audio picker in tab bar
+    renderSplitAudioPicker();
 
     const container = document.getElementById('split-chapters-list');
     if (!container) return;
@@ -4599,6 +4627,52 @@ function renderSplitVariantInfo() {
             const variantId = btn.dataset.variantId;
             const v = book.variants.find(vr => vr.variant_id === variantId);
             if (v) showDeleteConfirmation(v);
+        });
+    });
+}
+
+function renderSplitAudioPicker() {
+    const picker = document.getElementById('split-audio-picker');
+    if (!picker) return;
+
+    const book = state.currentBook;
+    const variant = state.currentVariant;
+    if (!book || !variant || !book.variants || book.variants.length <= 1) {
+        picker.style.display = 'none';
+        return;
+    }
+
+    picker.style.display = '';
+    const dropdown = document.getElementById('split-audio-picker-dropdown');
+    if (!dropdown) return;
+
+    const currentVoice = getVoiceDisplayName(variant.voice) || 'Audio';
+    const btn = document.getElementById('split-audio-picker-btn');
+    if (btn) btn.title = `Audio: ${currentVoice}`;
+
+    dropdown.innerHTML = book.variants.map(v => {
+        const isActive = v.variant_id === variant.variant_id;
+        const vVoice = getVoiceDisplayName(v.voice) || 'Audiobook';
+        const vSuffix = v.type === 'summary' && v.summary_pct ? ` (${v.summary_pct}%)` : '';
+        const vDuration = v.total_duration ? formatDuration(v.total_duration) : '';
+        const metaParts = [vDuration].filter(Boolean).join('');
+        return `
+            <div class="split-audio-picker-option ${isActive ? 'active' : ''}" data-variant-id="${v.variant_id}">
+                <span class="split-audio-picker-name">${vVoice}${vSuffix}</span>
+                ${metaParts ? `<span class="split-audio-picker-meta">${metaParts}</span>` : ''}
+                ${isActive ? '<span class="split-audio-picker-check">&#10003;</span>' : ''}
+            </div>
+        `;
+    }).join('');
+
+    // Wire option clicks
+    dropdown.querySelectorAll('.split-audio-picker-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const variantId = opt.dataset.variantId;
+            if (variantId !== variant.variant_id) {
+                selectAudioTrack(variantId);
+            }
+            dropdown.style.display = 'none';
         });
     });
 }

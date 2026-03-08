@@ -331,6 +331,8 @@ def discover_books() -> List[Dict]:
                     g_meta = json.load(f)
                 if not author and g_meta.get('author'):
                     author = g_meta['author']
+                if not year and g_meta.get('year'):
+                    year = g_meta['year']
                 # Use Gutenberg title only if we still have the slug-derived fallback
                 if g_meta.get('title') and title == book_id.replace('_', ' ').title():
                     title = g_meta['title']

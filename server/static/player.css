@@ -3512,17 +3512,16 @@ header h2 {
 }
 
 .reader-sync-btn {
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.35rem 0.65rem;
-    border: 1px solid currentColor;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .reader-sync-btn.active {
-    border-width: 2px;
-    font-weight: 700;
     opacity: 1;
+    color: var(--accent, #4ecdc4);
+}
+
+.reader-sync-btn.active .action-label {
+    color: var(--accent, #4ecdc4);
 }
 
 .reader-toolbar-title {
@@ -4394,6 +4393,82 @@ body.has-now-playing .view {
 
 .split-tab:hover:not(.active) {
     color: var(--text-primary);
+}
+
+/* --- Audio Picker (in tab bar) --- */
+
+.split-audio-picker {
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.split-audio-picker-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-secondary);
+    transition: color 0.15s;
+    line-height: 1;
+}
+
+.split-audio-picker-btn:hover {
+    color: var(--text-primary);
+}
+
+.split-audio-picker-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 220px;
+    background: var(--surface-color, var(--bg-secondary));
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.split-audio-picker-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    cursor: pointer;
+    transition: background 0.1s;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.split-audio-picker-option:last-child {
+    border-bottom: none;
+}
+
+.split-audio-picker-option:hover {
+    background: var(--bg-secondary);
+}
+
+.split-audio-picker-option.active {
+    background: var(--bg-secondary);
+}
+
+.split-audio-picker-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.split-audio-picker-meta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.split-audio-picker-check {
+    color: var(--text-primary);
+    font-size: 0.875rem;
 }
 
 /* --- Split Tab Content --- */

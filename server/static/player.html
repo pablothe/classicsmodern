@@ -230,6 +230,10 @@
                                 <span class="action-icon">AI</span>
                                 <span class="action-label">AI Assistant</span>
                             </button>
+                            <button id="player-sync-btn" class="secondary-action-btn reader-sync-btn active" title="Sync text with audio">
+                                <span class="action-icon">&#8644;</span>
+                                <span class="action-label">Sync</span>
+                            </button>
                             <!-- Audio Track Selector (Netflix-style) -->
                             <div id="audio-track-selector" class="track-selector audio-track-selector" style="display: none;">
                                 <button id="audio-track-btn" class="track-selector-btn">
@@ -267,15 +271,17 @@
                 <!-- RIGHT PANEL: Tabbed Content (Chapters / Read / AI Chat) -->
                 <div class="split-right">
                     <div class="split-tabs">
-                        <button class="split-tab active" data-split-tab="chapters">Audio Files</button>
+                        <button class="split-tab active" data-split-tab="chapters">Chapters</button>
                         <button class="split-tab" data-split-tab="read">Read</button>
                         <button class="split-tab" data-split-tab="chat">AI Chat</button>
-                        <button id="player-sync-btn" class="reader-toolbar-btn reader-sync-btn" title="Sync text with audio" style="margin-left: auto; display: none;">Sync</button>
+                        <div id="split-audio-picker" class="split-audio-picker" style="display: none;">
+                            <button id="split-audio-picker-btn" class="split-audio-picker-btn" title="Audio version">&#127911;</button>
+                            <div id="split-audio-picker-dropdown" class="split-audio-picker-dropdown" style="display: none;"></div>
+                        </div>
                     </div>
 
-                    <!-- Audio Files Tab -->
+                    <!-- Chapters Tab -->
                     <div class="split-tab-content active" data-split-content="chapters">
-                        <div id="split-variant-info" class="split-variant-info"></div>
                         <div id="split-chapters-list" class="split-chapters-list"></div>
                     </div>
 

@@ -895,7 +895,22 @@ class BookProcessor:
                 section_type=ch_info.get('section_type', 'chapter')
             ))
 
-        return chapter_objects
+        # Filter out near-empty chapters (decorative title headers, separators, etc.)
+        filtered = []
+        for ch in chapter_objects:
+            real_content = re.sub(r'^-{3,}\s*$', '', ch.content, flags=re.MULTILINE).strip()
+            real_words = len(real_content.split()) if real_content else 0
+            if real_words < 5:
+                self.log_message(f"Dropping near-empty chapter '{ch.title}' ({real_words} real words)")
+                continue
+            filtered.append(ch)
+
+        # Renumber if any chapters were filtered out
+        if len(filtered) < len(chapter_objects):
+            for i, ch in enumerate(filtered):
+                ch.number = i + 1
+
+        return filtered
 
     def extract_chapter_title(self, line: str, match: re.Match, pattern_type: str) -> str:
         """Extract a clean chapter title from the matched line."""

@@ -287,10 +287,17 @@ class GutenbergDownloader:
                 print(f"✓ Saved {ch_count} chapters to gutenberg_chapters.json (v2.0)")
 
             # Save Gutenberg metadata (title, author from HTML)
+            year = None
+            try:
+                from lib.book.catalog import get_book_info
+                year = get_book_info(book_slug).get('year')
+            except ImportError:
+                pass
             gutenberg_meta = {
                 'gutenberg_id': gutenberg_id,
                 'title': metadata.get('title'),
                 'author': metadata.get('author'),
+                'year': year,
                 'downloaded_at': datetime.now().isoformat()
             }
             meta_path = book_dir / "gutenberg_metadata.json"

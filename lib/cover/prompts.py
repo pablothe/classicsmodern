@@ -9,6 +9,7 @@ Falls back to a hardcoded catalog when LLM is unavailable.
 All prompts enforce watercolor illustration style.
 """
 
+import json
 import logging
 import re
 from pathlib import Path
@@ -91,26 +92,77 @@ def _get_default_llm():
         return None
 
 
-def _generate_prompt_with_llm(excerpt: str, llm=None) -> str:
+def _resolve_book_metadata(book_path: Path) -> dict:
     """
-    Ask an LLM to describe the main character and environment from a book excerpt.
+    Resolve book title and author from available metadata sources.
+
+    Priority: catalog → book_manifest.json → gutenberg_metadata.json → directory name.
+
+    Returns:
+        Dict with 'title' and 'author' keys.
+    """
+    book_dir = book_path.parent
+    book_id = book_dir.name
+
+    # Priority 1: Catalog (curated, most reliable)
+    try:
+        from lib.book.catalog import get_book_info
+        info = get_book_info(book_id)
+        if info and info.get('title'):
+            return {'title': info['title'], 'author': info.get('author', 'Unknown')}
+    except Exception:
+        pass
+
+    # Priority 2: book_manifest.json
+    manifest_path = book_dir / 'book_manifest.json'
+    if manifest_path.exists():
+        try:
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                manifest = json.load(f)
+            meta = manifest.get('metadata', {})
+            if meta.get('title'):
+                return {'title': meta['title'], 'author': meta.get('author', 'Unknown')}
+        except Exception:
+            pass
+
+    # Priority 3: gutenberg_metadata.json
+    gutenberg_path = book_dir / 'gutenberg_metadata.json'
+    if gutenberg_path.exists():
+        try:
+            with open(gutenberg_path, 'r', encoding='utf-8') as f:
+                guten = json.load(f)
+            if guten.get('title'):
+                return {'title': guten['title'], 'author': guten.get('author', 'Unknown')}
+        except Exception:
+            pass
+
+    # Fallback: derive from directory name
+    return {'title': book_id.replace('_', ' ').title(), 'author': 'Unknown'}
+
+
+def _generate_prompt_with_llm(title: str, author: str, llm=None) -> str:
+    """
+    Ask an LLM to describe a vivid scene from a book for cover illustration.
+
+    The LLM already knows classic literature — giving it the title and author
+    is enough to generate rich, book-specific visual descriptions.
 
     Args:
-        excerpt: ~30 words from the middle of the book
+        title: Book title
+        author: Book author
         llm: Optional LLMProvider instance. If None, uses default from config.
 
     Returns:
         Comma-separated visual descriptors, or empty string on failure
     """
     prompt = (
-        "Translate this book excerpt into a description of how you would illustrate "
-        "the main character on a book cover. Start with the character's name, then describe "
-        "what makes them visually distinctive: their defining features, clothing, expression, "
-        "posture, and the setting around them. "
-        "Output ONLY comma-separated visual descriptors.\n"
-        "Example: Sherlock Holmes, gaunt detective in deerstalker cap, sharp piercing eyes, "
-        "magnifying glass, long coat, foggy gaslit London alley, mysterious shadows\n\n"
-        f"Excerpt:\n{excerpt}"
+        f'Describe a vivid scene from "{title}" by {author} as a watercolor illustration. '
+        "Focus on the main character in a key moment from the story — their appearance, "
+        "expression, clothing, and the environment around them. Describe only the visual "
+        "scene, no text or typography. Use descriptive phrases separated by commas.\n\n"
+        "Example: young girl in blue dress falling through air, surrounded by floating "
+        "playing cards and pocket watches, giant mushrooms below, dreamy pastel wonderland, "
+        "curious wide-eyed expression"
     )
 
     try:
@@ -137,11 +189,14 @@ def _generate_prompt_with_llm(excerpt: str, llm=None) -> str:
             response.raise_for_status()
             descriptors = response.json().get('response', '').strip()
 
-        # Clean up: remove any sentence-like output, keep comma-separated descriptors
+        # Clean up
         descriptors = descriptors.strip('"\'')
 
+        # Strip leading "watercolor" prefix (the wrapper already adds it)
+        descriptors = re.sub(r'^(?:a\s+)?watercolor\s+(?:illustration\s*,?\s*)?', '', descriptors, flags=re.IGNORECASE).strip()
+
         # Filter garbage responses (translator model sometimes treats input as translation task)
-        garbage_phrases = ['translate', 'translation', 'provide the text', 'please provide', 'i cannot']
+        garbage_phrases = ['translate', 'translation', 'provide the text', 'please provide', 'i cannot', 'here is']
         if any(phrase in descriptors.lower() for phrase in garbage_phrases):
             logger.warning(f"LLM returned garbage for cover prompt, falling back")
             return ""
@@ -201,9 +256,8 @@ def get_book_prompt(title_or_filename: str, llm=None) -> str:
     """
     Generate a Stable Diffusion prompt for a book cover.
 
-    Uses an LLM to read ~30 words from the middle of the book and
-    describe the main character and environment. Falls back to a hardcoded
-    catalog if LLM is unavailable.
+    Uses an LLM to describe a vivid scene from the book based on its
+    title and author. Falls back to a hardcoded catalog if LLM is unavailable.
 
     All prompts enforce watercolor illustration style.
 
@@ -214,14 +268,13 @@ def get_book_prompt(title_or_filename: str, llm=None) -> str:
     Returns:
         Stable Diffusion prompt string (always includes watercolor style)
     """
-    # Try to read from the actual book and generate with LLM
+    # Try to resolve book metadata and generate with LLM
     book_path = _resolve_book_path(title_or_filename)
     if book_path:
-        excerpt = _read_excerpt_from_middle(book_path)
-        if excerpt:
-            descriptors = _generate_prompt_with_llm(excerpt, llm=llm)
-            if descriptors:
-                return f"watercolor illustration, {descriptors}, soft flowing brushstrokes, professional book cover"
+        meta = _resolve_book_metadata(book_path)
+        descriptors = _generate_prompt_with_llm(meta['title'], meta['author'], llm=llm)
+        if descriptors:
+            return f"watercolor illustration, {descriptors}, soft flowing brushstrokes, professional book cover"
 
     # Fallback: hardcoded catalog (offline mode)
     text = title_or_filename.lower()
