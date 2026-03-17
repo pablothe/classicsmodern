@@ -58,7 +58,7 @@ pip install kokoro-tts kokoro-onnx soundfile
 brew install ffmpeg  # macOS
 # or apt-get install ffmpeg  # Linux
 
-# 6. Optional: EPUB conversion support
+# 6. Optional: EPUB conversion support (ebooklib is AGPL-licensed, install separately)
 pip install ebooklib markdownify
 
 # 7. Optional: External LLM providers
