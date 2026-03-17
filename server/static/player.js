@@ -24,7 +24,9 @@ const state = {
         timeoutId: null,
         endTime: null,
         type: null, // 'timer' or 'end-of-chapter'
-        updateIntervalId: null
+        updateIntervalId: null,
+        extraChapters: 0,            // +N offset for end-of-chapter mode
+        stopAfterChapterIndex: null  // target chapter index to stop after
     },
     currentChapterIndex: null,
     // Separate "playing" state — tracks what audio is actually loaded,
@@ -715,66 +717,69 @@ const ui = {
 // Library Functions
 // ============================================================================
 
+async function refreshBookStatuses() {
+    const positions = await API.getAllPlaybackPositions();
+    state.allPlaybackPositions = positions;
+    state.playbackProgress = {};
+    state.bookStatus = {};
+    state.bookDuration = {};
+    state.bookTimeLeft = {};
+    state.bookLastActivity = {};
+    for (const book of state.books) {
+        if (!book.has_audio || !book.variants.length) {
+            state.bookStatus[book.book_id] = 'not_started';
+            continue;
+        }
+        // Find the variant with the most recent playback position
+        let activeVariant = null;
+        let activePos = null;
+        for (const v of book.variants) {
+            const k = `${book.book_id}:${v.variant_id}`;
+            const p = positions[k];
+            if (p && (!activePos || (p.last_updated && (!activePos.last_updated || p.last_updated > activePos.last_updated)))) {
+                activeVariant = v;
+                activePos = p;
+            }
+        }
+        const variant = activeVariant || book.variants[0];
+        const pos = activePos;
+        const totalDuration = variant.total_duration || 0;
+        if (totalDuration > 0) {
+            state.bookDuration[book.book_id] = totalDuration;
+        }
+        if (pos?.last_updated) {
+            state.bookLastActivity[book.book_id] = new Date(pos.last_updated).getTime();
+        }
+        if (!pos) {
+            state.bookStatus[book.book_id] = 'not_started';
+        } else if (variant.file_count > 0) {
+            const fileIndex = pos.file_index || 0;
+            state.playbackProgress[book.book_id] = Math.round((fileIndex / variant.file_count) * 100);
+            if (fileIndex >= variant.file_count - 1) {
+                state.bookStatus[book.book_id] = 'finished';
+            } else {
+                state.bookStatus[book.book_id] = 'in_progress';
+                if (totalDuration > 0) {
+                    const progressPct = state.playbackProgress[book.book_id];
+                    state.bookTimeLeft[book.book_id] = Math.round(totalDuration * (1 - progressPct / 100));
+                }
+            }
+        } else {
+            state.bookStatus[book.book_id] = 'not_started';
+        }
+    }
+
+    renderStatusFilters();
+    renderUnifiedSearch();
+}
+
 async function loadLibrary() {
     try {
         const data = await API.getBooks();
         state.books = data.books;
         state.totalLibrarySizeMb = data.total_library_size_mb || 0;
 
-        // Fetch playback progress and compute reading status for all books
-        const positions = await API.getAllPlaybackPositions();
-        state.allPlaybackPositions = positions;
-        state.playbackProgress = {};
-        state.bookStatus = {};
-        state.bookDuration = {};
-        state.bookTimeLeft = {};
-        state.bookLastActivity = {};
-        for (const book of state.books) {
-            if (!book.has_audio || !book.variants.length) {
-                state.bookStatus[book.book_id] = 'not_started';
-                continue;
-            }
-            // Find the variant with the most recent playback position
-            let activeVariant = null;
-            let activePos = null;
-            for (const v of book.variants) {
-                const k = `${book.book_id}:${v.variant_id}`;
-                const p = positions[k];
-                if (p && (!activePos || (p.last_updated && (!activePos.last_updated || p.last_updated > activePos.last_updated)))) {
-                    activeVariant = v;
-                    activePos = p;
-                }
-            }
-            const variant = activeVariant || book.variants[0];
-            const pos = activePos;
-            const totalDuration = variant.total_duration || 0;
-            if (totalDuration > 0) {
-                state.bookDuration[book.book_id] = totalDuration;
-            }
-            if (pos?.last_updated) {
-                state.bookLastActivity[book.book_id] = new Date(pos.last_updated).getTime();
-            }
-            if (!pos) {
-                state.bookStatus[book.book_id] = 'not_started';
-            } else if (variant.file_count > 0) {
-                const fileIndex = pos.file_index || 0;
-                state.playbackProgress[book.book_id] = Math.round((fileIndex / variant.file_count) * 100);
-                if (fileIndex >= variant.file_count - 1) {
-                    state.bookStatus[book.book_id] = 'finished';
-                } else {
-                    state.bookStatus[book.book_id] = 'in_progress';
-                    if (totalDuration > 0) {
-                        const progressPct = state.playbackProgress[book.book_id];
-                        state.bookTimeLeft[book.book_id] = Math.round(totalDuration * (1 - progressPct / 100));
-                    }
-                }
-            } else {
-                state.bookStatus[book.book_id] = 'not_started';
-            }
-        }
-
-        renderStatusFilters();
-        renderUnifiedSearch();
+        await refreshBookStatuses();
     } catch (error) {
         console.error('Failed to load library:', error);
         ui.bookList.innerHTML = '<div class="error">Failed to load books. Please check server connection.</div>';
@@ -1107,7 +1112,9 @@ async function generateCoverForBook(bookId) {
         const data = await response.json();
         console.log('Cover generation job created:', data.job_id);
 
-        // Force a refresh so the job status shows on the card
+        // Kick off job polling and refresh library
+        jobsActivity.poll();
+        jobsActivity.startPolling();
         loadLibrary();
     } catch (err) {
         console.error('Failed to create cover job:', err);
@@ -1307,6 +1314,7 @@ function showLibrary() {
     ui.playerView.classList.remove('active');
     ui.playerView.classList.remove('read-mode');
     updateNowPlayingBar();
+    refreshBookStatuses();
 }
 
 // ============================================================================
@@ -2450,7 +2458,9 @@ async function startDownload(gutenbergId, bookSlug, bookTitle, language) {
         // Show notification
         showNotification(`Downloading ${bookTitle}...`);
 
-        // Start polling
+        // Start job activity polling and download polling
+        jobsActivity.poll();
+        jobsActivity.startPolling();
         startDownloadPolling();
 
         // Update UI
@@ -2857,6 +2867,17 @@ async function savePlaybackState() {
     if (!success) {
         console.warn('Failed to save playback state');
     }
+
+    // Optimistic status update so library reflects progress immediately
+    const fileIndex = state.currentFileIndex || 0;
+    if (variant.file_count > 0) {
+        if (fileIndex >= variant.file_count - 1) {
+            state.bookStatus[book.book_id] = 'finished';
+        } else {
+            state.bookStatus[book.book_id] = 'in_progress';
+        }
+        state.playbackProgress[book.book_id] = Math.round((fileIndex / variant.file_count) * 100);
+    }
 }
 
 // ============================================================================
@@ -2885,19 +2906,46 @@ function setSleepTimer(minutes) {
 }
 
 function setEndOfChapterTimer() {
-    // Cancel any existing timer
-    cancelSleepTimer();
+    // Clear any existing countdown timer (but preserve extraChapters)
+    if (state.sleepTimer.timeoutId) {
+        clearTimeout(state.sleepTimer.timeoutId);
+        state.sleepTimer.timeoutId = null;
+    }
+    if (state.sleepTimer.updateIntervalId) {
+        clearInterval(state.sleepTimer.updateIntervalId);
+        state.sleepTimer.updateIntervalId = null;
+    }
 
     state.sleepTimer.type = 'end-of-chapter';
     state.sleepTimer.endTime = null;
+    state.sleepTimer.stopAfterChapterIndex = (state.currentChapterIndex ?? 0) + state.sleepTimer.extraChapters;
 
     // Update status
     const timerStatus = document.getElementById('timer-status');
-    timerStatus.textContent = 'Will stop at end of current chapter';
+    if (state.sleepTimer.extraChapters === 0) {
+        timerStatus.textContent = 'Will stop at end of current chapter';
+    } else {
+        const targetIdx = state.sleepTimer.stopAfterChapterIndex;
+        const chapters = state.currentBook?.chapters;
+        const chapterLabel = chapters && chapters[targetIdx]
+            ? chapters[targetIdx].title || `Chapter ${targetIdx + 1}`
+            : `Chapter ${targetIdx + 1}`;
+        timerStatus.textContent = `Will stop after ${chapterLabel}`;
+    }
     timerStatus.classList.add('active');
 
     // Show cancel button
     document.getElementById('cancel-timer-btn').style.display = 'block';
+}
+
+function updateEndOfChapterLabel() {
+    const btn = document.getElementById('eoc-btn');
+    if (!btn) return;
+    if (state.sleepTimer.extraChapters === 0) {
+        btn.textContent = 'End of Chapter';
+    } else {
+        btn.textContent = `End of Chapter +${state.sleepTimer.extraChapters}`;
+    }
 }
 
 function cancelSleepTimer() {
@@ -2916,12 +2964,15 @@ function cancelSleepTimer() {
     // Reset state
     state.sleepTimer.endTime = null;
     state.sleepTimer.type = null;
+    state.sleepTimer.extraChapters = 0;
+    state.sleepTimer.stopAfterChapterIndex = null;
 
     // Update UI
     const timerStatus = document.getElementById('timer-status');
     timerStatus.textContent = 'No timer set';
     timerStatus.classList.remove('active');
     document.getElementById('cancel-timer-btn').style.display = 'none';
+    updateEndOfChapterLabel();
 }
 
 function updateTimerDisplay() {
@@ -2968,34 +3019,29 @@ function checkEndOfChapterTimer() {
     const chapters = state.currentBook.chapters;
     const currentFile = state.currentFileIndex;
     const currentTime = ui.audio.currentTime;
+    const targetIdx = state.sleepTimer.stopAfterChapterIndex;
 
-    // Check if we're at the end of a chapter
-    // Find next chapter
-    let nextChapterIndex = null;
-    for (let i = 0; i < chapters.length; i++) {
-        const chapter = chapters[i];
-        if (chapter.file_index > currentFile ||
-            (chapter.file_index === currentFile && chapter.timestamp > currentTime)) {
-            nextChapterIndex = i;
-            break;
-        }
-    }
+    // Find the chapter boundary AFTER the target chapter
+    // That's the point where we should pause
+    const boundaryIdx = (targetIdx != null) ? targetIdx + 1 : (state.currentChapterIndex ?? 0) + 1;
 
-    // If no next chapter found, we're in the last chapter
-    // Check if we're near the end of the current file
-    if (nextChapterIndex === null || nextChapterIndex === state.currentChapterIndex + 1) {
-        // We're in the last chapter or approaching next chapter
-        // Check if we should stop (within 1 second of next chapter or end of file)
-        if (nextChapterIndex !== null) {
-            const nextChapter = chapters[nextChapterIndex];
-            if (nextChapter.file_index === currentFile) {
-                const timeToNextChapter = nextChapter.timestamp - currentTime;
-                if (timeToNextChapter <= 1) {
-                    pauseAndNotify('End of chapter reached');
-                }
+    if (boundaryIdx < chapters.length) {
+        // There is a next chapter after the target — pause at its start
+        const boundary = chapters[boundaryIdx];
+        if (boundary.file_index === currentFile) {
+            const timeToBoundary = boundary.timestamp - currentTime;
+            if (timeToBoundary <= 1 && timeToBoundary >= 0) {
+                pauseAndNotify('End of chapter reached');
             }
-        } else if (ui.audio.duration - currentTime <= 1) {
-            // Near end of file and no next chapter
+        } else if (boundary.file_index > currentFile) {
+            // Boundary is in a later file — pause near end of current file
+            if (ui.audio.duration - currentTime <= 1) {
+                pauseAndNotify('End of chapter reached');
+            }
+        }
+    } else {
+        // Target is the last chapter — pause near end of file
+        if (ui.audio.duration - currentTime <= 1) {
             pauseAndNotify('End of chapter reached');
         }
     }
@@ -3527,6 +3573,25 @@ function setupEventListeners() {
 
     document.getElementById('cancel-timer-btn').addEventListener('click', () => {
         cancelSleepTimer();
+    });
+
+    // End-of-chapter +/- adjustment buttons
+    document.getElementById('eoc-plus').addEventListener('click', () => {
+        state.sleepTimer.extraChapters++;
+        updateEndOfChapterLabel();
+        if (state.sleepTimer.type === 'end-of-chapter') {
+            setEndOfChapterTimer();
+        }
+    });
+
+    document.getElementById('eoc-minus').addEventListener('click', () => {
+        if (state.sleepTimer.extraChapters > 0) {
+            state.sleepTimer.extraChapters--;
+            updateEndOfChapterLabel();
+            if (state.sleepTimer.type === 'end-of-chapter') {
+                setEndOfChapterTimer();
+            }
+        }
     });
 
     // Request notification permission on first interaction
@@ -4096,9 +4161,20 @@ const jobsActivity = {
         this.countBadge = ui.queueCount;
         this.tabCountBadge = ui.tabQueueCount;
 
-        // Start polling
+        // Do one initial fetch; only start continuous polling if there are active jobs
         this.poll();
+    },
+
+    startPolling() {
+        if (this.pollInterval) return; // already polling
         this.pollInterval = setInterval(() => this.poll(), 5000);
+    },
+
+    stopPolling() {
+        if (this.pollInterval) {
+            clearInterval(this.pollInterval);
+            this.pollInterval = null;
+        }
     },
 
     // Priority for picking which job to show per book (higher = more important)
@@ -4151,6 +4227,14 @@ const jobsActivity = {
             // Update variant view if a book detail page is open
             if (state.currentBook) {
                 updateBookJobStatus(state.currentBook.book_id);
+            }
+
+            // Start or stop polling based on whether there are active jobs
+            const hasActive = allJobs.some(j => j.status === 'running' || j.status === 'pending');
+            if (hasActive) {
+                this.startPolling();
+            } else {
+                this.stopPolling();
             }
 
             // Filter for queue panel

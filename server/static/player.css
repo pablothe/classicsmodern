@@ -1455,6 +1455,38 @@ header h2 {
     opacity: 0.8;
 }
 
+.timer-end-chapter-row {
+    display: flex;
+    align-items: stretch;
+    grid-column: span 2;
+    gap: 0;
+}
+
+.timer-end-chapter-row .timer-btn {
+    flex: 1;
+    border-radius: 0;
+}
+
+.timer-adj-btn {
+    width: 3rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.125rem;
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.timer-adj-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.timer-adj-btn:active {
+    opacity: 0.7;
+}
+
 /* ============================================================================
    Responsive
    ============================================================================ */

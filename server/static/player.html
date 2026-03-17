@@ -374,7 +374,11 @@
                         <button class="timer-btn" data-minutes="30">30 min</button>
                         <button class="timer-btn" data-minutes="45">45 min</button>
                         <button class="timer-btn" data-minutes="60">60 min</button>
-                        <button class="timer-btn" data-action="end-of-chapter">End of Chapter</button>
+                        <div class="timer-end-chapter-row">
+                            <button class="timer-adj-btn" id="eoc-minus">−</button>
+                            <button class="timer-btn" data-action="end-of-chapter" id="eoc-btn">End of Chapter</button>
+                            <button class="timer-adj-btn" id="eoc-plus">+</button>
+                        </div>
                         <button class="timer-btn cancel" id="cancel-timer-btn" style="display: none;">Cancel Timer</button>
                     </div>
                 </div>

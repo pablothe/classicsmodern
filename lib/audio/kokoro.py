@@ -942,7 +942,8 @@ class KokoroAudioGenerator:
         output_file: Path,
         speed: float = 1.0,
         normalize: bool = True,
-        convert_to_mp3: bool = True
+        convert_to_mp3: bool = True,
+        mp3_vbr_quality: int = 6
     ) -> Path:
         """
         Post-process audio file (speed, normalize, convert to MP3).
@@ -953,6 +954,7 @@ class KokoroAudioGenerator:
             speed: Speed multiplier (1.0 = normal)
             normalize: Whether to normalize loudness
             convert_to_mp3: Whether to convert to MP3
+            mp3_vbr_quality: LAME VBR quality (0=best, 9=worst, 6=audiobook default)
 
         Returns:
             Path to processed audio file
@@ -987,7 +989,7 @@ class KokoroAudioGenerator:
             cmd.extend(['-af', ','.join(filters)])
 
         if convert_to_mp3:
-            cmd.extend(['-c:a', 'libmp3lame', '-b:a', '128k'])
+            cmd.extend(['-c:a', 'libmp3lame', '-q:a', str(mp3_vbr_quality)])
         else:
             cmd.extend(['-c:a', 'copy'])
 
@@ -1115,7 +1117,8 @@ class KokoroAudioGenerator:
         speed: float = 1.0,
         normalize: bool = True,
         to_mp3: bool = True,
-        generate_cover: bool = False
+        generate_cover: bool = False,
+        mp3_vbr_quality: int = 6
     ) -> dict:
         """
         Generate complete audiobook from text file.
@@ -1128,6 +1131,7 @@ class KokoroAudioGenerator:
             normalize: Whether to normalize loudness
             to_mp3: Whether to convert to MP3 format
             generate_cover: Whether to generate cover art (requires generate.py)
+            mp3_vbr_quality: LAME VBR quality (0=best, 9=worst, 6=audiobook default)
 
         Returns:
             Dictionary with generation results
@@ -1442,7 +1446,8 @@ class KokoroAudioGenerator:
                     processed_path,
                     speed=speed,
                     normalize=normalize,
-                    convert_to_mp3=to_mp3
+                    convert_to_mp3=to_mp3,
+                    mp3_vbr_quality=mp3_vbr_quality
                 )
 
                 if i % 10 == 0 or i == 1 or i == len(raw_audio_files):
@@ -1645,6 +1650,14 @@ class KokoroAudioGenerator:
                     print("⚠️  generate.py not found, skipping cover art")
             except Exception as e:
                 print(f"⚠️  Cover generation failed: {e}")
+
+        # Clean up raw WAV files after successful chapter recombination
+        raw_dir = output_dir / "raw"
+        if raw_dir.exists() and raw_dir.is_dir() and (chapter_files or to_mp3):
+            import shutil
+            raw_size = sum(f.stat().st_size for f in raw_dir.rglob('*') if f.is_file())
+            shutil.rmtree(raw_dir)
+            print(f"\n🧹 Cleaned up raw WAV files: {raw_size / (1024*1024):.0f} MB freed")
 
         # Clean up checkpoint and lock on successful completion
         checkpoint_file = output_dir / ".generation_checkpoint.json"

@@ -85,6 +85,10 @@ class AudioConfig:
     default_format: str = "wav"
     supported_formats: List[str] = field(default_factory=lambda: ["wav", "mp3", "flac"])
 
+    # MP3 quality: LAME VBR quality level (0=best ~245kbps, 9=worst ~65kbps)
+    # For speech: 6 ≈ 55-70kbps (audiobook standard), 4 ≈ 100-130kbps (higher quality)
+    mp3_vbr_quality: int = 6
+
     # Chunking for audio generation
     audio_chunk_chars: int = 4000
     generate_playlist: bool = True

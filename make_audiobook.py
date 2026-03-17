@@ -41,6 +41,7 @@ class AudiobookMaker:
         generate_word_timings: bool = True,
         non_interactive: bool = False,
         llm=None,
+        mp3_vbr_quality: int = 6,
     ):
         self.input_file = Path(input_file)
         self.voice = voice
@@ -55,6 +56,7 @@ class AudiobookMaker:
         self.generate_word_timings = generate_word_timings
         self.non_interactive = non_interactive
         self.llm = llm
+        self.mp3_vbr_quality = mp3_vbr_quality
 
         if not self.input_file.exists():
             raise FileNotFoundError(f"Input file not found: {input_file}")
@@ -230,7 +232,8 @@ class AudiobookMaker:
                     speed=self.speed,
                     normalize=self.normalize,
                     to_mp3=self.to_mp3,
-                    generate_cover=False
+                    generate_cover=False,
+                    mp3_vbr_quality=self.mp3_vbr_quality
                 )
 
                 self.state['audio_complete'] = True
@@ -401,6 +404,8 @@ Top Voices:
                         help='Generate word-level timing data for karaoke (default: enabled)')
     parser.add_argument('--no-word-timings', action='store_true',
                         help='Disable word timing generation')
+    parser.add_argument('--mp3-quality', type=int, default=6, metavar='LEVEL',
+                        help='MP3 VBR quality (0=best ~245kbps, 6=audiobook default ~64kbps, 9=smallest ~65kbps)')
     parser.add_argument('--non-interactive', action='store_true',
                         help='Skip validation prompts, fail fast (for automation)')
     parser.add_argument('--llm-provider', choices=['ollama', 'openai', 'anthropic'],
@@ -440,6 +445,7 @@ Top Voices:
             generate_word_timings=not args.no_word_timings,
             non_interactive=args.non_interactive,
             llm=llm,
+            mp3_vbr_quality=args.mp3_quality,
         )
 
         maker.make_audiobook()

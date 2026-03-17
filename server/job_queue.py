@@ -94,6 +94,9 @@ class UnifiedJobQueue:
             for job_type, limit in self.type_limits.items()
         }
 
+        # Completion callbacks (job type -> callback)
+        self.completion_callbacks: Dict[JobType, Callable] = {}
+
         # Lock for thread-safe operations
         self.lock = threading.Lock()
 
@@ -114,6 +117,18 @@ class UnifiedJobQueue:
         """
         self.handlers[job_type] = handler
         logger.info("Registered handler for %s", job_type)
+
+    def register_completion_callback(self, job_type: JobType, callback: Callable):
+        """
+        Register a callback invoked when a job of this type completes successfully.
+
+        Args:
+            job_type: Type of job to watch
+            callback: Function called on completion
+                      Signature: callback(job: Dict, result: Dict, queue: UnifiedJobQueue) -> Optional[str]
+        """
+        self.completion_callbacks[job_type] = callback
+        logger.info("Registered completion callback for %s", job_type)
 
     def create_job(
         self,
@@ -321,8 +336,20 @@ class UnifiedJobQueue:
                     })
                     continue
 
-                # Acquire type-specific semaphore (limit concurrency per type)
-                with self.type_semaphores[job_type]:
+                # Try to acquire type-specific semaphore (non-blocking).
+                # If the limit for this type is reached, re-queue the job
+                # so this worker can pick up a different job type instead
+                # of blocking and starving the queue.
+                semaphore = self.type_semaphores[job_type]
+                if not semaphore.acquire(blocking=False):
+                    # Re-queue with original priority
+                    priority = job.get('priority', 0)
+                    created_at = datetime.fromisoformat(job['created_at']).timestamp()
+                    self.job_queue.put((-priority, created_at, job_id))
+                    time.sleep(0.5)  # Brief pause before retrying
+                    continue
+
+                try:
                     # Mark as running
                     with self.lock:
                         self.running_jobs[job_id] = threading.current_thread()
@@ -362,6 +389,13 @@ class UnifiedJobQueue:
 
                         logger.info("Job %s completed", job_id)
 
+                        # Invoke completion callback (e.g. download -> cover)
+                        if job_type in self.completion_callbacks:
+                            try:
+                                self.completion_callbacks[job_type](job, result, self)
+                            except Exception as cb_err:
+                                logger.error("Completion callback for %s failed: %s", job_id, cb_err)
+
                     except Exception as e:
                         # Check if cancelled
                         current_job = self.db.get_job(job_id)
@@ -383,6 +417,9 @@ class UnifiedJobQueue:
                         # Remove from running jobs
                         with self.lock:
                             self.running_jobs.pop(job_id, None)
+
+                finally:
+                    semaphore.release()
 
             except Exception as e:
                 logger.error("Worker %d error: %s", worker_id, e)

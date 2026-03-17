@@ -1,6 +1,7 @@
 /**
  * Jobs Dashboard — monitors background tasks (downloads, translations,
- * audiobook generation, cover art). Auto-refreshes every 2 seconds.
+ * audiobook generation, cover art). Polls every 2 seconds only while
+ * there are active (running/pending) jobs; stops when idle.
  * Supports filtering by type/status and a detail modal with cancel.
  */
 
@@ -17,8 +18,7 @@ let currentFilters = {
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     loadJobs();
-    loadStats();
-    startAutoRefresh();
+    loadStats(); // will start auto-refresh if there are active jobs
 });
 
 // Event Listeners
@@ -74,7 +74,8 @@ async function loadJobs() {
     }
 }
 
-/** Fetch aggregate job counts from /api/jobs/stats and update the summary cards. */
+/** Fetch aggregate job counts from /api/jobs/stats and update the summary cards.
+ *  Also starts or stops auto-refresh based on whether there are active jobs. */
 async function loadStats() {
     try {
         const response = await fetch(`${API_BASE}/jobs/stats`);
@@ -85,6 +86,14 @@ async function loadStats() {
         document.getElementById('stat-pending').textContent = stats.by_status?.pending || 0;
         document.getElementById('stat-completed').textContent = stats.by_status?.completed || 0;
         document.getElementById('stat-failed').textContent = stats.by_status?.failed || 0;
+
+        // Only poll while there are active jobs
+        const activeCount = (stats.by_status?.running || 0) + (stats.by_status?.pending || 0);
+        if (activeCount > 0) {
+            startAutoRefresh();
+        } else {
+            stopAutoRefresh();
+        }
     } catch (error) {
         console.error('Failed to load stats:', error);
     }
@@ -383,12 +392,20 @@ async function cleanupOldJobs() {
     }
 }
 
-// Auto-refresh
+// Auto-refresh (only while there are active jobs)
 function startAutoRefresh() {
+    if (refreshTimer) return; // already polling
     refreshTimer = setInterval(() => {
         loadJobs();
         loadStats();
     }, REFRESH_INTERVAL);
+}
+
+function stopAutoRefresh() {
+    if (refreshTimer) {
+        clearInterval(refreshTimer);
+        refreshTimer = null;
+    }
 }
 
 // Toast notification

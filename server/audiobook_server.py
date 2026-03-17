@@ -2488,6 +2488,23 @@ def main():
             queue.register_handler(JobType.AUDIOBOOK, pipeline_handler)
             queue.register_handler(JobType.COVER, cover_handler)
 
+            # Auto-queue cover generation after download completes
+            def on_download_complete(job, result, q):
+                book_slug = result.get('book_slug') or job.get('config', {}).get('book_slug')
+                if not book_slug:
+                    return None
+                if (BOOKS_DIR / book_slug / "cover.png").exists():
+                    logger.info("Cover already exists for %s, skipping", book_slug)
+                    return None
+                logger.info("Auto-queuing cover job for %s", book_slug)
+                return q.create_job(
+                    job_type=JobType.COVER,
+                    config={'book_id': book_slug},
+                    parent_job_id=job['job_id']
+                )
+
+            queue.register_completion_callback(JobType.DOWNLOAD, on_download_complete)
+
             logger.info("Job queue initialized (database: %s)", JOB_DB_PATH)
 
             # Show queue stats
