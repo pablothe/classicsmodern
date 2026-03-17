@@ -1,4 +1,8 @@
-// Jobs Dashboard JavaScript
+/**
+ * Jobs Dashboard — monitors background tasks (downloads, translations,
+ * audiobook generation, cover art). Auto-refreshes every 2 seconds.
+ * Supports filtering by type/status and a detail modal with cancel.
+ */
 
 const API_BASE = '/api';
 const REFRESH_INTERVAL = 2000; // 2 seconds
@@ -53,7 +57,7 @@ function setupEventListeners() {
     });
 }
 
-// Load jobs from API
+/** Fetch jobs from /api/jobs with current type/status filters and re-render the list. */
 async function loadJobs() {
     try {
         const params = new URLSearchParams();
@@ -70,7 +74,7 @@ async function loadJobs() {
     }
 }
 
-// Load statistics
+/** Fetch aggregate job counts from /api/jobs/stats and update the summary cards. */
 async function loadStats() {
     try {
         const response = await fetch(`${API_BASE}/jobs/stats`);
@@ -86,7 +90,7 @@ async function loadStats() {
     }
 }
 
-// Render jobs list
+/** Render an array of job objects as clickable cards, or show empty state. */
 function renderJobs(jobs) {
     const jobsList = document.getElementById('jobs-list');
     const emptyState = document.getElementById('empty-state');
@@ -109,7 +113,7 @@ function renderJobs(jobs) {
     });
 }
 
-// Create job card HTML
+/** Build the HTML string for a single job card (progress bar shown when running). */
 function createJobCard(job) {
     const typeIcon = getTypeIcon(job.job_type);
     const typeClass = `job-type-${job.job_type}`;
@@ -231,7 +235,7 @@ function formatETA(seconds) {
     }
 }
 
-// Show job details modal
+/** Open a modal showing full details for a job (config, result, error, cancel button). */
 async function showJobDetails(jobId) {
     try {
         const response = await fetch(`${API_BASE}/jobs/${jobId}`);

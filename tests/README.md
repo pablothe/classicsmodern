@@ -115,19 +115,6 @@ pytest -m "not requires_ollama"
 pytest -m "not requires_gpu"
 ```
 
-## CI/CD
-
-Tests run automatically on:
-- Push to main/develop
-- Pull requests
-- Daily at 2 AM UTC
-
-Test matrix:
-- Python: 3.10, 3.11, 3.12
-- OS: Ubuntu, macOS
-
-See [`.github/workflows/test.yml`](../.github/workflows/test.yml)
-
 ## Coverage Goals
 
 | Component | Target |

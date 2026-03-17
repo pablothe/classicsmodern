@@ -22,7 +22,18 @@ class BookChunk:
 
 
 def split_by_headers(text: str, header_level: int = 2) -> List[BookChunk]:
-    """Split book by Markdown headers"""
+    """Split book text into chunks at Markdown header boundaries.
+
+    Finds all headers at the given level and splits the text so each chunk
+    starts with its header and ends just before the next one.
+
+    Args:
+        text: Full book text in Markdown format.
+        header_level: Markdown header level to split on (default: 2 = ##).
+
+    Returns:
+        List of BookChunk objects. Empty list if no headers found.
+    """
     pattern = f'^{"#" * header_level}\\s+(.+)$'
     chunks = []
     chunk_positions = []

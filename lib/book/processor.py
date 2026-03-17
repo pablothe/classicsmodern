@@ -44,7 +44,7 @@ class Chapter:
 @dataclass
 class BookManifest:
     """Complete book structure and metadata."""
-    version: str = "2.0"
+    version: str = "3.0"
     metadata: Dict = field(default_factory=dict)
     processing: Dict = field(default_factory=dict)
     chapters: List[Chapter] = field(default_factory=list)

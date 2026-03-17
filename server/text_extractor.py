@@ -478,9 +478,18 @@ def get_chapter_text_data(book_dir: Path, chapter_index: int, audio_chapter_timi
                     'audio_duration': audio_chapter_timing.get('duration')
                 }
 
-            # v2.0 manifests include front matter as real chapters — no offset needed.
-            # Legacy manifests need offset logic because discover_books() injects
-            # prologue/epilogue entries that aren't in the manifest.
+            # Two manifest versions have different chapter indexing strategies:
+            #
+            # v2.0 manifests: Front matter (prologue, dedication, etc.) is stored as
+            # real chapters in the manifest. chapter_index maps directly to manifest
+            # index — no offset needed.
+            #
+            # Legacy manifests: Only numbered chapters are in the manifest. However,
+            # discover_books() injects synthetic prologue/epilogue entries into the
+            # audio chapter list. So audio chapter 0 = prologue (text before ch 1),
+            # and the last audio chapter = epilogue (text after last ch). We must
+            # apply an offset (prologue_offset) to convert audio chapter_index into
+            # the correct manifest_index.
             has_explicit_fm = _manifest_has_explicit_front_matter(manifest)
 
             if has_explicit_fm:

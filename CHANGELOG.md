@@ -166,8 +166,8 @@ paragraphIndex = floor((textPosition / total_text_length) × total_paragraphs)
 - Confirmed global position tracking across chapter files
 
 **Documentation:**
-- Created comprehensive guide: [docs/AUDIO_TEXT_SYNC.md](docs/AUDIO_TEXT_SYNC.md)
-- Includes architecture diagrams, algorithm details, troubleshooting
+- Comprehensive technical guide: [docs/AUDIO_TEXT_SYNC.md](docs/AUDIO_TEXT_SYNC.md)
+- Covers architecture, data formats, sync algorithms, and troubleshooting
 
 **Migration:**
 Audiobooks created before Feb 9, 2026 need regeneration:

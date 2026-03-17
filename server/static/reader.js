@@ -299,6 +299,13 @@ class BookReader {
     // Scroll & Navigation
     // ========================================================================
 
+    /**
+     * Set up lazy-loading via IntersectionObserver.
+     * Each chapter section has a data-observe sentinel. When a sentinel
+     * enters the viewport (10% threshold), we update the toolbar title
+     * and pre-load adjacent chapters so content is ready before the
+     * user scrolls to it.
+     */
     setupIntersectionObserver() {
         if (this.observer) this.observer.disconnect();
 

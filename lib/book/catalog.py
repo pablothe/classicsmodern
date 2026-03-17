@@ -6,6 +6,11 @@ Centralized catalog of classic books with author, publication year,
 and other bibliographic information for display in the audiobook player.
 """
 
+# Hardcoded bibliographic catalog for display in the audiobook player UI.
+# Keys are book directory names (e.g., 'alice_adventures').
+# Values: title, author, year, original_language, gutenberg_id.
+# This is a static fallback — runtime metadata comes from gutenberg_metadata.json
+# or book_manifest.json when available (see catalog.py:get_book_info()).
 BOOK_CATALOG = {
     'alice_adventures': {
         'title': "Alice's Adventures in Wonderland",
