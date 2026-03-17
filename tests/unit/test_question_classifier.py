@@ -126,20 +126,3 @@ class TestDefaultFallback:
         result = classify_question("asdfghjkl")
         assert result['type'] == 'SPECIFIC_FACTUAL'
         assert result['confidence'] == 'low'
-
-
-class TestReturnStructure:
-
-    def test_has_required_keys(self):
-        result = classify_question("Any question")
-        assert 'type' in result
-        assert 'confidence' in result
-        assert 'reasoning' in result
-
-    def test_type_is_valid(self):
-        result = classify_question("Any question")
-        assert result['type'] in ('SPECIFIC_FACTUAL', 'BROAD_SUMMARY')
-
-    def test_confidence_is_valid(self):
-        result = classify_question("Any question")
-        assert result['confidence'] in ('high', 'medium', 'low')

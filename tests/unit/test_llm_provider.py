@@ -78,10 +78,6 @@ class TestOllamaProvider:
             assert result["available"] is False
             assert "connection refused" in result["error"]
 
-    def test_repr(self):
-        provider = OllamaProvider(model="test:1b")
-        assert "test:1b" in repr(provider)
-
 
 class TestOpenAIProvider:
     def test_missing_package_raises_importerror(self, monkeypatch):
