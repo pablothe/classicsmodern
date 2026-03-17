@@ -1648,6 +1648,15 @@ function renderPlayer() {
     if (controlsEl) controlsEl.style.display = hasAudio ? '' : 'none';
     if (ui.secondaryControls) ui.secondaryControls.style.display = hasAudio ? 'grid' : 'none';
 
+    // When browsing a different book, reset the player controls to "ready to play"
+    // so they don't show the playing book's progress
+    if (isBrowsingDifferentBook()) {
+        ui.progressBar.value = 0;
+        ui.currentTime.textContent = '';
+        ui.timeRemaining.textContent = '';
+        ui.playPauseBtn.textContent = '▶';
+    }
+
     // Mobile read toggle: show only if book has source text
     const mobileToggle = document.getElementById('mobile-read-toggle');
     if (mobileToggle) mobileToggle.style.display = book.has_source_text ? '' : 'none';
@@ -1688,7 +1697,7 @@ function updateNavigationButtons() {
 
 function loadAudioFile() {
     const book = state.playingBook || state.currentBook;
-    const variant = state.currentVariant;
+    const variant = state.playingVariant || state.currentVariant;
     const audioURL = API.getAudioURL(book.book_id, variant.variant_id, state.currentFileIndex);
 
     console.log('[loadAudioFile]', {
@@ -1716,8 +1725,9 @@ function renderChapters() {
         chapters: chapters
     });
 
+    const browsingDifferent = isBrowsingDifferentBook();
     ui.chaptersList.innerHTML = chapters.map((chapter, index) => {
-        const isActive = state.currentChapterIndex === index;
+        const isActive = !browsingDifferent && state.currentChapterIndex === index;
         const chapterTitle = chapter.title || `Chapter ${chapter.number || index + 1}`;
 
         // Calculate chapter duration from audio files
@@ -1779,7 +1789,21 @@ function jumpToChapter(chapterIndex, seekAfterLoad) {
     }
 
     const chapter = chapters[chapterIndex];
-    const variant = state.currentVariant;
+
+    // If browsing a different book, switch playback to this book
+    if (isBrowsingDifferentBook() && state.currentVariant) {
+        state.playingBook = state.currentBook;
+        state.playingVariant = state.currentVariant;
+        state.chunkManifest = null;
+        state.paragraphTimings = null;
+        // Fetch sync data asynchronously
+        API.getChunkManifest(state.currentBook.book_id)
+            .then(m => state.chunkManifest = m).catch(() => {});
+        fetch(`${API.baseURL}/api/books/${state.currentBook.book_id}/paragraph-timings`)
+            .then(r => r.ok ? r.json() : null)
+            .then(d => state.paragraphTimings = d?.has_paragraph_timings ? d.chapters : null)
+            .catch(() => {});
+    }
 
     // Find which audio file contains this chapter
     // Chapter data contains file_index and timestamp
@@ -1833,10 +1857,13 @@ function detectCurrentChapter() {
     for (let i = chapters.length - 1; i >= 0; i--) {
         const chapter = chapters[i];
         if (chapter.file_index === currentFile && chapter.timestamp <= currentTime) {
-            if (state.currentChapterIndex !== i) {
-                state.currentChapterIndex = i;
+            if (state.playingChapterIndex !== i) {
                 state.playingChapterIndex = i;
-                updateChapterHighlight();
+                // Only update browsing chapter index when viewing the playing book
+                if (!isBrowsingDifferentBook()) {
+                    state.currentChapterIndex = i;
+                    updateChapterHighlight();
+                }
                 updateCurrentChapterDisplay();
             }
             return;
@@ -2615,6 +2642,14 @@ function showNotification(message, type = 'info') {
 // ============================================================================
 
 function togglePlayPause() {
+    // If browsing a different book and pressing play, switch to that book
+    if (ui.audio.paused && isBrowsingDifferentBook() && state.currentVariant) {
+        loadVariantAudio(state.currentBook, state.currentVariant).then(() => {
+            ui.audio.play();
+            renderPlayer();
+        });
+        return;
+    }
     if (ui.audio.paused) {
         ui.audio.play();
     } else {
@@ -2652,6 +2687,10 @@ function forward() {
 }
 
 function updateProgress() {
+    // Don't update player view progress when browsing a different book —
+    // the left panel should show the browsed book's "ready to play" state
+    if (isBrowsingDifferentBook()) return;
+
     if (ui.audio.duration) {
         const progress = (ui.audio.currentTime / ui.audio.duration) * 100;
         ui.progressBar.value = progress;
@@ -3370,7 +3409,10 @@ function setupEventListeners() {
     // Audio events
     ui.audio.addEventListener('play', () => {
         state.isPlaying = true;
-        ui.playPauseBtn.textContent = '‖';
+        // Only update the player view play button if viewing the playing book
+        if (!isBrowsingDifferentBook()) {
+            ui.playPauseBtn.textContent = '‖';
+        }
         startAutoSave();
         updateMediaSession();
         updateNowPlayingBar();
@@ -3378,7 +3420,10 @@ function setupEventListeners() {
 
     ui.audio.addEventListener('pause', () => {
         state.isPlaying = false;
-        ui.playPauseBtn.textContent = '▶';
+        // Only update the player view play button if viewing the playing book
+        if (!isBrowsingDifferentBook()) {
+            ui.playPauseBtn.textContent = '▶';
+        }
         savePlaybackState();
         stopAutoSave();
         updateNowPlayingBar();
@@ -3561,6 +3606,11 @@ function selectBestVariant(book) {
     return book.variants[0];
 }
 
+function isBrowsingDifferentBook() {
+    return state.playingBook && state.currentBook &&
+        state.playingBook.book_id !== state.currentBook.book_id;
+}
+
 async function openBook(bookId) {
     const book = state.books.find(b => b.book_id === bookId);
     if (!book) return;
@@ -3583,6 +3633,15 @@ async function openBook(bookId) {
         } else {
             state.currentVariant = null;
         }
+    } else {
+        // Browsing a different book while audio plays — set variant for UI
+        // but do NOT load audio or change playing state
+        if (book.has_audio && book.variants.length > 0) {
+            state.currentVariant = selectBestVariant(book);
+        } else {
+            state.currentVariant = null;
+        }
+        state.currentChapterIndex = 0;
     }
 
     // Show player view (split view on desktop, stacked on mobile)
@@ -3789,9 +3848,10 @@ function updateNowPlayingBar() {
     const hasAudio = ui.audio.src && !ui.audio.src.endsWith('/');
     const playerActive = ui.playerView.classList.contains('active');
 
-    // Show when audio is loaded and we're NOT in the player view
-    // Visible in library AND reader (so you always see what's playing)
-    const shouldShow = hasAudio && state.playingVariant && !playerActive;
+    // Show when audio is loaded and we're NOT in the player view,
+    // OR when in player view but browsing a different book (Spotify-style)
+    const browsingDifferent = isBrowsingDifferentBook();
+    const shouldShow = hasAudio && state.playingVariant && (!playerActive || browsingDifferent);
 
     if (shouldShow) {
         ui.nowPlayingBar.classList.remove('hidden');
@@ -3899,6 +3959,7 @@ function initNowPlayingBar() {
             if (state.playingBook && state.playingVariant) {
                 state.currentBook = state.playingBook;
                 state.currentVariant = state.playingVariant;
+                state.currentChapterIndex = state.playingChapterIndex;
                 renderPlayer();
                 ui.libraryView.classList.remove('active');
                 ui.variantView.classList.remove('active');
@@ -4486,6 +4547,12 @@ function renderSplitView() {
     // Render chapters
     renderSplitChapters();
 
+    // If read tab is active, reload content for the current book
+    const activeTab = document.querySelector('.split-tab.active');
+    if (activeTab?.dataset.splitTab === 'read') {
+        ensureSplitReaderLoaded();
+    }
+
     // If no chapters and has source text, default to read tab
     if ((!book.has_chapters || !book.chapters?.length) && book.has_source_text) {
         switchSplitTab('read');
@@ -4505,8 +4572,9 @@ function renderSplitChapters() {
         return;
     }
 
+    const browsingDifferent = isBrowsingDifferentBook();
     container.innerHTML = book.chapters.map((chapter, index) => {
-        const isActive = state.currentChapterIndex === index;
+        const isActive = !browsingDifferent && state.currentChapterIndex === index;
         const title = chapter.title || `Chapter ${chapter.number || (index + 1)}`;
 
         return `
