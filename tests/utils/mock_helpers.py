@@ -380,6 +380,44 @@ def mock_ollama_available(available: bool = True):
 # Test Data Helpers
 # ============================================================================
 
+class MockLLMProvider:
+    """Mock LLM provider for testing without network calls.
+
+    Usage:
+        llm = MockLLMProvider(responses=["response1", "response2"])
+        result = llm.generate("prompt")  # Returns "response1"
+        result = llm.generate("prompt")  # Returns "response2"
+    """
+
+    def __init__(self, responses: List[str] = None, available: bool = True):
+        self.responses = responses or ["Mock LLM response"]
+        self.available = available
+        self.call_count = 0
+        self.last_prompt = None
+        self.name = "mock"
+        self.model = "mock-model"
+
+    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
+        self.last_prompt = prompt
+        response = self.responses[min(self.call_count, len(self.responses) - 1)]
+        self.call_count += 1
+        return response
+
+    def chat(self, messages: List[Dict], temperature: float = 0.3, timeout: int = 300) -> str:
+        prompt = messages[-1].get('content', '') if messages else ''
+        return self.generate(prompt, temperature=temperature, timeout=timeout)
+
+    def is_available(self) -> Dict:
+        return {
+            "available": self.available,
+            "provider": "mock",
+            "error": None if self.available else "Mock provider unavailable"
+        }
+
+    def __repr__(self):
+        return f"MockLLMProvider(model={self.model!r})"
+
+
 def create_sample_book(
     title: str = "Test Book",
     author: str = "Test Author",

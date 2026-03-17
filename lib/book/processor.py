@@ -875,7 +875,11 @@ class BookProcessor:
             else:
                 end_line = len(lines)
 
-            content_lines = lines[start_line + 1:end_line]
+            # For single_chapter_fallback (no header), include the start line itself
+            if ch_info['detection_type'] == 'single_chapter_fallback':
+                content_lines = lines[start_line:end_line]
+            else:
+                content_lines = lines[start_line + 1:end_line]
             content = '\n'.join(content_lines).strip()
 
             start_char = ch_info['char_pos']

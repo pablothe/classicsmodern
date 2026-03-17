@@ -216,16 +216,18 @@ def mock_playback_db(temp_dir) -> str:
 @pytest.fixture
 def chapter_patterns() -> Dict:
     """Return various chapter format examples."""
+    # Each chapter needs enough content (5+ words) to pass the near-empty filter
+    filler = "This is enough content to pass the minimum word count filter for chapters."
     return {
         'roman_numerals': [
-            "## CHAPTER I. Down the Rabbit-Hole",
-            "## CHAPTER II. The Pool of Tears",
-            "## CHAPTER III. A Caucus-Race"
+            f"## CHAPTER I. Down the Rabbit-Hole\n\n{filler}",
+            f"## CHAPTER II. The Pool of Tears\n\n{filler}",
+            f"## CHAPTER III. A Caucus-Race\n\n{filler}"
         ],
         'markdown_headers': [
-            "## Chapter 1: The Beginning",
-            "## Chapter 2: The Middle",
-            "## Chapter 3: The End"
+            f"## Chapter 1: The Beginning\n\n{filler}",
+            f"## Chapter 2: The Middle\n\n{filler}",
+            f"## Chapter 3: The End\n\n{filler}"
         ],
     }
 
@@ -299,6 +301,17 @@ def mock_ollama(monkeypatch):
 # ============================================================================
 # Pytest Configuration
 # ============================================================================
+
+@pytest.fixture
+def job_db(temp_dir):
+    """Create a JobDatabase instance with a temp SQLite path."""
+    try:
+        from server.job_database import JobDatabase
+        db = JobDatabase(str(temp_dir / "test_jobs.db"))
+        return db
+    except ImportError:
+        pytest.skip("server.job_database not available")
+
 
 def pytest_configure(config):
     """Configure pytest with custom markers."""

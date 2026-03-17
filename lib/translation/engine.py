@@ -328,6 +328,7 @@ class OllamaTranslator:
         # LLM can auto-detect source language, we only specify target
         # Detect modernization mode (English → Modern English, etc.)
         is_modernization = (
+            source_lang is not None and
             'english' in source_lang.lower() and 'english' in target_lang.lower()
         )
 

@@ -9,6 +9,9 @@ import pytest
 
 from lib.book.processor import BookProcessor
 
+# Chapters need 5+ words of content to pass the near-empty filter
+FILLER = "This chapter contains enough words to pass the minimum content filter easily."
+
 
 class TestChapterDetector:
     """Test suite for ChapterDetector class"""
@@ -28,7 +31,7 @@ class TestChapterDetector:
 
     def test_detect_fallback_chapter_keyword(self):
         """Test detection of bare Chapter N lines via fallback regex"""
-        text = """Some preamble text here.
+        text = f"""Some preamble text here.
 
 Chapter I. The Horror in Clay
 
@@ -66,19 +69,19 @@ Content of the third chapter with enough words to be meaningful.
 
     def test_detect_multiple_markdown_headers(self):
         """Test detection with multiple ## header styles"""
-        text = """# Book Title
+        text = f"""# Book Title
 
 ## Introduction
 
-Some intro text here.
+{FILLER} Some intro text here with additional words for the content filter.
 
 ## Chapter 1: Development
 
-Development content here.
+{FILLER} Development content here with more meaningful text to read.
 
 ## The Conclusion
 
-Final content here.
+{FILLER} Final content here with a proper ending to the story.
 """
         detector = BookProcessor(verbose=False)
 
@@ -90,18 +93,18 @@ Final content here.
 
     def test_validate_sequential_chapters(self):
         """Test sequential chapter validation"""
-        text = """
+        text = f"""
 ## CHAPTER I. First Chapter
 
-Content here.
+{FILLER} The first chapter starts with a detailed introduction to the story.
 
 ## CHAPTER II. Second Chapter
 
-More content.
+{FILLER} The second chapter continues with more exciting developments.
 
 ## CHAPTER III. Third Chapter
 
-Final content.
+{FILLER} The third chapter wraps up the narrative arc beautifully.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -113,18 +116,18 @@ Final content.
 
     def test_detect_missing_chapters(self):
         """Test detection of missing chapters in sequence"""
-        text = """
+        text = f"""
 ## CHAPTER I. First Chapter
 
-Content here.
+{FILLER} The story begins here with plenty of interesting details.
 
 ## CHAPTER III. Third Chapter
 
-Skipped chapter 2!
+{FILLER} We skipped chapter two and jumped straight to chapter three.
 
 ## CHAPTER IV. Fourth Chapter
 
-More content.
+{FILLER} The fourth chapter continues the story after the gap.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -135,18 +138,18 @@ More content.
 
     def test_detect_duplicate_chapters(self):
         """Test detection of duplicate chapter numbers"""
-        text = """
+        text = f"""
 ## CHAPTER I. First Chapter
 
-Content here.
+{FILLER} The first chapter introduces the main characters in detail.
 
 ## CHAPTER II. Second Chapter
 
-Content.
+{FILLER} The second chapter develops the plot with many twists.
 
 ## CHAPTER II. Another Second Chapter
 
-Duplicate!
+{FILLER} This duplicate chapter has the same number as the previous one.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -169,9 +172,9 @@ Duplicate!
         text = """
 # Just a Title
 
-Some content without any chapters.
+Some short content.
 
-More content here.
+More short content.
 
 The end.
 """
@@ -213,18 +216,18 @@ class TestChapterEdgeCases:
 
     def test_case_insensitive_detection(self):
         """Test that chapter detection is case-insensitive"""
-        text = """
+        text = f"""
 ## chapter i. lowercase
 
-Content.
+{FILLER} The lowercase chapter has content with enough words to be valid.
 
 ## CHAPTER II. UPPERCASE
 
-Content.
+{FILLER} The uppercase chapter also has content with enough words here.
 
 ## Chapter III. Mixed Case
 
-Content.
+{FILLER} The mixed case chapter rounds out our test with more content.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -233,14 +236,14 @@ Content.
 
     def test_whitespace_tolerance(self):
         """Test that extra whitespace doesn't break detection"""
-        text = """
+        text = f"""
 ##    CHAPTER   I.    Extra     Spaces
 
-Content.
+{FILLER} Extra whitespace in the header should not prevent chapter detection.
 
 ##CHAPTER II.NoSpaces
 
-Content.
+{FILLER} No spaces between hash and text might or might not be detected.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -249,14 +252,14 @@ Content.
 
     def test_unicode_chapter_titles(self):
         """Test chapter titles with unicode characters"""
-        text = """
+        text = f"""
 ## CHAPTER I. Café und Bücher
 
-Content with unicode.
+{FILLER} Unicode characters in chapter titles should be handled gracefully.
 
 ## CHAPTER II. Japanese Content
 
-Japanese title.
+{FILLER} Another chapter with a different language reference in the title.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -270,7 +273,7 @@ Japanese title.
         text = f"""
 ## CHAPTER I. {long_title}
 
-Content.
+{FILLER} Even with an extremely long title the chapter should still be detected.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -284,19 +287,19 @@ class TestPriorityChain:
 
     def test_markdown_headers_priority_1(self):
         """Priority 1: ## headers are the primary detection method."""
-        text = """# Test Book
+        text = f"""# Test Book
 
 ## The Beginning
 
-Content here with enough words.
+{FILLER} Content here with enough words to pass the filter easily.
 
 ## The Middle
 
-More content here with enough words.
+{FILLER} More content here with enough words to be a real chapter.
 
 ## The End
 
-Final content here with enough words.
+{FILLER} Final content here with enough words to complete the story.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
@@ -306,7 +309,7 @@ Final content here with enough words.
 
     def test_fallback_regex_for_bare_chapter_lines(self):
         """Priority 2: Regex fallback for text without ## headers."""
-        text = """Some preamble text.
+        text = f"""Some preamble text.
 
 Chapter I. The First Adventure
 
@@ -334,19 +337,19 @@ Content of chapter two here with enough words to be meaningful.
 
     def test_act_scene_fallback(self):
         """Priority 2: Act/Scene patterns for plays."""
-        text = """A play by Someone.
+        text = f"""A play by Someone.
 
 Act I
 
-Content of act one.
+{FILLER} The first act opens with a dramatic monologue by the protagonist.
 
 Act II
 
-Content of act two.
+{FILLER} The second act introduces the conflict and rising tension beautifully.
 
 Act III
 
-Content of act three.
+{FILLER} The third act brings the resolution and a satisfying conclusion.
 """
         detector = BookProcessor(verbose=False)
         chapters = detector.detect_chapters(text)
