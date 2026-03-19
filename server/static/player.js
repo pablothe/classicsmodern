@@ -3944,12 +3944,20 @@ function updateNowPlayingBar() {
             }
         }
 
-        // Chapter subtitle: "Author · Chapter Title"
+        // Author + Chapter subtitle
+        const author = book?.author || '';
+        const npAuthor = document.getElementById('np-author');
+        const npChapterSep = document.getElementById('np-chapter-sep');
+        if (npAuthor) {
+            npAuthor.textContent = author;
+            npAuthor.style.display = author ? '' : 'none';
+        }
+        if (npChapterSep) npChapterSep.style.display = author ? '' : 'none';
+
         const chapter = book?.chapters?.[state.playingChapterIndex];
         if (chapter) {
             const chapterTitle = chapter.title || `Chapter ${chapter.number || (state.playingChapterIndex + 1)}`;
-            const author = book?.author || '';
-            ui.npChapter.textContent = author ? `${author} \u2022 ${chapterTitle}` : chapterTitle;
+            ui.npChapter.textContent = chapterTitle;
         } else if (state.playingChapterIndex !== null) {
             ui.npChapter.textContent = `Chapter ${state.playingChapterIndex + 1}`;
         }
@@ -4031,6 +4039,24 @@ function initNowPlayingBar() {
                 ui.playerView.classList.add('active');
                 updateNowPlayingBar();
             }
+        });
+    }
+
+    // Author name click → filter library by author
+    const npAuthor = document.getElementById('np-author');
+    if (npAuthor) {
+        npAuthor.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const author = npAuthor.textContent.trim();
+            if (!author) return;
+            state.searchQuery = author;
+            if (ui.unifiedSearchInput) ui.unifiedSearchInput.value = author;
+            // Switch to library view
+            ui.libraryView.classList.add('active');
+            ui.variantView.classList.remove('active');
+            ui.playerView.classList.remove('active');
+            switchTab('library');
+            updateNowPlayingBar();
         });
     }
 

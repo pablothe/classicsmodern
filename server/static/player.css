@@ -4024,6 +4024,7 @@ header h2 {
     min-width: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.625rem;
     cursor: pointer;
     overflow: hidden;
@@ -4046,6 +4047,7 @@ header h2 {
 .np-info {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.1rem;
     min-width: 0;
 }
@@ -4065,6 +4067,15 @@ header h2 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.np-author {
+    cursor: pointer;
+}
+
+.np-author:hover {
+    text-decoration: underline;
+    color: var(--text-primary);
 }
 
 /* --- RIGHT: Utility buttons --- */
