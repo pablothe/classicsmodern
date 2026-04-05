@@ -7,12 +7,13 @@ Only removes text if there's an EXACT match - no fuzzy logic.
 """
 
 import re
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import List, Tuple, Optional
 import sys
 
 
-def find_exact_overlap(text1_end: str, text2_start: str, max_words: int = 30) -> Optional[str]:
+def find_exact_overlap(text1_end: str, text2_start: str, max_words: int = 50) -> Optional[str]:
     """
     Find exact overlapping text between end of text1 and start of text2.
 
@@ -45,7 +46,91 @@ def find_exact_overlap(text1_end: str, text2_start: str, max_words: int = 30) ->
     return None
 
 
-def deduplicate_chunks(chunk_files: List[Path], output_dir: Path, max_overlap_words: int = 30) -> List[Path]:
+def _split_sentences(text: str) -> List[str]:
+    """Split text into sentences using punctuation boundaries."""
+    # Split on sentence-ending punctuation followed by whitespace
+    parts = re.split(r'(?<=[.!?])\s+', text.strip())
+    return [s.strip() for s in parts if s.strip()]
+
+
+def find_fuzzy_overlap(
+    text1_end: str,
+    text2_start: str,
+    similarity_threshold: float = 0.8,
+    max_sentences: int = 5,
+) -> List[Tuple[str, str, float]]:
+    """
+    Find near-duplicate sentences between end of text1 and start of text2.
+
+    Uses difflib.SequenceMatcher for similarity scoring (stdlib, no deps).
+    Returns pairs of similar sentences that likely represent echoed context.
+
+    Args:
+        text1_end: Last portion of first text
+        text2_start: First portion of second text
+        similarity_threshold: Minimum similarity ratio (0.0-1.0) to count as overlap
+        max_sentences: Maximum sentences to compare from each side
+
+    Returns:
+        List of (sentence_from_text1, sentence_from_text2, similarity_score)
+        for pairs exceeding the threshold
+    """
+    sentences1 = _split_sentences(text1_end)[-max_sentences:]
+    sentences2 = _split_sentences(text2_start)[:max_sentences]
+
+    if not sentences1 or not sentences2:
+        return []
+
+    matches = []
+    # Compare sentences from end of text1 against start of text2
+    # Only check sequential alignment (sentence i in text1 ~ sentence j in text2)
+    # to avoid false positives from coincidental similarity
+    matched_j = set()
+    for s1 in sentences1:
+        for j, s2 in enumerate(sentences2):
+            if j in matched_j:
+                continue
+            ratio = SequenceMatcher(None, s1.lower(), s2.lower()).ratio()
+            if ratio >= similarity_threshold:
+                matches.append((s1, s2, ratio))
+                matched_j.add(j)
+                break  # Each s1 matches at most one s2
+
+    return matches
+
+
+def remove_fuzzy_overlap(text: str, fuzzy_matches: List[Tuple[str, str, float]]) -> str:
+    """
+    Remove fuzzy-matched sentences from the start of text.
+
+    Only removes sentences that appear at the beginning of the text and match
+    a sentence from the previous chunk. Preserves the rest of the text.
+
+    Args:
+        text: The text to clean (start of a chunk/paragraph)
+        fuzzy_matches: Output from find_fuzzy_overlap()
+
+    Returns:
+        Text with overlapping sentences removed from the start
+    """
+    if not fuzzy_matches:
+        return text
+
+    # Get the sentences that were found in text2 (the current text)
+    sentences_to_remove = [match[1] for match in fuzzy_matches]
+
+    result = text
+    for sentence in sentences_to_remove:
+        # Only remove if it appears at or near the start of the text
+        # Use a loose match: find the sentence in the first portion of text
+        idx = result.find(sentence)
+        if idx != -1 and idx < 100:  # Within first 100 chars = at the start
+            result = result[idx + len(sentence):].lstrip()
+
+    return result
+
+
+def deduplicate_chunks(chunk_files: List[Path], output_dir: Path, max_overlap_words: int = 50) -> List[Path]:
     """
     Remove exact duplicate text from consecutive chunks.
 
@@ -90,10 +175,22 @@ def deduplicate_chunks(chunk_files: List[Path], output_dir: Path, max_overlap_wo
                 total_removed_chars += removed
 
                 overlap_words = len(overlap.split())
-                print(f"  ✓ Removed {overlap_words} words ({removed:,} chars)")
+                print(f"  ✓ Removed {overlap_words} words ({removed:,} chars) [exact]")
                 print(f"    Preview: '{overlap[:60]}...'")
             else:
-                print(f"  ○ No exact overlap found")
+                # Fallback: try fuzzy overlap detection
+                fuzzy_matches = find_fuzzy_overlap(
+                    prev_content, content, similarity_threshold=0.85
+                )
+                if fuzzy_matches:
+                    content = remove_fuzzy_overlap(content, fuzzy_matches)
+                    removed = original_length - len(content)
+                    total_removed_chars += removed
+                    print(f"  ✓ Removed {len(fuzzy_matches)} fuzzy match(es) ({removed:,} chars)")
+                    for s1, s2, score in fuzzy_matches:
+                        print(f"    [{score:.0%}] '{s2[:50]}...'")
+                else:
+                    print(f"  ○ No overlap found")
         else:
             print(f"  ○ First chunk - no deduplication needed")
 

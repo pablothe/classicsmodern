@@ -26,6 +26,7 @@ from datetime import datetime
 
 from lib.book.validator import validate_book, ValidationReport
 from lib.book.processor import BookProcessor
+from lib.translation.deduplicate import find_exact_overlap, find_fuzzy_overlap, remove_fuzzy_overlap
 
 
 # ============================================================================
@@ -442,6 +443,16 @@ class BlockTranslator:
             # Translate with context from previous paragraph
             if previous_translated:
                 translated = self._translate_text_with_context(para, previous_translated)
+                # Post-translation dedup: remove echoed context from output
+                overlap = find_exact_overlap(previous_translated, translated, max_words=50)
+                if overlap:
+                    translated = translated[len(overlap):].lstrip()
+                else:
+                    fuzzy_matches = find_fuzzy_overlap(
+                        previous_translated, translated, similarity_threshold=0.85
+                    )
+                    if fuzzy_matches:
+                        translated = remove_fuzzy_overlap(translated, fuzzy_matches)
             else:
                 translated = self._translate_text(para)
 

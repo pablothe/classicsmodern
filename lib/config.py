@@ -43,7 +43,7 @@ class ModelConfig:
 class TranslationConfig:
     """Configuration for translation process"""
     chunk_size_words: int = 250
-    context_overlap_words: int = 20
+    context_overlap_words: int = 50
     max_retries: int = 3
     retry_delay_seconds: int = 5
 
