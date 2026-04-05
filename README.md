@@ -1,8 +1,13 @@
 # Modern Classics
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+
 Translate classic literature and generate audiobooks using local AI.
 
-**Works fully offline.** After initial setup (pip install, model download), no internet connection is required. The only feature that uses the internet is downloading books from Project Gutenberg (optional).
+**Works fully offline.** After initial setup, no internet connection is required. The only feature that uses the internet is downloading books from Project Gutenberg (optional).
+
+---
 
 ## What It Does
 
@@ -14,41 +19,51 @@ Translate classic literature and generate audiobooks using local AI.
 
 ---
 
-## AI Models
+## Prerequisites
 
-All models run locally by default. No cloud APIs or API keys required.
+Before installing, make sure you have:
 
-Optionally, you can use **OpenAI** or **Anthropic** APIs for translation, summarization, and other text tasks (see [External LLM APIs](#optional-external-llm-apis) below).
+| Requirement | Version | Install |
+|-------------|---------|---------|
+| **Python** | 3.11+ | [python.org](https://www.python.org/downloads/) |
+| **Ollama** | Latest | [ollama.com](https://ollama.com/) |
+| **FFmpeg** | Latest | `brew install ffmpeg` (macOS) / `sudo apt install ffmpeg` (Linux) |
 
-| Model | Purpose | Runtime |
-|-------|---------|---------|
-| **zongwei/gemma3-translator:4b** | Translation & summarization | Ollama |
-| **llama3.2:3b** | AI chat about books | Ollama |
-| **Kokoro v1.0** | Text-to-speech (52 voices) | ONNX Runtime |
-| **Stable Diffusion v1.5** | Cover art generation | PyTorch |
-| **all-MiniLM-L6-v2** | Semantic search (RAG) | sentence-transformers |
-| **WhisperX** | Word timing (Karaoke) | PyTorch (optional) |
-| **OpenAI GPT models** | Translation, summarization, chat (optional) | OpenAI API |
-| **Anthropic Claude models** | Translation, summarization, chat (optional) | Anthropic API |
+**System requirements:**
+- ~2 GB disk space for AI models (downloaded automatically on first run)
+- 8 GB RAM minimum (16 GB recommended for cover art generation)
+- macOS (Apple Silicon recommended) or Linux
+- Windows: untested, but should work with WSL
 
 ---
 
 ## Quick Start
 
-### Install
+### 1. Install
 
 ```bash
-# Create virtual environment (required)
+# Clone the repository
+git clone https://github.com/your-username/classicsmodern.git
+cd classicsmodern
+
+# Create virtual environment (required — see note below)
 python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-pip install kokoro-tts kokoro-onnx soundfile
-brew install ffmpeg  # macOS
 ```
 
-### Create an Audiobook (one command)
+> **Why is venv required?** The server uses `venv/bin/python3` for subprocess calls. Without venv, audio generation will fail with "kokoro-onnx library not installed".
+
+### 2. Pull the Ollama models
+
+```bash
+ollama pull zongwei/gemma3-translator:4b
+ollama pull llama3.2:3b  # optional, for AI chat
+```
+
+### 3. Create an Audiobook (one command)
 
 ```bash
 python3 make_audiobook.py books/alice_adventures/alices_adventures.md --generate-cover
@@ -58,32 +73,50 @@ This will:
 1. Strip Gutenberg boilerplate (if present)
 2. Detect chapters automatically
 3. Generate audio with Kokoro TTS
-4. Generate cover art
+4. Generate cover art with Stable Diffusion
 5. Output to `books/alice_adventures/audio_kokoro/`
 
-### Listen
+### 4. Listen
 
 ```bash
-# Start web server
+# Start the web server
 ./start_server.sh
 
-# Open http://localhost:8000 in browser
-# Or from phone: http://[your-mac-ip]:8000
+# Open in browser
+# http://localhost:8000
+# Or from your phone: http://[your-mac-ip]:8000
 ```
+
+---
+
+## AI Models
+
+All models run locally by default. No cloud APIs or API keys required.
+
+| Model | Purpose | Runtime |
+|-------|---------|---------|
+| **zongwei/gemma3-translator:4b** | Translation & summarization | Ollama |
+| **llama3.2:3b** | AI chat about books | Ollama |
+| **Kokoro v1.0** | Text-to-speech (52 voices) | ONNX Runtime |
+| **Stable Diffusion v1.5** | Cover art generation | PyTorch |
+| **all-MiniLM-L6-v2** | Semantic search (RAG) | sentence-transformers |
+| **WhisperX** | Word timing (Karaoke) | PyTorch (optional) |
+
+Optionally, you can use **OpenAI** or **Anthropic** APIs for text tasks (see [External LLM APIs](#optional-external-llm-apis) below).
 
 ---
 
 ## CLI Scripts
 
-| Script | Purpose |
-|--------|---------|
-| `make_audiobook.py` | Full pipeline (validate + translate + audio + cover) |
-| `translate.py` | Translate a book |
-| `audiobook.py` | Generate audiobook from text |
-| `summarize.py` | Summarize a book |
-| `cover.py` | Generate cover art |
-| `validate.py` | Validate book structure |
-| `epub_to_md.py` | Convert EPUB to Markdown |
+| Script | Purpose | Example |
+|--------|---------|---------|
+| `make_audiobook.py` | Full pipeline (validate + translate + audio + cover) | `python3 make_audiobook.py book.md --generate-cover` |
+| `translate.py` | Translate a book | `python3 translate.py book.md --target-lang English` |
+| `audiobook.py` | Generate audiobook from text | `python3 audiobook.py book.md --voice bf_emma` |
+| `summarize.py` | Summarize a book | `python3 summarize.py book.md 50` |
+| `cover.py` | Generate cover art | `python3 cover.py "fantasy scene" --output cover.png` |
+| `validate.py` | Validate book structure | `python3 validate.py book.md --auto-fix` |
+| `epub_to_md.py` | Convert EPUB to Markdown | `python3 epub_to_md.py book.epub output/` |
 
 ---
 
@@ -93,9 +126,9 @@ Kokoro TTS includes 52 preset voices. Top picks:
 
 | Voice | Description | Best for |
 |-------|-------------|----------|
-| `bf_emma` | British Female | Classics |
+| `bf_emma` | British Female | Classics (default) |
 | `bm_george` | British Male | Classics |
-| `af_sky` | American Female | Default |
+| `af_sky` | American Female | General |
 | `am_adam` | American Male | General |
 | `am_onyx` | American Male (deep) | Drama |
 
@@ -136,7 +169,7 @@ python3 summarize.py book.md 50
 
 ---
 
-## Web Server Features
+## Web Player Features
 
 The web player (`./start_server.sh`) includes:
 
@@ -152,16 +185,6 @@ The web player (`./start_server.sh`) includes:
 
 ---
 
-## Documentation
-
-| File | Purpose |
-|------|---------|
-| [GUIDE.md](GUIDE.md) | Complete workflow guide |
-| [CLAUDE.md](CLAUDE.md) | Technical reference and architecture |
-| [CHANGELOG.md](CHANGELOG.md) | Version history |
-
----
-
 ## Optional: External LLM APIs
 
 By default everything runs locally with Ollama. To use OpenAI or Anthropic instead:
@@ -174,6 +197,8 @@ By default everything runs locally with Ollama. To use OpenAI or Anthropic inste
 
 2. Configure via `.env` file (copy from `.env.example`):
    ```bash
+   cp .env.example .env
+   # Then edit .env:
    LLM_PROVIDER=openai          # or anthropic
    LLM_MODEL=gpt-4o-mini        # optional, uses provider default
    OPENAI_API_KEY=sk-...        # your API key
@@ -191,12 +216,50 @@ External LLM support applies to: translation, summarization, cover prompt genera
 
 ---
 
+## Troubleshooting
+
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| `kokoro-onnx library not installed` | venv not activated | Run `source venv/bin/activate` before starting |
+| `Connection refused` on translation | Ollama not running | Run `ollama serve` in another terminal |
+| Server won't start | Missing venv or dependencies | Always use `./start_server.sh`, not `python3 server/audiobook_server.py` directly |
+| Cover art generation is slow | No GPU acceleration | Normal on CPU (~2 min). Apple Silicon uses MPS automatically |
+| `ffmpeg: command not found` | FFmpeg not installed | `brew install ffmpeg` (macOS) or `sudo apt install ffmpeg` (Linux) |
+| Audio sounds robotic | Wrong language code | Make sure `--lang` matches the text language (default: `en-us`) |
+
+---
+
+## Documentation
+
+| File | Purpose |
+|------|---------|
+| [GUIDE.md](GUIDE.md) | Complete workflow guide |
+| [CLAUDE.md](CLAUDE.md) | Technical reference and architecture |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
+
+---
+
 ## Design Principles
 
 1. **Local by default** -- runs fully offline with Ollama, with optional cloud LLM support
 2. **One command** -- `make_audiobook.py` handles the full pipeline
 3. **Resumable** -- interrupted jobs pick up where they left off
 4. **Structure-preserving** -- maintains chapters and formatting through all processing
+
+---
+
+## Contributing
+
+Contributions are welcome! Here's how to get started:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Make your changes
+4. Run the tests: `python3 -m pytest tests/`
+5. Commit and push your branch
+6. Open a pull request
+
+If you find a bug or have a feature request, please [open an issue](https://github.com/your-username/classicsmodern/issues).
 
 ---
 

@@ -95,13 +95,13 @@ Updated Feb 25, 2026. Cross-referenced against uncommitted changes + git history
 > Plan: `wondrous-hugging-moonbeam`
 > **Independent** — no dependencies on other phases
 
-- [ ] Server: users_db.json data model + CRUD API endpoints (`/api/users`)
-- [ ] Server: Modify playback endpoints to accept `X-User-ID` header
-- [ ] UI: "Who's listening?" profile picker overlay
-- [ ] UI: Emoji avatar selection grid
-- [ ] UI: Top-right user menu (replaces gear+moon buttons)
-- [ ] Per-user settings: language prefs + dark mode stored server-side
-- [ ] Migration: copy device playback data to first user profile
+- [x] Server: users_db.json data model + CRUD API endpoints (`/api/users`)
+- [x] Server: Modify playback endpoints to accept `X-User-ID` header
+- [x] UI: "Who's listening?" profile picker overlay
+- [x] UI: Emoji avatar selection grid
+- [x] UI: Top-right user menu (replaces gear+moon buttons)
+- [x] Per-user settings: language prefs + dark mode stored server-side
+- [x] Migration: copy device playback data to first user profile
 
 **Files:** `server/audiobook_server.py`, `server/static/player.html`, `server/static/player.js`, `server/static/player.css`
 
