@@ -359,6 +359,7 @@ POST /api/settings                 # Update LLM config (.env)
 # Other
 POST /api/ask                      # AI chat about books
 GET  /api/health                   # Health check (includes LLM status)
+GET  /api/logs                     # Server log viewer
 ```
 
 ## Architecture
@@ -377,6 +378,7 @@ classicsmodern/
 ├── start_server.sh            # Server startup
 ├── requirements.txt
 ├── .env.example               # Environment variable template (LLM API keys, provider config)
+├── NOTICES.md                 # Third-party license notices
 │
 ├── lib/                       # Core library package
 │   ├── config.py              # Configuration (models, paths, LLM provider)
@@ -429,15 +431,34 @@ classicsmodern/
 │       ├── player.html/css/js # Audio player + library
 │       ├── reader.js          # Fullscreen e-reader
 │       ├── jobs.html/css/js   # Job dashboard
+│       ├── logs.html/css/js   # Server log viewer
 │       ├── pipeline.js        # Pipeline UI
 │       ├── karaoke.js         # Karaoke mode
 │       └── manifest.json      # PWA manifest
 │
+├── docs/                      # Additional documentation
+│   └── AUDIO_TEXT_SYNC.md     # Audio-text synchronization design
 ├── scripts/                   # Utility scripts
-│   └── reset_books.py         # Reset book data
-├── templates/                 # HTML templates (legacy)
+│   ├── reset_books.py         # Reset book data
+│   ├── audit_boundaries.py    # Audit chunk boundaries
+│   ├── backfill_metadata.py   # Backfill book metadata
+│   ├── download_top100.py     # Download Gutenberg top 100
+│   ├── migrate_gutenberg_chapters.py  # Migrate chapter data
+│   └── review_chapters.py     # Review chapter detection
+├── templates/                 # HTML templates (deprecated, unused)
 ├── books/                     # Book data
 └── tests/                     # Test suite
+    ├── conftest.py            # Root test configuration
+    ├── pytest.ini             # Pytest settings
+    ├── run_smoke_tests.sh     # Quick smoke test runner
+    ├── smoke/                 # Smoke tests (10 tests)
+    ├── unit/                  # Unit tests (23 tests)
+    ├── integration/           # Integration tests (6 tests)
+    ├── e2e/                   # End-to-end tests
+    ├── regression/            # Regression tests
+    ├── fixtures/              # Test data (sample books, audio, expected outputs)
+    ├── utils/                 # Test helpers (mocks, data generators)
+    └── benchmarks/            # Performance benchmarks
 ```
 
 ### Book Manifest System
