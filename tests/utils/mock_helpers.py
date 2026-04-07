@@ -10,12 +10,15 @@ Provides mock implementations of expensive operations:
 """
 
 import io
+import re
 import wave
 import struct
 import json
 from pathlib import Path
 from typing import Optional, Dict, List
 from datetime import datetime
+
+from lib.llm import LLMProvider
 
 
 # ============================================================================
@@ -416,6 +419,168 @@ class MockLLMProvider:
 
     def __repr__(self):
         return f"MockLLMProvider(model={self.model!r})"
+
+
+# ============================================================================
+# Mock LLM Providers (for translation/deduplication tests)
+# ============================================================================
+
+class MockEchoLLM(LLMProvider):
+    """LLM that echoes context back verbatim, simulating worst-case behavior."""
+
+    def __init__(self):
+        super().__init__(name="mock-echo", model="echo-v1")
+        self.prompts_received = []
+
+    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
+        self.prompts_received.append(prompt)
+
+        context_match = re.search(
+            r'Reference \(do not repeat\):\s*\n(.*?)\n\n',
+            prompt,
+            re.DOTALL
+        )
+
+        lines = prompt.split('\n')
+        content_start = None
+        for i, line in enumerate(lines):
+            if line.startswith('Translate to') or line.startswith('Rewrite this'):
+                content_start = i + 1
+                break
+
+        if content_start is not None:
+            actual_content = '\n'.join(lines[content_start:]).strip()
+        else:
+            actual_content = prompt.strip()
+
+        if context_match:
+            echoed_context = context_match.group(1).strip()
+            return f"{echoed_context} {actual_content}"
+        else:
+            return actual_content
+
+    def is_available(self) -> dict:
+        return {"available": True, "provider": "mock-echo"}
+
+
+class MockParaphraseEchoLLM(LLMProvider):
+    """LLM that echoes context with synonym substitutions."""
+
+    SYNONYMS = {
+        "the": "one",
+        "was": "had been",
+        "very": "extremely",
+        "began": "started",
+        "said": "spoke",
+        "large": "big",
+        "small": "tiny",
+        "quickly": "rapidly",
+        "merely": "only",
+        "desire": "wish",
+        "power": "might",
+        "is": "remains",
+        "not": "never",
+        "man": "humanity",
+        "great": "remarkable",
+        "that": "which",
+        "and": "plus",
+        "he": "one",
+        "over": "above",
+        "have": "possess",
+        "something": "a thing",
+        "what": "which thing",
+    }
+
+    def __init__(self):
+        super().__init__(name="mock-paraphrase", model="paraphrase-v1")
+
+    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
+        context_match = re.search(
+            r'Reference \(do not repeat\):\s*\n(.*?)\n\n',
+            prompt,
+            re.DOTALL
+        )
+
+        lines = prompt.split('\n')
+        content_start = None
+        for i, line in enumerate(lines):
+            if line.startswith('Translate to') or line.startswith('Rewrite this'):
+                content_start = i + 1
+                break
+
+        if content_start is not None:
+            actual_content = '\n'.join(lines[content_start:]).strip()
+        else:
+            actual_content = prompt.strip()
+
+        if context_match:
+            echoed_context = context_match.group(1).strip()
+            paraphrased = echoed_context
+            for original, replacement in self.SYNONYMS.items():
+                paraphrased = re.sub(
+                    rf'\b{re.escape(original)}\b',
+                    replacement,
+                    paraphrased,
+                    flags=re.IGNORECASE
+                )
+            return f"{paraphrased} {actual_content}"
+        else:
+            return actual_content
+
+    def is_available(self) -> dict:
+        return {"available": True, "provider": "mock-paraphrase"}
+
+
+class MockCleanLLM(LLMProvider):
+    """LLM that translates cleanly without echoing context. Control group."""
+
+    def __init__(self):
+        super().__init__(name="mock-clean", model="clean-v1")
+
+    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
+        lines = prompt.split('\n')
+        content_start = None
+        for i, line in enumerate(lines):
+            if line.startswith('Translate to') or line.startswith('Rewrite this'):
+                content_start = i + 1
+                break
+
+        if content_start is not None:
+            return '\n'.join(lines[content_start:]).strip()
+        return prompt.strip()
+
+    def is_available(self) -> dict:
+        return {"available": True, "provider": "mock-clean"}
+
+
+class MockRecordingLLM(LLMProvider):
+    """LLM that records all prompts and returns predictable translations."""
+
+    def __init__(self):
+        super().__init__(name="mock-recording", model="recording-v1")
+        self.prompts = []
+        self.call_count = 0
+
+    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
+        self.prompts.append(prompt)
+        self.call_count += 1
+
+        lines = prompt.split('\n')
+        content_start = None
+        for i, line in enumerate(lines):
+            if line.startswith('Translate to') or line.startswith('Rewrite this'):
+                content_start = i + 1
+                break
+
+        if content_start is not None:
+            content = '\n'.join(lines[content_start:]).strip()
+        else:
+            content = prompt.strip()
+
+        return f"[T{self.call_count}] {content}"
+
+    def is_available(self) -> dict:
+        return {"available": True, "provider": "mock-recording"}
 
 
 def create_sample_book(

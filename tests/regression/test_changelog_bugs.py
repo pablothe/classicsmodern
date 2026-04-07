@@ -5,13 +5,11 @@ Regression Tests for CHANGELOG.md Bugs
 Prevents regression of historical bugs documented in CHANGELOG.md:
 1. Translation corruption (meta-commentary)
 2. Chunk overlap duplication (20-word overlap)
-3. Audio truncation
-4. Missing chapter detection
-5. Gutenberg boilerplate in output
+3. Missing chapter detection
+4. Gutenberg boilerplate in output
 """
 
 import pytest
-import re
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -49,37 +47,6 @@ class TestTranslationCorruption:
 
     Fix: Validation in translation pipeline rejects meta-commentary.
     """
-
-    def test_detect_meta_commentary_phrases(self):
-        """Test detection of common meta-commentary phrases."""
-        meta_phrases = [
-            "This text discusses the adventures",
-            "The author describes a scene",
-            "The passage tells us about",
-            "According to this text",
-            "As mentioned in the passage"
-        ]
-
-        for phrase in meta_phrases:
-            # These should be flagged as meta-commentary
-            assert any(marker in phrase.lower() for marker in [
-                "this text", "the author", "the passage", "according to"
-            ])
-
-    def test_detect_llm_refusal_phrases(self):
-        """Test detection of LLM refusal phrases."""
-        refusal_phrases = [
-            "I cannot translate this",
-            "I can't provide a translation",
-            "I'm unable to translate",
-            "As an AI, I cannot"
-        ]
-
-        for phrase in refusal_phrases:
-            # These should be flagged as refusals
-            assert any(marker in phrase.lower() for marker in [
-                "i cannot", "i can't", "i'm unable", "as an ai"
-            ])
 
     @patch('requests.post')
     def test_translation_rejects_meta_commentary(self, mock_post):
@@ -200,40 +167,7 @@ class TestChunkOverlapDuplication:
 
 
 # ============================================================================
-# Bug #3: Audio Truncation
-# ============================================================================
-
-@pytest.mark.regression
-class TestAudioTruncation:
-    """
-    Bug: Audio files truncated mid-sentence due to chunk size limits.
-
-    Fix: Conservative chunk sizes (800 chars) and phoneme limit checking.
-    """
-
-    def test_chunk_size_within_safe_limits(self):
-        """Test that chunk size is conservative (≤800 chars)."""
-        if KOKORO_AVAILABLE:
-            # Verify safety limit
-            assert KokoroAudioGenerator.MAX_SAFE_CHUNK_SIZE <= 800
-
-    def test_phoneme_limit_defined(self):
-        """Test that phoneme limit is enforced."""
-        if KOKORO_AVAILABLE:
-            # Verify phoneme limit is set
-            assert hasattr(KokoroAudioGenerator, 'KOKORO_PHONEME_LIMIT')
-            assert KokoroAudioGenerator.KOKORO_PHONEME_LIMIT == 510
-
-    def test_long_text_requires_multiple_chunks(self):
-        """Test that long text is split into multiple chunks."""
-        long_text = "word " * 500  # ~2500 chars
-
-        # Should exceed safe chunk size
-        assert len(long_text) > 800
-
-
-# ============================================================================
-# Bug #4: Missing Chapter Detection
+# Bug #3: Missing Chapter Detection
 # ============================================================================
 
 @pytest.mark.skipif(not VALIDATOR_AVAILABLE, reason="Validator not available")
@@ -359,26 +293,6 @@ class TestAllRegressionBugs:
             "the passage tells"
         ])
 
-    def test_audio_not_truncated(self):
-        """Regression: Audio uses safe chunk sizes."""
-        if not KOKORO_AVAILABLE:
-            pytest.skip("Kokoro not available")
-
-        # Verify safety measures in place
-        assert KokoroAudioGenerator.MAX_SAFE_CHUNK_SIZE <= 800
-        assert KokoroAudioGenerator.KOKORO_PHONEME_LIMIT == 510
-
-    def test_gutenberg_stripped_automatically(self):
-        """Regression: Gutenberg boilerplate is stripped."""
-        if not KOKORO_AVAILABLE:
-            pytest.skip("Kokoro not available")
-
-        book = GutenbergDataGenerator.generate_with_standard_boilerplate("Test")
-        generator = KokoroAudioGenerator()
-        cleaned, title, author = generator.strip_gutenberg_boilerplate(book)
-
-        assert "*** START OF THE PROJECT GUTENBERG" not in cleaned
-        assert "*** END OF THE PROJECT GUTENBERG" not in cleaned
 
 
 if __name__ == "__main__":

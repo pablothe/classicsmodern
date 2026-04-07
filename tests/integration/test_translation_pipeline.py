@@ -15,79 +15,11 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from lib.llm import LLMProvider
 from lib.translation.engine import OllamaTranslator
 from lib.translation.deduplicate import (
     find_exact_overlap, find_fuzzy_overlap, deduplicate_chunks,
 )
-
-
-# =============================================================================
-# Mock LLMs for Integration Tests
-# =============================================================================
-
-class MockRecordingLLM(LLMProvider):
-    """LLM that records all prompts and returns predictable translations."""
-
-    def __init__(self):
-        super().__init__(name="mock-recording", model="recording-v1")
-        self.prompts = []
-        self.call_count = 0
-
-    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
-        self.prompts.append(prompt)
-        self.call_count += 1
-
-        # Extract content after instruction line
-        lines = prompt.split('\n')
-        content_start = None
-        for i, line in enumerate(lines):
-            if line.startswith('Translate to') or line.startswith('Rewrite this'):
-                content_start = i + 1
-                break
-
-        if content_start is not None:
-            content = '\n'.join(lines[content_start:]).strip()
-        else:
-            content = prompt.strip()
-
-        # Return a simple "translation" (prefix with [T])
-        return f"[T{self.call_count}] {content}"
-
-    def is_available(self) -> dict:
-        return {"available": True, "provider": "mock-recording"}
-
-
-class MockEchoLLM(LLMProvider):
-    """LLM that echoes context back, creating duplicates."""
-
-    def __init__(self):
-        super().__init__(name="mock-echo", model="echo-v1")
-
-    def generate(self, prompt: str, temperature: float = 0.3, timeout: int = 300) -> str:
-        context_match = re.search(
-            r'Reference \(do not repeat\):\s*\n(.*?)\n\n',
-            prompt, re.DOTALL
-        )
-
-        lines = prompt.split('\n')
-        content_start = None
-        for i, line in enumerate(lines):
-            if line.startswith('Translate to') or line.startswith('Rewrite this'):
-                content_start = i + 1
-                break
-
-        if content_start is not None:
-            content = '\n'.join(lines[content_start:]).strip()
-        else:
-            content = prompt.strip()
-
-        if context_match:
-            return f"{context_match.group(1).strip()} {content}"
-        return content
-
-    def is_available(self) -> dict:
-        return {"available": True, "provider": "mock-echo"}
+from tests.utils.mock_helpers import MockRecordingLLM, MockEchoLLM
 
 
 # =============================================================================

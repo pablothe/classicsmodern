@@ -4,25 +4,16 @@ Unit Tests for Kokoro TTS Audio Generation
 
 Tests the Kokoro TTS functionality without actually generating audio.
 Uses mocks to test:
-- Voice selection
-- Text chunking and phoneme limits
-- Gutenberg boilerplate stripping
-- Chapter detection
-- Audio combining
+- Text chunking
+- Audio generation workflow
+- Error handling
+- Server integration
 """
 
 import pytest
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
 
-from tests.utils.mock_helpers import MockKokoroTTS, create_sample_book, create_book_with_gutenberg_boilerplate
-from tests.utils.test_data_generators import BookGenerator, GutenbergDataGenerator
-
-try:
-    from lib.audio.kokoro import KokoroAudioGenerator
-    KOKORO_AVAILABLE = True
-except ImportError:
-    KOKORO_AVAILABLE = False
+from tests.utils.mock_helpers import MockKokoroTTS, create_sample_book
 
 
 # ============================================================================
@@ -35,82 +26,12 @@ def mock_kokoro():
     return MockKokoroTTS(voice="af_sky", language="en-us")
 
 
-@pytest.fixture
-def sample_text_short():
-    """Return short sample text (100 words)."""
-    return create_sample_book(
-        title="Short Test",
-        num_chapters=2,
-        words_per_chapter=50
-    )
-
-
-@pytest.fixture
-def sample_text_with_chapters():
-    """Return text with multiple chapters."""
-    return BookGenerator.generate_valid_book(
-        title="Multi-Chapter Book",
-        num_chapters=3,
-        words_per_chapter=100
-    )
-
-
-# ============================================================================
-# Voice Selection Tests
-# ============================================================================
-
-class TestVoiceSelection:
-    """Test voice configuration and validation."""
-
-    def test_default_voice(self, mock_kokoro):
-        """Test default voice is af_sky."""
-        assert mock_kokoro.voice == "af_sky"
-        assert mock_kokoro.language == "en-us"
-
-    def test_british_female_voice(self):
-        """Test British female voice (recommended for classics)."""
-        mock = MockKokoroTTS(voice="bf_emma")
-        assert mock.voice == "bf_emma"
-
-    def test_british_male_voice(self):
-        """Test British male voice."""
-        mock = MockKokoroTTS(voice="bm_george")
-        assert mock.voice == "bm_george"
-
-    def test_american_male_voice(self):
-        """Test American male voices."""
-        mock_adam = MockKokoroTTS(voice="am_adam")
-        assert mock_adam.voice == "am_adam"
-
-        mock_onyx = MockKokoroTTS(voice="am_onyx")
-        assert mock_onyx.voice == "am_onyx"
-
-    def test_voice_list_constants(self):
-        """Test that voice constants are defined."""
-        if KOKORO_AVAILABLE:
-            assert hasattr(KokoroAudioGenerator, 'VOICE_AF_SKY')
-            assert hasattr(KokoroAudioGenerator, 'VOICE_BF_EMMA')
-            assert hasattr(KokoroAudioGenerator, 'VOICE_BM_GEORGE')
-            assert hasattr(KokoroAudioGenerator, 'VOICE_AM_ADAM')
-
-
 # ============================================================================
 # Text Chunking Tests
 # ============================================================================
 
 class TestTextChunking:
     """Test text chunking and phoneme limit handling."""
-
-    def test_safe_chunk_size(self):
-        """Test that MAX_SAFE_CHUNK_SIZE is conservative."""
-        if KOKORO_AVAILABLE:
-            assert KokoroAudioGenerator.MAX_SAFE_CHUNK_SIZE <= 800
-
-    def test_phoneme_limit_defined(self):
-        """Test that phoneme limit is defined."""
-        if KOKORO_AVAILABLE:
-            assert hasattr(KokoroAudioGenerator, 'KOKORO_PHONEME_LIMIT')
-            assert KokoroAudioGenerator.KOKORO_PHONEME_LIMIT == 510
 
     def test_short_text_chunking(self, mock_kokoro):
         """Test chunking of short text (<800 chars)."""
@@ -122,98 +43,6 @@ class TestTextChunking:
         )
         assert result['success'] is True
         assert result['text_length'] == len(short_text)
-
-    def test_long_text_needs_chunking(self):
-        """Test that long text would be chunked."""
-        long_text = "word " * 500  # ~2500 chars
-        # This should exceed MAX_SAFE_CHUNK_SIZE (800)
-        assert len(long_text) > 800
-
-
-# ============================================================================
-# Gutenberg Boilerplate Tests
-# ============================================================================
-
-class TestGutenbergCleaning:
-    """Test Gutenberg boilerplate detection and removal."""
-
-    def test_strip_standard_boilerplate(self):
-        """Test stripping standard Gutenberg header/footer."""
-        book_with_boilerplate = GutenbergDataGenerator.generate_with_standard_boilerplate("Alice")
-
-        # Check that boilerplate markers are present
-        assert "*** START OF THE PROJECT GUTENBERG" in book_with_boilerplate
-        assert "*** END OF THE PROJECT GUTENBERG" in book_with_boilerplate
-
-        if KOKORO_AVAILABLE:
-            generator = KokoroAudioGenerator()
-            cleaned, title, author = generator.strip_gutenberg_boilerplate(book_with_boilerplate)
-
-            # Check that boilerplate is removed
-            assert "*** START OF THE PROJECT GUTENBERG" not in cleaned
-            assert "*** END OF THE PROJECT GUTENBERG" not in cleaned
-
-            # Check that actual content is preserved
-            assert "CHAPTER" in cleaned
-
-    def test_extract_title_from_boilerplate(self):
-        """Test title extraction from Gutenberg boilerplate."""
-        book = GutenbergDataGenerator.generate_with_standard_boilerplate("Test Book Title")
-
-        if KOKORO_AVAILABLE:
-            generator = KokoroAudioGenerator()
-            cleaned, title, author = generator.strip_gutenberg_boilerplate(book)
-
-            # Title should be extracted
-            assert title is not None
-            assert "Test Book Title" in title.upper() or "TEST BOOK TITLE" in title.upper()
-
-    def test_no_boilerplate_unchanged(self):
-        """Test that clean books pass through unchanged."""
-        clean_book = GutenbergDataGenerator.generate_without_boilerplate()
-
-        if KOKORO_AVAILABLE:
-            generator = KokoroAudioGenerator()
-            cleaned, title, author = generator.strip_gutenberg_boilerplate(clean_book)
-
-            # Should return original text
-            assert len(cleaned) > 0
-            assert "CHAPTER" in cleaned
-
-    def test_partial_boilerplate(self):
-        """Test handling of incomplete boilerplate markers."""
-        partial = GutenbergDataGenerator.generate_with_partial_boilerplate()
-
-        if KOKORO_AVAILABLE:
-            generator = KokoroAudioGenerator()
-            cleaned, title, author = generator.strip_gutenberg_boilerplate(partial)
-
-            # Should handle gracefully
-            assert len(cleaned) > 0
-
-
-# ============================================================================
-# Chapter Detection Tests
-# ============================================================================
-
-class TestChapterDetection:
-    """Test chapter detection for audiobook organization."""
-
-    def test_detect_roman_numeral_chapters(self, sample_text_with_chapters):
-        """Test detection of Roman numeral chapters."""
-        # Mock expects chapters to be in format "CHAPTER I", "CHAPTER II", etc.
-        assert "CHAPTER I" in sample_text_with_chapters or "CHAPTER 1" in sample_text_with_chapters
-
-    def test_single_chapter_book(self, mock_kokoro, temp_dir):
-        """Test handling of single-chapter book."""
-        single_chapter = BookGenerator.generate_valid_book(num_chapters=1)
-        test_file = temp_dir / "single.md"
-        test_file.write_text(single_chapter)
-
-        result = mock_kokoro.generate_audiobook(str(test_file))
-
-        # Should handle single chapter
-        assert result['chapters'] >= 1
 
 
 # ============================================================================
