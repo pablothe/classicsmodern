@@ -5,6 +5,7 @@ Central configuration management for the local reader application.
 """
 
 import os
+import secrets
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
@@ -134,10 +135,10 @@ class StorageConfig:
 @dataclass
 class WebConfig:
     """Configuration for web interface"""
-    host: str = "0.0.0.0"  # Allow external connections
+    host: str = os.environ.get("HOST", "0.0.0.0")  # Set HOST=127.0.0.1 to restrict to localhost
     port: int = 5000
-    debug: bool = True
-    secret_key: str = os.environ.get("SECRET_KEY", "dev-secret-key-change-in-production")
+    debug: bool = False  # NEVER enable debug on a network-exposed host (Werkzeug debugger = RCE)
+    secret_key: str = os.environ.get("SECRET_KEY") or secrets.token_hex(32)  # random per-process if SECRET_KEY unset
 
     # API settings for mobile app
     enable_mobile_api: bool = True
